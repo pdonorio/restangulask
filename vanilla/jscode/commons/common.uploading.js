@@ -60,7 +60,7 @@ function UploadController($scope, $log, $mdDialog)
       file.status = 'fail';
       var json_message = angular.fromJson(message);
       //console.log(message, json_message);
-      file.errorMessage = json_message.data['error'];
+      file.errorMessage = json_message.data['errors'];
       $log.warn("File error", file, file.errorMessage);
       $scope.showSimpleToast({
         "Failed to upload": file.name,
