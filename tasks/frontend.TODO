@@ -6,6 +6,11 @@ http://codeology.braintreepayments.com/pdonorio/restangulask
 
 --- ✄ -----------------------
 
+ FEATURE REQUEST:
+ ☐ API Decorator: to parse arguments from the function args list and add them to flask parameters
+
+--- ✄ -----------------------
+
 Next release:
   ✔ info endpoint @done (16-03-22 14:35)
   ☐ otherimages endpoint
@@ -13,9 +18,8 @@ Next release:
   ☐ Welcome page complention
     ☐ welcome parallax
     ☐ welcome slider
-  ☐ transcription lib
 
-Protocol:
+RELEASE protocol:
   ☐ stop frapi
   ☐ remove volumes
   ☐ clone restangulask
@@ -24,6 +28,16 @@ Protocol:
   ☐ check permissions
   ☐ launch operations.py
   ☐ let users register
+
+After release:
+  ☐ Multi images check on details page
+  ☐ Transcriptions
+    ☐ transcription lib
+      ☐ install
+      ☐ test
+    ☐ submission step
+      ☐ also for image upload
+    ☐ backend insert with API
 
 Rethinkdb logs:
    ☐ problem with the second...

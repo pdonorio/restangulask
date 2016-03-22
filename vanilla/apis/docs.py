@@ -6,10 +6,12 @@ Some endpoints implementation
 
 from __future__ import absolute_import
 
+import os
+import re
 import rethinkdb as r
+
 from rethinkdb.net import DefaultCursorEmpty
 from flask.ext.security import auth_token_required, roles_required
-from flask.ext.restful import reqparse
 from confs import config
 from ..services.rethink import schema_and_tables, BaseRethinkResource
 from ..services.uploader import Uploader
@@ -326,54 +328,29 @@ class RethinkUploader(Uploader, BaseRethinkResource):
     def get(self, filename=None):
         return super(RethinkUploader, self).get(filename)
 
+    @deck.add_endpoint_parameter(name='record', required=True)
+    @deck.add_endpoint_parameter(name='site', ptype=bool, default=False)
     @deck.apimethod
     def post(self):
+        """ Let the file upload and do operations to the database with it """
 
-        parser = reqparse.RequestParser()
-# record=e0f7f651-b09a-4d0e-8b09-5f75dad7989e&flowChunkNumber=1&flowChunkSize=1048576&flowCurrentChunkSize=1367129&flowTotalSize=1367129&flowIdentifier=1367129-IMG_4364CR2jpg&flowFilename=IMG_4364.CR2.jpg&flowRelativePath=IMG_4364.CR2.jpg&flowTotalChunks=1
-
-        # Handle record id, which is mandatory
+        # Record is the main thing here
         key = 'record'
-        parser.add_argument(key, type=str)
-        request_params = parser.parse_args()
+        id = self._args[key]
 
-        if key not in request_params or request_params[key] is None:
-            return self.response(
-                "No record to associate the image with",
-                fail=True, code=hcodes.HTTP_DEFAULT_SERVICE_FAIL)
-        id = request_params[key]
-
-# // FEATURE REQUEST
-# Try to create a decorator to parse arguments from the function args list
-# // FEATURE REQUEST
+        # This is the turning point for the image future use
+        key_type = 'site'
+        is_site = self._args[key_type]
+        print("Is site?", is_site)
 
         # Original upload
         obj, status = super(RethinkUploader, self).post()
 
-        if isinstance(obj, dict) and 'filename' in obj['data']:
-            myfile = obj['data']['filename']
-            abs_file = self.absolute_upload_file(myfile)
-
-            import os
-            import re
-
-            # Check exists
-            if not os.path.exists(abs_file):
-                return self.response(
-                    "Failed to find the uploaded file",
-                    fail=True, code=hcodes.HTTP_DEFAULT_SERVICE_FAIL)
-
-            ftype = None
-            fcharset = None
-            try:
-                # Check the type
-                from plumbum.cmd import file
-                out = file["-ib", abs_file]()
-                tmp = out.split(';')
-                ftype = tmp[0].strip()
-                fcharset = tmp[1].split('=')[1].strip()
-            except Exception:
-                logger.warning("Unknown type for '%s'" % abs_file)
+        # If response is success, save inside the database
+        key_file = 'filename'
+        if isinstance(obj, dict) and key_file in obj['data']:
+            myfile = obj['data'][key_file]
+            meta = obj['data']['meta']
 
             # RethinkDB
             query = self.get_table_query()
@@ -382,7 +359,7 @@ class RethinkUploader(Uploader, BaseRethinkResource):
 
             # I should query the database to see if this record already exists
             # And has some images
-            cursor = query.filter({'record': id})['images'].run()
+            cursor = query.filter({key: id})['images'].run()
             try:
                 images = next(cursor)
                 action = self.replace
@@ -393,14 +370,14 @@ class RethinkUploader(Uploader, BaseRethinkResource):
 
             # Add the image to this record
             images.append({
+                key_file: myfile,
                 "code": re.sub(r"\.[^\.]+$", '', myfile),
-                "filename": myfile,
-                "filetype": ftype,
-                "filecharset": fcharset})
+                key_file + "_type": meta['type'],
+                key_file + "_charset": meta['charset']})
 
             # Handle the file info insertion inside rethinkdb
             record = {
-                "record": id,
+                key: id,
                 "images": images,
             }
 
