@@ -45,14 +45,6 @@ Meta (data)
 
 Next release:
 
-  ✔ Show zoomification @done (16-03-22 00:14)
-    ✔ a zoom test working page @done (16-03-21 23:01)
-      ✘ js @cancelled (16-03-21 23:01)
-      ✔ python @done (16-03-21 23:01)
-        ✔ passing variables @done (16-03-21 23:23)
-    ✘ a backend api endpoint to query the file name from the record id @cancelled (16-03-21 23:50)
-    ✔ popup from details page @done (16-03-21 23:50)
-    ✔ debug @done (16-03-22 07:41)
   ☐ info endpoint
   ☐ otherimages endpoint
     ☐ upload with a separated POST option = subfolder
@@ -60,9 +52,6 @@ Next release:
     ☐ welcome parallax
     ☐ welcome slider
   ☐ transcription lib
-
-  ☐ Move frameworks? in specs
-  /Users/projects/restapi/restangulask/frontend/config/angular/frameworks.json
 
   ☐ stop frapi
   ☐ remove volumes
@@ -98,10 +87,10 @@ Next release:
 Configurations:
   http://www.jvandemo.com/how-to-configure-your-angularjs-application-using-environment-variables/
   http://rochacbruno.github.io/dynaconf/
-  Mail:
+  ☐ Mail
     https://pythonhosted.org/Flask-Security/quickstart.html#mail-configuration
     and https://pythonhosted.org/Flask-Security/configuration.html
-
+ ☐ check extra parameters
 2016-03-16 21:35:52,119 restapi.resources.decorators INFO     [Class: RethinkDataValues] GET request
 2016-03-16 21:35:52,119 restapi.resources.base DEBUG    Accept param 'key', type <class 'str'>
 2016-03-16 21:35:52,119 restapi.resources.base DEBUG    Accept param 'currentpage', type <class 'int'>
@@ -122,6 +111,8 @@ bugs & ideas:
 ☐ table are not same size on details
 ☐ extrait not complete list inside the details page
 ☐ topbar menu for mobile
+☐ Move frameworks? in specs
+  /Users/projects/restapi/restangulask/frontend/config/angular/frameworks.json
 
 SUBMIT:
  ☐ Steps are upside down
@@ -153,6 +144,7 @@ Autocomplete:
  ☐ extra
 http://blog.sandeepchivukula.com/posts/2016/03/06/photo-search/
 https://github.com/appbaseio/dejaVu
+https://medium.appbase.io/how-to-scale-and-migrate-elasticsearch-with-docker-10179930d7c9#.b8jbnbzcv
 ✔ docker server setup @done (16-02-07 01:41)
   ✔ install python library, don't know which @done (16-02-07 01:41)
   ☐ how to refresh indexes on startup?
@@ -628,3 +620,11 @@ COMPLETED:
        ✔ give the basic role @done (16-03-20 15:34)
        ✔ add name/surname @done (16-03-20 15:56)
      ✔ add the view like login for angular ui @done (16-03-20 21:00)
+  ✔ Show zoomification @done (16-03-22 00:14)
+    ✔ a zoom test working page @done (16-03-21 23:01)
+      ✘ js @cancelled (16-03-21 23:01)
+      ✔ python @done (16-03-21 23:01)
+        ✔ passing variables @done (16-03-21 23:23)
+    ✘ a backend api endpoint to query the file name from the record id @cancelled (16-03-21 23:50)
+    ✔ popup from details page @done (16-03-21 23:50)
+    ✔ debug @done (16-03-22 07:41)
