@@ -324,6 +324,50 @@ class RethinkUploader(Uploader, BaseRethinkResource):
     table = 'datadocs'
     ZOOMIFY_ENABLE = True
 
+    def image_rdb_insert(self, obj):
+
+        # Record is the main thing here
+        key = 'record'
+        id = self._args[key]
+        # Other infos
+        key_file = 'filename'
+        myfile = obj['data'][key_file]
+        meta = obj['data']['meta']
+        # RethinkDB setup
+        query = self.get_table_query()
+        images = []
+        action = self.insert
+
+        # I should query the database to see if this record already exists
+        # And has some images
+        cursor = query.filter({key: id})['images'].run()
+        try:
+            images = next(cursor)
+            action = self.replace
+        except DefaultCursorEmpty:
+            pass
+
+        # Add the image to this record
+        images.append({
+            key_file: myfile,
+            "code": re.sub(r"\.[^\.]+$", '', myfile),
+            key_file + "_type": meta['type'],
+            key_file + "_charset": meta['charset']})
+
+        # Handle the file info insertion inside rethinkdb
+        record = {
+            key: id,
+            "images": images,
+        }
+        try:
+            action(record)
+            obj = {'id': id}
+            logger.debug("Operation on record '%s'" % id)
+        except BaseException as e:
+            obj = {'Image save/update': str(e)}
+
+        return obj
+
     @deck.apimethod
     def get(self, filename=None):
         return super(RethinkUploader, self).get(filename)
@@ -333,10 +377,6 @@ class RethinkUploader(Uploader, BaseRethinkResource):
     @deck.apimethod
     def post(self):
         """ Let the file upload and do operations to the database with it """
-
-        # Record is the main thing here
-        key = 'record'
-        id = self._args[key]
 
         # This is the turning point for the image future use
         key_type = 'site'
@@ -349,44 +389,10 @@ class RethinkUploader(Uploader, BaseRethinkResource):
         # If response is success, save inside the database
         key_file = 'filename'
         if isinstance(obj, dict) and key_file in obj['data']:
-            myfile = obj['data'][key_file]
-            meta = obj['data']['meta']
+            # rdb call
+            obj = self.image_rdb_insert(obj)
+            if 'id' not in obj:
+                status = hcodes.HTTP_BAD_CONFLICT
 
-            # RethinkDB
-            query = self.get_table_query()
-            images = []
-            action = self.insert
-
-            # I should query the database to see if this record already exists
-            # And has some images
-            cursor = query.filter({key: id})['images'].run()
-            try:
-                images = next(cursor)
-                action = self.replace
-            except DefaultCursorEmpty:
-                pass
-
-            # I could check if the filename is already there. But why? :)
-
-            # Add the image to this record
-            images.append({
-                key_file: myfile,
-                "code": re.sub(r"\.[^\.]+$", '', myfile),
-                key_file + "_type": meta['type'],
-                key_file + "_charset": meta['charset']})
-
-            # Handle the file info insertion inside rethinkdb
-            record = {
-                key: id,
-                "images": images,
-            }
-
-            try:
-                action(record)
-                obj = {'id': id}
-                logger.debug("Updated record '%s'" % id)
-            except BaseException as e:
-                return self.response(
-                    str(e), fail=True, code=hcodes.HTTP_BAD_CONFLICT)
-
+        # Reply to user
         return self.response(obj, code=status)

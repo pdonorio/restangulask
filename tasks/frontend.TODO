@@ -20,14 +20,20 @@ Next release:
     ☐ welcome slider
 
 RELEASE protocol:
-  ☐ stop frapi
-  ☐ remove volumes
-  ☐ clone restangulask
-  ☐ move images
-  ☐ import rdb
-  ☐ check permissions
-  ☐ launch operations.py
-  ☐ let users register
+  ✔ stop frapi @done (16-03-22 21:41)
+  ✔ remove volumes @done (16-03-22 21:41)
+  ✔ clone restangulask @done (16-03-22 21:41)
+  ✔ move images @done (16-03-22 21:43)
+  ✔ project init @done (16-03-22 21:48)
+    ✔ bower install @done (16-03-22 21:48)
+  ✔ check permissions vanilla dir @done (16-03-22 21:48)
+  user 1000
+  ✔ fix jquery to 2.1 @done (16-03-22 22:10)
+  ✔ import rdb @done (16-03-22 22:10)
+  ✔ launch operations.py @done (16-03-22 22:10)
+  ✔ change content.json @done (16-03-22 22:54)
+  ✔ let users register @done (16-03-22 22:54)
+  ☐ bug production mode on frontend missing production config file?
 
 After release:
   ☐ Multi images check on details page
