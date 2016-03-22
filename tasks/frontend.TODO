@@ -1,34 +1,37 @@
 
->  Welcome and goodbye. And thanks for all the fish!
+>  Welcome. And goodbye.
+> And thanks for all the fish!
 
 http://codeology.braintreepayments.com/pdonorio/restangulask
 
-# PRIVATE GIT
-git remote add private ssh://git@mygitlab.dev:10022/pdonorio/restangulask.git
-# GOOD API DESIGN
-should be profoundly discussed
-# UI ROUTER and params
-http://stackoverflow.com/a/25647714/2114395
-# HTML5 validator
-https://github.com/svenkreiss/html5validator
-
 --- ✄ -----------------------
 
-TAR.BZ2
+Next release:
+  ✔ info endpoint @done (16-03-22 14:35)
+  ☐ otherimages endpoint
+    ☐ upload with a separated POST option = subfolder
+  ☐ Welcome page complention
+    ☐ welcome parallax
+    ☐ welcome slider
+  ☐ transcription lib
 
-This format has the best level of compression among all of the formats I’ve mentioned here.
-But this comes at a cost – in time and in CPU. Here’s how you compress a directory using tar.bz2
+Protocol:
+  ☐ stop frapi
+  ☐ remove volumes
+  ☐ clone restangulask
+  ☐ move images
+  ☐ import rdb
+  ☐ check permissions
+  ☐ launch operations.py
+  ☐ let users register
 
-# tar -jcvf archive_name.tar.bz2 directory_to_compress
-
-This will extract the files in the archive_name.tar.bz2 archive in the current directory. To extract the files to a different directory use
-
-# tar -jxvf archive_name.tar.bz2 -C /tmp/extract_here/
-
---- ✄ -----------------------
+Rethinkdb logs:
+   ☐ problem with the second...
+     ☐ rethinkdb append?
+   ☐ logs for user login and/or registration/profile?
+     ☐ from frontend calls?
 
 NEW RESPONSE STANDARD:
-
    ☐ @todiscuss
    ☐ should check what to do also on angularjs side...
 Response
@@ -40,33 +43,6 @@ Meta (data)
     "status": 500
  ☐ How to force the same also on normal flask endpoint?
    ☐ and on frontend side?
-
---- ✄ -----------------------
-
-Next release:
-
-  ☐ info endpoint
-  ☐ otherimages endpoint
-    ☐ upload with a separated POST option = subfolder
-  ☐ Welcome page complention
-    ☐ welcome parallax
-    ☐ welcome slider
-  ☐ transcription lib
-
-  ☐ stop frapi
-  ☐ remove volumes
-  ☐ clone restangulask
-  ☐ move images
-  ☐ import rdb
-  ☐ check permissions
-  ☐ launch operations.py
-  ☐ let users register
-
- Rethinkdb logs:
-   ☐ problem with the second...
-     ☐ rethinkdb append?
-   ☐ logs for user login and/or registration/profile?
-     ☐ from frontend calls?
 
  Dlite update:
    ☐ release 2 beta?
@@ -351,6 +327,23 @@ JS  LAZY LOAD:
 
 PIPELINE STEPS:
   http://devcenter.wercker.com/learn/pipelines/how-it-works.html
+
+--- ✄ -----------------------
+
+# PRIVATE GIT
+git remote add private ssh://git@mygitlab.dev:10022/pdonorio/restangulask.git
+# GOOD API DESIGN
+should be profoundly discussed
+# UI ROUTER and params
+http://stackoverflow.com/a/25647714/2114395
+# HTML5 validator
+https://github.com/svenkreiss/html5validator
+
+--- ✄ -----------------------
+
+TAR.BZ2
+# tar -jcvf archive_name.tar.bz2 directory_to_compress
+# tar -jxvf archive_name.tar.bz2 -C /tmp/extract_here/
 
 --- ✄ -----------------------
 
