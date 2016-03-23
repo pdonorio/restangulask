@@ -7,12 +7,6 @@
 
 <!-- TABS -->
 
-    <md-tab label="Steps" md-on-select="adm.onTabSelected('tree')">
-      <md-content class="md-padding">
-        <div ng-include="root.blueprintTemplateDir + 'admin_step.html'"></div>
-      </md-content>
-    </md-tab>
-
     <md-tab label="Welcoming sections"
         md-on-select="adm.onTabSelected('sections')">
       <md-content layout-padding flex='grow'>
@@ -20,10 +14,18 @@
       </md-content>
     </md-tab>
 
+    <md-tab label="Steps" md-on-select="adm.onTabSelected('tree')">
+      <md-content class="md-padding">
+        <div ng-include="root.blueprintTemplateDir + 'admin_step.html'"></div>
+      </md-content>
+    </md-tab>
+
     <md-tab label="Welcoming slider"
         md-on-select="adm.onTabSelected('slider')">
       <md-content class="md-padding">
-        Work in progress
+        <i class="material-icons">error_outline</i>
+        <br>
+        Work in progress!
       </md-content>
     </md-tab>
 

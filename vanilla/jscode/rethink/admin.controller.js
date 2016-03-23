@@ -192,7 +192,7 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
 
       apicall.then(function (out) {
         console.log("Admin api call", out);
-        if (out.elements >= 0) {
+        if (out) {
           getSectionData(AdminService, $scope);
         }
         // Activate the view
