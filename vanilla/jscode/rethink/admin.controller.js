@@ -15,9 +15,9 @@ var
 
 // General purpose load data function
 // To use only inside controllers
-function getSectionData(admin, $scope)
+function getSectionData(AdminService, $scope)
 {
-    return admin.getData().then(function (out)
+    return AdminService.getData().then(function (out)
     {
 
     // IF DATA IS PRESENT
@@ -56,13 +56,13 @@ function getSectionData(admin, $scope)
 };
 
 
-function WelcomeInfoController($scope, $log, $stateParams, admin)
+function WelcomeInfoController($scope, $log, $stateParams, AdminService)
 {
     $log.debug("Welcome info", $stateParams);
     var self = this;
     self.title = "None";
     self.moreContent = "No section selected";
-    getSectionData(admin, $scope).then(function() {
+    getSectionData(AdminService, $scope).then(function() {
         var section = $scope.sections[$stateParams.section];
         self.title = section.data['Section'];
         self.moreContent = section.data['Content'];
@@ -70,7 +70,7 @@ function WelcomeInfoController($scope, $log, $stateParams, admin)
 
 };
 
-function WelcomeController($scope, $rootScope, $timeout, $log, admin, $state, $stateParams, $mdMedia, $mdDialog, $q)
+function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $state, $stateParams, $mdMedia, $mdDialog, $q)
 {
   $log.debug("Welcome admin controller", $stateParams);
   var self = this;
@@ -83,7 +83,7 @@ function WelcomeController($scope, $rootScope, $timeout, $log, admin, $state, $s
         // update position
         element.data['Position'] = index;
         // send to api
-        promises.push(admin.update(data_type, element.id, element.data));
+        promises.push(AdminService.update(data_type, element.id, element.data));
     });
 
     $q.all(promises).then((values) => {
@@ -100,7 +100,7 @@ function WelcomeController($scope, $rootScope, $timeout, $log, admin, $state, $s
   $timeout(function () {
     var check = 'welcome';
     if ($state.current.name.slice(0, check.length) == check) {
-       getSectionData(admin, $scope);
+       getSectionData(AdminService, $scope);
        self.init = 'rdb';
     }
   });
@@ -181,19 +181,19 @@ function WelcomeController($scope, $rootScope, $timeout, $log, admin, $state, $s
       var apicall = null;
       if (update_id) {
         if (remove) {
-            apicall = admin.delete(data_type, update_id);
+            apicall = AdminService.delete(data_type, update_id);
         } else {
-            apicall = admin.update(data_type, update_id, element);
+            apicall = AdminService.update(data_type, update_id, element);
         }
       } else {
         element['Position'] = $scope.sections.length;
-        apicall = admin.insert(data_type, element);
+        apicall = AdminService.insert(data_type, element);
       }
 
       apicall.then(function (out) {
         console.log("Admin api call", out);
         if (out.elements >= 0) {
-          getSectionData(admin, $scope);
+          getSectionData(AdminService, $scope);
         }
         // Activate the view
         $timeout(function() {
@@ -260,7 +260,7 @@ function DialogController($scope, $rootScope, $mdDialog, sectionModels, modelId)
 // controller
 ////////////////////////////////
 
-function TreeController($scope, $rootScope, $log, search)
+function TreeController($scope, $rootScope, $log, SearchService)
 {
   // INIT controller
   $log.debug("Tree of life");
@@ -331,10 +331,10 @@ function getType(key) {
   return type;
 }
 
-function treeProcessData(search, $scope) {
+function treeProcessData(SearchService, $scope) {
 
     var tree = [];
-    search.getSteps(true).then(function (steps)
+    SearchService.getSteps(true).then(function (steps)
     {
         forEach(steps, function(single, i){
             var fields = [];
@@ -365,7 +365,7 @@ function treeProcessData(search, $scope) {
 // MAIN ADMIN controller
 ////////////////////////////////
 
-function AdminController($scope, $rootScope, $log, admin, search, $stateParams)
+function AdminController($scope, $rootScope, $log, AdminService, SearchService, $stateParams)
 {
   // Init controller
   $log.debug("ADMIN page controller", $stateParams);
@@ -385,12 +385,12 @@ function AdminController($scope, $rootScope, $log, admin, search, $stateParams)
       // INIT TAB FOR MANAGING SECTIONS
       if (key == 'sections') {
         $scope.sections = {};
-        getSectionData(admin, $scope);
+        getSectionData(AdminService, $scope);
       }
       // INIT TAB FOR TREE STEPS
       else if (key == 'tree') {
         $scope.dataCount = -1;
-        treeProcessData(search, $scope);
+        treeProcessData(SearchService, $scope);
       }
 
   }

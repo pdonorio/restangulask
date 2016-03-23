@@ -2,7 +2,7 @@
   'use strict';
 
 angular.module('web')
-    .service('admin', AdminService);
+    .service('AdminService', AdminService);
 
 function AdminService($log, api) {
 

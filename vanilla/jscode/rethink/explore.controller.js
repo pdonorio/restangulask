@@ -11,7 +11,7 @@ angular.module('web')
 // controller
 ////////////////////////////////
 
-function ExploreController($scope, $rootScope, $log, $state, search, admin)
+function ExploreController($scope, $rootScope, $log, $state, SearchService, AdminService)
 {
 
   // INIT controller
@@ -30,7 +30,7 @@ function ExploreController($scope, $rootScope, $log, $state, search, admin)
 
 // THIS IS WHERE YOU ADD THE DATA LOAD LOGIC FOR TABS
       if (key == 'imagefix') {
-        getMissingImagesData(admin, $scope);
+        getMissingImagesData(AdminService, $scope);
       }
   }
 
@@ -40,8 +40,8 @@ function ExploreController($scope, $rootScope, $log, $state, search, admin)
 // Fix images
 ////////////////////////////////
 
-function getMissingImagesData(admin, $scope) {
-    return admin.getDocumentsWithNoImages()
+function getMissingImagesData(AdminService, $scope) {
+    return AdminService.getDocumentsWithNoImages()
       .then(function (out)
       {
         //console.log("DATA", out);
@@ -50,7 +50,7 @@ function getMissingImagesData(admin, $scope) {
 
 };
 
-function FixImagesController($scope, $log, $mdDialog, $window, admin)
+function FixImagesController($scope, $log, $mdDialog, $window, AdminService)
 {
     $log.debug("Fix Controller");
     var self = this;
@@ -97,7 +97,7 @@ function FixImagesController($scope, $log, $mdDialog, $window, admin)
                 // Close the card
                 self.closeCard();
                 // Reload data
-                getMissingImagesData(admin, $scope);
+                getMissingImagesData(AdminService, $scope);
             }
         });
     }
@@ -109,14 +109,14 @@ function FixImagesController($scope, $log, $mdDialog, $window, admin)
 // controller
 ////////////////////////////////
 
-function StepsController($scope, $log, $state, search)
+function StepsController($scope, $log, $state, SearchService)
 {
   // INIT controller
   $log.debug("Stepping in pieces");
   var self = this;
   self.step = 2;
 
-  search.getDistinctValuesFromStep(self.step).then(function (out)
+  SearchService.getDistinctValuesFromStep(self.step).then(function (out)
   {
         self.data = [];
         self.dataCount = self.data.length;

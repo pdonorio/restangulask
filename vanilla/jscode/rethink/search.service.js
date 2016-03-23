@@ -2,7 +2,7 @@
   'use strict';
 
 angular.module('web')
-    .service('search', SearchService);
+    .service('SearchService', SearchService);
 
 function SearchService($log, api) {
 

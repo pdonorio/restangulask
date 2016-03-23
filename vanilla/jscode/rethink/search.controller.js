@@ -6,7 +6,7 @@ angular.module('web')
     .controller('ChipsController', ChipsController)
     ;
 
-function SearchController($scope, $rootScope, $log, $state, search, hotkeys, keyshortcuts)
+function SearchController($scope, $rootScope, $log, $state, SearchService, hotkeys, keyshortcuts)
 {
 
   // INIT controller
@@ -69,7 +69,7 @@ function SearchController($scope, $rootScope, $log, $state, search, hotkeys, key
     forEach(response.data, function (x, i)
     {
       // SINGLE DETAILS
-      search.getSingleData(x.record, false)
+      SearchService.getSingleData(x.record, false)
        .then(function(element)
       {
           $scope.data.push(element);
@@ -88,7 +88,7 @@ function SearchController($scope, $rootScope, $log, $state, search, hotkeys, key
 // controller
 ////////////////////////////////
 
-function ChipsController($scope, $log, $q, $stateParams, search)
+function ChipsController($scope, $log, $q, $stateParams, SearchService)
 {
 
   // Init controller
@@ -101,7 +101,7 @@ function ChipsController($scope, $log, $q, $stateParams, search)
   self.loadAllRecords = function () {
     $log.debug("Button to define");
 // ACTION FOR ONLY THE BUTTON TO LOAD ALL ARCHIVE
-    //search.getData().then(function(out_data){
+    //SearchService.getData().then(function(out_data){
   }
 
   self.newChip = function(chip) {
@@ -114,9 +114,9 @@ function ChipsController($scope, $log, $q, $stateParams, search)
       // Choose table to query
       var promise = null;
       if (chip.type == 'Transcription') {
-        promise = search.filterDocuments(chip.display);
+        promise = SearchService.filterDocuments(chip.display);
       } else {
-        promise = search.filterData(chip.display);
+        promise = SearchService.filterData(chip.display);
       }
       // Do query
       promise.then(function(out_data) {
@@ -176,7 +176,7 @@ function ChipsController($scope, $log, $q, $stateParams, search)
   self.searchAll = function () {
       $scope.setDataCount(null);
       // Do query
-      search.getData().then(function(out_data) {
+      SearchService.getData().then(function(out_data) {
         if (!out_data || out_data.elements < 1) {
           return null;
         }
@@ -188,7 +188,7 @@ function ChipsController($scope, $log, $q, $stateParams, search)
 //http://solutionoptimist.com/2013/12/27/javascript-promise-chains-2/
   var
     initSearchComplete = function (argument) {
-        return search.getSteps();
+        return SearchService.getSteps();
     },
     parallelLoad = function (steps) {
 
@@ -200,11 +200,11 @@ function ChipsController($scope, $log, $q, $stateParams, search)
 // TO FIX
 // should be a foreach on 'steps'
         var promises = {
-            1: search.getDistinctValuesFromStep(1),
-            2: search.getDistinctValuesFromStep(2),
-            3: search.getDistinctValuesFromStep(3),
-            4: search.getDistinctValuesFromStep(4),
-            5: search.getDistinctTranscripts(),
+            1: SearchService.getDistinctValuesFromStep(1),
+            2: SearchService.getDistinctValuesFromStep(2),
+            3: SearchService.getDistinctValuesFromStep(3),
+            4: SearchService.getDistinctValuesFromStep(4),
+            5: SearchService.getDistinctTranscripts(),
         }
         return $q.all(promises).then((values) =>
         {

@@ -4,7 +4,7 @@
 angular.module('web')
     .controller('DetailsController', DetailsController);
 
-function DetailsController($scope, $log, $stateParams, search)
+function DetailsController($scope, $log, $stateParams, SearchService)
 {
     $log.info("Single view on", $stateParams.id);
     var self = this;
@@ -13,7 +13,7 @@ function DetailsController($scope, $log, $stateParams, search)
     function loadData() {
 
       // STEPS INFO
-      search.getSteps().then(function(steps)
+      SearchService.getSteps().then(function(steps)
       {
         // This call is needed inside Search Service
         // at least once for Controller
@@ -21,7 +21,7 @@ function DetailsController($scope, $log, $stateParams, search)
         $scope.stepnames = steps;
 
         // SINGLE DETAILS
-        search.getSingleData($stateParams.id, true)
+        SearchService.getSingleData($stateParams.id, true)
          .then(function(out_single)
         {
             if (! out_single)

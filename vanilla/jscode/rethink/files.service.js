@@ -2,9 +2,9 @@
   'use strict';
 
 angular.module('web')
-    .service('search', SearchService);
+    .service('SomeService', SomeService);
 
-function SearchService($log, api)
+function SomeService($log, api)
 {
 
     var self = this;

@@ -4,7 +4,7 @@
 angular.module('web')
     .controller('SearchController', SearchController);
 
-function SearchController($scope, $rootScope, $log, $state, search)
+function SearchController($scope, $rootScope, $log, $state, SearchService)
 {
   // Init
   $log.info("Ready to search");
@@ -16,8 +16,6 @@ function SearchController($scope, $rootScope, $log, $state, search)
 // https://material.angularjs.org/latest/demo/chips
   $scope.newChip = function(chip) {
     $log.info("Requested tag:", chip, "total:", $scope.chips);
-    // API CALL
-    //search.getData().then();
   }
 
   $scope.removeChip = function(chip, index) {

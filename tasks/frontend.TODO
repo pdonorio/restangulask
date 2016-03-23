@@ -23,7 +23,8 @@ Next release:
   ☐ bugs
     ✔ production mode on frontend missing production config file? @done (16-03-23 07:33)
     ✔ with a port to frontend it does not work anymore @done (16-03-23 07:46)
-    ☐ 'search' name we don't like
+    ✔ 'search' and 'admin' name we don't like @done (16-03-23 08:02)
+    ☐ remove file.service
   ✔ info endpoint @done (16-03-22 14:35)
   ☐ otherimages endpoint
     ☐ upload with a separated POST option = subfolder
