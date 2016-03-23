@@ -9,7 +9,7 @@ function RestApiService($http, $auth, $log) {
     var self = this;
     // Api URI
     self.API_URL = apiUrl + '/';
-    self.FRONTEND_URL = serverUrl + '/';
+    self.FRONTEND_URL = originalApiUrl + '/';
 
     self.endpoints = {
         check: 'verify',

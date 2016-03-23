@@ -22,7 +22,7 @@ git submodule update
 Next release:
   ☐ bugs
     ✔ production mode on frontend missing production config file? @done (16-03-23 07:33)
-    ☐ with a port to frontend it does not work anymore
+    ✔ with a port to frontend it does not work anymore @done (16-03-23 07:46)
     ☐ 'search' name we don't like
   ✔ info endpoint @done (16-03-22 14:35)
   ☐ otherimages endpoint

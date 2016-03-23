@@ -9,7 +9,7 @@ angular.module('web')
 
 .config(function($authProvider) {
 
-	$authProvider.loginUrl = serverUrl + "/auth";
+	$authProvider.loginUrl = originalApiUrl + "/auth";
 	$authProvider.tokenName = 'authentication_token';
 
 	$authProvider.oauth1({

@@ -9,7 +9,15 @@ var timeToWait = {{time}}; // measured in ms
 
 // Api URI
 var apiPort = 8081;
-var serverUrl = '{{api_url}}'.slice(0, -1);
+
+var originalApiUrl = '{{api_url}}'.slice(0, -1);
+var serverUrl = originalApiUrl;
+var ifPort = originalApiUrl.indexOf(':', 5);
+if (ifPort) {
+    serverUrl = serverUrl.slice(0, ifPort);
+}
+
+// TO FIX
 var apiUrl = serverUrl + ':' + apiPort + '/api';
 
 var welcomeTemplate = {{js_template}};
