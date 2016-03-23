@@ -9,9 +9,21 @@ http://codeology.braintreepayments.com/pdonorio/restangulask
  FEATURE REQUEST:
  ☐ API Decorator: to parse arguments from the function args list and add them to flask parameters
 
+[submodule "backend"]
+  path = backend
+  url = https://github.com/pdonorio/rest-mock.git
+  branch = master
+
+git submodule sync
+git submodule update
+
 --- ✄ -----------------------
 
 Next release:
+  ☐ bugs
+    ✔ production mode on frontend missing production config file? @done (16-03-23 07:33)
+    ☐ with a port to frontend it does not work anymore
+    ☐ 'search' name we don't like
   ✔ info endpoint @done (16-03-22 14:35)
   ☐ otherimages endpoint
     ☐ upload with a separated POST option = subfolder
@@ -25,15 +37,14 @@ RELEASE protocol:
   ✔ clone restangulask @done (16-03-22 21:41)
   ✔ move images @done (16-03-22 21:43)
   ✔ project init @done (16-03-22 21:48)
-    ✔ bower install @done (16-03-22 21:48)
   ✔ check permissions vanilla dir @done (16-03-22 21:48)
   user 1000
+    ✔ bower install @done (16-03-22 21:48)
   ✔ fix jquery to 2.1 @done (16-03-22 22:10)
   ✔ import rdb @done (16-03-22 22:10)
   ✔ launch operations.py @done (16-03-22 22:10)
   ✔ change content.json @done (16-03-22 22:54)
   ✔ let users register @done (16-03-22 22:54)
-  ☐ bug production mode on frontend missing production config file?
 
 After release:
   ☐ Multi images check on details page
