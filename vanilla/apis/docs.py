@@ -318,6 +318,9 @@ class RethinkImagesAssociations(BaseRethinkResource):
 ##########################################
 # Upload
 ##########################################
+DEFAULT_DESTINATION = 'documents'
+
+
 class RethinkUploader(Uploader, BaseRethinkResource):
     """ Uploading data and save it inside db """
 
@@ -373,15 +376,23 @@ class RethinkUploader(Uploader, BaseRethinkResource):
         return super(RethinkUploader, self).get(filename)
 
     @deck.add_endpoint_parameter(name='record', required=True)
-    @deck.add_endpoint_parameter(name='site', ptype=bool, default=False)
+    @deck.add_endpoint_parameter('destination', default=DEFAULT_DESTINATION)
     @deck.apimethod
     def post(self):
-        """ Let the file upload and do operations to the database with it """
+        """
+        Let the file be uploaded, make stats
+        and do operations to the database with it.
+        """
 
         # This is the turning point for the image future use
-        key_type = 'site'
-        is_site = self._args[key_type]
-        print("Is site?", is_site)
+        key_type = 'destination'
+        # options
+        destinations = [DEFAULT_DESTINATION, 'welcome', 'slider']
+
+        image_destination = self._args[key_type]
+        if image_destination not in destinations:
+            image_destination = DEFAULT_DESTINATION
+        logger.debug("Destination: %s" % image_destination)
 
         # Original upload
         obj, status = super(RethinkUploader, self).post()

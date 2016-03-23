@@ -20,13 +20,8 @@ git submodule update
 --- ✄ -----------------------
 
 Next release:
-  ✔ bugs @done (16-03-23 08:03)
-    ✔ production mode on frontend missing production config file? @done (16-03-23 07:33)
-    ✔ with a port to frontend it does not work anymore @done (16-03-23 07:46)
-    ✔ 'search' and 'admin' name we don't like @done (16-03-23 08:02)
-    ✔ remove file.service @done (16-03-23 08:03)
-  ✔ info endpoint @done (16-03-22 14:35)
   ☐ otherimages endpoint
+    ✔ destination parameter @done (16-03-23 08:14)
     ☐ upload with a separated POST option = subfolder
   ☐ Welcome page complention
     ☐ welcome parallax
@@ -653,3 +648,9 @@ COMPLETED:
     ✘ a backend api endpoint to query the file name from the record id @cancelled (16-03-21 23:50)
     ✔ popup from details page @done (16-03-21 23:50)
     ✔ debug @done (16-03-22 07:41)
+  ✔ bugs @done (16-03-23 08:03)
+    ✔ production mode on frontend missing production config file? @done (16-03-23 07:33)
+    ✔ with a port to frontend it does not work anymore @done (16-03-23 07:46)
+    ✔ 'search' and 'admin' name we don't like @done (16-03-23 08:02)
+    ✔ remove file.service @done (16-03-23 08:03)
+  ✔ info endpoint @done (16-03-22 14:35)
