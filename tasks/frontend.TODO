@@ -37,10 +37,11 @@ RELEASE protocol:
 Next release:
   ☐ otherimages endpoint
     ✔ destination parameter @done (16-03-23 08:14)
-      ☐ parameter could also be the subfolder?
     ✔ datadocs with new attribute 'type' @done (16-03-23 12:31)
-      ☐ fix it also inside the "operations.py"
-       ☐ maybe a rethinkdb default
+      ✔ fix it also inside the "operations.py" @done (16-03-23 12:44)
+       ✘ maybe a rethinkdb default @cancelled (16-03-23 12:44)
+       ✔ run it on local @done (16-03-23 12:44)
+      ☐ parameter could also be the subfolder?
   ☐ Welcome page complention
     ☐ welcome parallax
     ☐ welcome slider
