@@ -20,11 +20,11 @@ git submodule update
 --- ✄ -----------------------
 
 Next release:
-  ☐ bugs
+  ✔ bugs @done (16-03-23 08:03)
     ✔ production mode on frontend missing production config file? @done (16-03-23 07:33)
     ✔ with a port to frontend it does not work anymore @done (16-03-23 07:46)
     ✔ 'search' and 'admin' name we don't like @done (16-03-23 08:02)
-    ☐ remove file.service
+    ✔ remove file.service @done (16-03-23 08:03)
   ✔ info endpoint @done (16-03-22 14:35)
   ☐ otherimages endpoint
     ☐ upload with a separated POST option = subfolder
