@@ -35,16 +35,13 @@ RELEASE protocol:
 --- ✄ -----------------------
 
 Next release:
-  ✔ otherimages endpoint @done (16-03-23 13:48)
-    ✔ destination parameter @done (16-03-23 08:14)
-    ✔ datadocs with new attribute 'type' @done (16-03-23 12:31)
-      ✔ fix it also inside the "operations.py" @done (16-03-23 12:44)
-       ✘ maybe a rethinkdb default @cancelled (16-03-23 12:44)
-       ✔ run it on local @done (16-03-23 12:44)
-      ✔ parameter could also be the subfolder? @done (16-03-23 13:48)
   ☐ Welcome page complention
+    ✔ rdb filter images on type @done (16-03-23 14:43)
+      ✔ test rdb filter @done (16-03-23 14:43)
+    ✔ fix existing @done (16-03-23 14:43)
+      ☐ new endpoint: generic get for other types
     ☐ welcome parallax
-    ☐ welcome slider
+      ☐ welcome slider
 
 After release:
   ☐ Multi images check on details page
@@ -59,6 +56,8 @@ After release:
   ☐ Gunicorn or similar (tornado?) for frontend production
   ☐ Public search pages
     ☐ A python/js variable to know if you want to do it?
+  ☐ haproxy and migration to digitalocean 1GB
+  http://docker-haproxy-domain-redirect.readthedocs.org/en/latest/
 
 Rethinkdb logs:
    ☐ problem with the second...
@@ -662,3 +661,10 @@ COMPLETED:
     ✔ 'search' and 'admin' name we don't like @done (16-03-23 08:02)
     ✔ remove file.service @done (16-03-23 08:03)
   ✔ info endpoint @done (16-03-22 14:35)
+  ✔ otherimages endpoint @done (16-03-23 13:48)
+    ✔ destination parameter @done (16-03-23 08:14)
+    ✔ datadocs with new attribute 'type' @done (16-03-23 12:31)
+      ✔ fix it also inside the "operations.py" @done (16-03-23 12:44)
+       ✘ maybe a rethinkdb default @cancelled (16-03-23 12:44)
+       ✔ run it on local @done (16-03-23 12:44)
+      ✔ parameter could also be the subfolder? @done (16-03-23 13:48)

@@ -259,7 +259,8 @@ class RethinkImagesAssociations(BaseRethinkResource):
     def get(self, id=None):
 
         # Get the record value and the party name associated
-        first = self.get_query().table('datavalues') \
+        first = self.get_query() \
+            .table('datavalues') \
             .concat_map(lambda doc: doc['steps'].concat_map(
                     lambda step: step['data'].concat_map(
                         lambda data: [{
@@ -271,8 +272,11 @@ class RethinkImagesAssociations(BaseRethinkResource):
             .pluck('record', 'party') \
             .group('party')['record'] \
 
-        records_with_docs = list(
-            self.get_query().table('datadocs')['record'].run())
+        records_with_docs = \
+            list(self.get_query()
+                 .table('datadocs').has_fields('type')
+                 .filter({'type': DEFAULT_DESTINATION})
+                 ['record'].run())
 
         final = {}
         from operator import itemgetter
