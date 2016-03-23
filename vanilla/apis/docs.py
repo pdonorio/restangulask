@@ -411,8 +411,13 @@ class RethinkUploader(Uploader, BaseRethinkResource):
         and do operations to the database with it.
         """
 
+        subfolder = None
+        img_destination = image_destination(self._args)
+        if img_destination != DEFAULT_DESTINATION:
+            subfolder = img_destination
+
         # Original upload
-        obj, status = super(RethinkUploader, self).post()
+        obj, status = super(RethinkUploader, self).post(subfolder)
 
         # If response is success, save inside the database
         key_file = 'filename'

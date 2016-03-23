@@ -35,13 +35,13 @@ RELEASE protocol:
 --- ✄ -----------------------
 
 Next release:
-  ☐ otherimages endpoint
+  ✔ otherimages endpoint @done (16-03-23 13:48)
     ✔ destination parameter @done (16-03-23 08:14)
     ✔ datadocs with new attribute 'type' @done (16-03-23 12:31)
       ✔ fix it also inside the "operations.py" @done (16-03-23 12:44)
        ✘ maybe a rethinkdb default @cancelled (16-03-23 12:44)
        ✔ run it on local @done (16-03-23 12:44)
-      ☐ parameter could also be the subfolder?
+      ✔ parameter could also be the subfolder? @done (16-03-23 13:48)
   ☐ Welcome page complention
     ☐ welcome parallax
     ☐ welcome slider
@@ -56,6 +56,7 @@ After release:
       ☐ also for image upload
     ☐ backend insert with API
       ☐ split words like operations do
+  ☐ Gunicorn or similar (tornado?) for frontend production
   ☐ Public search pages
     ☐ A python/js variable to know if you want to do it?
 
