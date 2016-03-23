@@ -29,7 +29,7 @@
 </div>
 
 <ul sv-root sv-part="sections" ng-hide="loaders['admin_sections']"
-    sv-on-sort="wadm.resort($item, $partFrom, $partTo, $indexFrom, $indexTo)"
+    sv-on-sort="wadm.resort($item)"
     class="collapsible" data-collapsible="accordion" watch>
 
     <li ng-repeat="model in sections track by $index"
@@ -40,17 +40,25 @@
         layout="row" layout-align="center center">
         <div flex="90">
          <b>Section <span style="font-style:italic">{{$index+1}}</span> </b>
-         <br> {{model.data['Section']}}
+         <br>
+         <span ng-if="model.data['Section']"> {{model.data['Section']}} </span>
+         <span ng-if="!model.data['Section']"> <b>BROKEN</b> </span>
         </div>
         <div flex="10" layout="row" layout-align="center start">
-          <a href class="btn" ng-click="wadm.showAdvanced($event, model)">
+          <a href class="btn red lighten-2" ng-if="!model.data['Section']"
+            ng-click="wadm.fixPositions($index);">
+            FIX
+          </a>
+          <a href class="btn" ng-if="model.data['Section']"
+            ng-click="wadm.showAdvanced($event, model)">
             edit
           </a>
         </div>
        </md-content>
        </div>
 
-       <div class="collapsible-body grey lighten-3"
+       <div ng-if="model.data['Section']"
+            class="collapsible-body grey lighten-3"
             style="padding:5px 40px 5px 40px;">
         <md-subheader class="md-primary grey lighten-3">
             A short description:

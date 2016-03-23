@@ -31,9 +31,21 @@ function getSectionData(AdminService, $scope)
                 newdata[x] = {};
             };
             forEach(out.data, function (element, j) {
-                var index = element.data['Position'];
-                newdata[index] = element;
-            })
+                //console.log("TEST ME", element);
+                if (element && element != '') {
+                    var index = element.data['Position'];
+                    newdata[index] = element;
+                }
+            });
+            // VERIFY if some sections are missing
+            for (var x = 0; x < newdata.length; x++) {
+                if (!newdata[x]) {
+                    newdata[x] = {'data': {
+                        'Section': null,
+                        'Position': null,
+                    }};
+                }
+            }
         }
         $scope.sections = angular.copy(newdata); // out.data;
 
@@ -70,23 +82,49 @@ function WelcomeInfoController($scope, $log, $stateParams, AdminService)
 
 };
 
-function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $state, $stateParams, $mdMedia, $mdDialog, $q)
+function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $state, $stateParams, $mdMedia, $mdDialog, $q, $filter)
 {
   $log.debug("Welcome admin controller", $stateParams);
   var self = this;
 
-  self.resort = function (item, partFrom, partTo, indexFrom, indexTo) {
+  self.fixPositions = function (position) {
+    var count = 0;
+    var newSections = [];
+
+    // Fix
+    forEach($scope.sections, function(element, index) {
+        if (element.data) {
+            newSections[count++] = element;
+        }
+    });
+    $scope.sections = angular.copy(newSections);
+    $log.debug("Fixed sections");
+
+    // Push and reload
+    $rootScope.loaders[mysection] = true;
+    self.resort().then(function () {
+        getSectionData(AdminService, $scope).then(function () {
+            // Activate the view
+            $rootScope.loaders[mysection] = false;
+        });
+    });
+  }
+  self.resort = function (item) //, partFrom, partTo, indexFrom, indexTo)
+  {
     var promises = [];
     //console.log("TEST SECTIONS", $scope.sections);
+
     // For each section
     forEach($scope.sections, function(element, index) {
-        // update position
-        element.data['Position'] = index;
-        // send to api
-        promises.push(AdminService.update(data_type, element.id, element.data));
+        if (element.data) {
+            // update position
+            element.data['Position'] = index;
+            // send to api
+            promises.push(AdminService.update(data_type, element.id, element.data));
+        }
     });
 
-    $q.all(promises).then((values) => {
+    return $q.all(promises).then((values) => {
         $log.debug("Pushed updated order");
     });
   }
@@ -135,7 +173,7 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
   self.showAdvanced = function(ev, model) {
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && self.customFullscreen;
     var id = null;
-    if (model) {
+    if (model && model.id) {
         id = model.id;
     }
 
@@ -186,6 +224,7 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
             apicall = AdminService.update(data_type, update_id, element);
         }
       } else {
+        console.log("Check position", element);
         element['Position'] = $scope.sections.length;
         apicall = AdminService.insert(data_type, element);
       }
@@ -193,12 +232,11 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
       apicall.then(function (out) {
         console.log("Admin api call", out);
         if (out) {
-          getSectionData(AdminService, $scope);
+          getSectionData(AdminService, $scope).then(function () {
+            // Activate the view
+            $rootScope.loaders[mysection] = false;
+          });
         }
-        // Activate the view
-        $timeout(function() {
-           $rootScope.loaders[mysection] = false;
-        }, timeToWait);
       });
     }
 
