@@ -39,7 +39,10 @@ Next release:
     ✔ rdb filter images on type @done (16-03-23 14:43)
       ✔ test rdb filter @done (16-03-23 14:43)
     ✔ fix existing @done (16-03-23 14:43)
-      ☐ new endpoint: generic get for other types
+    ✔ new endpoint @done (16-03-23 14:52)
+      ☐ generic get
+        ☐ generic filter
+        ☐ test filter on types
     ☐ welcome parallax
       ☐ welcome slider
 

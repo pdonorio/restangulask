@@ -341,6 +341,15 @@ def image_destination(mydict, key_type='destination'):
     return image_destination
 
 
+class RethinkMetaImages(BaseRethinkResource):
+    """ Uploading data and save it inside db """
+
+    table = 'datadocs'
+
+    def get(self):
+        return "Hello"
+
+
 class RethinkUploader(Uploader, BaseRethinkResource):
     """ Uploading data and save it inside db """
 
