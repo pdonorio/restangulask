@@ -40,6 +40,7 @@ Next release:
       ✔ test rdb filter @done (16-03-23 14:43)
     ✔ fix existing @done (16-03-23 14:43)
     ✔ new endpoint @done (16-03-23 14:52)
+      ☐ sv position drag and drop?
       ☐ generic get
         ☐ generic filter
         ☐ test filter on types

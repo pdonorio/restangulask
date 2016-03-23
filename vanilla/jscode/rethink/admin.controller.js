@@ -102,15 +102,20 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
 
     // Push and reload
     $rootScope.loaders[mysection] = true;
-    self.resort().then(function () {
+    self.resort(true).then(function () {
         getSectionData(AdminService, $scope).then(function () {
             // Activate the view
-            $rootScope.loaders[mysection] = false;
+            $timeout(function () {
+                $rootScope.loaders[mysection] = false;
+            }, timeToWait)
         });
     });
   }
-  self.resort = function (item) //, partFrom, partTo, indexFrom, indexTo)
+  self.resort = function (skipReload)
   {
+    if (!skipReload) {
+        $rootScope.loaders[mysection] = true;
+    }
     var promises = [];
     //console.log("TEST SECTIONS", $scope.sections);
 
@@ -126,6 +131,12 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
 
     return $q.all(promises).then((values) => {
         $log.debug("Pushed updated order");
+        if (!skipReload) {
+            // Activate the view
+            $timeout(function () {
+                $rootScope.loaders[mysection] = false;
+            }, timeToWait)
+        }
     });
   }
 

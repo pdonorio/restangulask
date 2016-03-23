@@ -7,8 +7,11 @@
         <div layout="row" flex="flex" class="fill-height"
         layout-align="center center">
           <div class="md-toolbar-item md-breadcrumb" aria-hidden="false">
-            <span tabindex="0"> <br>
+            <span tabindex="0">
+                <br>
                 Custom sections for your <i>Welcome page</i>
+                <br>
+                <small>Note: you may drag and drop to re-order sections</small>
             </span>
           </div>
         </div>
@@ -29,7 +32,7 @@
 </div>
 
 <ul sv-root sv-part="sections" ng-hide="loaders['admin_sections']"
-    sv-on-sort="wadm.resort($item)"
+    sv-on-sort="wadm.resort()"
     class="collapsible" data-collapsible="accordion" watch>
 
     <li ng-repeat="model in sections track by $index"
@@ -41,9 +44,20 @@
              <b>Section <span style="font-style:italic">
                 {{$index+1}}</span> - </b>
              <span ng-if="model.data['Section']">
-                {{model.data['Section']}} </span>
+                {{model.data['Section']}}
+             </span>
              <span ng-if="!model.data['Section']">
-                <b>BROKEN</b> </span>
+                <b>BROKEN</b>
+                <a href class="btn red lighten-2"
+                    ng-click="wadm.fixPositions($index);">
+                    FIX
+                </a>
+             </span>
+<!--
+             <span ng-if="model.data['Section']">
+                <br> <small>Date: dd/mm/YYYY </small>
+             </span>
+-->
            </md-content>
        </div>
 
@@ -86,10 +100,6 @@
             <h4>Section {{$index+1}} info</h4>
             </div>
             <div flex="20" layout="row" layout-align="center start">
-              <a href class="btn red lighten-2" ng-if="!model.data['Section']"
-                ng-click="wadm.fixPositions($index);">
-                FIX
-              </a>
               <a href class="btn" ng-if="model.data['Section']"
                 ng-click="wadm.showAdvanced($event, model)">
                 upload
