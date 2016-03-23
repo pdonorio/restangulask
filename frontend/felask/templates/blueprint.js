@@ -13,7 +13,7 @@ var apiPort = 8081;
 var originalApiUrl = '{{api_url}}'.slice(0, -1);
 var serverUrl = originalApiUrl;
 var ifPort = originalApiUrl.indexOf(':', 5);
-if (ifPort) {
+if (ifPort > 0) {
     serverUrl = serverUrl.slice(0, ifPort);
 }
 
