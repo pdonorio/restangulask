@@ -36,45 +36,74 @@
         sv-element="opts" class="well" >
 
       <div class="collapsible-header">
-      <md-content layout-padding layout-wrap
-        layout="row" layout-align="center center">
-        <div flex="90">
-         <b>Section <span style="font-style:italic">{{$index+1}}</span> </b>
-         <br>
-         <span ng-if="model.data['Section']"> {{model.data['Section']}} </span>
-         <span ng-if="!model.data['Section']"> <b>BROKEN</b> </span>
-        </div>
-        <div flex="10" layout="row" layout-align="center start">
-          <a href class="btn red lighten-2" ng-if="!model.data['Section']"
-            ng-click="wadm.fixPositions($index);">
-            FIX
-          </a>
-          <a href class="btn" ng-if="model.data['Section']"
-            ng-click="wadm.showAdvanced($event, model)">
-            edit
-          </a>
-        </div>
-       </md-content>
+          <md-content layout-padding layout-wrap
+            layout="row" layout-align="start center">
+             <b>Section <span style="font-style:italic">
+                {{$index+1}}</span> - </b>
+             <span ng-if="model.data['Section']">
+                {{model.data['Section']}} </span>
+             <span ng-if="!model.data['Section']">
+                <b>BROKEN</b> </span>
+           </md-content>
        </div>
 
        <div ng-if="model.data['Section']"
             class="collapsible-body grey lighten-3"
             style="padding:5px 40px 5px 40px;">
+
         <md-subheader class="md-primary grey lighten-3">
-            A short description:
+            Section name
+        </md-subheader>
+        <md-content class="grey lighten-3" style="padding-left: 30px;">
+            <span ng-bind-html="model.data['Section']"></span>
+        </md-content>
+        <md-subheader class="md-primary grey lighten-3">
+            A short description
         </md-subheader>
         <md-content class="grey lighten-3" style="padding-left: 30px;">
             <span ng-bind-html="model.data['Description']"></span>
         </md-content>
         <span ng-if="model.data['Content']">
             <md-subheader class="md-primary grey lighten-3">
-                Content for separated page:
+                Content for separated page
             </md-subheader>
             <md-content class="grey lighten-3" style="padding-left: 30px;">
                 <span ng-bind-html="model.data['Content']"></span>
             </md-content>
         </span>
+        <md-subheader class="md-primary grey lighten-3">
+            Image
+        </md-subheader>
+        <md-content class="grey lighten-3" style="padding-left: 30px;">
+            TO DO: add a list
+        </md-content>
+
         <br>
+
+          <md-content layout-padding layout-wrap class="grey lighten-2"
+            layout="row" layout-align="center center">
+            <div flex="75">
+            <h4>Section {{$index+1}} info</h4>
+            </div>
+            <div flex="20" layout="row" layout-align="center start">
+              <a href class="btn red lighten-2" ng-if="!model.data['Section']"
+                ng-click="wadm.fixPositions($index);">
+                FIX
+              </a>
+              <a href class="btn" ng-if="model.data['Section']"
+                ng-click="wadm.showAdvanced($event, model)">
+                upload
+              </a>
+              &nbsp;
+              <a href class="btn" ng-if="model.data['Section']"
+                ng-click="wadm.showAdvanced($event, model)">
+                edit
+              </a>
+            </div>
+          </md-content>
+
+        <br>
+
        </div>
 
     </li>
