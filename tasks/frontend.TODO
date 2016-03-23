@@ -17,19 +17,9 @@ http://codeology.braintreepayments.com/pdonorio/restangulask
 git submodule sync
 git submodule update
 
---- ✄ -----------------------
-
-Next release:
-  ☐ otherimages endpoint
-    ✔ destination parameter @done (16-03-23 08:14)
-    ☐ upload with a separated POST option = subfolder
-  ☐ Welcome page complention
-    ☐ welcome parallax
-    ☐ welcome slider
-
 RELEASE protocol:
-  ✔ stop frapi @done (16-03-22 21:41)
-  ✔ remove volumes @done (16-03-22 21:41)
+  ✔ stop other services @done (16-03-22 21:41)
+  ✔ eventually remove volumes @done (16-03-22 21:41)
   ✔ clone restangulask @done (16-03-22 21:41)
   ✔ move images @done (16-03-22 21:43)
   ✔ project init @done (16-03-22 21:48)
@@ -41,6 +31,19 @@ RELEASE protocol:
   ✔ launch operations.py @done (16-03-22 22:10)
   ✔ change content.json @done (16-03-22 22:54)
   ✔ let users register @done (16-03-22 22:54)
+
+--- ✄ -----------------------
+
+Next release:
+  ☐ otherimages endpoint
+    ✔ destination parameter @done (16-03-23 08:14)
+      ☐ parameter could also be the subfolder?
+    ✔ datadocs with new attribute 'type' @done (16-03-23 12:31)
+      ☐ fix it also inside the "operations.py"
+       ☐ maybe a rethinkdb default
+  ☐ Welcome page complention
+    ☐ welcome parallax
+    ☐ welcome slider
 
 After release:
   ☐ Multi images check on details page

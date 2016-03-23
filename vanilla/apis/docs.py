@@ -318,7 +318,23 @@ class RethinkImagesAssociations(BaseRethinkResource):
 ##########################################
 # Upload
 ##########################################
+
+#####################################
+# Extra function for handling the image destination
 DEFAULT_DESTINATION = 'documents'
+IMAGE_DESTINATIONS = [DEFAULT_DESTINATION, 'welcome', 'slider']
+
+
+def image_destination(mydict, key_type='destination'):
+    """ This is the turning point for the image future use """
+
+    image_destination = None
+    if key_type in mydict:
+        image_destination = mydict[key_type]
+    if image_destination not in IMAGE_DESTINATIONS:
+        image_destination = DEFAULT_DESTINATION
+
+    return image_destination
 
 
 class RethinkUploader(Uploader, BaseRethinkResource):
@@ -332,22 +348,16 @@ class RethinkUploader(Uploader, BaseRethinkResource):
         Handle destination of the image
         inside rethinkdb documents
         """
-
-        destinations = [DEFAULT_DESTINATION, 'welcome', 'slider']
-
         images = []
         key = 'record'
-        key_type = 'destination'
         key_file = 'filename'
 
         # Record is the main thing here
         id = self._args[key]
 
         # This is the turning point for the image future use
-        image_destination = self._args[key_type]
-        if image_destination not in destinations:
-            image_destination = DEFAULT_DESTINATION
-        logger.debug("Destination: %s" % image_destination)
+        img_destination = image_destination(self._args)
+        logger.debug("Destination: %s" % img_destination)
 
         # Other infos
         myfile = obj['data'][key_file]
@@ -377,6 +387,7 @@ class RethinkUploader(Uploader, BaseRethinkResource):
         record = {
             key: id,
             "images": images,
+            "type": img_destination,
         }
         try:
             action(record)
