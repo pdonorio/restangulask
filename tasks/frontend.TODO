@@ -51,6 +51,9 @@ After release:
     ☐ submission step
       ☐ also for image upload
     ☐ backend insert with API
+      ☐ split words like operations do
+  ☐ Public search pages
+    ☐ A python/js variable to know if you want to do it?
 
 Rethinkdb logs:
    ☐ problem with the second...

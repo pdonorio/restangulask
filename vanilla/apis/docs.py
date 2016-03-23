@@ -328,17 +328,33 @@ class RethinkUploader(Uploader, BaseRethinkResource):
     ZOOMIFY_ENABLE = True
 
     def image_rdb_insert(self, obj):
+        """
+        Handle destination of the image
+        inside rethinkdb documents
+        """
+
+        destinations = [DEFAULT_DESTINATION, 'welcome', 'slider']
+
+        images = []
+        key = 'record'
+        key_type = 'destination'
+        key_file = 'filename'
 
         # Record is the main thing here
-        key = 'record'
         id = self._args[key]
+
+        # This is the turning point for the image future use
+        image_destination = self._args[key_type]
+        if image_destination not in destinations:
+            image_destination = DEFAULT_DESTINATION
+        logger.debug("Destination: %s" % image_destination)
+
         # Other infos
-        key_file = 'filename'
         myfile = obj['data'][key_file]
         meta = obj['data']['meta']
+
         # RethinkDB setup
         query = self.get_table_query()
-        images = []
         action = self.insert
 
         # I should query the database to see if this record already exists
@@ -383,16 +399,6 @@ class RethinkUploader(Uploader, BaseRethinkResource):
         Let the file be uploaded, make stats
         and do operations to the database with it.
         """
-
-        # This is the turning point for the image future use
-        key_type = 'destination'
-        # options
-        destinations = [DEFAULT_DESTINATION, 'welcome', 'slider']
-
-        image_destination = self._args[key_type]
-        if image_destination not in destinations:
-            image_destination = DEFAULT_DESTINATION
-        logger.debug("Destination: %s" % image_destination)
 
         # Original upload
         obj, status = super(RethinkUploader, self).post()
