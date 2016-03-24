@@ -122,7 +122,7 @@ def jstemplate(title='App', mydomain='/'):
 def load_users():
     """ Save the current user as the global user for each request """
     if current_user.is_authenticated:
-        g.user = current_user.get_id()
+        g.user = current_user
     else:
         g.user = None
 # def before_request():
@@ -191,6 +191,10 @@ def zoom(document, code):
 
     template_path = 'custom' + '/' + CURRENT_BLUEPRINT
     filename = '/empty'
+
+    if g.user is None:
+        return "Server has restarted after your last login." + \
+            "<br>Please logout and login again..."
 
 # https://teamtreehouse.com/community/attributeerror-anonymoususermixin-object-has-no-attribute-username
 
