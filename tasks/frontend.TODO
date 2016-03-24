@@ -35,34 +35,26 @@ git submodule update
  http://blog.trello.com/going-public-roadmapping-with-a-public-trello-board/
 
 RELEASE protocol:
-  ✔ stop other services @done (16-03-22 21:41)
-  ✔ eventually remove volumes @done (16-03-22 21:41)
-  ✔ clone restangulask @done (16-03-22 21:41)
-  ✔ move images @done (16-03-22 21:43)
-  ✔ project init @done (16-03-22 21:48)
-  ✔ check permissions vanilla dir @done (16-03-22 21:48)
+
+  ☐ stop other services
+  ☐ eventually remove volumes
+  ☐ clone restangulask
+  ☐ move images
+  ☐ project init
+  ☐ check permissions vanilla dir
   user 1000
-    ✔ bower install @done (16-03-22 21:48)
-  ✔ fix jquery to 2.1 @done (16-03-22 22:10)
-  ✔ import rdb @done (16-03-22 22:10)
-  ✔ launch operations.py @done (16-03-22 22:10)
-  ✔ change content.json @done (16-03-22 22:54)
-  ✔ let users register @done (16-03-22 22:54)
+    ☐ bower install
+  ☐ fix jquery to 2.1
+  ☐ import rdb
+  ☐ launch operations.py
+  ☐ change content.json
+  ☐ let users register
 
 --- ✄ -----------------------
 
 Next release:
 
- ☐ Current @bugs
-   ✔ missing images @done (16-03-24 17:56)
-     ✔ limogen_1... @done (16-03-24 17:56)
-     ☐ add icon to quickly go to check to details
-   ☐ details
-     ☐ Dunkerque_MS_1
-     ☐ multiple details?
-     ☐ use extrait as record name?
-     ☐ or use another color?
-
+ ☐ details: extrait name color
   ☐ Welcome page complention
     ✔ rdb filter images on type @done (16-03-23 14:43)
       ✔ test rdb filter @done (16-03-23 14:43)
@@ -78,6 +70,8 @@ Next release:
         ☐ SUBSECTIONS?
     ☐ test when uploading an image that already exists with JS
     ☐ welcome slider
+  ☐ Multiple details
+   Dunkerque_MS_1
 
 After release:
   ☐ Multi images check on details page
@@ -709,3 +703,6 @@ COMPLETED:
      ✔ gunicorn for backend? @done (16-03-24 15:00)
      ✔ tornado for frontend? @done (16-03-24 15:31)
        ✔ number of workers? @done (16-03-24 17:33)
+   ✔ missing images @done (16-03-24 17:56)
+     ✔ limogen_1... @done (16-03-24 17:56)
+     ✔ add icon to quickly go to check to details @done (16-03-24 19:50)

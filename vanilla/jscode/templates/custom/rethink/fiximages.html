@@ -41,14 +41,23 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
-        <ul>
-            <li ng-repeat="element in fix.elements">
-                <a href
-                ng-click="fix.uploaderDialog(element.record, element.value)">
-                    {{element.value}}
-                </a>
-            </li>
-        </ul>
+        <table class="table table-hover">
+          <tbody>
+            <tr ng-repeat="element in fix.elements">
+             <td> {{element.value}} </td>
+             <td> <a href
+                 ng-click="fix.uploaderDialog(element.record, element.value)"
+                 class="waves-effect waves-light btn-floating lime lighten-2">
+                   <i class="material-icons blue-grey-text"> publish </i> </a>
+             </td>
+             <td> <a target="_blank"
+                 ui-sref='logged.details({id: element.record})'
+                 class="waves-effect waves-light btn-floating lime lighten-3">
+                   <i class="material-icons blue-grey-text">web</i> </a>
+             </td>
+            </tr>
+          </tbody>
+        </table>
       </md-card-content>
       <md-card-actions layout="row" layout-align="start center">
         <md-button ng-click="fix.closeCard()"> Close </md-button>

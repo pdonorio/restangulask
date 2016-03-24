@@ -270,7 +270,7 @@ class RethinkImagesAssociations(BaseRethinkResource):
                 )) \
             .filter({'step': 3, 'pos': 1}) \
             .pluck('record', 'party') \
-            .group('party')['record'] \
+            .group('party')['record']
 
         records_with_docs = \
             list(self.get_query()

@@ -8,10 +8,11 @@ from logging.config import fileConfig
 # import json
 import commentjson as json
 
+# Default. Will be changed inside the different configurations.
+DEBUG = True
+
 #######################
 # Warning: this decides about final configuration
-#DEBUG = True
-DEBUG = os.environ['APP_DEBUG']
 PATH = 'angular'   # Main directory where all conf files are found
 # Warning: this decides about final configuration
 #######################
