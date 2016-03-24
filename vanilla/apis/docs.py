@@ -6,10 +6,10 @@ Some endpoints implementation
 
 from __future__ import absolute_import
 
-import os
 import re
 import rethinkdb as r
 
+from operator import itemgetter
 from rethinkdb.net import DefaultCursorEmpty
 from flask.ext.security import auth_token_required, roles_required
 from confs import config
@@ -159,7 +159,7 @@ class RethinkDocuments(BaseRethinkResource):
     def get_all_notes(self, q):
         return q.concat_map(
             lambda doc: doc['images'].
-            has_fields({'transcriptions': True, 'images': True}).concat_map(
+            has_fields({'transcriptions': True}).concat_map(
                 lambda image: image['transcriptions_split'])) \
             .distinct()
 
@@ -168,7 +168,7 @@ class RethinkDocuments(BaseRethinkResource):
 
         mapped = q.concat_map(
                 lambda doc: doc['images'].has_fields(
-                    {'transcriptions': True, 'images': True}).map(
+                    {'transcriptions': True}).map(
                         lambda image: {
                             'word': image['transcriptions_split'],
                             'record': doc['record'],
@@ -274,41 +274,48 @@ class RethinkImagesAssociations(BaseRethinkResource):
 
         records_with_docs = \
             list(self.get_query()
-                 .table('datadocs').has_fields('type')
+                 .table('datadocs')  # .has_fields('type')
                  .filter({'type': DEFAULT_DESTINATION})
                  ['record'].run())
+        to_remove = set(records_with_docs)
 
         final = {}
-        from operator import itemgetter
 
         for party, records in first.run().items():
-            elements = set(records) - set(records_with_docs)
+
+            elements = set(records) - to_remove
+
             if len(elements) > 0:
+
                 # Remove the records containing the images
-                ids = list(set(records) - set(records_with_docs))
                 cursor = self.get_query().table('datavalues') \
-                    .filter(lambda doc: r.expr(ids).contains(doc['record'])) \
+                    .filter(lambda doc: r.expr(list(elements))
+                            .contains(doc['record'])) \
                     .run()
                 newrecord = []
                 for obj in cursor:
+
                     val = obj['steps'][0]['data'][0]['value']
+
+                    # Sort from the number value
                     tmp = val.split('_')
                     index = 0
+                    offset = 0
                     if len(tmp) > 1:
-                        index = 1
-                    sort = tmp[index]
-
+                        index = len(tmp) - 1
+                        offset = 1000
                     try:
-                        sortme = int(sort)
+                        sort_value = int(tmp[index]) + offset
                     except:
-                        sortme = -1
+                        sort_value = -1
+
                     newrecord.append({
-                        'sortme': sortme,
+                        'sortme': sort_value,
                         'value': val,
                         'record': obj['record']
                     })
                 final[party] = sorted(newrecord, key=itemgetter('sortme'))
-                # final[party] = list(cursor)
+
         return self.response(final)
 
         # # Join the records with the uploaded files
