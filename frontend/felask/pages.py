@@ -119,9 +119,14 @@ def jstemplate(title='App', mydomain='/'):
 # #################################
 # # BASIC INTERFACE ROUTES
 @cms.before_request
-def before_request():
+def load_users():
     """ Save the current user as the global user for each request """
-    g.user = current_user
+    if current_user.is_authenticated:
+        g.user = current_user.get_id()
+    else:
+        g.user = None
+# def before_request():
+#     g.user = current_user
 
 
 def forward_response(response):
@@ -186,6 +191,9 @@ def zoom(document, code):
 
     template_path = 'custom' + '/' + CURRENT_BLUEPRINT
     filename = '/empty'
+
+# https://teamtreehouse.com/community/attributeerror-anonymoususermixin-object-has-no-attribute-username
+
     HEADERS = {
         'content-type': 'application/json',
         'Authentication-Token': g.user.token
