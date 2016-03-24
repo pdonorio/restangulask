@@ -27,7 +27,9 @@
           <tbody>
             <tr ng-if='value' ng-repeat='(key, value) in rows'>
               <th> {{ key }} </th>
-              <td> {{ value }} </td>
+              <td ng-if="name == 'Extrait' && key.indexOf('ero de l') >= 0">
+                <b> <i>{{ value }}</i> </b> </td>
+              <td ng-if="!(name == 'Extrait' && key.indexOf('ero de l') >= 0)"> {{ value }} </td>
             </tr>
           </tbody>
         </table>

@@ -54,7 +54,7 @@ RELEASE protocol:
 
 Next release:
 
- ☐ details: extrait name color
+ ✔ details: extrait name color @done (16-03-24 20:04)
   ☐ Welcome page complention
     ✔ rdb filter images on type @done (16-03-23 14:43)
       ✔ test rdb filter @done (16-03-23 14:43)
