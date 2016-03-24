@@ -10,7 +10,8 @@ import commentjson as json
 
 #######################
 # Warning: this decides about final configuration
-DEBUG = True
+#DEBUG = True
+DEBUG = os.environ['APP_DEBUG']
 PATH = 'angular'   # Main directory where all conf files are found
 # Warning: this decides about final configuration
 #######################
@@ -62,7 +63,8 @@ user_config = read_files(PATH)
 ########################################
 class BaseConfig(object):
 
-    DEBUG = os.environ.get('APP_DEBUG', DEBUG)
+    DEBUG = bool(int(os.environ.get('APP_DEBUG', int(DEBUG))))
+    print("TEST DEBUG", DEBUG)
     TESTING = False
     MYCONFIG_PATH = os.path.join(CONFIG_PATH, PATH)
     BASE_DB_DIR = '/dbs'

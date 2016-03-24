@@ -11,10 +11,11 @@ from felask.server import create_app
 from plumbum.cmd import ln
 from plumbum.commands.processes import ProcessExecutionError as perror
 
-# #TORNADO
-# from tornado.wsgi import WSGIContainer
-# from tornado.httpserver import HTTPServer
-# from tornado.ioloop import IOLoop
+# TORNADO
+from tornado.wsgi import WSGIContainer
+from tornado.httpserver import HTTPServer
+from tornado.ioloop import IOLoop
+
 # #GEVENT
 # #from gevent.wsgi import WSGIServer
 
@@ -35,21 +36,25 @@ upload_link = os.path.join(
 
 try:
     ln['-s', app.config['UPLOAD_FOLDER'], upload_link]()
+    app.logger.info("Created folder upload link")
 except perror:
     pass
 
 #########################
 # MAIN
 if __name__ == '__main__':
-    # if debug:
-    app.run(
-        host=host, port=port,
-        debug=debug, use_reloader=True, threaded=True)
-    # else:
+    if debug:
+        app.logger.debug("Server is development Flask instance")
+        app.run(
+            host=host, port=port,
+            debug=debug, use_reloader=True, threaded=True)
+    else:
+        app.logger.info("Tornado mode on")
+        # TORNADO
+        http_server = HTTPServer(WSGIContainer(app))
+        http_server.listen(port)
+        IOLoop.instance().start()
+
     # #     ## GEVENT
     # #     # http_server = WSGIServer(('', port), app)
     # #     # http_server.serve_forever()
-    #     ## TORNADO
-    #     http_server = HTTPServer(WSGIContainer(app))
-    #     http_server.listen(port)
-    #     IOLoop.instance().start()

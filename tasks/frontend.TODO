@@ -60,12 +60,16 @@ custombe_1    | r.db('webapp').table('datadocs').concat_map(lambda var_17: var_1
  ☐ Current @bugs
    ☐ performances...
      ✔ gunicorn for backend? @done (16-03-24 15:00)
-     ☐ tornado for frontend?
+     ✔ tornado for frontend? @done (16-03-24 15:31)
+       ☐ number of workers?
    ☐ missing images
      ☐ limogen_1...
      ☐ add icon to quickly go to check to details
    ☐ details
-     ☐ Dunkerque_1
+     ☐ Dunkerque_MS_1
+     ☐ multiple details?
+     ☐ use extrait as record name?
+     ☐ or use another color?
 
   ☐ Welcome page complention
     ✔ rdb filter images on type @done (16-03-23 14:43)

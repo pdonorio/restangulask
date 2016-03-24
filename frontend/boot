@@ -16,10 +16,10 @@ if [ "$APP_MODE" == "debug" ]; then
 elif [ "$APP_MODE" == "production" ]; then
     echo "[=== PRODUCTION MODE ===]"
 ## NGINX + WSGI?
-    FLASK_CONFIGURATION="$APP_MODE" APP_DEBUG="false" $main_command
+    FLASK_CONFIGURATION="$APP_MODE" APP_DEBUG=0 $main_command
 else
     echo "[=== DEVELOPMENT MODE ===]"
-    FLASK_CONFIGURATION="$APP_MODE" APP_DEBUG="true" $main_command
+    FLASK_CONFIGURATION="$APP_MODE" APP_DEBUG=1 $main_command
 fi
 
 
