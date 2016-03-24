@@ -11,16 +11,20 @@ from felask.server import create_app
 from plumbum.cmd import ln
 from plumbum.commands.processes import ProcessExecutionError as perror
 
-# TORNADO
+# Productions services
 from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
+from gevent.wsgi import WSGIServer
 
-# #GEVENT
-# #from gevent.wsgi import WSGIServer
+#########################
+# Decide which WSGI
+GEVENT = True
+TORNADO = False
 
 #########################
 # APP preparation
+
 app = create_app()
 host = app.config.get("HOST")
 port = app.config.get("PORT")
@@ -49,18 +53,20 @@ if __name__ == '__main__':
             host=host, port=port,
             debug=debug, use_reloader=True, threaded=True)
     else:
-        # TORNADO
-        app.logger.info("Tornado mode on")
+
+        if TORNADO:
+            app.logger.info("Tornado mode on")
         # more info:
         # http://www.tornadoweb.org/en/stable/guide/running.html#processes-and-ports
 
-        http_server = HTTPServer(WSGIContainer(app))
-        # http_server.listen(port)
-        http_server.bind(port)
-        http_server.start(0)  # forks one process per cpu
-        # IOLoop.istance().start()
-        IOLoop.current().start()
+            http_server = HTTPServer(WSGIContainer(app))
+            # http_server.listen(port)
+            http_server.bind(port)
+            http_server.start(0)  # forks one process per cpu
+            # IOLoop.istance().start()
+            IOLoop.current().start()
 
-    # #     ## GEVENT
-    # #     # http_server = WSGIServer(('', port), app)
-    # #     # http_server.serve_forever()
+        elif GEVENT:
+            app.logger.info("GEVENT mode on!")
+            http_server = WSGIServer(('', port), app)
+            http_server.serve_forever()
