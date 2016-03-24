@@ -326,7 +326,10 @@ class RethinkImagesAssociations(BaseRethinkResource):
 #####################################
 # Extra function for handling the image destination
 DEFAULT_DESTINATION = 'documents'
-IMAGE_DESTINATIONS = [DEFAULT_DESTINATION, 'welcome', 'slider']
+HOMEPAGE_DESTINATION = 'welcome'
+SLIDES_DESTINATION = 'slides'
+IMAGE_DESTINATIONS = [
+    DEFAULT_DESTINATION, HOMEPAGE_DESTINATION, SLIDES_DESTINATION]
 
 
 def image_destination(mydict, key_type='destination'):
@@ -340,14 +343,47 @@ def image_destination(mydict, key_type='destination'):
 
     return image_destination
 
+model = 'datadocs'
+mylabel, mytemplate, myschema = schema_and_tables(model)
+
 
 class RethinkMetaImages(BaseRethinkResource):
-    """ Uploading data and save it inside db """
+    """ Meta informations about uploaded documents """
 
-    table = 'datadocs'
+    schema = myschema
+    template = mytemplate
+    table = mylabel
 
+    @deck.apimethod
+    #@auth_token_required
     def get(self):
-        return "Hello"
+
+        # Handling one filter
+        main_key = 'filter'
+        j = self.get_input(False)
+        if main_key not in j:
+            return self.response("This endpoint is to filter...")
+
+        tmp = j[main_key].split(':')
+        if len(tmp) != 2:
+            return self.response("This endpoint is to filter...")
+
+        filter_key, filter_value = tmp
+        print("TEST", filter_key, filter_value)
+
+        # Handling more than one filter??
+
+        # Do rethinkdb
+        records_with_docs = \
+            list(self.get_query()
+                 .table('datadocs').has_fields('type')
+                 .filter({'type': DEFAULT_DESTINATION})
+                 ['record'].run())
+        return self.response(records_with_docs.pop())
+
+    @deck.apimethod
+    def post(self):
+        return self.response("POST method Not implemented yet")
 
 
 class RethinkUploader(Uploader, BaseRethinkResource):
@@ -412,12 +448,15 @@ class RethinkUploader(Uploader, BaseRethinkResource):
         return obj
 
     @deck.apimethod
+    #@auth_token_required
     def get(self, filename=None):
         return super(RethinkUploader, self).get(filename)
 
     @deck.add_endpoint_parameter(name='record', required=True)
     @deck.add_endpoint_parameter('destination', default=DEFAULT_DESTINATION)
     @deck.apimethod
+# // TO FIX: use ng-flow headers to set authentication?
+    #@auth_token_required
     def post(self):
         """
         Let the file be uploaded, make stats

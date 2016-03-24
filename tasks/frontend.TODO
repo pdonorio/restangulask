@@ -41,11 +41,14 @@ Next release:
     ✔ fix existing @done (16-03-23 14:43)
     ✔ new endpoint @done (16-03-23 14:52)
       ☐ sv position drag and drop?
-      ☐ generic get
-        ☐ generic filter
+      ✔ generic get @done (16-03-24 08:12)
+        ✔ generic filter @done (16-03-24 08:12)
+          ☐ filters as a list
         ☐ test filter on types
     ☐ welcome parallax
       ☐ upload image on admin section
+        ☐ SUBSECTIONS?
+    ☐ test when uploading an image that already exists with JS
     ☐ welcome slider
 
 After release:
@@ -54,6 +57,7 @@ After release:
     ☐ transcription lib
       ☐ install
       ☐ test
+      ☐ show transcriptions in zoom
     ☐ submission step
       ☐ also for image upload
     ☐ backend insert with API
