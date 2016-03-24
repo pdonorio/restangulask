@@ -49,11 +49,17 @@ if __name__ == '__main__':
             host=host, port=port,
             debug=debug, use_reloader=True, threaded=True)
     else:
-        app.logger.info("Tornado mode on")
         # TORNADO
+        app.logger.info("Tornado mode on")
+        # more info:
+        # http://www.tornadoweb.org/en/stable/guide/running.html#processes-and-ports
+
         http_server = HTTPServer(WSGIContainer(app))
-        http_server.listen(port)
-        IOLoop.instance().start()
+        # http_server.listen(port)
+        http_server.bind(port)
+        http_server.start(0)  # forks one process per cpu
+        # IOLoop.istance().start()
+        IOLoop.current().start()
 
     # #     ## GEVENT
     # #     # http_server = WSGIServer(('', port), app)
