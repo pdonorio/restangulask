@@ -15,7 +15,10 @@ NATIVE WEB APPs / WEB PROGRESSIVE APP:
 > isArray package had 18M downloads last month, has 72 dependant packages. It fits in a tweet:
   return toString.call(arr) == '[object Array]';
 
---- ✄ -----------------------
+PROTOTYPING:
+
+https://www.invisionapp.com/tour/design-feedback-collaboration-tool
+
 
  FEATURE REQUEST:
  ☐ API Decorator: to parse arguments from the function args list and add them to flask parameters
@@ -27,6 +30,9 @@ NATIVE WEB APPs / WEB PROGRESSIVE APP:
 
 git submodule sync
 git submodule update
+
+ ☐ Roadmapping
+ http://blog.trello.com/going-public-roadmapping-with-a-public-trello-board/
 
 RELEASE protocol:
   ✔ stop other services @done (16-03-22 21:41)
