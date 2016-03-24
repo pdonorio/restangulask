@@ -4,6 +4,17 @@
 
 http://codeology.braintreepayments.com/pdonorio/restangulask
 
+
+--- ✄ -----------------------
+
+NATIVE WEB APPs / WEB PROGRESSIVE APP:
+
+  https://developers.google.com/web/progressive-web-apps?hl=en
+  http://read.humanjavascript.com/ch01-introduction.html
+
+> isArray package had 18M downloads last month, has 72 dependant packages. It fits in a tweet:
+  return toString.call(arr) == '[object Array]';
+
 --- ✄ -----------------------
 
  FEATURE REQUEST:

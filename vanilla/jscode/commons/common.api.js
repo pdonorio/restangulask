@@ -65,9 +65,39 @@ function RestApiService($http, $auth, $log) {
                 timeout: timeout,
             }
 
+/* Note:
+$http wraps the call inside the SCHEMA:
+
+config : Object
+data : Object
+headers : (d)
+status : 200
+statusText : "OK"
+__proto__ : Object
+
+My response is inside $http response.data.
+Well, this is how i wrap that call:
+{
+    "data": {
+        "id": "2"
+    },
+    "data_type": "<class 'dict'>",
+    "elements": 1,
+    "status": 200
+}
+
+So we have again data and status.
+This is because the main API python package we are writing,
+is trying to use some standards, which were found already there
+with Angular.
+
+
+*/
+
         return $http(req).then(
             function successCallback(response) {
-                //$log.debug("API call successful");
+
+                $log.debug("API call successful", response);
                 return response.data;
           }, function errorCallback(response) {
                 $log.warn("API failed to call")
