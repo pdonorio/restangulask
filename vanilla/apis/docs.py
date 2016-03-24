@@ -159,7 +159,7 @@ class RethinkDocuments(BaseRethinkResource):
     def get_all_notes(self, q):
         return q.concat_map(
             lambda doc: doc['images'].
-            has_fields({'transcriptions': True}).concat_map(
+            has_fields({'transcriptions': True, 'images': True}).concat_map(
                 lambda image: image['transcriptions_split'])) \
             .distinct()
 
@@ -168,7 +168,7 @@ class RethinkDocuments(BaseRethinkResource):
 
         mapped = q.concat_map(
                 lambda doc: doc['images'].has_fields(
-                    {'transcriptions': True}).map(
+                    {'transcriptions': True, 'images': True}).map(
                         lambda image: {
                             'word': image['transcriptions_split'],
                             'record': doc['record'],
