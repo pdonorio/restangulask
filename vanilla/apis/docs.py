@@ -112,8 +112,10 @@ class RethinkDataValues(BaseRethinkResource):
                 query = self.filter_nested_field(
                     query, self._args['key'], 1)
 
+            # Paging
+            current_page, limit = self.get_paging()
             # Execute query
-            count, data = self.execute_query(query, self._args['perpage'])
+            count, data = self.execute_query(query, limit)
         else:
             # Get all content from db
             count, data = super().get(data_key)
@@ -205,7 +207,8 @@ class RethinkDocuments(BaseRethinkResource):
         if document_id is not None:
             count, data = super().get(document_id)
         else:
-            count, data = self.execute_query(query, self._args['perpage'])
+            current_page, limit = self.get_paging()
+            count, data = self.execute_query(query, limit)
 
         return self.response(data, elements=count)
 
@@ -455,8 +458,8 @@ class RethinkUploader(Uploader, BaseRethinkResource):
     def get(self, filename=None):
         return super(RethinkUploader, self).get(filename)
 
-    @deck.add_endpoint_parameter(name='record', required=True)
     @deck.add_endpoint_parameter('destination', default=DEFAULT_DESTINATION)
+    @deck.add_endpoint_parameter(name='record', required=True)
     @deck.apimethod
 # // TO FIX: use ng-flow headers to set authentication?
     #@auth_token_required
