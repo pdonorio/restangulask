@@ -61,58 +61,71 @@
            </md-content>
        </div>
 
-       <div ng-if="model.data['Section']"
-            class="collapsible-body grey lighten-3"
-            style="padding:5px 40px 5px 40px;">
+       <div class="collapsible-body"
+            ng-if="model.data['Section']"
+            style="padding:5px 40px 15px 40px;">
 
-        <md-subheader class="md-primary grey lighten-3">
-            Section name
-        </md-subheader>
-        <md-content class="grey lighten-3" style="padding-left: 30px;">
-            <span ng-bind-html="model.data['Section']"></span>
-        </md-content>
-        <md-subheader class="md-primary grey lighten-3">
-            A short description
-        </md-subheader>
-        <md-content class="grey lighten-3" style="padding-left: 30px;">
-            <span ng-bind-html="model.data['Description']"></span>
-        </md-content>
-        <span ng-if="model.data['Content']">
+         <md-content
+            class="grey lighten-3"
+            layout-padding layout-wrap
+            layout="row" layout-align="start center">
+          <div flex="90">
             <md-subheader class="md-primary grey lighten-3">
-                Content for separated page
+                Section name
             </md-subheader>
             <md-content class="grey lighten-3" style="padding-left: 30px;">
-                <span ng-bind-html="model.data['Content']"></span>
+                <span ng-bind-html="model.data['Section']"></span>
             </md-content>
-        </span>
-        <md-subheader class="md-primary grey lighten-3">
-            Image
-        </md-subheader>
-        <md-content class="grey lighten-3" style="padding-left: 30px;">
-            TO DO: add a list
-        </md-content>
+            <md-subheader class="md-primary grey lighten-3">
+                A short description
+            </md-subheader>
+            <md-content class="grey lighten-3" style="padding-left: 30px;">
+                <span ng-bind-html="model.data['Description']"></span>
+            </md-content>
+            <span ng-if="model.data['Content']">
+                <md-subheader class="md-primary grey lighten-3">
+                    Content for separated page
+                </md-subheader>
+                <md-content class="grey lighten-3" style="padding-left: 30px;">
+                    <span ng-bind-html="model.data['Content']"></span>
+                </md-content>
+            </span>
+            <md-subheader class="md-primary grey lighten-3">
+                Image
+            </md-subheader>
+            <md-content class="grey lighten-3" style="padding-left: 30px;">
+                TO DO: add a list
+            </md-content>
+          </div>
+          <div flex="10" layout="column" layout-align="start center">
+                <md-subheader class="md-primary grey lighten-3">
+                    Actions
+                </md-subheader>
 
-        <br>
-
-          <md-content layout-padding layout-wrap class="grey lighten-2"
-            layout="row" layout-align="center center">
-            <div flex="75">
-            <h4>Section {{$index+1}} info</h4>
-            </div>
-            <div flex="20" layout="row" layout-align="center start">
-              <a href class="btn" ng-if="model.data['Section']"
+              <a href ng-if="model.data['Section']"
+                class="waves-effect btn-floating"
+                tooltipped data-position="left" data-delay="50"
+                data-tooltip="Edit this section"
                 ng-click="wadm.showAdvanced($event, model)">
-                upload
+                <i class="material-icons">mode_edit</i>
               </a>
               &nbsp;
-              <a href class="btn" ng-if="model.data['Section']"
+              <a href ng-if="model.data['Section']"
+                class="waves-effect btn-floating"
+                tooltipped data-position="left" data-delay="50"
+                data-tooltip="Upload an image for this section"
                 ng-click="wadm.showAdvanced($event, model)">
-                edit
+               <i class="material-icons"> publish </i> </a>
               </a>
-            </div>
-          </md-content>
-
-        <br>
+              &nbsp;
+              <a class="waves-effect btn-floating red"
+                tooltipped data-position="left" data-delay="50"
+                data-tooltip="Remove this element: BE CAREFUL!"
+                ng-click="remove()">
+                <i class="material-icons">delete</i>
+              </a>
+          </div>
+         </md-content>
 
        </div>
 

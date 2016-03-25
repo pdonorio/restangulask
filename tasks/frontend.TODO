@@ -68,8 +68,10 @@ Next release:
         ✘ subview with url parameter @cancelled (16-03-25 08:18)
     ✔ test when uploading an image that already exists with JS @done (16-03-25 15:44)
     ☐ welcome parallax
-      ☐ upload image on admin section
-        ☐ SUBSECTIONS?
+      ☐ upload icon action
+      ☐ delete icon action
+      ☐ move the section management to a separated page and link
+        ☐ subsections @inthefuture
     ☐ sv position drag and drop?
     ☐ welcome slider
   ☐ Multiple details
