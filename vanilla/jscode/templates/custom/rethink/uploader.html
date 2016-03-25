@@ -65,10 +65,15 @@ LIST:
                     ></md-progress-circular>
             </span>
         </td>
+        <td width="20%">
+            <div ng-if='file.errorMessage'>
+                <h5>Error(s):</h5>
+                <span ng-bind-html="file.errorMessage"></span>
+            </div>
+        </td>
         <td width="45%">
             <img flow-img="file" width="200">
         </td>
-        <td width="20%"> <b>{{file.errorMessage}}</b> </td>
     </tr>
   </table>
 </div>

@@ -94,6 +94,22 @@ function setScopeError(message, log, scope) {
   scope.error = "Service down...";
 }
 
+function apiErrorToHtml(data) {
+
+    error = "";
+    if (!data || !data.errors) {
+        error += "Unknown error";
+    } else {
+        forEach(data.errors, function(element, index) {
+            forEach(element, function(value, key) {
+                //console.log("TO HTML", index, key, value);
+                error += '<b>' + key + '</b>' + ':' + value + '<br>';
+            });
+        });
+    }
+    return error
+}
+
 String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + angular.lowercase(this.slice(1));
 }
