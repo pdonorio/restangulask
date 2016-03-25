@@ -222,6 +222,7 @@ class RethinkDataForAdministrators(BaseRethinkResource):
     template = mytemplate
     table = mylabel
 
+    @deck.add_endpoint_parameter(name='id')
     @deck.apimethod
     # @auth_token_required
     # @roles_required(config.ROLE_ADMIN)

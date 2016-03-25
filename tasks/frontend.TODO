@@ -64,13 +64,13 @@ Next release:
         ✔ generic json filter @done (16-03-24 08:12)
           ✘ filters as a list @cancelled (16-03-25 07:47)
         ✔ test filter on types @done (16-03-25 08:15)
-      ☐ missing images/transcriptions
-        ☐ subview with url parameter
-      ☐ sv position drag and drop?
+      ✔ missing images/transcriptions @done (16-03-25 08:18)
+        ✘ subview with url parameter @cancelled (16-03-25 08:18)
+    ☐ test when uploading an image that already exists with JS
     ☐ welcome parallax
       ☐ upload image on admin section
         ☐ SUBSECTIONS?
-    ☐ test when uploading an image that already exists with JS
+    ☐ sv position drag and drop?
     ☐ welcome slider
   ☐ Multiple details
    Dunkerque_MS_1
