@@ -9,6 +9,7 @@ from __future__ import absolute_import
 import re
 import rethinkdb as r
 
+from jinja2._compat import iteritems
 from operator import itemgetter
 from rethinkdb.net import DefaultCursorEmpty
 from flask.ext.security import auth_token_required, roles_required
@@ -371,22 +372,16 @@ class RethinkMetaImages(BaseRethinkResource):
         if main_key not in j:
             return self.response("This endpoint is to filter...")
 
-        tmp = j[main_key].split(':')
-        if len(tmp) != 2:
-            return self.response("This endpoint is to filter...")
+        q = self.get_table_query()
 
-        filter_key, filter_value = tmp
-        print("TEST", filter_key, filter_value)
-
-        # Handling more than one filter??
+        # Handling more than one filter
+        for key, value in iteritems(j[main_key]):
+            q = q.has_fields(key).filter({key: value})
 
         # Do rethinkdb
-        records_with_docs = \
-            list(self.get_query()
-                 .table('datadocs').has_fields('type')
-                 .filter({'type': DEFAULT_DESTINATION})
-                 ['record'].run())
-        return self.response(records_with_docs.pop())
+        cursor = q.run(time_format="raw")
+
+        return self.response(list(cursor))
 
     @deck.apimethod
     def post(self):

@@ -17,10 +17,13 @@ NATIVE WEB APPs / WEB PROGRESSIVE APP:
 
 PROTOTYPING:
 
+  ☐ get @feedback from ui
 https://www.invisionapp.com/tour/design-feedback-collaboration-tool
 
+ ☐ Roadmapping
+ http://blog.trello.com/going-public-roadmapping-with-a-public-trello-board/
 
- FEATURE REQUEST:
+FEATURE REQUEST:
  ☐ API Decorator: to parse arguments from the function args list and add them to flask parameters
 
 [submodule "backend"]
@@ -30,9 +33,6 @@ https://www.invisionapp.com/tour/design-feedback-collaboration-tool
 
 git submodule sync
 git submodule update
-
- ☐ Roadmapping
- http://blog.trello.com/going-public-roadmapping-with-a-public-trello-board/
 
 RELEASE protocol:
 
@@ -60,11 +60,13 @@ Next release:
       ✔ test rdb filter @done (16-03-23 14:43)
     ✔ fix existing @done (16-03-23 14:43)
     ✔ new endpoint @done (16-03-23 14:52)
-      ☐ sv position drag and drop?
       ✔ generic get @done (16-03-24 08:12)
-        ✔ generic filter @done (16-03-24 08:12)
-          ☐ filters as a list
-        ☐ test filter on types
+        ✔ generic json filter @done (16-03-24 08:12)
+          ✘ filters as a list @cancelled (16-03-25 07:47)
+        ✔ test filter on types @done (16-03-25 08:15)
+      ☐ missing images/transcriptions
+        ☐ subview with url parameter
+      ☐ sv position drag and drop?
     ☐ welcome parallax
       ☐ upload image on admin section
         ☐ SUBSECTIONS?
@@ -80,6 +82,8 @@ After release:
       ☐ install
       ☐ test
       ☐ show transcriptions in zoom
+    ☐ script to remove transcriptions split and recompute
+      ☐ usefull to go to elasticsearch
     ☐ submission step
       ☐ also for image upload
     ☐ backend insert with API
