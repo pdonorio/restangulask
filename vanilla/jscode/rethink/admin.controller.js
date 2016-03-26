@@ -24,6 +24,9 @@ function getSectionData(AdminService, $scope)
       if (out !== null
         && out.hasOwnProperty('elements'))
       {
+// TO DO:
+        //Load images: datadocs with type=welcome
+
         //Preserve order
         var newdata = [];
         if (out.elements > 0) {

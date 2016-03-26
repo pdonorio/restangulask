@@ -22,6 +22,27 @@ from ... import get_logger, htmlcodes as hcodes
 logger = get_logger(__name__)
 
 #####################################
+# Extra function for handling the image destination
+
+DEFAULT_DESTINATION = 'documents'
+HOMEPAGE_DESTINATION = 'welcome'
+SLIDES_DESTINATION = 'slides'
+IMAGE_DESTINATIONS = [
+    DEFAULT_DESTINATION, HOMEPAGE_DESTINATION, SLIDES_DESTINATION]
+
+
+def image_destination(mydict, key_type='destination'):
+    """ This is the turning point for the image future use """
+
+    image_destination = None
+    if key_type in mydict:
+        image_destination = mydict[key_type]
+    if image_destination not in IMAGE_DESTINATIONS:
+        image_destination = DEFAULT_DESTINATION
+
+    return image_destination
+
+#####################################
 # Main resource
 model = 'datavalues'
 mylabel, mytemplate, myschema = schema_and_tables(model)
@@ -187,13 +208,18 @@ class RethinkDocuments(BaseRethinkResource):
     @deck.add_endpoint_parameter(name='filter')
     @deck.add_endpoint_parameter(name='key')
     @deck.apimethod
-    @auth_token_required
+    #@auth_token_required
     def get(self, document_id=None):
+
+        # Init
         data = []
         count = len(data)
-        param = self._args['filter']
-
         query = self.get_table_query()
+
+        #################################
+        # Using bad old filtering
+# Note: this can be removed when switching to elasticsearch!
+        param = self._args['filter']
         if param is not None and param == 'notes':
             # Making filtering queries
             logger.debug("Build query '%s'" % param)
@@ -203,6 +229,12 @@ class RethinkDocuments(BaseRethinkResource):
             else:
                 query = self.get_all_notes(query)
 
+        #################################
+        # Using new great filtering
+        j = self.get_input(False)
+        query = query.filter({'type': image_destination(j)})
+
+        #################################
         # Execute query
         if document_id is not None:
             count, data = super().get(document_id)
@@ -256,7 +288,7 @@ class RethinkDataForAdministrators(BaseRethinkResource):
 # A good tests for uploading images
 class RethinkImagesAssociations(BaseRethinkResource):
     """
-    Fixing problems in images associations?
+    Helping to fix problems in images associations
     """
 
     @deck.apimethod
@@ -334,26 +366,6 @@ class RethinkImagesAssociations(BaseRethinkResource):
 ##########################################
 # Upload
 ##########################################
-
-#####################################
-# Extra function for handling the image destination
-DEFAULT_DESTINATION = 'documents'
-HOMEPAGE_DESTINATION = 'welcome'
-SLIDES_DESTINATION = 'slides'
-IMAGE_DESTINATIONS = [
-    DEFAULT_DESTINATION, HOMEPAGE_DESTINATION, SLIDES_DESTINATION]
-
-
-def image_destination(mydict, key_type='destination'):
-    """ This is the turning point for the image future use """
-
-    image_destination = None
-    if key_type in mydict:
-        image_destination = mydict[key_type]
-    if image_destination not in IMAGE_DESTINATIONS:
-        image_destination = DEFAULT_DESTINATION
-
-    return image_destination
 
 model = 'datadocs'
 mylabel, mytemplate, myschema = schema_and_tables(model)
