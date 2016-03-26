@@ -69,7 +69,7 @@ Next release:
     ✔ test when uploading an image that already exists with JS @done (16-03-25 15:44)
     ☐ welcome parallax
       ☐ upload icon action
-      ☐ delete icon action
+      ✔ delete icon action @done (16-03-26 21:51)
       ☐ move the section management to a separated page and link
         ☐ subsections @inthefuture
     ☐ sv position drag and drop?
@@ -95,6 +95,11 @@ After release:
     ☐ A python/js variable to know if you want to do it?
   ☐ haproxy and migration to digitalocean 1GB
   http://docker-haproxy-domain-redirect.readthedocs.org/en/latest/
+  ☐ delete buttons: undo with long timeout to promise
+
+ Dlite update:
+   ☐ release 2 beta?
+   ☐ or docker for mac beta??
 
 Rethinkdb logs:
    ☐ problem with the second...
@@ -115,8 +120,8 @@ Meta (data)
  ☐ How to force the same also on normal flask endpoint?
    ☐ and on frontend side?
 
- Dlite update:
-   ☐ release 2 beta?
+Service workers js scripts:
+https://developers.google.com/web/fundamentals/getting-started/your-first-offline-web-app/step-5?hl=en
 
  Image optimization:
   ☐ UI FIX

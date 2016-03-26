@@ -17,7 +17,7 @@ function MenuInAppController($scope, $rootScope, $log)
     self.buttons = [
         { name: 'view', link: 'logged.explore', icon: null, },
         //{ name: 'submit', link: 'logged.submission', icon: null, },
-        { name: 'sections', link: 'logged.admin', icon: null, },
+        { name: 'manage', link: 'logged.admin', icon: null, },
         { name: 'logout', link: 'logged.logout', icon: null, },
     ];
 }

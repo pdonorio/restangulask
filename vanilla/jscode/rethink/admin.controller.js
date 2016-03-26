@@ -111,6 +111,7 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
         });
     });
   }
+
   self.resort = function (skipReload)
   {
     if (!skipReload) {
@@ -177,11 +178,36 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
     },
   ];
 
+  self.removeSection = function (model)
+  {
+    $rootScope.loaders[mysection] = true;
+    AdminService.delete(data_type, model.id)
+     .then(function (response) {
+      console.log("Removed", response);
+      var message = {'Error': 'Failed to remove!'};
+      if (response) message = {Removed:
+            'Section ' + model.data['Section'] + ' deleted'}
+      // TOAST
+      $scope.showSimpleToast(message);
+      // Reload data
+      getSectionData(AdminService, $scope).then(function () {
+        $timeout(function () {
+          $rootScope.loaders[mysection] = false;
+        }, timeToWait);
+      });
+    });
+  }
+
+  self.uploadSectionImage = function (ev, model)
+  {
+    console.log("UPLOAD", model);
+  }
+
 //////////////////////////////////////
 // HANDLING THE CREATION OF A DIALOG
   self.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
 
-  self.showAdvanced = function(ev, model) {
+  self.addSection = function(ev, model) {
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && self.customFullscreen;
     var id = null;
     if (model && model.id) {
@@ -266,7 +292,7 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
 
   // Activate dialog to insert new element if requested by url
   if ($stateParams.new) {
-    self.showAdvanced();
+    self.addSection();
   }
 
 }
@@ -299,10 +325,12 @@ function DialogController($scope, $rootScope, $mdDialog, sectionModels, modelId)
       $mdDialog.hide([modelId, null]);
     }
   };
+/*
   $scope.remove = function() {
     $rootScope.loaders[mysection] = true;
     $mdDialog.hide([modelId, true]);
   };
+*/
 }
 
 ////////////////////////////////

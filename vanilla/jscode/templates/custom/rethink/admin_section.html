@@ -21,7 +21,7 @@
 <div style="padding-top:20px;"
     layout="row" layout-align="center center">
     <a class="btn waves-effect waves-light red"
-       ng-click="wadm.showAdvanced($event)"
+       ng-click="wadm.addSection($event)"
        >
         new section
     </a>
@@ -106,7 +106,7 @@
                 class="waves-effect btn-floating"
                 tooltipped data-position="left" data-delay="50"
                 data-tooltip="Edit this section"
-                ng-click="wadm.showAdvanced($event, model)">
+                ng-click="wadm.addSection($event, model)">
                 <i class="material-icons">mode_edit</i>
               </a>
               &nbsp;
@@ -114,14 +114,14 @@
                 class="waves-effect btn-floating"
                 tooltipped data-position="left" data-delay="50"
                 data-tooltip="Upload an image for this section"
-                ng-click="wadm.showAdvanced($event, model)">
+                ng-click="wadm.uploadSectionImage($event, model)">
                <i class="material-icons"> publish </i> </a>
               </a>
               &nbsp;
               <a class="waves-effect btn-floating red"
                 tooltipped data-position="left" data-delay="50"
                 data-tooltip="Remove this element: BE CAREFUL!"
-                ng-click="remove()">
+                ng-click="wadm.removeSection(model)">
                 <i class="material-icons">delete</i>
               </a>
           </div>
