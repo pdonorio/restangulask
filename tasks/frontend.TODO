@@ -68,11 +68,10 @@ Next release:
         ✘ subview with url parameter @cancelled (16-03-25 08:18)
     ✔ test when uploading an image that already exists with JS @done (16-03-25 15:44)
     ☐ welcome parallax
-      ☐ upload icon action
+      ✔ upload icon action @done (16-03-26 23:49)
       ✔ delete icon action @done (16-03-26 21:51)
-      ☐ move the section management to a separated page and link
-        ☐ subsections @inthefuture
-    ☐ sv position drag and drop?
+      ☐ compute the list and the thumbnail insie the section info
+    ✘ sv position drag and drop? @cancelled (16-03-26 23:50)
     ☐ welcome slider
   ☐ Multiple details
    Dunkerque_MS_1
@@ -86,8 +85,12 @@ After release:
       ☐ show transcriptions in zoom
     ☐ script to remove transcriptions split and recompute
       ☐ usefull to go to elasticsearch
-    ☐ submission step
-      ☐ also for image upload
+    ☐ move the section management to a separated page and link
+      ☐ subsections @inthefuture
+    ☐ submission steps
+      ☐ reverse
+      ☐ upload
+      ☐ transcriptions for each upload
     ☐ backend insert with API
       ☐ split words like operations do
   ☐ Gunicorn or similar (tornado?) for frontend production

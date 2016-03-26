@@ -68,8 +68,12 @@ function FixImagesController($scope, $log, $mdDialog, $window, AdminService)
 
     self.uploaderDialog = function(record, name)
     {
+
+      // Prepare data for the dialog
       $scope.currentRecord = record;
+      $scope.currentType = 'documents';
       $scope.currentName = name;
+
       var dialogOptions = {
         templateUrl: blueprintTemplateDir + 'uploader.html',
         //controller: UploadController,

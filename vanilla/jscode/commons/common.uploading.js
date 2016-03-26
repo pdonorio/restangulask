@@ -19,8 +19,10 @@ function UploadController($scope, $log, $mdDialog)
         // Passing data to the flow HTTP API call
         query: function (flowFile, flowChunk) {
           return {
+            // record id with all the documents
             record: $scope.currentRecord,
-            //source: 'flow_query'
+            // destination is what this document/image is for
+            destination: $scope.currentType,
           };
         }
     }

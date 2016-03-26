@@ -200,7 +200,18 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
 
   self.uploadSectionImage = function (ev, model)
   {
-    console.log("UPLOAD", model);
+    // Prepare data for the dialog
+    $scope.currentRecord = model.id;
+    $scope.currentType = 'welcome';
+    $scope.currentName = 'SECTION: ' + model.data['Section'];
+    $mdDialog.show({
+        templateUrl: blueprintTemplateDir + 'uploader.html' ,
+        //clickOutsideToClose: false,
+        scope: $scope.$new(),
+    }).then(function (response) {
+        console.log("Closing dialog", response);
+    });
+
   }
 
 //////////////////////////////////////
