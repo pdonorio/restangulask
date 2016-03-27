@@ -35,7 +35,7 @@ def image_destination(mydict, key_type='destination'):
     """ This is the turning point for the image future use """
 
     image_destination = None
-    if key_type in mydict:
+    if mydict is not None and key_type in mydict:
         image_destination = mydict[key_type]
     if image_destination not in IMAGE_DESTINATIONS:
         image_destination = DEFAULT_DESTINATION
@@ -208,7 +208,7 @@ class RethinkDocuments(BaseRethinkResource):
     @deck.add_endpoint_parameter(name='filter')
     @deck.add_endpoint_parameter(name='key')
     @deck.apimethod
-    #@auth_token_required
+    @auth_token_required
     def get(self, document_id=None):
 
         # Init
@@ -242,6 +242,26 @@ class RethinkDocuments(BaseRethinkResource):
             current_page, limit = self.get_paging()
             count, data = self.execute_query(query, limit)
 
+        return self.response(data, elements=count)
+
+    @deck.apimethod
+    @auth_token_required
+    def post(self):
+        """
+        Not a real POST method at the moment...
+        Used for searching with json filter for now!
+        """
+        query = self.get_table_query()
+
+        #################################
+        # Using new great filtering
+        j = self.get_input(False)
+        query = query.filter({'type': image_destination(j)})
+
+        #################################
+        # Execute query
+        current_page, limit = self.get_paging()
+        count, data = self.execute_query(query, limit)
         return self.response(data, elements=count)
 
 #####################################

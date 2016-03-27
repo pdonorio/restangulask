@@ -67,14 +67,18 @@ Next release:
       ✔ missing images/transcriptions @done (16-03-25 08:18)
         ✘ subview with url parameter @cancelled (16-03-25 08:18)
     ✔ test when uploading an image that already exists with JS @done (16-03-25 15:44)
+    ✘ sv position drag and drop? @cancelled (16-03-26 23:50)
     ☐ welcome parallax
       ✔ upload icon action @done (16-03-26 23:49)
       ✔ delete icon action @done (16-03-26 21:51)
-      ☐ compute the list and the thumbnail insie the section info
-    ✘ sv position drag and drop? @cancelled (16-03-26 23:50)
+      ☐ compute the list and the thumbnail inside the section info
+        ☐ use images inside the welcome page
     ☐ welcome slider
+      ☐ admin section is almost identical to parallax
   ☐ Multiple details
    Dunkerque_MS_1
+
+http://flask.pocoo.org/docs/0.10/patterns/methodoverrides/
 
 After release:
   ☐ Multi images check on details page

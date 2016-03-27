@@ -52,14 +52,18 @@ function RestApiService($http, $auth, $log) {
         }
 
         var token = self.checkToken(),
-            timeout = 13500,
+            timeout = 8500,
             req = {
                 method: method,
                 url: currentUrl,
                 headers: {
-                    'Content-Type': 'application/json',
                     'Authentication-Token': token,
+                    'Content-Type': 'application/json',
+                    //'Content-Type': 'application/json; charset=utf-8',
+                    // 'Accept': 'application/json; charset=utf-8',
+                    //'Accept-Charset': 'charset=utf-8',
                 },
+                //dataType: 'json',
                 data: data,
                 params: params,
                 timeout: timeout,

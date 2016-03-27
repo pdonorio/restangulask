@@ -15,7 +15,7 @@ var
 
 // General purpose load data function
 // To use only inside controllers
-function getSectionData(AdminService, $scope)
+function getSectionData($scope, AdminService, SearchService)
 {
     return AdminService.getData().then(function (out)
     {
@@ -38,6 +38,8 @@ function getSectionData(AdminService, $scope)
                 if (element && element != '') {
                     var index = element.data['Position'];
                     newdata[index] = element;
+// COMPUTE IF IMAGES ARE AVAILABLE THERE
+//SearchService.getDocsFromType()
                 }
             });
             // VERIFY if some sections are missing
@@ -71,13 +73,14 @@ function getSectionData(AdminService, $scope)
 };
 
 
-function WelcomeInfoController($scope, $log, $stateParams, AdminService)
+function WelcomeInfoController($scope, $log, $stateParams,
+    AdminService, SearchService)
 {
     $log.debug("Welcome info", $stateParams);
     var self = this;
     self.title = "None";
     self.moreContent = "No section selected";
-    getSectionData(AdminService, $scope).then(function() {
+    getSectionData($scope, AdminService, SearchService).then(function() {
         var section = $scope.sections[$stateParams.section];
         self.title = section.data['Section'];
         self.moreContent = section.data['Content'];
@@ -85,7 +88,11 @@ function WelcomeInfoController($scope, $log, $stateParams, AdminService)
 
 };
 
-function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $state, $stateParams, $mdMedia, $mdDialog, $q, $filter)
+function WelcomeController($scope,
+        $rootScope, $timeout, $log,
+        AdminService, SearchService,
+        $state, $stateParams,
+        $mdMedia, $mdDialog, $q)
 {
   $log.debug("Welcome admin controller", $stateParams);
   var self = this;
@@ -106,7 +113,7 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
     // Push and reload
     $rootScope.loaders[mysection] = true;
     self.resort(true).then(function () {
-        getSectionData(AdminService, $scope).then(function () {
+        getSectionData($scope, AdminService, SearchService).then(function () {
             // Activate the view
             $timeout(function () {
                 $rootScope.loaders[mysection] = false;
@@ -153,7 +160,7 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
   $timeout(function () {
     var check = 'welcome';
     if ($state.current.name.slice(0, check.length) == check) {
-       getSectionData(AdminService, $scope);
+       getSectionData($scope, AdminService, SearchService);
        self.init = 'rdb';
     }
   });
@@ -193,7 +200,8 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
       // TOAST
       $scope.showSimpleToast(message);
       // Reload data
-      getSectionData(AdminService, $scope).then(function () {
+      getSectionData($scope, AdminService, SearchService)
+       .then(function () {
         $timeout(function () {
           $rootScope.loaders[mysection] = false;
         }, timeToWait);
@@ -283,7 +291,8 @@ function WelcomeController($scope, $rootScope, $timeout, $log, AdminService, $st
       apicall.then(function (out) {
         console.log("Admin api call", out);
         if (out) {
-          getSectionData(AdminService, $scope).then(function () {
+          getSectionData($scope, AdminService, SearchService)
+           .then(function () {
             // Activate the view
             $rootScope.loaders[mysection] = false;
           });
@@ -476,7 +485,7 @@ function AdminController($scope, $rootScope, $log, AdminService, SearchService, 
       // INIT TAB FOR MANAGING SECTIONS
       if (key == 'sections') {
         $scope.sections = {};
-        getSectionData(AdminService, $scope);
+        getSectionData($scope, AdminService, SearchService);
       }
       // INIT TAB FOR TREE STEPS
       else if (key == 'tree') {

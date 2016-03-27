@@ -118,6 +118,12 @@ function SearchService($log, api) {
             self.endpoints.documents,
             undefined, undefined, id);
     }
+
+    self.getDocsFromType = function(type) {
+        return api.apiCall(
+            self.endpoints.documents, 'POST', {'destination': type});
+    }
+
     self.getDistinctTranscripts = function() {
       return self.doQuery(self.endpoints.documents,
             {
