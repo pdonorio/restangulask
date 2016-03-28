@@ -38,7 +38,7 @@
           </a>
         </div>
         <img ng-if='row.thumb'
-          lazy-img="/static/uploads/{{ row.thumb }}"
+          lazy-img="{{ root.imagesPath + row.thumb }}"
           class="z-depth-1">
       </td>
       <td ng-repeat='(key, value) in row'

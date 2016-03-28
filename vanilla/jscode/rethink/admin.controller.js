@@ -100,6 +100,7 @@ function WelcomeController($scope,
 {
   $log.debug("Welcome admin controller", $stateParams);
   var self = this;
+  self.mainSubFolder = data_type + '/';
 
   self.fixPositions = function (position) {
     var count = 0;
@@ -224,7 +225,14 @@ function WelcomeController($scope,
         //clickOutsideToClose: false,
         scope: $scope.$new(),
     }).then(function (response) {
-        console.log("Closing dialog", response);
+        $rootScope.loaders[mysection] = true;
+        //console.log("Closing dialog", response);
+        if (response) {
+            getSectionData($scope, AdminService)
+             .then(function () {
+                $rootScope.loaders[mysection] = false;
+            });
+        };
     });
 
   }

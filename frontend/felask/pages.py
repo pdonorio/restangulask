@@ -11,7 +11,7 @@ from flask.ext.login import logout_user, current_user
 from .basemodel import user_config
 from .security import login_point, register_api
 from . import htmlcodes as hcodes
-from config import get_logger, FRAMEWORKS, API_URL
+from config import get_logger, FRAMEWORKS, API_URL, UPLOAD_FOLDER
 
 logger = get_logger(__name__)
 CURRENT_FRAMEWORK = None
@@ -179,7 +179,8 @@ def jsblueprint():
         'name': CURRENT_BLUEPRINT,
         'time': user_config['options']['load_timeout'],
         'api_url': request.url_root,
-        'js_template': js_template
+        'js_template': js_template,
+        'images_path': '/' + staticdir + UPLOAD_FOLDER.strip('/') + '/'
     }
     return render_template("blueprint.js", **variables)
 

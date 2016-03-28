@@ -16,6 +16,7 @@ from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from gevent.wsgi import WSGIServer
+from config import UPLOAD_FOLDER
 
 #########################
 # Decide which WSGI
@@ -36,10 +37,10 @@ debug = app.config.get("DEBUG")
 current_package = create_app.__module__.split('.')[0]
 upload_link = os.path.join(
     app.config['BASE_DIR'],
-    '../' + current_package + '/static' + app.config['UPLOAD_FOLDER'])
+    '../' + current_package + '/static' + UPLOAD_FOLDER)
 
 try:
-    ln['-s', app.config['UPLOAD_FOLDER'], upload_link]()
+    ln['-s', UPLOAD_FOLDER, upload_link]()
     app.logger.info("Created folder upload link")
 except perror:
     pass

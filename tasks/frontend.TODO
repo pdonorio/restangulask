@@ -61,7 +61,7 @@ Next release:
     ✔ fix existing @done (16-03-23 14:43)
     ✔ new endpoint @done (16-03-23 14:52)
       ✔ generic get @done (16-03-24 08:12)
-        ✔ generic json filter @done (16-03-24 08:12)
+        ✔ generic json filter @done (16-03-24 08:12
           ✘ filters as a list @cancelled (16-03-25 07:47)
         ✔ test filter on types @done (16-03-25 08:15)
       ✔ missing images/transcriptions @done (16-03-25 08:18)
@@ -71,8 +71,10 @@ Next release:
     ☐ welcome parallax
       ✔ upload icon action @done (16-03-26 23:49)
       ✔ delete icon action @done (16-03-26 21:51)
-      ☐ compute the list and the thumbnail inside the section info
-        ☐ use images inside the welcome page
+      ✔ compute the list and the thumbnail inside the section info @done (16-03-28 18:28)
+        ✔ section reload after upload @done (16-03-28 18:46)
+      ☐ use images inside the welcome page
+      ☐ remove operation for image inside the admin list
     ☐ welcome slider
       ☐ admin section is almost identical to parallax
   ☐ Multiple details

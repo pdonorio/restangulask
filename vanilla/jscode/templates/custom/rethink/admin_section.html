@@ -96,9 +96,17 @@
                 </md-subheader>
                 <md-content class="grey lighten-4" style="padding-left: 30px;">
                     <ul>
-                        <li ng-repeat="image in model.images">
-                            {{image}}
-                        </li>
+                      <li ng-repeat="image in model.images">
+                        <table> <tr>
+                        <td width='30%'>
+{{image.code}} <br> [{{image.filename_type}}]
+                        </td>
+                        <td>
+<img lazy-img="{{ root.imagesPath + wadm.mainSubFolder + image.filename }}"
+    width=80 class="z-depth-1">
+                        </td>
+                        </tr> </table>
+                      </li>
                     </ul>
                 </md-content>
             </span>

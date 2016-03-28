@@ -12,9 +12,9 @@ function HistorySidebarController($scope, $rootScope, $log, $mdSidenav, $mdCompo
     // Init controller and variables
     $log.debug("Sidebar history controller");
     var self = this;
+
     self.name = "mysnav";
     self.history = [];
-
     self.loader = 'hside';
 
     // SIDEBAR STRANGE BEHAVIOUR
@@ -102,6 +102,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
     self.templateDir = templateDir;
     self.customTemplateDir = customTemplateDir;
     self.blueprintTemplateDir = blueprintTemplateDir;
+    self.imagesPath = imagesPath;
 
     // Decide if Welcome page is a specific static file
     self.welcomeTemplate = welcomeTemplate;

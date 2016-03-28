@@ -29,9 +29,7 @@ for key in os.environ.keys():
 PORT = 5000
 URL = 'http://%s:%s' % (BACKEND_NAME, PORT)
 API_URL = URL + '/api/'
-
-
-########################################
+UPLOAD_FOLDER = '/uploads'
 
 
 ########################################
@@ -77,8 +75,6 @@ class BaseConfig(object):
     SECRET_KEY = 'my precious'
 
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-    UPLOAD_FOLDER = '/uploads'
-
     HOST = 'localhost'
     PORT = int(os.environ.get('PORT', 5000))
 
