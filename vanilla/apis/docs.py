@@ -267,9 +267,12 @@ class RethinkDocuments(BaseRethinkResource):
 #####################################
 # Keys for templates and submission
 model = 'datadmins'
+mykey = 'type'
 mylabel, mytemplate, myschema = schema_and_tables(model)
 
 
+# @deck.enable_endpoint_identifier('id')
+# above is not necessary because i specify this on the .ini configuration
 class RethinkDataForAdministrators(BaseRethinkResource):
     """ Data admins """
 
@@ -277,12 +280,26 @@ class RethinkDataForAdministrators(BaseRethinkResource):
     template = mytemplate
     table = mylabel
 
-    @deck.add_endpoint_parameter(name='id')
+    @deck.add_endpoint_parameter(mykey)
     @deck.apimethod
+    # This method should be public
+    # to show sections in the welcome page to unlogged users
     # @auth_token_required
-    # @roles_required(config.ROLE_ADMIN)
     def get(self, id=None):
-        count, data = super().get(id)
+
+        type = image_destination(self._args, key_type=mykey)
+        table1 = self.get_table_query()
+        table2 = r.table('datadocs')
+
+        # .eq_join("id", r.table('datadocs'), index="record") \
+        query = table1.filter({mykey: type}) \
+            .outer_join(table2, lambda sections, images:
+                        sections['id'] == images['record']) \
+            .zip() \
+            .filter({mykey: type})
+
+        count, data = self.execute_query(query)
+        # count, data = super().get(id)
         return self.response(data, elements=count)
 
     @deck.apimethod

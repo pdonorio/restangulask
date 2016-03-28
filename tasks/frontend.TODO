@@ -80,6 +80,8 @@ Next release:
 
 http://flask.pocoo.org/docs/0.10/patterns/methodoverrides/
 
+GET methods with json in body... in angular $http?
+
 After release:
   ☐ Multi images check on details page
   ☐ Transcriptions

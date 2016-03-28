@@ -20,26 +20,14 @@ function AdminService($log, api) {
 
     //////////////////
     // Base API call with Rethinkdb
-    self.getData = function() {
-        return api.apiCall(self.endpoints.admin);
+    self.getData = function(type) {
+        return api.apiCall(self.endpoints.admin, 'GET', {type: type});
     }
-
-/* HOW DATA SHOULD LOOK LIKE:
-    {
-        "type": {
-            "name": "Welcome page",
-            "description": null
-        },
-        "data": {
-            "whatever": "True"
-        }
-    }
-*/
 
     self.insert = function(name, data) {
         return api.apiCall(self.endpoints.admin, 'POST',
             {
-                type: {name: name},
+                type: name,
                 data: data,
             }
         );
@@ -48,7 +36,7 @@ function AdminService($log, api) {
     self.update = function(name, id, data) {
         return api.apiCall(self.endpoints.admin, 'PUT',
             {
-                type: {name: name},
+                type: name,
                 data: data,
             }, id);
     }

@@ -10,14 +10,19 @@ angular.module('web')
     ;
 
 var
-    data_type = 'welcome_section',
+    data_type = 'welcome',
+    slide_type = 'slides',
     mysection = 'admin_sections';
 
 // General purpose load data function
 // To use only inside controllers
-function getSectionData($scope, AdminService, SearchService)
+function getSectionData($scope, AdminService)
 {
-    return AdminService.getData().then(function (out)
+
+    //SHOULD GET SLIDES TOO!
+
+    //Recover sections
+    return AdminService.getData(data_type).then(function (out)
     {
 
     // IF DATA IS PRESENT
@@ -38,8 +43,8 @@ function getSectionData($scope, AdminService, SearchService)
                 if (element && element != '') {
                     var index = element.data['Position'];
                     newdata[index] = element;
-// COMPUTE IF IMAGES ARE AVAILABLE THERE
-//SearchService.getDocsFromType()
+// Do somthehing with images?
+                    console.log("images", element.images);
                 }
             });
             // VERIFY if some sections are missing
@@ -66,7 +71,8 @@ function getSectionData($scope, AdminService, SearchService)
                     "<br>We apologize for any inconvenience."
                     ,
                 "Content": "",
-            }
+            },
+            images: {}
         }]
       }
     });
@@ -74,13 +80,13 @@ function getSectionData($scope, AdminService, SearchService)
 
 
 function WelcomeInfoController($scope, $log, $stateParams,
-    AdminService, SearchService)
+    AdminService)
 {
     $log.debug("Welcome info", $stateParams);
     var self = this;
     self.title = "None";
     self.moreContent = "No section selected";
-    getSectionData($scope, AdminService, SearchService).then(function() {
+    getSectionData($scope, AdminService).then(function() {
         var section = $scope.sections[$stateParams.section];
         self.title = section.data['Section'];
         self.moreContent = section.data['Content'];
@@ -90,7 +96,7 @@ function WelcomeInfoController($scope, $log, $stateParams,
 
 function WelcomeController($scope,
         $rootScope, $timeout, $log,
-        AdminService, SearchService,
+        AdminService,
         $state, $stateParams,
         $mdMedia, $mdDialog, $q)
 {
@@ -113,7 +119,7 @@ function WelcomeController($scope,
     // Push and reload
     $rootScope.loaders[mysection] = true;
     self.resort(true).then(function () {
-        getSectionData($scope, AdminService, SearchService).then(function () {
+        getSectionData($scope, AdminService).then(function () {
             // Activate the view
             $timeout(function () {
                 $rootScope.loaders[mysection] = false;
@@ -160,7 +166,7 @@ function WelcomeController($scope,
   $timeout(function () {
     var check = 'welcome';
     if ($state.current.name.slice(0, check.length) == check) {
-       getSectionData($scope, AdminService, SearchService);
+       getSectionData($scope, AdminService);
        self.init = 'rdb';
     }
   });
@@ -200,7 +206,7 @@ function WelcomeController($scope,
       // TOAST
       $scope.showSimpleToast(message);
       // Reload data
-      getSectionData($scope, AdminService, SearchService)
+      getSectionData($scope, AdminService)
        .then(function () {
         $timeout(function () {
           $rootScope.loaders[mysection] = false;
@@ -291,7 +297,7 @@ function WelcomeController($scope,
       apicall.then(function (out) {
         console.log("Admin api call", out);
         if (out) {
-          getSectionData($scope, AdminService, SearchService)
+          getSectionData($scope, AdminService)
            .then(function () {
             // Activate the view
             $rootScope.loaders[mysection] = false;
@@ -485,7 +491,7 @@ function AdminController($scope, $rootScope, $log, AdminService, SearchService, 
       // INIT TAB FOR MANAGING SECTIONS
       if (key == 'sections') {
         $scope.sections = {};
-        getSectionData($scope, AdminService, SearchService);
+        getSectionData($scope, AdminService);
       }
       // INIT TAB FOR TREE STEPS
       else if (key == 'tree') {
