@@ -264,6 +264,11 @@ class RethinkDocuments(BaseRethinkResource):
         count, data = self.execute_query(query, limit)
         return self.response(data, elements=count)
 
+    @deck.apimethod
+    @auth_token_required
+    def put(self, document_id):
+        return super().put(document_id, index='record')
+
 #####################################
 # Keys for templates and submission
 model = 'datadmins'

@@ -55,7 +55,7 @@ RELEASE protocol:
 Next release:
 
  ✔ details: extrait name color @done (16-03-24 20:04)
-  ☐ Welcome page complention
+  ✔ Welcome page complention @done (16-03-28 23:42)
     ✔ rdb filter images on type @done (16-03-23 14:43)
       ✔ test rdb filter @done (16-03-23 14:43)
     ✔ fix existing @done (16-03-23 14:43)
@@ -68,13 +68,14 @@ Next release:
         ✘ subview with url parameter @cancelled (16-03-25 08:18)
     ✔ test when uploading an image that already exists with JS @done (16-03-25 15:44)
     ✘ sv position drag and drop? @cancelled (16-03-26 23:50)
-    ☐ welcome parallax
+    ✔ welcome parallax @done (16-03-28 23:42)
       ✔ upload icon action @done (16-03-26 23:49)
       ✔ delete icon action @done (16-03-26 21:51)
       ✔ compute the list and the thumbnail inside the section info @done (16-03-28 18:28)
         ✔ section reload after upload @done (16-03-28 18:46)
       ✔ use images inside the welcome page @done (16-03-28 18:54)
-      ☐ remove operation for image inside the admin list
+      ✔ remove operation for image inside the admin list @done (16-03-28 23:35)
+      ✔ show image in more page @done (16-03-28 23:42)
     ☐ welcome slider
       ☐ admin section is almost identical to parallax
   ☐ Multiple details

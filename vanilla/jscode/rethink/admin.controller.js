@@ -82,19 +82,24 @@ function WelcomeInfoController($scope, $log, $stateParams,
 {
     $log.debug("Welcome info", $stateParams);
     var self = this;
+
     self.title = "None";
     self.moreContent = "No section selected";
+    self.images = null;
+    self.mainSubFolder = data_type + '/';
+
     getSectionData($scope, AdminService).then(function() {
         var section = $scope.sections[$stateParams.section];
         self.title = section.data['Section'];
         self.moreContent = section.data['Content'];
+        self.images = section.images;
     });
 
 };
 
 function WelcomeController($scope,
         $rootScope, $timeout, $log,
-        AdminService,
+        AdminService, SearchService,
         $state, $stateParams,
         $mdMedia, $mdDialog, $q)
 {
@@ -235,6 +240,22 @@ function WelcomeController($scope,
         };
     });
 
+  }
+
+  self.rmImage = function (model, image_index) {
+    $log.debug("Remove image", model, image_index);
+    //delete model.images[image_index];
+    model.images.splice(image_index, 1);
+    var newdoc = {
+        'record': model.record,
+        'images': model.images,
+        'type': data_type,
+    }
+
+    SearchService.updateImages(newdoc).then(function (response) {
+        if (response)
+            $log.info("Updated images");
+    });
   }
 
 //////////////////////////////////////

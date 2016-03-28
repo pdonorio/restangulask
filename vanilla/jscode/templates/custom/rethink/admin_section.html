@@ -69,7 +69,7 @@
             class="grey lighten-4"
             layout-padding layout-wrap
             layout="row" layout-align="start center">
-          <div flex="90">
+          <div flex="80">
             <md-subheader class="md-primary grey lighten-4">
                 Section name
             </md-subheader>
@@ -90,29 +90,36 @@
                     <span ng-bind-html="model.data['Content']"></span>
                 </md-content>
             </span>
-            <span ng-if="model.images">
+            <span ng-if="model.images && model.images.length > 0">
                 <md-subheader class="md-primary grey lighten-4">
                     Image(s)
                 </md-subheader>
                 <md-content class="grey lighten-4" style="padding-left: 30px;">
-                    <ul>
-                      <li ng-repeat="image in model.images">
-                        <table> <tr>
-                        <td width='30%'>
-{{image.code}} <br> [{{image.filename_type}}]
-                        </td>
-                        <td> <img
+                 <table class="bordered">
+                    <tr> <th colspan=10></th> </tr>
+                    <tr ng-repeat="image in model.images track by $index"
+                        ng-if="image.filename">
+                    <td width='10%'>
+      <a href tooltipped data-position="bottom" data-delay="25"
+        data-tooltip="Remove this image"
+        ng-click="wadm.rmImage(model, $index)">
+        <i class="material-icons">remove_circle</i>
+      </a>
+                    </td>
+                    <td width='20%'> <img
     lazy-img="{{ root.imagesPath + wadm.mainSubFolder
      + image.code + '/TileGroup0/0-0-0.jpg' }}"
     width=80 class="z-depth-1">
-                        </td>
-                        </tr> </table>
-                      </li>
-                    </ul>
+                    </td>
+                    <td width='30%'>
+{{image.code}} <br> [<i>{{image.filename_type}}</i]
+                    </td>
+                    <td> </td>
+                 </tr> </table>
                 </md-content>
             </span>
           </div>
-          <div flex="10" layout="column" layout-align="start center">
+          <div flex="20" layout="column" layout-align="start center">
                 <md-subheader class="md-primary grey lighten-4">
                     Actions
                 </md-subheader>

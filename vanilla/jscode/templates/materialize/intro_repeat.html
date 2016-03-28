@@ -25,12 +25,14 @@
     layout-padding
     class="section scrollspy" scrollspy>
 
+    <!-- TITLE -->
     <h2 class="header">
         {{ section.data['Section'].capitalizeFirstLetter() }} </h2>
+    <!-- DESCRIPTION -->
     <span ng-bind-html="section.data['Description']"></span>
-
+    <!-- SEARCH CASE -->
     <md-content
-        ng-show="welcome.isSearch(section)"
+        ng-if="welcome.isSearch(section)"
         layout-padding layout-wrap>
             <div layout="row" layout-align="center center">
                 <input placeholder="{{section.data['Content']}}"
@@ -38,10 +40,9 @@
                 <i class="material-icons prefix">search</i>
             </div>
     </md-content>
-
-    <md-content
-        ng-hide="welcome.isSearch(section)"
-        flew="100" ng-if="section.data['Content'] != ''"
+    <!-- More -->
+    <md-content flew="100"
+        ng-if="!welcome.isSearch(section) && section.data['Content'] != ''"
         layout="row" layout-align="end center">
         <md-button class="md-warn">
           <a ui-sref="welcome.more({'section':$index})">more...</a>
@@ -50,10 +51,11 @@
 
     <md-content layout-padding layout-wrap></md-content>
 
-    <div class="parallax-container" ng-if="section.images">
-        <div parallax> <img
-    lazy-img="{{ root.imagesPath + wadm.mainSubFolder + section.images[0].filename}}"
-    class="z-depth-1">
+    <div class="parallax-container"
+        ng-if="section.images && section.images.length > 0">
+        <div parallax> <img lazy-img="{{ root.imagesPath
+            + welcome.mainSubFolder + section.images[0].filename}}"
+            class="z-depth-1">
         </div>
     </div>
 

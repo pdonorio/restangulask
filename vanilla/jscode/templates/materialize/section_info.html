@@ -10,10 +10,14 @@
     </md-content>
 
     <h2>{{info.title}}</h2>
+    <hr>
     <span ng-bind-html="info.moreContent"></span>
-
-    <h5>
-        <i> Note: image to be added here </i>
-    </h5>
+    <p></p>
+    <div ng-if='info.images'>
+      <img lazy-img="{{ root.imagesPath
+        + info.mainSubFolder + info.images[0].filename}}"
+        class="z-depth-1">
+    </div>
+    <p></p>
 
 </div>

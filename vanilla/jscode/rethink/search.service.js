@@ -142,7 +142,13 @@ function SearchService($log, api) {
                 key: filter,
             }
         );
+    }
 
+    //////////////////////////
+    self.updateImages = function(data) {
+        return api.apiCall(
+            self.endpoints.documents,
+            'PUT', data, data.record);
     }
 
 }
