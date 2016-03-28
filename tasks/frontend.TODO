@@ -73,7 +73,7 @@ Next release:
       ✔ delete icon action @done (16-03-26 21:51)
       ✔ compute the list and the thumbnail inside the section info @done (16-03-28 18:28)
         ✔ section reload after upload @done (16-03-28 18:46)
-      ☐ use images inside the welcome page
+      ✔ use images inside the welcome page @done (16-03-28 18:54)
       ☐ remove operation for image inside the admin list
     ☐ welcome slider
       ☐ admin section is almost identical to parallax

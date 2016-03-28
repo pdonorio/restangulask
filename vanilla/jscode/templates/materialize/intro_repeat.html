@@ -50,9 +50,10 @@
 
     <md-content layout-padding layout-wrap></md-content>
 
-    <div class="parallax-container">
-        <div parallax>
-            <img src="/static/img/parallax.jpg">
+    <div class="parallax-container" ng-if="section.images">
+        <div parallax> <img
+    lazy-img="{{ root.imagesPath + wadm.mainSubFolder + section.images[0].filename}}"
+    class="z-depth-1">
         </div>
     </div>
 
