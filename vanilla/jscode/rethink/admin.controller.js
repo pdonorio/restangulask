@@ -12,7 +12,8 @@ angular.module('web')
 var
     data_type = 'welcome',
     slide_type = 'slides',
-    mysection = 'admin_sections';
+    mysection = 'admin_sections',
+    myslide = 'admin_slides';
 
 // General purpose load data function
 // To use only inside controllers

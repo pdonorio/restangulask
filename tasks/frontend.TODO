@@ -4,7 +4,6 @@
 
 http://codeology.braintreepayments.com/pdonorio/restangulask
 
-
 --- ✄ -----------------------
 
 NATIVE WEB APPs / WEB PROGRESSIVE APP:
@@ -24,69 +23,24 @@ https://www.invisionapp.com/tour/design-feedback-collaboration-tool
  http://blog.trello.com/going-public-roadmapping-with-a-public-trello-board/
 
 FEATURE REQUEST:
+
  ☐ API Decorator: to parse arguments from the function args list and add them to flask parameters
-
-[submodule "backend"]
-  path = backend
-  url = https://github.com/pdonorio/rest-mock.git
-  branch = master
-
-git submodule sync
-git submodule update
-
-RELEASE protocol:
-
-  ☐ stop other services
-  ☐ eventually remove volumes
-  ☐ clone restangulask
-  ☐ move images
-  ☐ project init
-  ☐ check permissions vanilla dir
-  user 1000
-    ☐ bower install
-  ☐ fix jquery to 2.1
-  ☐ import rdb
-  ☐ launch operations.py
-  ☐ change content.json
-  ☐ let users register
+ ☐ @JS+learning
+   ☐ array delete
+ ☐ @Discussion
+   ☐ GET methods with json in body... in angular $http?
+   http://www.benfranklinlabs.com/delete-item-list-angularjs/
 
 --- ✄ -----------------------
 
 Next release:
-
- ✔ details: extrait name color @done (16-03-24 20:04)
-  ✔ Welcome page complention @done (16-03-28 23:42)
-    ✔ rdb filter images on type @done (16-03-23 14:43)
-      ✔ test rdb filter @done (16-03-23 14:43)
-    ✔ fix existing @done (16-03-23 14:43)
-    ✔ new endpoint @done (16-03-23 14:52)
-      ✔ generic get @done (16-03-24 08:12)
-        ✔ generic json filter @done (16-03-24 08:12
-          ✘ filters as a list @cancelled (16-03-25 07:47)
-        ✔ test filter on types @done (16-03-25 08:15)
-      ✔ missing images/transcriptions @done (16-03-25 08:18)
-        ✘ subview with url parameter @cancelled (16-03-25 08:18)
-    ✔ test when uploading an image that already exists with JS @done (16-03-25 15:44)
-    ✘ sv position drag and drop? @cancelled (16-03-26 23:50)
-    ✔ welcome parallax @done (16-03-28 23:42)
-      ✔ upload icon action @done (16-03-26 23:49)
-      ✔ delete icon action @done (16-03-26 21:51)
-      ✔ compute the list and the thumbnail inside the section info @done (16-03-28 18:28)
-        ✔ section reload after upload @done (16-03-28 18:46)
-      ✔ use images inside the welcome page @done (16-03-28 18:54)
-      ✔ remove operation for image inside the admin list @done (16-03-28 23:35)
-      ✔ show image in more page @done (16-03-28 23:42)
     ☐ welcome slider
       ☐ admin section is almost identical to parallax
-  ☐ Multiple details
-   Dunkerque_MS_1
-
-http://flask.pocoo.org/docs/0.10/patterns/methodoverrides/
-
-GET methods with json in body... in angular $http?
 
 After release:
   ☐ Multi images check on details page
+  ☐ Manual insert for multiple details?
+   Dunkerque_MS_1
   ☐ Transcriptions
     ☐ transcription lib
       ☐ install
@@ -113,9 +67,26 @@ After release:
    ☐ release 2 beta?
    ☐ or docker for mac beta??
 
+RELEASE protocol:
+
+  ☐ stop other services
+  ☐ eventually remove volumes
+  ☐ clone restangulask
+  ☐ move images
+  ☐ project init
+  ☐ check permissions vanilla dir
+  user 1000
+    ☐ bower install
+  ☐ fix jquery to 2.1
+  ☐ import rdb
+  ☐ launch operations.py
+  ☐ change content.json
+  ☐ let users register
+
 Rethinkdb logs:
    ☐ problem with the second...
-     ☐ rethinkdb append?
+     ☐ rethinkdb put, with a js push to the old one...
+       ☐ how to modify custom js api to do this?
    ☐ logs for user login and/or registration/profile?
      ☐ from frontend calls?
 
@@ -151,17 +122,10 @@ https://developers.google.com/web/fundamentals/getting-started/your-first-offlin
 Configurations:
   http://www.jvandemo.com/how-to-configure-your-angularjs-application-using-environment-variables/
   http://rochacbruno.github.io/dynaconf/
+ ✔ check extra parameters @done (16-03-28 23:47)
   ☐ Mail
     https://pythonhosted.org/Flask-Security/quickstart.html#mail-configuration
     and https://pythonhosted.org/Flask-Security/configuration.html
- ☐ check extra parameters
-2016-03-16 21:35:52,119 restapi.resources.decorators INFO     [Class: RethinkDataValues] GET request
-2016-03-16 21:35:52,119 restapi.resources.base DEBUG    Accept param 'key', type <class 'str'>
-2016-03-16 21:35:52,119 restapi.resources.base DEBUG    Accept param 'currentpage', type <class 'int'>
-2016-03-16 21:35:52,119 restapi.resources.base DEBUG    Accept param 'perpage', type <class 'int'>
-2016-03-16 21:35:52,119 restapi.resources.base DEBUG    Accept param 'step', type <class 'int'>
-2016-03-16 21:35:52,119 restapi.resources.base DEBUG    Accept param 'filter', type <class 'str'>
-2016-03-16 21:35:52,119 restapi.resources.base DEBUG    Accept param 'details', type <class 'str'>
 
 bugs & ideas:
 ✔ static welcome page from configuration @done (16-03-22 12:14)
@@ -729,3 +693,25 @@ COMPLETED:
    ✔ missing images @done (16-03-24 17:56)
      ✔ limogen_1... @done (16-03-24 17:56)
      ✔ add icon to quickly go to check to details @done (16-03-24 19:50)
+ ✔ details: extrait name color @done (16-03-24 20:04)
+  ✔ Welcome page complention @done (16-03-28 23:42)
+    ✔ rdb filter images on type @done (16-03-23 14:43)
+      ✔ test rdb filter @done (16-03-23 14:43)
+    ✔ fix existing @done (16-03-23 14:43)
+    ✔ new endpoint @done (16-03-23 14:52)
+      ✔ generic get @done (16-03-24 08:12)
+        ✔ generic json filter @done (16-03-24 08:12
+          ✘ filters as a list @cancelled (16-03-25 07:47)
+        ✔ test filter on types @done (16-03-25 08:15)
+      ✔ missing images/transcriptions @done (16-03-25 08:18)
+        ✘ subview with url parameter @cancelled (16-03-25 08:18)
+    ✔ test when uploading an image that already exists with JS @done (16-03-25 15:44)
+    ✘ sv position drag and drop? @cancelled (16-03-26 23:50)
+    ✔ welcome parallax @done (16-03-28 23:42)
+      ✔ upload icon action @done (16-03-26 23:49)
+      ✔ delete icon action @done (16-03-26 21:51)
+      ✔ compute the list and the thumbnail inside the section info @done (16-03-28 18:28)
+        ✔ section reload after upload @done (16-03-28 18:46)
+      ✔ use images inside the welcome page @done (16-03-28 18:54)
+      ✔ remove operation for image inside the admin list @done (16-03-28 23:35)
+      ✔ show image in more page @done (16-03-28 23:42)

@@ -2,7 +2,7 @@
 <div ng-controller="WelcomeController as wadm">
 
     <md-toolbar layout="column"
-        class="md-tall md-default-theme light-blue darken-1 md-whiteframe-6dp">
+        class="md-tall md-default-theme light-blue darken-2 md-whiteframe-6dp">
       <div class="md-toolbar-tools">
         <div layout="row" flex="flex" class="fill-height"
         layout-align="center center">
@@ -10,10 +10,14 @@
             <span tabindex="0">
                 <br>
                 Custom
-                <b>sections</b>
+                <b>slides</b>
                 for your <i>Welcome page</i>
                 <br>
-                <small>Note: you may drag and drop to re-order</small>
+                <small>
+                Important: only the <b>first three slides</b> will be used
+                <br>
+                Note: you may drag and drop to re-order
+                </small>
             </span>
           </div>
         </div>
@@ -25,19 +29,19 @@
     <a class="btn waves-effect waves-light red"
        ng-click="wadm.addSection($event)"
        >
-        new section
+        new slide
     </a>
 </div>
 
-<div ng-show="loaders['admin_sections']">
+<div ng-show="loaders['admin_slides']">
     <span colspan="10" ng-include="root.templateDir+'loader.html'"></span>
 </div>
 
-<ul sv-root sv-part="sections" ng-hide="loaders['admin_sections']"
+<ul sv-root sv-part="slides" ng-hide="loaders['admin_slides']"
     sv-on-sort="wadm.resort()"
     class="collapsible" data-collapsible="accordion" watch>
 
-    <li ng-repeat="model in sections track by $index"
+    <li ng-repeat="model in slides track by $index"
         sv-element="opts" class="well" >
 
       <div class="collapsible-header">
@@ -176,13 +180,13 @@
          </tr>
      </thead>
 
-     <tbody ng-if="loaders['admin_sections']">
+     <tbody ng-if="loaders['admin_slides']">
        <tr>
         <td colspan="10" ng-include="root.templateDir+'loader.html'"></td>
        </tr>
      </tbody>
 
-     <tbody ng-hide="loaders['admin_sections']">
+     <tbody ng-hide="loaders['admin_slides']">
       <tr ng-repeat="model in sections track by $index">
         <td>{{$index+1}}</td>
         <td ng-repeat="template in wadm.sectionModels">
