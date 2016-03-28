@@ -43,8 +43,6 @@ function getSectionData($scope, AdminService)
                 if (element && element != '') {
                     var index = element.data['Position'];
                     newdata[index] = element;
-// Do somthehing with images?
-                    console.log("images", element.images);
                 }
             });
             // VERIFY if some sections are missing

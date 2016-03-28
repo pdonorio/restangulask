@@ -90,12 +90,18 @@
                     <span ng-bind-html="model.data['Content']"></span>
                 </md-content>
             </span>
-            <md-subheader class="md-primary grey lighten-4">
-                Image
-            </md-subheader>
-            <md-content class="grey lighten-4" style="padding-left: 30px;">
-                TO DO: add a list
-            </md-content>
+            <span ng-if="model.images">
+                <md-subheader class="md-primary grey lighten-4">
+                    Image(s)
+                </md-subheader>
+                <md-content class="grey lighten-4" style="padding-left: 30px;">
+                    <ul>
+                        <li ng-repeat="image in model.images">
+                            {{image}}
+                        </li>
+                    </ul>
+                </md-content>
+            </span>
           </div>
           <div flex="10" layout="column" layout-align="start center">
                 <md-subheader class="md-primary grey lighten-4">
