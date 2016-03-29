@@ -29,7 +29,7 @@ function getSectionData($scope, AdminService, custom_type)
     //Recover sections
     return AdminService.getData(type).then(function (out)
     {
-        console.log("Getting data", type, out.data);
+        //console.log("Getting data", type, out.data);
 
     // IF DATA IS PRESENT
       if (out !== null
