@@ -17,7 +17,9 @@ function uploaderConfig(flowFactoryProvider) {
         // Found out about in:
         //https://github.com/flowjs/flow.js/issues/57#issuecomment-62300498
         target: apiUrl + '/upload',
-        permanentErrors:[404, 500, 501]
+        permanentErrors:[404, 500, 501],
+        // No chunks at the moment!
+        chunkSize: 1024*1024*1024,
     };
 
 }

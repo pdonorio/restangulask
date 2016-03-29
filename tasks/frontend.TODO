@@ -32,15 +32,9 @@ FEATURE REQUEST:
    http://www.benfranklinlabs.com/delete-item-list-angularjs/
 
 --- ✄ -----------------------
-
-Next release:
-    ✔ welcome slider @done (16-03-29 15:08)
-      ✔ admin section is almost identical to parallax @done (16-03-29 10:08)
-      ✔ check insert @done (16-03-29 10:08)
-      ✔ check upload @done (16-03-29 10:08)
-      ✔ check update and delete @done (16-03-29 10:08)
-      ✔ show them in welcome page @done (16-03-29 14:37)
-        ✔ more to info @done (16-03-29 15:08)
+BUGS:
+  ✔ 1M limit to chunk upload? @done (16-03-29 16:11)
+  ☐ seems to check if exists after upload!
 
 After release:
   ☐ Multi images check on details page
@@ -720,3 +714,10 @@ COMPLETED:
       ✔ use images inside the welcome page @done (16-03-28 18:54)
       ✔ remove operation for image inside the admin list @done (16-03-28 23:35)
       ✔ show image in more page @done (16-03-28 23:42)
+    ✔ welcome slider @done (16-03-29 15:08)
+      ✔ admin section is almost identical to parallax @done (16-03-29 10:08)
+      ✔ check insert @done (16-03-29 10:08)
+      ✔ check upload @done (16-03-29 10:08)
+      ✔ check update and delete @done (16-03-29 10:08)
+      ✔ show them in welcome page @done (16-03-29 14:37)
+        ✔ more to info @done (16-03-29 15:08)
