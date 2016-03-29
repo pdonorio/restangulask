@@ -4,20 +4,21 @@
 <!--CONTENT -->
  <div flex="75">
 
-    <div ng-if="sections.length > 1"
+    <div ng-if="slides.length > 1"
         style="padding-bottom: 10px;" class="slider"
         height='350' transition='300' slider>
+
      <ul class="slides">
-        <li ng-repeat="x in [0,1,2,3]">
-            <img lazy-img="/static/img/parallax.jpg">
+        <li ng-repeat="slide in slides">
+          <img src="{{ root.imagesPath + welcome.secondarySubFolder
+            + slide.images[0].filename}}" >
           <div class="caption center-align">
-            <h3>Our brand new site!</h3>
-            <h5 class="light grey-text text-lighten-3">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo repellat dignissimos velit. Voluptatibus quia iure nemo perspiciatis veniam unde rem ducimus. Adipisci recusandae eius laboriosam, commodi in nihil nam saepe.
-            </h5>
+            <h3> {{slide.data['Section']}} </h3>
+            <h5> {{slide.data['Description']}} </h5>
           </div>
         </li>
      </ul>
+
     </div>
 
   <div ng-repeat="section in sections track by $index"

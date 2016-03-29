@@ -347,7 +347,9 @@ function WelcomeController($scope,
 {
   $log.debug("Welcome admin controller", $stateParams);
   var self = this;
+
   self.mainSubFolder = data_type + '/';
+  self.secondarySubFolder = slide_type + '/';
 
   self.fixPositions = function (position) {
     var count = 0;
