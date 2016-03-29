@@ -34,7 +34,7 @@ FEATURE REQUEST:
 --- ✄ -----------------------
 BUGS:
   ✔ 1M limit to chunk upload? @done (16-03-29 16:11)
-  ☐ seems to check if exists after upload!
+  ✔ seems to check if exists after upload! @done (16-03-29 16:16)
 
 After release:
   ☐ Multi images check on details page
