@@ -156,7 +156,7 @@ $stateProvider
     })
 
     .state("welcome.more", {
-        url: "/info/:section",
+        url: "/info/:element?section_type",
         views: {
             "main@": {
                 templateUrl: templateDir + 'section_info.html',

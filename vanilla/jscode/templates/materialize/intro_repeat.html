@@ -4,18 +4,27 @@
 <!--CONTENT -->
  <div flex="75">
 
-    <div ng-if="slides.length > 1"
-        style="padding-bottom: 10px;" class="slider"
-        height='350' transition='300' slider>
+    <div ng-if="slides.length < 2"
+        class="caption center-align"
+        style='height: 400px; padding-top: 50px;'>
+        <h3 class='black-text'> New website online </h3>
+        <h6> No news available at the moment </h6>
+    </div>
 
+    <div ng-if="slides.length > 1" class="slider"
+        style="padding-bottom: 10px;"
+        height='400' transition='300' slider>
      <ul class="slides">
-        <li ng-repeat="slide in slides">
-          <img src="{{ root.imagesPath + welcome.secondarySubFolder
-            + slide.images[0].filename}}" >
-          <div class="caption center-align">
-            <h3> {{slide.data['Section']}} </h3>
-            <h5> {{slide.data['Description']}} </h5>
-          </div>
+        <li ng-repeat="slide in slides track by $index">
+          <a ui-sref="welcome.more(
+            {element: $index, section_type: 'slides'})">
+              <img src="{{ root.imagesPath + welcome.secondarySubFolder
+                + slide.images[0].filename}}" >
+              <div class="caption center-align">
+                <h3> {{slide.data['Section']}} </h3>
+                <h5> {{slide.data['Description']}} </h5>
+              </div>
+          </a>
         </li>
      </ul>
 
@@ -46,7 +55,8 @@
         ng-if="!welcome.isSearch(section) && section.data['Content'] != ''"
         layout="row" layout-align="end center">
         <md-button class="md-warn">
-          <a ui-sref="welcome.more({'section':$index})">more...</a>
+          <a ui-sref="welcome.more(
+            {element: $index, section_type: 'welcome'})">more...</a>
         </md-button>
     </md-content>
 

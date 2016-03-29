@@ -100,13 +100,32 @@ function WelcomeInfoController($scope, $log, $stateParams,
     self.title = "None";
     self.moreContent = "No section selected";
     self.images = null;
-    self.mainSubFolder = data_type + '/';
 
-    getSectionData($scope, AdminService).then(function() {
-        var section = $scope.sections[$stateParams.section];
-        self.title = section.data['Section'];
-        self.moreContent = section.data['Content'];
-        self.images = section.images;
+    var type = $stateParams.section_type;
+    $log.debug("Info type", type);
+
+    getSectionData($scope, AdminService, type)
+     .then(function()
+    {
+        // Recover from scope
+        var section = null;
+
+        // Pool off the right data
+        if (type == data_type) {
+            self.subFolder = data_type + '/';
+            section = $scope.sections[$stateParams.element];
+        }
+        if (type == slide_type) {
+            self.subFolder = slide_type + '/';
+            section = $scope.slides[$stateParams.element];
+        }
+
+        // Apply data
+        if (section) {
+            self.title = section.data['Section'];
+            self.moreContent = section.data['Content'];
+            self.images = section.images;
+        }
     });
 
 };
