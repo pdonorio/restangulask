@@ -35,7 +35,12 @@ FEATURE REQUEST:
 
 Next release:
     ☐ welcome slider
-      ☐ admin section is almost identical to parallax
+      ✔ admin section is almost identical to parallax @done (16-03-29 10:08)
+      ✔ check insert @done (16-03-29 10:08)
+      ✔ check upload @done (16-03-29 10:08)
+      ✔ check update and delete @done (16-03-29 10:08)
+      ☐ show them in welcome page
+        ☐ more to info
 
 After release:
   ☐ Multi images check on details page

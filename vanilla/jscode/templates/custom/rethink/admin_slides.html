@@ -1,5 +1,5 @@
 
-<div ng-controller="WelcomeController as wadm">
+<div ng-controller="WelcomeSlideController as wsc">
 
     <md-toolbar layout="column"
         class="md-tall md-default-theme light-blue darken-2 md-whiteframe-6dp">
@@ -27,18 +27,19 @@
 <div style="padding-top:20px;"
     layout="row" layout-align="center center">
     <a class="btn waves-effect waves-light red"
-       ng-click="wadm.addSection($event)"
+       ng-click="wsc.addSlide($event)"
        >
         new slide
     </a>
 </div>
 
-<div ng-show="loaders['admin_slides']">
+<div ng-if="loaders['admin_sections']">
     <span colspan="10" ng-include="root.templateDir+'loader.html'"></span>
 </div>
 
-<ul sv-root sv-part="slides" ng-hide="loaders['admin_slides']"
-    sv-on-sort="wadm.resort()"
+   <ul sv-root sv-part="slides"
+    ng-if="!loaders['admin_sections'] && slides.length > 0"
+    sv-on-sort="wsc.slidesResort()"
     class="collapsible" data-collapsible="accordion" watch>
 
     <li ng-repeat="model in slides track by $index"
@@ -47,7 +48,7 @@
       <div class="collapsible-header">
           <md-content layout-padding layout-wrap
             layout="row" layout-align="start center">
-             <b>Section <span style="font-style:italic">
+             <b>Slide <span style="font-style:italic">
                 {{$index+1}}</span> - </b>
              <span ng-if="model.data['Section']">
                 {{model.data['Section']}}
@@ -55,7 +56,7 @@
              <span ng-if="!model.data['Section']">
                 <b>BROKEN</b>
                 <a href class="btn red lighten-2"
-                    ng-click="wadm.fixPositions($index);">
+                    ng-click="wsc.fixSlidesPositions($index);">
                     FIX
                 </a>
              </span>
@@ -77,7 +78,7 @@
             layout="row" layout-align="start center">
           <div flex="80">
             <md-subheader class="md-primary grey lighten-4">
-                Section name
+                Slide name
             </md-subheader>
             <md-content class="grey lighten-4" style="padding-left: 30px;">
                 <span ng-bind-html="model.data['Section']"></span>
@@ -108,12 +109,12 @@
                     <td width='10%'>
       <a href tooltipped data-position="bottom" data-delay="25"
         data-tooltip="Remove this image"
-        ng-click="wadm.rmImage(model, $index)">
+        ng-click="wsc.rmSlideImage(model, $index)">
         <i class="material-icons">remove_circle</i>
       </a>
                     </td>
                     <td width='20%'> <img
-    lazy-img="{{ root.imagesPath + wadm.mainSubFolder
+    lazy-img="{{ root.imagesPath + wsc.mainSubFolder
      + image.code + '/TileGroup0/0-0-0.jpg' }}"
     width=80 class="z-depth-1">
                     </td>
@@ -133,23 +134,23 @@
               <a href ng-if="model.data['Section']"
                 class="waves-effect btn-floating"
                 tooltipped data-position="left" data-delay="50"
-                data-tooltip="Edit this section"
-                ng-click="wadm.addSection($event, model)">
+                data-tooltip="Edit this slide"
+                ng-click="wsc.addSlide($event, model)">
                 <i class="material-icons">mode_edit</i>
               </a>
               &nbsp;
               <a href ng-if="model.data['Section']"
                 class="waves-effect btn-floating"
                 tooltipped data-position="left" data-delay="50"
-                data-tooltip="Upload an image for this section"
-                ng-click="wadm.uploadSectionImage($event, model)">
+                data-tooltip="Upload an image for this slide"
+                ng-click="wsc.uploadSlideImage($event, model)">
                <i class="material-icons"> publish </i> </a>
               </a>
               &nbsp;
               <a class="waves-effect btn-floating red"
                 tooltipped data-position="left" data-delay="50"
                 data-tooltip="Remove this element: BE CAREFUL!"
-                ng-click="wadm.removeSection(model)">
+                ng-click="wsc.removeSlide(model)">
                 <i class="material-icons">delete</i>
               </a>
           </div>
@@ -158,52 +159,6 @@
        </div>
 
     </li>
-</ul>
-
-<!--
-     <table class="highlight">
-     <thead>
-         <tr>
-            <th>Position</th>
-            <th ng-repeat="model in wadm.sectionModels">
-                {{model.name}}
-            </th>
-            <th width="10%">
-                <a href class="btn-floating waves-effect waves-light red"
-                   ng-click="wadm.showAdvanced($event)"
-                   tooltipped data-position="top" data-delay="50"
-                   data-tooltip="Add a new Section"
-                   >
-                    <i class="material-icons">add</i>
-                </a>
-            </th>
-         </tr>
-     </thead>
-
-     <tbody ng-if="loaders['admin_slides']">
-       <tr>
-        <td colspan="10" ng-include="root.templateDir+'loader.html'"></td>
-       </tr>
-     </tbody>
-
-     <tbody ng-hide="loaders['admin_slides']">
-      <tr ng-repeat="model in sections track by $index">
-        <td>{{$index+1}}</td>
-        <td ng-repeat="template in wadm.sectionModels">
-            <span ng-bind-html=" model.data[template.name] || '-'"></span>
-        </td>
-        <td>
-          <a class="waves-effect waves-light btn-floating"
-           ng-click="wadm.showAdvanced($event, model)"
-           tooltipped data-position="left" data-delay="50"
-           data-tooltip="Edit this section" >
-              <i class="material-icons">mode_edit</i>
-          </a>
-        </td>
-      </tr>
-     </tbody>
-
-    </table>
--->
+   </ul>
 
 </div>

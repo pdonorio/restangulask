@@ -2,11 +2,12 @@
   'use strict';
 
 angular.module('web')
-    .controller('AdminController', AdminController)
+    .controller('WelcomeSlideController', WelcomeSlideController)
     .controller('WelcomeController', WelcomeController)
     .controller('WelcomeInfoController', WelcomeInfoController)
     .controller('DialogController', DialogController)
     .controller('TreeController', TreeController)
+    .controller('AdminController', AdminController)
     ;
 
 var
@@ -17,21 +18,23 @@ var
 
 // General purpose load data function
 // To use only inside controllers
-function getSectionData($scope, AdminService)
+function getSectionData($scope, AdminService, custom_type)
 {
-
-    //SHOULD GET SLIDES TOO!
+    var myscope = {};
+    var type = data_type;
+    if (custom_type == slide_type) {
+        type = slide_type;
+    }
 
     //Recover sections
-    return AdminService.getData(data_type).then(function (out)
+    return AdminService.getData(type).then(function (out)
     {
+        console.log("Getting data", type, out.data);
 
     // IF DATA IS PRESENT
       if (out !== null
         && out.hasOwnProperty('elements'))
       {
-// TO DO:
-        //Load images: datadocs with type=welcome
 
         //Preserve order
         var newdata = [];
@@ -49,18 +52,20 @@ function getSectionData($scope, AdminService)
             // VERIFY if some sections are missing
             for (var x = 0; x < newdata.length; x++) {
                 if (!newdata[x]) {
-                    newdata[x] = {'data': {
+                    newdata[x] = {
+                      'data': {
                         'Section': null,
                         'Position': null,
-                    }};
+                      }
+                    };
                 }
             }
         }
-        $scope.sections = angular.copy(newdata); // out.data;
+        myscope = angular.copy(newdata);
 
     // IF DATA MISSING!
       } else {
-        $scope.sections = [{
+        myscope = [{
             data: {
                 "Section": "Temporary failure",
                 "Description":
@@ -74,6 +79,14 @@ function getSectionData($scope, AdminService)
             images: {}
         }]
       }
+
+      // Fill the right scope
+      if (type == slide_type) {
+        $scope.slides = myscope;
+      } else {
+        $scope.sections = myscope;
+      }
+
     });
 };
 
@@ -98,6 +111,234 @@ function WelcomeInfoController($scope, $log, $stateParams,
 
 };
 
+//////////////////////////////////////
+// Dedicated to SLIDES
+function WelcomeSlideController($scope,
+        $rootScope, $timeout, $log,
+        AdminService, SearchService,
+        $state, $stateParams,
+        $mdMedia, $mdDialog, $q)
+{
+  $log.debug("Welcome Slides controller", $stateParams);
+  var self = this;
+  self.mainSubFolder = slide_type + '/';
+
+  self.fixSlidesPositions = function (position) {
+    var count = 0;
+    var newSlides = [];
+
+    // Fix
+    forEach($scope.slides, function(element, index) {
+        if (element.data) {
+            newSlides[count++] = element;
+        }
+    });
+    $scope.slides = angular.copy(newSlides);
+    $log.debug("Fixed slides");
+
+    // Push and reload
+    $rootScope.loaders[mysection] = true;
+    self.slidesResort(true).then(function () {
+        getSectionData($scope, AdminService, slide_type).then(function () {
+            // Activate the view
+            $timeout(function () {
+                $rootScope.loaders[mysection] = false;
+            }, timeToWait)
+        });
+    });
+  }
+
+  self.slidesResort = function (skipReload)
+  {
+    if (!skipReload) {
+        $rootScope.loaders[mysection] = true;
+    }
+    var promises = [];
+    //console.log("TEST slides", $scope.slides);
+
+    // For each section
+    forEach($scope.slides, function(element, index) {
+        if (element.data) {
+            // update position
+            element.data['Position'] = index;
+            // send to api
+            promises.push(AdminService.update(slide_type, element.id, element.data));
+        }
+    });
+
+    return $q.all(promises).then((values) => {
+        $log.debug("Pushed updated order");
+        if (!skipReload) {
+            // Activate the view
+            $timeout(function () {
+                $rootScope.loaders[mysection] = false;
+            }, timeToWait)
+        }
+    });
+  }
+
+  self.sectionModels = [
+    {
+        name: 'Section',
+        value: 'New slide!',
+        description: 'The name for your new welcome slide/news',
+        required: true,
+        focus: true,
+        chars: 50,
+    },
+    {
+        name: 'Description',
+        value: 'We will talk about a lot of things',
+        description: 'Short description of your slide.',
+        required: true,
+        chars: 500,
+    },
+    {
+        name: 'Content',
+        value: 'This explanation is very long',
+        description: 'Explanation of this slide news. It will be showed in a separate page.',
+    },
+  ];
+
+  self.removeSlide = function (model)
+  {
+    $rootScope.loaders[mysection] = true;
+    AdminService.delete(slide_type, model.id)
+     .then(function (response) {
+      console.log("Removed", response);
+      var message = {'Error': 'Failed to remove!'};
+      if (response) message = {Removed:
+            'Section ' + model.data['Section'] + ' deleted'}
+      // TOAST
+      $scope.showSimpleToast(message);
+      // Reload data
+      getSectionData($scope, AdminService, slide_type)
+       .then(function () {
+        $timeout(function () {
+          $rootScope.loaders[mysection] = false;
+        }, timeToWait);
+      });
+    });
+  }
+
+  self.uploadSlideImage = function (ev, model)
+  {
+    // Prepare data for the dialog
+    $scope.currentRecord = model.id;
+    $scope.currentType = slide_type;
+    $scope.currentName = 'SECTION: ' + model.data['Section'];
+    $mdDialog.show({
+        templateUrl: blueprintTemplateDir + 'uploader.html' ,
+        //clickOutsideToClose: false,
+        scope: $scope.$new(),
+    }).then(function (response) {
+        $rootScope.loaders[mysection] = true;
+        //console.log("Closing dialog", response);
+        if (response) {
+            getSectionData($scope, AdminService, slide_type)
+             .then(function () {
+                $rootScope.loaders[mysection] = false;
+            });
+        };
+    });
+
+  }
+
+  self.rmSlideImage = function (model, image_index) {
+    $log.debug("Remove image", model, image_index);
+    //delete model.images[image_index];
+    model.images.splice(image_index, 1);
+    var newdoc = {
+        'record': model.record,
+        'images': model.images,
+        'type': slide_type,
+    }
+
+    SearchService.updateImages(newdoc).then(function (response) {
+        if (response)
+            $log.info("Updated images");
+    });
+  }
+
+  self.addSlide = function(ev, model) {
+    var id = null;
+    if (model && model.id) {
+        id = model.id;
+    }
+
+// Clear or insert data in the model
+    for (var j = 0; j < self.sectionModels.length; j++) {
+        var value = "";
+        if (model) {
+            value = model.data[self.sectionModels[j].name];
+        }
+        self.sectionModels[j].text = value;
+    };
+// Options
+    var dialogOptions =
+    {
+      controller: DialogController,
+      templateUrl: blueprintTemplateDir + 'add_section.html',
+      parent: angular.element(document.body),
+      // How to pass data to the dialog
+      locals: {
+        sectionModels: self.sectionModels,
+        modelId: id,
+      },
+      targetEvent: ev,
+      //clickOutsideToClose:true,
+      onComplete: function(){
+        // Focus on first textarea
+        $timeout(function(){ angular.element("textarea")[0].focus(); });
+      },
+    }
+
+// WHEN COMPLETED
+    var slideAfterDialog = function(response) {
+
+      var update_id = response[0], remove = response[1];
+      $log.debug("After dialog", update_id, remove);
+      // Check if id
+      var element = {};
+      forEach(self.sectionModels, function(x, i) {
+        element[x.name] = x.text;
+      });
+
+      var apicall = null;
+      if (update_id) {
+        if (remove) {
+            apicall = AdminService.delete(slide_type, update_id);
+        } else {
+            apicall = AdminService.update(slide_type, update_id, element);
+        }
+      } else {
+        console.log("Check position", element);
+        element['Position'] = $scope.slides.length;
+        apicall = AdminService.insert(slide_type, element);
+      }
+
+      apicall.then(function (out) {
+        console.log("Admin api call", out);
+        if (out) {
+          getSectionData($scope, AdminService, slide_type)
+           .then(function () {
+            // Activate the view
+            $rootScope.loaders[mysection] = false;
+          });
+        }
+      });
+    }
+
+// Open
+    $mdDialog.show(dialogOptions) .then(slideAfterDialog);
+
+  };
+
+}
+
+
+//////////////////////////////////////
+// Dedicated to SECTIONS
 function WelcomeController($scope,
         $rootScope, $timeout, $log,
         AdminService, SearchService,
@@ -110,15 +351,15 @@ function WelcomeController($scope,
 
   self.fixPositions = function (position) {
     var count = 0;
-    var newSections = [];
+    var newSlides = [];
 
     // Fix
     forEach($scope.sections, function(element, index) {
         if (element.data) {
-            newSections[count++] = element;
+            newSlides[count++] = element;
         }
     });
-    $scope.sections = angular.copy(newSections);
+    $scope.sections = angular.copy(newSlides);
     $log.debug("Fixed sections");
 
     // Push and reload
@@ -171,8 +412,12 @@ function WelcomeController($scope,
   $timeout(function () {
     var check = 'welcome';
     if ($state.current.name.slice(0, check.length) == check) {
-       getSectionData($scope, AdminService);
-       self.init = 'rdb';
+        //Sections
+        getSectionData($scope, AdminService, data_type);
+        //Slides
+        getSectionData($scope, AdminService, slide_type);
+        //Type for the welcome template: rethinkdb template
+        self.init = 'rdb';
     }
   });
 
@@ -224,7 +469,7 @@ function WelcomeController($scope,
   {
     // Prepare data for the dialog
     $scope.currentRecord = model.id;
-    $scope.currentType = 'welcome';
+    $scope.currentType = data_type;
     $scope.currentName = 'SECTION: ' + model.data['Section'];
     $mdDialog.show({
         templateUrl: blueprintTemplateDir + 'uploader.html' ,
@@ -520,6 +765,11 @@ function AdminController($scope, $rootScope, $log, AdminService, SearchService, 
       if (key == 'sections') {
         $scope.sections = {};
         getSectionData($scope, AdminService);
+      }
+      // INIT TAB FOR MANAGING SLIDES
+      if (key == 'slides') {
+        $scope.slides = {};
+        getSectionData($scope, AdminService, slide_type);
       }
       // INIT TAB FOR TREE STEPS
       else if (key == 'tree') {
