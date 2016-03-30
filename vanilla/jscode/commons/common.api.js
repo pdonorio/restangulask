@@ -7,6 +7,10 @@ angular.module('web')
 function RestApiService($http, $auth, $log) {
 
     var self = this;
+
+    // How long should i wait for API response?
+    var self.defaultTimeOut = 9500;
+
     // Api URI
     self.API_URL = apiUrl + '/';
     self.FRONTEND_URL = originalApiUrl + '/';
@@ -52,7 +56,6 @@ function RestApiService($http, $auth, $log) {
         }
 
         var token = self.checkToken(),
-            timeout = 8500,
             req = {
                 method: method,
                 url: currentUrl,
@@ -66,7 +69,7 @@ function RestApiService($http, $auth, $log) {
                 //dataType: 'json',
                 data: data,
                 params: params,
-                timeout: timeout,
+                timeout: self.defaultTimeOut;
             }
 
 /* Note:

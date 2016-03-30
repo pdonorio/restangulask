@@ -22,6 +22,10 @@ https://www.invisionapp.com/tour/design-feedback-collaboration-tool
  ☐ Roadmapping
  http://blog.trello.com/going-public-roadmapping-with-a-public-trello-board/
 
+ ☐ Cleaning volumes
+ docker volume ls -f dangling=true
+ (remove only 64 letters long names)
+
 FEATURE REQUEST:
 
  ☐ API Decorator: to parse arguments from the function args list and add them to flask parameters
