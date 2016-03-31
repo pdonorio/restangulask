@@ -1,20 +1,10 @@
 
->  Welcome. And goodbye.
-> And thanks for all the fish!
-
+PROTOTYPING:
 http://codeology.braintreepayments.com/pdonorio/restangulask
 
---- ✄ -----------------------
-
-NATIVE WEB APPs / WEB PROGRESSIVE APP:
-
+ ☐ NATIVE WEB APPs / WEB PROGRESSIVE APP
   https://developers.google.com/web/progressive-web-apps?hl=en
   http://read.humanjavascript.com/ch01-introduction.html
-
-> isArray package had 18M downloads last month, has 72 dependant packages. It fits in a tweet:
-  return toString.call(arr) == '[object Array]';
-
-PROTOTYPING:
 
   ☐ get @feedback from ui
 https://www.invisionapp.com/tour/design-feedback-collaboration-tool
@@ -22,34 +12,65 @@ https://www.invisionapp.com/tour/design-feedback-collaboration-tool
  ☐ Roadmapping
  http://blog.trello.com/going-public-roadmapping-with-a-public-trello-board/
 
+ ☐ JWT apis
+  https://thinkster.io/angularjs-jwt-auth
+
+ ☐ Service workers js scripts
+https://developers.google.com/web/fundamentals/getting-started/your-first-offline-web-app/step-5?hl=en
+   ☐ browser push notifications?
+
  ☐ Cleaning volumes
  docker volume ls -f dangling=true
  (remove only 64 letters long names)
+
+ ☐ Dlite update
+   ☐ release 2 beta?
+   ☐ or docker for mac beta??
+
 
 FEATURE REQUEST:
 
  ☐ API Decorator: to parse arguments from the function args list and add them to flask parameters
  ☐ @JS+learning
    ☐ array delete
+  return toString.call(arr) == '[object Array]';
  ☐ @Discussion
    ☐ GET methods with json in body... in angular $http?
    http://www.benfranklinlabs.com/delete-item-list-angularjs/
+ ☐ @file
+   ☐ download
+ http -d GET http://192.168.64.7:8081/api/upload/retro.png\?record=22
+   ☐ upload
+ http --form POST http://192.168.64.7:8081/api/upload file@~/Dropbox/Screenshot/retro.png record=22
+   ☐ remove
+
 
 --- ✄ -----------------------
-BUGS:
-  ☐ remove image after PUT on datadocs
+BUGS (and ideas):
   ☐ on search
   angular.js:13294 TypeError: Cannot read property 'elements' of null
     at search.controller.js:212
     at forEach (common.globals.js:65)
     at $q.all.then (search.controller.js:211)
+☐ materialize spy is probably broken in latest materialize? @toverifyagain
+☐ after login go to latest requested url
+  ☐ seek in history
+  ☐ if from welcome, go to simple 'app'
+☐ chips with bigger div to show results
+☐ table are not same size on details
+☐ extrait not complete list inside the details page
+☐ topbar menu for mobile
+☐ Move frameworks? in specs
+  /Users/projects/restapi/restangulask/frontend/config/angular/frameworks.json
+☐ an equivalent for admin to check informations about other users
 
 After release:
+  ☐ remove image after PUT on datadocs
   ☐ Multi images check on details page
   ☐ Manual insert for multiple details?
    Dunkerque_MS_1
   ☐ Transcriptions
-    ☐ transcription lib
+    ☐ transcription lib: ngWYSIWYG
       ☐ install
       ☐ test
       ☐ show transcriptions in zoom
@@ -69,26 +90,6 @@ After release:
   ☐ haproxy and migration to digitalocean 1GB
   http://docker-haproxy-domain-redirect.readthedocs.org/en/latest/
   ☐ delete buttons: undo with long timeout to promise
-
- Dlite update:
-   ☐ release 2 beta?
-   ☐ or docker for mac beta??
-
-RELEASE protocol:
-
-  ☐ stop other services
-  ☐ eventually remove volumes
-  ☐ clone restangulask
-  ☐ move images
-  ☐ project init
-  ☐ check permissions vanilla dir
-  user 1000
-    ☐ bower install
-  ☐ fix jquery to 2.1
-  ☐ import rdb
-  ☐ launch operations.py
-  ☐ change content.json
-  ☐ let users register
 
 Rethinkdb logs:
    ☐ problem with the second...
@@ -110,9 +111,6 @@ Meta (data)
  ☐ How to force the same also on normal flask endpoint?
    ☐ and on frontend side?
 
-Service workers js scripts:
-https://developers.google.com/web/fundamentals/getting-started/your-first-offline-web-app/step-5?hl=en
-
  Image optimization:
   ☐ UI FIX
     ☐ scroll bars and fixed width
@@ -133,21 +131,6 @@ Configurations:
   ☐ Mail
     https://pythonhosted.org/Flask-Security/quickstart.html#mail-configuration
     and https://pythonhosted.org/Flask-Security/configuration.html
-
-bugs & ideas:
-✔ static welcome page from configuration @done (16-03-22 12:14)
-✔ /info for authenticated user. Get id and other informations about the user from the token. @done (16-03-22 12:13)
- ☐ an equivalent for admin to check informations about other users
-☐ materialize spy is probably broken in latest materialize? @toverifyagain
-☐ after login go to latest requested url
-  ☐ seek in history
-  ☐ if from welcome, go to simple 'app'
-☐ chips with bigger div to show results
-☐ table are not same size on details
-☐ extrait not complete list inside the details page
-☐ topbar menu for mobile
-☐ Move frameworks? in specs
-  /Users/projects/restapi/restangulask/frontend/config/angular/frameworks.json
 
 SUBMIT:
  ☐ Steps are upside down
@@ -205,33 +188,6 @@ History:
   ☐ a loader while timeout
   ☐ A label to explain the route
   ☐ Could add timestamp to each history element
-
-dynamic menu:
-  ☐ decided upon a json model
-  https://pythonadventures.wordpress.com/2016/03/15/pretty-json-output-with-flask-restful/
-    ☐ how to overide if existing?
-  ☐ just logout if none provided
-
-fancy:
-  ☐ browser notifications
-  https://github.com/sagiegurari/angular-web-notification
-
-Updates:
- ☐ bower install jquery#~2.1.4 @tocheck
- ✔ update angular to 1.5 @done (16-02-09 19:49)
- ☐ update my rethinkdb image?
-
-Admin page:
-  ✔ Change toolbar color @done (16-01-25 16:03)
-  ✔ Tabs? @done (16-01-27 09:44)
-  ☐ Move tree here for administrating steps
-    ☐ refactor steps
-  ✔ FAB plus button @done (16-01-31 23:37)
-  ✘ inline wysiwyg + xeditable @cancelled (16-01-31 23:37)
-    ✘ use both and hide textarea @cancelled (16-01-31 23:37)
-    http://stackoverflow.com/q/30761498
-   ☐ ngWYSIWYG
-   http://psergus.github.io/ngWYSIWYG/
 
 New fixed search:
 ✔ onenter and onexit route extra @done (16-01-25 11:10)
@@ -339,21 +295,6 @@ JS LIBS:
   https://toddmotto.com/nofi-detecting-no-wifi-callbacks-for-offline-states-with-html5/
   ☐ DOM manipulation
   https://toddmotto.com/apollo-js-standalone-class-manipulation-api-for-html5-and-legacy-dom/
-
-JWT apis:
-  https://thinkster.io/angularjs-jwt-auth
-
-  ☐ Material framework
-    ☐ python pages
-  ☐ Home page parallax
-    ☐ LOGIN button
-    ☐ no topbar
-  ☐ App mode with few elements in menu/topbar
-  ☐ Rethinkdb with rest-mock
-    ☐ this could be a @separateproject
-  ☐ Material fisarmonica as steps?
-  ☐ Search
-    ☐ A quick single view
 
  REALTIME (rethink changefeed):
   ☐ Change Feed
@@ -729,3 +670,22 @@ COMPLETED:
       ✔ check update and delete @done (16-03-29 10:08)
       ✔ show them in welcome page @done (16-03-29 14:37)
         ✔ more to info @done (16-03-29 15:08)
+✔ static welcome page from configuration @done (16-03-22 12:14)
+✔ /info for authenticated user. Get id and other informations about the user from the token. @done (16-03-22 12:13)
+
+
+RELEASE protocol:
+
+  ☐ stop other services
+  ☐ eventually remove volumes
+  ☐ clone restangulask
+  ☐ move images
+  ☐ project init
+  ☐ check permissions vanilla dir
+  user 1000
+    ☐ bower install
+  ☐ fix jquery to 2.1
+  ☐ import rdb
+  ☐ launch operations.py
+  ☐ change content.json
+  ☐ let users register

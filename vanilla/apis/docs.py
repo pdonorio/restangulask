@@ -267,7 +267,11 @@ class RethinkDocuments(BaseRethinkResource):
     @deck.apimethod
     @auth_token_required
     def put(self, document_id):
-        return super().put(document_id, index='record')
+
+# Should remove the image/file if there is one less...
+        changes = super().put(document_id, index='record')
+        print("CHANGES", changes)
+        return changes
 
 #####################################
 # Keys for templates and submission
@@ -507,10 +511,17 @@ class RethinkUploader(Uploader, BaseRethinkResource):
 
         return obj
 
+    @deck.add_endpoint_parameter('destination', default=DEFAULT_DESTINATION)
     @deck.apimethod
-    #@auth_token_required
     def get(self, filename=None):
-        return super(RethinkUploader, self).get(filename)
+
+        subfolder = None
+        img_destination = image_destination(self._args)
+        if img_destination != DEFAULT_DESTINATION:
+            subfolder = img_destination
+
+        return super(RethinkUploader, self) \
+            .download(filename, subfolder=subfolder, get=True)
 
     @deck.add_endpoint_parameter('destination', default=DEFAULT_DESTINATION)
     @deck.add_endpoint_parameter(name='record', required=True)
@@ -529,7 +540,7 @@ class RethinkUploader(Uploader, BaseRethinkResource):
             subfolder = img_destination
 
         # Original upload
-        obj, status = super(RethinkUploader, self).post(subfolder)
+        obj, status = super(RethinkUploader, self).upload(subfolder)
 
         # If response is success, save inside the database
         key_file = 'filename'
