@@ -37,8 +37,12 @@ FEATURE REQUEST:
 
 --- ✄ -----------------------
 BUGS:
-  ✔ 1M limit to chunk upload? @done (16-03-29 16:11)
-  ✔ seems to check if exists after upload! @done (16-03-29 16:16)
+  ☐ remove image after PUT on datadocs
+  ☐ on search
+  angular.js:13294 TypeError: Cannot read property 'elements' of null
+    at search.controller.js:212
+    at forEach (common.globals.js:65)
+    at $q.all.then (search.controller.js:211)
 
 After release:
   ☐ Multi images check on details page

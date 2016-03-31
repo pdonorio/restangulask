@@ -11,10 +11,11 @@ angular.module('web')
     ;
 
 var
-    data_type = 'welcome',
-    slide_type = 'slides',
-    mysection = 'admin_sections',
-    myslide = 'admin_slides';
+    data_type = 'welcome'
+    , slide_type = 'slides'
+    , mysection = 'admin_sections'
+    //, myslide = 'admin_slides'
+    ;
 
 // General purpose load data function
 // To use only inside controllers
@@ -251,9 +252,8 @@ function WelcomeSlideController($scope,
         //clickOutsideToClose: false,
         scope: $scope.$new(),
     }).then(function (response) {
-        $rootScope.loaders[mysection] = true;
-        //console.log("Closing dialog", response);
         if (response) {
+            $rootScope.loaders[mysection] = true;
             getSectionData($scope, AdminService, slide_type)
              .then(function () {
                 $rootScope.loaders[mysection] = false;
@@ -425,8 +425,19 @@ function WelcomeController($scope,
   }
 
   self.isSearch = function(section) {
-    var key = 'search';
-    return angular.lowercase(section.data['Section']) == key;
+    var keys = [
+        'search'    //english
+        ,'ricerca'   //italiano
+        ,'recherche'   //french
+    ];
+
+    var response = false;
+    forEach(keys, function(key, i) {
+        if (angular.lowercase(section.data['Section']) == key)
+            response = true;
+    });
+    return response;
+
   }
 
   // Activate a dynamic welcome inside the view
@@ -497,9 +508,8 @@ function WelcomeController($scope,
         //clickOutsideToClose: false,
         scope: $scope.$new(),
     }).then(function (response) {
-        $rootScope.loaders[mysection] = true;
-        //console.log("Closing dialog", response);
         if (response) {
+            $rootScope.loaders[mysection] = true;
             getSectionData($scope, AdminService)
              .then(function () {
                 $rootScope.loaders[mysection] = false;
