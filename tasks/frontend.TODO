@@ -2,37 +2,28 @@
 PROTOTYPING:
 http://codeology.braintreepayments.com/pdonorio/restangulask
 
- ☐ Firefox check
- Nothing seems to work?
-
  ☐ NATIVE WEB APPs / WEB PROGRESSIVE APP
   https://developers.google.com/web/progressive-web-apps?hl=en
   http://read.humanjavascript.com/ch01-introduction.html
-
   ☐ get @feedback from ui
 https://www.invisionapp.com/tour/design-feedback-collaboration-tool
-
  ☐ Roadmapping
  http://blog.trello.com/going-public-roadmapping-with-a-public-trello-board/
-
  ☐ JWT apis
   https://thinkster.io/angularjs-jwt-auth
-
  ☐ Service workers js scripts
 https://developers.google.com/web/fundamentals/getting-started/your-first-offline-web-app/step-5?hl=en
    ☐ browser push notifications?
 
- ☐ Cleaning volumes
- docker volume ls -f dangling=true
- (remove only 64 letters long names)
-
- ☐ Dlite update
-   ☐ release 2 beta?
-   ☐ or docker for mac beta??
-
 
 FEATURE REQUEST:
 
+ ☐ Cleaning volumes
+ docker volume ls -f dangling=true
+ (remove only 64 letters long names)
+ ☐ Dlite update
+   ☐ release 2 beta?
+   ☐ or docker for mac beta??
  ☐ API Decorator: to parse arguments from the function args list and add them to flask parameters
  ☐ @JS+learning
    ☐ array delete
@@ -45,14 +36,18 @@ FEATURE REQUEST:
    upload         http --form POST http://192.168.64.7:8081/api/upload file@~/Dropbox/Screenshot/retro.png record=22
    removed      to see
 
-
 --- ✄ -----------------------
 BUGS (and ideas):
+ ☐ Firefox check
+ Nothing seems to work?
   ☐ on search
   angular.js:13294 TypeError: Cannot read property 'elements' of null
     at search.controller.js:212
     at forEach (common.globals.js:65)
     at $q.all.then (search.controller.js:211)
+ ☐ Rebuild rethinkdb connection on backend side  if error is like below @bug
+ rethinkdb.errors.ReqlDriverError: RqlQuery.run must be given a connection to run on.
+ A default connection has been set with `repl()` on another thread, but not this one.
 ☐ materialize spy is probably broken in latest materialize? @toverifyagain
 ☐ after login go to latest requested url
   ☐ seek in history

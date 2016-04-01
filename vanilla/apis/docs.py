@@ -514,11 +514,14 @@ class RethinkUploader(Uploader, BaseRethinkResource):
             "type": img_destination,
         }
         try:
+            logger.debug("RethinkDB pushing '%s'" % record)
             action(record)
             obj = {'id': id}
-            logger.debug("Operation on record '%s'" % id)
-        except BaseException as e:
-            obj = {'Image save/update': str(e)}
+            logger.debug("Obtained RethinKDB record '%s'" % id)
+        except r.errors.ReqlDriverError as e:
+            error = str(e)
+            logger.critical("RethinkDB failed insert/update:\n%s" % error)
+            obj = {'Image save/update': error}
 
         return obj
 
@@ -526,17 +529,20 @@ class RethinkUploader(Uploader, BaseRethinkResource):
     @deck.apimethod
     def get(self, filename=None):
 
-        subfolder = None
-        img_destination = image_destination(self._args)
-        if img_destination != DEFAULT_DESTINATION:
-            subfolder = img_destination
+        # Forward GET method from flow chunks, to POST method
+        return self.response("Go to POST", code=hcodes.HTTP_OK_NORESPONSE)
 
-        return super(RethinkUploader, self).download(
-            filename,
-            subfolder=subfolder,
-            # To allow chunks.
-            # View / Download is provided with server static dir
-            get=False)
+        # subfolder = None
+        # img_destination = image_destination(self._args)
+        # if img_destination != DEFAULT_DESTINATION:
+        #     subfolder = img_destination
+
+        # return super(RethinkUploader, self).download(
+        #     filename,
+        #     subfolder=subfolder,
+        #     # To allow chunks.
+        #     # View / Download is provided with server static dir
+        #     get=False)
 
     @deck.add_endpoint_parameter('destination', default=DEFAULT_DESTINATION)
     @deck.add_endpoint_parameter(name='record', required=True)
@@ -563,6 +569,8 @@ class RethinkUploader(Uploader, BaseRethinkResource):
             # rdb call
             obj = self.image_rdb_insert(obj)
             if 'id' not in obj:
+
+# // TO FIX: remove if fail to insert inside database
                 status = hcodes.HTTP_BAD_CONFLICT
 
         # Reply to user
