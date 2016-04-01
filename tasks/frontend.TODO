@@ -2,6 +2,9 @@
 PROTOTYPING:
 http://codeology.braintreepayments.com/pdonorio/restangulask
 
+ ☐ Firefox check
+ Nothing seems to work?
+
  ☐ NATIVE WEB APPs / WEB PROGRESSIVE APP
   https://developers.google.com/web/progressive-web-apps?hl=en
   http://read.humanjavascript.com/ch01-introduction.html
@@ -38,11 +41,9 @@ FEATURE REQUEST:
    ☐ GET methods with json in body... in angular $http?
    http://www.benfranklinlabs.com/delete-item-list-angularjs/
  ☐ @file
-   ☐ download
- http -d GET http://192.168.64.7:8081/api/upload/retro.png\?record=22
-   ☐ upload
- http --form POST http://192.168.64.7:8081/api/upload file@~/Dropbox/Screenshot/retro.png record=22
-   ☐ remove
+   download    http -d GET http://192.168.64.7:8081/api/upload/retro.png\?record=22
+   upload         http --form POST http://192.168.64.7:8081/api/upload file@~/Dropbox/Screenshot/retro.png record=22
+   removed      to see
 
 
 --- ✄ -----------------------

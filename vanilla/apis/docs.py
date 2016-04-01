@@ -172,7 +172,7 @@ model = 'datadocs'
 mylabel, mytemplate, myschema = schema_and_tables(model)
 
 
-class RethinkDocuments(BaseRethinkResource):
+class RethinkDocuments(Uploader, BaseRethinkResource):
     """ Data keys administrable """
 
     schema = myschema
@@ -270,7 +270,18 @@ class RethinkDocuments(BaseRethinkResource):
 
 # Should remove the image/file if there is one less...
         changes = super().put(document_id, index='record')
-        print("CHANGES", changes)
+
+        tmp = changes['changes'].pop()
+        if tmp['replaced'] > 0:
+## TO CHECK
+            old = tmp['old_val']['images']
+            new = tmp['new_val']['images']
+            # Compare this two lists. there should be one less maximum
+
+            print("Compare", old, new)
+            # {'filename': 'IMG_4364.CR2.jpg', 'filename_type': 'image/jpeg', 'filename_charset': 'binary', 'code': 'IMG_4364.CR2'}
+
+        # obj, status = super().remove(subfolder)
         return changes
 
 #####################################
@@ -520,8 +531,12 @@ class RethinkUploader(Uploader, BaseRethinkResource):
         if img_destination != DEFAULT_DESTINATION:
             subfolder = img_destination
 
-        return super(RethinkUploader, self) \
-            .download(filename, subfolder=subfolder, get=True)
+        return super(RethinkUploader, self).download(
+            filename,
+            subfolder=subfolder,
+            # To allow chunks.
+            # View / Download is provided with server static dir
+            get=False)
 
     @deck.add_endpoint_parameter('destination', default=DEFAULT_DESTINATION)
     @deck.add_endpoint_parameter(name='record', required=True)
