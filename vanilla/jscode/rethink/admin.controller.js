@@ -268,6 +268,7 @@ function WelcomeSlideController($scope,
     //delete model.images[image_index];
     model.images.splice(image_index, 1);
     var newdoc = {
+        'destination': slide_type,
         'record': model.record,
         'images': model.images,
         'type': slide_type,
@@ -524,6 +525,7 @@ function WelcomeController($scope,
     //delete model.images[image_index];
     model.images.splice(image_index, 1);
     var newdoc = {
+        'destination': data_type,
         'record': model.record,
         'images': model.images,
         'type': data_type,

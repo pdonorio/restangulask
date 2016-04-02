@@ -42,6 +42,18 @@ def image_destination(mydict, key_type='destination'):
 
     return image_destination
 
+
+def image_subfolder(args):
+    """ Evaluate subfolder for images """
+
+    subfolder = None
+    img_destination = image_destination(args)
+    if img_destination != DEFAULT_DESTINATION:
+        subfolder = img_destination
+
+    logger.debug("Subfolder is %s" % subfolder)
+    return subfolder
+
 #####################################
 # Main resource
 model = 'datavalues'
@@ -179,6 +191,7 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
     template = mytemplate
     table = mylabel
     table_index = 'record'
+    ZOOMIFY_ENABLE = True
 
     def get_all_notes(self, q):
         return q.concat_map(
@@ -231,6 +244,7 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
 
         #################################
         # Using new great filtering
+# JSON DOES NOT WORK WITH GET METHOD....? it's in the request body
         j = self.get_input(False)
         query = query.filter({'type': image_destination(j)})
 
@@ -264,24 +278,38 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
         count, data = self.execute_query(query, limit)
         return self.response(data, elements=count)
 
+    @deck.add_endpoint_parameter('destination', default=DEFAULT_DESTINATION)
     @deck.apimethod
     @auth_token_required
     def put(self, document_id):
 
-# Should remove the image/file if there is one less...
-        changes = super().put(document_id, index='record')
+        subfolder = image_subfolder(self.get_input(False))
 
-        tmp = changes['changes'].pop()
-        if tmp['replaced'] > 0:
-## TO CHECK
-            old = tmp['old_val']['images']
-            new = tmp['new_val']['images']
-            # Compare this two lists. there should be one less maximum
+        # Update document inside the database
+        rdbout = super().put(document_id, index='record')
+        # print("Output", rdbout)
+        changes = rdbout['changes'].pop()
+        # print("Changes", changes)
 
-            print("Compare", old, new)
-            # {'filename': 'IMG_4364.CR2.jpg', 'filename_type': 'image/jpeg', 'filename_charset': 'binary', 'code': 'IMG_4364.CR2'}
+        # Should remove the image/file if there is one less
+        if rdbout['replaced'] > 0:
+            old = changes['old_val']['images']
+            new = changes['new_val']['images']
 
-        # obj, status = super().remove(subfolder)
+            # Compare this two lists.
+            # There should be one less maximum, probably.
+            # http://stackoverflow.com/a/19755464/2114395
+            import itertools
+            missing = list(itertools.filterfalse(lambda x: x in new, old))
+            # print("Compare", old, new, missing)
+            logger.debug("Found missing: '%s'" % missing)
+            for item in missing:
+                if 'filename' in item:
+                    logger.info("Remove useless file %s "
+                                % item['filename'])
+                    obj, status = super().remove(item['filename'], subfolder)
+                    # print("Deleted?", obj, status)
+
         return changes
 
 #####################################
@@ -532,10 +560,7 @@ class RethinkUploader(Uploader, BaseRethinkResource):
         # Forward GET method from flow chunks, to POST method
         return self.response("Go to POST", code=hcodes.HTTP_OK_NORESPONSE)
 
-        # subfolder = None
-        # img_destination = image_destination(self._args)
-        # if img_destination != DEFAULT_DESTINATION:
-        #     subfolder = img_destination
+        # subfolder = image_subfolder(self._args)
 
         # return super(RethinkUploader, self).download(
         #     filename,
@@ -555,12 +580,8 @@ class RethinkUploader(Uploader, BaseRethinkResource):
         and do operations to the database with it.
         """
 
-        subfolder = None
-        img_destination = image_destination(self._args)
-        if img_destination != DEFAULT_DESTINATION:
-            subfolder = img_destination
-
         # Original upload
+        subfolder = image_subfolder(self._args)
         obj, status = super(RethinkUploader, self).upload(subfolder)
 
         # If response is success, save inside the database
