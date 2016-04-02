@@ -22,7 +22,8 @@
     "angular-sortable-view": "^0.0.15",
     "ng-flow": "~2",
     "jquery": "2.1.1",
-    "Materialize": "materialize#0.97.5"
+    "Materialize": "materialize#0.97.5",
+    "ngWYSIWYG": "^0.6.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.8"

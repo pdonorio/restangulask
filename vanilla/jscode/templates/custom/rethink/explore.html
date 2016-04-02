@@ -8,6 +8,12 @@
     md-selected='exp.selectedTab'
     >
 
+    <md-tab label="Missing transcriptions" md-on-select="exp.onTabSelected('transfix')">
+      <md-content class="md-padding">
+        <div ng-include="root.blueprintTemplateDir + 'fixtrans.html'"></div>
+      </md-content>
+    </md-tab>
+
     <md-tab label="Missing images" md-on-select="exp.onTabSelected('imagefix')">
       <md-content class="md-padding">
         <div ng-include="root.blueprintTemplateDir + 'fiximages.html'"></div>

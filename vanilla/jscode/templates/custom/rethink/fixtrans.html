@@ -1,0 +1,67 @@
+
+<div ng-controller='ToastController as toasting'>
+ <div ng-controller="FixTransController as fix" style="padding-top: 20px;"
+    layout="row" layout-align="center start" >
+
+
+<wysiwyg-edit content="your_variable"></wysiwyg-edit>
+
+<!--
+    <div ng-if="!parties">
+        <div ng-include="root.templateDir + 'loader.html'"></div>
+    </div>
+
+    <div ng-if="parties"
+        flex-xs flex-gt-xs="55" layout="column">
+     <div ng-if="Object.keys(parties).length == 0">
+        No data available
+     </div>
+     <md-list>
+      <div ng-repeat="(party, data) in parties track by $index">
+          <md-divider></md-divider>
+          <md-list-item class="md-2-line"
+              ng-click="fix.noImageList(party, data)">
+            <div class="md-list-item-text" layout="column">
+              <h3>{{party}}</h3>
+              <p> Elements: <b>{{data.length}}</b> </p>
+            </div>
+          </md-list-item>
+      </div>
+     </md-list>
+    </div>
+
+    <div flex-xs flex-gt-xs="45" layout="column"
+        ng-show="fix.elements">
+     <md-card>
+      <md-card-title>
+        <md-card-title-text>
+            <h5>{{fix.currentParty}}</h5>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <table class="table table-hover">
+          <tbody>
+            <tr ng-repeat="element in fix.elements">
+             <td> {{element.value}} </td>
+             <td> <a href
+                 ng-click="fix.uploaderDialog(element.record, element.value)"
+                 class="waves-effect waves-light btn-floating lime lighten-2">
+                   <i class="material-icons blue-grey-text"> publish </i> </a>
+             </td>
+             <td> <a ui-sref='logged.details({id: element.record})'
+                 class="waves-effect waves-light btn-floating lime lighten-3">
+                   <i class="material-icons blue-grey-text">web</i> </a>
+             </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="start center">
+        <md-button ng-click="fix.closeCard()"> Close </md-button>
+      </md-card-actions>
+     </md-card>
+    </div>
+-->
+
+ </div>
+</div>

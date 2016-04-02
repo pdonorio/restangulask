@@ -20,7 +20,8 @@
 		"angular-tree-control/css/tree-control.css",
 		//"angular-tree-control/css/tree-control-attribute.css"
 		"angular-hotkeys/build/hotkeys.min.css",
-        "angular-xeditable/dist/css/xeditable.css"
+        //"angular-xeditable/dist/css/xeditable.css",
+        "ngWYSIWYG/dist/editor.min.css"
 	],
 // USER CUSTOM CSS
 	"customcss" : [
@@ -75,7 +76,8 @@
 		"api-check/dist/api-check.min.js",
 		"angular-formly/dist/formly.min.js",
 		"angular-formly-material/dist/formly-material.min.js",
-        "angular-xeditable/dist/js/xeditable.min.js"
+        //"angular-xeditable/dist/js/xeditable.min.js",
+        "ngWYSIWYG/dist/wysiwyg.min.js"
 	    //"moment/min/moment.min.js",
 	],
 // USER CUSTOM APP

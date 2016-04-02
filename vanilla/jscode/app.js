@@ -41,9 +41,11 @@ console.log('POST');
         'formly',
         'formlyMaterial',
 // EDITABLE FORMS
-        'xeditable',
+        //'xeditable',
 // RESTARTABLE UPLOAD
         'flow',
+// WYSIWYG text editor
+        'ngWYSIWYG',
 
 /* Custom end */
 //////////////////////////////////////

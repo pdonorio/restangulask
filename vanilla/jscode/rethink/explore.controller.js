@@ -4,6 +4,7 @@
 angular.module('web')
     .controller('ExploreController', ExploreController)
     .controller('FixImagesController', FixImagesController)
+    .controller('FixTransController', FixTransController)
     .controller('StepsController', StepsController)
     ;
 
@@ -106,6 +107,71 @@ function FixImagesController($scope, $log, $mdDialog, $window, AdminService)
         });
     }
 /////////////////////////////////////
+
+};
+
+////////////////////////////////
+// controller
+////////////////////////////////
+
+function FixTransController($scope, $log, $mdDialog, $window, AdminService)
+{
+    $log.debug("Fix Transcriptions Controller");
+    var self = this;
+
+/*
+    self.noImageList = function (name, data) {
+      self.elements = data;
+      self.currentParty = name;
+      $window.scrollTo(0, 0);
+    }
+
+    self.closeCard = function() {
+      delete self.elements;
+    }
+
+/////////////////////////////////////
+
+    self.uploaderDialog = function(record, name)
+    {
+
+      // Prepare data for the dialog
+      $scope.currentRecord = record;
+      $scope.currentType = 'documents';
+      $scope.currentName = name;
+
+      var dialogOptions = {
+        templateUrl: blueprintTemplateDir + 'uploader.html',
+        //controller: UploadController,
+// Not working if controller is declared inside the dialog HTML
+// http://blog.thoughtram.io/angularjs/2015/01/02/exploring-angular-1.3-bindToController.html
+        //bindToController: true,
+        parent: angular.element(document.body),
+// But I can pass my scope...
+// https://github.com/angular/material/issues/455#issuecomment-114017738
+        scope: $scope.$new(),
+// Note: THE $new() FUNCTION IS NECESSARY to duplicate the scope inside the modal.
+// Otherwise, closing the modal would destroy the parent's scope
+        //clickOutsideToClose:true,
+        //onComplete: function
+      }
+
+      // Open
+      $mdDialog.show(dialogOptions)
+        .then(function (response) {
+            $log.debug("Closed dialog with", response);
+            if (response) {
+                // Make the loader appear
+                $scope.parties = null;
+                $scope.showSimpleToast({"Reloading data": null}, 1200);
+                // Close the card
+                self.closeCard();
+                // Reload data
+                getMissingImagesData(AdminService, $scope);
+            }
+        });
+    }
+*/
 
 };
 
