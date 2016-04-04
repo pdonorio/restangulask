@@ -1,18 +1,20 @@
 
 <div ng-controller='ToastController as toasting'>
- <div ng-controller="FixTransController as fix" style="padding-top: 20px;"
-    layout="row" layout-align="center start" >
+ <div ng-controller="FixTransController as fix" style="padding-top: 20px;">
+
+    <div layout="row" layout-align="center start">
+        Raw HTML Content:
+        <br>
+        <pre>
+        {{fix.editor.model || 'EMPTY'}}
+        </pre>
+    </div>
+    <div layout="row" layout-align="center start">
+          <textarea ui-tinymce="fix.options"
+            ng-model="fix.editor.model"></textarea>
+    </div>
 
 
-<!--
-<wysiwyg-edit
-    content="wcontent"
-    config="editorConfig"></wysiwyg-edit>
--->
-
-<form method="post">
-  <textarea ui-tinymce ng-model="tinymceModel"></textarea>
-</form>
 
 <!--
     <div ng-if="!parties">

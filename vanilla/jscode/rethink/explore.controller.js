@@ -119,6 +119,31 @@ function FixTransController($scope, $log, $mdDialog, $window, AdminService)
     $log.debug("Fix Transcriptions Controller");
     var self = this;
 
+    ////////////////////////////////
+    // CONFIGURE EDITOR WYSIWYG
+    ////////////////////////////////
+
+    // Note: Make sure you using scopes correctly by following this wiki page. If you are having issues with your model not updating, make sure you have a '.' in your model.
+    self.editor = { model: null };
+
+    //PLUGINS?
+    //https://www.tinymce.com/docs/plugins/
+
+    self.options = {
+        //resize: false,
+        width: 700,  // I *think* its a number and not '400' string
+        height: 380,
+        plugins: 'print textcolor image link',
+        fontsize_formats: "8px 12px 18px 24px 36px 72px",
+    // TOOLBAR
+        toolbar:    "undo redo | bold italic | " +
+                    "fontselect fontsizeselect | " +
+                    // "styleselect print " +
+                    "alignleft aligncenter alignright | " +
+                    "link image | forecolor backcolor " +
+                    "",
+    };
+
 /*
     self.noImageList = function (name, data) {
       self.elements = data;
