@@ -448,10 +448,81 @@ class RethinkImagesAssociations(BaseRethinkResource):
         # return self.response(cursor)
 
 
+#####################################
+# A good tests for uploading images
+class RethinkTranscriptsAssociations(BaseRethinkResource):
+    """
+    Helping to fix problems in images associations
+    """
+
+    @deck.apimethod
+    @auth_token_required
+    def get(self, id=None):
+
+        # # Get the record value and the party name associated
+        # first = self.get_query() \
+        #     .table('datavalues') \
+        #     .concat_map(lambda doc: doc['steps'].concat_map(
+        #             lambda step: step['data'].concat_map(
+        #                 lambda data: [{
+        #                     'record': doc['record'], 'step': step['step'],
+        #                     'pos': data['position'], 'party': data['value'],
+        #                 }])
+        #         )) \
+        #     .filter({'step': 3, 'pos': 1}) \
+        #     .pluck('record', 'party') \
+        #     .group('party')['record']
+
+        # records_with_docs = \
+        #     list(self.get_query()
+        #          .table('datadocs')  # .has_fields('type')
+        #          .filter({'type': DEFAULT_DESTINATION})
+        #          ['record'].run())
+        # to_remove = set(records_with_docs)
+
+        final = {}
+
+        # for party, records in first.run().items():
+
+        #     elements = set(records) - to_remove
+
+        #     if len(elements) > 0:
+
+        #         # Remove the records containing the images
+        #         cursor = self.get_query().table('datavalues') \
+        #             .filter(lambda doc: r.expr(list(elements))
+        #                     .contains(doc['record'])) \
+        #             .run()
+        #         newrecord = []
+        #         for obj in cursor:
+
+        #             val = obj['steps'][0]['data'][0]['value']
+
+        #             # Sort from the number value
+        #             tmp = val.split('_')
+        #             index = 0
+        #             offset = 0
+        #             if len(tmp) > 1:
+        #                 index = len(tmp) - 1
+        #                 offset = 1000
+        #             try:
+        #                 sort_value = int(tmp[index]) + offset
+        #             except:
+        #                 sort_value = -1
+
+        #             newrecord.append({
+        #                 'sortme': sort_value,
+        #                 'value': val,
+        #                 'record': obj['record']
+        #             })
+        #         final[party] = sorted(newrecord, key=itemgetter('sortme'))
+
+        return self.response(final)
+
+
 ##########################################
 # Upload
 ##########################################
-
 model = 'datadocs'
 mylabel, mytemplate, myschema = schema_and_tables(model)
 

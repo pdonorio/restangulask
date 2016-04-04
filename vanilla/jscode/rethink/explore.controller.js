@@ -30,6 +30,9 @@ function ExploreController($scope, $rootScope, $log, $state, SearchService, Admi
       $log.debug("Selected", key, self.selectedTab);
 
 // THIS IS WHERE YOU ADD THE DATA LOAD LOGIC FOR TABS
+      if (key == 'transfix') {
+        getMissingTransData(AdminService, $scope);
+      }
       if (key == 'imagefix') {
         getMissingImagesData(AdminService, $scope);
       }
@@ -47,8 +50,8 @@ function getMissingImagesData(AdminService, $scope) {
       {
         //console.log("DATA", out);
         $scope.parties = out.data;
+        $scope.partiesElements = out.elements;
     });
-
 };
 
 function FixImagesController($scope, $log, $mdDialog, $window, AdminService)
@@ -111,13 +114,24 @@ function FixImagesController($scope, $log, $mdDialog, $window, AdminService)
 };
 
 ////////////////////////////////
-// controller
+// fix transcriptions
 ////////////////////////////////
 
-function FixTransController($scope, $log, $timeout, $mdDialog, $window, AdminService)
+function getMissingTransData(AdminService, $scope) {
+    return AdminService.getDocumentsWithNoTrans()
+      .then(function (out)
+      {
+        $scope.transcripts = out.data;
+        $scope.transcriptsElements = out.elements;
+    });
+};
+
+function FixTransController($scope, $rootScope,
+    $log, $timeout, $mdDialog, $window, AdminService)
 {
-    $log.debug("Fix Transcriptions Controller");
     var self = this;
+    self.elements = null;
+    $log.debug("Fix Transcriptions Controller");
 
     ////////////////////////////////
     // CONFIGURE EDITOR WYSIWYG
@@ -125,35 +139,17 @@ function FixTransController($scope, $log, $timeout, $mdDialog, $window, AdminSer
 
     // Note: Make sure you using scopes correctly by following this wiki page. If you are having issues with your model not updating, make sure you have a '.' in your model.
     self.editor = { model: null };
+    self.options = angular.copy($rootScope.tinymceOptions);
 
-    //PLUGINS?
-    //https://www.tinymce.com/docs/plugins/
-
-    self.options = {
-        //resize: false,
-        width: 700,  // I *think* its a number and not '400' string
-        height: 380,
-        plugins: 'print textcolor image link',
-        skin: 'lightgray',
-        theme : 'modern',
-        //menubar: "insert",
-        fontsize_formats: "8px 12px 18px 24px 36px 72px",
-    // TOOLBAR
-        toolbar:    "undo redo | bold italic | " +
-                    "fontselect fontsizeselect | " +
-                    // "styleselect print " +
-                    "alignleft aligncenter alignright | " +
-                    "link image | forecolor backcolor " +
-                    "",
-        setup: function(editor) {
-          editor.on("init", function() {
-            self.editor.model = 'test <b>me</b> html';
-            //console.log("INIT!", editor);
-            editor.focus();
-          });
-          //editor.on("click", function() { console.log("CLICK!"); });
-        }
-    };
+    // Handle init
+    self.options.setup = function(editor) {
+      editor.on("init", function() {
+        self.editor.model = 'test <b>me</b> html';
+        //console.log("INIT!", editor);
+        editor.focus();
+      });
+      //editor.on("click", function() { console.log("CLICK!"); });
+    }
 
 /*
     self.noImageList = function (name, data) {
@@ -203,7 +199,7 @@ function FixTransController($scope, $log, $timeout, $mdDialog, $window, AdminSer
                 // Close the card
                 self.closeCard();
                 // Reload data
-                getMissingImagesData(AdminService, $scope);
+                getMissingTransData(AdminService, $scope);
             }
         });
     }

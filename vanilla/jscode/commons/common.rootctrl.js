@@ -98,6 +98,26 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
         $state.go(element.state.name, element.params);
     };
 
+    // Global editor configuration
+    $rootScope.tinymceOptions = {
+        //resize: false,
+        width: 700,
+        height: 380,
+        //https://www.tinymce.com/docs/plugins/
+        plugins: 'print textcolor image link',
+        skin: 'lightgray',
+        theme : 'modern',
+        //menubar: "insert",
+        fontsize_formats: "8px 12px 18px 24px 36px 72px",
+    // TOOLBAR
+        toolbar:    "undo redo | bold italic | " +
+                    "fontselect fontsizeselect | " +
+                    // "styleselect print " +
+                    "alignleft aligncenter alignright | " +
+                    "link image | forecolor backcolor " +
+                    "",
+    };
+
     // Passing a global variable
     self.templateDir = templateDir;
     self.customTemplateDir = customTemplateDir;

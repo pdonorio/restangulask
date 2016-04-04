@@ -1,41 +1,33 @@
 
 <div ng-controller='ToastController as toasting'>
  <div ng-controller="FixTransController as fix"
+    layout="row" layout-align="center start"
     style="padding-top: 20px; padding-bottom: 20px;">
 
-<!--
-    <div layout="row" layout-align="center start">
-        Raw HTML Content:
-        <br>
-        <pre>
-        {{fix.editor.model || 'EMPTY'}}
-        </pre>
-    </div>
--->
+
+<!-- Tinymce Editor
     <div layout="row" layout-align="center start">
           <textarea ui-tinymce="fix.options"
             ng-model="fix.editor.model"></textarea>
     </div>
+-->
 
-
-
-<!--
-    <div ng-if="!parties">
+    <div ng-if="!transcripts">
         <div ng-include="root.templateDir + 'loader.html'"></div>
     </div>
 
-    <div ng-if="parties"
+    <div ng-if="transcripts"
         flex-xs flex-gt-xs="55" layout="column">
-     <div ng-if="Object.keys(parties).length == 0">
+     <div ng-if="transcriptsElements == 0">
         No data available
      </div>
      <md-list>
-      <div ng-repeat="(party, data) in parties track by $index">
+      <div ng-repeat="(transc, data) in transcripts track by $index">
           <md-divider></md-divider>
           <md-list-item class="md-2-line"
-              ng-click="fix.noImageList(party, data)">
+              ng-click="fix.noImageList(transc, data)">
             <div class="md-list-item-text" layout="column">
-              <h3>{{party}}</h3>
+              <h3>{{transc}}</h3>
               <p> Elements: <b>{{data.length}}</b> </p>
             </div>
           </md-list-item>
@@ -43,8 +35,12 @@
      </md-list>
     </div>
 
+
     <div flex-xs flex-gt-xs="45" layout="column"
-        ng-show="fix.elements">
+        ng-if="fix.elements">
+
+        To do
+<!--
      <md-card>
       <md-card-title>
         <md-card-title-text>
@@ -73,8 +69,8 @@
         <md-button ng-click="fix.closeCard()"> Close </md-button>
       </md-card-actions>
      </md-card>
-    </div>
 -->
+    </div>
 
  </div>
 </div>
