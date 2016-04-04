@@ -4,7 +4,15 @@
     layout="row" layout-align="center start" >
 
 
-<wysiwyg-edit content="your_variable"></wysiwyg-edit>
+<!--
+<wysiwyg-edit
+    content="wcontent"
+    config="editorConfig"></wysiwyg-edit>
+-->
+
+<form method="post">
+  <textarea ui-tinymce ng-model="tinymceModel"></textarea>
+</form>
 
 <!--
     <div ng-if="!parties">

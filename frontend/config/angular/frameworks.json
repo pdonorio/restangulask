@@ -19,9 +19,8 @@
 		//"angular-loading-bar/build/loading-bar.min.css",
 		"angular-tree-control/css/tree-control.css",
 		//"angular-tree-control/css/tree-control-attribute.css"
-		"angular-hotkeys/build/hotkeys.min.css",
         //"angular-xeditable/dist/css/xeditable.css",
-        "ngWYSIWYG/dist/editor.min.css"
+        "angular-hotkeys/build/hotkeys.min.css"
 	],
 // USER CUSTOM CSS
 	"customcss" : [
@@ -43,8 +42,10 @@
 //(starting from bower dir)
 	"js": [
 		// # JQUERY
+        //(needed by material... don't like!)
 		"jquery/dist/jquery.min.js",
-		//(needed by material... don't like!)
+        //tinymce inline javascript editor
+        "tinymce-dist/tinymce.min.js",
 		// # ANGULAR
 		"angular/angular.min.js",
 	    "angular-sanitize/angular-sanitize.min.js",
@@ -77,8 +78,8 @@
 		"angular-formly/dist/formly.min.js",
 		"angular-formly-material/dist/formly-material.min.js",
         //"angular-xeditable/dist/js/xeditable.min.js",
-        "ngWYSIWYG/dist/wysiwyg.min.js"
-	    //"moment/min/moment.min.js",
+        //"moment/min/moment.min.js",
+        "angular-ui-tinymce/dist/tinymce.min.js"
 	],
 // USER CUSTOM APP
 	"customjs": [

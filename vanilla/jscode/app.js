@@ -44,8 +44,8 @@ console.log('POST');
         //'xeditable',
 // RESTARTABLE UPLOAD
         'flow',
-// WYSIWYG text editor
-        'ngWYSIWYG',
+// text editor
+        'ui.tinymce',
 
 /* Custom end */
 //////////////////////////////////////
