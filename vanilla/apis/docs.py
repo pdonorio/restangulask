@@ -22,6 +22,10 @@ from ... import get_logger, htmlcodes as hcodes
 logger = get_logger(__name__)
 
 #####################################
+# Tables
+DOCSTABLE = 'datadocs'
+
+#####################################
 # Extra function for handling the image destination
 
 DEFAULT_DESTINATION = 'documents'
@@ -179,8 +183,8 @@ class RethinkDataKeys(BaseRethinkResource):
         return self.response(data, elements=count)
 
 #####################################
-# Keys for templates and submission
-model = 'datadocs'
+# Documents and files that are associated to records
+model = DOCSTABLE
 mylabel, mytemplate, myschema = schema_and_tables(model)
 
 
@@ -313,7 +317,7 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
         return changes
 
 #####################################
-# Keys for templates and submission
+# Administration profile
 model = 'datadmins'
 mykey = 'type'
 mylabel, mytemplate, myschema = schema_and_tables(model)
@@ -337,9 +341,8 @@ class RethinkDataForAdministrators(BaseRethinkResource):
 
         type = image_destination(self._args, key_type=mykey)
         table1 = self.get_table_query()
-        table2 = r.table('datadocs')
+        table2 = r.table(DOCSTABLE)
 
-        # .eq_join("id", r.table('datadocs'), index="record") \
         query = table1.filter({mykey: type}) \
             .outer_join(table2, lambda sections, images:
                         sections['id'] == images['record']) \
@@ -371,17 +374,12 @@ class RethinkDataForAdministrators(BaseRethinkResource):
 
 #####################################
 # A good tests for uploading images
-class RethinkImagesAssociations(BaseRethinkResource):
-    """
-    Helping to fix problems in images associations
-    """
+class RethinkGrouping(BaseRethinkResource):
+    """ Associate parties to records """
 
-    @deck.apimethod
-    @auth_token_required
-    def get(self, id=None):
-
-        # Get the record value and the party name associated
-        first = self.get_query() \
+    def group_query(self, id=None):
+        """ Get the record value and the party name associated """
+        return self.get_query() \
             .table('datavalues') \
             .concat_map(lambda doc: doc['steps'].concat_map(
                     lambda step: step['data'].concat_map(
@@ -394,16 +392,11 @@ class RethinkImagesAssociations(BaseRethinkResource):
             .pluck('record', 'party') \
             .group('party')['record']
 
-        records_with_docs = \
-            list(self.get_query()
-                 .table('datadocs')  # .has_fields('type')
-                 .filter({'type': DEFAULT_DESTINATION})
-                 ['record'].run())
-        to_remove = set(records_with_docs)
+    def subtract_documents(self, to_remove):
 
         final = {}
 
-        for party, records in first.run().items():
+        for party, records in self.group_query().run().items():
 
             elements = set(records) - to_remove
 
@@ -438,92 +431,52 @@ class RethinkImagesAssociations(BaseRethinkResource):
                     })
                 final[party] = sorted(newrecord, key=itemgetter('sortme'))
 
-        return self.response(final)
-
-        # # Join the records with the uploaded files
-        # second = first.eq_join(
-        #     "record", r.table('datadocs'), index="record").zip()
-        # # Group everything by party name
-        # cursor = second.group('party').run(time_format="raw")
-        # return self.response(cursor)
+        return final
 
 
 #####################################
 # A good tests for uploading images
-class RethinkTranscriptsAssociations(BaseRethinkResource):
-    """
-    Helping to fix problems in images associations
-    """
+class RethinkImagesAssociations(RethinkGrouping):
+    """ Help in fixing problems in images associations """
 
     @deck.apimethod
     @auth_token_required
     def get(self, id=None):
 
-        # # Get the record value and the party name associated
-        # first = self.get_query() \
-        #     .table('datavalues') \
-        #     .concat_map(lambda doc: doc['steps'].concat_map(
-        #             lambda step: step['data'].concat_map(
-        #                 lambda data: [{
-        #                     'record': doc['record'], 'step': step['step'],
-        #                     'pos': data['position'], 'party': data['value'],
-        #                 }])
-        #         )) \
-        #     .filter({'step': 3, 'pos': 1}) \
-        #     .pluck('record', 'party') \
-        #     .group('party')['record']
+        records_with_docs = \
+            list(self.get_query()
+                 .table(DOCSTABLE)  # .has_fields('type')
+                 .filter({'type': DEFAULT_DESTINATION})
+                 ['record'].run())
+        final = self.subtract_documents(set(records_with_docs))
+        return self.response(final)
 
-        # records_with_docs = \
-        #     list(self.get_query()
-        #          .table('datadocs')  # .has_fields('type')
-        #          .filter({'type': DEFAULT_DESTINATION})
-        #          ['record'].run())
-        # to_remove = set(records_with_docs)
 
-        final = {}
+#####################################
+# A good tests for writing with text editor
+class RethinkTranscriptsAssociations(RethinkGrouping):
+    """ For missing transcription associations """
 
-        # for party, records in first.run().items():
+    @deck.apimethod
+    @auth_token_required
+    def get(self, id=None):
 
-        #     elements = set(records) - to_remove
+        records_with_trans = \
+            list(self.get_query()
+                 .table(DOCSTABLE).concat_map(
+                    lambda obj: obj['images'].has_fields('transcriptions'))
+                 ['recordid']
+                 .run())
 
-        #     if len(elements) > 0:
-
-        #         # Remove the records containing the images
-        #         cursor = self.get_query().table('datavalues') \
-        #             .filter(lambda doc: r.expr(list(elements))
-        #                     .contains(doc['record'])) \
-        #             .run()
-        #         newrecord = []
-        #         for obj in cursor:
-
-        #             val = obj['steps'][0]['data'][0]['value']
-
-        #             # Sort from the number value
-        #             tmp = val.split('_')
-        #             index = 0
-        #             offset = 0
-        #             if len(tmp) > 1:
-        #                 index = len(tmp) - 1
-        #                 offset = 1000
-        #             try:
-        #                 sort_value = int(tmp[index]) + offset
-        #             except:
-        #                 sort_value = -1
-
-        #             newrecord.append({
-        #                 'sortme': sort_value,
-        #                 'value': val,
-        #                 'record': obj['record']
-        #             })
-        #         final[party] = sorted(newrecord, key=itemgetter('sortme'))
-
+        # print("TEST\n\n", records_with_trans)
+        final = self.subtract_documents(set(records_with_trans))
         return self.response(final)
 
 
 ##########################################
 # Upload
 ##########################################
-model = 'datadocs'
+model = DOCSTABLE
 mylabel, mytemplate, myschema = schema_and_tables(model)
 
 
@@ -563,7 +516,7 @@ class RethinkMetaImages(BaseRethinkResource):
 class RethinkUploader(Uploader, BaseRethinkResource):
     """ Uploading data and save it inside db """
 
-    table = 'datadocs'
+    table = model
     ZOOMIFY_ENABLE = True
 
     def image_rdb_insert(self, obj):
