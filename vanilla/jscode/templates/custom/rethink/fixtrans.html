@@ -1,7 +1,9 @@
 
 <div ng-controller='ToastController as toasting'>
- <div ng-controller="FixTransController as fix" style="padding-top: 20px;">
+ <div ng-controller="FixTransController as fix"
+    style="padding-top: 20px; padding-bottom: 20px;">
 
+<!--
     <div layout="row" layout-align="center start">
         Raw HTML Content:
         <br>
@@ -9,6 +11,7 @@
         {{fix.editor.model || 'EMPTY'}}
         </pre>
     </div>
+-->
     <div layout="row" layout-align="center start">
           <textarea ui-tinymce="fix.options"
             ng-model="fix.editor.model"></textarea>

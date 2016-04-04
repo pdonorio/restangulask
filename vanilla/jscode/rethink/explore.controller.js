@@ -114,7 +114,7 @@ function FixImagesController($scope, $log, $mdDialog, $window, AdminService)
 // controller
 ////////////////////////////////
 
-function FixTransController($scope, $log, $mdDialog, $window, AdminService)
+function FixTransController($scope, $log, $timeout, $mdDialog, $window, AdminService)
 {
     $log.debug("Fix Transcriptions Controller");
     var self = this;
@@ -134,6 +134,9 @@ function FixTransController($scope, $log, $mdDialog, $window, AdminService)
         width: 700,  // I *think* its a number and not '400' string
         height: 380,
         plugins: 'print textcolor image link',
+        skin: 'lightgray',
+        theme : 'modern',
+        //menubar: "insert",
         fontsize_formats: "8px 12px 18px 24px 36px 72px",
     // TOOLBAR
         toolbar:    "undo redo | bold italic | " +
@@ -142,6 +145,14 @@ function FixTransController($scope, $log, $mdDialog, $window, AdminService)
                     "alignleft aligncenter alignright | " +
                     "link image | forecolor backcolor " +
                     "",
+        setup: function(editor) {
+          editor.on("init", function() {
+            self.editor.model = 'test <b>me</b> html';
+            //console.log("INIT!", editor);
+            editor.focus();
+          });
+          //editor.on("click", function() { console.log("CLICK!"); });
+        }
     };
 
 /*
