@@ -12,7 +12,7 @@ angular.module('web')
 // controller
 ////////////////////////////////
 
-function ExploreController($scope, $rootScope, $log, $state, SearchService, AdminService)
+function ExploreController($scope, $log, $state, SearchService, AdminService)
 {
 
   // INIT controller
@@ -133,25 +133,6 @@ function FixTransController($scope, $rootScope,
     self.elements = null;
     $log.debug("Fix Transcriptions Controller");
 
-    ////////////////////////////////
-    // CONFIGURE EDITOR WYSIWYG
-    ////////////////////////////////
-
-    // Note: Make sure you using scopes correctly by following this wiki page. If you are having issues with your model not updating, make sure you have a '.' in your model.
-    self.editor = { model: null };
-    self.options = angular.copy($rootScope.tinymceOptions);
-
-    // Handle init
-    self.options.setup = function(editor) {
-      editor.on("init", function() {
-        self.editor.model = 'test <b>me</b> html';
-        //console.log("INIT!", editor);
-        editor.focus();
-      });
-      //editor.on("click", function() { console.log("CLICK!"); });
-    }
-
-/*
     self.noImageList = function (name, data) {
       self.elements = data;
       self.currentParty = name;
@@ -162,48 +143,53 @@ function FixTransController($scope, $rootScope,
       delete self.elements;
     }
 
-/////////////////////////////////////
-
-    self.uploaderDialog = function(record, name)
+    self.transcriptionDialog = function(record, name)
     {
 
       // Prepare data for the dialog
       $scope.currentRecord = record;
       $scope.currentType = 'documents';
       $scope.currentName = name;
+      $scope.options = angular.copy($rootScope.tinymceOptions);
+      $scope.options.setup = function (editor) {
+          editor.on("init", function() {
+            //self.editor.model = 'test <b>me</b> html';
+            //console.log("INIT!", editor);
+            $timeout(function () {
+                //console.log("FOCUS!");
+                editor.focus();
+            }, 600);
+          });
+      }
 
       var dialogOptions = {
-        templateUrl: blueprintTemplateDir + 'uploader.html',
-        //controller: UploadController,
-// Not working if controller is declared inside the dialog HTML
-// http://blog.thoughtram.io/angularjs/2015/01/02/exploring-angular-1.3-bindToController.html
-        //bindToController: true,
+        templateUrl: blueprintTemplateDir + 'transcription.html',
         parent: angular.element(document.body),
-// But I can pass my scope...
-// https://github.com/angular/material/issues/455#issuecomment-114017738
+        // I can pass my scope
         scope: $scope.$new(),
-// Note: THE $new() FUNCTION IS NECESSARY to duplicate the scope inside the modal.
-// Otherwise, closing the modal would destroy the parent's scope
-        //clickOutsideToClose:true,
-        //onComplete: function
+        // Note: THE $new() FUNCTION IS NECESSARY to duplicate
+        // the scope inside the modal.
+        // Otherwise, closing the modal would destroy the parent's scope
       }
 
       // Open
       $mdDialog.show(dialogOptions)
         .then(function (response) {
-            $log.debug("Closed dialog with", response);
+            $log.debug("Closed transcript dialog with", response);
+
+/* REMOVE COMMENT
             if (response) {
                 // Make the loader appear
-                $scope.parties = null;
-                $scope.showSimpleToast({"Reloading data": null}, 1200);
+                $scope.transcripts = null;
+                //$scope.showSimpleToast({"Reloading data": null}, 1200);
                 // Close the card
                 self.closeCard();
                 // Reload data
                 getMissingTransData(AdminService, $scope);
             }
+*/
         });
     }
-*/
 
 };
 

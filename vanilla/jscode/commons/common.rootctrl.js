@@ -101,6 +101,16 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
     // Global editor configuration
     $rootScope.tinymceOptions = {
         //resize: false,
+        // inline: false,
+        // format: 'text',
+        trusted: true,
+        // cleanup: false,
+        // validate_children: false,
+        forced_root_block: false,
+        // element_format: 'text',
+        // //keep_styles: true,
+        // schema: 'html4',
+
         width: 700,
         height: 380,
         //https://www.tinymce.com/docs/plugins/

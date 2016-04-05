@@ -1,0 +1,45 @@
+<div ng-controller='ToastController as toasting'>
+
+ <md-dialog ng-controller="EditorController as edit"
+    aria-label="Transcription for image">
+  <form>
+
+    <md-toolbar class="md-primary md-hue-3" >
+      <div class="md-toolbar-tools" layout="row">
+        <h2> <b>{{currentName}}</b>: <i>Transcription</i> for image </h2>
+      </div>
+    </md-toolbar>
+
+    <!-- CONTENT -->
+    <md-dialog-content layout-padding
+      style="min-width:800px; min-height:400px;
+      max-width:1100px; max-height:800px; ">
+      <textarea
+            ui-tinymce="edit.options"
+            ng-model="edit.content"
+            ng-change="edit.updateHtml()"
+            ></textarea>
+
+<!--
+      content:
+      <pre>{{edit.content}}</pre>
+      <div ng-bind-html='edit.mcehtml'></div>
+      <pre>{{edit.mcehtml}}</pre>
+-->
+
+    </md-dialog-content>
+    <!-- CONTENT -->
+
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-secondary" ng-click="edit.validate()">
+        save
+      </md-button>
+      <md-button class="md-warn" ng-click="edit.cancel()" >
+        cancel
+      </md-button>
+    </md-dialog-actions>
+
+  </form>
+ </md-dialog>
+</div>

@@ -4,14 +4,6 @@
     layout="row" layout-align="center start"
     style="padding-top: 20px; padding-bottom: 20px;">
 
-
-<!-- Tinymce Editor
-    <div layout="row" layout-align="center start">
-          <textarea ui-tinymce="fix.options"
-            ng-model="fix.editor.model"></textarea>
-    </div>
--->
-
     <div ng-if="!transcripts">
         <div ng-include="root.templateDir + 'loader.html'"></div>
     </div>
@@ -38,9 +30,6 @@
 
     <div flex-xs flex-gt-xs="45" layout="column"
         ng-if="fix.elements">
-
-        To do
-<!--
      <md-card>
       <md-card-title>
         <md-card-title-text>
@@ -53,9 +42,9 @@
             <tr ng-repeat="element in fix.elements">
              <td> {{element.value}} </td>
              <td> <a href
-                 ng-click="fix.uploaderDialog(element.record, element.value)"
+                 ng-click="fix.transcriptionDialog(element.record, element.value)"
                  class="waves-effect waves-light btn-floating lime lighten-2">
-                   <i class="material-icons blue-grey-text"> publish </i> </a>
+                   <i class="material-icons blue-grey-text"> description </i> </a>
              </td>
              <td> <a ui-sref='logged.details({id: element.record})'
                  class="waves-effect waves-light btn-floating lime lighten-3">
@@ -69,7 +58,6 @@
         <md-button ng-click="fix.closeCard()"> Close </md-button>
       </md-card-actions>
      </md-card>
--->
     </div>
 
  </div>
