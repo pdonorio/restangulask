@@ -15,15 +15,20 @@ function EditorController($scope, $sce, $log, $mdDialog)
     ////////////////////////////////
 
     // Note: Make sure you using scopes correctly by following this wiki page. If you are having issues with your model not updating, make sure you have a '.' in your model.
-    self.content = null; //{ model: null };
+    self.content = null;
+    self.realHtml = null;
 
     self.options = $scope.options;
     self.options.width = 600;
     self.options.height = 300;
 
-    self.updateHtml = function() {
-      self.mcehtml = $sce.trustAsHtml(self.content);
-    };
+    $scope.$watch(
+        "edit.content",
+        function handleFooChange( newValue, oldValue ) {
+            self.realHtml = $sce.trustAsHtml(oldValue);
+            //$log.debug("HTML content watch:", oldValue);
+        }
+    );
 
 /*
     // Handle init
@@ -47,25 +52,10 @@ function EditorController($scope, $sce, $log, $mdDialog)
       $mdDialog.hide(false);
     };
 
-
     self.validate = function() {
-      // send transcription back
-      $mdDialog.hide(self.content);
+      // send transcription back as original html
+      $mdDialog.hide($sce.getTrustedHtml(self.realHtml));
     };
-
-/*
-    self.fileError = function(file, message) {
-      file.status = 'fail';
-      var json_message = angular.fromJson(message);
-      //console.log(message, json_message);
-      file.errorMessage = apiErrorToHtml(json_message.data);
-      $log.warn("File error", file, file.errorMessage);
-      $scope.showSimpleToast({
-        "Failed to upload": file.name,
-        //"Error message": message,
-      }, 9000);
-    };
-*/
 
 };
 

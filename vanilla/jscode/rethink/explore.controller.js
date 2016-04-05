@@ -132,27 +132,10 @@ function getMissingTransData(AdminService, $scope) {
 };
 
 function FixTransController($scope, $rootScope,
-    $sce,
     $log, $timeout, $mdDialog, $window, AdminService)
 {
     var self = this;
     self.elements = null;
-
-    // TEST EDITOR
-    self.content = null;
-    self.realHtml = null;
-
-    self.updateHtml = function() {
-      console.log("received", self.content, $sce.trustAsHtml(self.content));
-      //self.content = $sce.trustAsHtml(self.content);
-    };
-    $scope.$watch(
-        "fix.content",
-        function handleFooChange( newValue, oldValue ) {
-            self.realHtml = $sce.trustAsHtml(oldValue);
-            console.log( "watch:", oldValue, newValue );
-        }
-    );
 
     $log.debug("Fix Transcriptions Controller");
 
@@ -176,12 +159,10 @@ function FixTransController($scope, $rootScope,
       $scope.options = angular.copy($rootScope.tinymceOptions);
       $scope.options.setup = function (editor) {
           editor.on("init", function() {
+            // If i want to init the variable
             //self.editor.model = 'test <b>me</b> html';
-            //console.log("INIT!", editor);
-            $timeout(function () {
-                //console.log("FOCUS!");
-                editor.focus();
-            }, 600);
+            // Give focus to textarea
+            $timeout(function () { editor.focus(); }, 600);
           });
       }
 
@@ -200,8 +181,10 @@ function FixTransController($scope, $rootScope,
         .then(function (response) {
             $log.debug("Closed transcript dialog with", response);
 
-/* REMOVE COMMENT
             if (response) {
+
+// SAVE DATA!
+
                 // Make the loader appear
                 $scope.transcripts = null;
                 //$scope.showSimpleToast({"Reloading data": null}, 1200);
@@ -210,7 +193,6 @@ function FixTransController($scope, $rootScope,
                 // Reload data
                 getMissingTransData(AdminService, $scope);
             }
-*/
         });
     }
 

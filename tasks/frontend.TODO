@@ -42,9 +42,6 @@ FEATURE REQUEST:
    removed      to see
 
 BUGS (and ideas):
- ✔ tinymce missing attributes inside tags @bug @done (16-04-05 15:12)
- codepen: http://codepen.io/pdonorio/pen/NNwgBE
- ngsanitize is terrible...!
  ☐TIF is not viewed with tag img
    ☐ convert with imagemagick
      ☐ search for tif/tiff extension?
@@ -77,13 +74,14 @@ After release:
     ☐ don't wait for other people @blablabla
   ☐ operations.py
     ☐ Remove h5 from transcriptions
-    ☐ script to remove transcriptions split and recompute
+    ☐ script to remove transcriptions split and recompute?
   ☐ Fix Transcriptions
     ✘ transcription lib: ngWYSIWYG @cancelled (16-04-04 11:56)
     ✔ tinymce @done (16-04-04 11:56)
       ✔ install @done (16-04-02 14:26)
       ✔ test @done (16-04-02 14:26)
     ✔ show missing transcriptions by query @done (16-04-05 07:44)
+      ☐ convert html trusted into text to save inside db
       ☐ one upload per existing image...
         ✘ get image opening a card @cancelled (16-04-05 08:33)
         ✔ assumption: only one image at this phase @done (16-04-05 08:33)
@@ -682,6 +680,9 @@ COMPLETED:
         ✔ more to info @done (16-03-29 15:08)
 ✔ static welcome page from configuration @done (16-03-22 12:14)
 ✔ /info for authenticated user. Get id and other informations about the user from the token. @done (16-03-22 12:13)
+ ✔ tinymce missing attributes inside tags @bug @done (16-04-05 15:12)
+ codepen: http://codepen.io/pdonorio/pen/NNwgBE
+ ngsanitize is terrible...!
 
 
 RELEASE protocol:
@@ -691,6 +692,7 @@ RELEASE protocol:
   ☐ clone restangulask
   ☐ move images
   ☐ project init
+  ☐ bower check/update!!!
   ☐ check permissions vanilla dir
   user 1000
     ☐ bower install

@@ -52,7 +52,8 @@ console.log('POST');
 
     ])
 
-// CHECK SANITIZE:
+/*
+// CHECK SANITIZER:
 // http://odetocode.com/blogs/scott/archive/2014/09/10/a-journey-with-trusted-html-in-angularjs.aspx
 .config(function($provide){
     $provide.decorator("$sanitize", function($delegate, $log){
@@ -65,7 +66,8 @@ console.log('POST');
             return result;
         };
     });
-});
+})
+*/
 
     ;
 

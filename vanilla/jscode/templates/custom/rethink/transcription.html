@@ -14,17 +14,14 @@
     <md-dialog-content layout-padding
       style="min-width:800px; min-height:400px;
       max-width:1100px; max-height:800px; ">
-      <textarea
-            ui-tinymce="edit.options"
-            ng-model="edit.content"
-            ng-change="edit.updateHtml()"
-            ></textarea>
+
+
+<textarea ui-tinymce="edit.options" ng-model="edit.content" ></textarea>
 
 <!--
-      content:
-      <pre>{{edit.content}}</pre>
-      <div ng-bind-html='edit.mcehtml'></div>
-      <pre>{{edit.mcehtml}}</pre>
+<br>content:
+<div ng-bind='edit.realHtml'></div>
+<div ng-bind-html='edit.realHtml'></div>
 -->
 
     </md-dialog-content>

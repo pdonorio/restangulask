@@ -4,17 +4,6 @@
     layout="row" layout-align="center start"
     style="padding-top: 20px; padding-bottom: 20px;">
 
-      <textarea
-            ui-tinymce="{trusted: true}"
-            ng-change="fix.updateHtml()"
-            ng-model="fix.content"
-            ></textarea>
-
-    content:
-      <div ng-bind='fix.content'></div>
-      <div ng-bind='fix.realHtml'></div>
-
-<!--
     <div ng-if="!transcripts">
         <div ng-include="root.templateDir + 'loader.html'"></div>
     </div>
@@ -84,7 +73,6 @@
       </md-card-actions>
      </md-card>
     </div>
--->
 
  </div>
 </div>
