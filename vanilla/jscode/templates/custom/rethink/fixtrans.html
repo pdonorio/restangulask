@@ -13,6 +13,10 @@
      <div ng-if="transcriptsElements == 0">
         No data available
      </div>
+     <div ng-if="transcriptsElements > 0">
+        Note:
+        Only records with <b>at least one image</b> uploaded will be listed.
+     </div>
      <md-list>
       <div ng-repeat="(transc, data) in transcripts track by $index">
           <md-divider></md-divider>
@@ -40,6 +44,7 @@
         <table class="table table-hover">
           <tbody>
             <tr ng-repeat="element in fix.elements">
+             <!-- <td>{{element}}</td> -->
              <td> {{element.value}} </td>
              <td> <a href
                  ng-click="fix.transcriptionDialog(element.record, element.value)"

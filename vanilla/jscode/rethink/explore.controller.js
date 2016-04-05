@@ -45,12 +45,15 @@ function ExploreController($scope, $log, $state, SearchService, AdminService)
 ////////////////////////////////
 
 function getMissingImagesData(AdminService, $scope) {
+
+    $scope.parties = null;
+    $scope.partiesElements = -1;
     return AdminService.getDocumentsWithNoImages()
       .then(function (out)
       {
         //console.log("DATA", out);
-        $scope.parties = out.data;
         $scope.partiesElements = out.elements;
+        $scope.parties = out.data;
     });
 };
 
@@ -118,11 +121,13 @@ function FixImagesController($scope, $log, $mdDialog, $window, AdminService)
 ////////////////////////////////
 
 function getMissingTransData(AdminService, $scope) {
+    $scope.transcripts = null;
+    $scope.transcriptsElements = -1;
     return AdminService.getDocumentsWithNoTrans()
       .then(function (out)
       {
-        $scope.transcripts = out.data;
         $scope.transcriptsElements = out.elements;
+        $scope.transcripts = out.data;
     });
 };
 

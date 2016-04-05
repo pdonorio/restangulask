@@ -80,6 +80,8 @@ After release:
       ✔ test @done (16-04-02 14:26)
     ✔ show missing transcriptions by query @done (16-04-05 07:44)
       ☐ one upload per existing image...
+        ✘ get image opening a card @cancelled (16-04-05 08:33)
+        ✔ assumption: only one image at this phase @done (16-04-05 08:33)
         ✔ skip records with no images @done (16-04-05 08:22)
       ☐ check if records are the ones we wanted
       ☐ tinymce missing attributes inside tags? @bug
