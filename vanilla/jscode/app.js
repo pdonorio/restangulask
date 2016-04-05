@@ -50,6 +50,23 @@ console.log('POST');
 /* Custom end */
 //////////////////////////////////////
 
-    ]);
+    ])
+
+// CHECK SANITIZE:
+// http://odetocode.com/blogs/scott/archive/2014/09/10/a-journey-with-trusted-html-in-angularjs.aspx
+.config(function($provide){
+    $provide.decorator("$sanitize", function($delegate, $log){
+        return function(text, target){
+
+            var result = $delegate(text, target);
+            $log.info("$sanitize input: " + text);
+            $log.info("$sanitize output: " + result);
+
+            return result;
+        };
+    });
+});
+
+    ;
 
 })();

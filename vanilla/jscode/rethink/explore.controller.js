@@ -132,10 +132,28 @@ function getMissingTransData(AdminService, $scope) {
 };
 
 function FixTransController($scope, $rootScope,
+    $sce,
     $log, $timeout, $mdDialog, $window, AdminService)
 {
     var self = this;
     self.elements = null;
+
+    // TEST EDITOR
+    self.content = null;
+    self.realHtml = null;
+
+    self.updateHtml = function() {
+      console.log("received", self.content, $sce.trustAsHtml(self.content));
+      //self.content = $sce.trustAsHtml(self.content);
+    };
+    $scope.$watch(
+        "fix.content",
+        function handleFooChange( newValue, oldValue ) {
+            self.realHtml = $sce.trustAsHtml(oldValue);
+            console.log( "watch:", oldValue, newValue );
+        }
+    );
+
     $log.debug("Fix Transcriptions Controller");
 
     self.noImageList = function (name, data) {

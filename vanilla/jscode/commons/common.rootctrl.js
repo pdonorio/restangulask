@@ -103,7 +103,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
         //resize: false,
         // inline: false,
         // format: 'text',
-        trusted: true,
+        //trusted: true,
         // cleanup: false,
         // validate_children: false,
         forced_root_block: false,

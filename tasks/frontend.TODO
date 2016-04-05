@@ -42,8 +42,9 @@ FEATURE REQUEST:
    removed      to see
 
 BUGS (and ideas):
- ☐ tinymce missing attributes inside tags @bug
+ ✔ tinymce missing attributes inside tags @bug @done (16-04-05 15:12)
  codepen: http://codepen.io/pdonorio/pen/NNwgBE
+ ngsanitize is terrible...!
  ☐TIF is not viewed with tag img
    ☐ convert with imagemagick
      ☐ search for tif/tiff extension?
