@@ -48,10 +48,20 @@
              <td> {{element.value}} </td>
              <td> <a href
                  ng-click="fix.transcriptionDialog(element.record, element.value)"
+           tooltipped data-position="left" data-delay="50"
+           data-tooltip="Provide a transcription"
                  class="waves-effect waves-light btn-floating lime lighten-2">
                    <i class="material-icons blue-grey-text"> description </i> </a>
              </td>
+             <td> <a ui-sref='logged.specialsearch({text: element.value})'
+           tooltipped data-position="down" data-delay="50"
+           data-tooltip="Search this record"
+                 class="waves-effect waves-light btn-floating lime lighten-3">
+                   <i class="material-icons blue-grey-text"> youtube_searched_for </i> </a>
+             </td>
              <td> <a ui-sref='logged.details({id: element.record})'
+           tooltipped data-position="up" data-delay="50"
+           data-tooltip="View details of this record"
                  class="waves-effect waves-light btn-floating lime lighten-3">
                    <i class="material-icons blue-grey-text">web</i> </a>
              </td>
