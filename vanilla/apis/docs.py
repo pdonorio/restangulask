@@ -392,9 +392,11 @@ class RethinkGrouping(BaseRethinkResource):
             .pluck('record', 'party') \
             .group('party')['record']
 
-    def subtract_documents(self, to_remove):
+    def subtract_documents(self, to_remove, record_list=False):
 
         final = {}
+        if record_list:
+            final = []
 
         for party, records in self.group_query().run().items():
 
@@ -403,35 +405,47 @@ class RethinkGrouping(BaseRethinkResource):
             if len(elements) > 0:
 
                 # Remove the records containing the images
-                cursor = self.get_query().table('datavalues') \
+                query = self.get_query().table('datavalues') \
                     .filter(lambda doc: r.expr(list(elements))
-                            .contains(doc['record'])) \
-                    .run()
-                newrecord = []
-                for obj in cursor:
+                            .contains(doc['record']))
 
-                    val = obj['steps'][0]['data'][0]['value']
+                if not record_list:
+                    # Sort the list in a way we can use it on the interface
+                    newrecord = []
+                    for obj in query.run():
 
-                    # Sort from the number value
-                    tmp = val.split('_')
-                    index = 0
-                    offset = 0
-                    if len(tmp) > 1:
-                        index = len(tmp) - 1
-                        offset = 1000
-                    try:
-                        sort_value = int(tmp[index]) + offset
-                    except:
-                        sort_value = -1
+                        val = obj['steps'][0]['data'][0]['value']
 
-                    newrecord.append({
-                        'sortme': sort_value,
-                        'value': val,
-                        'record': obj['record']
-                    })
-                final[party] = sorted(newrecord, key=itemgetter('sortme'))
+                        # Sort from the number value
+                        tmp = val.split('_')
+                        index = 0
+                        offset = 0
+                        if len(tmp) > 1:
+                            index = len(tmp) - 1
+                            offset = 1000
+                        try:
+                            sort_value = int(tmp[index]) + offset
+                        except:
+                            sort_value = -1
+
+                        newrecord.append({
+                            'sortme': sort_value,
+                            'value': val,
+                            'record': obj['record']
+                        })
+                    final[party] = sorted(newrecord, key=itemgetter('sortme'))
+                else:
+                    final += list(query['record'].run())
 
         return final
+
+    def records_missing_images(self, record_list=False):
+        records_with_docs = \
+            list(self.get_query()
+                 .table(DOCSTABLE)
+                 .filter({'type': DEFAULT_DESTINATION})
+                 ['record'].run())
+        return self.subtract_documents(set(records_with_docs), record_list)
 
 
 #####################################
@@ -442,13 +456,7 @@ class RethinkImagesAssociations(RethinkGrouping):
     @deck.apimethod
     @auth_token_required
     def get(self, id=None):
-
-        records_with_docs = \
-            list(self.get_query()
-                 .table(DOCSTABLE)  # .has_fields('type')
-                 .filter({'type': DEFAULT_DESTINATION})
-                 ['record'].run())
-        final = self.subtract_documents(set(records_with_docs))
+        final = self.records_missing_images()
         return self.response(final)
 
 
@@ -461,6 +469,8 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
     @auth_token_required
     def get(self, id=None):
 
+        records_with_no_images = self.records_missing_images(record_list=True)
+
         records_with_trans = \
             list(self.get_query()
                  .table(DOCSTABLE).concat_map(
@@ -468,8 +478,12 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
                  ['recordid']
                  .run())
 
-        # print("TEST\n\n", records_with_trans)
-        final = self.subtract_documents(set(records_with_trans))
+        # I need the union of the previous sets
+        records = set(records_with_trans) | set(records_with_no_images)
+        # I want to skip record which already have transcriptions
+        # But also want to avoid records which have no images
+
+        final = self.subtract_documents(set(records))
         return self.response(final)
 
 
