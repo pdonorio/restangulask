@@ -50,7 +50,7 @@ function EditorController($scope, $sce, $log, $mdDialog)
 
     self.validate = function() {
       // send transcription back
-      $mdDialog.hide(self.editor);
+      $mdDialog.hide(self.content);
     };
 
 /*
