@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xml:lang="EN" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <title> Hello! Just a test </title>
+    <script type="text/javascript"
+        src="/static/bower/tinymce-dist/tinymce.min.js"></script>
+    <script type="text/javascript"
+        src="/static/bower/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="/static/bower/angular/angular.min.js"></script>
+    <script type="text/javascript"
+        src="/static/bower/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript"
+        src="/static/bower/angular-ui-tinymce/dist/tinymce.min.js"></script>
+
+</head>
+
+<body>
+
+<h1>
+Just a test
+</h1>
+
+<div ng-app="app">
+  <div ng-controller="ctrl">
+    <textarea ui-tinymce ng-model="vm.value"></textarea>
+    <br>
+    <br>
+    <div ng-bind="vm.value"></div>
+    <div ng-bind-html="vm.value"></div>
+  </div>
+</div>
+
+<script>
+angular
+  .module("app", [
+    'ui.tinymce',
+    'ngSanitize'])
+  .controller('ctrl', ctrl);
+
+ctrl.$inject = ['$scope'];
+function ctrl($scope) {
+  $scope.vm = {};
+  $scope.vm.value = 'Test <strong>tacos!</strong>';
+};
+</script>
+
+
+</body>
+</html>

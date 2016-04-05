@@ -186,6 +186,15 @@ def jsblueprint():
 
 
 ################################################
+# A test endpoint
+@cms.route('/templatetest')
+def testing_templates():
+    template_path = 'custom' + '/' + CURRENT_BLUEPRINT
+    variables = {}
+    return render_template(template_path + '/' + 'justatest.html', **variables)
+
+
+################################################
 # ZOOM?
 @cms.route('/zoom/<string:document>/<string:code>')
 def zoom(document, code):

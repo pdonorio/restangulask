@@ -42,9 +42,12 @@ FEATURE REQUEST:
    removed      to see
 
 BUGS (and ideas):
+ ☐ tinymce missing attributes inside tags @bug
+ codepen: http://codepen.io/pdonorio/pen/NNwgBE
  ☐TIF is not viewed with tag img
    ☐ convert with imagemagick
-     ☐ add to docker image
+     ☐ search for tif/tiff extension?
+     ✔ add to docker image @done (16-04-05 13:39)
  ☐ Firefox check
  Nothing seems to work?
   ☐ on search
@@ -84,8 +87,7 @@ After release:
         ✘ get image opening a card @cancelled (16-04-05 08:33)
         ✔ assumption: only one image at this phase @done (16-04-05 08:33)
         ✔ skip records with no images @done (16-04-05 08:22)
-      ☐ check if records are the ones we wanted
-      ☐ tinymce missing attributes inside tags? @bug
+      ✔ check if records are the ones we wanted @done (16-04-05 13:38)
     ☐ show transcriptions in zoom?
   ☐ Public search pages @important
     ☐ A python/js variable to know if you want to do it?
