@@ -183,7 +183,17 @@ function FixTransController($scope, $rootScope,
 
             if (response) {
 
+//////////////////////////////////
 // SAVE DATA!
+              var data = {};
+              data.type = $scope.currentType;
+              data.trans = response;
+              return AdminService.setDocumentTrans(
+                    $scope.currentRecord, data).then(function(out)
+              {
+                  console.log("SET OUT", out);
+              });
+//////////////////////////////////
 
                 // Make the loader appear
                 $scope.transcripts = null;

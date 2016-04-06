@@ -21,6 +21,11 @@ function AdminService($log, api) {
     self.getDocumentsWithNoTrans = function() {
         return api.apiCall(self.endpoints.tmissing);
     }
+    self.setDocumentTrans = function(record, data) {
+        return api.apiCall(
+            self.endpoints.tmissing,
+            'PUT', data, record);
+    }
 
     //////////////////
     // Base API call with Rethinkdb

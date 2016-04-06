@@ -486,6 +486,33 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
         final = self.subtract_documents(set(records))
         return self.response(final)
 
+    @deck.apimethod
+    # @auth_token_required
+    def put(self, id):
+
+        j = self.get_input(False)
+        if 'trans' not in j:
+            return self.response({}, code=hcodes.HTTP_OK_NORESPONSE)
+        print("Id", id, "Received", j)
+
+        # def merge_dicts(a, b):
+        #     print("MERGE", a, b)
+        #     z = a.copy()
+        #     z.update(b)
+        #     print("MERGED", z)
+        #     return z
+
+        base_query = self.get_table_query(DOCSTABLE).get(id)
+        data = base_query.run().copy()
+        image = data['images'].pop()
+        image["transcriptions"] = [j['trans']]
+        print(image)
+        changes = base_query.update({
+            'images': [image]
+        }, return_changes=True).run()
+
+        return self.response(changes)
+
 
 ##########################################
 # Upload
