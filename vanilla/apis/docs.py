@@ -17,6 +17,7 @@ from confs import config
 from ..services.rethink import schema_and_tables, BaseRethinkResource
 from ..services.uploader import Uploader
 from .. import decorators as deck
+from ..utilities import split_and_html_strip
 from ... import get_logger, htmlcodes as hcodes
 
 logger = get_logger(__name__)
@@ -38,11 +39,9 @@ IMAGE_DESTINATIONS = [
 def image_destination(mydict, key_type='destination'):
     """ This is the turning point for the image future use """
 
-    image_destination = None
-    if mydict is not None and key_type in mydict:
-        image_destination = mydict[key_type]
-    if image_destination not in IMAGE_DESTINATIONS:
-        image_destination = DEFAULT_DESTINATION
+    image_destination = DEFAULT_DESTINATION
+    if mydict is not None:
+        image_destination = mydict.get(key_type, DEFAULT_DESTINATION)
 
     return image_destination
 
@@ -245,12 +244,12 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
                 query = self.get_filtered_notes(query, self._args['key'])
             else:
                 query = self.get_all_notes(query)
-
         #################################
         # Using new great filtering
+        else:
 # JSON DOES NOT WORK WITH GET METHOD....? it's in the request body
-        j = self.get_input(False)
-        query = query.filter({'type': image_destination(j)})
+            j = self.get_input(False)
+            query = query.filter({'type': image_destination(j)})
 
         #################################
         # Execute query
@@ -505,7 +504,16 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
         base_query = self.get_table_query(DOCSTABLE).get(id)
         data = base_query.run().copy()
         image = data['images'].pop()
-        image["transcriptions"] = [j['trans']]
+
+        key = 'transcriptions'
+        image[key] = [j['trans']]
+
+# TO FIX: substitute with elastic search
+        words = set()
+        for trans in image[key]:
+            words = words | split_and_html_strip(trans)
+        image[key+'_split'] = list(words)
+
         print(image)
         changes = base_query.update({
             'images': [image]
