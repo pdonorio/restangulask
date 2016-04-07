@@ -2,6 +2,12 @@
 THE PROJECT
 http://codeology.braintreepayments.com/pdonorio/restangulask
 
+
+ download    http -d GET http://192.168.64.7:8081/api/upload/retro.png\?record=22
+ upload         http --form POST http://192.168.64.7:8081/api/upload file@~/Dropbox/Screenshot/retro.png record=22
+
+
+
 PROTOTYPING:
 
   ☐ get @feedback from ui
@@ -14,87 +20,7 @@ https://www.invisionapp.com/tour/design-feedback-collaboration-tool
  web progressive apps
 https://developers.google.com/web/fundamentals/getting-started/your-first-offline-web-app/step-5?hl=en
 
---- ✄ -----------------------
-
-FEATURE REQUEST:
-
-  ☐ delete buttons: undo with long timeout to promise
-  ☐ haproxy and migration to digitalocean 1GB
-  http://docker-haproxy-domain-redirect.readthedocs.org/en/latest/
- ☐ Cleaning volumes
- docker volume ls -f dangling=true
- (remove only 64 letters long names)
- ☐ Dlite update
-   ☐ release 2 beta?
-   ☐ or docker for mac beta??
- ☐ API Decorator: to parse arguments from the function args list and add them to flask parameters
- ☐ @JS+learning
-   ☐ array delete
-  return toString.call(arr) == '[object Array]';
- ☐ @Discussion
-   ☐ GET methods with json in body... in angular $http?
-   http://www.benfranklinlabs.com/delete-item-list-angularjs/
- ☐ @file
-   download    http -d GET http://192.168.64.7:8081/api/upload/retro.png\?record=22
-   upload         http --form POST http://192.168.64.7:8081/api/upload file@~/Dropbox/Screenshot/retro.png record=22
-   removed      to see
-
-BUGS (and ideas):
- ☐TIF is not viewed with tag img
-   ☐ convert with imagemagick
-     ☐ search for tif/tiff extension?
-     ✔ add to docker image @done (16-04-05 13:39)
- ☐ Firefox check
- Nothing seems to work?
- ☐ Rebuild rethinkdb connection on backend side  if error is like below @bug
- rethinkdb.errors.ReqlDriverError: RqlQuery.run must be given a connection to run on.
- A default connection has been set with `repl()` on another thread, but not this one.
-✔ materialize spy is probably broken in latest materialize? @toverifyagain @done (16-04-04 11:56)
-☐ after login go to latest requested url
-  ☐ seek in history
-  ☐ if from welcome, go to simple 'app'
-☐ chips with bigger div to show results
-☐ table are not same size on details
-☐ extrait not complete list inside the details page
-☐ topbar menu for mobile
-☐ Move frameworks? in specs
-  /Users/projects/restapi/restangulask/frontend/config/angular/frameworks.json
-☐ an equivalent for admin to check informations about other users
-
-After release:
-  ✔ remove image after PUT on datadocs @done (16-04-02 14:03)
-  ☐ Manual insert for multiple details? Dunkerque_MS_1
-    ☐ don't wait for other people @blablabla
-  ☐ operations.py
-    ☐ Remove h5 from transcriptions
-    ☐ script to remove transcriptions split and recompute?
-  ☐ Fix Transcriptions
-    ✘ transcription lib: ngWYSIWYG @cancelled (16-04-04 11:56)
-    ✔ tinymce @done (16-04-04 11:56)
-      ✔ install @done (16-04-02 14:26)
-      ✔ test @done (16-04-02 14:26)
-    ✔ show missing transcriptions by query @done (16-04-05 07:44)
-      ☐ convert html trusted into text to save inside db
-      ☐ one upload per existing image...
-        ✘ get image opening a card @cancelled (16-04-05 08:33)
-        ✔ assumption: only one image at this phase @done (16-04-05 08:33)
-        ✔ skip records with no images @done (16-04-05 08:22)
-      ✔ check if records are the ones we wanted @done (16-04-05 13:38)
-    ☐ show transcriptions in zoom?
-  ☐ Public search pages @important
-    ☐ A python/js variable to know if you want to do it?
-    ☐ but how can we decide if the endpoint for search require auth??
-
-Rethinkdb logs:
-   ☐ problem with the second...
-     ☐ rethinkdb put, with a js push to the old one...
-       ☐ how to modify custom js api to do this?
-   ☐ logs for user login and/or registration/profile?
-     ☐ from frontend calls?
-
-NEW RESPONSE STANDARD:
-   ☐ @todiscuss
-   ☐ should check what to do also on angularjs side...
+☐ RESPONSE standard @todiscuss
 Response
   data
   errors { 'FIELD': 'message'}
@@ -102,40 +28,25 @@ Meta (data)
     "data_type": "<class 'dict'>",
     "elements": 1,
     "status": 500
- ☐ How to force the same also on normal flask endpoint?
-   ☐ and on frontend side?
+ ☐ How to force the same also on normal flask endpoint
+   ☐ and on frontend side
+☐ admin page to check informations about other users
+ ☐ user ranks on interface side
 
- Image optimization:
-  ☐ ng-flow
+☐ delete buttons: undo with long timeout to promise
+☐ API Decorator: to parse arguments from the function args list and add them to flask parameters
+☐ GET methods with json in body... in angular $http?
+   http://www.benfranklinlabs.com/delete-item-list-angularjs/
+☐ after login go to latest requested url
+
+☐ rethinkdb ping before request?
+ ☐ Rebuild connection on backend side  if error is like below
+ rethinkdb.errors.ReqlDriverError: RqlQuery.run must be given a connection to run on.
+ A default connection has been set with `repl()` on another thread, but not this one.
+☐ Rethinkdb logs
+  ☐  append an element inside a nested array
+☐ ng-flow
     ☐ missing authenticatation (header config)
-    ☐ chunked flow?
-
-Configurations:
-  http://www.jvandemo.com/how-to-configure-your-angularjs-application-using-environment-variables/
-  http://rochacbruno.github.io/dynaconf/
- ✔ check extra parameters @done (16-03-28 23:47)
-  ☐ Mail
-    https://pythonhosted.org/Flask-Security/quickstart.html#mail-configuration
-    and https://pythonhosted.org/Flask-Security/configuration.html
-
-SUBMIT:
- ☐ Steps are upside down
-  ✔ Guide the submission with breadcrumbs @done (16-02-16 15:14)
-  ☐ the document is a draft until the last step is completed (estratto)
-  ☐ draft is a separated rethinkdb resource, related to the user
-    ☐ automatically relate the user from the token to its drafts
-      ☐ how to get user from token inside the API?
-  ☐ transcriptions size inside db? or post/get method injection?
-  ☐ Submission skeleton with collapsible or collections
-  ☐ Submission steps
-  http://materializecss.com/collections.html
- ☐ good example for transcription edit
- https://material.angularjs.org/latest/demo/menuBar
-
-Common functionalities:
-  ☐ A list of required extra routes
-    ☐ check if they exist
-    ☐ if not create them with template "yet to implement"
 
 Autocomplete:
 ☐ elasticsearch
@@ -160,42 +71,19 @@ https://hub.docker.com/_/logstash/
 https://github.com/deviantony/docker-elk/blob/master/docker-compose.yml
 ☐ OR my rethinkdb table change feed?
 
-User ranks:
-  ☐ get user info via REST /myself
-  ☐ do routig based on rank check?
-
-History:
-  ✔ clickable elements... @done (16-02-05 18:08)
-  ☐ a loader while timeout
-  ☐ A label to explain the route
-  ☐ Could add timestamp to each history element
-
-New fixed search:
-✔ onenter and onexit route extra @done (16-01-25 11:10)
-✔ Tree back @done (16-01-25 12:42)
-☐ understand md-content?
-✔ Parties back @done (16-01-25 12:15)
- ☐ sub piece in lazy load?
- http://www.cloudcity.io/blog/2016/03/03/angular-loading-annoyances/
-☐ chips watch?
-☐ lazy load of more than 10 results
-☐ Application name inside the Toolbar should be a hand made font?
-
-SEARCH:
-☐ Some times chips do not see change of text?
-☐ Chip list is too small. Can i change the template?
-☐ Chips array = apply filter on cascade
-☐ infinite scrolling is easy
-  https://material.angularjs.org/latest/demo/virtualRepeat
-
-DETAILS:
-  ☐ Zoomify
-    ✘ opensource version @cancelled (16-03-21 16:49)
-  http://blog.thematicmapping.org/2013/06/showing-zoomify-images-with-leaflet.html
-    ☐ angular open new tab /page
-    ☐ via python request and jinja template
- ☐ select language on transcription
- ☐ aggiungere lista dettagli (step 4) sotto lo scrollspy
+SUBMIT:
+ ☐ Steps are upside down
+  ✔ Guide the submission with breadcrumbs @done (16-02-16 15:14)
+  ☐ the document is a draft until the last step is completed (estratto)
+  ☐ draft is a separated rethinkdb resource, related to the user
+    ☐ automatically relate the user from the token to its drafts
+      ☐ how to get user from token inside the API?
+  ☐ transcriptions size inside db? or post/get method injection?
+  ☐ Submission skeleton with collapsible or collections
+  ☐ Submission steps
+  http://materializecss.com/collections.html
+ ☐ good example for transcription edit
+ https://material.angularjs.org/latest/demo/menuBar
 
 OTHER:
   ☐ one time binding
@@ -243,49 +131,13 @@ VOCABULARY:
 
  https://github.com/graphql-python/graphene
 
-HTTPS:
-  ☐ nginx proxy
-    ☐ nginx acme and let's encrypt beta
-    http://steveltn.me/2015/12/18/nginx-acme
-
 JS LIBS:
-  ☐ Am i using sanitize?
-  ☐ controller as
-  https://toddmotto.com/digging-into-angulars-controller-as-syntax/
-
-<div ng-controller="MainCtrl as main">
-  {{ main.title }}
-  <div ng-controller="AnotherCtrl as another">
-    Scope title: {{ another.title }}
-    Parent title: {{ main.title }}
-    <div ng-controller="YetAnotherCtrl as yet">
-      Scope title: {{ yet.title }}
-      Parent title: {{ another.title }}
-      Parent parent title: {{ main.title }}
-    </div>
-  </div>
-</div>
-
   ☐ controller filters
   https://toddmotto.com/use-controller-filters-to-prevent-digest-performance-issues/
   ✔ foreach implementation @done (15-12-30 16:37)
   https://toddmotto.com/simple-foreach-implementation-for-objects-nodelists-arrays-with-automatic-type-looping/
-  ☐ image lazy loading
-  https://toddmotto.com/echo-js-simple-javascript-image-lazy-loading/
   ☐ detect no wifi
   https://toddmotto.com/nofi-detecting-no-wifi-callbacks-for-offline-states-with-html5/
-  ☐ DOM manipulation
-  https://toddmotto.com/apollo-js-standalone-class-manipulation-api-for-html5-and-legacy-dom/
-
- REALTIME (rethink changefeed):
-  ☐ Change Feed
-    ☐ python?
-    https://www.rethinkdb.com/docs/changefeeds/python/
-      ☐ could register an angular timeout to
-    ☐ or directly js?
-    "Unlike other cursors, the output of changes is infinite:
-    the cursor will block until more elements are available. "
-    https://github.com/neumino/rethinkdbdash
 
 ui router pitfall:
   http://www.codelord.net/2015/06/02/angularjs-pitfalls-using-ui-routers-resolve/
@@ -658,6 +510,27 @@ COMPLETED:
  ngsanitize is terrible...!
   ✔ Gunicorn or similar (tornado?) for frontend production @done (16-04-02 14:08)
 ✔ Register page @done (16-04-06 15:01)
+  ✔ remove image after PUT on datadocs @done (16-04-02 14:03)
+  ✔ Fix Transcriptions @done (16-04-07 07:36)
+    ✘ transcription lib: ngWYSIWYG @cancelled (16-04-04 11:56)
+    ✔ tinymce @done (16-04-04 11:56)
+      ✔ install @done (16-04-02 14:26)
+      ✔ test @done (16-04-02 14:26)
+    ✔ show missing transcriptions by query @done (16-04-05 07:44)
+      ✔ convert html trusted into text to save inside db @done (16-04-07 07:36)
+      ✔ one upload per existing image... @done (16-04-07 07:36)
+        ✘ get image opening a card @cancelled (16-04-05 08:33)
+        ✔ assumption: only one image at this phase @done (16-04-05 08:33)
+        ✔ skip records with no images @done (16-04-05 08:22)
+      ✔ check if records are the ones we wanted @done (16-04-05 13:38)
+    ✘ show transcriptions in zoom? @cancelled (16-04-07 07:36)
+✔ materialize spy is probably broken in latest materialize? @toverifyagain @done (16-04-04 11:56)
+  ✔ Zoomify @done (16-04-07 07:52)
+    ✘ opensource version @cancelled (16-03-21 16:49)
+  http://blog.thematicmapping.org/2013/06/showing-zoomify-images-with-leaflet.html
+    ✔ angular open new tab /page @done (16-04-07 07:52)
+    ✔ via python request and jinja template @done (16-04-07 07:52)
+ ✘ aggiungere lista dettagli (step 4) sotto lo scrollspy @cancelled (16-04-07 07:52)
 
 RELEASE protocol:
 
