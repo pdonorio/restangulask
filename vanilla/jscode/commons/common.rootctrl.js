@@ -101,7 +101,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
     // Global editor configuration
     $rootScope.tinymceOptions = {
 
-        forced_root_block: false,
+        //forced_root_block: false,
         //resize: false,
         //trusted: true,
         // cleanup: false,

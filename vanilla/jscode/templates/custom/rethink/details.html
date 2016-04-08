@@ -81,10 +81,18 @@
     </li>
 </ul>
 
+
+  <div ng-bind-html="detail.test"></div>
+<!--
+  <span ng-bind="image.transcriptions" > </span>
+  class='transcription flow-text z-depth-3'
+
+<!- One transcript ->
+
 <div ng-if="image.transcriptions.length == 1"
-  ng-bind-html="image.transcriptions" class='transcription flow-text z-depth-3'>
-<!-- One transcript -->
-</div>
+  ng-bind-html="image.transcriptions" ></div>
+-->
+
               </td>
             </tr>
           </tbody>

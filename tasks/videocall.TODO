@@ -1,26 +1,25 @@
 
-WAITING:
-
-- Text editor
-justify
-
-- Interface adjustment: we should see in two weeks
+Interface adjustment:
+  we should see in two weeks (21?)
 
 GOING ONLINE:
 
 - TIF/TIFF conversion
 
-- Move to a powerful node
-backup oceanmaster1
-leaseweb
-haproxy test
-baroque HTTPS: nginx in production, letsencrypt
+- Text editor
+justify
 
 - details:
 remove h5 from current transcriptions
 change appearance of transcripts into a better monospace
 next and previous page
 click to zoom tooltip
+
+- Move to a powerful node
+backup oceanmaster1
+leaseweb
+haproxy test
+baroque HTTPS: nginx in production, letsencrypt
 
 - Search page goes public
 
@@ -30,9 +29,9 @@ lazy load after 10 elements
   https://material.angularjs.org/latest/demo/virtualRepeat
 elasticsearch (or solr) on all fields + transcriptions
 
-- Multiple entries for single field
-
 - Submission
+inverted
+Multiple entries for single field
 
 LATER ON:
 

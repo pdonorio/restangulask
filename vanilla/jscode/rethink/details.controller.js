@@ -4,7 +4,7 @@
 angular.module('web')
     .controller('DetailsController', DetailsController);
 
-function DetailsController($scope, $log, $stateParams, SearchService)
+function DetailsController($scope, $log, $sce, $stateParams, SearchService)
 {
     $log.info("Single view on", $stateParams.id);
     var self = this;
@@ -36,6 +36,19 @@ function DetailsController($scope, $log, $stateParams, SearchService)
             delete tmp.thumb;
             delete tmp.images;
             self.refinedData = tmp;
+
+// REWRITE IMAGES and TRANSCRIPTIONS
+            console.log("A TEST HTML", out_single);
+            forEach(out_single.images, function(element, index) {
+              forEach(element.transcriptions, function(trans, j) {
+                console.log("Trans", j, trans);
+
+out_single.images[index].transcriptions[j] = angular.copy($sce.trustAsHtml(trans));
+
+self.test = $sce.trustAsHtml(trans);
+
+              });
+            });
             self.data = out_single;
 
         }); // single data

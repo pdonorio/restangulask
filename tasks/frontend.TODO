@@ -23,7 +23,7 @@ https://developers.google.com/web/fundamentals/getting-started/your-first-offlin
 ☐ RESPONSE standard @todiscuss
 Response
   data
-  errors { 'FIELD': 'message'}
+  errors { ['FIELD': 'message'], ['ANOTHER_ERROR': 'another message']}
 Meta (data)
     "data_type": "<class 'dict'>",
     "elements": 1,
