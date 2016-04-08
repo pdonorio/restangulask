@@ -33,9 +33,9 @@
     <span colspan="10" ng-include="root.templateDir+'loader.html'"></span>
 </div>
 
-<ul sv-root sv-part="sections" ng-hide="loaders['admin_sections']"
-    sv-on-sort="wadm.resort()"
-    class="collapsible" data-collapsible="accordion" watch>
+<ul ng-if="!loaders['admin_sections']"
+    sv-root sv-part="sections" sv-on-sort="wadm.resort()"
+    class="collapsible" data-collapsible="accordion">
 
     <li ng-repeat="model in sections track by $index"
         sv-element="opts" class="well" >
@@ -155,51 +155,5 @@
 
     </li>
 </ul>
-
-<!--
-     <table class="highlight">
-     <thead>
-         <tr>
-            <th>Position</th>
-            <th ng-repeat="model in wadm.sectionModels">
-                {{model.name}}
-            </th>
-            <th width="10%">
-                <a href class="btn-floating waves-effect waves-light red"
-                   ng-click="wadm.showAdvanced($event)"
-                   tooltipped data-position="top" data-delay="50"
-                   data-tooltip="Add a new Section"
-                   >
-                    <i class="material-icons">add</i>
-                </a>
-            </th>
-         </tr>
-     </thead>
-
-     <tbody ng-if="loaders['admin_sections']">
-       <tr>
-        <td colspan="10" ng-include="root.templateDir+'loader.html'"></td>
-       </tr>
-     </tbody>
-
-     <tbody ng-hide="loaders['admin_sections']">
-      <tr ng-repeat="model in sections track by $index">
-        <td>{{$index+1}}</td>
-        <td ng-repeat="template in wadm.sectionModels">
-            <span ng-bind-html=" model.data[template.name] || '-'"></span>
-        </td>
-        <td>
-          <a class="waves-effect waves-light btn-floating"
-           ng-click="wadm.showAdvanced($event, model)"
-           tooltipped data-position="left" data-delay="50"
-           data-tooltip="Edit this section" >
-              <i class="material-icons">mode_edit</i>
-          </a>
-        </td>
-      </tr>
-     </tbody>
-
-    </table>
--->
 
 </div>
