@@ -4,6 +4,21 @@ Interface adjustment:
 
 GOING ONLINE:
 
+- Welcome page new instructions
+  ☐ new look
+    ☐ add color
+  ☐ inline editor for section content
+  ☐ Whole starting page is just a slide?
+    https://www.rijksmuseum.nl/nl/
+    http://pedroduarte.me/wallop/
+    http://unslider.com/
+  ☐ A new admin page for "subsection" (only one, the first)
+    ☐ how to add the submenu?
+
+- Search page goes public
+ ☐ public
+   ☐ submenu
+
 - TIF/TIFF conversion
 
 - Text editor
@@ -20,8 +35,6 @@ backup oceanmaster1
 leaseweb
 haproxy test
 baroque HTTPS: nginx in production, letsencrypt
-
-- Search page goes public
 
 - Search page optimization: become faster
 invert table titles

@@ -4,6 +4,8 @@
 <!--CONTENT -->
  <div flex="75">
 
+<!-- slides/news
+
     <div ng-if="slides.length < 2"
         class="caption center-align"
         style='height: 400px; padding-top: 50px;'>
@@ -29,18 +31,50 @@
      </ul>
 
     </div>
+-->
 
   <div ng-repeat="section in sections track by $index"
     id='step{{$index}}'
     layout-padding
     class="section scrollspy" scrollspy>
 
-    <!-- TITLE -->
-    <h2 class="header">
-        {{ section.data['Section'].capitalizeFirstLetter() }} </h2>
-    <!-- DESCRIPTION -->
-    <span ng-bind-html="section.data['Description']"></span>
-    <!-- SEARCH CASE -->
+<div style="
+    position: relative;
+    /*border:1px solid red;*/
+    height: 320px;
+">
+
+    <!-- IMAGE -->
+    <div style="background-repeat: no-repeat;
+        background-size: 100% 100%; /* background-size:cover; */
+        width: 700px; height: 300px;
+        z-index:1; "
+        ng-style="{'background-image':'url('+
+        root.imagesPath + welcome.mainSubFolder + section.images[0].filename
+        +')'}"> </div>
+
+    <!-- TITLE BACKGROUND COLOR? -->
+    <div style=" position: absolute; bottom: 0px;
+        background-color: red;
+        width: 700px;
+        height: 110px;
+        margin-bottom: 10px;
+        opacity: .5;
+        z-index:2;"></div>
+
+    <div style=" position: absolute; bottom: 0px;
+        padding-left: 5%; color: white;
+        z-index:3;">
+        <!-- TITLE -->
+        <h2 class="header">
+            {{ section.data['Section'].capitalizeFirstLetter() }} </h2>
+        <!-- DESCRIPTION -->
+        <p ng-bind-html="section.data['Description']"></p>
+    </div>
+</div>
+
+
+<!-- SEARCH CASE
     <md-content
         ng-if="welcome.isSearch(section)"
         layout-padding layout-wrap>
@@ -50,7 +84,9 @@
                 <i class="material-icons prefix">search</i>
             </div>
     </md-content>
-    <!-- More -->
+-->
+
+<!-- More
     <md-content flew="100"
         ng-if="!welcome.isSearch(section) && section.data['Content'] != ''"
         layout="row" layout-align="end center">
@@ -59,18 +95,23 @@
             {element: $index, section_type: 'welcome'})">more...</a>
         </md-button>
     </md-content>
+-->
 
+<!-- Parallax
     <md-content layout-padding layout-wrap></md-content>
-
     <div class="parallax-container"
         ng-if="section.images && section.images.length > 0">
-        <div parallax> <img lazy-img="{{ root.imagesPath
+        <div parallax>
+          <img lazy-img="{{ root.imagesPath
             + welcome.mainSubFolder + section.images[0].filename}}"
             class="z-depth-1">
         </div>
     </div>
+-->
 
   </div>
+
+  </br>
 
  </div>
 
@@ -78,6 +119,7 @@
 <!-- SIDE MENU -->
  <div ng-if="sections.length > 1"
     flex="15" pushpin pushpin-offset="1">
+
   <ul class="section table-of-contents">
     <li ng-repeat="section in sections track by $index">
       <a href="#step{{$index}}"> {{section.data['Section']}} </a>

@@ -22,6 +22,7 @@ from ... import get_logger, htmlcodes as hcodes
 
 logger = get_logger(__name__)
 
+
 #####################################
 # Tables
 DOCSTABLE = 'datadocs'

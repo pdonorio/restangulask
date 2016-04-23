@@ -129,7 +129,24 @@ VOCABULARY:
         ☐ web site insert
       ☐ step list angular inline filter
 
- https://github.com/graphql-python/graphene
+======
+
+PRODUCTION
+
+Uglify:
+http://labs.qandidate.com/blog/2014/09/02/minifying-an-existing-angularjs-project/
+
+NGINX:
+  https://www.nginx.com/blog/maximizing-python-performance-with-nginx-parti-web-serving-and-caching/
+  https://www.nginx.com/blog/maximizing-python-performance-with-nginx-part-ii-load-balancing-and-monitoring/
+
+SEARCH A NEW PROJECT NAME:
+  https://foxtype.com/thesaurus?text=linux
+
+Flask security and rethinkdb:
+ https://github.com/mattupstate/flask-security/issues/388#issuecomment-203394522
+
+======
 
 JS LIBS:
   ☐ controller filters
