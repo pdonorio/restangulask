@@ -2,7 +2,9 @@
 
  <div flex="5"></div>
 <!--CONTENT -->
- <div flex="75">
+ <div
+    flex="75"
+    layout="column" layout-align='center center'>
 
 <!-- slides/news
 
@@ -33,43 +35,47 @@
     </div>
 -->
 
+<div style="padding-top: 50px;"></div>
+
   <div ng-repeat="section in sections track by $index"
     id='step{{$index}}'
-    layout-padding
+    style="padding-bottom: 100px;"
     class="section scrollspy" scrollspy>
 
-   <div style="position: relative; height: 320px;">
+   <div style="position: relative; height: 480px;">
 
     <!-- IMAGE (with link) -->
-    <a href ui-sref="{{section.link}}"
-        ><div style="background-repeat: no-repeat;
+    <div style="background-repeat: no-repeat;
         background-size: 100% 100%; /* background-size:cover; */
-        width: 700px; height: 300px;
+        width: 750px; height: 470px;
         z-index:1; "
         ng-style="{'background-image':'url('+
         root.imagesPath + welcome.mainSubFolder + section.images[0].filename
         +')'}"
-        ></div></a>
+        ></div>
 
     <!-- TITLE BACKGROUND COLOR? -->
-    <div style=" position: absolute; bottom: 0px;
+    <div style=" position: absolute; bottom: 10px;
         background-color: {{ section.data['Color'] || defaultColor }};
-        width: 700px;
-        height: 100px;
-        margin-bottom: 10px;
+        width: 750px;
+        height: 140px;
         opacity: .5;
-        z-index:2;"></div>
+        z-index:2;">
+        </div>
 
     <div style=" position: absolute; bottom: 0px;
         padding-left: 5%; color: white;
+        width: 100%;
         z-index:3;">
+        <a href ui-sref="{{section.link}}" style="color: white;">
         <!-- TITLE -->
-        <h4 class="header" style='font-family: Leela;'>
-            {{ section.data['Section'].capitalizeFirstLetter() }} </h4>
+        <h2 class="header" style='font-family: Leela;'>
+            {{ section.data['Section'].capitalizeFirstLetter() }} </h2>
         <!-- DESCRIPTION -->
         <p ng-if="section.data['Description'].trim() == ''">&nbsp;</p>
         <p ng-if="section.data['Description'].trim() != ''"
             ng-bind-html="section.data['Description']"></p>
+        </a>
     </div>
    </div>
 
@@ -109,7 +115,7 @@
 -->
 
   </div>
- </br>
+
 </div>
 
  <div flex="5"></div>
