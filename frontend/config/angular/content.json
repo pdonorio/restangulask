@@ -1,5 +1,6 @@
 {
-    "project": "Prototype",
+    //"project": "Prototype",
+    "project": "Cultures du Spectacle Baroque",
     // This is my first comment
     "menus": [ "home" ],
     "title": "Angularjs meets Flask",

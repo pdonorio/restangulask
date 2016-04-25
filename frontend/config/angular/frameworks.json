@@ -34,7 +34,7 @@
 // Cool FONTS
 	"fonts" : [
         //"font-awesome/css/font-awesome.min.css",
-        // # MATERIAL FONTS
+        // # MATERIAL (and custom) FONTS
         "css/myfonts.css"
         //"http://fonts.googleapis.com/icon?family=Material+Icons"
 	],

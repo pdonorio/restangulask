@@ -21,3 +21,9 @@
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
+/* Requested font */
+@font-face {
+    font-family: Leela;
+    src: url("/static/fonts/leela.ttf");
+}

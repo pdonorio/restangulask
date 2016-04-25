@@ -38,11 +38,7 @@
     layout-padding
     class="section scrollspy" scrollspy>
 
-<div style="
-    position: relative;
-    /*border:1px solid red;*/
-    height: 320px;
-">
+   <div style="position: relative; height: 320px;">
 
     <!-- IMAGE -->
     <div style="background-repeat: no-repeat;
@@ -66,15 +62,23 @@
         padding-left: 5%; color: white;
         z-index:3;">
         <!-- TITLE -->
-        <h4 class="header">
+
+<!--
+Base de données
+ng-click="activateSearch()"
+-->
+        <h4 class="header" style='font-family: Leela;'>
             {{ section.data['Section'].capitalizeFirstLetter() }} </h4>
         <!-- DESCRIPTION -->
         <p ng-bind-html="section.data['Description']"></p>
     </div>
-</div>
-
+   </div>
 
 <!-- SEARCH CASE
+
+Base de données
+ng-click="activateSearch()"
+
     <md-content
         ng-if="welcome.isSearch(section)"
         layout-padding layout-wrap>
@@ -110,10 +114,8 @@
 -->
 
   </div>
-
-  </br>
-
- </div>
+ </br>
+</div>
 
  <div flex="5"></div>
 <!-- SIDE MENU -->

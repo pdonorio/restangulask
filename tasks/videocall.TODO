@@ -20,7 +20,12 @@ GOING ONLINE:
    ✔ fix keyboard shortcuts @done (16-04-25 16:10)
      ✔ remove history button @done (16-04-25 16:10)
 
-  ☐ Subwelcome
+✔ Specifi font @done (16-04-25 16:33)
+☐ More button
+ ✔ remove @done (16-04-25 16:11)
+ ☐ click to go to specific
+
+☐ Subwelcome
     ☐ duplicate welcome
       ☐ inline editor for section content (not for welcome)
     ☐ show as a separate page
