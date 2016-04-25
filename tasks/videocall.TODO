@@ -6,18 +6,22 @@ GOING ONLINE:
 
 - Welcome page new instructions
   ☐ new look
-    ☐ add color
-  ☐ inline editor for section content
-  ☐ Whole starting page is just a slide?
+    ✔ add color @done (16-04-25 14:29)
+      ✔ default @done (16-04-25 14:29)
+      ✔ database line @done (16-04-25 14:29)
+  ☐ Subwelcome
+    ☐ how to add the submenu?
+    ☐ inline editor for section content (not for welcome)
+  ☐ Whole starting page is just a slide? @question
     https://www.rijksmuseum.nl/nl/
     http://pedroduarte.me/wallop/
     http://unslider.com/
-  ☐ A new admin page for "subsection" (only one, the first)
-    ☐ how to add the submenu?
 
 - Search page goes public
  ☐ public
-   ☐ submenu
+   ☐ menu will be unified again:
+     ☐ login, search
+     ☐ admin, fix, logout
 
 - TIF/TIFF conversion
 

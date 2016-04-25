@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+var DefaultColor = "#ff2600";
+
 angular.module('web')
     .controller('WelcomeSlideController', WelcomeSlideController)
     .controller('WelcomeController', WelcomeController)
@@ -46,6 +48,14 @@ function getSectionData($scope, AdminService, custom_type)
             forEach(out.data, function (element, j) {
                 //console.log("TEST ME", element);
                 if (element && element != '') {
+                    if (!element.data['Color'] ||
+                        element.data['Color'].trim() == "")
+                    {
+                        element.data['Color'] = DefaultColor;
+                    }
+                    if (element.data['Description'].trim() == "") {
+                        element.data['Description'] = "&nbsp;";
+                    }
                     var index = element.data['Position'];
                     newdata[index] = element;
                 }
@@ -370,6 +380,7 @@ function WelcomeController($scope,
 
   self.mainSubFolder = data_type + '/';
   self.secondarySubFolder = slide_type + '/';
+  $scope.defaultColor = DefaultColor;
 
   self.fixPositions = function (position) {
     var count = 0;
@@ -462,6 +473,13 @@ function WelcomeController($scope,
         required: true,
         focus: true,
         chars: 50,
+    },
+    {
+        name: 'Color',
+        value: 'Pick the code of a background color',
+        description: 'Pick the code of a background color',
+        //text: DefaultColor,
+        required: false,
     },
     {
         name: 'Description',

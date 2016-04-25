@@ -24,7 +24,12 @@
         <md-subheader class="md-primary">
           {{model.name}}
         </md-subheader>
-        <md-input-container>
+        <div ng-if="model.name == 'Color'">
+            <label> {{model.description}} </label>
+            <input type="color" ng-model="model.text">
+            {{model.text}}
+        </div>
+        <md-input-container ng-if="model.name != 'Color'">
           <label> {{model.description}} </label>
           <textarea name="{{model.name}}" ng-model="model.text" ng-required="model.required"
             cols="50" md-maxlength="model.chars || 99999" ></textarea>
