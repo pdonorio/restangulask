@@ -4,35 +4,50 @@ Interface adjustment:
 
 GOING ONLINE:
 
-- Welcome page new instructions
-  ☐ new look
+- Welcome page refactoring
+
+  ✔ new look @done (16-04-25 14:36)
     ✔ add color @done (16-04-25 14:29)
       ✔ default @done (16-04-25 14:29)
       ✔ database line @done (16-04-25 14:29)
+
   ☐ Subwelcome
-    ☐ how to add the submenu?
-    ☐ inline editor for section content (not for welcome)
-  ☐ Whole starting page is just a slide? @question
+    ☐ duplicate welcome
+      ☐ inline editor for section content (not for welcome)
+    ☐ show as a separate page
+      ☐ by clicking (bienvenu?)
+      ☐ how to show spy-submenu?
+
+- Search page goes public
+ ✔ public @done (16-04-25 15:05)
+   ✔ fix'em all @done (16-04-25 15:05)
+   ✔ menu will be unified again: @done (16-04-25 16:00)
+     ✔ login, search @done (16-04-25 16:00)
+     ✔ admin, fix, logout @done (16-04-25 16:00)
+   ☐ fix keyboard shortcuts
+     ☐ remove history button
+
+☐ Html title in the bar?
+ ☐ look inside the doc/ppt in the first version
+☐ Loader in welcome page?
+☐ Text editor
+ ☐ justify
+
+☐ details:
+ ☐ next and previous page
+ ☐ click to zoom tooltip
+ ☐ change appearance of transcripts into a better monospace
+ ☐ remove h5 from current transcriptions
+
+☐ Where is the Search bar going to be? @question
+   ☐ back inside the topbar for now
+☐ Whole starting page is just a slide? @question
     https://www.rijksmuseum.nl/nl/
     http://pedroduarte.me/wallop/
     http://unslider.com/
 
-- Search page goes public
- ☐ public
-   ☐ menu will be unified again:
-     ☐ login, search
-     ☐ admin, fix, logout
-
 - TIF/TIFF conversion
 
-- Text editor
-justify
-
-- details:
-remove h5 from current transcriptions
-change appearance of transcripts into a better monospace
-next and previous page
-click to zoom tooltip
 
 - Move to a powerful node
 backup oceanmaster1
@@ -58,6 +73,5 @@ LATER ON:
 
 - Cache problem (versioning?)
 
-- Firefox / Explorer and HTML standards
-
 - Profiles, administration and email
+

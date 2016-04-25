@@ -119,6 +119,7 @@ function routeConfig($stateProvider, $urlRouterProvider, $authProvider, $logProv
                     dir = blueprintTemplateDir;
                 }
                 myViews[viewName] = {templateUrl: dir + view.templateUrl};
+                //console.log("Added view", stateName, viewName, myViews[viewName]);
             });
 
             var finalRoute = {
@@ -144,7 +145,8 @@ $stateProvider
         url: "/welcome",
         views: {
             "menu": {
-                templateUrl: templateDir + 'intro_menu.html',
+                templateUrl: templateDir + 'menu.html',
+                //templateUrl: templateDir + 'intro_menu.html',
             },
             "sidebar": {
                 templateUrl: templateDir + 'history_sidenav.html',
@@ -183,7 +185,7 @@ $stateProvider
         }
     })
 
-// To log the user in
+// Registration page
     .state("register", {
         url: "/register",
         resolve: {
@@ -191,6 +193,22 @@ $stateProvider
         },
         views: {
             "main": {templateUrl: templateDir + 'registration.html'}
+        }
+    })
+
+// A public state
+    .state("public", {
+        url: "/public",
+        resolve: {
+            skip: _skipAuthenticationCheckApiOnline,
+        },
+        views: {
+            "menu": {
+                templateUrl: templateDir + 'menu.html',
+            },
+            "main": {
+                template: "<div ui-view='unlogged'></div>",
+            }
         }
     })
 

@@ -66,11 +66,16 @@ function ToolbarController($scope, $log, $rootScope)
 function WelcomeMenuController($scope, $log, api, $auth)
 {
     $log.debug("Welcome menu");
+
     var self = this;
     self.buttons = [];
+    self.logged = false;
 
     api.verify(true).then(function(response){
       if (response && $auth.isAuthenticated()) {
+
+// LOGGED
+        self.logged = true;
         //console.log("Logged");
         self.buttons.push({
             name: 'app',
@@ -78,6 +83,8 @@ function WelcomeMenuController($scope, $log, api, $auth)
             icon: 'something',
         });
       } else {
+
+// NOT LOGGED
         self.buttons.push({
             name: 'login',
             link: 'login',
@@ -266,7 +273,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
     // Redirect to that state
     $rootScope.activateSearch = function ()
     {
-        $state.go('logged.specialsearch');
+        $state.go('public.specialsearch');
     }
 
 	$log.info("Menu", $rootScope.menu);

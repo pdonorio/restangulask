@@ -46,7 +46,8 @@ function SearchService($log, api) {
           return self.getDocs(id).then(function(out_docs)
           {
             //console.log("DOCS", out_docs);
-            if (out_docs.elements > 0) {
+            if (out_docs && out_docs.elements > 0)
+            {
               // RECOVER ALL IMAGES
               var images = out_docs.data[0].images;
               element.images = images;

@@ -9,10 +9,10 @@ angular.module('web')
 
     //////////////////////
 //NOT LOGGED?
-        'logged.specialsearch': {
+        'public.specialsearch': {
             url: "/search/:text",
             views: {
-                "loggedview": {
+                "unlogged": {
                     dir: 'blueprint',
                     templateUrl: 'search.html',
                 }
@@ -26,10 +26,14 @@ angular.module('web')
         },
 
     //////////////////////
-        'logged.details': {
+        'public.details': {
             url: "/details/:id",
             views: {
-                "loggedview": {
+                // "menu": {
+                //     dir: 'template',
+                //     templateUrl: 'menu.html',
+                // },
+                "unlogged": {
                     dir: 'blueprint',
                     templateUrl: 'details.html',
                 }

@@ -1,12 +1,17 @@
+
 <div ng-controller="MenuInAppController as mymenu">
+
  <ul id="nav-mobile" class="right">
 
+<!-- IF LOGGED AND NOT LOGGED -->
     <li>
         <div layout="row">
             <i class="material-icons prefix">search</i>
             <input placeholder="Search" ng-focus="activateSearch()">
         </div>
     </li>
+
+<!-- IF NOT LOGGED -->
 
     <!-- Angular dynamic material menu -->
     <li ng-if="mymenu.buttons" ng-repeat="button in mymenu.buttons">
@@ -15,8 +20,18 @@
         </a>
     </li>
 
+<!-- IF LOGGED -->
+    <li ng-if="mymenu.logged">
+        <div layout="row">
+            <i class="material-icons prefix">face</i>
+            &nbsp;
+        </div>
+    </li>
+
+<!-- BASIC MENU FROM ROUTING - if nothing else is available -->
+
     <!-- Angular menu from route -->
-	<li ng-hide="mymenu.buttons" ng-repeat='item in menu'>
+	<li ng-if="menu && !mymenu.buttons" ng-repeat='item in menu'>
 		<a ui-sref="logged.{{item.toLowerCase()}}">{{item}}</a>
 	</li>
 

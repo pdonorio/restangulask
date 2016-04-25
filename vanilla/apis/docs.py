@@ -131,7 +131,7 @@ class RethinkDataValues(BaseRethinkResource):
     @deck.add_endpoint_parameter(name='key')
     @deck.add_endpoint_parameter(name='details', default='short')
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, data_key=None):
         data = []
         count = len(data)
@@ -177,7 +177,7 @@ class RethinkDataKeys(BaseRethinkResource):
     table_index = 'steps'
 
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, step=None):
         count, data = super().get(step)
         return self.response(data, elements=count)
@@ -225,7 +225,7 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
     @deck.add_endpoint_parameter(name='filter')
     @deck.add_endpoint_parameter(name='key')
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, document_id=None):
 
         # Init
@@ -245,12 +245,18 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
                 query = self.get_filtered_notes(query, self._args['key'])
             else:
                 query = self.get_all_notes(query)
-        #################################
-        # Using new great filtering
-        else:
-# JSON DOES NOT WORK WITH GET METHOD....? it's in the request body
-            j = self.get_input(False)
-            query = query.filter({'type': image_destination(j)})
+
+######################################################################
+# # JSON DOES NOT WORK WITH GET METHOD....? it's in the request body
+#         #################################
+#         # Using new great filtering
+#         else:
+#             j = self.get_input(False)
+#             print("TEST 1")
+#             query = query.filter({'type': image_destination(j)})
+#             print("TEST 2", query)
+# # JSON DOES NOT WORK WITH GET METHOD....? it's in the request body
+######################################################################
 
         #################################
         # Execute query
@@ -263,7 +269,7 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
         return self.response(data, elements=count)
 
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def post(self):
         """
         Not a real POST method at the moment...

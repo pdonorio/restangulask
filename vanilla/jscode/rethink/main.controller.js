@@ -9,17 +9,29 @@ angular
     .controller('MenuInAppController', MenuInAppController)
     .controller('FabButtonController', FabController);
 
-function MenuInAppController($scope, $rootScope, $log)
+function MenuInAppController($scope, $rootScope, $log, $auth)
 {
     $log.info("Force a new menu");
     var self = this;
+
+    // Remove normal/main menu
     $rootScope.menu = [];
-    self.buttons = [
-        { name: 'view', link: 'logged.explore', icon: null, },
-        //{ name: 'submit', link: 'logged.submission', icon: null, },
-        { name: 'manage', link: 'logged.admin', icon: null, },
-        { name: 'logout', link: 'logged.logout', icon: null, },
-    ];
+
+    // Let the controller know if logged
+    self.logged = $auth.isAuthenticated();
+
+    if (self.logged) {
+        self.buttons = [
+            //{ name: 'submit', link: 'logged.submission', icon: null, },
+            { name: 'manage', link: 'logged.admin', icon: null, },
+            { name: 'fix', link: 'logged.explore', icon: null, },
+            { name: 'logout', link: 'logged.logout', icon: null, },
+        ];
+    } else {
+        self.buttons = [
+            { name: 'login', link: 'login', icon: null, },
+        ];
+    }
 }
 
 //https://material.angularjs.org/latest/demo/fabSpeedDial

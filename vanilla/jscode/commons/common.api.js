@@ -53,24 +53,31 @@ function RestApiService($http, $auth, $log) {
         var currentUrl = self.API_URL + endpoint;
         if (endpoint == self.endpoints.register) {
             currentUrl = self.FRONTEND_URL + endpoint;
+        };
+
+        var headers = {
+            //'Authentication-Token': token,
+            'Content-Type': 'application/json',
+            //'Content-Type': 'application/json; charset=utf-8',
+            // 'Accept': 'application/json; charset=utf-8',
+            //'Accept-Charset': 'charset=utf-8',
+            //dataType: 'json',
+        };
+
+        var token = self.checkToken();
+        //console.log("CHECK token", token);
+        if (token) {
+            headers['Authentication-Token'] = token;
         }
 
-        var token = self.checkToken(),
-            req = {
-                method: method,
-                url: currentUrl,
-                headers: {
-                    'Authentication-Token': token,
-                    'Content-Type': 'application/json',
-                    //'Content-Type': 'application/json; charset=utf-8',
-                    // 'Accept': 'application/json; charset=utf-8',
-                    //'Accept-Charset': 'charset=utf-8',
-                },
-                //dataType: 'json',
-                data: data,
-                params: params,
-                timeout: self.defaultTimeOut,
-            }
+        var req = {
+            method: method,
+            url: currentUrl,
+            headers: headers,
+            data: data,
+            params: params,
+            timeout: self.defaultTimeOut,
+        };
 
 /* Note:
 $http wraps the call inside the SCHEMA:
