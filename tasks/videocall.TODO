@@ -61,9 +61,18 @@ GOING ONLINE:
 
 - Move to a powerful node
 backup oceanmaster1
-leaseweb
-haproxy test
-baroque HTTPS: nginx in production, letsencrypt
+ ☐ leaseweb
+ ☐ haproxy test?
+ ☐ baroque HTTPS: nginx in production, letsencrypt
+  https://github.com/diafygi/acme-tiny
+  https://gist.github.com/renchap/c093702f06df69ba5cac
+  http://manas.com.ar/blog/2016/01/25/letsencrypt-certificate-auto-renewal-in-docker-powered-nginx-reverse-proxy.html
+
+  note: stage environment
+
+  https://github.com/SteveLTN/https-portal
+  https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion
+
 
 - Search page optimization: become faster
 invert table titles

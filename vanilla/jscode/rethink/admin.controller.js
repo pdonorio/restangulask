@@ -51,10 +51,13 @@ function getSectionData($scope, AdminService, custom_type)
 
                 var sec = element.data['Section'];
                 var anchor = "welcome.workinprogress";
-                console.log("Section", sec);
+                //console.log("Section", sec);
 
+////////////////////////////////////////////////////////
+// BY HAND.
+// WARNING PORCATA...
                 if (sec == 'Bienvenue') {
-                    console.log(sec, "Benvenuti");
+                    //console.log(sec, "Benvenuti");
                     anchor = 'welcome.subsection'
                 } else if (sec == 'Base de données') {
                     //console.log(sec, "SEARCH?");
@@ -65,6 +68,7 @@ function getSectionData($scope, AdminService, custom_type)
                         "section_type: 'welcome'" +
                         "})";
                 }
+////////////////////////////////////////////////////////
 
                 element.link = anchor;
 
