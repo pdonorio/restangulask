@@ -4,7 +4,9 @@
  <ul id="nav-mobile" class="right">
 
 <!-- IF LOGGED AND NOT LOGGED -->
-    <li>
+
+<!-- only if not welcome? -->
+    <li ng-if="mymenu.currentPage != 'welcome'">
         <div layout="row">
             <i class="material-icons prefix">search</i>
             <input placeholder="Search" ng-focus="activateSearch()">

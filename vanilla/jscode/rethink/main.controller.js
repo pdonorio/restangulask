@@ -9,10 +9,13 @@ angular
     .controller('MenuInAppController', MenuInAppController)
     .controller('FabButtonController', FabController);
 
-function MenuInAppController($scope, $rootScope, $log, $auth)
+function MenuInAppController($scope, $rootScope, $log, $auth, $state)
 {
     $log.info("Force a new menu");
     var self = this;
+
+    // Where am i?
+    self.currentPage = $state.current.name;
 
     // Remove normal/main menu
     $rootScope.menu = [];

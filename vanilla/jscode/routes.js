@@ -166,6 +166,24 @@ $stateProvider
         },
     })
 
+    .state("welcome.subsection", {
+        url: "/project",
+        views: {
+            "main@": {
+                templateUrl: templateDir + 'project_explain.html',
+            }
+        },
+    })
+
+    .state("welcome.workinprogress", {
+        url: "/workinprogress",
+        views: {
+            "main@": {
+                templateUrl: templateDir + 'workinprogress.html',
+            }
+        },
+    })
+
 // If i see API are not available
     .state("offline", {
         url: "/offline",

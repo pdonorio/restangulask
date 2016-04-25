@@ -42,35 +42,52 @@ function getSectionData($scope, AdminService, custom_type)
         //Preserve order
         var newdata = [];
         if (out.elements > 0) {
-            for (var x = 0; x < out.data.length; x++) {
-                newdata[x] = {};
-            };
-            forEach(out.data, function (element, j) {
-                //console.log("TEST ME", element);
-                if (element && element != '') {
-                    if (!element.data['Color'] ||
-                        element.data['Color'].trim() == "")
-                    {
-                        element.data['Color'] = DefaultColor;
-                    }
-                    if (element.data['Description'].trim() == "") {
-                        element.data['Description'] = "&nbsp;";
-                    }
-                    var index = element.data['Position'];
-                    newdata[index] = element;
+          for (var x = 0; x < out.data.length; x++) {
+              newdata[x] = {};
+          };
+
+          forEach(out.data, function (element, index) {
+            if (element && element != '') {
+
+                var sec = element.data['Section'];
+                var anchor = "welcome.workinprogress";
+                console.log("Section", sec);
+
+                if (sec == 'Bienvenue') {
+                    console.log(sec, "Benvenuti");
+                    anchor = 'welcome.subsection'
+                } else if (sec == 'Base de données') {
+                    //console.log(sec, "SEARCH?");
+                    anchor = 'public.specialsearch'
+                } else if (element.data['Content'].trim() != "") {
+                    anchor = "welcome.more({" +
+                        "element: " + element.data['Position'] + ", " +
+                        "section_type: 'welcome'" +
+                        "})";
                 }
-            });
-            // VERIFY if some sections are missing
-            for (var x = 0; x < newdata.length; x++) {
-                if (!newdata[x]) {
-                    newdata[x] = {
-                      'data': {
-                        'Section': null,
-                        'Position': null,
-                      }
-                    };
+
+                element.link = anchor;
+
+                if (!element.data['Color'] ||
+                    element.data['Color'].trim() == "")
+                {
+                    element.data['Color'] = DefaultColor;
                 }
+                var index = element.data['Position'];
+                newdata[index] = element;
             }
+          });
+          // VERIFY if some sections are missing
+          for (var x = 0; x < newdata.length; x++) {
+              if (!newdata[x]) {
+                  newdata[x] = {
+                    'data': {
+                      'Section': null,
+                      'Position': null,
+                    }
+                  };
+              }
+          }
         }
         myscope = angular.copy(newdata);
 

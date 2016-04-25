@@ -40,14 +40,16 @@
 
    <div style="position: relative; height: 320px;">
 
-    <!-- IMAGE -->
-    <div style="background-repeat: no-repeat;
+    <!-- IMAGE (with link) -->
+    <a href ui-sref="{{section.link}}"
+        ><div style="background-repeat: no-repeat;
         background-size: 100% 100%; /* background-size:cover; */
         width: 700px; height: 300px;
         z-index:1; "
         ng-style="{'background-image':'url('+
         root.imagesPath + welcome.mainSubFolder + section.images[0].filename
-        +')'}"> </div>
+        +')'}"
+        ></div></a>
 
     <!-- TITLE BACKGROUND COLOR? -->
     <div style=" position: absolute; bottom: 0px;
@@ -62,23 +64,16 @@
         padding-left: 5%; color: white;
         z-index:3;">
         <!-- TITLE -->
-
-<!--
-Base de données
-ng-click="activateSearch()"
--->
         <h4 class="header" style='font-family: Leela;'>
             {{ section.data['Section'].capitalizeFirstLetter() }} </h4>
         <!-- DESCRIPTION -->
-        <p ng-bind-html="section.data['Description']"></p>
+        <p ng-if="section.data['Description'].trim() == ''">&nbsp;</p>
+        <p ng-if="section.data['Description'].trim() != ''"
+            ng-bind-html="section.data['Description']"></p>
     </div>
    </div>
 
-<!-- SEARCH CASE
-
-Base de données
-ng-click="activateSearch()"
-
+<!-- SEARCH CASE? Didn't perceive it very good.
     <md-content
         ng-if="welcome.isSearch(section)"
         layout-padding layout-wrap>

@@ -21,9 +21,18 @@ GOING ONLINE:
      ✔ remove history button @done (16-04-25 16:10)
 
 ✔ Specifi font @done (16-04-25 16:33)
-☐ More button
+✔ Html title in the bar? @done (16-04-25 17:21)
+ ✔ look inside the doc/ppt in the first version @done (16-04-25 17:21)
+
+☐ links
  ✔ remove @done (16-04-25 16:11)
- ☐ click to go to specific
+ ✔ search @done (16-04-25 16:54)
+ ☐ subsection
+ ✔ click to go to specific @done (16-04-25 17:21)
+ ✔ workinprogress @done (16-04-25 17:21)
+
+☐ Loader in welcome page?
+ ☐ go back (from search?) looks very slow
 
 ☐ Subwelcome
     ☐ duplicate welcome
@@ -32,26 +41,21 @@ GOING ONLINE:
       ☐ by clicking (bienvenu?)
       ☐ how to show spy-submenu?
 
-☐ Html title in the bar?
- ☐ look inside the doc/ppt in the first version
-☐ Loader in welcome page?
-☐ Text editor
- ☐ justify
-
 ☐ details:
  ☐ next and previous page
  ☐ click to zoom tooltip
  ☐ change appearance of transcripts into a better monospace
  ☐ remove h5 from current transcriptions
 
-☐ Where is the Search bar going to be? @question
-   ☐ back inside the topbar for now
+☐ Text editor
+ ☐ justify
+
 ☐ Whole starting page is just a slide? @question
     https://www.rijksmuseum.nl/nl/
     http://pedroduarte.me/wallop/
     http://unslider.com/
 
-- TIF/TIFF conversion
+ ☐ TIF/TIFF conversion
 
 
 - Move to a powerful node

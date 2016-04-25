@@ -4,7 +4,10 @@
         <md-button class="md-accent">
           <a ui-sref="welcome()"
             layout="row" layout-align="center center">
+            <i class="material-icons">keyboard_arrow_left</i> Retour
+            <!-- Fix language?
             <i class="material-icons">keyboard_arrow_left</i> back
+            -->
           </a>
         </md-button>
     </md-content>
@@ -16,6 +19,7 @@
     <div ng-if='info.images'>
       <img lazy-img="{{ root.imagesPath
         + info.subFolder + info.images[0].filename}}"
+        style="width: 600px; height: 400px;"
         class="z-depth-1">
     </div>
     <p></p>
