@@ -139,19 +139,15 @@ else
         if [ "$2" == "start" ]; then
             echo -e "ACTION: Start\n"
             $com $files up -d $services
-        fi
-        if [ "$2" == "stop" ]; then
+        elif [ "$2" == "stop" ]; then
             echo -e "ACTION: Stop\n"
             echo "Freezing services"
             $com $files stop
-        fi
-        if [ "$2" == "remove" ]; then
+        elif [ "$2" == "remove" ]; then
             echo -e "ACTION: Removal\n"
             echo "Destroying services"
-            $com $files stop
-            $com $files rm -f
-        fi
-        if [ "$2" == "sql" ]; then
+            $com $files stop && $com $files rm -f
+        elif [ "$2" == "sql" ]; then
             echo "Launch adminer for SQL servers"
             $com run --service-ports sqladmin
         fi
