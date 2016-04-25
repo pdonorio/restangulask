@@ -21,19 +21,24 @@
       style="min-width:600px; max-width:1000px; max-height:810px; ">
 
       <div ng-repeat="model in sectionModels">
-        <md-subheader class="md-primary">
-          {{model.name}}
-        </md-subheader>
+
+        <md-subheader class="md-primary"> {{model.name}} </md-subheader>
+
+        <!-- color picker? -->
         <div ng-if="model.name == 'Color'">
             <label> {{model.description}} </label>
             <input type="color" ng-model="model.text">
             {{model.text}}
         </div>
+
         <md-input-container ng-if="model.name != 'Color'">
           <label> {{model.description}} </label>
           <textarea name="{{model.name}}" ng-model="model.text" ng-required="model.required"
             cols="50" md-maxlength="model.chars || 99999" ></textarea>
         </md-input-container>
+
+        <!-- DO SOMETHING DIFFERENT: INLINE EDITOR FOR SUBSECTIONS -->
+
       </div>
 
     </md-dialog-content>

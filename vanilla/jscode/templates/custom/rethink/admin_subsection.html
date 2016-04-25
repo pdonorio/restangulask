@@ -1,0 +1,159 @@
+
+<div ng-controller="SubWelcomeController as subwelcome">
+
+    <md-toolbar layout="column"
+        class="md-tall md-default-theme light-blue darken-1 md-whiteframe-6dp">
+      <div class="md-toolbar-tools">
+        <div layout="row" flex="flex" class="fill-height"
+        layout-align="center center">
+          <div class="md-toolbar-item md-breadcrumb" aria-hidden="false">
+            <span tabindex="0">
+                <br>
+                Custom
+                <b><i>sub</i>-sections</b>
+                for your <i>Welcome page</i>
+                <br>
+                <small>Note: you may drag and drop to re-order</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </md-toolbar>
+
+<div style="padding-top:20px;"
+    layout="row" layout-align="center center">
+    <a class="btn waves-effect waves-light red"
+       ng-click="subwelcome.addSection($event)"
+       >
+        new section
+    </a>
+</div>
+
+<div ng-show="loaders['admin_sections']">
+    <span colspan="10" ng-include="root.templateDir+'loader.html'"></span>
+</div>
+
+<ul ng-if="!loaders['admin_sections']"
+    sv-root sv-part="sections" sv-on-sort="subwelcome.resort()"
+    class="collapsible" data-collapsible="accordion">
+
+    <li ng-repeat="model in sections track by $index"
+        sv-element="opts" class="well" >
+
+      <div class="collapsible-header">
+          <md-content layout-padding layout-wrap
+            layout="row" layout-align="start center">
+             <b>Section <span style="font-style:italic">
+                {{$index+1}}</span> - </b>
+             <span ng-if="model.data['Section']">
+                {{model.data['Section']}}
+             </span>
+             <span ng-if="!model.data['Section']">
+                <b>BROKEN</b>
+                <a href class="btn red lighten-2"
+                    ng-click="subwelcome.fixPositions($index);">
+                    FIX
+                </a>
+             </span>
+<!--
+             <span ng-if="model.data['Section']">
+                <br> <small>Date: dd/mm/YYYY </small>
+             </span>
+-->
+           </md-content>
+       </div>
+
+       <div class="collapsible-body"
+            ng-if="model.data['Section']"
+            style="padding:5px 40px 15px 40px;">
+
+         <md-content
+            class="grey lighten-4"
+            layout-padding layout-wrap
+            layout="row" layout-align="start center">
+          <div flex="80">
+            <md-subheader class="md-primary grey lighten-4">
+                Section name
+            </md-subheader>
+            <md-content class="grey lighten-4" style="padding-left: 30px;">
+                <span ng-bind-html="model.data['Section']"></span>
+            </md-content>
+            <md-subheader class="md-primary grey lighten-4">
+                A short description
+            </md-subheader>
+            <md-content class="grey lighten-4" style="padding-left: 30px;">
+                <span ng-bind-html="model.data['Description']"></span>
+            </md-content>
+            <span ng-if="model.data['Content']">
+                <md-subheader class="md-primary grey lighten-4">
+                    Content for separated page
+                </md-subheader>
+                <md-content class="grey lighten-4" style="padding-left: 30px;">
+                    <span ng-bind-html="model.data['Content']"></span>
+                </md-content>
+            </span>
+            <span ng-if="model.images && model.images.length > 0">
+                <md-subheader class="md-primary grey lighten-4">
+                    Image(s)
+                </md-subheader>
+                <md-content class="grey lighten-4" style="padding-left: 30px;">
+                 <table class="bordered">
+                    <tr> <th colspan=10></th> </tr>
+                    <tr ng-repeat="image in model.images track by $index"
+                        ng-if="image.filename">
+                    <td width='10%'>
+      <a href tooltipped data-position="bottom" data-delay="25"
+        data-tooltip="Remove this image"
+        ng-click="subwelcome.rmImage(model, $index)">
+        <i class="material-icons">remove_circle</i>
+      </a>
+                    </td>
+                    <td width='20%'> <img
+    lazy-img="{{ root.imagesPath + subwelcome.mainSubFolder
+     + image.code + '/TileGroup0/0-0-0.jpg' }}"
+    width=80 class="z-depth-1">
+                    </td>
+                    <td width='30%'>
+{{image.code}} <br> [<i>{{image.filename_type}}</i]
+                    </td>
+                    <td> </td>
+                 </tr> </table>
+                </md-content>
+            </span>
+          </div>
+          <div flex="20" layout="column" layout-align="start center">
+                <md-subheader class="md-primary grey lighten-4">
+                    Actions
+                </md-subheader>
+
+              <a href ng-if="model.data['Section']"
+                class="waves-effect btn-floating"
+                tooltipped data-position="left" data-delay="50"
+                data-tooltip="Edit this section"
+                ng-click="subwelcome.addSection($event, model)">
+                <i class="material-icons">mode_edit</i>
+              </a>
+              &nbsp;
+              <a href ng-if="model.data['Section']"
+                class="waves-effect btn-floating"
+                tooltipped data-position="left" data-delay="50"
+                data-tooltip="Upload an image for this section"
+                ng-click="subwelcome.uploadSectionImage($event, model)">
+               <i class="material-icons"> publish </i> </a>
+              </a>
+              &nbsp;
+              <a class="waves-effect btn-floating red"
+                tooltipped data-position="left" data-delay="50"
+                data-tooltip="Remove this element: BE CAREFUL!"
+                ng-click="subwelcome.removeSection(model)">
+                <i class="material-icons">delete</i>
+              </a>
+          </div>
+         </md-content>
+
+       </div>
+
+    </li>
+</ul>
+
+</div>

@@ -4,14 +4,12 @@ Interface adjustment:
 
 GOING ONLINE:
 
-- Welcome page refactoring
-
+✔ Welcome page refactoring @done (16-04-26 01:20)
   ✔ new look @done (16-04-25 14:36)
     ✔ add color @done (16-04-25 14:29)
       ✔ default @done (16-04-25 14:29)
       ✔ database line @done (16-04-25 14:29)
-
-- Search page goes public
+✔ Search page goes public @done (16-04-26 01:20)
  ✔ public @done (16-04-25 15:05)
    ✔ fix'em all @done (16-04-25 15:05)
    ✔ menu will be unified again: @done (16-04-25 16:00)
@@ -19,34 +17,34 @@ GOING ONLINE:
      ✔ admin, fix, logout @done (16-04-25 16:00)
    ✔ fix keyboard shortcuts @done (16-04-25 16:10)
      ✔ remove history button @done (16-04-25 16:10)
-
 ✔ Specifi font @done (16-04-25 16:33)
 ✔ Html title in the bar? @done (16-04-25 17:21)
  ✔ look inside the doc/ppt in the first version @done (16-04-25 17:21)
-
-☐ links
+✔ links @done (16-04-26 01:20)
  ✔ remove @done (16-04-25 16:11)
  ✔ search @done (16-04-25 16:54)
- ☐ subsection
+ ✔ subsection @done (16-04-26 01:20)
  ✔ click to go to specific @done (16-04-25 17:21)
  ✔ workinprogress @done (16-04-25 17:21)
 
-☐ Loader in welcome page?
- ☐ go back (from search?) looks very slow
- ☐ also in section info
-
 ☐ Subwelcome
-    ☐ duplicate welcome
+    ✔ duplicate welcome @done (16-04-26 01:44)
       ☐ inline editor for section content (not for welcome)
     ☐ show as a separate page
       ☐ by clicking (bienvenu?)
       ☐ how to show spy-submenu?
+
+☐ Search column names
 
 ☐ details:
  ☐ next and previous page
  ☐ click to zoom tooltip
  ☐ change appearance of transcripts into a better monospace
  ☐ remove h5 from current transcriptions
+
+☐ Loader in welcome page?
+ ☐ go back (from search?) looks very slow
+ ☐ also in section info
 
 ☐ Text editor
  ☐ justify

@@ -6,6 +6,7 @@ var DefaultColor = "#ff2600";
 angular.module('web')
     .controller('WelcomeSlideController', WelcomeSlideController)
     .controller('WelcomeController', WelcomeController)
+    .controller('SubWelcomeController', SubWelcomeController)
     .controller('WelcomeInfoController', WelcomeInfoController)
     .controller('DialogController', DialogController)
     .controller('TreeController', TreeController)
@@ -15,6 +16,7 @@ angular.module('web')
 var
     data_type = 'welcome'
     , slide_type = 'slides'
+    , sub_type = 'subwelcome'
     , mysection = 'admin_sections'
     //, myslide = 'admin_slides'
     ;
@@ -25,8 +27,8 @@ function getSectionData($scope, AdminService, custom_type)
 {
     var myscope = {};
     var type = data_type;
-    if (custom_type == slide_type) {
-        type = slide_type;
+    if (custom_type != data_type) {
+        type = custom_type;
     }
 
     //Recover sections
@@ -50,6 +52,7 @@ function getSectionData($scope, AdminService, custom_type)
             if (element && element != '') {
 
                 var sec = element.data['Section'];
+                var index = element.data['Position'];
                 var anchor = "welcome.workinprogress";
                 //console.log("Section", sec);
 
@@ -64,7 +67,7 @@ function getSectionData($scope, AdminService, custom_type)
                     anchor = 'public.specialsearch'
                 } else if (element.data['Content'].trim() != "") {
                     anchor = "welcome.more({" +
-                        "element: " + element.data['Position'] + ", " +
+                        "element: " + index + ", " +
                         "section_type: 'welcome'" +
                         "})";
                 }
@@ -72,12 +75,13 @@ function getSectionData($scope, AdminService, custom_type)
 
                 element.link = anchor;
 
-                if (!element.data['Color'] ||
-                    element.data['Color'].trim() == "")
-                {
-                    element.data['Color'] = DefaultColor;
+                if (type == data_type) {
+                    if (!element.data['Color'] ||
+                        element.data['Color'].trim() == "")
+                    {
+                        element.data['Color'] = DefaultColor;
+                    }
                 }
-                var index = element.data['Position'];
                 newdata[index] = element;
             }
           });
@@ -143,13 +147,13 @@ function WelcomeInfoController($scope, $log, $stateParams,
         var section = null;
 
         // Pool off the right data
+        self.subFolder = type + '/';
         if (type == data_type) {
-            self.subFolder = data_type + '/';
             section = $scope.sections[$stateParams.element];
-        }
-        if (type == slide_type) {
-            self.subFolder = slide_type + '/';
+        } else if (type == slide_type) {
             section = $scope.slides[$stateParams.element];
+        } else if (type == sub_type) {
+            section = $scope.subsections[$stateParams.element];
         }
 
         // Apply data
@@ -671,6 +675,270 @@ function WelcomeController($scope,
 
 }
 
+//////////////////////////////////////
+//////////////////////////////////////
+// Dedicated to SUBSECTIONS
+function SubWelcomeController($scope,
+        $rootScope, $timeout, $log, AdminService, SearchService,
+        $state, $mdMedia, $mdDialog, $q)
+{
+  $log.debug("SubWelcome controller!");
+  var self = this;
+
+  self.mainSubFolder = sub_type + '/';
+
+  self.fixPositions = function (position) {
+    var count = 0;
+    var newSlides = [];
+
+    // Fix
+    forEach($scope.sections, function(element, index) {
+        if (element.data) {
+            newSlides[count++] = element;
+        }
+    });
+    $scope.sections = angular.copy(newSlides);
+    $log.debug("Fixed sections");
+
+    // Push and reload
+    $rootScope.loaders[mysection] = true;
+    self.resort(true).then(function () {
+        getSectionData($scope, AdminService).then(function () {
+            // Activate the view
+            $timeout(function () {
+                $rootScope.loaders[mysection] = false;
+            }, timeToWait)
+        });
+    });
+  }
+
+  self.resort = function (skipReload)
+  {
+    if (!skipReload) {
+        $rootScope.loaders[mysection] = true;
+    }
+    var promises = [];
+    //console.log("TEST SECTIONS", $scope.sections);
+
+    // For each section
+    forEach($scope.sections, function(element, index) {
+        if (element.data) {
+            // update position
+            element.data['Position'] = index;
+            // send to api
+            promises.push(AdminService.update(sub_type, element.id, element.data));
+        }
+    });
+
+    return $q.all(promises).then((values) => {
+        $log.debug("Pushed updated order");
+        if (!skipReload) {
+            // Activate the view
+            $timeout(function () {
+                $rootScope.loaders[mysection] = false;
+            }, timeToWait)
+        }
+    });
+  }
+
+  self.isSearch = function(section) {
+    var keys = [
+        'search'    //english
+        ,'ricerca'   //italiano
+        ,'recherche'   //french
+    ];
+
+    var response = false;
+    forEach(keys, function(key, i) {
+        if (angular.lowercase(section.data['Section']) == key)
+            response = true;
+    });
+    return response;
+
+  }
+
+  // Activate a dynamic welcome inside the view
+  $timeout(function () {
+    var check = 'welcome';
+    if ($state.current.name.slice(0, check.length) == check) {
+        //Sections
+        getSectionData($scope, AdminService, sub_type);
+        //Slides
+// DISABLED FOR NOW
+// getSectionData($scope, AdminService, slide_type);
+        //Type for the welcome template: rethinkdb template
+        self.init = 'rdb';
+    }
+  });
+
+  self.sectionModels = [
+    {
+        name: 'Section',
+        value: 'New Sub Section!',
+        description: 'The name for your new welcome section',
+        required: true,
+        focus: true,
+        chars: 50,
+    },
+    {
+        name: 'Description',
+        value: 'We will talk about a lot of things',
+        description: 'Short description of your section. It will appear in the home page.',
+        required: true,
+        chars: 500,
+    },
+    {
+        name: 'Content',
+        value: 'This explanation is very long',
+        description: 'Explanation of the section. It will appear in a separate page.',
+    },
+  ];
+
+  self.removeSection = function (model)
+  {
+    $rootScope.loaders[mysection] = true;
+    AdminService.delete(sub_type, model.id)
+     .then(function (response) {
+      console.log("Removed", response);
+      var message = {'Error': 'Failed to remove!'};
+      if (response) message = {Removed:
+            'Section ' + model.data['Section'] + ' deleted'}
+      // TOAST
+      $scope.showSimpleToast(message);
+      // Reload data
+      getSectionData($scope, AdminService)
+       .then(function () {
+        $timeout(function () {
+          $rootScope.loaders[mysection] = false;
+        }, timeToWait);
+      });
+    });
+  }
+
+  self.uploadSectionImage = function (ev, model)
+  {
+    // Prepare data for the dialog
+    $scope.currentRecord = model.id;
+    $scope.currentType = sub_type;
+    $scope.currentName = 'SECTION: ' + model.data['Section'];
+    $mdDialog.show({
+        templateUrl: blueprintTemplateDir + 'uploader.html' ,
+        //clickOutsideToClose: false,
+        scope: $scope.$new(),
+    }).then(function (response) {
+        if (response) {
+            $rootScope.loaders[mysection] = true;
+            getSectionData($scope, AdminService)
+             .then(function () {
+                $rootScope.loaders[mysection] = false;
+            });
+        };
+    });
+
+  }
+
+  self.rmImage = function (model, image_index) {
+    $log.debug("Remove image", model, image_index);
+    //delete model.images[image_index];
+    model.images.splice(image_index, 1);
+    var newdoc = {
+        'destination': sub_type,
+        'record': model.record,
+        'images': model.images,
+        'type': sub_type,
+    }
+
+    SearchService.updateImages(newdoc).then(function (response) {
+        if (response)
+            $log.info("Updated images");
+    });
+  }
+
+//////////////////////////////////////
+// HANDLING THE CREATION OF A DIALOG
+  self.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+
+  self.addSection = function(ev, model) {
+    var id = null;
+    if (model && model.id) {
+        id = model.id;
+    }
+
+// Clear or insert data in the model
+    for (var j = 0; j < self.sectionModels.length; j++) {
+        var value = "";
+        if (model) {
+            value = model.data[self.sectionModels[j].name];
+        }
+        self.sectionModels[j].text = value;
+    };
+// Options
+    var dialogOptions =
+    {
+      controller: DialogController,
+      templateUrl: blueprintTemplateDir + 'add_section.html',
+      parent: angular.element(document.body),
+      // How to pass data to the dialog
+      locals: {
+        sectionModels: self.sectionModels,
+        modelId: id,
+      },
+      targetEvent: ev,
+      //clickOutsideToClose:true,
+      onComplete: function(){
+        // Focus on first textarea
+        $timeout(function(){ angular.element("textarea")[0].focus(); });
+      },
+    }
+
+// WHEN COMPLETED
+    var afterDialog = function(response) {
+
+////////////////
+// UP TO HERE
+////////////////
+
+      var update_id = response[0], remove = response[1];
+      $log.debug("After dialog", update_id, remove);
+      // Check if id
+      var element = {};
+      forEach(self.sectionModels, function(x, i) {
+        element[x.name] = x.text;
+      });
+
+      var apicall = null;
+      if (update_id) {
+        if (remove) {
+            apicall = AdminService.delete(sub_type, update_id);
+        } else {
+            apicall = AdminService.update(sub_type, update_id, element);
+        }
+      } else {
+        console.log("Check position", element);
+        element['Position'] = $scope.sections.length;
+        apicall = AdminService.insert(sub_type, element);
+      }
+
+      apicall.then(function (out) {
+        console.log("A NEW SUB Admin api call", out);
+        if (out) {
+          getSectionData($scope, AdminService, sub_type)
+           .then(function () {
+            // Activate the view
+            $rootScope.loaders[mysection] = false;
+          });
+        }
+      });
+    }
+
+// Open
+    $mdDialog.show(dialogOptions)
+        .then(afterDialog);
+
+  };
+
+}
+
 function DialogController($scope, $rootScope, $mdDialog, sectionModels, modelId)
 {
 
@@ -837,6 +1105,11 @@ function AdminController($scope, $rootScope, $log, AdminService, SearchService, 
       if (key == 'sections') {
         $scope.sections = {};
         getSectionData($scope, AdminService);
+      }
+      // INIT TAB FOR MANAGING SUBSECTIONS
+      if (key == 'subsections') {
+        $scope.subsections = {};
+        getSectionData($scope, AdminService, sub_type);
       }
       // INIT TAB FOR MANAGING SLIDES
       if (key == 'slides') {
