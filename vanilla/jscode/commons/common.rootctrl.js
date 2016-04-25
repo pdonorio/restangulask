@@ -34,6 +34,8 @@ function HistorySidebarController($scope, $rootScope, $log, $mdSidenav, $mdCompo
         });
     };
 
+/* TO FIX: you may enable back the sidebar when you want it
+
     // Init keys
     hotkeys.bindTo($scope)
         .add({
@@ -43,6 +45,7 @@ function HistorySidebarController($scope, $rootScope, $log, $mdSidenav, $mdCompo
                 keyshortcuts.openHistorySidebar(event, self);
             }
         });
+*/
 
     //$mdSidenav(self.name).open().then();
     $scope.close = function () {

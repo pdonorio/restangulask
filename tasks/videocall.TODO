@@ -11,21 +11,21 @@ GOING ONLINE:
       ✔ default @done (16-04-25 14:29)
       ✔ database line @done (16-04-25 14:29)
 
-  ☐ Subwelcome
-    ☐ duplicate welcome
-      ☐ inline editor for section content (not for welcome)
-    ☐ show as a separate page
-      ☐ by clicking (bienvenu?)
-      ☐ how to show spy-submenu?
-
 - Search page goes public
  ✔ public @done (16-04-25 15:05)
    ✔ fix'em all @done (16-04-25 15:05)
    ✔ menu will be unified again: @done (16-04-25 16:00)
      ✔ login, search @done (16-04-25 16:00)
      ✔ admin, fix, logout @done (16-04-25 16:00)
-   ☐ fix keyboard shortcuts
-     ☐ remove history button
+   ✔ fix keyboard shortcuts @done (16-04-25 16:10)
+     ✔ remove history button @done (16-04-25 16:10)
+
+  ☐ Subwelcome
+    ☐ duplicate welcome
+      ☐ inline editor for section content (not for welcome)
+    ☐ show as a separate page
+      ☐ by clicking (bienvenu?)
+      ☐ how to show spy-submenu?
 
 ☐ Html title in the bar?
  ☐ look inside the doc/ppt in the first version
