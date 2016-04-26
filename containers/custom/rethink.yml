@@ -1,6 +1,7 @@
 
 rethinkdb:
-  image: pdonorio/myrethinkdb
+  # image: pdonorio/myrethinkdb
+  image: rethinkdb
   hostname: rdbmaster
   # Web admin
   ports:
