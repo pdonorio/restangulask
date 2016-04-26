@@ -24,13 +24,14 @@ var
 
 // General purpose load data function
 // To use only inside controllers
-function getSectionData($scope, AdminService, custom_type)
+function getSectionData($scope, AdminService, custom_type, $sce)
 {
     var myscope = {};
     var type = data_type;
-    if (custom_type != data_type) {
+    if (custom_type && custom_type != data_type) {
         type = custom_type;
     }
+    //console.log("Type is", type, custom_type);
 
     //Recover sections
     return AdminService.getData(type).then(function (out)
@@ -83,6 +84,14 @@ function getSectionData($scope, AdminService, custom_type)
                         element.data['Color'] = DefaultColor;
                     }
                 }
+
+                // To show html if any
+                if (element.data['Content'] && $sce) {
+                    var tmp = angular.copy(element.data['Content']);
+                    delete element.data['Content'];
+                    element.data['Content'] = $sce.trustAsHtml(tmp);
+                }
+
                 newdata[index] = element;
             }
           });
@@ -117,6 +126,7 @@ function getSectionData($scope, AdminService, custom_type)
         }]
       }
 
+
       // Fill the right scope
       if (type == slide_type) {
         $scope.slides = myscope;
@@ -125,18 +135,18 @@ function getSectionData($scope, AdminService, custom_type)
       } else {
         $scope.sections = myscope;
       }
+      //console.log("SCOPE", myscope, $scope);
 
     });
 };
 
-
-function WelcomeSubInfoController($scope, $log, AdminService)
+function WelcomeSubInfoController($scope, $log, $sce, AdminService)
 {
     $log.debug("Welcome SUB info");
     var self = this;
     //$scope.subsections = null;
 
-    getSectionData($scope, AdminService, sub_type)
+    getSectionData($scope, AdminService, sub_type, $sce)
      .then(function()
     {
         console.log("Obtained", $scope);

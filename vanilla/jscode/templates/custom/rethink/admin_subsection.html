@@ -10,7 +10,7 @@
             <span tabindex="0">
                 <br>
                 Custom
-                <b><i>sub</i>-sections</b>
+                <b><i>SUB</i>-sections</b>
                 for your <i>Welcome page</i>
                 <br>
                 <small>Note: you may drag and drop to re-order</small>
@@ -34,10 +34,10 @@
 </div>
 
 <ul ng-if="!loaders['admin_sections']"
-    sv-root sv-part="sections" sv-on-sort="subwelcome.resort()"
+    sv-root sv-part="subsections" sv-on-sort="subwelcome.resort()"
     class="collapsible" data-collapsible="accordion">
 
-    <li ng-repeat="model in sections track by $index"
+    <li ng-repeat="model in subsections track by $index"
         sv-element="opts" class="well" >
 
       <div class="collapsible-header">

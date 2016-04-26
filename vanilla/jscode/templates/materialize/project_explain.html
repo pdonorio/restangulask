@@ -14,9 +14,10 @@
     <h2 class="header" style='font-family: Leela;'>
         {{ section.data['Section'].capitalizeFirstLetter() }} </h2>
     <!-- DESCRIPTION -->
-    <p ng-if="section.data['Description'].trim() == ''">&nbsp;</p>
     <p ng-if="section.data['Description'].trim() != ''"
         ng-bind-html="section.data['Description']"></p>
+    <hr>
+    <div ng-bind-html="section.data['Content']"></div>
 
   </div>
 </div>
