@@ -67,14 +67,23 @@ function _skipAuthenticationCheckApiOnline($state, $timeout, $auth, api)
 function routeConfig($stateProvider, $urlRouterProvider, $authProvider, $logProvider, $locationProvider, $httpProvider, $injector)
 {
 
-// ROUTER CONFIGURATION
+// TO FIX?
+// place somewhere else, + use a variable in the blueprint?
+// variable is related to python and "production"
 
+    /////////////////////////////////////
     // Enable log
-    $logProvider.debugEnabled(true); //.hashPrefix('!');
+    var debugFlag = false;
+    // debugFlag = true;
+    $logProvider.debugEnabled(debugFlag); //.hashPrefix('!');
+
+    /////////////////////////////////////
+    // ROUTER CONFIGURATION
+
     // HTML5 mode: remove hash bang to let url be parsable
     $locationProvider.html5Mode(true);
 
-// Change angular variables from {{}} to [[]] ?
+    // Change angular variables from {{}} to [[]] ?
     // $interpolateProvider.startSymbol('[[').endSymbol(']]');
 
 /*
