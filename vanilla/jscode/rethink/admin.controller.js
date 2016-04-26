@@ -680,7 +680,7 @@ function WelcomeController($scope,
 // Dedicated to SUBSECTIONS
 function SubWelcomeController($scope,
         $rootScope, $timeout, $log, AdminService, SearchService,
-        $state, $mdMedia, $mdDialog, $q)
+        $state, $mdMedia, $mdDialog, $q, $sce)
 {
   $log.debug("SubWelcome controller!");
   var self = this;
@@ -703,7 +703,7 @@ function SubWelcomeController($scope,
     // Push and reload
     $rootScope.loaders[mysection] = true;
     self.resort(true).then(function () {
-        getSectionData($scope, AdminService).then(function () {
+        getSectionData($scope, AdminService, sub_type).then(function () {
             // Activate the view
             $timeout(function () {
                 $rootScope.loaders[mysection] = false;
@@ -790,7 +790,7 @@ function SubWelcomeController($scope,
     {
         name: 'Content',
         value: 'This explanation is very long',
-        description: 'Explanation of the section. It will appear in a separate page.',
+        description: 'You may write HTML content to any subsection.',
     },
   ];
 
@@ -806,7 +806,7 @@ function SubWelcomeController($scope,
       // TOAST
       $scope.showSimpleToast(message);
       // Reload data
-      getSectionData($scope, AdminService)
+      getSectionData($scope, AdminService, sub_type)
        .then(function () {
         $timeout(function () {
           $rootScope.loaders[mysection] = false;
@@ -828,7 +828,7 @@ function SubWelcomeController($scope,
     }).then(function (response) {
         if (response) {
             $rootScope.loaders[mysection] = true;
-            getSectionData($scope, AdminService)
+            getSectionData($scope, AdminService, sub_type)
              .then(function () {
                 $rootScope.loaders[mysection] = false;
             });
@@ -894,16 +894,19 @@ function SubWelcomeController($scope,
 // WHEN COMPLETED
     var afterDialog = function(response) {
 
-////////////////
-// UP TO HERE
-////////////////
-
-      var update_id = response[0], remove = response[1];
-      $log.debug("After dialog", update_id, remove);
+      var
+        update_id = response[0],
+        remove = response[1],
+        html = response[2];
+      $log.debug("After dialog", update_id, remove, html);
       // Check if id
       var element = {};
       forEach(self.sectionModels, function(x, i) {
-        element[x.name] = x.text;
+        if (x.name == 'Content') {
+            element[x.name] = html;
+        } else {
+            element[x.name] = x.text;
+        }
       });
 
       var apicall = null;
@@ -939,15 +942,31 @@ function SubWelcomeController($scope,
 
 }
 
-function DialogController($scope, $rootScope, $mdDialog, sectionModels, modelId)
+function DialogController(
+    $scope, $rootScope, $log, $mdDialog, $sce,
+    sectionModels, modelId)
 {
 
   $scope.sectionModels = sectionModels;
+  console.log("Models?", sectionModels);
   $scope.id = modelId;
   $scope.title = "Add a new element";
   if (modelId) {
       $scope.title = "Edit/Update element";
   }
+
+  // HANDLING HTML
+  self.realHtml = null;
+  $scope.tiny_options = angular.copy($rootScope.tinymceOptions);
+  $scope.tiny_options.height = 500;
+
+  var unbind = $scope.$watch(
+    "sectionModels[2].text",
+    function handleChange( newValue, oldValue ) {
+        self.realHtml = $sce.trustAsHtml(oldValue);
+        $log.debug("HTML content watch:", oldValue);
+    }
+  );
 
   $scope.hide = function() {
     $mdDialog.hide();
@@ -963,8 +982,14 @@ function DialogController($scope, $rootScope, $mdDialog, sectionModels, modelId)
       }
     });
     if (valid) {
+      // stop watching the variable which will be destroyed
+      unbind();
       $rootScope.loaders[mysection] = true;
-      $mdDialog.hide([modelId, null]);
+      $mdDialog.hide([
+        modelId,
+        null,
+        angular.copy($sce.getTrustedHtml(self.realHtml))
+        ]);
     }
   };
 /*

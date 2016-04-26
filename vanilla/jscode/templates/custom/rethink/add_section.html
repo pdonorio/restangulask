@@ -31,13 +31,21 @@
             {{model.text}}
         </div>
 
-        <md-input-container ng-if="model.name != 'Color'">
-          <label> {{model.description}} </label>
-          <textarea name="{{model.name}}" ng-model="model.text" ng-required="model.required"
+        <md-input-container
+            ng-if="model.name != 'Color' && model.name != 'Content'">
+          <label > {{model.description}} </label>
+          <textarea name="{{model.name}}"
+            ng-model="model.text" ng-required="model.required"
             cols="50" md-maxlength="model.chars || 99999" ></textarea>
         </md-input-container>
 
-        <!-- DO SOMETHING DIFFERENT: INLINE EDITOR FOR SUBSECTIONS -->
+      <!-- INLINE EDITOR (for subsections) -->
+        <div ng-if="model.name == 'Content'">
+          <label > {{model.description}} </label>
+          <br>
+          <textarea
+            ui-tinymce="tiny_options" ng-model="model.text" ></textarea>
+        </div>
 
       </div>
 
