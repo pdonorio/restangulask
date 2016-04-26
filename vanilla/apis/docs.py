@@ -153,9 +153,11 @@ class RethinkDataValues(BaseRethinkResource):
                 query = self.filter_nested_field(
                     query, args['key'], default_position)
             elif param == 'recover_code' and \
-               args['key'] is not None and args['field'] is not None:
-                query = self.filter_nested_field(
-                    query, args['key'], None, args['field'])
+             args['key'] is not None and args['field'] is not None:
+
+                query = query.get_all(args['key'], index="title")
+                # query = self.filter_nested_field(
+                #     query, args['key'], None, args['field'])
 
             # Paging
             current_page, limit = self.get_paging()
