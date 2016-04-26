@@ -63,8 +63,8 @@ function SearchController($scope, $rootScope, $log, $state, SearchService, hotke
   {
     $log.debug("FILLING TABLE");
     $scope.data = [];
-    $scope.results = true;
     $scope.dataCount = response.elements;
+    $scope.counter = response.data.length;
 
     forEach(response.data, function (x, i)
     {
@@ -72,8 +72,10 @@ function SearchController($scope, $rootScope, $log, $state, SearchService, hotke
       SearchService.getSingleData(x.record, false)
        .then(function(element)
       {
-          $scope.data.push(element);
 // FIX HTML VIEW?
+        $scope.data.push(element);
+        $scope.counter--;
+        //console.log("MY counter", $scope.counter);
       });
     });
   }
@@ -97,12 +99,6 @@ function ChipsController($scope, $log, $q, $stateParams, SearchService)
 
   // https://material.angularjs.org/latest/demo/chips
   self.chips = [];
-
-  self.loadAllRecords = function () {
-    $log.debug("Button to define");
-// ACTION FOR ONLY THE BUTTON TO LOAD ALL ARCHIVE
-    //SearchService.getData().then(function(out_data){
-  }
 
   self.newChip = function(chip) {
       $scope.setDataCount(null);
@@ -253,6 +249,8 @@ function ChipsController($scope, $log, $q, $stateParams, SearchService)
     //self.states
 // CHAINING PROMISES
 ////////////////////////////////////////
+
+    self.searchAll();
 
 }
 

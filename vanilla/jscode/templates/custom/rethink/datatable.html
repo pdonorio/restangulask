@@ -20,9 +20,9 @@
   <thead>
     <tr>
         <th data-field="source">Vignette</th>
-        <th data-field="main">Fête</th>
-        <th data-field="source">Source</th>
         <th data-field="name">Extrait</th>
+        <th data-field="source">Source</th>
+        <th data-field="main">Fête</th>
     </tr>
   </thead>
 
@@ -66,3 +66,5 @@
   </tbody>
 </table>
 
+<div ng-if="counter > 0"
+    ng-include="root.templateDir + 'loader.html'"></div>
