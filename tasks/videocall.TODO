@@ -70,6 +70,8 @@ GOING ONLINE:
 - Move to a powerful node
 backup oceanmaster1
  ☐ leaseweb
+ ☐ uptime robot (both interface and api)
+ ☐ disable rethinkdb monitor interface
  ☐ haproxy test?
  ☐ baroque HTTPS: nginx in production, letsencrypt
   https://github.com/diafygi/acme-tiny
