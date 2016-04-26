@@ -114,11 +114,25 @@
             {{name}}
           </a>
         </li>
+
+        <!-- SEPARATOR -->
+        <li> <hr> </li>
+
+        <!-- PREVIOUS PAGE if exists -->
+        <li> <a href ui-sref="public.details({id: detail.previous.link})"
+            ><i>précédent</i>: <u>{{detail.previous.text}}</u></a> </li>
+
+        <!-- SHOULD BE ONLY ONE PAGE -->
         <li ng-repeat='image in detail.data.images'>
           <a href="#image{{image.code}}">
-            Page {{image.code}}
+            <i>Page</i>: <b>{{image.code}} </b>
           </a>
         </li>
+
+        <!-- NEXT PAGE if exists -->
+        <li> <a href ui-sref="public.details({id: detail.next.link})"
+            ><i>suivant</i>: <u>{{detail.next.text}}</u></a> </li>
+
       </ul>
      </div>
   <!-- Summary -->

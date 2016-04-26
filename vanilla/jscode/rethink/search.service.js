@@ -114,6 +114,17 @@ function SearchService($log, api) {
         );
     }
 
+    self.recoverCode = function(filter, field) {
+        return self.doQuery(
+            self.endpoints.search,
+            {
+                filter: 'recover_code',
+                key: filter,
+                field: field,
+            }
+        );
+    }
+
     self.getDocs = function(id) {
         return api.apiCall(
             self.endpoints.documents,
