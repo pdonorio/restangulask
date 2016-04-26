@@ -1,133 +1,32 @@
 
-JUST A TEST
-
-<div layout="row">
-
+<div layout="row" ng-controller="WelcomeSubInfoController as subinfo">
  <div flex="5"></div>
-<!--CONTENT -->
- <div
-    flex="75"
-    layout="column" layout-align='center center'>
 
-<!-- slides/news
-
-    <div ng-if="slides.length < 2"
-        class="caption center-align"
-        style='height: 400px; padding-top: 50px;'>
-        <h3 class='black-text'> New website online </h3>
-        <h6> No news available at the moment </h6>
-    </div>
-
-    <div ng-if="slides.length > 1" class="slider"
-        style="padding-bottom: 10px;"
-        height='400' transition='300' slider>
-     <ul class="slides">
-        <li ng-repeat="slide in slides track by $index">
-          <a ui-sref="welcome.more(
-            {element: $index, section_type: 'slides'})">
-              <img src="{{ root.imagesPath + welcome.secondarySubFolder
-                + slide.images[0].filename}}" >
-              <div class="caption center-align">
-                <h3> {{slide.data['Section']}} </h3>
-                <h5> {{slide.data['Description']}} </h5>
-              </div>
-          </a>
-        </li>
-     </ul>
-
-    </div>
--->
-
-<div style="padding-top: 50px;"></div>
-
-  <div ng-repeat="section in sections track by $index"
+ <div flex="75">
+   <div ng-repeat="section in subsections track by $index"
     id='step{{$index}}'
     style="padding-bottom: 100px;"
     class="section scrollspy" scrollspy>
 
-   <div style="position: relative; height: 480px;">
-
-    <!-- IMAGE (with link) -->
-    <div style="background-repeat: no-repeat;
-        background-size: 100% 100%; /* background-size:cover; */
-        width: 750px; height: 470px;
-        z-index:1; "
-        ng-style="{'background-image':'url('+
-        root.imagesPath + welcome.mainSubFolder + section.images[0].filename
-        +')'}"
-        ></div>
-
-    <!-- TITLE BACKGROUND COLOR? -->
-    <div style=" position: absolute; bottom: 10px;
-        background-color: {{ section.data['Color'] || defaultColor }};
-        width: 750px;
-        height: 140px;
-        opacity: .5;
-        z-index:2;">
-        </div>
-
-    <div style=" position: absolute; bottom: 0px;
-        padding-left: 5%; color: white;
-        width: 100%;
-        z-index:3;">
-        <a href ui-sref="{{section.link}}" style="color: white;">
-        <!-- TITLE -->
-        <h2 class="header" style='font-family: Leela;'>
-            {{ section.data['Section'].capitalizeFirstLetter() }} </h2>
-        <!-- DESCRIPTION -->
-        <p ng-if="section.data['Description'].trim() == ''">&nbsp;</p>
-        <p ng-if="section.data['Description'].trim() != ''"
-            ng-bind-html="section.data['Description']"></p>
-        </a>
-    </div>
-   </div>
-
-<!-- SEARCH CASE? Didn't perceive it very good.
-    <md-content
-        ng-if="welcome.isSearch(section)"
-        layout-padding layout-wrap>
-            <div layout="row" layout-align="center center">
-                <input placeholder="{{section.data['Content']}}"
-                    ng-focus="activateSearch()">
-                <i class="material-icons prefix">search</i>
-            </div>
-    </md-content>
--->
-
-<!-- More
-    <md-content flew="100"
-        ng-if="!welcome.isSearch(section) && section.data['Content'] != ''"
-        layout="row" layout-align="end center">
-        <md-button class="md-warn">
-          <a ui-sref="welcome.more(
-            {element: $index, section_type: 'welcome'})">more...</a>
-        </md-button>
-    </md-content>
--->
-
-<!-- Parallax
-    <md-content layout-padding layout-wrap></md-content>
-    <div class="parallax-container"
-        ng-if="section.images && section.images.length > 0">
-        <div parallax>
-          <img lazy-img="{{ root.imagesPath
-            + welcome.mainSubFolder + section.images[0].filename}}"
-            class="z-depth-1">
-        </div>
-    </div>
--->
+<!--     {{section}}
+ -->
+    <!-- TITLE -->
+    <h2 class="header" style='font-family: Leela;'>
+        {{ section.data['Section'].capitalizeFirstLetter() }} </h2>
+    <!-- DESCRIPTION -->
+    <p ng-if="section.data['Description'].trim() == ''">&nbsp;</p>
+    <p ng-if="section.data['Description'].trim() != ''"
+        ng-bind-html="section.data['Description']"></p>
 
   </div>
-
 </div>
 
  <div flex="5"></div>
 <!-- SIDE MENU -->
- <div ng-if="sections.length > 1"
+ <div ng-if="subsections.length > 1"
     flex="15" pushpin pushpin-offset="1">
-
   <ul class="section table-of-contents">
-    <li ng-repeat="section in sections track by $index">
+    <li ng-repeat="section in subsections track by $index">
       <a href="#step{{$index}}"> {{section.data['Section']}} </a>
     </li>
   </ul>

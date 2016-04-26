@@ -8,6 +8,7 @@ angular.module('web')
     .controller('WelcomeController', WelcomeController)
     .controller('SubWelcomeController', SubWelcomeController)
     .controller('WelcomeInfoController', WelcomeInfoController)
+    .controller('WelcomeSubInfoController', WelcomeSubInfoController)
     .controller('DialogController', DialogController)
     .controller('TreeController', TreeController)
     .controller('AdminController', AdminController)
@@ -119,6 +120,8 @@ function getSectionData($scope, AdminService, custom_type)
       // Fill the right scope
       if (type == slide_type) {
         $scope.slides = myscope;
+      } else if (type == sub_type) {
+        $scope.subsections = myscope;
       } else {
         $scope.sections = myscope;
       }
@@ -126,6 +129,23 @@ function getSectionData($scope, AdminService, custom_type)
     });
 };
 
+
+function WelcomeSubInfoController($scope, $log, AdminService)
+{
+    $log.debug("Welcome SUB info");
+    var self = this;
+    //$scope.subsections = null;
+
+    getSectionData($scope, AdminService, sub_type)
+     .then(function()
+    {
+        console.log("Obtained", $scope);
+        // Pool off the right data
+        self.subFolder = sub_type + '/';
+        //$scope.subsections = $scope.subsections[$stateParams.element];
+    });
+
+};
 
 function WelcomeInfoController($scope, $log, $stateParams,
     AdminService)
