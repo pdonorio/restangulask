@@ -30,6 +30,17 @@ GOING ONLINE:
 ✔ Search results @done (16-04-26 12:36)
  ✔ order column names... @done (16-04-26 12:36)
 ☐ Search order? @question
+☐ search speed?
+// https://www.rethinkdb.com/docs/secondary-indexes/python/#multi-indexes
+
+✔ Text editor @done (16-04-26 23:04)
+ ✔ justify @done (16-04-26 23:04)
+
+☐ Loader in welcome page?
+ ☐ go back (from search?) looks very slow
+ ☐ also in section info
+
+☐ Link to base donnée (new power point)
 
 ☐ Subwelcome
     ✔ duplicate welcome @done (16-04-26 01:44)
@@ -39,21 +50,14 @@ GOING ONLINE:
       ✔ trust html to show (content)? @done (16-04-26 12:09)
     ☐ spy menu @question
       ☐ how to show spy-submenu?
-      ☐ can i use spy as direct links?
+      ✔ can i use spy as direct links @done (16-04-26 23:09)
 
 ☐ details:
- ☐ click to zoom tooltip
+ ✔ click to zoom tooltip @done (16-04-26 23:12)
  ✔ next and previous page! @done (16-04-26 15:34)
    ✔ optimize index @done (16-04-26 23:01)
- ☐ change appearance of transcripts into a better monospace
- ☐ remove h5 from current transcriptions
-
-☐ Loader in welcome page?
- ☐ go back (from search?) looks very slow
- ☐ also in section info
-
-☐ Text editor
- ☐ justify
+ ☐ change appearance of transcripts into a better monospace?
+ ☐ remove h5 from current transcriptions...
 
 ☐ Whole starting page is just a slide? @question
     https://www.rijksmuseum.nl/nl/

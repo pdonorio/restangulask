@@ -128,7 +128,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
         toolbar:    "undo redo | bold italic | " +
                     "fontselect fontsizeselect | " +
                     // "styleselect print " +
-                    "alignleft aligncenter alignright | " +
+                    "alignleft aligncenter alignright alignjustify | " +
                     "link image | forecolor backcolor " +
                     "",
     };

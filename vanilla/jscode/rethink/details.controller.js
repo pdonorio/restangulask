@@ -52,9 +52,6 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
                 previous_code = prefix + "_" + String(num - 1),
                 next_code = prefix + "_" + String(num + 1);
 
-// OPTIMIZE:
-// http://stackoverflow.com/q/28835512/2114395
-// https://www.rethinkdb.com/docs/secondary-indexes/python/#multi-indexes
             // SEARCH WITH APIs
             self.previous.text = previous_code;
             SearchService.recoverCode(previous_code, field).then(function (out)
@@ -70,7 +67,7 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
                 if (out.elements && out.elements > 0) {
                     self.next.link = out.data[0].record;
                 }
-                $log.warn("Link avaialble")
+                //$log.warn("Link avaialble")
             })
             ////////////////////////////////////
             ////////////////////////////////////
