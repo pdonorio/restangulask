@@ -32,7 +32,7 @@ function MenuInAppController($scope, $rootScope, $log, $auth, $state)
         ];
     } else {
         self.buttons = [
-            { name: 'login', link: 'login', icon: null, },
+            //{ name: 'login', link: 'login', icon: null, },
         ];
     }
 }

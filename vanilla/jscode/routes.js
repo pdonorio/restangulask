@@ -71,6 +71,8 @@ function routeConfig($stateProvider, $urlRouterProvider, $authProvider, $logProv
 // place somewhere else, + use a variable in the blueprint?
 // variable is related to python and "production"
 
+// THIS IS WHERE YOU MAY ENABLE JS DEBUG
+
     /////////////////////////////////////
     // Enable log
     var debugFlag = false;

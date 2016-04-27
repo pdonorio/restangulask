@@ -1,12 +1,18 @@
 
 <div ng-controller="MenuInAppController as mymenu">
 
- <ul id="nav-mobile" class="right">
+ <ul id="nav-mobile" class="right"
+    style="color: grey;"
+    >
 
 <!-- IF LOGGED AND NOT LOGGED -->
 
-<!-- only if not welcome? -->
+<!-- only if not welcome?
     <li ng-if="mymenu.currentPage != 'welcome'">
+-->
+    <li
+        ng-if="mymenu.currentPage != 'public.db'"
+        style="color: grey;">
         <div layout="row">
             <i class="material-icons prefix">search</i>
             <input placeholder="Search" ng-focus="activateSearch()">
@@ -17,13 +23,13 @@
 
     <!-- Angular dynamic material menu -->
     <li ng-if="mymenu.buttons" ng-repeat="button in mymenu.buttons">
-        <a ui-sref="{{button.link}}">
+        <a style="color: grey;" ui-sref="{{button.link}}">
             {{ button.name.capitalizeFirstLetter() }}
         </a>
     </li>
 
 <!-- IF LOGGED -->
-    <li ng-if="mymenu.logged">
+    <li style="color: grey;" ng-if="mymenu.logged">
         <div layout="row">
             <i class="material-icons prefix">face</i>
             &nbsp;

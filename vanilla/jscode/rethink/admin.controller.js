@@ -66,7 +66,8 @@ function getSectionData($scope, AdminService, custom_type, $sce)
                     anchor = 'welcome.subsection'
                 } else if (sec == 'Base de données') {
                     //console.log(sec, "SEARCH?");
-                    anchor = 'public.specialsearch'
+                    //anchor = 'public.specialsearch'
+                    anchor = 'public.db'
                 } else if (element.data['Content'].trim() != "") {
                     anchor = "welcome.more({" +
                         "element: " + index + ", " +
@@ -163,6 +164,7 @@ function WelcomeInfoController($scope, $log, $stateParams,
     $log.debug("Welcome info", $stateParams);
     var self = this;
 
+    $scope.defaultColor = DefaultColor;
     self.title = "None";
     self.moreContent = "No section selected";
     self.images = null;

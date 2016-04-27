@@ -71,6 +71,7 @@ class RethinkDataValues(BaseRethinkResource):
     template = mytemplate
     table = mylabel
     table_index = 'record'
+    sort_index = 'title'
 
     def get_autocomplete_data(self, q, step_number=1, field_number=1):
         """ Data for autocompletion in js """
@@ -166,7 +167,7 @@ class RethinkDataValues(BaseRethinkResource):
         else:
             # Get all content from db
             count, data = super().get(data_key)
-            # just one single ID - reshape!
+            # just one single ID - reshape json output!
             if data_key is not None:
                 data = self.single_element(data, self._args['details'])
 

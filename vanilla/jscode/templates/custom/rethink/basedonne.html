@@ -1,0 +1,95 @@
+
+<div ng-controller="WelcomeInfoController as welcome"
+    layout="row">
+
+ <div flex="5"></div>
+<!--CONTENT -->
+ <div
+    flex="75"
+    layout="column" layout-align='center center'>
+
+   <div style="position: relative; height: 480px;">
+
+    <!-- IMAGE (with link) -->
+    <div style="background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 750px; height: 470px;
+        z-index:1;
+        background-image: url('/static/uploads/welcome/Bienvenue.jpg')"
+        ></div>
+
+    <!-- BACKGROUND COLOR -->
+    <div style=" position: absolute; bottom: 10px;
+        background-color: #00838f;
+        width: 750px;
+        height: 470px;
+        opacity: .7;
+        z-index:2;">
+        </div>
+
+    <div layout="row" layout-align="center center"
+        style=" position: absolute; bottom: 200px; left: 30px;
+        background-color: white; width: 300px;
+        border-radius: 5px; padding: 10px 30px; z-index:3;">
+            <i class="material-icons prefix">search</i>
+            <input value=" mot-clé" ng-focus="activateSearch()">
+        </div>
+
+    <div layout="row" layout-align="center center"
+        style=" position: absolute; bottom: 100px; left: 30px;
+        background-color: white; width: 300px;
+        border-radius: 5px; padding: 10px 30px; z-index:3;">
+            <i class="material-icons prefix">list</i>
+            <input value=" liste des fêtes" ng-focus="activateOther('list')">
+        </div>
+
+    <!-- TITLE -->
+    <div style="
+        position: absolute; top: 10px;
+        padding-left: 5%; color: white;
+        width: 100%;
+        z-index:3;">
+        <!-- TITLE -->
+        <h2 class="header">
+        RECHERCHE
+        <hr>
+        </h2>
+        </div>
+   </div>
+
+   <div>
+<h4>Comment chercher dans la base de données?</h4>
+
+La base de données propose des copies digitalisés des relations imprimées et manuscrites des fêtes de canonisation des saints Ignace et François-Xavier, déroulées sur le territoire des anciens Pays-Bas méridionaux, de l’Italie et de la France en 1622. Les copies digitalisées des textes rédigés en latin, italien et français sont accompagnés d’une transcription.
+
+Les textes sont accessibles via :
+Une recherche libre qui permet de multiplier les critères de recherche. Pour ce faire….
+Une liste des fêtes.
+
+Pour optimiser la recherche portant directement sur le contenu des transcriptions en latin, français ancien et italien ancien, <b>un lexique multilingue de la fête</b> propose au chercheur…
+   </div>
+
+</div>
+
+ <div flex="5"></div>
+
+<!-- SIDE MENU
+
+Bienvenue
+Base de données
+Exposition
+Lexique
+
+-->
+
+ <div ng-if="sections.length > 1"
+    flex="15" pushpin pushpin-offset="1">
+
+  <ul class="section table-of-contents">
+    <li ng-repeat="section in sections track by $index">
+      <a href="#step{{$index}}"> {{section.data['Section']}} </a>
+    </li>
+  </ul>
+ </div>
+
+</div>

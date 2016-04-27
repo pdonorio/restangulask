@@ -60,10 +60,13 @@ function ToolbarController($scope, $log, $rootScope)
 {
     var self = this;
     $log.debug("Toolbar controller");
-    var color = 'cyan darken-3';
+    //var color = 'cyan darken-3';
+    var color = 'white';
     $rootScope.originalColor = angular.copy(color);
     $rootScope.toolbarColor = angular.copy(color);
-    self.shade = 'z-depth-2';
+    $rootScope.stripeColor = "red darken-2";
+    //self.shade = 'z-depth-2';
+    self.shade = 'z-depth-1';
 }
 
 function WelcomeMenuController($scope, $log, api, $auth)
@@ -277,6 +280,13 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
     $rootScope.activateSearch = function ()
     {
         $state.go('public.specialsearch');
+    }
+
+    // In case of special search available
+    // Redirect to that state
+    $rootScope.activateOther = function (route)
+    {
+        $state.go('public.' + route);
     }
 
 	$log.info("Menu", $rootScope.menu);

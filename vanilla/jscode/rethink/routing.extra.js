@@ -26,6 +26,28 @@ angular.module('web')
         },
 
     //////////////////////
+        'public.db': {
+            url: "/db",
+            views: {
+                "unlogged": {
+                    dir: 'blueprint',
+                    templateUrl: 'basedonne.html',
+                }
+            }
+        },
+
+    //////////////////////
+        'public.list': {
+            url: "/list",
+            views: {
+                "unlogged": {
+                    dir: 'blueprint',
+                    templateUrl: 'steplist.html',
+                }
+            }
+        },
+
+    //////////////////////
         'public.details': {
             url: "/details/:id",
             views: {
@@ -85,6 +107,7 @@ angular.module('web')
                     templateUrl: 'admin.html',
                 }
             },
+/*
             onEnter: function ($rootScope) {
               $rootScope.toolbarColor = 'red darken-4';
             },
@@ -92,6 +115,7 @@ angular.module('web')
               $rootScope.toolbarColor =
                 angular.copy($rootScope.originalColor);
             },
+*/
         },
 
     //////////////////////
