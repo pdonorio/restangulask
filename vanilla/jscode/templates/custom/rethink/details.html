@@ -10,7 +10,7 @@
   </div>
   <div class="row" ng-if="detail.data.id">
 
-   <div class="col s12 m10 l10">
+   <div class="col s12 m9 l9">
   <!-- content -->
 
       <!-- text -->
@@ -104,7 +104,7 @@
   <!-- content -->
    </div>
 
-    <div class="col hide-on-small-only m2 l2">
+    <div class="col hide-on-small-only m3 l3">
   <!-- Summary -->
       <div pushpin pushpin-offset="1">
       <ul class="section table-of-contents">
@@ -121,18 +121,20 @@
         <li> <hr> </li>
 
         <!-- PREVIOUS PAGE if exists -->
-        <li> <a href ui-sref="public.details({id: detail.previous.link})"
+        <li ng-if="detail.previous.link">
+            <a href ui-sref="public.details({id: detail.previous.link})"
             ><i>précédent</i>: <u>{{detail.previous.text}}</u></a> </li>
 
         <!-- SHOULD BE ONLY ONE PAGE -->
         <li ng-repeat='image in detail.data.images'>
           <a href="#image{{image.code}}">
-            <i>Page</i>: <b>{{image.code}} </b>
+            <i>Image</i>: <b>{{image.code}} </b>
           </a>
         </li>
 
         <!-- NEXT PAGE if exists -->
-        <li> <a href ui-sref="public.details({id: detail.next.link})"
+        <li ng-if="detail.next.link">
+            <a href ui-sref="public.details({id: detail.next.link})"
             ><i>suivant</i>: <u>{{detail.next.text}}</u></a> </li>
 
       </ul>

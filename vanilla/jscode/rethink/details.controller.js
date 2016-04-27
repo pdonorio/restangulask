@@ -59,6 +59,9 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
                 //$log.warn("OUT PREV IS", out);
                 if (out.elements && out.elements > 0) {
                     self.previous.link = out.data[0].record;
+                } else {
+                    self.previous.link = null;
+
                 }
             });
             self.next.text = next_code;
@@ -66,6 +69,8 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
             {
                 if (out.elements && out.elements > 0) {
                     self.next.link = out.data[0].record;
+                } else {
+                    self.next.link = null;
                 }
                 //$log.warn("Link avaialble")
             })
