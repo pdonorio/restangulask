@@ -199,8 +199,10 @@ function ChipsController($scope, $log, $q, $stateParams, SearchService)
             1: SearchService.getDistinctValuesFromStep(1),
             2: SearchService.getDistinctValuesFromStep(2),
             3: SearchService.getDistinctValuesFromStep(3),
-            4: SearchService.getDistinctValuesFromStep(4),
-            5: SearchService.getDistinctTranscripts(),
+            //Details?
+            //4: SearchService.getDistinctValuesFromStep(4),
+            //5: SearchService.getDistinctTranscripts(),
+            4: SearchService.getDistinctTranscripts(),
         }
         return $q.all(promises).then((values) =>
         {
