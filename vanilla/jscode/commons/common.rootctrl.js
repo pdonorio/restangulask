@@ -66,7 +66,8 @@ function ToolbarController($scope, $log, $rootScope)
     $rootScope.toolbarColor = angular.copy(color);
     $rootScope.stripeColor = "red darken-2";
     //self.shade = 'z-depth-2';
-    self.shade = 'z-depth-1';
+    //self.shade = 'z-depth-1';
+    self.shade = '';
 }
 
 function WelcomeMenuController($scope, $log, api, $auth)

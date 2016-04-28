@@ -99,3 +99,9 @@ md-input-container.editable-controls {
 md-input-container.editable-controls [ng-message] {
   position: static;
 }
+
+.noshadow {
+    box-shadow: 0px 0px 0px 0px;
+    -moz-box-shadow: 0px 0px 0px 0px;
+    -webkit-box-shadow: 0px 0px 0px 0px;
+}

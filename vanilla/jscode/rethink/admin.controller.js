@@ -19,6 +19,7 @@ var
     , slide_type = 'slides'
     , sub_type = 'subwelcome'
     , mysection = 'admin_sections'
+    , mysubsection = 'admin_subsections'
     //, myslide = 'admin_slides'
     ;
 
@@ -724,12 +725,12 @@ function SubWelcomeController($scope,
     var newSlides = [];
 
     // Fix
-    forEach($scope.sections, function(element, index) {
+    forEach($scope.subsections, function(element, index) {
         if (element.data) {
             newSlides[count++] = element;
         }
     });
-    $scope.sections = angular.copy(newSlides);
+    $scope.subsections = angular.copy(newSlides);
     $log.debug("Fixed sections");
 
     // Push and reload
@@ -750,10 +751,10 @@ function SubWelcomeController($scope,
         $rootScope.loaders[mysection] = true;
     }
     var promises = [];
-    //console.log("TEST SECTIONS", $scope.sections);
+    //console.log("TEST SECTIONS", $scope.subsections);
 
     // For each section
-    forEach($scope.sections, function(element, index) {
+    forEach($scope.subsections, function(element, index) {
         if (element.data) {
             // update position
             element.data['Position'] = index;
@@ -950,7 +951,7 @@ function SubWelcomeController($scope,
         }
       } else {
         console.log("Check position", element);
-        element['Position'] = $scope.sections.length;
+        element['Position'] = $scope.subsections.length;
         apicall = AdminService.insert(sub_type, element);
       }
 

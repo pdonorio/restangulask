@@ -146,7 +146,7 @@ else
         elif [ "$2" == "remove" ]; then
             echo -e "ACTION: Removal\n"
             echo "Destroying services"
-            $com $files stop && $com $files rm -f
+            $com $files stop && $com $files rm -f --all
         elif [ "$2" == "sql" ]; then
             echo "Launch adminer for SQL servers"
             $com run --service-ports sqladmin

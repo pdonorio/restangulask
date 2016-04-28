@@ -29,8 +29,8 @@ GOING ONLINE:
 
 ✔ Search results @done (16-04-26 12:36)
  ✔ order column names... @done (16-04-26 12:36)
-☐ Search order? @question
-☐ search speed?
+✘ Search order? @question @cancelled (16-04-27 23:54)
+✘ search speed? @cancelled (16-04-27 23:54)
 // https://www.rethinkdb.com/docs/secondary-indexes/python/#multi-indexes
 
 ✔ Text editor @done (16-04-26 23:04)
@@ -38,7 +38,14 @@ GOING ONLINE:
 
 ✔  base donnée (new power point) @done (16-04-27 21:56)
   ✔ fete list @done (16-04-27 21:56)
-    ☐ fete list could be like missing images
+
+bugs:
+✔ subsection move to second place @done (16-04-28 07:51)
+✔ position in subsection @done (16-04-28 07:51)
+✔ check loading in section @done (16-04-28 09:47)
+☐ check loading in "more"
+☐ fete list could be like missing images
+
 
 ☐ Subwelcome
     ✔ duplicate welcome @done (16-04-26 01:44)
@@ -54,10 +61,8 @@ GOING ONLINE:
  ✔ click to zoom tooltip @done (16-04-26 23:12)
  ✔ next and previous page! @done (16-04-26 15:34)
    ✔ optimize index @done (16-04-26 23:01)
-   ☐ check start and end
-   ☐ other cases?
-   http://docker.local/public/details/84d4ed10-5a03-4ea6-8fba-9e5083bdc2d5
- ☐ change appearance of transcripts into a better monospace?
+   ✔ other cases? @done (16-04-27 23:54)
+ ✘ change appearance of transcripts into a better monospace? @cancelled (16-04-27 23:54)
  ☐ remove h5 from current transcriptions...
 
 ☐ Whole starting page is just a slide? @question

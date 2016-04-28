@@ -6,14 +6,15 @@
 <!-- TOPBAR -->
 <div ng-controller="ToolbarController as tool"
     ng-hide="avoidTheToolbar" class="navbar"
-    ng-class="tool.shade" ng-cloak>
-	<nav>
+    ng-class="tool.shade"
+    ng-cloak>
+	<nav class="noshadow">
 
       <div ng-class="stripeColor" style="
         position: absolute; top: 0px;
         width:100%; height: 8px;
         z-index: 1;
-      ">test</div>
+      ">&nbsp;</div>
       <div ng-class="toolbarColor" class="nav-wrapper white">
 
           <a ui-sref='welcome'
