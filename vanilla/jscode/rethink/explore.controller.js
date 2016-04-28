@@ -212,12 +212,23 @@ function FixTransController($scope, $rootScope,
 // controller
 ////////////////////////////////
 
-function StepsController($scope, $log, $state, SearchService)
+function StepsController($scope, $log, $state, $window, SearchService)
 {
   // INIT controller
   $log.debug("Stepping in pieces");
   var self = this;
   self.step = 2;
+
+    self.noImageList = function (name, data) {
+      self.elements = data;
+      self.currentParty = data;
+      //self.currentParty = name;
+      $window.scrollTo(0, 0);
+    }
+
+    self.closeCard = function() {
+      delete self.elements;
+    }
 
   SearchService.getDistinctValuesFromStep(self.step).then(function (out)
   {

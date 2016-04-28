@@ -1,8 +1,87 @@
+<md-tabs md-dynamic-height md-border-bottom
+ md-center-tabs
+    md-swipe-content md-selected='true'>
 
-<div
-    ng-controller="StepsController as steps"
-    class="container">
+ <md-tab label="Fêtes">
+  <md-content class="md-padding">
 
+    <div ng-controller="StepsController as steps"
+        layout="row" layout-align="center start"
+        style="padding-top: 20px; padding-bottom: 20px;">
+
+    <div ng-if="!steps.data">
+        <div ng-include="root.templateDir + 'loader.html'"></div>
+    </div>
+
+    <div ng-if="steps.data"
+        flex-xs flex-gt-xs="55" layout="column">
+     <md-list>
+      <div ng-repeat="(transc, data) in steps.data track by $index">
+          <md-divider></md-divider>
+          <md-list-item class="md-2-line"
+              ng-click="steps.noImageList(transc, data)">
+
+<!-- TO FIX -->
+            <div class="md-list-item-text" layout="column">
+              <h3>{{data}}</h3>
+              <p> Elements: <b>{{data.length}}</b> </p>
+            </div>
+          </md-list-item>
+      </div>
+     </md-list>
+    </div>
+
+
+    <div flex-xs flex-gt-xs="45" layout="column"
+        ng-if="steps.elements">
+     <md-card>
+      <md-card-title>
+        <md-card-title-text>
+            <h5>{{steps.currentParty}}</h5>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+<!-- TO FIX -->
+        [...]
+
+<!--
+        <table class="table table-hover">
+          <tbody>
+            <tr ng-repeat="element in steps.elements">
+             <td> {{element.value}} </td>
+             <td> <a href
+                 ng-click="steps.transcriptionDialog(element.record, element.value)"
+           tooltipped data-position="left" data-delay="50"
+           data-tooltip="Provide a transcription"
+                 class="waves-effect waves-light btn-floating lime lighten-2">
+                   <i class="material-icons blue-grey-text"> description </i> </a>
+             </td>
+             <td> <a ui-sref='public.specialsearch({text: element.value})'
+           tooltipped data-position="down" data-delay="50"
+           data-tooltip="Search this record"
+                 class="waves-effect waves-light btn-floating lime lighten-3">
+                   <i class="material-icons blue-grey-text"> youtube_searched_for </i> </a>
+             </td>
+             <td> <a ui-sref='public.details({id: element.record})'
+           tooltipped data-position="up" data-delay="50"
+           data-tooltip="View details of this record"
+                 class="waves-effect waves-light btn-floating lime lighten-3">
+                   <i class="material-icons blue-grey-text">web</i> </a>
+             </td>
+            </tr>
+          </tbody>
+        </table>
+-->
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="start center">
+        <md-button ng-click="steps.closeCard()"> Close </md-button>
+      </md-card-actions>
+     </md-card>
+    </div>
+
+ </div>
+
+<!--
     <h4>
         <b> Fêtes </b>
     </h4>
@@ -19,20 +98,16 @@
             <li ng-repeat="item in steps.data track by $index">
                 <div class="collapsible-header">
 
-<!--                     <b>#{{$index+1}}</b>:
- -->
 <span style="font-family: Leela; font-size: 18px;">
     {{item}}
 </span>
                 </div>
                 <div class="collapsible-body"><p>
                     [...]
-<!--                     <b>Some content</b>
-                    with <i>lazy load</i>.
- -->
                 </p></div>
             </li>
         </ul>
     </div>
 
 </div>
+-->
