@@ -12,6 +12,12 @@
         </md-button>
     </md-content>
 
+<div ng-if="info.loader">
+    <span colspan="10" ng-include="root.templateDir+'loader.html'"></span>
+</div>
+
+<div ng-if="!info.loader">
+
     <h2>{{info.title}}</h2>
     <hr>
     <span ng-bind-html="info.moreContent"></span>
@@ -23,5 +29,6 @@
         class="z-depth-1">
     </div>
     <p></p>
+</div>
 
 </div>

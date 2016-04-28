@@ -142,7 +142,7 @@ function getSectionData($scope, AdminService, custom_type, $sce)
     });
 };
 
-function WelcomeSubInfoController($scope, $log, $sce, AdminService)
+function WelcomeSubInfoController($scope, $rootScope, $log, $sce, AdminService)
 {
     $log.debug("Welcome SUB info");
     var self = this;
@@ -154,6 +154,7 @@ function WelcomeSubInfoController($scope, $log, $sce, AdminService)
         console.log("Obtained", $scope);
         // Pool off the right data
         self.subFolder = sub_type + '/';
+        // $rootScope.loaders['welcome_info'] = true;
         //$scope.subsections = $scope.subsections[$stateParams.element];
     });
 
@@ -164,6 +165,7 @@ function WelcomeInfoController($scope, $log, $stateParams,
 {
     $log.debug("Welcome info", $stateParams);
     var self = this;
+    self.loader = true;
 
     $scope.defaultColor = DefaultColor;
     self.title = "None";
@@ -194,6 +196,7 @@ function WelcomeInfoController($scope, $log, $stateParams,
             self.title = section.data['Section'];
             self.moreContent = section.data['Content'];
             self.images = section.images;
+            self.loader = false;
         }
     });
 
