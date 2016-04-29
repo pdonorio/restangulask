@@ -20,17 +20,29 @@ function FastSearchController($scope, $log, SearchService
   self.selectedItemChange = function (item) {
     $log.warn('Item changed to ' + JSON.stringify(item));
   }
+/*
   self.querySearch = function (text) {
        return [
             {name: 'hello', watchers: '12', forks: 'qualcosa'},
             {name: 'a hel world', watchers: '12', forks: 'qualcosa'},
        ];
   }
+*/
 
-  SearchService.getDataFast().then(function (out) {
-       console.log("TEST", out);
-       self.data = out.data;
-  });
+  self.load = function(keyphrase) {
+
+      self.data = null;
+      self.elements = -1;
+      SearchService.getDataFast().then(function (out) {
+           //console.log("TEST", out);
+           self.data = out.data;
+           self.elements = out.elements;
+      });
+
+  }
+
+  // first call
+  self.load();
 
 }
 

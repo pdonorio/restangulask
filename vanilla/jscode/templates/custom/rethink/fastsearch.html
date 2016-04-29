@@ -5,6 +5,7 @@
 <form ng-submit="$event.preventDefault()" layout="row">
  <div flex="15"></div>
  <div flex="70" layout="column">
+ <h4> Resultats de la <i>Recherche</i> </h4>
  <md-toolbar class="white black-text">
       <md-autocomplete md-autofocus
           md-min-length="0"
@@ -31,27 +32,33 @@
               <strong>book</strong>
           </div>
         </md-item-template>
+<!--
         <md-not-found> No matches found. </md-not-found>
+-->
       </md-autocomplete>
  </md-toolbar>
+ <span ng-if="search.elements >= 0">
+    <b><i>Trouvés: {{search.elements}} éléments</i></b>
+ </span>
  </div>
  <div flex="15"></div>
 </form>
 <!-- TOOLBAR -->
 
-<div ng-if="!search.data"
-    ng-include="root.templateDir + 'loader.html'"></div>
 
- <md-content layout="row"
-    layout-padding ng-if="search.data">
+<md-content layout="row" layout-padding>
  <div flex='10'>&nbsp;</div>
  <div flex='80'>
- <table class='bordered highlight'>
+
+<div ng-if="!search.data"
+    ng-include="root.templateDir + 'loader.html'"></div>
+ <table class='bordered highlight'ng-if="search.data">
   <thead>
     <tr>
         <th>Vignette</th>
-        <th data-field="name">Extrait</th>
-        <th data-field="source">Infos</th>
+        <th>Extrait</th>
+        <th>Détails</th>
+        <th><i>links</i></th>
     </tr>
   </thead>
 
@@ -59,35 +66,32 @@
     <tr ng-repeat='row in search.data'>
       <!-- IMAGE -->
       <td style="height: 160px;">
-        <div ng-if='!row._source.thumbnail'>
-          <a class="waves-effect waves-light btn disabled">
-            <i class="material-icons blue-grey-text">
-              center_focus_weak
-            </i>
-          </a>
-        </div>
-        <div ng-if='row._source.thumbnail'
-            style="
-                background-repeat: no-repeat;
-                background-size: 100% 100%; /* background-size:cover; */
-                width: 110px; height: 160px;
-            "
-            ng-style="{'background-image':'url('+ row._source.thumbnail +')'}"
 
-        ></div>
 <!--
-        <img ng-if='row._source.thumbnail'
-          src="{{ row._source.thumbnail }}"
-          class="z-depth-1">
+          <a class="waves-effect waves-light btn disabled">
+            <i class="material-icons blue-grey-text"> center_focus_weak </i>
+          </a>
 -->
+        <div ng-if='!row._source.thumbnail'
+            style=" background-repeat: no-repeat; background-size: 100% 100%;
+                width: 110px; height: 160px;"
+            ng-style="{'background-image':'url(http://placehold.it/110x160)'}"
+        ></div>
+        <div ng-if='row._source.thumbnail'
+            style=" background-repeat: no-repeat; background-size: 100% 100%;
+                width: 110px; height: 160px;"
+            ng-style="{'background-image':'url('+ row._source.thumbnail +')'}"
+        ></div>
       </td>
-      <td>{{row._source.extrait}}</td>
+      <td> <strong>{{row._source.extrait}}</strong> </td>
       <td>
-        Source: {{row._source.source}}<br>
-        Fete: {{row._source.fete}}
+        <i>Source</i>: {{row._source.source}}<br>
+        <i>Fete</i>: {{row._source.fete}}<br>
+        <i>Lieu</i>: {{row._source.place}}<br>
+        <i>Date</i>: {{row._source.date}}
       </td>
       <td>
-          <a ui-sref='public.details({id: row.id})'
+          <a ui-sref='public.details({id: row._id})'
               class="waves-effect waves-light btn-floating lime lighten-3">
               <i class="material-icons blue-grey-text">web</i>
           </a>
