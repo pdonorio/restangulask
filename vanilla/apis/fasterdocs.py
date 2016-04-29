@@ -17,6 +17,6 @@ class FastDocs(ExtendedApiResource, FastSearch):
 
     def get(self, record=None):
 
-        es = self.get_instance()
-        logger.info("es %s" % es._api.info())
-        return self.response(['Hello ES'])
+        self.get_instance()
+        out = self.fast_get(record)
+        return self.response(out)
