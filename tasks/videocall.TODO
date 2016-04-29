@@ -1,6 +1,16 @@
 
-Interface adjustment:
-  we should see in two weeks (21?)
+ELASTICSEARCH:
+
+  {
+    id @record
+    extrait
+    source
+    fete
+    transcription @update
+    image_thumbnail_path @update
+  }
+
+  ☐ bold hightlight?
 
 GOING ONLINE:
 

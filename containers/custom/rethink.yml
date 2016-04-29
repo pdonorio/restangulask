@@ -27,7 +27,7 @@ custombe:
       service: backend
   links:
       - rethinkdb:rdb
-#      - searchindex:el
+      - searchindex:el
   volumes_from:
       - uploadsdata
 
