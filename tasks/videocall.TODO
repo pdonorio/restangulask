@@ -74,13 +74,19 @@ bugs:
  ✘ change appearance of transcripts into a better monospace? @cancelled (16-04-27 23:54)
  ☐ remove h5 from current transcriptions...
 
-☐ Whole starting page is just a slide? @question
-    https://www.rijksmuseum.nl/nl/
+- slides example
     http://pedroduarte.me/wallop/
-    http://unslider.com/
+- images stretched to take all the body
+- editor: table plugin
+- lexique: tabs from pdf
+- menu in all pages
+- list fete: vignette
+- multiple source in fete: palermo
+- details fete:
+    - detail extrait
+- logged link to edit transcriptions
 
  ☐ TIF/TIFF conversion
-
 
 - Move to a powerful node
 backup oceanmaster1

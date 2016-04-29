@@ -1,0 +1,114 @@
+
+<div ng-controller="FastSearchController as search">
+
+<!-- TOOLBAR -->
+<form ng-submit="$event.preventDefault()" layout="row">
+ <div flex="15"></div>
+ <div flex="70" layout="column">
+ <md-toolbar class="white black-text">
+      <md-autocomplete md-autofocus
+          md-min-length="0"
+
+          md-selected-item="search.selectedItem"
+          md-search-text-change="search.searchTextChange(search.searchText)"
+          md-search-text="search.searchText"
+          md-selected-item-change="search.selectedItemChange(item)"
+          md-items="item in search.querySearch(search.searchText)"
+          md-item-text="item.name"
+
+          md-menu-class="autocomplete-custom-template"
+          placeholder="Recherche" >
+        <md-item-template>
+          <span
+            md-highlight-text="search.searchText"
+            md-highlight-flags="^i"
+            >{{item.name}}</span>
+          <div layout="row" layout-align="start center">
+              <i class="material-icons"> import_contacts </i>
+              &nbsp;
+              type:
+              &nbsp;
+              <strong>book</strong>
+          </div>
+        </md-item-template>
+        <md-not-found> No matches found. </md-not-found>
+      </md-autocomplete>
+ </md-toolbar>
+ </div>
+ <div flex="15"></div>
+</form>
+<!-- TOOLBAR -->
+
+<div ng-if="!search.data"
+    ng-include="root.templateDir + 'loader.html'"></div>
+
+ <md-content layout="row"
+    layout-padding ng-if="search.data">
+ <div flex='10'>&nbsp;</div>
+ <div flex='80'>
+ <table class='bordered highlight'>
+  <thead>
+    <tr>
+        <th>Vignette</th>
+        <th data-field="name">Extrait</th>
+        <th data-field="source">Infos</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat='row in search.data'>
+      <!-- IMAGE -->
+      <td style="height: 160px;">
+        <div ng-if='!row._source.thumbnail'>
+          <a class="waves-effect waves-light btn disabled">
+            <i class="material-icons blue-grey-text">
+              center_focus_weak
+            </i>
+          </a>
+        </div>
+        <div ng-if='row._source.thumbnail'
+            style="
+                background-repeat: no-repeat;
+                background-size: 100% 100%; /* background-size:cover; */
+                width: 110px; height: 160px;
+            "
+            ng-style="{'background-image':'url('+ row._source.thumbnail +')'}"
+
+        ></div>
+<!--
+        <img ng-if='row._source.thumbnail'
+          src="{{ row._source.thumbnail }}"
+          class="z-depth-1">
+-->
+      </td>
+      <td>{{row._source.extrait}}</td>
+      <td>
+        Source: {{row._source.source}}<br>
+        Fete: {{row._source.fete}}
+      </td>
+      <td>
+          <a ui-sref='public.details({id: row.id})'
+              class="waves-effect waves-light btn-floating lime lighten-3">
+              <i class="material-icons blue-grey-text">web</i>
+          </a>
+      </td>
+<!--
+      <td>
+          <a class="waves-effect waves-light btn-floating disabled">
+              <i class="material-icons">mode_edit</i>
+          </a>
+      </td>
+      <td>
+          <a class="waves-effect waves-light btn-floating disabled">
+              <i class="material-icons">delete</i>
+          </a>
+      </td>
+-->
+    </tr>
+  </tbody>
+ </table>
+ </div>
+ <div flex='10'>&nbsp;</div>
+ </md-content>
+
+</div>

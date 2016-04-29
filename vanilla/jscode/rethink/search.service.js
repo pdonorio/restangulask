@@ -14,6 +14,7 @@ function SearchService($log, api) {
         submit: 'datakeys',
         documents: 'datadocs',
         users : 'accounts',
+        fast: 'datasearch',
     }
 
 //////////////////
@@ -161,6 +162,14 @@ function SearchService($log, api) {
         return api.apiCall(
             self.endpoints.documents,
             'PUT', data, data.record);
+    }
+
+//////////////////////////
+//////////////////////////
+
+    //////////////////////////
+    self.getDataFast = function() {
+        return api.apiCall(self.endpoints.fast);
     }
 
 }

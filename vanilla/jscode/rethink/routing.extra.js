@@ -8,7 +8,23 @@ angular.module('web')
     {
 
     //////////////////////
-//NOT LOGGED?
+        'public.fastsearch': {
+            url: "/fastsearch/:text",
+            views: {
+                "unlogged": {
+                    dir: 'blueprint',
+                    templateUrl: 'fastsearch.html',
+                }
+            },
+            // onEnter: function ($rootScope) {
+            //     $rootScope.avoidTheToolbar = true;
+            // },
+            // onExit: function ($rootScope) {
+            //     $rootScope.avoidTheToolbar = false;
+            // },
+        },
+
+    //////////////////////
         'public.specialsearch': {
             url: "/search/:text",
             views: {
