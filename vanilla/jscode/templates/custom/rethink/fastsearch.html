@@ -52,7 +52,7 @@
 
 <div ng-if="!search.data"
     ng-include="root.templateDir + 'loader.html'"></div>
- <table class='bordered highlight'ng-if="search.data">
+ <table class='bordered highlight' ng-if="search.data">
   <thead>
     <tr>
         <th>Vignette</th>
@@ -83,12 +83,27 @@
             ng-style="{'background-image':'url('+ row._source.thumbnail +')'}"
         ></div>
       </td>
-      <td> <strong>{{row._source.extrait}}</strong> </td>
       <td>
-        <i>Source</i>: {{row._source.source}}<br>
-        <i>Fete</i>: {{row._source.fete}}<br>
-        <i>Lieu</i>: {{row._source.place}}<br>
-        <i>Date</i>: {{row._source.date}}
+            <strong>
+              <span
+                md-highlight-text="search.searchText"
+                md-highlight-flags="^i">{{row._source.extrait}}</span>
+            </strong> </td>
+      <td>
+        <i>Source</i>:
+        <span md-highlight-text="search.searchText"
+            md-highlight-flags="^i">{{row._source.source}}</span>
+        <br>
+        <i>Fete</i>:
+        <span md-highlight-text="search.searchText"
+            md-highlight-flags="^i">{{row._source.fete}}</span>
+        <br>
+        <i>Lieu</i>:
+        {{row._source.place}}
+        <br>
+        <i>Date</i>:
+        {{row._source.date}}
+        <br>
       </td>
       <td>
           <a ui-sref='public.details({id: row._id})'

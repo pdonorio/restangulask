@@ -12,6 +12,9 @@ ELASTICSEARCH:
 
   ☐ bold hightlight?
 
+  ☐ scroll
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html
+
 GOING ONLINE:
 
 ✔ Welcome page refactoring @done (16-04-26 01:20)

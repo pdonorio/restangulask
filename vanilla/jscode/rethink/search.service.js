@@ -168,8 +168,8 @@ function SearchService($log, api) {
 //////////////////////////
 
     //////////////////////////
-    self.getDataFast = function() {
-        return api.apiCall(self.endpoints.fast);
+    self.getDataFast = function(searchTerms) {
+        return api.apiCall(self.endpoints.fast, 'GET', null, searchTerms);
     }
 
 }

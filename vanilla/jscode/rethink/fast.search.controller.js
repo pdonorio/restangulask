@@ -16,6 +16,9 @@ function FastSearchController($scope, $log, SearchService
 
   self.searchTextChange = function (text) {
     $log.warn('Text changed to ' + text);
+    if (text && text.trim() != '') {
+        self.load(text);
+    }
   }
   self.selectedItemChange = function (item) {
     $log.warn('Item changed to ' + JSON.stringify(item));
@@ -29,11 +32,11 @@ function FastSearchController($scope, $log, SearchService
   }
 */
 
-  self.load = function(keyphrase) {
+  self.load = function(searchTerms) {
 
       self.data = null;
       self.elements = -1;
-      SearchService.getDataFast().then(function (out) {
+      SearchService.getDataFast(searchTerms).then(function (out) {
            //console.log("TEST", out);
            self.data = out.data;
            self.elements = out.elements;

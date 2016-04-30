@@ -15,9 +15,8 @@ logger = get_logger(__name__)
 class FastDocs(ExtendedApiResource, FastSearch):
     """ A faster search on key values of the database documents """
 
-    def get(self, record=None):
+    def get(self, searchterms=None):
 
         self.get_instance()
-        # fields = ['extrait', 'source', 'fete', 'transcription']
-        data, count = self.fast_get(record)  # , fields=fields)
+        data, count = self.fast_get(searchterms)
         return self.response(data, elements=count)
