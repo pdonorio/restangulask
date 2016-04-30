@@ -2,11 +2,8 @@
 THE PROJECT
 http://codeology.braintreepayments.com/pdonorio/restangulask
 
-
  download    http -d GET http://192.168.64.7:8081/api/upload/retro.png\?record=22
  upload         http --form POST http://192.168.64.7:8081/api/upload file@~/Dropbox/Screenshot/retro.png record=22
-
-
 
 PROTOTYPING:
 
@@ -20,7 +17,7 @@ https://www.invisionapp.com/tour/design-feedback-collaboration-tool
  web progressive apps
 https://developers.google.com/web/fundamentals/getting-started/your-first-offline-web-app/step-5?hl=en
 
-☐ RESPONSE standard @todiscuss
+RESPONSE standard:
 Response
   data
   errors { ['FIELD': 'message'], ['ANOTHER_ERROR': 'another message']}
@@ -28,7 +25,9 @@ Meta (data)
     "data_type": "<class 'dict'>",
     "elements": 1,
     "status": 500
- ☐ How to force the same also on normal flask endpoint
+
+☐ to apply
+☐ How to force the same also on normal flask endpoint
    ☐ and on frontend side
 ☐ admin page to check informations about other users
  ☐ user ranks on interface side
@@ -48,22 +47,11 @@ Meta (data)
 ☐ ng-flow
     ☐ missing authenticatation (header config)
 
-Autocomplete:
-☐ elasticsearch
-    https://elasticsearch-py.readthedocs.org/en/master/index.html
- ☐ extra
-http://blog.sandeepchivukula.com/posts/2016/03/06/photo-search/
-https://github.com/appbaseio/dejaVu
-https://medium.appbase.io/how-to-scale-and-migrate-elasticsearch-with-docker-10179930d7c9#.b8jbnbzcv
+Elasticsearch:
 ✔ docker server setup @done (16-02-07 01:41)
   ✔ install python library, don't know which @done (16-02-07 01:41)
   ☐ how to refresh indexes on startup?
     ☐ flask before first request i would say
-☐ python insert in operations.py
-  ✔ think about a structure @done (16-02-07 11:08)
-  ☐ tests
-☐ API with GET
-  ☐  separate file for elastic?
 ☐ Mix with Rethinkdb
 https://www.rethinkdb.com/docs/elasticsearch/
 https://github.com/rethinkdb/logstash-input-rethinkdb
@@ -548,6 +536,54 @@ COMPLETED:
     ✔ angular open new tab /page @done (16-04-07 07:52)
     ✔ via python request and jinja template @done (16-04-07 07:52)
  ✘ aggiungere lista dettagli (step 4) sotto lo scrollspy @cancelled (16-04-07 07:52)
+✔ Welcome page refactoring @done (16-04-26 01:20)
+  ✔ new look @done (16-04-25 14:36)
+    ✔ add color @done (16-04-25 14:29)
+      ✔ default @done (16-04-25 14:29)
+      ✔ database line @done (16-04-25 14:29)
+✔ Search page goes public @done (16-04-26 01:20)
+ ✔ public @done (16-04-25 15:05)
+   ✔ fix'em all @done (16-04-25 15:05)
+   ✔ menu will be unified again: @done (16-04-25 16:00)
+     ✔ login, search @done (16-04-25 16:00)
+     ✔ admin, fix, logout @done (16-04-25 16:00)
+   ✔ fix keyboard shortcuts @done (16-04-25 16:10)
+     ✔ remove history button @done (16-04-25 16:10)
+✔ Specifi font @done (16-04-25 16:33)
+✔ Html title in the bar? @done (16-04-25 17:21)
+ ✔ look inside the doc/ppt in the first version @done (16-04-25 17:21)
+✔ links @done (16-04-26 01:20)
+ ✔ remove @done (16-04-25 16:11)
+ ✔ search @done (16-04-25 16:54)
+ ✔ subsection @done (16-04-26 01:20)
+ ✔ click to go to specific @done (16-04-25 17:21)
+ ✔ workinprogress @done (16-04-25 17:21)
+
+✔ Search results @done (16-04-26 12:36)
+ ✔ order column names... @done (16-04-26 12:36)
+✘ Search order? @question @cancelled (16-04-27 23:54)
+✘ search speed? @cancelled (16-04-27 23:54)
+// https://www.rethinkdb.com/docs/secondary-indexes/python/#multi-indexes
+
+✔ Text editor @done (16-04-26 23:04)
+ ✔ justify @done (16-04-26 23:04)
+
+✔  base donnée (new power point) @done (16-04-27 21:56)
+  ✔ fete list @done (16-04-27 21:56)
+
+bugs:
+✔ subsection move to second place @done (16-04-28 07:51)
+✔ position in subsection @done (16-04-28 07:51)
+✔ check loading in section @done (16-04-28 09:47)
+✔ check loading in "more" @done (16-04-28 09:55)
+✔ fete list could be like missing images @done (16-04-28 10:15)
+
+✔ Subwelcome @done (16-04-30 14:59)
+    ✔ duplicate welcome @done (16-04-26 01:44)
+      ✔ inline editor for section content (not for welcome) @done (16-04-26 02:45)
+    ✔ show as a separate page @done (16-04-26 03:01)
+      ✔ by clicking (bienvenu?) @done (16-04-26 12:09)
+      ✔ trust html to show (content)? @done (16-04-26 12:09)
 
 RELEASE protocol:
 
