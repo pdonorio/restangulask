@@ -18,5 +18,6 @@ class FastDocs(ExtendedApiResource, FastSearch):
     def get(self, record=None):
 
         self.get_instance()
-        data, count = self.fast_get(record)
+        # fields = ['extrait', 'source', 'fete', 'transcription']
+        data, count = self.fast_get(record)  # , fields=fields)
         return self.response(data, elements=count)
