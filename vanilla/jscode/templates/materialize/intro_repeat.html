@@ -6,53 +6,19 @@
     flex="75"
     layout="column" layout-align='center center'>
 
-    <div ng-if="!wallopme"
-        ng-include="root.templateDir + 'loader.html'"></div>
-    <!-- slides/news WALLOP -->
-    <div ng-show="wallopme" class="Wallop Wallop--slide resizetowindow">
-        <div class="Wallop-list">
-          <div ng-repeat="section in sections"
-                class="Wallop-item">
-            <img
-                style='height: 100% - 100px; width: 100%; object-fit: contain'
-                src="{{root.imagesPath
-                + welcome.mainSubFolder + section.images[0].filename}}" />
-          </div>
-        </div>
-    </div>
 
-<!-- slides/news
+<!--SLIDER-->
+<div ng-include="root.blueprintTemplateDir + 'slider.html'"></div>
 
-    <div ng-if="slides.length < 2"
-        class="caption center-align"
-        style='height: 400px; padding-top: 50px;'>
-        <h3 class='black-text'> New website online </h3>
-        <h6> No news available at the moment </h6>
-    </div>
+<div ng-if="loading"
+    ng-include="root.templateDir + 'loader.html'"></div>
 
-    <div ng-if="slides.length > 1" class="slider"
-        style="padding-bottom: 10px;"
-        height='400' transition='300' slider>
-     <ul class="slides">
-        <li ng-repeat="slide in slides track by $index">
-          <a ui-sref="welcome.more(
-            {element: $index, section_type: 'slides'})">
-              <img src="{{ root.imagesPath + welcome.secondarySubFolder
-                + slide.images[0].filename}}" >
-              <div class="caption center-align">
-                <h3> {{slide.data['Section']}} </h3>
-                <h5> {{slide.data['Description']}} </h5>
-              </div>
-          </a>
-        </li>
-     </ul>
-
-    </div>
--->
-
+<div ng-if="!loading">
 <div style="padding-top: 50px;"></div>
 
+<!-- REPEATS -->
   <div ng-repeat="section in sections track by $index"
+    ng-cloak
     id='step{{$index}}'
     style="padding-bottom: 100px;"
     class="section scrollspy" scrollspy>
@@ -132,7 +98,8 @@
 
   </div>
 
-</div>
+</div> <!-- loader -->
+</div> <!-- flex -->
 
  <div flex="5"></div>
 <!-- SIDE MENU -->

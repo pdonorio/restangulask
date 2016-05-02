@@ -438,7 +438,7 @@ function WelcomeController($scope,
 {
   $log.debug("Welcome admin controller", $stateParams);
   var self = this;
-
+  $scope.loading = true;
 
   self.mainSubFolder = data_type + '/';
   self.secondarySubFolder = slide_type + '/';
@@ -514,24 +514,6 @@ function WelcomeController($scope,
 
   }
 
-/************************/
-/************************/
-  // WALLOP AUTOPLAY
-    function autoplay(wallop, interval) {
-      var lastTime = 0;
-      function frame(timestamp) {
-        var update = timestamp - lastTime >= interval;
-        if (update) {
-          wallop.next();
-          lastTime = timestamp;
-        }
-        requestAnimationFrame(frame);
-      }
-      requestAnimationFrame(frame);
-    };
-/************************/
-/************************/
-
   // Activate a dynamic welcome inside the view
   $timeout(function () {
 
@@ -546,17 +528,7 @@ function WelcomeController($scope,
 
         //Sections
         getSectionData($scope, AdminService, data_type).then(function () {
-/************************/
-/************************/
-            console.log("TEST WALLOP!");
-            $timeout(function () {
-                var wallopEl = document.querySelector('.Wallop');
-                var wallop = new Wallop(wallopEl);
-                autoplay(wallop, 5000);
-                $scope.wallopme = true;
-            }, 1000);
-/************************/
-/************************/
+            $scope.loading = false;
         });
 
         // //Slides
