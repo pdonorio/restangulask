@@ -6,6 +6,21 @@
     flex="75"
     layout="column" layout-align='center center'>
 
+    <div ng-if="!wallopme"
+        ng-include="root.templateDir + 'loader.html'"></div>
+    <!-- slides/news WALLOP -->
+    <div ng-show="wallopme" class="Wallop Wallop--slide resizetowindow">
+        <div class="Wallop-list">
+          <div ng-repeat="section in sections"
+                class="Wallop-item">
+            <img
+                style='height: 100% - 100px; width: 100%; object-fit: contain'
+                src="{{root.imagesPath
+                + welcome.mainSubFolder + section.images[0].filename}}" />
+          </div>
+        </div>
+    </div>
+
 <!-- slides/news
 
     <div ng-if="slides.length < 2"
@@ -48,7 +63,7 @@
     <div style="
         background-repeat: no-repeat;
         background-size: 100% 100%; /* background-size:cover; */
-        width: 750px; height: 470px;
+        width: 950px; height: 470px;
         z-index:1; "
         ng-style="{'background-image':'url('+
         root.imagesPath + welcome.mainSubFolder + section.images[0].filename
@@ -58,7 +73,7 @@
     <!-- TITLE BACKGROUND COLOR? -->
     <div style=" position: absolute; bottom: 10px;
         background-color: {{ section.data['Color'] || defaultColor }};
-        width: 750px;
+        width: 100%;
         height: 140px;
         opacity: .5;
         z-index:2;">

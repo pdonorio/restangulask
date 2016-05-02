@@ -20,7 +20,9 @@
 		"angular-tree-control/css/tree-control.css",
 		//"angular-tree-control/css/tree-control-attribute.css"
         //"angular-xeditable/dist/css/xeditable.css",
-        "angular-hotkeys/build/hotkeys.min.css"
+        "angular-hotkeys/build/hotkeys.min.css",
+        "wallop/css/wallop.css",
+        "wallop/css/wallop--slide.css"
 	],
 // USER CUSTOM CSS
 	"customcss" : [
@@ -79,7 +81,8 @@
 		"angular-formly-material/dist/formly-material.min.js",
         //"angular-xeditable/dist/js/xeditable.min.js",
         //"moment/min/moment.min.js",
-        "angular-ui-tinymce/dist/tinymce.min.js"
+        "angular-ui-tinymce/dist/tinymce.min.js",
+        "wallop/js/Wallop.min.js"
 	],
 // USER CUSTOM APP
 	"customjs": [

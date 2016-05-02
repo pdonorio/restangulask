@@ -26,15 +26,14 @@ ELASTICSEARCH:
 
 http://csscience.com/responsiveslidercss3/nojs.html
     file:///Users/paulie/Downloads/test.html
+ ✘ timer to load next slide @cancelled (16-05-02 07:46)
+ ✘ pointer to go down @cancelled (16-05-02 07:46)
 
- ☐ timer to load next slide
- ☐ pointer to go down
-
-☐ images stretched to take all the body
+✔ images stretched to take all the body @done (16-05-02 07:46)
+☐ list fete: vignette
 ☐ editor: table plugin
 ☐ lexique: tabs from pdf
 ☐ menu in all pages
-☐ list fete: vignette
 ☐ multiple source in fete: palermo
 ☐ details fete
      ☐ detail extrait
