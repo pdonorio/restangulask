@@ -67,7 +67,7 @@ function getSectionData($scope, AdminService, custom_type, $sce)
                     anchor = 'welcome.subsection'
                 } else if (sec == 'Base de données') {
                     //console.log(sec, "SEARCH?");
-                    //anchor = 'public.specialsearch'
+                    //anchor = 'public.fastsearch'
                     anchor = 'public.db'
                 } else if (element.data['Content'].trim() != "") {
                     anchor = "welcome.more({" +
@@ -163,7 +163,7 @@ function WelcomeSubInfoController($scope, $rootScope, $log, $sce, AdminService)
 function WelcomeInfoController($scope, $log, $stateParams,
     AdminService)
 {
-    $log.debug("Welcome info", $stateParams);
+    $log.warn("Welcome info", $stateParams);
     var self = this;
     self.loader = true;
 
@@ -439,6 +439,7 @@ function WelcomeController($scope,
   $log.debug("Welcome admin controller", $stateParams);
   var self = this;
 
+
   self.mainSubFolder = data_type + '/';
   self.secondarySubFolder = slide_type + '/';
   $scope.defaultColor = DefaultColor;
@@ -513,14 +514,54 @@ function WelcomeController($scope,
 
   }
 
+/************************/
+/************************/
+  // WALLOP AUTOPLAY
+    function autoplay(wallop, interval) {
+      var lastTime = 0;
+      function frame(timestamp) {
+        var update = timestamp - lastTime >= interval;
+        if (update) {
+          wallop.next();
+          lastTime = timestamp;
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    };
+/************************/
+/************************/
+
   // Activate a dynamic welcome inside the view
   $timeout(function () {
+
+    // ONLY IF CURRENT PAGE IS WELCOME
     var check = 'welcome';
+    $scope.wallopme = false;
+
     if ($state.current.name.slice(0, check.length) == check) {
+
+        $scope.h = window.innerHeight;
+        $scope.w = window.innerWidth;
+
         //Sections
-        getSectionData($scope, AdminService, data_type);
-        //Slides
-        getSectionData($scope, AdminService, slide_type);
+        getSectionData($scope, AdminService, data_type).then(function () {
+/************************/
+/************************/
+            console.log("TEST WALLOP!");
+            $timeout(function () {
+                var wallopEl = document.querySelector('.Wallop');
+                var wallop = new Wallop(wallopEl);
+                autoplay(wallop, 5000);
+                $scope.wallopme = true;
+            }, 1000);
+/************************/
+/************************/
+        });
+
+        // //Slides
+        // getSectionData($scope, AdminService, slide_type);
+
         //Type for the welcome template: rethinkdb template
         self.init = 'rdb';
     }

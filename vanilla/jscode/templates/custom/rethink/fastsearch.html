@@ -8,33 +8,44 @@
  <h4> Resultats de la <i>Recherche</i> </h4>
  <md-toolbar class="white black-text">
       <md-autocomplete md-autofocus
-          md-min-length="0"
-
+          md-min-length="1"
           md-selected-item="search.selectedItem"
           md-search-text-change="search.searchTextChange(search.searchText)"
           md-search-text="search.searchText"
-          md-selected-item-change="search.selectedItemChange(item)"
+          md-selected-item-change="search.selectedItemChange(item._source.suggest)"
           md-items="item in search.querySearch(search.searchText)"
-          md-item-text="item.name"
-
+          md-item-text="item._source.suggest"
           md-menu-class="autocomplete-custom-template"
+          md-delay="500"
+          md-select-on-focus
+          md-select-on-match
           placeholder="Recherche" >
         <md-item-template>
-          <span
-            md-highlight-text="search.searchText"
-            md-highlight-flags="^i"
-            >{{item.name}}</span>
-          <div layout="row" layout-align="start center">
-              <i class="material-icons"> import_contacts </i>
-              &nbsp;
-              type:
-              &nbsp;
-              <strong>book</strong>
-          </div>
+          <span layout="row" layout-align="start center">
+            <!-- TYPE -->
+            <span style="width: 200px;">
+                <span ng-switch on="item._source.label">
+                  <i ng-switch-when="extrait"
+                    class="material-icons"> import_contacts </i>
+                  <i ng-switch-when="source"
+                    class="material-icons"> book </i>
+                  <i ng-switch-when="fete"
+                    class="material-icons"> bookmark_border </i>
+                  <i ng-switch-when="transcription"
+                    class="material-icons"> library_books </i>
+                </span>
+                  &nbsp; <strong>{{item._source.label}}</strong>
+            </span>
+            <!-- VALUE -->
+            <span
+                md-highlight-text="search.searchText"
+                md-highlight-flags="^i"
+                >{{item._source.suggest}}</span>
+          </span>
         </md-item-template>
-<!--
-        <md-not-found> No matches found. </md-not-found>
--->
+        <!--
+        <md-not-found> No matches... </md-not-found>
+        -->
       </md-autocomplete>
  </md-toolbar>
  <span ng-if="search.elements >= 0">
@@ -52,7 +63,7 @@
 
 <div ng-if="!search.data"
     ng-include="root.templateDir + 'loader.html'"></div>
- <table class='bordered highlight' ng-if="search.data">
+ <table class='bordered highlight' ng-if="search.elements > 0">
   <thead>
     <tr>
         <th>Vignette</th>

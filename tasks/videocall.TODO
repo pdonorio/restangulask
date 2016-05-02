@@ -1,35 +1,35 @@
 
 ELASTICSEARCH:
 
-obj = {
-   "query": {
-      "function_score": {
-         "query": {
-            "filtered": {
-               "query": {'match': {'suggest': 'palerm'}}}},
-"functions": [
-    {"script_score": {"script": "_score * doc['prob'].value"}}]}}}
-es.search(index='suggestions', body=obj)
-
-
   ✔ bold hightlight? @done (16-04-30 14:56)
   http://codepen.io/vncnz/pen/mJLoaZ
-  ☐ relevance of fields in search
-    ☐ mixed with sorting...
+  ✔ relevance of fields in search @done (16-05-01 23:59)
+    ✔ mixed with sorting... @done (16-05-01 23:59)
   ☐ suggestions
-  https://www.elastic.co/blog/you-complete-me
-  https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html
+    ☐ edge gram for this index only
+    https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-edgengram-tokenizer.html
+    ☐ or prefix query for non analyzed?
+    https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
     ☐ did you mean?
     https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html
   ☐ scroll
   https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html
 
- ☐ logged link to edit transcriptions
+  OTHERS:
 
-☐ Spy menu
+☐ Spy menu every page
 
-☐ slides example
+☐ logged link to edit transcriptions
+
+☐ slides welcome page
     http://pedroduarte.me/wallop/
+
+http://csscience.com/responsiveslidercss3/nojs.html
+    file:///Users/paulie/Downloads/test.html
+
+ ☐ timer to load next slide
+ ☐ pointer to go down
+
 ☐ images stretched to take all the body
 ☐ editor: table plugin
 ☐ lexique: tabs from pdf

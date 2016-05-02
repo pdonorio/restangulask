@@ -15,6 +15,7 @@ function SearchService($log, api) {
         documents: 'datadocs',
         users : 'accounts',
         fast: 'datasearch',
+        suggest: 'datasuggest',
     }
 
 //////////////////
@@ -170,6 +171,11 @@ function SearchService($log, api) {
     //////////////////////////
     self.getDataFast = function(searchTerms) {
         return api.apiCall(self.endpoints.fast, 'GET', null, searchTerms);
+    }
+
+    //////////////////////////
+    self.getSuggestionsFast = function(searchTerms) {
+        return api.apiCall(self.endpoints.suggest, 'GET', null, searchTerms);
     }
 
 }

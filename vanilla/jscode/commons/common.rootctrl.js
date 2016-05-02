@@ -280,7 +280,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
     // Redirect to that state
     $rootScope.activateSearch = function ()
     {
-        $state.go('public.specialsearch');
+        $state.go('public.fastsearch');
     }
 
     // In case of special search available

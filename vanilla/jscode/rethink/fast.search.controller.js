@@ -21,16 +21,26 @@ function FastSearchController($scope, $log, SearchService
     }
   }
   self.selectedItemChange = function (item) {
-    $log.warn('Item changed to ' + JSON.stringify(item));
+    //$log.warn('Item changed to ' + JSON.stringify(item));
+    if (item && item.trim() != '') {
+        self.load(item);
+    }
   }
-/*
+
   self.querySearch = function (text) {
-       return [
-            {name: 'hello', watchers: '12', forks: 'qualcosa'},
-            {name: 'a hel world', watchers: '12', forks: 'qualcosa'},
-       ];
+
+    var empty_response = [];
+
+    if (!text || text.trim() == '')
+        return empty_response;
+    return SearchService.getSuggestionsFast(text).then(function (out) {
+        console.log("OUT", out);
+        if (out.elements && out.elements > 0)
+            return out.data;
+        return empty_response;
+    });
   }
-*/
+
 
   self.load = function(searchTerms) {
 

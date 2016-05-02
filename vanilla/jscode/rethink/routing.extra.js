@@ -7,7 +7,7 @@ angular.module('web')
 // EXTRA ROUTES
     {
 
-    //////////////////////
+    ////////////////////// NEW
         'public.fastsearch': {
             url: "/fastsearch/:text",
             views: {
@@ -24,7 +24,7 @@ angular.module('web')
             // },
         },
 
-    //////////////////////
+    ////////////////////// OLD
         'public.specialsearch': {
             url: "/search/:text",
             views: {
@@ -67,10 +67,10 @@ angular.module('web')
         'public.details': {
             url: "/details/:id",
             views: {
-                // "menu": {
-                //     dir: 'template',
-                //     templateUrl: 'menu.html',
-                // },
+                "menu": {
+                    dir: 'template',
+                    templateUrl: 'menu.html',
+                },
                 "unlogged": {
                     dir: 'blueprint',
                     templateUrl: 'details.html',
