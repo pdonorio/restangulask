@@ -67,7 +67,7 @@ function getSectionData($scope, AdminService, custom_type, $sce)
                     anchor = 'welcome.subsection'
                 } else if (sec == 'Base de données') {
                     //console.log(sec, "SEARCH?");
-                    //anchor = 'public.specialsearch'
+                    //anchor = 'public.fastsearch'
                     anchor = 'public.db'
                 } else if (element.data['Content'].trim() != "") {
                     anchor = "welcome.more({" +
@@ -163,7 +163,7 @@ function WelcomeSubInfoController($scope, $rootScope, $log, $sce, AdminService)
 function WelcomeInfoController($scope, $log, $stateParams,
     AdminService)
 {
-    $log.debug("Welcome info", $stateParams);
+    $log.warn("Welcome info", $stateParams);
     var self = this;
     self.loader = true;
 
@@ -438,6 +438,7 @@ function WelcomeController($scope,
 {
   $log.debug("Welcome admin controller", $stateParams);
   var self = this;
+  $scope.loading = true;
 
   self.mainSubFolder = data_type + '/';
   self.secondarySubFolder = slide_type + '/';
@@ -515,12 +516,24 @@ function WelcomeController($scope,
 
   // Activate a dynamic welcome inside the view
   $timeout(function () {
+
+    // ONLY IF CURRENT PAGE IS WELCOME
     var check = 'welcome';
+    $scope.wallopme = false;
+
     if ($state.current.name.slice(0, check.length) == check) {
+
+        $scope.h = window.innerHeight;
+        $scope.w = window.innerWidth;
+
         //Sections
-        getSectionData($scope, AdminService, data_type);
-        //Slides
-        getSectionData($scope, AdminService, slide_type);
+        getSectionData($scope, AdminService, data_type).then(function () {
+            $scope.loading = false;
+        });
+
+        // //Slides
+        // getSectionData($scope, AdminService, slide_type);
+
         //Type for the welcome template: rethinkdb template
         self.init = 'rdb';
     }

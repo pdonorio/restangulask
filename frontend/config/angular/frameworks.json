@@ -27,6 +27,7 @@
 	// # BOOTSTRAP
 		//"css/custom.css"
 	// # MATERIAL
+        "css/slider.css",
 		"css/custom_material.css",
 		"css/style.css"
 

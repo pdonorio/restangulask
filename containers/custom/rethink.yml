@@ -14,6 +14,7 @@ searchindex:
   hostname: elastic
   volumes:
       - restangulask_elasticdata:/usr/share/elasticsearch/data
+      - ../containers/elastic.confs:/usr/share/elasticsearch/config
 
 uploadsdata:
   image: busybox
@@ -27,7 +28,7 @@ custombe:
       service: backend
   links:
       - rethinkdb:rdb
-#      - searchindex:el
+      - searchindex:el
   volumes_from:
       - uploadsdata
 

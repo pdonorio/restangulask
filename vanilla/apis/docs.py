@@ -500,7 +500,9 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
         # I want to skip record which already have transcriptions
         # But also want to avoid records which have no images
 
-        final = self.subtract_documents(set(records))
+        # final = self.subtract_documents(set(records))
+# SHOW ALL BECAUSE WE PASSED THAT PHASE
+        final = self.subtract_documents(set())
         return self.response(final)
 
     @deck.apimethod
@@ -510,7 +512,7 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
         j = self.get_input(False)
         if 'trans' not in j:
             return self.response({}, code=hcodes.HTTP_OK_NORESPONSE)
-        print("Id", id, "Received", j)
+        # print("Id", id, "Received", j)
 
         # def merge_dicts(a, b):
         #     print("MERGE", a, b)
@@ -526,16 +528,16 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
         key = 'transcriptions'
         image[key] = [j['trans']]
 
-# TO FIX: substitute with elastic search
-        words = set()
-        for trans in image[key]:
-            words = words | split_and_html_strip(trans)
-        image[key+'_split'] = list(words)
+# # TO FIX: substitute with elastic search
+#         words = set()
+#         for trans in image[key]:
+#             words = words | split_and_html_strip(trans)
+#         image[key+'_split'] = list(words)
 
         print(image)
         changes = base_query.update({
             'images': [image]
-        }, return_changes=True).run()
+        }, return_changes=True).run(time_format="raw")
 
         return self.response(changes)
 

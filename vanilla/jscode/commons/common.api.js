@@ -37,7 +37,7 @@ function RestApiService($http, $auth, $log) {
         //DEFAULTS
         errorCheck = self.getOrDefault(errorCheck, false);
         endpoint = self.getOrDefault(endpoint, self.endpoints.check);
-        if (typeof id !== 'undefined' && method != 'POST') {
+        if (typeof id !== 'undefined' && id && method != 'POST') {
             endpoint += '/' + id;
         }
         method = self.getOrDefault(method, 'GET');

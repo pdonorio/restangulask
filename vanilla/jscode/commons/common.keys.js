@@ -11,7 +11,7 @@ function HotkeysService($timeout, $state) {
   self.search = function(event, controller) {
     event.preventDefault();
     $timeout(function () {
-        $state.go('public.specialsearch');
+        $state.go('public.fastsearch');
     }, 10);
   }
 

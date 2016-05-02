@@ -1,0 +1,69 @@
+
+<!-- MaxWidth Options
+    <div class="respond">
+
+        <label class="desktop" for="desktop"></label>
+        <label class="tablet" for="tablet"></label>
+        <label class="mobile" for="mobile"></label>
+        <p><strong>Important:</strong> If you want to resize the window manually, leave at desktop resolution. Or you can just click an icon.</p>
+    </div>
+-->
+<!-- Enable MaxWidth Switching
+<input checked="" type="radio" name="respond" id="desktop">
+<input type="radio" name="respond" id="tablet">
+<input type="radio" name="respond" id="mobile">
+-->
+
+<article id="slider">
+
+
+    <!-- Slider Setup -->
+    <input checked="" type="radio" name="slider" id="slide1">
+    <input type="radio" name="slider" id="slide2">
+    <input type="radio" name="slider" id="slide3">
+    <input type="radio" name="slider" id="slide4">
+
+    <!-- The Slider -->
+
+    <div id="slides">
+        <div id="overflow">
+            <div class="inner">
+
+                <article ng-repeat="section in sections">
+                    <div class="info">
+                        <h3>
+                            BIENVENUE SUR CULTURES
+                            <br>
+                            DU SPECTACLE BAROQUE
+                        </h3>
+                    </div>
+                    <img src="{{root.imagesPath
+                        + welcome.mainSubFolder + section.images[0].filename}}">
+                </article>
+
+            </div> <!-- .inner -->
+
+        </div> <!-- #overflow -->
+
+    </div> <!-- #slides -->
+
+
+    <!-- Controls and Active Slide Display -->
+
+    <div id="controls">
+        <label for="slide1"></label>
+        <label for="slide2"></label>
+        <label for="slide3"></label>
+        <label for="slide4"></label>
+    </div> <!-- #controls -->
+
+    <div id="active">
+        <label for="slide1"></label>
+        <label for="slide2"></label>
+        <label for="slide3"></label>
+        <label for="slide4"></label>
+    </div> <!-- #active -->
+
+
+
+</article> <!-- #slider -->

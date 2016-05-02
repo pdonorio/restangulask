@@ -6,38 +6,19 @@
     flex="75"
     layout="column" layout-align='center center'>
 
-<!-- slides/news
 
-    <div ng-if="slides.length < 2"
-        class="caption center-align"
-        style='height: 400px; padding-top: 50px;'>
-        <h3 class='black-text'> New website online </h3>
-        <h6> No news available at the moment </h6>
-    </div>
+<!--SLIDER-->
+<div ng-include="root.blueprintTemplateDir + 'slider.html'"></div>
 
-    <div ng-if="slides.length > 1" class="slider"
-        style="padding-bottom: 10px;"
-        height='400' transition='300' slider>
-     <ul class="slides">
-        <li ng-repeat="slide in slides track by $index">
-          <a ui-sref="welcome.more(
-            {element: $index, section_type: 'slides'})">
-              <img src="{{ root.imagesPath + welcome.secondarySubFolder
-                + slide.images[0].filename}}" >
-              <div class="caption center-align">
-                <h3> {{slide.data['Section']}} </h3>
-                <h5> {{slide.data['Description']}} </h5>
-              </div>
-          </a>
-        </li>
-     </ul>
+<div ng-if="loading"
+    ng-include="root.templateDir + 'loader.html'"></div>
 
-    </div>
--->
-
+<div ng-if="!loading">
 <div style="padding-top: 50px;"></div>
 
+<!-- REPEATS -->
   <div ng-repeat="section in sections track by $index"
+    ng-cloak
     id='step{{$index}}'
     style="padding-bottom: 100px;"
     class="section scrollspy" scrollspy>
@@ -45,9 +26,10 @@
    <div style="position: relative; height: 480px;">
 
     <!-- IMAGE (with link) -->
-    <div style="background-repeat: no-repeat;
+    <div style="
+        background-repeat: no-repeat;
         background-size: 100% 100%; /* background-size:cover; */
-        width: 750px; height: 470px;
+        width: 950px; height: 470px;
         z-index:1; "
         ng-style="{'background-image':'url('+
         root.imagesPath + welcome.mainSubFolder + section.images[0].filename
@@ -57,7 +39,7 @@
     <!-- TITLE BACKGROUND COLOR? -->
     <div style=" position: absolute; bottom: 10px;
         background-color: {{ section.data['Color'] || defaultColor }};
-        width: 750px;
+        width: 100%;
         height: 140px;
         opacity: .5;
         z-index:2;">
@@ -116,7 +98,8 @@
 
   </div>
 
-</div>
+</div> <!-- loader -->
+</div> <!-- flex -->
 
  <div flex="5"></div>
 <!-- SIDE MENU -->

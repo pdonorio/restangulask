@@ -1,0 +1,144 @@
+
+<div ng-controller="FastSearchController as search">
+
+<!-- TOOLBAR -->
+<form ng-submit="$event.preventDefault()" layout="row">
+ <div flex="15"></div>
+ <div flex="70" layout="column">
+ <h4> Resultats de la <i>Recherche</i> </h4>
+ <md-toolbar class="white black-text">
+      <md-autocomplete md-autofocus
+          md-min-length="1"
+          md-selected-item="search.selectedItem"
+          md-search-text-change="search.searchTextChange(search.searchText)"
+          md-search-text="search.searchText"
+          md-selected-item-change="search.selectedItemChange(item._source.suggest)"
+          md-items="item in search.querySearch(search.searchText)"
+          md-item-text="item._source.suggest"
+          md-menu-class="autocomplete-custom-template"
+          md-delay="500"
+          md-select-on-focus
+          md-select-on-match
+          placeholder="Recherche" >
+        <md-item-template>
+          <span layout="row" layout-align="start center">
+            <!-- TYPE -->
+            <span style="width: 200px;">
+                <span ng-switch on="item._source.label">
+                  <i ng-switch-when="extrait"
+                    class="material-icons"> import_contacts </i>
+                  <i ng-switch-when="source"
+                    class="material-icons"> book </i>
+                  <i ng-switch-when="fete"
+                    class="material-icons"> bookmark_border </i>
+                  <i ng-switch-when="transcription"
+                    class="material-icons"> library_books </i>
+                </span>
+                  &nbsp; <strong>{{item._source.label}}</strong>
+            </span>
+            <!-- VALUE -->
+            <span
+                md-highlight-text="search.searchText"
+                md-highlight-flags="^i"
+                >{{item._source.suggest}}</span>
+          </span>
+        </md-item-template>
+        <!--
+        <md-not-found> No matches... </md-not-found>
+        -->
+      </md-autocomplete>
+ </md-toolbar>
+ <span ng-if="search.elements >= 0">
+    <b><i>Trouvés: {{search.elements}} éléments</i></b>
+ </span>
+ </div>
+ <div flex="15"></div>
+</form>
+<!-- TOOLBAR -->
+
+
+<md-content layout="row" layout-padding>
+ <div flex='10'>&nbsp;</div>
+ <div flex='80'>
+
+<div ng-if="!search.data"
+    ng-include="root.templateDir + 'loader.html'"></div>
+ <table class='bordered highlight' ng-if="search.elements > 0">
+  <thead>
+    <tr>
+        <th>Vignette</th>
+        <th>Extrait</th>
+        <th>Détails</th>
+        <th><i>links</i></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat='row in search.data'>
+      <!-- IMAGE -->
+      <td style="height: 160px;">
+
+<!--
+          <a class="waves-effect waves-light btn disabled">
+            <i class="material-icons blue-grey-text"> center_focus_weak </i>
+          </a>
+-->
+        <div ng-if='!row._source.thumbnail'
+            style=" background-repeat: no-repeat; background-size: 100% 100%;
+                width: 110px; height: 160px;"
+            ng-style="{'background-image':'url(http://placehold.it/110x160)'}"
+        ></div>
+        <div ng-if='row._source.thumbnail'
+            style=" background-repeat: no-repeat; background-size: 100% 100%;
+                width: 110px; height: 160px;"
+            ng-style="{'background-image':'url('+ row._source.thumbnail +')'}"
+        ></div>
+      </td>
+      <td>
+            <strong>
+              <span
+                md-highlight-text="search.searchText"
+                md-highlight-flags="^i">{{row._source.extrait}}</span>
+            </strong> </td>
+      <td>
+        <i>Source</i>:
+        <span md-highlight-text="search.searchText"
+            md-highlight-flags="^i">{{row._source.source}}</span>
+        <br>
+        <i>Fete</i>:
+        <span md-highlight-text="search.searchText"
+            md-highlight-flags="^i">{{row._source.fete}}</span>
+        <br>
+        <i>Lieu</i>:
+        {{row._source.place}}
+        <br>
+        <i>Date</i>:
+        {{row._source.date}}
+        <br>
+      </td>
+      <td>
+          <a ui-sref='public.details({id: row._id})'
+              class="waves-effect waves-light btn-floating lime lighten-3">
+              <i class="material-icons blue-grey-text">web</i>
+          </a>
+      </td>
+<!--
+      <td>
+          <a class="waves-effect waves-light btn-floating disabled">
+              <i class="material-icons">mode_edit</i>
+          </a>
+      </td>
+      <td>
+          <a class="waves-effect waves-light btn-floating disabled">
+              <i class="material-icons">delete</i>
+          </a>
+      </td>
+-->
+    </tr>
+  </tbody>
+ </table>
+ </div>
+ <div flex='10'>&nbsp;</div>
+ </md-content>
+
+</div>

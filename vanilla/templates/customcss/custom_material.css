@@ -1,4 +1,14 @@
 
+
+.resizetowindow {
+ width: calc(100%);
+ /*
+ height: calc(100%);
+ */
+ height: 100vh - 100px;
+ padding-top: 50px;
+}
+
 header, main, footer {
   padding: 0;
   margin: 0;
@@ -28,6 +38,10 @@ header, main, footer {
 }
 
 /* AUTOCOMPLETE */
+.md-virtual-repeat-container.md-autocomplete-suggestions-container {
+    height: 300px;
+    max-height: 300px !important;
+}
 .autocomplete-custom-template li {
   border-bottom: 1px solid #ccc;
   height: auto;
@@ -104,4 +118,16 @@ md-input-container.editable-controls [ng-message] {
     box-shadow: 0px 0px 0px 0px;
     -moz-box-shadow: 0px 0px 0px 0px;
     -webkit-box-shadow: 0px 0px 0px 0px;
+}
+
+table.highlight td span.highlight {
+    color: black;
+    background: #eee;
+    border: 1px solid red;
+    border-radius: 2px;
+    margin: -1px;
+}
+
+table.highlight td span.highlight:empty {
+    display: none;
 }

@@ -1,80 +1,44 @@
 
-Interface adjustment:
-  we should see in two weeks (21?)
+ELASTICSEARCH:
 
-GOING ONLINE:
+  ✔ bold hightlight? @done (16-04-30 14:56)
+  http://codepen.io/vncnz/pen/mJLoaZ
+  ✔ relevance of fields in search @done (16-05-01 23:59)
+    ✔ mixed with sorting... @done (16-05-01 23:59)
+  ☐ suggestions
+    ☐ edge gram for this index only
+    https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-edgengram-tokenizer.html
+    ☐ or prefix query for non analyzed?
+    https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
+    ☐ did you mean?
+    https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html
+  ☐ scroll
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html
 
-✔ Welcome page refactoring @done (16-04-26 01:20)
-  ✔ new look @done (16-04-25 14:36)
-    ✔ add color @done (16-04-25 14:29)
-      ✔ default @done (16-04-25 14:29)
-      ✔ database line @done (16-04-25 14:29)
-✔ Search page goes public @done (16-04-26 01:20)
- ✔ public @done (16-04-25 15:05)
-   ✔ fix'em all @done (16-04-25 15:05)
-   ✔ menu will be unified again: @done (16-04-25 16:00)
-     ✔ login, search @done (16-04-25 16:00)
-     ✔ admin, fix, logout @done (16-04-25 16:00)
-   ✔ fix keyboard shortcuts @done (16-04-25 16:10)
-     ✔ remove history button @done (16-04-25 16:10)
-✔ Specifi font @done (16-04-25 16:33)
-✔ Html title in the bar? @done (16-04-25 17:21)
- ✔ look inside the doc/ppt in the first version @done (16-04-25 17:21)
-✔ links @done (16-04-26 01:20)
- ✔ remove @done (16-04-25 16:11)
- ✔ search @done (16-04-25 16:54)
- ✔ subsection @done (16-04-26 01:20)
- ✔ click to go to specific @done (16-04-25 17:21)
- ✔ workinprogress @done (16-04-25 17:21)
+  OTHERS:
 
-✔ Search results @done (16-04-26 12:36)
- ✔ order column names... @done (16-04-26 12:36)
-✘ Search order? @question @cancelled (16-04-27 23:54)
-✘ search speed? @cancelled (16-04-27 23:54)
-// https://www.rethinkdb.com/docs/secondary-indexes/python/#multi-indexes
+✔ slides welcome page @done (16-05-02 08:34)
+http://csscience.com/responsiveslidercss3/nojs.html
+✔ images stretched to take all the body @done (16-05-02 07:46)
+✔ logged link to edit transcriptions @done (16-05-02 11:10)
 
-✔ Text editor @done (16-04-26 23:04)
- ✔ justify @done (16-04-26 23:04)
-
-✔  base donnée (new power point) @done (16-04-27 21:56)
-  ✔ fete list @done (16-04-27 21:56)
-
-bugs:
-✔ subsection move to second place @done (16-04-28 07:51)
-✔ position in subsection @done (16-04-28 07:51)
-✔ check loading in section @done (16-04-28 09:47)
-✔ check loading in "more" @done (16-04-28 09:55)
-✔ fete list could be like missing images @done (16-04-28 10:15)
-
-☐ Subwelcome
-    ✔ duplicate welcome @done (16-04-26 01:44)
-      ✔ inline editor for section content (not for welcome) @done (16-04-26 02:45)
-    ✔ show as a separate page @done (16-04-26 03:01)
-      ✔ by clicking (bienvenu?) @done (16-04-26 12:09)
-      ✔ trust html to show (content)? @done (16-04-26 12:09)
-    ☐ spy menu @question
-      ☐ how to show spy-submenu?
-      ✔ can i use spy as direct links @done (16-04-26 23:09)
-
-☐ details:
- ✔ click to zoom tooltip @done (16-04-26 23:12)
- ✔ next and previous page! @done (16-04-26 15:34)
-   ✔ optimize index @done (16-04-26 23:01)
-   ✔ other cases? @done (16-04-27 23:54)
- ✘ change appearance of transcripts into a better monospace? @cancelled (16-04-27 23:54)
- ☐ remove h5 from current transcriptions...
-
-☐ Whole starting page is just a slide? @question
-    https://www.rijksmuseum.nl/nl/
-    http://pedroduarte.me/wallop/
-    http://unslider.com/
+☐ Spy menu every page
+☐ list fete: vignette
+☐ editor: table plugin
+☐ lexique: tabs from pdf
+☐ menu in all pages
+☐ multiple source in fete: palermo
+☐ details fete
+     ☐ detail extrait
 
  ☐ TIF/TIFF conversion
 
+☐ details:
+ ☐ remove h5 from current transcriptions...
 
-- Move to a powerful node
-backup oceanmaster1
- ☐ leaseweb
+MOVE TO PRODUCTION:
+ ✔ backup oceanmaster1 @done (16-04-30 15:00)
+ ✔ leaseweb @done (16-04-30 15:00)
  ☐ uptime robot (both interface and api)
  ☐ disable rethinkdb monitor interface
  ☐ haproxy test?
@@ -87,13 +51,6 @@ backup oceanmaster1
 
   https://github.com/SteveLTN/https-portal
   https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion
-
-
-- Search page optimization: become faster
-invert table titles
-lazy load after 10 elements
-  https://material.angularjs.org/latest/demo/virtualRepeat
-elasticsearch (or solr) on all fields + transcriptions
 
 - Submission
 inverted
