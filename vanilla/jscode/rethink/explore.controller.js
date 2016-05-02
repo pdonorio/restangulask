@@ -12,7 +12,7 @@ angular.module('web')
 // controller
 ////////////////////////////////
 
-function ExploreController($scope, $log, $state, SearchService, AdminService)
+function ExploreController($scope, $log, $state, AdminService)
 {
 
   // INIT controller
@@ -131,8 +131,8 @@ function getMissingTransData(AdminService, $scope) {
     });
 };
 
-function FixTransController($scope, $rootScope,
-    $log, $timeout, $mdDialog, $window, AdminService)
+function FixTransController($scope, $rootScope, $sce,
+    $log, $timeout, $mdDialog, $window, AdminService, SearchService)
 {
     var self = this;
     self.elements = null;
@@ -153,10 +153,12 @@ function FixTransController($scope, $rootScope,
     {
 
       // Prepare data for the dialog
+      $scope.currentText = "";
       $scope.currentRecord = record;
       $scope.currentType = 'documents';
       $scope.currentName = name;
       $scope.options = angular.copy($rootScope.tinymceOptions);
+
       $scope.options.setup = function (editor) {
           editor.on("init", function() {
             // If i want to init the variable
@@ -166,44 +168,62 @@ function FixTransController($scope, $rootScope,
           });
       }
 
-      var dialogOptions = {
-        templateUrl: blueprintTemplateDir + 'transcription.html',
-        parent: angular.element(document.body),
-        // I can pass my scope
-        scope: $scope.$new(),
-        // Note: THE $new() FUNCTION IS NECESSARY to duplicate
-        // the scope inside the modal.
-        // Otherwise, closing the modal would destroy the parent's scope
-      }
+      // Fill data if exists
+      SearchService.getDocs(record).then(function (out) {
+          var emptyText = "";
+          //console.log("To inject", record, out.data[0].images);
+          if (out.data[0].images
+              && out.data[0].images.length > 0
+              && out.data[0].images[0].transcriptions
+              && out.data[0].images[0].transcriptions.length > 0)
+          {
 
-      // Open
-      $mdDialog.show(dialogOptions)
-        .then(function (response) {
-            $log.debug("Closed transcript dialog with", response);
+                var trans = out.data[0].images[0].transcriptions[0];
+                //console.log("Obtained", trans);
+                //$scope.currentText = angular.copy($sce.trustAsHtml(trans));
+                $scope.currentText = angular.copy(trans);
+          }
+          //console.log("To inject", $scope.currentText);
 
-            if (response) {
+          var dialogOptions = {
+            templateUrl: blueprintTemplateDir + 'transcription.html',
+            parent: angular.element(document.body),
+            // I can pass my scope
+            scope: $scope.$new(),
+            // Note: THE $new() FUNCTION IS NECESSARY to duplicate
+            // the scope inside the modal.
+            // Otherwise, closing the modal would destroy the parent's scope
+          }
 
-//////////////////////////////////
-// SAVE DATA!
-              var data = {};
-              data.type = $scope.currentType;
-              data.trans = response;
-              return AdminService.setDocumentTrans(
-                    $scope.currentRecord, data).then(function(out)
-              {
-                  console.log("SET OUT", out);
-              });
-//////////////////////////////////
+          // Open
+          $mdDialog.show(dialogOptions)
+            .then(function (response) {
+                $log.debug("Closed transcript dialog with", response);
 
-                // Make the loader appear
-                $scope.transcripts = null;
-                //$scope.showSimpleToast({"Reloading data": null}, 1200);
-                // Close the card
-                self.closeCard();
-                // Reload data
-                getMissingTransData(AdminService, $scope);
-            }
-        });
+                if (response) {
+
+                  //////////////////////////////////
+                  // SAVE DATA!
+                  var data = {};
+                  data.type = $scope.currentType;
+                  data.trans = response;
+                  return AdminService.setDocumentTrans(
+                        $scope.currentRecord, data).then(function(out)
+                  {
+                      console.log("SET OUT", out);
+                  });
+
+                    // Make the loader appear
+                    $scope.transcripts = null;
+                    //$scope.showSimpleToast({"Reloading data": null}, 1200);
+                    // Close the card
+                    self.closeCard();
+                    // Reload data
+                    getMissingTransData(AdminService, $scope);
+                }
+          }); // end of open
+
+        }); // end of filling
     }
 
 };
@@ -221,8 +241,8 @@ function StepsController($scope, $log, $state, $window, SearchService)
 
     self.noImageList = function (name, data) {
       self.elements = data;
-      self.currentParty = data;
-      //self.currentParty = name;
+// TO FIX
+      self.currentParty = name;
       $window.scrollTo(0, 0);
     }
 

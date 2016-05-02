@@ -5,7 +5,7 @@ angular.module('web')
     .controller('EditorController', EditorController);
 
 
-function EditorController($scope, $sce, $log, $mdDialog)
+function EditorController($scope, $sce, $log, $mdDialog, $timeout)
 {
     var self = this;
     $log.debug("TransDialog", $scope.currentRecord);
@@ -14,19 +14,30 @@ function EditorController($scope, $sce, $log, $mdDialog)
     // CONFIGURE EDITOR WYSIWYG
     ////////////////////////////////
 
-    // Note: Make sure you using scopes correctly by following this wiki page. If you are having issues with your model not updating, make sure you have a '.' in your model.
-    self.content = null;
-    self.realHtml = null;
-
     self.options = $scope.options;
     self.options.width = 600;
     self.options.height = 300;
 
+    // Note: Make sure you using scopes correctly by following this wiki page. If you are having issues with your model not updating, make sure you have a '.' in your model.
+    self.content = null;
+    self.realHtml = null;
+    if ($scope.currentText) {
+        // If i don't use timeout, the content gets wiped
+        $timeout(function () {
+            self.content = angular.copy($scope.currentText); //.getTrustedHtml());
+        }, 800);
+    }
+    //console.log("TEST CONTENT", self.content, $scope);
+
     $scope.$watch(
         "edit.content",
         function handleFooChange( newValue, oldValue ) {
+
+            // if (newValue == oldValue)
+            //     return;
             self.realHtml = $sce.trustAsHtml(oldValue);
-            //$log.debug("HTML content watch:", oldValue);
+            // $log.warn("HTML content watch:",
+            //     "Old", oldValue, "New", newValue, "real", self.realHtml);
         }
     );
 

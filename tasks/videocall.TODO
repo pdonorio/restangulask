@@ -17,19 +17,12 @@ ELASTICSEARCH:
 
   OTHERS:
 
-☐ Spy menu every page
-
-☐ logged link to edit transcriptions
-
-☐ slides welcome page
-    http://pedroduarte.me/wallop/
-
+✔ slides welcome page @done (16-05-02 08:34)
 http://csscience.com/responsiveslidercss3/nojs.html
-    file:///Users/paulie/Downloads/test.html
- ✘ timer to load next slide @cancelled (16-05-02 07:46)
- ✘ pointer to go down @cancelled (16-05-02 07:46)
-
 ✔ images stretched to take all the body @done (16-05-02 07:46)
+✔ logged link to edit transcriptions @done (16-05-02 11:10)
+
+☐ Spy menu every page
 ☐ list fete: vignette
 ☐ editor: table plugin
 ☐ lexique: tabs from pdf
