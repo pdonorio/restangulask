@@ -5,14 +5,27 @@ angular.module('web')
     .controller('FastSearchController', FastSearchController)
     ;
 
-function FastSearchController($scope, $log, SearchService
-    //, $rootScope, $state, hotkeys, keyshortcuts
+function FastSearchController(
+    $scope, $log, $stateParams,
+    SearchService, hotkeys, keyshortcuts
+    //, $rootScope, $state
+
     )
 {
 
   // INIT controller
   var self = this;
   $log.warn("New FAST search controller");
+
+/*
+  // Init keys
+  hotkeys.bindTo($scope)
+    .add({
+        combo: "esc",
+        description: "Quit from searching",
+        callback: function() { keyshortcuts.exitSearch(event, self); }
+  });
+*/
 
   self.searchTextChange = function (text) {
     $log.warn('Text changed to ' + text);
@@ -55,7 +68,15 @@ function FastSearchController($scope, $log, SearchService
   }
 
   // first call
-  self.load();
+  // // HANDLE PARAMETER
+  self.searchText = $stateParams.text;
+  self.load(self.searchText);
+
+  // self.parameter = $stateParams.text;
+  // console.log("Search parameter", self.parameter);
+  // if (self.parameter) {
+  //   self.querySearch(self.parameter);
+  // }
 
 }
 
