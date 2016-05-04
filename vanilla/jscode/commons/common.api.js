@@ -9,7 +9,7 @@ function RestApiService($http, $auth, $log) {
     var self = this;
 
     // How long should i wait for API response?
-    self.defaultTimeOut = 9500;
+    self.defaultTimeOut = 12500;
 
     // Api URI
     self.API_URL = apiUrl + '/';

@@ -1,4 +1,11 @@
-<div layout="row">
+<div ng-if="failure" layout="column" layout-align='center center'>
+    <h3>Temporary failure</h3><br>
+    Currently our data server is unreachable.
+    <br><br>Please try again in a few minutes;
+    <br>We apologize for any inconvenience.
+</div>
+
+<div ng-if="!failure" layout="row">
 
  <div flex="5"></div>
 <!--CONTENT -->

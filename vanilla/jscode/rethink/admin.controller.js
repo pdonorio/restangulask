@@ -113,19 +113,7 @@ function getSectionData($scope, AdminService, custom_type, $sce)
 
     // IF DATA MISSING!
       } else {
-        myscope = [{
-            data: {
-                "Section": "Temporary failure",
-                "Description":
-                    "Dear User,<br>" +
-                    "currently our data server is unreachable." +
-                    "<br><br>Please try again in a few minutes;" +
-                    "<br>We apologize for any inconvenience."
-                    ,
-                "Content": "",
-            },
-            images: {}
-        }]
+        $scope.failure = true;
       }
 
 
