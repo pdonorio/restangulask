@@ -123,7 +123,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
         width: 700,
         height: 380,
     //https://www.tinymce.com/docs/plugins/
-        plugins: 'print textcolor image link',
+        plugins: 'print textcolor image link table',
         skin: 'lightgray',
         theme : 'modern',
         //menubar: "insert",
@@ -133,7 +133,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
                     "fontselect fontsizeselect | " +
                     // "styleselect print " +
                     "alignleft aligncenter alignright alignjustify | " +
-                    "link image | forecolor backcolor " +
+                    "link image | forecolor backcolor table" +
                     "",
     };
 

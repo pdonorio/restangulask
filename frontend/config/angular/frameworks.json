@@ -47,6 +47,7 @@
 		"jquery/dist/jquery.min.js",
         //tinymce inline javascript editor
         "tinymce-dist/tinymce.min.js",
+        "tinymce-dist/plugins/table/plugin.min.js",
 		// # ANGULAR
 		"angular/angular.min.js",
 	    "angular-sanitize/angular-sanitize.min.js",

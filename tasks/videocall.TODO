@@ -25,19 +25,15 @@ http://csscience.com/responsiveslidercss3/nojs.html
 SLIDES:
   http://www.one-tab.com/page/d869y3e1R3-HYp3h9_i1DA
 
-☐ Spy menu every page
-☐ list fete: vignette
-☐ editor: table plugin
-☐ lexique: tabs from pdf
 ☐ menu in all pages
+☐ list fete: vignette
+✔ editor: table plugin @done (16-05-05 01:10)
+☐ lexique: tabs from pdf
 ☐ multiple source in fete: palermo
-☐ details fete
-     ☐ detail extrait
+✔ details fete @done (16-05-05 01:02)
+     ✔ detail extrait @done (16-05-05 01:02)
 
  ☐ TIF/TIFF conversion
-
-☐ details:
- ☐ remove h5 from current transcriptions...
 
 MOVE TO PRODUCTION:
  ✔ backup oceanmaster1 @done (16-04-30 15:00)
