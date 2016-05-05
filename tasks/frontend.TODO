@@ -564,26 +564,25 @@ COMPLETED:
 ✘ Search order? @question @cancelled (16-04-27 23:54)
 ✘ search speed? @cancelled (16-04-27 23:54)
 // https://www.rethinkdb.com/docs/secondary-indexes/python/#multi-indexes
-
 ✔ Text editor @done (16-04-26 23:04)
  ✔ justify @done (16-04-26 23:04)
-
 ✔  base donnée (new power point) @done (16-04-27 21:56)
   ✔ fete list @done (16-04-27 21:56)
-
-bugs:
 ✔ subsection move to second place @done (16-04-28 07:51)
 ✔ position in subsection @done (16-04-28 07:51)
 ✔ check loading in section @done (16-04-28 09:47)
 ✔ check loading in "more" @done (16-04-28 09:55)
 ✔ fete list could be like missing images @done (16-04-28 10:15)
-
 ✔ Subwelcome @done (16-04-30 14:59)
     ✔ duplicate welcome @done (16-04-26 01:44)
       ✔ inline editor for section content (not for welcome) @done (16-04-26 02:45)
     ✔ show as a separate page @done (16-04-26 03:01)
       ✔ by clicking (bienvenu?) @done (16-04-26 12:09)
       ✔ trust html to show (content)? @done (16-04-26 12:09)
+✔ slides welcome page @done (16-05-02 08:34)
+http://csscience.com/responsiveslidercss3/nojs.html
+✔ images stretched to take all the body @done (16-05-02 07:46)
+✔ logged link to edit transcriptions @done (16-05-02 11:10)
 
 RELEASE protocol:
 
