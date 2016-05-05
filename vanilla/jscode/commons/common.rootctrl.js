@@ -7,7 +7,7 @@ angular.module('web')
     .controller('HistorySidebarController', HistorySidebarController)
     .controller('ToolbarController', ToolbarController);
 
-function HistorySidebarController($scope, $rootScope, $log, $mdSidenav, $mdComponentRegistry, hotkeys, keyshortcuts, $timeout)
+function HistorySidebarController($scope, $rootScope, $log, $mdSidenav, $mdComponentRegistry, hotkeys, keyshortcuts, $timeout, $state)
 {
     // Init controller and variables
     $log.debug("Sidebar history controller");
@@ -16,6 +16,9 @@ function HistorySidebarController($scope, $rootScope, $log, $mdSidenav, $mdCompo
     self.name = "mysnav";
     self.history = [];
     self.loader = 'hside';
+
+    // console.log("CURRENT STATE", $state.current);
+    $rootScope.currentState = angular.copy($state.current);
 
     // SIDEBAR STRANGE BEHAVIOUR
     //http://luxiyalu.com/angular-material-no-instance-found-for-handle-left/
@@ -123,7 +126,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
         width: 700,
         height: 380,
     //https://www.tinymce.com/docs/plugins/
-        plugins: 'print textcolor image link',
+        plugins: 'print textcolor image link table',
         skin: 'lightgray',
         theme : 'modern',
         //menubar: "insert",
@@ -133,7 +136,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
                     "fontselect fontsizeselect | " +
                     // "styleselect print " +
                     "alignleft aligncenter alignright alignjustify | " +
-                    "link image | forecolor backcolor " +
+                    "link image | forecolor backcolor table" +
                     "",
     };
 
@@ -212,6 +215,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
 
         // I should save every state change to compile my history.
         var lastRoute = {state: toState, params: toParams};
+        $rootScope.lastRoute = lastRoute;
         //console.log("Current is", toState);
 
         // To execute only if we are loading the page
@@ -256,6 +260,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
     // Control states to create the menu
     var myObj = $state.get();
 
+/*
     // DO THE MENU
 	forEach(myObj, function (x, i) {
         //$log.debug("Menu element", i , x);
@@ -275,6 +280,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
     		}
         }
 	});
+*/
 
     // In case of special search available
     // Redirect to that state

@@ -1,10 +1,15 @@
-<div layout="row">
+<div ng-if="failure" layout="column" layout-align='center center'>
+    <h3>Temporary failure</h3><br>
+    Currently our data server is unreachable.
+    <br><br>Please try again in a few minutes;
+    <br>We apologize for any inconvenience.
+</div>
 
- <div flex="5"></div>
+<div ng-if="!failure" layout="row">
+
 <!--CONTENT -->
- <div
-    flex="75"
-    layout="column" layout-align='center center'>
+<div flex="5"></div>
+<div layout="column" layout-align='center center'>
 
 
 <!--SLIDER-->
@@ -101,8 +106,8 @@
 </div> <!-- loader -->
 </div> <!-- flex -->
 
+<!-- SIDE MENU
  <div flex="5"></div>
-<!-- SIDE MENU -->
  <div ng-if="sections.length > 1"
     flex="15" pushpin pushpin-offset="1">
 
@@ -112,5 +117,5 @@
     </li>
   </ul>
  </div>
-
+-->
 </div>

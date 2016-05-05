@@ -34,5 +34,7 @@ fi
 ###########################################
 # Original repo
 $push
-# Private repo
-$com push private master
+
+echo "Warning: skipping private gitlab for now"
+# # Private repo
+# $com push private master

@@ -132,7 +132,7 @@ else
         echo -e "ACTION: Reboot\n"
         echo "Cleaning project containers (if any)"
         $com $files stop
-        $com $files rm -f
+        $com $files rm -f --all
         echo "Starting up"
         $com $files up -d $services
     else

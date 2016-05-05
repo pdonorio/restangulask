@@ -15,26 +15,19 @@ ELASTICSEARCH:
   ☐ scroll
   https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html
 
-  OTHERS:
+SLIDES:
+  http://www.one-tab.com/page/d869y3e1R3-HYp3h9_i1DA
 
-✔ slides welcome page @done (16-05-02 08:34)
-http://csscience.com/responsiveslidercss3/nojs.html
-✔ images stretched to take all the body @done (16-05-02 07:46)
-✔ logged link to edit transcriptions @done (16-05-02 11:10)
-
-☐ Spy menu every page
+✔ menu in all pages @done (16-05-05 14:47)
+   ✔ submenu for welcome page @done (16-05-05 15:11)
 ☐ list fete: vignette
-☐ editor: table plugin
+✔ editor: table plugin @done (16-05-05 01:10)
 ☐ lexique: tabs from pdf
-☐ menu in all pages
 ☐ multiple source in fete: palermo
-☐ details fete
-     ☐ detail extrait
+✔ details fete @done (16-05-05 01:02)
+     ✔ detail extrait @done (16-05-05 01:02)
 
  ☐ TIF/TIFF conversion
-
-☐ details:
- ☐ remove h5 from current transcriptions...
 
 MOVE TO PRODUCTION:
  ✔ backup oceanmaster1 @done (16-04-30 15:00)
