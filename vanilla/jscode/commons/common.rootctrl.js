@@ -17,7 +17,7 @@ function HistorySidebarController($scope, $rootScope, $log, $mdSidenav, $mdCompo
     self.history = [];
     self.loader = 'hside';
 
-    //console.log("CURRENT STATE", $state.current);
+    // console.log("CURRENT STATE", $state.current);
     $rootScope.currentState = angular.copy($state.current);
 
     // SIDEBAR STRANGE BEHAVIOUR

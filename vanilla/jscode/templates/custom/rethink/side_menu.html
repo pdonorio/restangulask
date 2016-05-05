@@ -2,12 +2,27 @@
     ng-controller="SideMenuController as smenu">
 
   <ul class="section table-of-contents">
+
     <li ng-repeat="section in smenu.links">
       <a href
         ng-click="smenu.go(section.link, section.extra)"
         ng-class="section.cls">
         {{section.name.capitalizeFirstLetter()}}
       </a>
+
+<!-- SUBSECTION? -->
+      <ul class="table-of-contents"
+        ng-if="
+            lastRoute.state.name == 'welcome.subsection'
+            && section.name == 'bienvenue'
+            && subsections.length > 1
+            ">
+        <li style="padding-left: 20px;"
+            ng-repeat="section in subsections track by $index">
+          <a href="#step{{$index}}"> {{section.data['Section']}} </a>
+        </li>
+      </ul>
+
     </li>
   </ul>
 

@@ -144,6 +144,8 @@ function WelcomeSubInfoController($scope, $rootScope, $log, $sce, AdminService)
         self.subFolder = sub_type + '/';
         // $rootScope.loaders['welcome_info'] = true;
         //$scope.subsections = $scope.subsections[$stateParams.element];
+        $rootScope.subsections = $scope.subsections;
+        //console.log("LOADED");
     });
 
 };
@@ -735,7 +737,8 @@ function SubWelcomeController($scope,
         }
     });
     $scope.subsections = angular.copy(newSlides);
-    $log.debug("Fixed sections");
+    // $rootScope.subsections = $scope.subsections;
+    // console.log("Fixed SUBsections", $rootScope);
 
     // Push and reload
     $rootScope.loaders[mysection] = true;
