@@ -1,9 +1,8 @@
 <div ng-controller="DetailsController as detail">
-  <div class="row" ng-hide="detail.data && detail.data.id">
-  No data...
-  </div>
 
- <div ng-if='detail.data' layout="column">
+  <div ng-if="detail.load" ng-include="root.templateDir+'loader.html'"></div>
+  <div ng-if='detail.data' layout="column">
+      <div ng-hide="detail.data.id"> No data... </div>
 
  <div layout="column" layout-padding>
     <h4> NOTICE DETAILLEE:
@@ -15,7 +14,7 @@
  </div>
 
   <div layout="row" layout-padding>
-  <div flex="65" ng-if="detail.data.id">
+  <div flex="70" ng-if="detail.data.id">
 
       <div class="card-panel teal lighten-3">
         <span class="white-text">

@@ -1,0 +1,14 @@
+<div pushpin pushpin-offset="1"
+    ng-controller="SideMenuController as smenu">
+
+  <ul class="section table-of-contents">
+    <li ng-repeat="section in smenu.links">
+      <a href
+        ng-click="smenu.go(section.link, section.extra)"
+        ng-class="section.cls">
+        {{section.name.capitalizeFirstLetter()}}
+      </a>
+    </li>
+  </ul>
+
+</div>

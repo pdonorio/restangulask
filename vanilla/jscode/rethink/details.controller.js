@@ -8,9 +8,12 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
 {
     $log.info("Single view on", $stateParams.id);
     var self = this;
+    self.load = true;
     self.data = null;
 
     function loadData() {
+
+      self.load = true;
 
       var empty = {text: '..loading..', link: ''};
       self.previous = angular.copy(empty);
@@ -93,6 +96,7 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
             });
 
             self.data = out_single;
+            self.load = false;
 
         }); // single data
       }); // steps
