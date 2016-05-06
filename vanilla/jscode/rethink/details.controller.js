@@ -43,6 +43,26 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
             delete tmp.thumb;
             delete tmp.images;
             self.refinedData = tmp;
+            console.log("DATA IS", self.refinedData);
+
+// SHOULD I CYCLE TO REMOVE EMPTY?
+
+            var key = 'Fête';
+            self.refinedData.date = true;
+
+            var i = "Date de début de la fête";
+            if (typeof self.refinedData[key][i] === 'undefined')
+                self.refinedData.date = false;
+            else
+                self.refinedData[key][i] =
+                    new Date(self.refinedData[key][i]);
+
+            i = "Date de la fin de la fête";
+            if (typeof self.refinedData[key][i] === 'undefined')
+                self.refinedData.date = false;
+            else
+                self.refinedData[key][i] =
+                    new Date(self.refinedData[key][i]);
 
             ////////////////////////////////////
             ////////////////////////////////////

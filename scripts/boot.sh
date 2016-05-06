@@ -134,11 +134,11 @@ else
         $com $files stop
         $com $files rm -f --all
         echo "Starting up"
-        $com $files up -d $services
+        $com $files up -d --remove-orphans $services
     else
         if [ "$2" == "start" ]; then
             echo -e "ACTION: Start\n"
-            $com $files up -d $services
+            $com $files up -d --remove-orphans $services
         elif [ "$2" == "stop" ]; then
             echo -e "ACTION: Stop\n"
             echo "Freezing services"

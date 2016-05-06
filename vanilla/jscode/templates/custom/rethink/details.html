@@ -71,14 +71,137 @@
 
   <div flex="30" layout="column" layout="center end"
     class="rounder nospaces fullheight teal lighten-4">
-        <h4> DÉTAILS DE LA PAGE </h4>
 
-<div class="nospaces"
-    ng-repeat="(name, rows) in detail.refinedData"
-  ng-if="name !== 'undefined' && name != 'Extrait'">
-
+<div class="nospaces">
     <table class="smalltext">
 
+     <thead> <tr> <td colspan="2">
+        <h5> DÉTAILS DE LA PAGE </h5>
+        </td> </tr> </thead>
+      <tbody ng-init="key='Détails'">
+        <tr ng-init="field1='Personnages'">
+          <th width="35%"> {{ field1 }} </th>
+          <td> {{detail.refinedData[key][field1]}} </td>
+        </tr>
+        <tr ng-init="field2='Temps'">
+          <th width="35%"> {{ field2 }} </th>
+          <td> {{detail.refinedData[key][field2]}} </td>
+        </tr>
+        <tr ng-init="field3='Actions'">
+          <th width="35%"> {{ field3 }} </th>
+          <td>
+            {{detail.refinedData[key][field3]}},
+            {{detail.refinedData[key][field3 + ' libres']}}
+          </td>
+        </tr>
+        <tr ng-init="field4='Apparato'">
+          <th width="35%"> {{ field4 }} </th>
+          <td>
+            {{detail.refinedData[key][field4]}},
+            {{detail.refinedData[key][field4 + ' libre']}}
+          </td>
+        </tr>
+      </tbody>
+
+
+     <thead> <tr> <td colspan="2">
+        <h5> FÊTE </h5>
+        </td> </tr> </thead>
+      <tbody ng-init="key2='Fête'">
+        <tr ng-init="field11='Titre abrégé'">
+          <th width="35%"> {{ field11 }} </th>
+          <td> {{detail.refinedData[key2][field11]}} </td>
+        </tr>
+        <tr ng-init="field12='Date'">
+          <th width="35%"> {{ field12 }} </th>
+          <td>
+            <div ng-if='detail.refinedData.date'>
+            {{
+            detail.refinedData[key2]["Date de début de la fête"]
+            | date:'dd/MM'
+            }}
+            -
+            {{
+            detail.refinedData[key2]["Date de la fin de la fête"]
+            | date:'dd/MM'
+            }}
+            ,
+            </div>
+            {{detail.refinedData[key2][field12]}}
+            </td>
+        </tr>
+        <tr ng-init="field13='Lieu'">
+          <th width="35%"> {{ field13 }} </th>
+          <td> {{detail.refinedData[key2][field13]}} </td>
+        </tr>
+        <tr ng-init="field14='Notes'"
+        >
+          <th width="35%"> {{ field14 }} </th>
+          <td> {{detail.refinedData[key2][field14]}} </td>
+        </tr>
+
+      </tbody>
+
+
+     <thead> <tr> <td colspan="2">
+        <h5> SOURCE </h5>
+        </td> </tr> </thead>
+      <tbody ng-init="key3='Source'">
+        <tr ng-init="field21='Type de source'">
+          <th width="35%"> {{ field21 }} </th>
+          <td> {{detail.refinedData[key3][field21]}} </td>
+        </tr>
+        <tr ng-init="field22='Titre'">
+          <th width="35%"> {{ field22 }} </th>
+          <td> {{detail.refinedData[key3][field22]}} </td>
+        </tr>
+        <tr ng-init="field23='Noms'">
+          <th width="35%"> {{ field23 }} </th>
+          <td> {{detail.refinedData[key3][field23]}} </td>
+        </tr>
+        <tr ng-init="field24='Edition'">
+          <th width="35%"> {{ field24 }} </th>
+          <td> {{detail.refinedData[key3]["Lieu d'édition"]}},
+          {{detail.refinedData[key3]["Année"]}} </td>
+        </tr>
+        <tr ng-init="field25='Format'">
+          <th width="35%"> {{ field25 }} </th>
+          <td>
+            {{detail.refinedData[key3]["Dimensions"]}};
+            {{detail.refinedData[key3]["Nombre de pages/folio"]}};
+            {{detail.refinedData[key3]["Nombre d'illustrations"]}}
+          </td>
+        </tr>
+        <tr ng-init="field26='Cote'">
+          <th width="35%"> {{ field26 }} </th>
+          <td> {{detail.refinedData[key3][field26]}} </td>
+        </tr>
+        <tr ng-init="field27='Notes'"
+        >
+          <th width="35%"> {{ field27 }} </th>
+          <td> {{detail.refinedData[key3][field27]}} </td>
+        </tr>
+      </tbody>
+
+     <thead> <tr> <td colspan="2">
+        <h5> AUTRES SOURCES LIEES </h5>
+        </td> </tr> </thead>
+      <tbody>
+        <tr ng-init="field31='Sources'">
+          <td colspan="2"> {{detail.refinedData[key2][field31]}} </td>
+        </tr>
+      </tbody>
+
+     <thead> <tr> <td colspan="2">
+        <h5> DÉTAILS DE LA FÊTE </h5>
+        </td> </tr> </thead>
+      <tbody>
+        <tr>
+          <td colspan="2"> {{detail.refinedData[key2][field31]}} </td>
+        </tr>
+      </tbody>
+
+<!--
      <thead> <tr> <td colspan="2">
         <h5> <u> {{name}} </u> </h5>
         </td> </tr> </thead>
@@ -90,8 +213,9 @@
           <td ng-if="!(name == 'Extrait' && key.indexOf('ero de l') >= 0)"> {{ value }} </td>
         </tr>
       </tbody>
-    </table>
+-->
 
+    </table>
 </div>
 
 
