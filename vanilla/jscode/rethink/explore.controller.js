@@ -145,6 +145,10 @@ function FixTransController($scope, $rootScope, $sce,
       $window.scrollTo(0, 0);
     }
 
+    $scope.closeEdit = function() {
+      delete self.currentText;
+    }
+
     self.closeCard = function() {
       delete self.elements;
     }
@@ -153,7 +157,6 @@ function FixTransController($scope, $rootScope, $sce,
     {
 
       // Prepare data for the dialog
-      $scope.currentText = "";
       $scope.currentRecord = record;
       $scope.currentType = 'documents';
       $scope.currentName = name;
@@ -170,8 +173,6 @@ function FixTransController($scope, $rootScope, $sce,
 
       // Fill data if exists
       SearchService.getDocs(record).then(function (out) {
-          var emptyText = "";
-          //console.log("To inject", record, out.data[0].images);
           if (out.data[0].images
               && out.data[0].images.length > 0
               && out.data[0].images[0].transcriptions
@@ -182,9 +183,16 @@ function FixTransController($scope, $rootScope, $sce,
                 //console.log("Obtained", trans);
                 //$scope.currentText = angular.copy($sce.trustAsHtml(trans));
                 $scope.currentText = angular.copy(trans);
+                self.currentText = $scope.currentText;
+          } else {
+              self.currentText = " ";
           }
-          //console.log("To inject", $scope.currentText);
 
+////////////////////////////////////////
+// TO FIX
+////////////////////////////////////////
+
+/*
           var dialogOptions = {
             templateUrl: blueprintTemplateDir + 'transcription.html',
             parent: angular.element(document.body),
@@ -222,8 +230,32 @@ function FixTransController($scope, $rootScope, $sce,
                     getMissingTransData(AdminService, $scope);
                 }
           }); // end of open
+*/
 
         }); // end of filling
+    }
+
+    //////////////////////////////////
+    // SAVE DATA!
+    $scope.validateEdit = function (response)
+    {
+      console.log("Writing response", response);
+      var data = {};
+      data.type = $scope.currentType;
+      data.trans = response;
+      return AdminService.setDocumentTrans(
+            $scope.currentRecord, data).then(function(out)
+      {
+          console.log("SET OUT", out);
+      });
+
+        // // Make the loader appear
+        // $scope.transcripts = null;
+        // //$scope.showSimpleToast({"Reloading data": null}, 1200);
+        // // Close the card
+        // self.closeCard();
+        // // Reload data
+        // getMissingTransData(AdminService, $scope);
     }
 
 };

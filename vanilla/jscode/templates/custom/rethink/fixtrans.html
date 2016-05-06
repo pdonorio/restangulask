@@ -9,14 +9,18 @@
     </div>
 
     <div ng-if="transcripts"
-        flex-xs flex-gt-xs="55" layout="column">
+        flex-xs flex-gt-xs="40" layout="column">
      <div ng-if="transcriptsElements == 0">
         No data available
      </div>
+
+<!--
      <div ng-if="transcriptsElements > 0">
         Note:
         Only records with <b>at least one image</b> uploaded will be listed.
      </div>
+-->
+
      <md-list>
       <div ng-repeat="(transc, data) in transcripts track by $index">
           <md-divider></md-divider>
@@ -31,10 +35,17 @@
      </md-list>
     </div>
 
+    <div flex-xs flex-gt-xs="60" layout="column" ng-if="fix.elements">
 
-    <div flex-xs flex-gt-xs="45" layout="column"
-        ng-if="fix.elements">
-     <md-card>
+<!-- SINGLE ELEMENT -->
+     <md-card ng-if="fix.currentText">
+       <md-card-content>
+          <div ng-include="root.blueprintTemplateDir + 'transcription.html'"></div>
+       </md-card-content>
+     </md-card>
+
+<!-- LIST -->
+     <md-card ng-if="!fix.currentText">
       <md-card-title>
         <md-card-title-text>
             <h5>{{fix.currentParty}}</h5>
@@ -72,6 +83,8 @@
         <md-button ng-click="fix.closeCard()"> Close </md-button>
       </md-card-actions>
      </md-card>
+
+
     </div>
 
  </div>

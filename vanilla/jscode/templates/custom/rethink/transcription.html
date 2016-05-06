@@ -1,8 +1,12 @@
-<div ng-controller='ToastController as toasting'>
 
- <md-dialog ng-controller="EditorController as edit"
+<!--
+<div ng-controller='ToastController as toasting'>
+ <md-dialog instead of md-content
+-->
+
+ <md-content
+    ng-controller="EditorNonDialogController as edit"
     aria-label="Transcription for image">
-  <form>
 
     <md-toolbar class="md-primary md-hue-3" >
       <div class="md-toolbar-tools" layout="row">
@@ -10,22 +14,11 @@
       </div>
     </md-toolbar>
 
-    <!-- CONTENT -->
     <md-dialog-content layout-padding
       style="min-width:800px; min-height:400px;
       max-width:1100px; max-height:800px; ">
-
-
-<textarea ui-tinymce="edit.options" ng-model="edit.content" ></textarea>
-
-<!--
-<br>content:
-<div ng-bind='edit.realHtml'></div>
-<div ng-bind-html='edit.realHtml'></div>
--->
-
+        <textarea ui-tinymce="edit.options" ng-model="edit.content" ></textarea>
     </md-dialog-content>
-    <!-- CONTENT -->
 
     <md-dialog-actions layout="row">
       <span flex></span>
@@ -37,6 +30,4 @@
       </md-button>
     </md-dialog-actions>
 
-  </form>
- </md-dialog>
-</div>
+ </md-content>
