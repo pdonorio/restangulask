@@ -5,19 +5,19 @@
       <div ng-hide="detail.data.id"> No data... </div>
 
  <div layout="column" layout-padding>
-    <h4> NOTICE DETAILLEE:
+    <h3> NOTICE DETAILLEE:
     <b>
         {{detail.refinedData["Extrait"]["Numero de l'extrait"]}}
     </b>
     </hr>
-    </h4>
+    </h3>
  </div>
 
   <div layout="row" layout-padding>
-  <div flex="70" ng-if="detail.data.id">
+  <div flex="65" ng-if="detail.data.id">
 
-      <div class="card-panel teal lighten-3">
-        <span class="white-text">
+      <div>
+        <span>
         <b>Fête</b>: {{detail.refinedData["Fête"]["Titre abrégé"]}}
         <br>
         <b>Source</b>: {{detail.refinedData["Source"]["Titre abrégé"]}}
@@ -44,24 +44,16 @@
           </md-content>
       </div>
 
-      <div layout="row" layout-padding
-        class="card-panel indigo lighten-5">
+      <div layout="row">
 
-
-        <div flex=50>
+        <div flex=50 style="text-align: center;">
             <a ng-if="detail.data.images[0].filename"
                 href="/zoom/{{ detail.data.id }}/{{ detail.data.images[0].code }}"
                 target="_blank">
-             <div
-                       tooltipped data-position="right" data-delay="50"
-                       data-tooltip="Click to zoom this image"
-                style="
-                    background: url('/static/uploads/{{detail.data.images[0].filename}}');
-                    background-size: 100% 100%;
-                    height: 100%;
-                    min-height: 400px;
-                ">&nbsp;
-             </div>
+             <img tooltipped data-position="right" data-delay="50"
+                data-tooltip="Click to zoom this image"
+                height=500
+                src="/static/uploads/{{detail.data.images[0].filename}}">
             </a>
             <div ng-if="!detail.data.images[0].filename">
                 Image indisponible
@@ -69,41 +61,41 @@
                 <i class="material-icons">collections</i>
             </div>
         </div>
-        <div flex=50>
-          <div ng-bind-html="detail.test"></div>
-        </div>
+        <div flex=50
+            layout="row" layout-align="center center"
+            ng-bind-html="detail.test"></div>
       </div>
   </div> <!-- END OF ROW -->
 
-  <div flex="30" style="height: 100%;"
-    layout="column" layout-align="space-between end">
-      <div class="card-panel teal lighten-4">
-        <h5> DÉTAILS DE LA PAGE </h5>
+  <div flex="5"></div>
 
-<div ng-repeat="(name, rows) in detail.refinedData"
+  <div flex="30" layout="column" layout="center end"
+    class="rounder nospaces fullheight teal lighten-4">
+        <h4> DÉTAILS DE LA PAGE </h4>
+
+<div class="nospaces"
+    ng-repeat="(name, rows) in detail.refinedData"
   ng-if="name !== 'undefined' && name != 'Extrait'">
-    <table>
+
+    <table class="smalltext">
 
      <thead> <tr> <td colspan="2">
-        <div class="card-panel indigo lighten-5">
-        <h6> <u> {{name}} </u> </h6>
-        </div>
+        <h5> <u> {{name}} </u> </h5>
         </td> </tr> </thead>
-
       <tbody>
         <tr ng-if='value' ng-repeat='(key, value) in rows'>
-          <th> {{ key }} </th>
+          <th width="35%"> {{ key }} </th>
           <td ng-if="name == 'Extrait' && key.indexOf('ero de l') >= 0">
             <b> <i>{{ value }}</i> </b> </td>
           <td ng-if="!(name == 'Extrait' && key.indexOf('ero de l') >= 0)"> {{ value }} </td>
         </tr>
       </tbody>
     </table>
+
 </div>
 
 
       </div>
-  </div>
   </div> <!-- END OF COLUMN -->
 
  </div> <!-- END OF DATA -->

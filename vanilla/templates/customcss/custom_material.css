@@ -1,4 +1,16 @@
 
+.nospaces { padding: 0; margin: 0; border:0; }
+.nospaces table { padding: 0; margin: 0; border:0; }
+.nospaces table th { padding: 0; margin: 0; border:0; }
+.nospaces table td { padding: 0; margin: 0; border:0; }
+
+.rounder {
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.fullheight { height: 100%; }
+.smalltext { font-size: 12px; }
 
 .resizetowindow {
  width: calc(100%);
