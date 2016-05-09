@@ -551,36 +551,47 @@ class RethinkElement(BaseRethinkResource):
     table = 'datavalues'
 
     @deck.apimethod
-    def post(self):
+    def get(self):
 
-        empty = self.response([])
-
-        key = 'fete'
-        j = self.get_input(False)
-        if key not in j:
-            return empty
-
-        cursor = self.get_table_query() \
-            .concat_map(lambda doc: doc['steps'].concat_map(
-                lambda step: step['data'].concat_map(
-                    lambda data: [{
-                        'data': step, 'step': step['step'],
-                        'pos': data['position'], 'party': data['value'],
-                    }])
-                )) \
-            .filter({'party': j[key]}) \
-            .limit(1).run()
-        out = list(cursor)
-        if len(out) < 1:
-            return empty
-        fete = out.pop(0)
+        cursor = self.get_table_query().run()
 
         data = {}
-        for element in fete['data']['data']:
-            # print(element)
-            if element['value'].strip() == '':
-                element['value'] = '-'
-            data[element['name']] = element['value']
+        sources = {}
+        for obj in cursor:
+
+            tmp = {}
+            name = None
+            source_name = None
+            for step in obj['steps']:
+                if step['step'] == 2:
+                    source_name = step['data'][0]['value']
+                if step['step'] == 3:
+                    for element in step['data']:
+                        # print(element)
+                        if element['value'].strip() == '':
+                            element['value'] = '-'
+                        if element['position'] == 1:
+                            name = element['value']
+                        tmp[element['name']] = element['value']
+
+            if source_name is not None:
+                if name not in sources:
+                    sources[name] = []
+                try:
+                    sources[name].index(source_name)
+                except:
+                    sources[name].append(source_name)
+
+            # tmp['Titre abrégé de la source'] = source_name
+            flag = True
+            if name in data:
+                if (len(data[name]) > len(tmp)):
+                    flag = False
+            if flag:
+                data[name] = tmp
+
+        for key, values in data.items():
+            data[key]['Titre abrégé de la source'] = sources[key]
 
         return self.response(data)
 

@@ -282,22 +282,15 @@ function StepsController($scope, $log, $state, $window, SearchService)
       delete self.elements;
     }
 
-  SearchService.getDistinctValuesFromStep(self.step).then(function (out)
-  {
-       self.data = [];
-       if (out) {
+    SearchService.getFetes().then(function (out) {
+      self.data = [];
+      if (out) {
            self.data = out.data;
            self.dataCount = out.elements;
-       } else {
+      } else {
            self.dataCount = self.data.length;
-       }
-
-       forEach(self.data, function(element, index) {
-           SearchService.getFete(element).then(function (fete) {
-                console.log('FETE', fete);
-           });
-       });
-  })
+      }
+    });
 }
 
 

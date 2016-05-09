@@ -191,9 +191,12 @@ function SearchService($log, api) {
     }
 
     //////////////////////////
-    self.getFete = function(fete) {
-        return api.apiCall(self.endpoints.fete, 'POST', {fete: fete});
+    self.getFetes = function() {
+        return api.apiCall(self.endpoints.fete);
     }
+    // self.getFete = function(fete) {
+    //     return api.apiCall(self.endpoints.fete, 'POST', {fete: fete});
+    // }
 
 }
 
