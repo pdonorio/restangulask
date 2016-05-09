@@ -42,10 +42,20 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
             delete tmp.id;
             delete tmp.thumb;
             delete tmp.images;
-            self.refinedData = tmp;
-            console.log("DATA IS", self.refinedData);
 
 // SHOULD I CYCLE TO REMOVE EMPTY?
+            forEach(tmp, function(element, index) {
+                forEach(element, function(obj, j) {
+                    console.log("element", j, "*" + obj + "*");
+                    if (obj.trim() == '') {
+                        tmp[index][j] = null;
+                    }
+                });
+
+            });
+
+            self.refinedData = tmp;
+            console.log("DATA IS", self.refinedData);
 
             var key = 'Fête';
             self.refinedData.date = true;

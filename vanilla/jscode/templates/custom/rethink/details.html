@@ -53,7 +53,7 @@
              <img tooltipped data-position="right" data-delay="50"
                 data-tooltip="Click to zoom this image"
                 height=500
-                src="/static/uploads/{{detail.data.images[0].filename}}">
+                ng-src="/static/uploads/{{detail.data.images[0].filename}}">
             </a>
             <div ng-if="!detail.data.images[0].filename">
                 Image indisponible
@@ -62,7 +62,7 @@
             </div>
         </div>
         <div flex=50
-            layout="row" layout-align="center center"
+            layout="column" layout-align="start center"
             ng-bind-html="detail.test"></div>
       </div>
   </div> <!-- END OF ROW -->
@@ -70,7 +70,9 @@
   <div flex="5"></div>
 
   <div flex="30" layout="column" layout="center end"
-    class="rounder nospaces fullheight teal lighten-4">
+    class="rounder nospaces fullheight teal lighten-4"
+    style="padding-top: 15px; padding-bottom: 15px;"
+    >
 
 <div class="nospaces">
     <table class="smalltext">
@@ -79,26 +81,32 @@
         <h5> DÉTAILS DE LA PAGE </h5>
         </td> </tr> </thead>
       <tbody ng-init="key='Détails'">
-        <tr ng-init="field1='Personnages'">
+        <tr ng-init="field1='Personnages'"
+            ng-show='detail.refinedData[key][field1]'>
           <th width="35%"> {{ field1 }} </th>
           <td> {{detail.refinedData[key][field1]}} </td>
         </tr>
-        <tr ng-init="field2='Temps'">
+        <tr ng-init="field2='Temps'"
+            ng-show='detail.refinedData[key][field2]'>
           <th width="35%"> {{ field2 }} </th>
           <td> {{detail.refinedData[key][field2]}} </td>
         </tr>
-        <tr ng-init="field3='Actions'">
+        <tr ng-init="field3='Actions'"
+            ng-show='detail.refinedData[key][field3]
+            || detail.refinedData[key][field3 + " libres"]'>
           <th width="35%"> {{ field3 }} </th>
           <td>
-            {{detail.refinedData[key][field3]}},
-            {{detail.refinedData[key][field3 + ' libres']}}
+            {{detail.refinedData[key][field3]}}
+            , {{detail.refinedData[key][field3 + ' libres']}}
           </td>
         </tr>
-        <tr ng-init="field4='Apparato'">
+        <tr ng-init="field4='Apparato'"
+            ng-show='detail.refinedData[key][field4]
+            || detail.refinedData[key][field4 + " libre"]'>
           <th width="35%"> {{ field4 }} </th>
           <td>
-            {{detail.refinedData[key][field4]}},
-            {{detail.refinedData[key][field4 + ' libre']}}
+            {{detail.refinedData[key][field4]}}
+            , {{detail.refinedData[key][field4 + ' libre']}}
           </td>
         </tr>
       </tbody>
@@ -108,14 +116,16 @@
         <h5> FÊTE </h5>
         </td> </tr> </thead>
       <tbody ng-init="key2='Fête'">
-        <tr ng-init="field11='Titre abrégé'">
+        <tr ng-init="field11='Titre abrégé'"
+            ng-show='detail.refinedData[key2][field11]'>
           <th width="35%"> {{ field11 }} </th>
           <td> {{detail.refinedData[key2][field11]}} </td>
         </tr>
-        <tr ng-init="field12='Date'">
+        <tr ng-init="field12='Date'"
+            ng-show='detail.refinedData[key2][field12]'>
           <th width="35%"> {{ field12 }} </th>
           <td>
-            <div ng-if='detail.refinedData.date'>
+            <div ng-show='detail.refinedData.date'>
             {{
             detail.refinedData[key2]["Date de début de la fête"]
             | date:'dd/MM'
@@ -130,12 +140,13 @@
             {{detail.refinedData[key2][field12]}}
             </td>
         </tr>
-        <tr ng-init="field13='Lieu'">
+        <tr ng-init="field13='Lieu'"
+            ng-show='detail.refinedData[key2][field13]'>
           <th width="35%"> {{ field13 }} </th>
           <td> {{detail.refinedData[key2][field13]}} </td>
         </tr>
         <tr ng-init="field14='Notes'"
-        >
+            ng-show='detail.refinedData[key2][field14]'>
           <th width="35%"> {{ field14 }} </th>
           <td> {{detail.refinedData[key2][field14]}} </td>
         </tr>
@@ -147,15 +158,18 @@
         <h5> SOURCE </h5>
         </td> </tr> </thead>
       <tbody ng-init="key3='Source'">
-        <tr ng-init="field21='Type de source'">
+        <tr ng-init="field21='Type de source'"
+            ng-show='detail.refinedData[key3][field21]'>
           <th width="35%"> {{ field21 }} </th>
           <td> {{detail.refinedData[key3][field21]}} </td>
         </tr>
-        <tr ng-init="field22='Titre'">
+        <tr ng-init="field22='Titre'"
+            ng-show='detail.refinedData[key3][field22]'>
           <th width="35%"> {{ field22 }} </th>
           <td> {{detail.refinedData[key3][field22]}} </td>
         </tr>
-        <tr ng-init="field23='Noms'">
+        <tr ng-init="field23='Noms'"
+            ng-show='detail.refinedData[key3][field23]'>
           <th width="35%"> {{ field23 }} </th>
           <td> {{detail.refinedData[key3][field23]}} </td>
         </tr>
@@ -172,30 +186,37 @@
             {{detail.refinedData[key3]["Nombre d'illustrations"]}}
           </td>
         </tr>
-        <tr ng-init="field26='Cote'">
+        <tr ng-init="field26='Cote'"
+            ng-show='detail.refinedData[key3][field26]'>
           <th width="35%"> {{ field26 }} </th>
           <td> {{detail.refinedData[key3][field26]}} </td>
         </tr>
         <tr ng-init="field27='Notes'"
-        >
+            ng-show='detail.refinedData[key3][field27]'>
           <th width="35%"> {{ field27 }} </th>
           <td> {{detail.refinedData[key3][field27]}} </td>
         </tr>
       </tbody>
 
-     <thead> <tr> <td colspan="2">
+     <thead ng-init="field31='Sources'"
+           ng-show='detail.refinedData[key2][field31]'>
+       <tr> <td colspan="2">
         <h5> AUTRES SOURCES LIEES </h5>
         </td> </tr> </thead>
-      <tbody>
-        <tr ng-init="field31='Sources'">
+      <tbody
+           ng-show='detail.refinedData[key2][field31]'>
+        <tr>
           <td colspan="2"> {{detail.refinedData[key2][field31]}} </td>
         </tr>
       </tbody>
 
-     <thead> <tr> <td colspan="2">
+     <thead
+           ng-show='detail.refinedData[key2][field31]'>
+    <tr> <td colspan="2">
         <h5> DÉTAILS DE LA FÊTE </h5>
         </td> </tr> </thead>
-      <tbody>
+      <tbody
+           ng-show='detail.refinedData[key2][field31]'>
         <tr>
           <td colspan="2"> {{detail.refinedData[key2][field31]}} </td>
         </tr>
