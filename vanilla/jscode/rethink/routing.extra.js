@@ -67,10 +67,10 @@ angular.module('web')
         'public.details': {
             url: "/details/:id",
             views: {
-                "menu": {
-                    dir: 'template',
-                    templateUrl: 'menu.html',
-                },
+                // "menu": {
+                //     dir: 'template',
+                //     templateUrl: 'menu.html',
+                // },
                 "unlogged": {
                     dir: 'blueprint',
                     templateUrl: 'details.html',

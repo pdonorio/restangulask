@@ -543,6 +543,49 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
 
 
 ##########################################
+# The end is the beginning is the end
+##########################################
+class RethinkElement(BaseRethinkResource):
+    """ Meta informations about uploaded documents """
+
+    table = 'datavalues'
+
+    @deck.apimethod
+    def post(self):
+
+        empty = self.response([])
+
+        key = 'fete'
+        j = self.get_input(False)
+        if key not in j:
+            return empty
+
+        cursor = self.get_table_query() \
+            .concat_map(lambda doc: doc['steps'].concat_map(
+                lambda step: step['data'].concat_map(
+                    lambda data: [{
+                        'data': step, 'step': step['step'],
+                        'pos': data['position'], 'party': data['value'],
+                    }])
+                )) \
+            .filter({'party': j[key]}) \
+            .limit(1).run()
+        out = list(cursor)
+        if len(out) < 1:
+            return empty
+        fete = out.pop(0)
+
+        data = {}
+        for element in fete['data']['data']:
+            # print(element)
+            if element['value'].strip() == '':
+                element['value'] = '-'
+            data[element['name']] = element['value']
+
+        return self.response(data)
+
+
+##########################################
 # Upload
 ##########################################
 model = DOCSTABLE

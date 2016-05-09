@@ -16,6 +16,7 @@ function SearchService($log, api) {
         users : 'accounts',
         fast: 'datasearch',
         suggest: 'datasuggest',
+        fete: 'datalist',
     }
 
 //////////////////
@@ -169,13 +170,29 @@ function SearchService($log, api) {
 //////////////////////////
 
     //////////////////////////
-    self.getDataFast = function(searchTerms) {
-        return api.apiCall(self.endpoints.fast, 'GET', null, searchTerms);
+    self.getDataFast = function(searchTerms, current) {
+
+        /*
+        var perpage = 10;
+        var page = 1;
+        if (current > perpage) {
+            page = 1 + (current - 1) / perpage;
+        }
+        */
+        console.log("CURRENT IS", current);
+        return api.apiCall(self.endpoints.fast, 'GET',
+            null //{'currentpage': current}
+            , searchTerms);
     }
 
     //////////////////////////
     self.getSuggestionsFast = function(searchTerms) {
         return api.apiCall(self.endpoints.suggest, 'GET', null, searchTerms);
+    }
+
+    //////////////////////////
+    self.getFete = function(fete) {
+        return api.apiCall(self.endpoints.fete, 'POST', {fete: fete});
     }
 
 }

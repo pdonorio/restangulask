@@ -284,12 +284,19 @@ function StepsController($scope, $log, $state, $window, SearchService)
 
   SearchService.getDistinctValuesFromStep(self.step).then(function (out)
   {
-        self.data = [];
-        self.dataCount = self.data.length;
+       self.data = [];
        if (out) {
-           self.dataCount = out.elements;
            self.data = out.data;
+           self.dataCount = out.elements;
+       } else {
+           self.dataCount = self.data.length;
        }
+
+       forEach(self.data, function(element, index) {
+           SearchService.getFete(element).then(function (fete) {
+                console.log('FETE', fete);
+           });
+       });
   })
 }
 
