@@ -6,13 +6,17 @@
    ✔ empty fields @done (16-05-10 00:40)
    ✔ text title/columns @done (16-05-10 00:40)
  ☐ search scroll
+   ☐ go back to results search from details
    ☐ search query in details
      ☐ highlight the query inside the transcription?
  ✔ list of fetes (no vignette) @done (16-05-10 01:53)
-   ☐ single fete
+   ✔ single fete @done (16-05-10 11:14)
  ☐ edit
    ☐ some transcriptions errors?
    ☐ translation (in different languages)
+ ☐ bugs
+   ☐ filename extension yes or not?
+   ☐ images! thumbnails! @WTH
 
 ===================================
 

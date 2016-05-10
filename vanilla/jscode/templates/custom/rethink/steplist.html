@@ -4,7 +4,16 @@
     layout-margin layout-padding>
 
     <div style="padding-left: 40px;">
-        <h4> LISTE DES FÊTES </h4>
+        <h4 ng-show="steps.element">
+
+            <md-button class="md-raised">
+                <a ng-click='steps.closeElement()' layout='row' layout-align="center center">
+                    <i class="material-icons prefix">arrow_back</i> Retour
+                </a>
+            </md-button>
+            DETAILS DE LA FÊTE
+        </h4>
+        <h4 ng-hide="steps.element"> LISTE DES FÊTES </h4>
     </div>
 
     <hr style="padding:0px;">
@@ -14,7 +23,55 @@
         <div ng-include="root.templateDir + 'loader.html'"></div>
       </div>
 
-      <div ng-if="steps.data">
+      <div ng-if="steps.data && steps.element">
+
+        <b>Fête</b>:
+        {{steps.element['Titre abrégé']}}
+        <br>
+        <table>
+            <tr>
+                <th width=50> Source: </th>
+                 <td ng-repeat="source in steps.element['Titre abrégé de la source']">
+                    {{source}}
+                 </td>
+            </tr>
+        </table>
+
+        <table class="table table-hover bordered highlight responsive-table">
+            <thead style="font-style: italic;">
+                <tr>
+                    <th>Vignette</th>
+                    <th>Page</th>
+                    <th>Temps</th>
+                    <th>Actions</th>
+                    <th>Apparato</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in steps.element.extrait | orderBy: '+page'">
+                    <td width=100>
+                     <img height=160
+                ng-src="/static/uploads/{{row.filename}}/TileGroup0/0-0-0.jpg">
+                    </td>
+                    <td> {{row.page}} </td>
+                    <td> {{row.Temps}} </td>
+                    <td> {{row.Actions}} </td>
+                    <td> {{row.Apparato}} </td>
+                    <td></td>
+                    <td>
+          <a ui-sref='public.details({id: row.record})'
+              class="waves-effect waves-light btn-floating lime lighten-3">
+              <i class="material-icons blue-grey-text">web</i>
+          </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+
+      <div ng-if="steps.data && ! steps.element">
         <table class="table table-hover bordered highlight responsive-table">
             <thead style="font-style: italic;">
                 <tr>
@@ -23,10 +80,12 @@
                     <th>Type</th>
                     <th>Lieu</th>
                     <th>Date</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="fete in steps.data">
+                <tr ng-repeat="(key, fete) in steps.data">
                     <th> {{fete["Titre abrégé"]}} </th>
                     <td>
                         <div ng-repeat="source in fete['Titre abrégé de la source']">
@@ -39,6 +98,13 @@
                     </td>
                     <td>{{fete["Lieu"]}}</td>
                     <td>{{fete["Date"]}}</td>
+                    <td></td>
+      <td>
+          <a href ng-click="steps.selectElement(key)"
+              class="waves-effect waves-light btn-floating lime lighten-3">
+              <i class="material-icons blue-grey-text">list</i>
+          </a>
+      </td>
                 </tr>
             </tbody>
         </table>

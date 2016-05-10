@@ -269,17 +269,16 @@ function StepsController($scope, $log, $state, $window, SearchService)
   // INIT controller
   $log.debug("Stepping in pieces");
   var self = this;
-  self.step = 2;
+  self.element = null;
 
-    self.noImageList = function (name, data) {
-      self.elements = data;
-// TO FIX
-      self.currentParty = name;
+    self.selectElement = function (name) {
+      self.element = self.data[name];
+      console.log("Element", self.element);
       $window.scrollTo(0, 0);
     }
 
-    self.closeCard = function() {
-      delete self.elements;
+    self.closeElement = function() {
+      delete self.element;
     }
 
     SearchService.getFetes().then(function (out) {

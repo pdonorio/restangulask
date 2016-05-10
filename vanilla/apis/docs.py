@@ -553,26 +553,83 @@ class RethinkElement(BaseRethinkResource):
     @deck.apimethod
     def get(self):
 
+        documents = {}
+        cursor = self.get_query().table('datadocs').run()
+        for element in cursor:
+            id = element['record']
+            if len(element['images']) < 1:
+                continue
+            image = element['images'].pop(0)
+            documents[id] = image['code']
+            # documents[id] = image['filename']
+
         cursor = self.get_table_query().run()
+        pattern = re.compile(r'[0-9]+')
 
         data = {}
         sources = {}
+        extraits = {}
         for obj in cursor:
 
             tmp = {}
+            details = {
+                'Temps': '-',
+                'Actions': '-',
+                'Apparato': '-'
+            }
             name = None
             source_name = None
             for step in obj['steps']:
+                if step['step'] == 1:
+                    for element in step['data']:
+                        if element['position'] == 2:
+                            m = pattern.findall(element['value'])
+                            details['page'] = 0
+                            if len(m) > 0:
+                                details['page'] = int(m[0])
+                            details['record'] = obj['record']
+                            # else:
+                            #     print("UHM", m, element)
+                            break
+
                 if step['step'] == 2:
                     source_name = step['data'][0]['value']
                 if step['step'] == 3:
                     for element in step['data']:
-                        # print(element)
                         if element['value'].strip() == '':
                             element['value'] = '-'
                         if element['position'] == 1:
                             name = element['value']
                         tmp[element['name']] = element['value']
+                if step['step'] == 4:
+                    for element in step['data']:
+                        if element['value'] is not None and \
+                          element['value'].strip() == '':
+                            element['value'] = '-'
+                        if element['name'] == 'Temps':
+                            details[element['name']] = element['value']
+                        if element['name'] == 'Actions' or \
+                          element['name'] == 'Actions libres':
+                            if element['value'] is not None:
+                                if details['Actions'] == '-':
+                                    details['Actions'] = element['value']
+                                else:
+                                    details['Apparato'] += " " + element['value']
+                        if element['name'] == 'Apparato' or \
+                          element['name'] == 'Apparato libres':
+                            if element['value'] is not None:
+                                if details['Apparato'] == '-':
+                                    details['Apparato'] = element['value']
+                                else:
+                                    details['Apparato'] += " " + element['value']
+
+            details['filename'] = None
+            if obj['record'] in documents:
+                details['filename'] = documents[obj['record']]
+
+            if name not in extraits:
+                extraits[name] = []
+            extraits[name].append(details)
 
             if source_name is not None:
                 if name not in sources:
@@ -590,8 +647,15 @@ class RethinkElement(BaseRethinkResource):
             if flag:
                 data[name] = tmp
 
+# SHOULD SORT BY PAGE NUMBER
+
         for key, values in data.items():
             data[key]['Titre abrégé de la source'] = sources[key]
+            # from operator import itemgetter
+            # dsorted = sorted(extraits[key], key=itemgetter('page'))
+            # print("Sorted\n", dsorted)
+            # # print(extraits[key])
+            data[key]['extrait'] = extraits[key]
 
         return self.response(data)
 
