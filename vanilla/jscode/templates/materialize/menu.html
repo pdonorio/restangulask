@@ -1,18 +1,13 @@
 <div ng-controller="MenuInAppController as mymenu">
 
+
  <ul id="nav-mobile" class="right"
     style="color: grey;">
 
-<!--
-    <li>
-    TEST current {{mymenu.currentPage}}
-    </li>
--->
-
 <!-- IF LOGGED AND NOT LOGGED -->
     <li
-        ng-if="mymenu.currentPage != 'public.db'
-        && mymenu.currentPage != 'public.fastsearch'"
+        ng-show="lastRoute.state.name != 'public.db'
+            && lastRoute.state.name != 'public.fastsearch'"
         style="color: grey;">
         <div layout="row">
             <i class="material-icons prefix">search</i>

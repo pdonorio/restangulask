@@ -1,4 +1,43 @@
 
+===================================
+
+ ☐ slides
+ ✔ details @done (16-05-10 00:40)
+   ✔ empty fields @done (16-05-10 00:40)
+   ✔ text title/columns @done (16-05-10 00:40)
+ ☐ search scroll
+   ☐ go back to results search from details
+   ☐ search query in details
+     ☐ highlight the query inside the transcription?
+ ✔ list of fetes (no vignette) @done (16-05-10 01:53)
+   ✔ single fete @done (16-05-10 11:14)
+ ☐ edit
+   ☐ some transcriptions errors?
+   ☐ translation (in different languages)
+ ☐ bugs
+   ☐ filename extension yes or not?
+   ☐ images! thumbnails! @WTH
+
+===================================
+
+GROUPING +
+
+r.db('webapp').table('datavalues') \
+            .concat_map(lambda doc: doc['steps'].concat_map(
+                    lambda step: step['data'].concat_map(
+                        lambda data: [{
+                            'step': step['step'], 'total': step['data'],
+                            'pos': data['position'], 'party': data['value'],
+                        }])
+                )) \
+            .filter({'step': 3, 'pos': 1}).run()
+
+foreach grouping
+  ☐ query first element
+    ☐ and change number to 1
+ ☐ search for the document id
+ ☐ and then for the image...
+
 ELASTICSEARCH:
 
   ✔ bold hightlight? @done (16-04-30 14:56)
