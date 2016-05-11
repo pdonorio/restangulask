@@ -172,16 +172,15 @@ function SearchService($log, api) {
     //////////////////////////
     self.getDataFast = function(searchTerms, current) {
 
-        /*
-        var perpage = 10;
-        var page = 1;
-        if (current > perpage) {
-            page = 1 + (current - 1) / perpage;
-        }
-        */
-        console.log("CURRENT IS", current);
+        // var perpage = 10;
+        // var page = 1;
+        // if (current > perpage) {
+        //     page = 1 + (current - 1) / perpage;
+        // }
+        //console.log("CURRENT IS", current);
+
         return api.apiCall(self.endpoints.fast, 'GET',
-            null //{'currentpage': current}
+            {'currentpage': current}
             , searchTerms);
     }
 

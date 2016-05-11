@@ -5,10 +5,18 @@
  ✔ details @done (16-05-10 00:40)
    ✔ empty fields @done (16-05-10 00:40)
    ✔ text title/columns @done (16-05-10 00:40)
- ☐ search scroll
+ ☐ search
+   ✔ scroll with search text? @important @done (16-05-11 08:13)
+     ✔ adapter! @done (16-05-11 08:13)
    ☐ go back to results search from details
    ☐ search query in details
      ☐ highlight the query inside the transcription?
+   ☐ scroll cache!
+   ☐ enter on a word which is not suggested?
+   ☐ clear function? when pressing X
+   ☐ searching a phrase
+     ☐ avoid searching different words
+   ☐ did you mean?
  ✔ list of fetes (no vignette) @done (16-05-10 01:53)
    ✔ single fete @done (16-05-10 11:14)
  ☐ edit
