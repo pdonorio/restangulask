@@ -1,10 +1,12 @@
 
 <div class="css-slider-wrapper"
-    ng-controller="JustATest as j">
+    ng-controller="JustATest as j"
+    style="
+    z-index: 99;">
   <input type="radio" name="slider" class="slide-radio1" id="slider_1"
-    ng-checked="checking.slide1">
+    ng-checked="checking[0]">
   <input type="radio" name="slider" class="slide-radio2" id="slider_2"
-    ng-checked="checking.slide2">
+    ng-checked="checking[1]">
   <input type="radio" name="slider" class="slide-radio3" id="slider_3">
   <input type="radio" name="slider" class="slide-radio4" id="slider_4">
   <div class="slider-pagination">
@@ -23,21 +25,46 @@
   <div class="previous control">
 -->
 
-  <div class="slider slide1">
+  <div class="slider slide1 teal">
+    <div style="
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        opacity: 0.4;
+        background-size: 100%;
+        background-image:
+            url(http://localhost/static/uploads/welcome/Bienvenue.jpg);
+        z-index: -1;
+    "></div>
     <div>
-      <h2>Bienvenu</h2>
-      <md-button class="md-raised">
-        <a ui-sref='welcome.subsection' layout='row' layout-align="center center">
+      <h2>
+      Bienvenu
+      <br>
+        sur
+      </h2>
+      <h1 class="white-text">
+            <span class='fragola'>C</span>ultures du
+            <span class='fragola'>S</span>pectacle
+            <span class='fragola'>B</span>aroque
+      </h1>
+      <hr>
+        <a ui-sref='welcome.subsection'>
+      <md-button class="md-raised paolo">
+        <div layout='row' layout-align="center center">
             Project
-        </a>
+        </div>
       </md-button>
-      <md-button class="md-raised">
-        <a href ng-click="checking.slide2 = true;"
-            layout='row' layout-align="center center">
-            Next
-            <i class="material-icons">skip_next</i>
         </a>
+        <a href ng-click="nextSlide(2)">
+      <md-button class="md-raised paolo">
+            <div layout='row' layout-align="center center">
+                Next
+                <i class="material-icons">skip_next</i>
+            </div>
       </md-button>
+        </a>
     </div>
   </div>
   <div class="slider slide2">

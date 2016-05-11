@@ -13,18 +13,31 @@ angular.module('web')
     .controller('TreeController', TreeController)
     .controller('AdminController', AdminController)
 
-    .controller('JustATest', function($rootScope, $scope){
+.controller('JustATest', function($rootScope, $scope, $timeout)
+{
 
-        $rootScope.disable_sidemenu = true;
-        $scope.checking = {
-            slide1: true,
-            slide2: false,
-            slide3: false,
-            slide4: false,
-        }
+    $rootScope.avoidTheToolbar = true;
+    $rootScope.disable_sidemenu = true;
+    $scope.checking = [
+        false,
+        false,
+        false,
+        false,
+    ];
 
-    })
-    ;
+    $scope.nextSlide = function (position) {
+        forEach($scope.checking, function(element, index) {
+            $scope.checking[index] = false;
+        });
+        $scope.checking[position - 1] = true;
+    };
+
+    $timeout(function () {
+        $scope.nextSlide(1);
+    }, 800);
+
+})
+;
 
 var
     data_type = 'welcome'

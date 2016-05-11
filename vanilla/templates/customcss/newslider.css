@@ -30,15 +30,15 @@
   align-items: center;
   justify-content: center;
   align-content: center;
-  -webkit-transition: -webkit-transform 1600ms;
-  transition: -webkit-transform 1600ms, transform 1600ms;
+  -webkit-transition: -webkit-transform 400ms;
+  transition: -webkit-transform 400ms, transform 400ms;
   -webkit-transform: scale(1);
   transform: scale(1);
 }
 /* each slide backgound color */
 .slide1 {
-  background: #00bcd7;
-  left: 0;
+/*  background: #00bcd7;
+*/  left: 0;
 }
 .slide2 {
   background: #009788;
@@ -66,21 +66,14 @@
   -webkit-transform: translateX(500px);
   transform: translateX(500px);
 }
-.slider .button {
-  color: #FFF;
-  padding: 5px 30px;
-  background: rgba(255,255,255,0.3);
-  text-decoration: none;
-  opacity: 0;
-  font-size: 15px;
-  line-height: 30px;
+.slider .paolo {
   display: inline-block;
-  -webkit-transform: translateX(-500px);
-  transform: translateX(-500px);
+  -webkit-transform: translateX(-1000px);
+  transform: translateX(-1000px);
 }
-.slider h2, .slider .button {
-  -webkit-transition: opacity 800ms, -webkit-transform 800ms;
-  transition: transform 800ms, opacity 800ms;
+.slider h2, .slider .button, .slider .paolo {
+  -webkit-transition: opacity 500ms, -webkit-transform 500ms;
+  transition: transform 500ms, opacity 500ms;
   -webkit-transition-delay: 1s; /* Safari */
   transition-delay: 1s;
 }
@@ -169,10 +162,10 @@
 .slide-radio2:checked ~ .slide2 h2,
 .slide-radio3:checked ~ .slide3 h2,
 .slide-radio4:checked ~ .slide4 h2,
-.slide-radio1:checked ~ .slide1 .button,
-.slide-radio2:checked ~ .slide2 .button,
-.slide-radio3:checked ~ .slide3 .button,
-.slide-radio4:checked ~ .slide4 .button {
+.slide-radio1:checked ~ .slide1 .paolo,
+.slide-radio2:checked ~ .slide2 .paolo,
+.slide-radio3:checked ~ .slide3 .paolo,
+.slide-radio4:checked ~ .slide4 .paolo {
   -webkit-transform: translateX(0);
   transform: translateX(0);
   opacity: 1
