@@ -81,7 +81,8 @@
 		"angular-formly-material/dist/formly-material.min.js",
         //"angular-xeditable/dist/js/xeditable.min.js",
         //"moment/min/moment.min.js",
-        "angular-ui-tinymce/dist/tinymce.min.js"
+        "angular-ui-tinymce/dist/tinymce.min.js",
+        "ui-scroll/dist/ui-scroll.min.js"
 	],
 // USER CUSTOM APP
 	"customjs": [
