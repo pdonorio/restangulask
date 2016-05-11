@@ -1,72 +1,31 @@
 
-===================================
-
- ☐ slides
- ✔ details @done (16-05-10 00:40)
-   ✔ empty fields @done (16-05-10 00:40)
-   ✔ text title/columns @done (16-05-10 00:40)
- ☐ search scroll
-   ☐ go back to results search from details
-   ☐ search query in details
-     ☐ highlight the query inside the transcription?
+ SEARCH:
+   ✔ scroll with search text? @important @done (16-05-11 08:13)
+     ✔ adapter! @done (16-05-11 08:13)
+   ✔ search query in details @done (16-05-11 08:34)
+     ✔ go back to results search from details @done (16-05-11 09:57)
+     ✘ highlight the query inside the transcription? @cancelled (16-05-11 08:34)
+   ☐ enter on a word which is not suggested?
+   ☐ clear function? when pressing X
+   ☐ searching a phrase
+     ☐ avoid searching different words
+   ☐ prefix query? give importance if what you write is in the prefix
+   ☐ scroll cache!
+   ☐ did you mean?
  ✔ list of fetes (no vignette) @done (16-05-10 01:53)
    ✔ single fete @done (16-05-10 11:14)
- ☐ edit
-   ☐ some transcriptions errors?
-   ☐ translation (in different languages)
- ☐ bugs
-   ☐ filename extension yes or not?
-   ☐ images! thumbnails! @WTH
 
-===================================
-
-GROUPING +
-
-r.db('webapp').table('datavalues') \
-            .concat_map(lambda doc: doc['steps'].concat_map(
-                    lambda step: step['data'].concat_map(
-                        lambda data: [{
-                            'step': step['step'], 'total': step['data'],
-                            'pos': data['position'], 'party': data['value'],
-                        }])
-                )) \
-            .filter({'step': 3, 'pos': 1}).run()
-
-foreach grouping
-  ☐ query first element
-    ☐ and change number to 1
- ☐ search for the document id
- ☐ and then for the image...
-
-ELASTICSEARCH:
-
-  ✔ bold hightlight? @done (16-04-30 14:56)
-  http://codepen.io/vncnz/pen/mJLoaZ
-  ✔ relevance of fields in search @done (16-05-01 23:59)
-    ✔ mixed with sorting... @done (16-05-01 23:59)
-  ☐ suggestions
-    ☐ edge gram for this index only
-    https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-edgengram-tokenizer.html
-    ☐ or prefix query for non analyzed?
-    https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
-    ☐ did you mean?
-    https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html
-  ☐ scroll
-  https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html
-
-SLIDES:
-  http://www.one-tab.com/page/d869y3e1R3-HYp3h9_i1DA
-
-✔ menu in all pages @done (16-05-05 14:47)
-   ✔ submenu for welcome page @done (16-05-05 15:11)
-✔ editor: table plugin @done (16-05-05 01:10)
-✔ details fete @done (16-05-05 01:02)
-     ✔ detail extrait @done (16-05-05 01:02)
-☐ list fete: vignette
-☐ lexique: tabs from pdf
-☐ multiple source in fete: palermo
-
- ☐ TIF/TIFF conversion
+MORE:
+☐ another
+  ☐ lexique: tabs from pdf
+  ☐ multiple source in fete: palermo
+  ☐ TIF/TIFF conversion
+☐ edit
+ ☐ some transcriptions errors?
+ ☐ translation (in different languages)
+☐ bugs
+ ☐ filename extension yes or not?
+ ☐ images! thumbnails! @WTH
 
 MOVE TO PRODUCTION:
  ✔ backup oceanmaster1 @done (16-04-30 15:00)

@@ -65,7 +65,7 @@ angular.module('web')
 
     //////////////////////
         'public.details': {
-            url: "/details/:id",
+            url: "/details/:id?query",
             views: {
                 // "menu": {
                 //     dir: 'template',

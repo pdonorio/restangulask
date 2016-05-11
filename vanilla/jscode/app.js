@@ -46,6 +46,8 @@ console.log('POST');
         'flow',
 // text editor
         'ui.tinymce',
+// infinite (bi-directional) scrolling
+        'ui.scroll',
 
 /* Custom end */
 //////////////////////////////////////
