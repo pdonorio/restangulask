@@ -159,13 +159,23 @@ $stateProvider
                 templateUrl: templateDir + 'menu.html',
                 //templateUrl: templateDir + 'intro_menu.html',
             },
-            "sidebar": {
-                templateUrl: templateDir + 'history_sidenav.html',
-            },
+            // "sidebar": {
+            //     templateUrl: templateDir + 'history_sidenav.html',
+            // },
             "main": {
                 templateUrl: templateDir + 'intro.html',
             }
         }
+    })
+
+    .state("welcome.test", {
+        url: "/test",
+        views: {
+            "menu@": {template: 'test'},
+            "main@": {
+                templateUrl: blueprintTemplateDir + 'justatester.html',
+            },
+        },
     })
 
     .state("welcome.more", {
@@ -235,6 +245,9 @@ $stateProvider
             "menu": {
                 templateUrl: templateDir + 'menu.html',
             },
+            // "sidebar": {
+            //     templateUrl: templateDir + 'history_sidenav.html',
+            // },
             "main": {
                 template: "<div ui-view='unlogged'></div>",
             }
@@ -254,9 +267,9 @@ $stateProvider
                 templateUrl: templateDir + 'menu.html',
                 //controller: 'AppRootController',
             },
-            "sidebar": {
-                templateUrl: templateDir + 'history_sidenav.html',
-            },
+            // "sidebar": {
+            //     templateUrl: templateDir + 'history_sidenav.html',
+            // },
             "main": {
         // and add a child view called 'loggedview' for logged pages
                 templateUrl: templateDir + 'logged.html',

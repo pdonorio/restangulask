@@ -12,6 +12,18 @@ angular.module('web')
     .controller('DialogController', DialogController)
     .controller('TreeController', TreeController)
     .controller('AdminController', AdminController)
+
+    .controller('JustATest', function($rootScope, $scope){
+
+        $rootScope.disable_sidemenu = true;
+        $scope.checking = {
+            slide1: true,
+            slide2: false,
+            slide3: false,
+            slide4: false,
+        }
+
+    })
     ;
 
 var

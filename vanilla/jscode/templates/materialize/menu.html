@@ -1,8 +1,7 @@
 <div ng-controller="MenuInAppController as mymenu">
 
-
- <ul id="nav-mobile" class="right"
-    style="color: grey;">
+ <ul ng-if="lastRoute.state.name != 'welcome.test'"
+    id="nav-mobile" class="right" style="color: grey;">
 
 <!-- IF LOGGED AND NOT LOGGED -->
     <li

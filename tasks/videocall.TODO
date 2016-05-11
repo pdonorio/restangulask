@@ -1,12 +1,35 @@
 
+ ☐ slides
+ .slide-radio2:checked
+
+
+1. transcrizione
+2. dettagli
+3. fete + source
+
+bug:
+  ☐ agen_1 search/details vignette/image diff
+  ☐ duplicates in suggestions
+  ☐ remove "prova"
+
+search
+ ☐ div with translucent
+ ☐ strawberry in the title letters
+
+
+
  SEARCH:
+     file:///Users/projects/restapi/restangulask/tmp/ui-scroll/demo/
+
    ✔ scroll with search text? @important @done (16-05-11 08:13)
      ✔ adapter! @done (16-05-11 08:13)
    ✔ search query in details @done (16-05-11 08:34)
      ✔ go back to results search from details @done (16-05-11 09:57)
      ✘ highlight the query inside the transcription? @cancelled (16-05-11 08:34)
+
    ☐ enter on a word which is not suggested?
    ☐ clear function? when pressing X
+
    ☐ searching a phrase
      ☐ avoid searching different words
    ☐ prefix query? give importance if what you write is in the prefix

@@ -13,13 +13,14 @@
       <div style="
         position: absolute; top: 0px;
         width:100%; height: 8px;
-        z-index: 1;
+        z-index: 2;
         background-color: #F50057;
       ">&nbsp;</div>
-      <div ng-class="toolbarColor" class="nav-wrapper white">
+      <div ng-class="toolbarColor" class="nav-wrapper white"
+        style="z-index: 1;">
 
           <a ui-sref='welcome'
-            style='color: #D32F2F; font-family: Leela;'
+            style='color: #F50057; font-family: Leela;'
             class="brand-logo brandpad ">
             <!--
             {{ project[0].upper() + project[1:].lower() }}
