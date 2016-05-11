@@ -10,6 +10,7 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
     var self = this;
     self.load = true;
     self.data = null;
+    self.query = $stateParams.query;
 
     function loadData() {
 
