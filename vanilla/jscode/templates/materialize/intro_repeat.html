@@ -26,7 +26,7 @@
   <div
     ng-repeat="section in sections track by $index"
     class="slider"
-    style="background-color: {{ section.data['Color'] || defaultColor }};"
+    style="background-color: #{{ section.data['Color'] }};"
     ng-class="'slide' + ($index+1)">
 
 <!-- BACKGROUND IMAGE -->
