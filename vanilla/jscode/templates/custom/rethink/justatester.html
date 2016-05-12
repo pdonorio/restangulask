@@ -1,14 +1,17 @@
 
-<div class="css-slider-wrapper"
+<div
     ng-controller="JustATest as j"
-    style="
-    z-index: 99;">
+    class="css-slider-wrapper" style="z-index: 99;"
+    >
+
+<!-- FIX REPEAT -->
   <input type="radio" name="slider" class="slide-radio1" id="slider_1"
     ng-checked="checking[0]">
   <input type="radio" name="slider" class="slide-radio2" id="slider_2"
     ng-checked="checking[1]">
   <input type="radio" name="slider" class="slide-radio3" id="slider_3">
   <input type="radio" name="slider" class="slide-radio4" id="slider_4">
+
   <div class="slider-pagination">
     <label for="slider_1" class="page1"></label>
     <label for="slider_2" class="page2"></label>
@@ -16,57 +19,34 @@
     <label for="slider_4" class="page4"></label>
   </div>
 
-<!--
-<div class="next control">
-    <label for="slider_2" class="numb2">
-        <i class="material-icons">skip_next</i>
-        </label>
-</div>
-  <div class="previous control">
--->
-
+<!-- SLIDE (REPEAT) -->
   <div class="slider slide1 teal">
-    <div style="
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-        opacity: 0.4;
-        background-size: 100%;
-        background-image:
-            url(http://localhost/static/uploads/welcome/Bienvenue.jpg);
-        z-index: -1;
-    "></div>
+    <div class="slideback" style="
+        background-image: url(/static/uploads/welcome/Bienvenue.jpg);"></div>
     <div>
-      <h2>
-      Bienvenu
-      <br>
-        sur
-      </h2>
+      <h2> Bienvenu <br> sur </h2>
       <h1 class="white-text">
             <span class='fragola'>C</span>ultures du
             <span class='fragola'>S</span>pectacle
             <span class='fragola'>B</span>aroque
       </h1>
       <hr>
-        <a ui-sref='welcome.subsection'>
-      <md-button class="md-raised paolo">
+      <a ui-sref='welcome.subsection'>
+       <md-button class="md-raised paolo">
+        <div layout='row' layout-align="center center"> Project </div>
+       </md-button>
+      </a>
+      <a href ng-click="nextSlide(2)">
+       <md-button class="md-raised paolo">
         <div layout='row' layout-align="center center">
-            Project
+            Next <i class="material-icons">skip_next</i>
         </div>
-      </md-button>
-        </a>
-        <a href ng-click="nextSlide(2)">
-      <md-button class="md-raised paolo">
-            <div layout='row' layout-align="center center">
-                Next
-                <i class="material-icons">skip_next</i>
-            </div>
-      </md-button>
-        </a>
+       </md-button>
+      </a>
     </div>
   </div>
+<!-- SLIDE (REPEAT) -->
+
   <div class="slider slide2">
     <div>
       <h2>Second</h2>

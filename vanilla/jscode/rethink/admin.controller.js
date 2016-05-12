@@ -16,8 +16,9 @@ angular.module('web')
 .controller('JustATest', function($rootScope, $scope, $timeout)
 {
 
-    $rootScope.avoidTheToolbar = true;
-    $rootScope.disable_sidemenu = true;
+    // $rootScope.avoidTheToolbar = true;
+    // $rootScope.disable_sidemenu = true;
+
     $scope.checking = [
         false,
         false,

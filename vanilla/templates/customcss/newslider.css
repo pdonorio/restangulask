@@ -67,9 +67,8 @@
   transform: translateX(500px);
 }
 .slider .paolo {
-  display: inline-block;
-  -webkit-transform: translateX(-1000px);
-  transform: translateX(-1000px);
+  -webkit-transform: translateY(500px);
+  transform: translateY(500px);
 }
 .slider h2, .slider .button, .slider .paolo {
   -webkit-transition: opacity 500ms, -webkit-transform 500ms;

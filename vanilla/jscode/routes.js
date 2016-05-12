@@ -165,6 +165,14 @@ $stateProvider
             "main": {
                 templateUrl: templateDir + 'intro.html',
             }
+        },
+        onEnter: function ($rootScope) {
+            $rootScope.avoidTheToolbar = true;
+            $rootScope.disable_sidemenu = true;
+        },
+        onExit: function ($rootScope) {
+            $rootScope.avoidTheToolbar = false;
+            $rootScope.disable_sidemenu = false;
         }
     })
 
@@ -185,6 +193,10 @@ $stateProvider
                 templateUrl: templateDir + 'section_info.html',
             }
         },
+        onEnter: function ($rootScope) {
+            $rootScope.avoidTheToolbar = false;
+            $rootScope.disable_sidemenu = false;
+        }
     })
 
     .state("welcome.subsection", {
@@ -194,6 +206,10 @@ $stateProvider
                 templateUrl: templateDir + 'project_explain.html',
             }
         },
+        onEnter: function ($rootScope) {
+            $rootScope.avoidTheToolbar = false;
+            $rootScope.disable_sidemenu = false;
+        }
     })
 
     .state("welcome.workinprogress", {
