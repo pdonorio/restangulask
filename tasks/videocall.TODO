@@ -1,15 +1,5 @@
 
-The loader?
-
-COLORI HTML:
-Banda fine e Iniziali maiuscole titolo. HTML : cc0066
-Banda Slide 1 +  testo del titolo + testi finali. HTML: 6a909a
-Banda Slide 2. HTML: bcb862
-Banda Slide 3. HTML: ff0000
-Banda Slide 4. HTML: 0f243d
-
---- ✄ -----------------------
-
+order:
 1. trascrizione
 2. dettagli
 3. fete + source
@@ -18,15 +8,9 @@ bug:
   ☐ agen_1 search/details vignette/image diff
   ☐ duplicates in suggestions
   ☐ remove "prova"
-
-search
- ☐ div with translucent
- ☐ strawberry in the title letters
-
-
+  ☐ search div with translucent
 
  SEARCH:
-     file:///Users/projects/restapi/restangulask/tmp/ui-scroll/demo/
 
    ✔ scroll with search text? @important @done (16-05-11 08:13)
      ✔ adapter! @done (16-05-11 08:13)
@@ -46,6 +30,7 @@ search
    ✔ single fete @done (16-05-10 11:14)
 
 MORE:
+ ✔ strawberry in the title letters ?? @done (16-05-12 15:30)
 ☐ another
   ☐ lexique: tabs from pdf
   ☐ multiple source in fete: palermo

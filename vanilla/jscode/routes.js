@@ -166,6 +166,15 @@ $stateProvider
                 templateUrl: templateDir + 'intro.html',
             }
         },
+    })
+
+    .state("welcome.alternative", {
+        url: "/alternative",
+        views: {
+            "main@": {
+                templateUrl: templateDir + 'sliders.html',
+            }
+        },
         onEnter: function ($rootScope) {
             $rootScope.avoidTheToolbar = true;
             $rootScope.disable_sidemenu = true;
