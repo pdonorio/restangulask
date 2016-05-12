@@ -1,121 +1,78 @@
+
 <div ng-if="failure" layout="column" layout-align='center center'>
-    <h3>Temporary failure</h3><br>
-    Currently our data server is unreachable.
+    <h3>Server is temporary unavailable</h3><br>
+    Dear user, currently our data server is unreachable.
     <br><br>Please try again in a few minutes;
     <br>We apologize for any inconvenience.
 </div>
 
-<div ng-if="!failure" layout="row">
+<div ng-if="!failure"
+    ng-controller="JustATest as j"
+    class="css-slider-wrapper" style="z-index: 99;">
 
-<!--CONTENT -->
-<div flex="5"></div>
-<div layout="column" layout-align='center center'>
+<!-- FIX REPEAT -->
+  <input
+    ng-repeat="section in sections track by $index"
+    type="radio" name="slider"
+    class="slide-radio{{$index+1}}"
+    id="slider_{{$index+1}}" ng-checked="checking[$index]">
 
-
-<!--SLIDER-->
-<div ng-include="root.blueprintTemplateDir + 'slider.html'"></div>
-
-<div ng-if="loading"
-    ng-include="root.templateDir + 'loader.html'"></div>
-
-<div ng-if="!loading">
-<div style="padding-top: 50px;"></div>
-
-<!-- REPEATS -->
-  <div ng-repeat="section in sections track by $index"
-    ng-cloak
-    id='step{{$index}}'
-    style="padding-bottom: 100px;"
-    class="section scrollspy" scrollspy>
-
-   <div style="position: relative; height: 480px;">
-
-    <!-- IMAGE (with link) -->
-    <div style="
-        background-repeat: no-repeat;
-        background-size: 100% 100%; /* background-size:cover; */
-        width: 950px; height: 470px;
-        z-index:1; "
-        ng-style="{'background-image':'url('+
-        root.imagesPath + welcome.mainSubFolder + section.images[0].filename
-        +')'}"
-        ></div>
-
-    <!-- TITLE BACKGROUND COLOR? -->
-    <div style=" position: absolute; bottom: 10px;
-        background-color: {{ section.data['Color'] || defaultColor }};
-        width: 100%;
-        height: 140px;
-        opacity: .5;
-        z-index:2;">
-        </div>
-
-    <div style=" position: absolute; bottom: 0px;
-        padding-left: 5%; color: white;
-        width: 100%;
-        z-index:3;">
-        <a href ui-sref="{{section.link}}" style="color: white;">
-        <!-- TITLE -->
-        <h2 class="header" style='font-family: Leela;'>
-            {{ section.data['Section'].capitalizeFirstLetter() }} </h2>
-        <!-- DESCRIPTION -->
-        <p ng-if="section.data['Description'].trim() == ''">&nbsp;</p>
-        <p ng-if="section.data['Description'].trim() != ''"
-            ng-bind-html="section.data['Description']"></p>
-        </a>
-    </div>
-   </div>
-
-<!-- SEARCH CASE? Didn't perceive it very good.
-    <md-content
-        ng-if="welcome.isSearch(section)"
-        layout-padding layout-wrap>
-            <div layout="row" layout-align="center center">
-                <input placeholder="{{section.data['Content']}}"
-                    ng-focus="activateSearch()">
-                <i class="material-icons prefix">search</i>
-            </div>
-    </md-content>
--->
-
-<!-- More
-    <md-content flew="100"
-        ng-if="!welcome.isSearch(section) && section.data['Content'] != ''"
-        layout="row" layout-align="end center">
-        <md-button class="md-warn">
-          <a ui-sref="welcome.more(
-            {element: $index, section_type: 'welcome'})">more...</a>
-        </md-button>
-    </md-content>
--->
-
-<!-- Parallax
-    <md-content layout-padding layout-wrap></md-content>
-    <div class="parallax-container"
-        ng-if="section.images && section.images.length > 0">
-        <div parallax>
-          <img lazy-img="{{ root.imagesPath
-            + welcome.mainSubFolder + section.images[0].filename}}"
-            class="z-depth-1">
-        </div>
-    </div>
--->
-
+  <div class="slider-pagination">
+    <label ng-repeat="section in sections track by $index"
+        for="slider_{{$index+1}}" class="page{{$index+1}}"></label>
   </div>
 
-</div> <!-- loader -->
-</div> <!-- flex -->
+<!-- SLIDE (REPEAT) -->
+  <div
+    ng-repeat="section in sections track by $index"
+    class="slider"
+    style="background-color: {{ section.data['Color'] || defaultColor }};"
+    ng-class="'slide' + ($index+1)">
 
-<!-- SIDE MENU
- <div flex="5"></div>
- <div ng-if="sections.length > 1"
-    flex="15" pushpin pushpin-offset="1">
+<!-- BACKGROUND IMAGE -->
+    <div class="slideback"
+        ng-style="{'background-image':'url('+
+            root.imagesPath + welcome.mainSubFolder
+            + section.images[0].filename +')'}"
+        ></div>
 
-  <ul class="section table-of-contents">
-    <li ng-repeat="section in sections track by $index">
-      <a href="#step{{$index}}"> {{section.data['Section']}} </a>
-    </li>
-  </ul>
- </div>
--->
+    <div id='slide_content'>
+
+<!-- STATIC -->
+    <div ng-if="$index == 0">
+      <h2> Bienvenu <br> sur </h2>
+      <h1 class="white-text">
+            <span class='fragola'>C</span>ultures du
+            <span class='fragola'>S</span>pectacle
+            <span class='fragola'>B</span>aroque
+      </h1>
+    </div>
+
+<!-- DYNAMIC -->
+    <div ng-if="$index > 0">
+        <h2>
+            {{ section.data['Section'].capitalizeFirstLetter() }}
+        </h2>
+    </div>
+
+      <hr>
+      <a href ui-sref="{{section.link}}">
+       <md-button class="md-raised paolo">
+        <div layout='row' layout-align="center center">
+            Explore
+        </div>
+       </md-button>
+      </a>
+      <a href ng-click="nextSlide($index+2)" ng-if="$index+1 < sections.length">
+       <md-button class="md-raised paolo">
+        <div layout='row' layout-align="center center">
+            Suivant <i class="material-icons">skip_next</i>
+        </div>
+       </md-button>
+      </a>
+
+    </div>
+  </div>
+<!-- SLIDE (REPEAT) -->
+
 </div>

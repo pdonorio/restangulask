@@ -1,4 +1,15 @@
 
+.slideback {
+    position: absolute; left: 0px; top: 0px;
+    width: 100%; height: 100%;
+    z-index: -1; opacity: 0.6;
+    background-size: 100%;
+}
+
+.fragola {
+    color: #F50057;
+}
+
 .nospaces { padding: 0; margin: 0; border:0; }
 .nospaces table { padding: 0; margin: 0; border:0; }
 .nospaces table th { padding: 0; margin: 0; border:0; }
