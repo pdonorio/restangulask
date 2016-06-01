@@ -1,4 +1,58 @@
 
+- Rosso più scuro
+- Verde più scuro
+- invertire rosso e verde nel titolo
+
+BUGS:
+
+zoom 100%
+dunkerque_MS_2 (pagina avanti, pagina indietro)
+thumbnails
+
+TRADUZIONI:
+
+  - lingua
+  - editor
+  - tendina
+
+LESSICO:
+
+  - excel
+  - sheets
+  - macro
+  - micro
+  - posizione
+  - lingue (francesce, latino, italiano)
+
+EXPO':
+
+  breadcrumb: Expo > SpectacleBaroque >  Sala > Sezione > Immagine
+
+ - Expo = lista 3 sale
+   - mostra tutte immagini
+ - sala
+https://material.angularjs.org/latest/demo/gridList
+  - sezioni
+  - immagini
+    - pagina/numero
+    - dettagli immagini
+    titolo, nome, artista, data, luogo di conservazione, titolo libro, descrizione, materiale
+
+STEPs
+1. immagine
+2. dettagli immagine
+3. testo/commento
+
+
+
+
+
+
+
+
+
+
+
 order:
 1. trascrizione
 2. dettagli
