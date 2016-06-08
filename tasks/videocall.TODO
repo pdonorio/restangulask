@@ -1,13 +1,15 @@
 
+BUGS:
+
+ ☐ zoom error
+   ☐ also zoom 100%?
+ ☐ pages in details?
+   ☐ dunkerque_MS_2 (pagina avanti, pagina indietro)
+ ☐ thumbnails in search page
+
 - Rosso più scuro
 - Verde più scuro
 - invertire rosso e verde nel titolo
-
-BUGS:
-
-zoom 100%
-dunkerque_MS_2 (pagina avanti, pagina indietro)
-thumbnails
 
 TRASCRIZIONI (TRADUZIONI):
 
@@ -23,7 +25,6 @@ TRASCRIZIONI (TRADUZIONI):
 
 LESSICO:
 
-- lowercase?
   - excel
   - sheets
   - macro
@@ -31,7 +32,11 @@ LESSICO:
   - posizione
   - lingue (francese, latino, italiano)
 
-  - show with alphabetic french order (inside micro)
+  ☐ show with alphabetic french order (inside micro)
+  ☐ upload page
+    ☐ inject in elastic
+  ☐ show in search with modal + tabs
+  ☐ list in search details
 
 EXPO':
 
