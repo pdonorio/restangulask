@@ -9,34 +9,60 @@ zoom 100%
 dunkerque_MS_2 (pagina avanti, pagina indietro)
 thumbnails
 
-TRADUZIONI:
+TRASCRIZIONI (TRADUZIONI):
 
+  - editing existing
   - lingua
   - editor
   - tendina
 
+ From latin to french, usually
+
+ **should be generic
+ - detect language from lieu
+
 LESSICO:
 
+- lowercase?
   - excel
   - sheets
   - macro
   - micro
   - posizione
-  - lingue (francesce, latino, italiano)
+  - lingue (francese, latino, italiano)
+
+  - show with alphabetic french order (inside micro)
 
 EXPO':
 
-  breadcrumb: Expo > SpectacleBaroque >  Sala > Sezione > Immagine
+  breadcrumb: Expo > SpectacleBaroque >  Sala/Sezione > Tema > Immagine
+
+ * PERCORSO PER TEMI:
+  - elenco sale/sezioni
+  - ogni sezione ha tendina/dropdown con elenco "temi"
+
+* PERCORSO PER OPERE:
+  - tutte le opere thumbnail
+  - click on thumb goes to tema! (?)
+
+==================================
 
  - Expo = lista 3 sale
    - mostra tutte immagini
  - sala
 https://material.angularjs.org/latest/demo/gridList
-  - sezioni
+  - tema
   - immagini
     - pagina/numero
     - dettagli immagini
     titolo, nome, artista, data, luogo di conservazione, titolo libro, descrizione, materiale
+
+NO SEARCH!
+
+- upload all images
+- list them and edit details/text/no zoom option
+- when hover image show info icon with z-index?
+- in details page directly with zoom
 
 STEPs
 1. immagine
