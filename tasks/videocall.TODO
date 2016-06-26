@@ -13,16 +13,18 @@ BUGS:
 
 TRASCRIZIONI (TRADUZIONI):
 
- ☐ rebuild elastic?
- ☐ remove 'transcriptions_splitting' if exists
- ☐ add image attribute
-   ☐ translation (true/false: radio?)
+ ✔ remove 'transcriptions_splitting' if exists @done (16-06-27 00:36)
+ ✔ add image attribute @done (16-06-27 00:36)
+   ✔ translation (true/false: radio?) @done (16-06-27 00:36)
    ☐ language (select  from francese, latino, italiano)
  From latin to french, usually
+ ☐ change form
+   ☐ add swtich with select
 
- ☐ elastic is not updated when inserting/editing transcriptions??
-   ☐ should it be updated from javascript? see fasterdocs.py
-   ☐ should it be updated from docs.py itself? @probablyyes
+ ☐ rebuild elastic?
+   ☐ elastic is not updated when inserting/editing transcriptions??
+     ☐ should it be updated from javascript? see fasterdocs.py
+     ☐ should it be updated from docs.py itself? @probablyyes
 
 LESSICO:
 
