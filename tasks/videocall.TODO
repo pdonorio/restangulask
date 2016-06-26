@@ -13,15 +13,16 @@ BUGS:
 
 TRASCRIZIONI (TRADUZIONI):
 
-  - editing existing
-  - lingua
-  - editor
-  - tendina
-
+ ☐ rebuild elastic?
+ ☐ remove 'transcriptions_splitting' if exists
+ ☐ add image attribute
+   ☐ translation (true/false: radio?)
+   ☐ language (select  from francese, latino, italiano)
  From latin to french, usually
 
- **should be generic
- - detect language from lieu
+ ☐ elastic is not updated when inserting/editing transcriptions??
+   ☐ should it be updated from javascript? see fasterdocs.py
+   ☐ should it be updated from docs.py itself? @probablyyes
 
 LESSICO:
 

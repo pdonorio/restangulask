@@ -12,7 +12,7 @@ import rethinkdb as r
 from jinja2._compat import iteritems
 from operator import itemgetter
 from rethinkdb.net import DefaultCursorEmpty
-from flask.ext.security import auth_token_required, roles_required
+from flask_security import auth_token_required, roles_required
 from confs import config
 from ..services.rethink import schema_and_tables, BaseRethinkResource
 from ..services.uploader import Uploader
@@ -252,6 +252,7 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
             # Making filtering queries
             logger.debug("Build query '%s'" % param)
 
+            logger.critical("\n\nSHOULD NOT BE USED!!!\n\n")
             if self._args['key'] is not None:
                 query = self.get_filtered_notes(query, self._args['key'])
             else:

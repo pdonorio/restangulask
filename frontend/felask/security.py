@@ -8,7 +8,7 @@ import json
 # import simplejson as json
 from datetime import datetime
 # from flask import Response, stream_with_context
-from flask.ext.login import login_user, UserMixin
+from flask_login import login_user, UserMixin
 from config import BACKEND, API_URL, get_logger
 from .basemodel import db, lm, User
 from . import htmlcodes as hcodes

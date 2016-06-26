@@ -11,11 +11,11 @@ conf:
 
         ## If you need to get serious
         ## (gunicorn/nginx servers + postgres dbs + print INFO level)
-        APP_MODE: production
+        # APP_MODE: production
 
         ## If you are testing something that does not work
         ## (containers that do not start anything)
-        # APP_MODE: debug
+        APP_MODE: debug
 ###############################
 
 
