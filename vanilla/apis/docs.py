@@ -511,31 +511,27 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
     def put(self, id):
 
         j = self.get_input(False)
-        if 'trans' not in j:
+        key_base = 'transcription'
+        key_translate = 'translation'
+        if key_base not in j:
             return self.response({}, code=hcodes.HTTP_OK_NORESPONSE)
         # print("Id", id, "Received", j)
-
-        # def merge_dicts(a, b):
-        #     print("MERGE", a, b)
-        #     z = a.copy()
-        #     z.update(b)
-        #     print("MERGED", z)
-        #     return z
 
         base_query = self.get_table_query(DOCSTABLE).get(id)
         data = base_query.run().copy()
         image = data['images'].pop()
 
-        key = 'transcriptions'
-        image[key] = [j['trans']]
+        # If translation
+        if j[key_translate]:
+            if key_translate + 's' not in image:
+                image[key_translate + 's'] = {}
+            image[key_translate + 's'][j['language']] = j[key_base]
+        else:
+            image[key_base + 's'] = [j[key_base]]
 
-# # TO FIX: substitute with elastic search
-#         words = set()
-#         for trans in image[key]:
-#             words = words | split_and_html_strip(trans)
-#         image[key+'_split'] = list(words)
-
-        print(image)
+# // TO FIX:
+    # Update elastic search?
+        # print(image)
         changes = base_query.update({
             'images': [image]
         }, return_changes=True).run(time_format="raw")

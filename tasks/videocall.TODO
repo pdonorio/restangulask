@@ -1,25 +1,22 @@
 
-BUGS:
-
- ☐ zoom error
-   ☐ also zoom 100%?
- ☐ pages in details?
-   ☐ dunkerque_MS_2 (pagina avanti, pagina indietro)
- ☐ thumbnails in search page
+ ☐ UPDATE TINYMCE
 
 - Rosso più scuro
 - Verde più scuro
 - invertire rosso e verde nel titolo
 
-TRASCRIZIONI (TRADUZIONI):
+BUGS:
+ ☐ thumbnails in search page are wrong
 
+TRASCRIZIONI (TRADUZIONI):
  ✔ remove 'transcriptions_splitting' if exists @done (16-06-27 00:36)
  ✔ add image attribute @done (16-06-27 00:36)
    ✔ translation (true/false: radio?) @done (16-06-27 00:36)
-   ☐ language (select  from francese, latino, italiano)
+   ✔ language (select  from francese, latino, italiano) @done (16-06-29 00:11)
  From latin to french, usually
- ☐ change form
-   ☐ add swtich with select
+ ✔ change form @done (16-06-29 00:11)
+   ✔ add swtich with select @done (16-06-29 00:11)
+ ☐ Show translations
 
  ☐ rebuild elastic?
    ☐ elastic is not updated when inserting/editing transcriptions??
@@ -27,7 +24,6 @@ TRASCRIZIONI (TRADUZIONI):
      ☐ should it be updated from docs.py itself? @probablyyes
 
 LESSICO:
-
   - excel
   - sheets
   - macro
@@ -41,8 +37,10 @@ LESSICO:
   ☐ show in search with modal + tabs
   ☐ list in search details
 
-EXPO':
+SUBMISSION:
+  ☐ edit
 
+EXPO':
   breadcrumb: Expo > SpectacleBaroque >  Sala/Sezione > Tema > Immagine
 
  * PERCORSO PER TEMI:

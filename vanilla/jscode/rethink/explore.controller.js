@@ -142,6 +142,7 @@ function FixTransController($scope, $rootScope, $sce,
     self.noImageList = function (name, data) {
       self.elements = data;
       self.currentParty = name;
+      delete self.currentText;
       $window.scrollTo(0, 0);
     }
 
@@ -153,6 +154,66 @@ function FixTransController($scope, $rootScope, $sce,
       delete self.elements;
     }
 
+    $scope.baseLanguages = [
+        'Francais', 'Italiano', 'Latino',
+    ];
+    $scope.selectedLanguage = null;
+
+    self.translationDialog = function(record, name)
+    {
+// TO FIX
+    // "language":  "something" ,   // cannot be empty
+    // "translation": true
+
+      // Prepare data for the dialog
+      $scope.currentRecord = record;
+      $scope.currentType = 'documents';
+      $scope.currentName = name;
+      $scope.options = angular.copy($rootScope.tinymceOptions);
+      $scope.options.setup = function (editor) {
+          editor.on("init", function() {
+            $timeout(function () { editor.focus(); }, 600);
+          });
+      }
+      $scope.translation = true;
+      $scope.translations = {};
+      $scope.currentText = " ";
+      $scope.languages = angular.copy($scope.baseLanguages);
+      $scope.initialLanguage = $scope.languages[0];
+
+      // Fill data if exists
+      SearchService.getDocs(record).then(function (out) {
+
+          if (out.data[0].images && out.data[0].images.length > 0)
+          {
+                var trans = "";
+                var data = out.data[0].images[0];
+
+                if (data.hasOwnProperty('translations')) {
+
+                    // Get all languages
+                    forEach(data.translations, function(trans, language) {
+                        $scope.translations[language] = trans;
+                    });
+                    //console.log("Translations", $scope.translations);
+
+                    // Show the first one
+                    if (Object.keys($scope.translations).length > 0) {
+                        $scope.initialLanguage =
+                            Object.keys($scope.translations)[0];
+                        $scope.currentText = angular.copy(
+                            $scope.translations[$scope.initialLanguage]);
+                    }
+
+                }
+          }
+
+          self.currentText = $scope.currentText;
+
+        }); // end of filling
+    }
+
+
     self.transcriptionDialog = function(record, name)
     {
 
@@ -161,6 +222,12 @@ function FixTransController($scope, $rootScope, $sce,
       $scope.currentType = 'documents';
       $scope.currentName = name;
       $scope.options = angular.copy($rootScope.tinymceOptions);
+      $scope.translation = false;
+      $scope.currentText = " ";
+      $scope.languages = ['-'];
+      forEach($scope.baseLanguages, function(x, i) {
+          $scope.languages.push(x);
+      });
 
       $scope.options.setup = function (editor) {
           editor.on("init", function() {
@@ -180,82 +247,33 @@ function FixTransController($scope, $rootScope, $sce,
           {
 
                 var trans = out.data[0].images[0].transcriptions[0];
-                //console.log("Obtained", trans);
-                //$scope.currentText = angular.copy($sce.trustAsHtml(trans));
-                $scope.currentText = angular.copy(trans);
-                self.currentText = $scope.currentText;
-          } else {
-              self.currentText = " ";
-          }
-
-////////////////////////////////////////
-// TO FIX
-////////////////////////////////////////
-
-/*
-          var dialogOptions = {
-            templateUrl: blueprintTemplateDir + 'transcription.html',
-            parent: angular.element(document.body),
-            // I can pass my scope
-            scope: $scope.$new(),
-            // Note: THE $new() FUNCTION IS NECESSARY to duplicate
-            // the scope inside the modal.
-            // Otherwise, closing the modal would destroy the parent's scope
-          }
-
-          // Open
-          $mdDialog.show(dialogOptions)
-            .then(function (response) {
-                $log.debug("Closed transcript dialog with", response);
-
-                if (response) {
-
-                  //////////////////////////////////
-                  // SAVE DATA!
-                  var data = {};
-                  data.type = $scope.currentType;
-                  data.trans = response;
-                  return AdminService.setDocumentTrans(
-                        $scope.currentRecord, data).then(function(out)
-                  {
-                      console.log("SET OUT", out);
-                  });
-
-                    // Make the loader appear
-                    $scope.transcripts = null;
-                    //$scope.showSimpleToast({"Reloading data": null}, 1200);
-                    // Close the card
-                    self.closeCard();
-                    // Reload data
-                    getMissingTransData(AdminService, $scope);
+                if (trans.trim() != "") {
+                    $scope.currentText = angular.copy(trans);
                 }
-          }); // end of open
-*/
+          }
+
+          self.currentText = $scope.currentText;
 
         }); // end of filling
     }
 
     //////////////////////////////////
     // SAVE DATA!
-    $scope.validateEdit = function (response)
+    $scope.validateEdit = function (transcription, language)
     {
-      console.log("Writing response", response);
+      console.log("Is it translation?", $scope.translation);
+      console.log("Writing transcription", transcription);
       var data = {};
       data.type = $scope.currentType;
-      data.trans = response;
+      data.language = language;
+      data.transcription = transcription;
+      data.translation = $scope.translation;
+
       return AdminService.setDocumentTrans(
             $scope.currentRecord, data).then(function(out)
       {
           console.log("SET OUT", out);
       });
-
-        // // Make the loader appear
-        // $scope.transcripts = null;
-        // //$scope.showSimpleToast({"Reloading data": null}, 1200);
-        // // Close the card
-        // self.closeCard();
-        // // Reload data
-        // getMissingTransData(AdminService, $scope);
     }
 
 };

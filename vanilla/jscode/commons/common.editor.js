@@ -86,18 +86,17 @@ function EditorNonDialogController(
     self.options = $scope.options;
     self.options.width = 590;
     self.options.height = 400;
-
-    // Note: Make sure you using scopes correctly by following this wiki page. If you are having issues with your model not updating, make sure you have a '.' in your model.
     self.content = null;
     self.realHtml = null;
     if ($scope.currentText) {
         // If i don't use timeout, the content gets wiped
         $timeout(function () {
-            self.content = angular.copy($scope.currentText); //.getTrustedHtml());
+            self.content = angular.copy($scope.currentText);
         }, 800);
     }
-    //console.log("TEST CONTENT", self.content, $scope);
 
+/*
+    //console.log("TEST CONTENT", self.content, $scope);
     $scope.$watch(
         "edit.content",
         function handleEditorHtml( newValue, oldValue ) {
@@ -106,6 +105,7 @@ function EditorNonDialogController(
                 "Old", oldValue, "New", newValue, "real", self.realHtml);
         }
     );
+*/
 
     //////////////////////////////
     // Other functions
@@ -117,11 +117,24 @@ function EditorNonDialogController(
     };
 
     self.validate = function() {
-      // send transcription back as original html
-      //$mdDialog.hide($sce.getTrustedHtml(self.realHtml));
-      $scope.validateEdit($sce.getTrustedHtml(self.realHtml));
+
+      // Validate HTML
+      self.realHtml = $sce.trustAsHtml(self.content);
+      // Send transcription back as original html
+      $scope.validateEdit($sce.getTrustedHtml(self.realHtml), self.language);
+      // Close the card
       $scope.closeEdit();
     };
+
+    self.changeLanguage = function (language) {
+      if ($scope.translation) {
+        console.log("Changing language", language);
+        if ($scope.translations[language])
+            self.content = $scope.translations[language];
+        else
+            self.content = " ";
+      }
+    }
 
 };
 
