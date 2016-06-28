@@ -7,7 +7,7 @@ import os
 import requests
 from pathlib import Path
 from flask import Blueprint, render_template, request, jsonify, g
-from flask.ext.login import logout_user, current_user
+from flask_login import logout_user, current_user
 from .basemodel import user_config
 from .security import login_point, register_api
 from . import htmlcodes as hcodes

@@ -1,23 +1,41 @@
 
-<!--
-<div ng-controller='ToastController as toasting'>
- <md-dialog instead of md-content
--->
-
- <md-content
-    ng-controller="EditorNonDialogController as edit"
+<md-content ng-controller="EditorNonDialogController as edit"
     aria-label="Transcription for image">
 
     <md-toolbar class="md-primary md-hue-3" >
       <div class="md-toolbar-tools" layout="row">
-        <h2> <b>{{currentName}}</b>: <i>Transcription</i> for image </h2>
+        <h2> <b>{{currentName}}</b>:
+
+        <span ng-if='translation'>
+            <b>Translation</b> of
+        </span>
+        <i>Transcription</i>
+
+        for image </h2>
       </div>
     </md-toolbar>
 
     <md-dialog-content layout-padding
       style="min-width:800px; min-height:400px;
       max-width:1100px; max-height:800px; ">
-        <textarea ui-tinymce="edit.options" ng-model="edit.content" ></textarea>
+      <md-input-container>
+        <label>Language</label>
+        <md-select ng-model="edit.language"
+            ng-init="edit.language = initialLanguage"
+            md-on-close="edit.changeLanguage(edit.language)"
+            >
+          <md-optgroup label="Languages">
+            <md-option ng-value="item" ng-repeat="item in languages"
+                >{{item}}</md-option>
+          </md-optgroup>
+        </md-select>
+      </md-input-container>
+
+        <br>
+
+        <textarea
+            ui-tinymce="edit.options" ng-model="edit.content" ></textarea>
+
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
@@ -30,4 +48,4 @@
       </md-button>
     </md-dialog-actions>
 
- </md-content>
+</md-content>

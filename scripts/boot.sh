@@ -132,7 +132,7 @@ else
         echo -e "ACTION: Reboot\n"
         echo "Cleaning project containers (if any)"
         $com $files stop
-        $com $files rm -f --all
+        $com $files rm -f
         echo "Starting up"
         $com $files up -d --remove-orphans $services
     else
@@ -146,7 +146,7 @@ else
         elif [ "$2" == "remove" ]; then
             echo -e "ACTION: Removal\n"
             echo "Destroying services"
-            $com $files stop && $com $files rm -f --all
+            $com $files stop && $com $files rm -f
         elif [ "$2" == "sql" ]; then
             echo "Launch adminer for SQL servers"
             $com run --service-ports sqladmin

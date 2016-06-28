@@ -56,13 +56,16 @@
           <tbody>
             <tr ng-repeat="element in fix.elements">
              <td> {{element.value}} </td>
+
              <td> <a href
                  ng-click="fix.transcriptionDialog(element.record, element.value)"
-           tooltipped data-position="left" data-delay="50"
-           data-tooltip="Provide a transcription"
-                 class="waves-effect waves-light btn-floating lime lighten-2">
-                   <i class="material-icons blue-grey-text"> description </i> </a>
-             </td>
+                 class="waves-effect waves-light btn lime">
+                    transcript </a> </td>
+             <td> <a href
+                 ng-click="fix.translationDialog(element.record, element.value)"
+                 class="waves-effect waves-light btn lime lighten-1">
+                    translate </a> </td>
+
              <td> <a ui-sref='public.fastsearch({text: element.value})'
            tooltipped data-position="down" data-delay="50"
            data-tooltip="Search this record"
