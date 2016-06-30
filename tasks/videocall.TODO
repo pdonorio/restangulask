@@ -7,6 +7,9 @@
 
 BUGS:
  ☐ thumbnails in search page are wrong
+ ☐ tinymce angular?
+ angular.js:13708 TypeError: Cannot read property 'body' of undefined
+    at Object.getBody (tinymce.min.js:11)
 
 TRASCRIZIONI (TRADUZIONI):
  ✔ remove 'transcriptions_splitting' if exists @done (16-06-27 00:36)

@@ -241,6 +241,15 @@ function FixTransController($scope, $rootScope, $sce,
 
       // Fill data if exists
       SearchService.getDocs(record).then(function (out) {
+
+          if (! out.data[0] || ! out.data[0].hasOwnProperty('images')) {
+            $window.scrollTo(0, 0);
+            var errors = {};
+            errors[name] = 'does not have an image associated!';
+            $scope.showSimpleToast(errors, 4200);
+            return false;
+          }
+
           if (out.data[0].images
               && out.data[0].images.length > 0
               && out.data[0].images[0].transcriptions
