@@ -95,35 +95,39 @@ function EditorNonDialogController(
         }, 800);
     }
 
-/*
-    //console.log("TEST CONTENT", self.content, $scope);
-    $scope.$watch(
+    // Keep an eye on the content
+    // Use a watch to save the real html at each change
+    self.stopTheWatch = $scope.$watch(
         "edit.content",
         function handleEditorHtml( newValue, oldValue ) {
             self.realHtml = $sce.trustAsHtml(oldValue);
-            $log.debug("HTML content watch:",
-                "Old", oldValue, "New", newValue, "real", self.realHtml);
+            // console.log("HTML content watch:",
+            //     "Old", oldValue, "New", newValue, "real", self.realHtml);
         }
+        , true
     );
-*/
+// TO FIX: should kill the watch on close?
 
     //////////////////////////////
     // Other functions
     //////////////////////////////
 
-    self.cancel = function() {
-      //$mdDialog.hide(false);
+    self.exitCard = function() {
+      self.stopTheWatch();
       $scope.closeEdit();
+    }
+
+    self.cancel = function() {
+      // Close the card
+      self.exitCard();
     };
 
     self.validate = function() {
-
-      // Validate HTML
-      self.realHtml = $sce.trustAsHtml(self.content);
       // Send transcription back as original html
       $scope.validateEdit($sce.getTrustedHtml(self.realHtml), self.language);
+      $scope.showSimpleToast({'Updated': $scope.currentName});
       // Close the card
-      $scope.closeEdit();
+      self.exitCard();
     };
 
     self.changeLanguage = function (language) {

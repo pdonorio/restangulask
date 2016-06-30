@@ -142,11 +142,12 @@ function FixTransController($scope, $rootScope, $sce,
     self.noImageList = function (name, data) {
       self.elements = data;
       self.currentParty = name;
-      delete self.currentText;
       $window.scrollTo(0, 0);
+      delete self.currentText;
     }
 
     $scope.closeEdit = function() {
+      $window.scrollTo(0, 0);
       delete self.currentText;
     }
 
@@ -252,6 +253,7 @@ function FixTransController($scope, $rootScope, $sce,
                 }
           }
 
+          // Apply $sce?
           self.currentText = $scope.currentText;
 
         }); // end of filling
@@ -261,8 +263,7 @@ function FixTransController($scope, $rootScope, $sce,
     // SAVE DATA!
     $scope.validateEdit = function (transcription, language)
     {
-      console.log("Is it translation?", $scope.translation);
-      console.log("Writing transcription", transcription);
+      //console.log("Writing transcription", transcription);
       var data = {};
       data.type = $scope.currentType;
       data.language = language;
