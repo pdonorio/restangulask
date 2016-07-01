@@ -525,9 +525,12 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
         if j[key_translate]:
             if key_translate + 's' not in image:
                 image[key_translate + 's'] = {}
+            # Set the language
             image[key_translate + 's'][j['language']] = j[key_base]
         else:
             image[key_base + 's'] = [j[key_base]]
+            # Set the language
+            image['language'] = j['language']
 
 # // TO FIX:
     # Update elastic search?

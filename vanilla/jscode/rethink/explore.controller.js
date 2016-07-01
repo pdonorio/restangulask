@@ -257,8 +257,9 @@ function FixTransController($scope, $rootScope, $sce,
           {
 
                 var trans = out.data[0].images[0].transcriptions[0];
-                if (trans.trim() != "") {
+                if (trans != null && trans.trim() != "") {
                     $scope.currentText = angular.copy(trans);
+                    $scope.initialLanguage = out.data[0].images[0]['language'];
                 }
           }
 
