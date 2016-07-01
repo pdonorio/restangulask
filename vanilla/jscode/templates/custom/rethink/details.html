@@ -53,7 +53,7 @@
 
       <div layout="row">
 
-        <div flex=50 style="text-align: center;">
+        <div flex=45 style="text-align: center;">
             <a ng-if="detail.data.images[0].filename"
                 href="/zoom/{{ detail.data.id }}/{{ detail.data.images[0].code }}"
                 target="_blank">
@@ -68,7 +68,8 @@
                 <i class="material-icons">collections</i>
             </div>
         </div>
-        <div flex=50
+        <div flex=10></div>
+        <div flex=45
             layout="column" layout-align="start center"
             ng-bind-html="detail.test"></div>
       </div>
