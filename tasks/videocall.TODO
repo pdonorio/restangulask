@@ -1,12 +1,23 @@
 
- ☐ UPDATE TINYMCE
+COLORS:
 
-- Rosso più scuro
-- Verde più scuro
-- invertire rosso e verde nel titolo
+ ☐ Rosso più scuro
+ ☐ Verde più scuro
+ ☐ invertire rosso e verde nel titolo
 
 BUGS:
+
+ ☐ Anvers_MS_2 traduzioni?
+
+ ☐ EXPO UPLOADER PAGE
+
+ ☐ next and previous when more than one underscore
+ es. Anvers_MS_2
+
  ☐ thumbnails in search page are wrong
+
+ ☐ Convert bruxelles TIFF with operations
+
  ☐ tinymce angular?
  angular.js:13708 TypeError: Cannot read property 'body' of undefined
     at Object.getBody (tinymce.min.js:11)
@@ -19,6 +30,7 @@ TRASCRIZIONI (TRADUZIONI):
  From latin to french, usually
  ✔ change form @done (16-06-29 00:11)
    ✔ add swtich with select @done (16-06-29 00:11)
+
  ☐ Show translations
 
  ☐ rebuild elastic?

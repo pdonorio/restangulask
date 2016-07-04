@@ -717,6 +717,9 @@ class RethinkUploader(Uploader, BaseRethinkResource):
 
         # Record is the main thing here
         id = self._args[key]
+        if id == 'GENERATE':
+            import uuid
+            id = str(uuid.uuid4())
 
         # This is the turning point for the image future use
         img_destination = image_destination(self._args)
