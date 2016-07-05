@@ -334,6 +334,23 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
 
         return changes
 
+
+#####################################
+class RethinkExpo(BaseRethinkResource):
+
+    table = "datadocs"
+    _type = 'expo'
+
+    @deck.apimethod
+    @auth_token_required
+    def get(self):
+
+        table = self.get_table_query()
+        query = table.filter({mykey: self._type})
+        count, data = self.execute_query(query)
+        return self.response(data, elements=count)
+
+
 #####################################
 # Administration profile
 model = 'datadmins'
@@ -589,7 +606,6 @@ class RethinkElement(BaseRethinkResource):
                                 details['page'] = int(m[0])
                             details['record'] = obj['record']
                             # else:
-                            #     print("UHM", m, element)
                             break
 
                 if step['step'] == 2:

@@ -4,12 +4,38 @@
 angular.module('web')
     .controller('ExpoController', ExpoController);
 
-function ExpoController($scope, $log)
+function ExpoController($scope, $log, AdminService)
 {
 
     // INIT controller
     var self = this;
     $log.debug("EXPO: controller");
+    self.type = 'expo';
+
+    //Recover data
+    self.reload = function () {
+
+        AdminService.getExpo().then(function (out)
+        {
+          //console.log("Getting data", out.data);
+          var files = {};
+          // IF DATA IS PRESENT
+          if (out.data && out.data.length > 0) {
+
+            forEach(out.data, function (element, index) {
+              if (element && element != '') {
+                console.log("Element", element.images[0]);
+                files[element.record] =
+                    self.type + '/' + element.images[0].code;
+              }
+            });
+
+            self.files = files;
+          }
+
+        });
+    }
+    self.reload();
 
     //////////////////////////////
     // Flow library configuration
@@ -30,8 +56,8 @@ function ExpoController($scope, $log)
 
     self.uploaded = function(file) {
       file.status = 'uploaded';
-      self.response = true;
       $log.info("File uploaded", file);
+      self.reload();
     };
 
     self.adding = function(file, ev, flow) {

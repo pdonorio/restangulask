@@ -9,6 +9,7 @@ function AdminService($log, api) {
     var self = this;
     self.endpoints = {
         admin: 'datadmins',
+        expo: 'expo',
         imissing: 'dataimagemissing',
         tmissing: 'datatransmissing',
     }
@@ -31,6 +32,10 @@ function AdminService($log, api) {
     // Base API call with Rethinkdb
     self.getData = function(type) {
         return api.apiCall(self.endpoints.admin, 'GET', {type: type});
+    }
+
+    self.getExpo = function() {
+        return api.apiCall(self.endpoints.expo, 'GET');
     }
 
     self.insert = function(name, data) {

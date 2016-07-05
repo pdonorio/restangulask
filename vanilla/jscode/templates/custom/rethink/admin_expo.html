@@ -58,6 +58,12 @@
     <md-card ng-if="expo.files">
         <md-card-content layout="column" layout-align="center center">
         <h4>Uploaded files</h4>
+
+            <ul> <li ng-repeat="filename in expo.files">
+<img lazy-img="{{ root.imagesPath+filename+'/TileGroup0/0-0-0.jpg' }}"
+     width=80> {{filename}}
+            </li> </ul>
+
     </md-card-content> </md-card>
 
   </div>
