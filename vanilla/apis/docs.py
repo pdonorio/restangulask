@@ -342,13 +342,72 @@ class RethinkExpo(BaseRethinkResource):
     _type = 'expo'
 
     @deck.apimethod
+# TO BE REMOVED IN THE FUTURE
     @auth_token_required
-    def get(self):
+    def get(self, id=None):
 
+        # Lista immagini
         table = self.get_table_query()
         query = table.filter({mykey: self._type})
         count, data = self.execute_query(query)
+
+        # Sezioni e temi (da expo)
+        # Build select?
+
+        # Ritorna tutto
         return self.response(data, elements=count)
+
+    @deck.apimethod
+    @auth_token_required
+    def put(self, id):
+
+        table = self.get_table_query(self._type)
+        j = self.get_input(False).pop(self._type)
+        print("RECEIVED", j, table)
+
+        itsnew = "NEW ELEMENT"
+        # (sezione > tema > lista immagine)
+
+        ######################################
+        # Update expo tree
+
+        # Section
+        sec = j.pop("section").strip()
+        if sec == itsnew:
+            newsec = j.pop("newsection").strip()
+            if newsec != '':
+                print("Should add", newsec)
+                # Check if exists on rethink otherwise add
+                # as empty array
+                sec = newsec
+
+        # Theme
+        theme = j.pop("theme").strip()
+        if theme == itsnew:
+            newtheme = j.pop("newtheme").strip()
+            if newtheme != '':
+                print("Should add", newtheme)
+                # Check if exists on rethink otherwise add
+                # as empty array inside the section array
+                theme = newtheme
+
+        # Append image to Theme list
+        # i have sec + newtheme + image record uuid
+        j.pop('id')
+        print(sec, theme, id)
+
+        ######################################
+        # Update image info
+        print("REMAINING", j)
+
+        # this should be done on "datadocs" as internal attribute
+
+        ######################################
+        # query = table.filter({mykey: self._type})
+        # count, data = self.execute_query(query)
+        # return self.response(data, elements=count)
+
+        return self.response("Hello")
 
 
 #####################################

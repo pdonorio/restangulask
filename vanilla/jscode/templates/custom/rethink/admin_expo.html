@@ -95,7 +95,59 @@
     <md-card ng-if="expo.current">
         <md-card-content layout="column" layout-align="center center">
         <h4>Edit element {{expo.current.name}}</h4>
-        <md-button ng-click="expo.close()"> Close </md-button>
+
+        {{expo.current}}
+
+    <!-- SECTION -->
+      <div>
+          <md-input-container>
+            <label>Section</label>
+            <md-select ng-model="expo.current.section">
+              <md-optgroup label="sections">
+                <md-option ng-value="item" ng-repeat="item in expo.sections"
+                    >{{item}}</md-option>
+              </md-optgroup>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container ng-if="expo.current.section == 'NEW ELEMENT'">
+            <label>New Section</label>
+            <input ng-model="expo.current.newsection" type="text">
+          </md-input-container>
+        </div>
+
+    <!-- THEME -->
+      <div>
+          <md-input-container>
+            <label>Theme</label>
+            <md-select ng-model="expo.current.theme">
+              <md-optgroup label="themes">
+                <md-option ng-value="item" ng-repeat="item in expo.themes"
+                    >{{item}}</md-option>
+              </md-optgroup>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container ng-if="expo.current.theme == 'NEW ELEMENT'">
+            <label>New Section</label>
+            <input ng-model="expo.current.newtheme" type="text">
+          </md-input-container>
+        </div>
+
+    <!-- DETAILS -->
+      <div>
+        <md-input-container layout-padding
+          ng-repeat="(detail, type) in expo.details">
+            <label>{{detail}}</label>
+            <input
+                ng-model="expo.current.details[detail]" type="{{type}}">
+        </md-input-container>
+      </div>
+
+        <div>
+            <md-button ng-click="expo.save()"> save </md-button>
+            <md-button ng-click="expo.close()"> cancel </md-button>
+        </div>
         <section id='edit'></section>
         </md-card-content>
     </md-card>

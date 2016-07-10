@@ -38,6 +38,10 @@ function AdminService($log, api) {
         return api.apiCall(self.endpoints.expo, 'GET');
     }
 
+    self.setExpoElement = function(id, data) {
+        return api.apiCall(self.endpoints.expo, 'PUT', {expo: data}, id);
+    }
+
     self.insert = function(name, data) {
         return api.apiCall(self.endpoints.admin, 'POST',
             {

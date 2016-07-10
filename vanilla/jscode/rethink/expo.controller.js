@@ -12,20 +12,37 @@ function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminS
     $log.debug("EXPO: controller");
     self.type = 'expo';
     self.current = null;
+    self.newelement = "NEW ELEMENT";
+
+    self.details = {
+        position: 'number',
+        title: 'text',
+        name: 'text',
+        author: 'text',
+        date: 'text',
+        place: 'text',
+        book: 'text',
+        material: 'text',
+        description: 'text',
+    }
 
     //Recover data
     self.reload = function () {
 
+        self.sections = [];
+        self.themes = [];
+
         AdminService.getExpo().then(function (out)
         {
           //console.log("Getting data", out.data);
+          console.log("Reloaded EXPO data.")
           var files = {};
           // IF DATA IS PRESENT
           if (out.data && out.data.length > 0) {
 
             forEach(out.data, function (element, index) {
               if (element && element != '') {
-                console.log("Element", element.images[0]);
+                //console.log("Element", element.images[0]);
                 files[element.record] =
                     self.type + '/' + element.images[0].code;
               }
@@ -33,6 +50,9 @@ function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminS
 
             self.files = files;
           }
+
+          self.sections.push(self.newelement);
+          self.themes.push(self.newelement);
 
         });
     }
@@ -59,6 +79,8 @@ function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminS
       console.log("TEST", uuid);
       self.current = {
         id: uuid,
+        details: {position: Object.keys(self.files).length + 1},
+// TO FIX
         name: 'Just a Test',
       };
       $timeout(function () {
@@ -69,6 +91,20 @@ function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminS
 
     self.remove = function (uuid) {
       console.log("TEST TRASH", uuid);
+  // API CALL
+
+      self.reload();
+    }
+
+    self.save = function () {
+      console.log("Should save", self.current);
+  // API CALL
+      AdminService.setExpoElement(self.current.id, self.current)
+       .then(function (out){
+        console.log("PUT", out);
+      });
+
+      self.reload();
     }
 
     self.close = function () {
