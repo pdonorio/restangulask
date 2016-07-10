@@ -4,13 +4,14 @@
 angular.module('web')
     .controller('ExpoController', ExpoController);
 
-function ExpoController($scope, $log, AdminService)
+function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminService)
 {
 
     // INIT controller
     var self = this;
     $log.debug("EXPO: controller");
     self.type = 'expo';
+    self.current = null;
 
     //Recover data
     self.reload = function () {
@@ -38,7 +39,47 @@ function ExpoController($scope, $log, AdminService)
     self.reload();
 
     //////////////////////////////
-    // Flow library configuration
+    // functions
+
+    $scope.gotoAnchor = function(newHash) {
+      //source: https://docs.angularjs.org/api/ng/service/$anchorScroll
+
+      if ($location.hash() !== newHash) {
+        // set the $location.hash to `newHash` and
+        // $anchorScroll will automatically scroll to it
+        $location.hash(newHash);
+      } else {
+        // call $anchorScroll() explicitly,
+        // since $location.hash hasn't changed
+        $anchorScroll();
+      }
+    };
+
+    self.update = function (uuid) {
+      console.log("TEST", uuid);
+      self.current = {
+        id: uuid,
+        name: 'Just a Test',
+      };
+      $timeout(function () {
+          $scope.gotoAnchor("edit");
+      })
+
+    }
+
+    self.remove = function (uuid) {
+      console.log("TEST TRASH", uuid);
+    }
+
+    self.close = function () {
+      delete self.current;
+      $timeout(function () {
+          $scope.gotoAnchor("upload");
+      })
+    }
+
+    //////////////////////////////
+    // Flow library upload
     //////////////////////////////
 
     self.config = {

@@ -1,6 +1,7 @@
 
 <div ng-controller="ExpoController as expo">
 
+    <section id='upload'></section>
     <md-toolbar layout="column"
         class="md-tall md-default-theme light-blue lighten-1 md-whiteframe-6dp">
       <div class="md-toolbar-tools">
@@ -59,12 +60,45 @@
         <md-card-content layout="column" layout-align="center center">
         <h4>Uploaded files</h4>
 
-            <ul> <li ng-repeat="filename in expo.files">
-<img lazy-img="{{ root.imagesPath+filename+'/TileGroup0/0-0-0.jpg' }}"
-     width=80> {{filename}}
-            </li> </ul>
+<center>
+        <table>
+          <tr ng-repeat="(uuid, filename) in expo.files">
+            <td>
+    <img lazy-img="{{ root.imagesPath
+        + filename +'/TileGroup0/0-0-0.jpg' }}"
+         width=80>
+     <br>
+     {{filename}}
+            <td>
+            <td>
+       <a href tooltipped ng-click="expo.update(uuid)"
+           data-position="down" data-tooltip="Edit content"
+           class="waves-effect waves-light btn-floating blue">
+           <i class="material-icons"> web </i>
+       </a>
+            </td>
+            <td>
+       <a href tooltipped ng-click='expo.remove(uuid)'
+           data-position="down" data-tooltip="Remove"
+           class="waves-effect waves-light btn-floating red">
+           <i class="material-icons"> delete </i>
+       </a>
+            </td>
+
+            </td>
+          </tr>
+        </table>
+</center>
 
     </md-card-content> </md-card>
+
+    <md-card ng-if="expo.current">
+        <md-card-content layout="column" layout-align="center center">
+        <h4>Edit element {{expo.current.name}}</h4>
+        <md-button ng-click="expo.close()"> Close </md-button>
+        <section id='edit'></section>
+        </md-card-content>
+    </md-card>
 
   </div>
 

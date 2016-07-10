@@ -1,15 +1,7 @@
 
-COLORS:
-
- ☐ Rosso più scuro
- ☐ Verde più scuro
- ☐ invertire rosso e verde nel titolo
-
 BUGS:
 
  ☐ Anvers_MS_2 traduzioni?
-
- ☐ EXPO UPLOADER PAGE
 
  ☐ next and previous when more than one underscore
  es. Anvers_MS_2
@@ -18,11 +10,16 @@ BUGS:
 
  ☐ Convert bruxelles TIFF with operations
 
+ ☐ colors
+   ☐ Rosso più scuro
+   ☐ Verde più scuro
+   ☐ invertire rosso e verde nel titolo
+
  ☐ tinymce angular?
  angular.js:13708 TypeError: Cannot read property 'body' of undefined
     at Object.getBody (tinymce.min.js:11)
 
-TRASCRIZIONI (TRADUZIONI):
+TRADUZIONI:
  ✔ remove 'transcriptions_splitting' if exists @done (16-06-27 00:36)
  ✔ add image attribute @done (16-06-27 00:36)
    ✔ translation (true/false: radio?) @done (16-06-27 00:36)
@@ -33,12 +30,15 @@ TRASCRIZIONI (TRADUZIONI):
 
  ☐ Show translations
 
- ☐ rebuild elastic?
+ ☐ Index translations in elastic
+
+ ☐ rebuild elastic
    ☐ elastic is not updated when inserting/editing transcriptions??
      ☐ should it be updated from javascript? see fasterdocs.py
      ☐ should it be updated from docs.py itself? @probablyyes
 
 LESSICO:
+
   - excel
   - sheets
   - macro
@@ -52,11 +52,11 @@ LESSICO:
   ☐ show in search with modal + tabs
   ☐ list in search details
 
-SUBMISSION:
-  ☐ edit
-
 EXPO':
-  breadcrumb: Expo > SpectacleBaroque >  Sala/Sezione > Tema > Immagine
+  breadcrumb: SpectacleBaroque >  Expo > Sala/Sezione > Tema > Immagine
+
+ ✔ EXPO UPLOADER PAGE @done (16-07-05 08:13)
+ ☐ EXPO EDIT IMAGE ATTRIBUTES
 
  * PERCORSO PER TEMI:
   - elenco sale/sezioni
@@ -90,6 +90,8 @@ STEPs
 2. dettagli immagine
 3. testo/commento
 
+SUBMISSION:
+  ☐ edit
 
 
 
