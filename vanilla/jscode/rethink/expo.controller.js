@@ -15,15 +15,15 @@ function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminS
     self.newelement = "NEW ELEMENT";
 
     self.details = {
-        position: 'number',
-        title: 'text',
-        name: 'text',
-        author: 'text',
-        date: 'text',
-        place: 'text',
-        book: 'text',
-        material: 'text',
-        description: 'text',
+        position: {type: 'number'},
+        title: {type: 'text', required: true},
+        name: {type: 'text'},
+        author: {type: 'text'},
+        date: {type: 'text'},
+        place: {type: 'text'},
+        book: {type: 'text'},
+        material: {type: 'text'},
+        description: {type: 'text'},
     }
 
     //Recover data
@@ -90,24 +90,31 @@ function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminS
     }
 
     self.remove = function (uuid) {
-      console.log("TEST TRASH", uuid);
-  // API CALL
-
-      self.reload();
+      AdminService.delExpoElement(uuid).then(function (out){
+        console.log("Delete", uuid, out);
+        self.reload();
+      });
     }
 
     self.save = function () {
+
+// ERROR if no section or theme
+
+// ERROR if missing required field
+    //myForm.fieldname.$invalid?
+
       console.log("Should save", self.current);
   // API CALL
       AdminService.setExpoElement(self.current.id, self.current)
        .then(function (out){
-        console.log("PUT", out);
+            console.log("PUT", out);
+            self.close();
       });
 
-      self.reload();
     }
 
     self.close = function () {
+      self.reload();
       delete self.current;
       $timeout(function () {
           $scope.gotoAnchor("upload");

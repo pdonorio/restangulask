@@ -136,12 +136,19 @@
 
     <!-- DETAILS -->
       <div>
-        <md-input-container layout-padding
-          ng-repeat="(detail, type) in expo.details">
-            <label>{{detail}}</label>
-            <input
-                ng-model="expo.current.details[detail]" type="{{type}}">
-        </md-input-container>
+        <form action="myForm">
+            <md-input-container layout-padding
+              ng-repeat="(detail, options) in expo.details">
+                <label>{{detail}}</label>
+                <input
+                    ng-model="expo.current.details[detail]"
+                    ng-required="options.required"
+                    ng-type="options.type">
+            </md-input-container>
+            <div ng-messages="myForm.title.$error">
+              <div ng-message="required">This is required!</div>
+            </div>
+        </form>
       </div>
 
         <div>

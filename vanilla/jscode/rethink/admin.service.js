@@ -34,13 +34,19 @@ function AdminService($log, api) {
         return api.apiCall(self.endpoints.admin, 'GET', {type: type});
     }
 
+    ////////////
+    // EXPO
     self.getExpo = function() {
         return api.apiCall(self.endpoints.expo, 'GET');
     }
-
+    self.delExpoElement = function(id) {
+        return api.apiCall(self.endpoints.expo, 'DELETE', null, id);
+    }
     self.setExpoElement = function(id, data) {
         return api.apiCall(self.endpoints.expo, 'PUT', {expo: data}, id);
     }
+    // EXPO
+    ////////////
 
     self.insert = function(name, data) {
         return api.apiCall(self.endpoints.admin, 'POST',

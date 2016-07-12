@@ -363,49 +363,80 @@ class RethinkExpo(BaseRethinkResource):
 
         table = self.get_table_query(self._type)
         j = self.get_input(False).pop(self._type)
-        print("RECEIVED", j, table)
-
+        # print("RECEIVED", j, table)
         itsnew = "NEW ELEMENT"
-        # (sezione > tema > lista immagine)
 
         ######################################
         # Update expo tree
+        # (sezione > tema > lista immagini)
 
+        ##########
         # Section
         sec = j.pop("section").strip()
         if sec == itsnew:
             newsec = j.pop("newsection").strip()
             if newsec != '':
-                print("Should add", newsec)
-                # Check if exists on rethink otherwise add
-                # as empty array
                 sec = newsec
 
+        # Check if exists on rethink
+        out = list(table.filter({'section': sec}).run())
+        section_id = None
+        if len(out) > 0:
+            section_id = out.pop()['id']
+        else:
+            # otherwise add as empty array
+            changes = table.insert({'section': sec, 'themes': {}}).run()
+            section_id = changes['generated_keys'].pop()
+        logger.debug("Expo section is %s" % section_id)
+        section_query = table.get(section_id)
+        section = section_query.run()
+
+        ##########
         # Theme
         theme = j.pop("theme").strip()
         if theme == itsnew:
             newtheme = j.pop("newtheme").strip()
             if newtheme != '':
-                print("Should add", newtheme)
-                # Check if exists on rethink otherwise add
-                # as empty array inside the section array
                 theme = newtheme
 
+        # Check if exists on rethink
+        if theme not in section['themes']:
+            section['themes'][theme] = []
+
         # Append image to Theme list
-        # i have sec + newtheme + image record uuid
-        j.pop('id')
-        print(sec, theme, id)
+        if id not in section['themes'][theme]:
+            section['themes'][theme].append(id)
+
+        # Update rethink
+        changes = section_query.update({'themes': section['themes']}).run()
+        logger.debug(changes)
+
+# Problem:
+# we could associate the same image to more themes...
 
         ######################################
         # Update image info
-        print("REMAINING", j)
 
-        # this should be done on "datadocs" as internal attribute
+        # print(test, id, section, "\nREMAINING", j['details'])
+        query = self.get_table_query('datadocs').get(id)
+        key = 'details'
+        changes = query.update({key: j[key]}).run()
+        logger.debug(changes)
 
-        ######################################
         # query = table.filter({mykey: self._type})
         # count, data = self.execute_query(query)
         # return self.response(data, elements=count)
+
+        return self.response("Hello")
+
+    def delete(self, id):
+
+        # Remove from expo
+
+        # Remove from docs
+        # super.delete(id, index='record')
+
+        # Remove from FS
 
         return self.response("Hello")
 
