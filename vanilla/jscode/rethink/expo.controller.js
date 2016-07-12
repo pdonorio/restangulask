@@ -16,6 +16,11 @@ function ExpoController($scope, $log,
     self.current = null;
     self.newelement = "ADD NEW ELEMENT";
     self.position = 1;
+    $scope.keylen = function (obj) {
+      if (obj)
+          return Object.keys(obj).length;
+      return 0;
+    }
 
     self.details = {
         position: {type: 'number'},
@@ -43,7 +48,7 @@ function ExpoController($scope, $log,
             //self.sections = Array(Object.keys(self.sectionsAndThemes));
           });
           //console.log("Getting data", out.data);
-          console.log("Reloaded EXPO data.", out);
+          console.log("Reloaded EXPO data.");
           var files = {};
           // IF DATA IS PRESENT
           if (out.data) {
@@ -115,6 +120,7 @@ function ExpoController($scope, $log,
     self.remove = function (uuid) {
       AdminService.delExpoElement(uuid).then(function (out){
         console.log("Delete", uuid, out);
+        $scope.showSimpleToast({'Removed':'requested element'});
         self.reload();
       });
     }
@@ -163,9 +169,9 @@ function ExpoController($scope, $log,
   // API CALL
       AdminService.setExpoElement(self.current.id, self.current)
        .then(function (out){
-            console.log("PUT", out);
-            self.close();
+            //console.log("PUT", out);
             $scope.showSimpleToast({'Saved': self.current.id});
+            self.close();
       });
 
     }

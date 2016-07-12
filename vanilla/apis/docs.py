@@ -411,19 +411,6 @@ class RethinkExpo(BaseRethinkResource):
             if newsec != '':
                 sec = newsec
 
-        # Check if exists on rethink
-        out = list(table.filter({'section': sec}).run())
-        section_id = None
-        if len(out) > 0:
-            section_id = out.pop()['id']
-        else:
-            # otherwise add as empty array
-            changes = table.insert({'section': sec, 'themes': {}}).run()
-            section_id = changes['generated_keys'].pop()
-        logger.debug("Expo section is %s" % section_id)
-        section_query = table.get(section_id)
-        section = section_query.run()
-
         ##########
         # Theme
         theme = j.pop("theme").strip()
@@ -431,14 +418,6 @@ class RethinkExpo(BaseRethinkResource):
             newtheme = j.pop("newtheme").strip()
             if newtheme != '':
                 theme = newtheme
-
-        # Check if exists on rethink
-        if theme not in section['themes']:
-            section['themes'][theme] = []
-
-        # Append image to Theme list
-        if id not in section['themes'][theme]:
-            section['themes'][theme].append(id)
 
         # we could associate the same image to more themes...
         # Should be removed from where it is now
@@ -452,6 +431,27 @@ class RethinkExpo(BaseRethinkResource):
 
                         logger.debug("Removed from %s/%s" %
                                      (element['section'], current_theme))
+
+        # Check if section exists on rethink
+        out = list(table.filter({'section': sec}).run())
+        section_id = None
+        if len(out) > 0:
+            section_id = out.pop()['id']
+        else:
+            # otherwise add as empty array
+            changes = table.insert({'section': sec, 'themes': {}}).run()
+            section_id = changes['generated_keys'].pop()
+        logger.debug("Expo section is %s" % section_id)
+        section_query = table.get(section_id)
+        section = section_query.run()
+
+        # Check if exists on rethink
+        if theme not in section['themes']:
+            section['themes'][theme] = []
+
+        # Append image to Theme list
+        if id not in section['themes'][theme]:
+            section['themes'][theme].append(id)
 
         # Update rethink
         changes = section_query.update({'themes': section['themes']}).run()
