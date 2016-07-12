@@ -2,7 +2,16 @@
   'use strict';
 
 angular.module('web')
+    .controller('ExpoClient', ExpoClient)
     .controller('ExpoController', ExpoController);
+
+function ExpoClient($scope, $log,
+    $location, $window, $timeout, $anchorScroll,
+    AdminService)
+{
+    var self = this;
+    $log.info("EXPO: client");
+}
 
 function ExpoController($scope, $log,
     $location, $window, $timeout, $anchorScroll,
@@ -12,10 +21,12 @@ function ExpoController($scope, $log,
     // INIT controller
     var self = this;
     $log.debug("EXPO: controller");
+
     self.type = 'expo';
     self.current = null;
     self.newelement = "ADD NEW ELEMENT";
     self.position = 1;
+
     $scope.keylen = function (obj) {
       if (obj)
           return Object.keys(obj).length;

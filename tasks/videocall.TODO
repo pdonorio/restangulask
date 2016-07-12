@@ -56,16 +56,19 @@ EXPO':
   breadcrumb: SpectacleBaroque >  Expo > Sala/Sezione > Tema > Immagine
 
  ✔ EXPO UPLOADER PAGE @done (16-07-05 08:13)
- ☐ Expo edit
-   ☐ API
-     ☐ GET
-     ☐ DELETE
+ ✔ Expo edit @done (16-07-13 00:38)
+   ✔ API @done (16-07-13 00:38)
+     ✔ GET @done (16-07-13 00:38)
+     ✔ DELETE @done (16-07-13 00:38)
 
- * PERCORSO PER TEMI:
+ ☐ Update details:
+   ☐ Option no zoom
+
+ ☐  PERCORSO PER TEMI
   - elenco sale/sezioni
   - ogni sezione ha tendina/dropdown con elenco "temi"
 
-* PERCORSO PER OPERE:
+ ☐ PERCORSO PER OPERE
   - tutte le opere thumbnail
   - click on thumb goes to tema! (?)
 

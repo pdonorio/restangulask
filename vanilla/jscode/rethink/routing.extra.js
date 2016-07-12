@@ -53,6 +53,32 @@ angular.module('web')
         },
 
     //////////////////////
+        'public.expo': {
+            url: "/expo",
+            views: {
+                "unlogged": {
+                    dir: 'blueprint',
+                    templateUrl: 'expo_fork.html',
+                }
+            }
+        },
+
+    //////////////////////
+        'public.expo.themes': {
+            url: "/themes",
+            views: {
+                // "unlogged@": {
+                //     dir: 'blueprint',
+                //     templateUrl: 'expo_themes.html',
+                // },
+                "test": {
+                    dir: 'blueprint',
+                    templateUrl: 'expo_themes.html',
+                }
+            }
+        },
+
+    //////////////////////
         'public.list': {
             url: "/list",
             views: {

@@ -68,6 +68,15 @@
 
 <center>
         <table>
+            <thead>
+                <tr>
+                    <th>File</th>
+                    <th>Title</th>
+                    <th>Section</th>
+                    <th>Theme</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
           <tr ng-repeat="(uuid, options) in expo.files">
             <td>
     <img lazy-img="{{ root.imagesPath
@@ -75,7 +84,10 @@
          width=80>
      <br>
      {{options.name}}
-            <td>
+            </td>
+            <td> {{options.details.title}} </td>
+            <td> {{options.section}} </td>
+            <td> {{options.theme}} </td>
             <td>
        <a href tooltipped ng-click="expo.update(uuid)"
            data-position="down" data-tooltip="Edit content"
