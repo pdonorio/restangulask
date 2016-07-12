@@ -6,6 +6,7 @@ Some endpoints implementation
 
 from __future__ import absolute_import
 
+import os
 import re
 import rethinkdb as r
 
@@ -342,20 +343,52 @@ class RethinkExpo(BaseRethinkResource):
     _type = 'expo'
 
     @deck.apimethod
-# TO BE REMOVED IN THE FUTURE
-    @auth_token_required
+    # @auth_token_required
     def get(self, id=None):
 
-        # Lista immagini
+        data = {}
+        sections = {}
+
+        for element in self.get_table_query(self._type).run():
+            # print(element)
+            current_section = element['section']
+            sections[current_section] = []
+            for current_theme, ids in element['themes'].items():
+                sections[current_section].append(current_theme)
+                for uuid in ids:
+                    doc = self.get_table_query().get(uuid).run()
+                    code = doc['images'].pop()['code']
+                    data[uuid] = {
+                        'id': uuid,
+                        'section': current_section,
+                        'theme': current_theme,
+                        'details': doc['details'],
+                        'name': code,
+                        'file': os.path.join(self._type, code),
+                    }
+
+        # Only sections
+        if id == 'sections':
+            return self.response(sections)
+
+        # Load what is missing (images with no sections data)
         table = self.get_table_query()
         query = table.filter({mykey: self._type})
-        count, data = self.execute_query(query)
+        count, images = self.execute_query(query)
+        for doc in images:
+            # print("IMAGE\n\n", doc)
+            uuid = doc['record']
+            if uuid not in data:
+                # print("TO BE ADDED")
+                code = doc['images'].pop()['code']
+                data[uuid] = {
+                    'id': uuid,
+                    'name': code,
+                    'file': os.path.join(self._type, code),
+                }
+        # return self.response(data, elements=count)
 
-        # Sezioni e temi (da expo)
-        # Build select?
-
-        # Ritorna tutto
-        return self.response(data, elements=count)
+        return self.response(data, elements=len(data))
 
     @deck.apimethod
     @auth_token_required
@@ -364,7 +397,7 @@ class RethinkExpo(BaseRethinkResource):
         table = self.get_table_query(self._type)
         j = self.get_input(False).pop(self._type)
         # print("RECEIVED", j, table)
-        itsnew = "NEW ELEMENT"
+        itsnew = "ADD NEW ELEMENT"
 
         ######################################
         # Update expo tree
@@ -407,18 +440,28 @@ class RethinkExpo(BaseRethinkResource):
         if id not in section['themes'][theme]:
             section['themes'][theme].append(id)
 
+        # we could associate the same image to more themes...
+        # Should be removed from where it is now
+        for element in table.run():
+            for current_theme, ids in element['themes'].items():
+                if id in ids:
+                    if element['section'] != sec or theme != current_theme:
+                        element['themes'][current_theme].remove(id)
+                        table.get(element['id']).update(
+                            {'themes': element['themes']}).run()
+
+                        logger.debug("Removed from %s/%s" %
+                                     (element['section'], current_theme))
+
         # Update rethink
         changes = section_query.update({'themes': section['themes']}).run()
         logger.debug(changes)
-
-# Problem:
-# we could associate the same image to more themes...
 
         ######################################
         # Update image info
 
         # print(test, id, section, "\nREMAINING", j['details'])
-        query = self.get_table_query('datadocs').get(id)
+        query = self.get_table_query().get(id)
         key = 'details'
         changes = query.update({key: j[key]}).run()
         logger.debug(changes)
@@ -432,11 +475,27 @@ class RethinkExpo(BaseRethinkResource):
     def delete(self, id):
 
         # Remove from expo
+        table = self.get_table_query(self._type)
+        for element in table.run():
+            for current_theme, ids in element['themes'].items():
+                if id in ids:
+                    element['themes'][current_theme].remove(id)
+                    table.get(element['id']).update(
+                        {'themes': element['themes']}).run()
+                    logger.debug("Removed from %s/%s" %
+                                 (element['section'], current_theme))
 
         # Remove from docs
-        # super.delete(id, index='record')
+        doc = self.get_table_query().get(id).run()
+        super().delete(id, index='record')
 
         # Remove from FS
+        up = Uploader()
+        up.ZOOMIFY_ENABLE = True
+        up.remove(
+            doc['images'].pop()['filename'],
+            skip_response=True,
+            subfolder=self._type)
 
         return self.response("Hello")
 

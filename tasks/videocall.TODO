@@ -56,7 +56,10 @@ EXPO':
   breadcrumb: SpectacleBaroque >  Expo > Sala/Sezione > Tema > Immagine
 
  ✔ EXPO UPLOADER PAGE @done (16-07-05 08:13)
- ☐ EXPO EDIT IMAGE ATTRIBUTES
+ ☐ Expo edit
+   ☐ API
+     ☐ GET
+     ☐ DELETE
 
  * PERCORSO PER TEMI:
   - elenco sale/sezioni

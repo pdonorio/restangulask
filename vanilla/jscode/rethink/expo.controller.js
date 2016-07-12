@@ -4,7 +4,9 @@
 angular.module('web')
     .controller('ExpoController', ExpoController);
 
-function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminService)
+function ExpoController($scope, $log,
+    $location, $window, $timeout, $anchorScroll,
+    AdminService)
 {
 
     // INIT controller
@@ -12,7 +14,8 @@ function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminS
     $log.debug("EXPO: controller");
     self.type = 'expo';
     self.current = null;
-    self.newelement = "NEW ELEMENT";
+    self.newelement = "ADD NEW ELEMENT";
+    self.position = 1;
 
     self.details = {
         position: {type: 'number'},
@@ -30,29 +33,43 @@ function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminS
     self.reload = function () {
 
         self.sections = [];
-        self.themes = [];
 
         AdminService.getExpo().then(function (out)
         {
+          AdminService.getExpoSections().then(function (output) {
+
+            self.sectionsAndThemes = output.data;
+            for(var k in self.sectionsAndThemes) self.sections.push(k);
+            //self.sections = Array(Object.keys(self.sectionsAndThemes));
+          });
           //console.log("Getting data", out.data);
-          console.log("Reloaded EXPO data.")
+          console.log("Reloaded EXPO data.", out);
           var files = {};
           // IF DATA IS PRESENT
-          if (out.data && out.data.length > 0) {
+          if (out.data) {
 
             forEach(out.data, function (element, index) {
-              if (element && element != '') {
-                //console.log("Element", element.images[0]);
-                files[element.record] =
-                    self.type + '/' + element.images[0].code;
-              }
-            });
+                if (element.details && element.details.position
+                        && element.details.position > self.position
+                        ) {
+                    self.position = element.details.position;
 
-            self.files = files;
+                }
+            //   if (element && element != '') {
+            //     //console.log("Element", element.images[0]);
+            //     files[element.record] =
+            //         self.type + '/' + element.images[0].code;
+            //   }
+            });
+            // self.files = files;
+
+            self.files = out.data;
           }
 
+          // Give the possibility to add new elements
           self.sections.push(self.newelement);
-          self.themes.push(self.newelement);
+
+// LATEST POSITION
 
         });
     }
@@ -76,13 +93,19 @@ function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminS
     };
 
     self.update = function (uuid) {
-      console.log("TEST", uuid);
-      self.current = {
-        id: uuid,
-        details: {position: Object.keys(self.files).length + 1},
-// TO FIX
-        name: 'Just a Test',
-      };
+
+      self.reloadThemes(self.files[uuid].section);
+
+      self.current = self.files[uuid];
+      $log.info("Selected", uuid, self.current);
+      if (!self.current.details) {
+        self.current.details = {}
+      }
+      if (!self.current.details.position) {
+        self.current.details.position = self.position + 1;
+      }
+
+
       $timeout(function () {
           $scope.gotoAnchor("edit");
       })
@@ -96,19 +119,53 @@ function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminS
       });
     }
 
+    self.reloadThemes = function (section) {
+
+      if (self.current) {
+          // Clean choices
+          self.current.theme = null;
+          self.current.newtheme = null;
+      }
+
+      // THEMES
+      self.themes = [];
+      if (self.sectionsAndThemes[section])
+          self.themes = angular.copy(self.sectionsAndThemes[section]);
+
+      // Give the possibility to add new elements
+      self.themes.push(self.newelement);
+
+    }
+
     self.save = function () {
 
-// ERROR if no section or theme
+        var error = false;
+        // ERROR if missing required field
+        if (self.myForm.$invalid)
+            error = true;
 
-// ERROR if missing required field
-    //myForm.fieldname.$invalid?
+        // ERROR if no section or theme
+        if (!self.current.section && !self.current.newsection)
+            error = true;
 
-      console.log("Should save", self.current);
+        if (!self.current.theme && !self.current.newtheme)
+            error = true;
+
+        if (error) {
+            console.log("Error")
+            $window.scrollTo(0, 0);
+            //$timeout(function () { $scope.gotoAnchor("upload"); })
+            $scope.showSimpleToast({'Warning':'Missing required fields'});
+            return false;
+        }
+
+      //console.log("Should save", self.current);
   // API CALL
       AdminService.setExpoElement(self.current.id, self.current)
        .then(function (out){
             console.log("PUT", out);
             self.close();
+            $scope.showSimpleToast({'Saved': self.current.id});
       });
 
     }
@@ -116,9 +173,8 @@ function ExpoController($scope, $log, $location, $timeout, $anchorScroll, AdminS
     self.close = function () {
       self.reload();
       delete self.current;
-      $timeout(function () {
-          $scope.gotoAnchor("upload");
-      })
+      $window.scrollTo(0, 0);
+      //$timeout(function () { $scope.gotoAnchor("upload"); })
     }
 
     //////////////////////////////

@@ -1,7 +1,9 @@
 
-<div ng-controller="ExpoController as expo">
+<div ng-controller='ToastController as toasting'>
+ <div ng-controller="ExpoController as expo">
 
     <section id='upload'></section>
+
     <md-toolbar layout="column"
         class="md-tall md-default-theme light-blue lighten-1 md-whiteframe-6dp">
       <div class="md-toolbar-tools">
@@ -10,7 +12,8 @@
           <div class="md-toolbar-item md-breadcrumb" aria-hidden="false">
             <span tabindex="0">
                 <br>
-                Upload <b>EXPO</b> images
+                <b>EXPO gallery</b>
+                <br>
             </span>
           </div>
         </div>
@@ -26,8 +29,11 @@
     flow-file-error="expo.fileError($file, $message)"
     flow-progress="expo.progressing">
 
-    <md-card > <md-card-content layout="column" layout-align="center center">
-     <span class="btn" flow-btn>Click to upload</span>
+    <md-card
+        > <md-card-content layout="column" layout-align="center center"
+        >
+     <span class="btn waves-effect waves-light red"
+        flow-btn>new image</span>
      <table>
       <tr ng-repeat="file in $flow.files">
         <td> Request {{$index+1}}</td>
@@ -57,18 +63,18 @@
     </md-card-content> </md-card>
 
     <md-card ng-if="expo.files">
-        <md-card-content layout="column" layout-align="center center">
-        <h4>Uploaded files</h4>
+        <md-card-content layout="column" layout-align="center center" >
+        <h4>Uploaded images</h4>
 
 <center>
         <table>
-          <tr ng-repeat="(uuid, filename) in expo.files">
+          <tr ng-repeat="(uuid, options) in expo.files">
             <td>
     <img lazy-img="{{ root.imagesPath
-        + filename +'/TileGroup0/0-0-0.jpg' }}"
+        + options.file +'/TileGroup0/0-0-0.jpg' }}"
          width=80>
      <br>
-     {{filename}}
+     {{options.name}}
             <td>
             <td>
        <a href tooltipped ng-click="expo.update(uuid)"
@@ -93,16 +99,18 @@
     </md-card-content> </md-card>
 
     <md-card ng-if="expo.current">
-        <md-card-content layout="column" layout-align="center center">
-        <h4>Edit element {{expo.current.name}}</h4>
-
-        {{expo.current}}
+        <md-card-content layout="column" layout-align="center center"
+        class="light-blue lighten-5"
+        >
+        <h4>Edit element </h4>
+        <b>{{expo.current.name}}</b>
 
     <!-- SECTION -->
       <div>
           <md-input-container>
             <label>Section</label>
-            <md-select ng-model="expo.current.section">
+            <md-select ng-model="expo.current.section"
+                md-on-close="expo.reloadThemes(expo.current.section)" >
               <md-optgroup label="sections">
                 <md-option ng-value="item" ng-repeat="item in expo.sections"
                     >{{item}}</md-option>
@@ -110,9 +118,9 @@
             </md-select>
           </md-input-container>
 
-          <md-input-container ng-if="expo.current.section == 'NEW ELEMENT'">
+          <md-input-container ng-if="expo.current.section == expo.newelement">
             <label>New Section</label>
-            <input ng-model="expo.current.newsection" type="text">
+            <input ng-model="expo.current.newsection" type="text" required>
           </md-input-container>
         </div>
 
@@ -128,24 +136,24 @@
             </md-select>
           </md-input-container>
 
-          <md-input-container ng-if="expo.current.theme == 'NEW ELEMENT'">
+          <md-input-container ng-if="expo.current.theme == expo.newelement">
             <label>New Section</label>
-            <input ng-model="expo.current.newtheme" type="text">
+            <input ng-model="expo.current.newtheme" type="text" required>
           </md-input-container>
         </div>
 
     <!-- DETAILS -->
       <div>
-        <form action="myForm">
+        <form name="expo.myForm">
             <md-input-container layout-padding
               ng-repeat="(detail, options) in expo.details">
                 <label>{{detail}}</label>
                 <input
                     ng-model="expo.current.details[detail]"
                     ng-required="options.required"
-                    ng-type="options.type">
+                    type="{{options.type}}">
             </md-input-container>
-            <div ng-messages="myForm.title.$error">
+            <div ng-messages="expo.myForm.title.$error">
               <div ng-message="required">This is required!</div>
             </div>
         </form>
@@ -161,5 +169,5 @@
 
   </div>
 
-
+ </div>
 </div>

@@ -39,6 +39,9 @@ function AdminService($log, api) {
     self.getExpo = function() {
         return api.apiCall(self.endpoints.expo, 'GET');
     }
+    self.getExpoSections = function() {
+        return api.apiCall(self.endpoints.expo, 'GET', null, 'sections');
+    }
     self.delExpoElement = function(id) {
         return api.apiCall(self.endpoints.expo, 'DELETE', null, id);
     }
