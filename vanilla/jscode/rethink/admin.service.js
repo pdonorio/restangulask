@@ -39,6 +39,9 @@ function AdminService($log, api) {
     self.getExpo = function() {
         return api.apiCall(self.endpoints.expo, 'GET');
     }
+    self.getExpoMissing = function() {
+        return api.apiCall(self.endpoints.expo, 'GET', null, 'nopartials');
+    }
     self.getExpoSections = function() {
         return api.apiCall(self.endpoints.expo, 'GET', null, 'sections');
     }

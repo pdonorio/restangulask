@@ -11,6 +11,17 @@ function ExpoClient($scope, $log,
 {
     var self = this;
     $log.info("EXPO: client");
+
+    //recover data
+    self.reload = function () {
+
+        AdminService.getExpo().then(function (out) {
+            //console.log("OUT", out.data);
+            self.sections = out.data;
+        });
+    }
+
+    self.reload();
 }
 
 function ExpoController($scope, $log,
@@ -45,12 +56,12 @@ function ExpoController($scope, $log,
         description: {type: 'text'},
     }
 
-    //Recover data
+    //recover data
     self.reload = function () {
 
         self.sections = [];
 
-        AdminService.getExpo().then(function (out)
+        AdminService.getExpoMissing().then(function (out)
         {
           AdminService.getExpoSections().then(function (output) {
 

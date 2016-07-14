@@ -10,6 +10,7 @@ import os
 import re
 import rethinkdb as r
 
+from collections import OrderedDict
 from jinja2._compat import iteritems
 from operator import itemgetter
 from rethinkdb.net import DefaultCursorEmpty
@@ -18,7 +19,7 @@ from confs import config
 from ..services.rethink import schema_and_tables, BaseRethinkResource
 from ..services.uploader import Uploader
 from .. import decorators as deck
-from ..utilities import split_and_html_strip
+# from ..utilities import split_and_html_strip
 from ... import get_logger, htmlcodes as hcodes
 
 logger = get_logger(__name__)
@@ -348,28 +349,60 @@ class RethinkExpo(BaseRethinkResource):
 
         data = {}
         sections = {}
+        public = {}
 
         for element in self.get_table_query(self._type).run():
             # print(element)
             current_section = element['section']
             sections[current_section] = []
+            public[current_section] = {}
+
+            thumbs = OrderedDict()
+
             for current_theme, ids in element['themes'].items():
+
+                images = OrderedDict()
                 sections[current_section].append(current_theme)
+
                 for uuid in ids:
                     doc = self.get_table_query().get(uuid).run()
-                    code = doc['images'].pop()['code']
+                    image = doc['images'].pop()
+                    path = os.path.join(self._type, image['code'])
+                    key = doc['details'].pop('position')
+
+                    images[key] = {}
+                    images[key]['details'] = doc['details']
+                    images[key]['filename'] = \
+                        os.path.join(self._type, image['filename'])
+                    images[key]['thumb'] = path
+                    thumbs[key] = path
+
                     data[uuid] = {
                         'id': uuid,
                         'section': current_section,
                         'theme': current_theme,
                         'details': doc['details'],
-                        'name': code,
-                        'file': os.path.join(self._type, code),
+                        'name': image['code'],
+                        'file': path,
                     }
+
+                if len(images) > 0:
+                    public[current_section][current_theme] = images
+
+            if len(public[current_section]) < 1:
+                public.pop(current_section)
+            else:
+                for key in sorted(thumbs):
+                    public[current_section]['cover'] = thumbs[key]
+                    break
 
         # Only sections
         if id == 'sections':
             return self.response(sections)
+
+        # Data with no partial images
+        if id is None:
+            return self.response(public, elements=len(public))
 
         # Load what is missing (images with no sections data)
         table = self.get_table_query()
