@@ -86,6 +86,17 @@ angular.module('web')
         },
 
     //////////////////////
+        'public.expo.themes.selected.theme': {
+            url: "/:theme",
+            views: {
+                "themes@public.expo.themes": {
+                    dir: 'blueprint',
+                    templateUrl: 'expo_theme.html',
+                }
+            }
+        },
+
+    //////////////////////
         'public.list': {
             url: "/list",
             views: {

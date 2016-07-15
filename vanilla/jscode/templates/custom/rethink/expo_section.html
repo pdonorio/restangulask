@@ -7,7 +7,7 @@
             Section {{current_section}}
         </h3>
 
-          <md-input-container>
+          <md-input-container ng-if="single.themes.length > 1">
             <label>Theme</label>
             <md-select ng-model="single.current_theme"
                 md-on-close="single.selectTheme()" >

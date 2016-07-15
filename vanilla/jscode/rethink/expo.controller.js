@@ -36,33 +36,47 @@ function ExpoSections($scope, $log, $rootScope, AdminService)
 
     delete $rootScope.current_section;
     //delete $rootScope.current_themes;
-    //delete $rootScope.current_theme;
+    delete $rootScope.current_theme;
     //reLoadSections(AdminService, $rootScope, self);
 }
 
 function ExpoSingleSection($scope, $log,
-    $stateParams, $rootScope, AdminService)
+    $timeout, $state, $stateParams, $rootScope, AdminService)
 {
     var self = this;
     $log.info("EXPO: section", $stateParams);
     $rootScope.current_section = $stateParams.section;
-    reLoadSections(AdminService, self, $rootScope.current_section);
+    if ($stateParams.theme)
+        $rootScope.current_theme = $stateParams.theme;
+
+    reLoadSections(AdminService, self, $rootScope.current_section)
+/*
+     .then(function (out) {
+        // Selected theme
+        if ($stateParams.theme) {
+            $rootScope.current_theme = $stateParams.theme;
+            // var themes = {}
+            // themes[$rootScope.current_theme] =
+            //     $scope.sections[$rootScope.current_section][$rootScope.current_theme];
+            // $scope.sections = angular.copy({});
+            // $scope.sections[$rootScope.current_section] = themes;
+            // console.log('TEST', $scope.sections);
+        }
+     });
+*/
 
     self.selectTheme = function () {
 
 //activate a new url...
+        $timeout(function () {
+            $log.warn("Move to", self.current_theme);
+            $state.go('public.expo.themes.selected.theme',
+                {
+                    section: $rootScope.current_section,
+                    theme: self.current_theme,
+                });
+        });
 
-      reLoadSections(AdminService, self, $rootScope.current_section)
-       .then(function () {
-          if (self.current_theme) {
-            var themes = {}
-            themes[self.current_theme] =
-                self.sections[$rootScope.current_section][self.current_theme];
-            self.sections = angular.copy({});
-            self.sections[$rootScope.current_section] = themes;
-            console.log("Selected", self.current_theme, self.sections);
-          }
-      });
     }
 }
 

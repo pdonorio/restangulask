@@ -1,0 +1,21 @@
+<div ng-controller="ExpoSingleSection as single"
+    layout="column" layout-align='center center'>
+
+    <div layout="column" layout-align="center center">
+       <md-card ng-repeat="(position, data) in sections[current_section][current_theme]">
+    <br>
+
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-subhead">
+                {{data.details.title}}
+              </span>
+            </md-card-title-text>
+          </md-card-title>
+
+        <md-card-content>
+            <img src="{{ root.imagesPath + data.thumb +'/TileGroup0/0-0-0.jpg' }}" width="200" >
+        </md-card-content>
+       </md-card>
+    </div>
+</div>
