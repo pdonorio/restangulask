@@ -1,0 +1,47 @@
+<div ng-controller="ExpoSingleSection as single"
+    layout="row"
+    layout-padding layout-align='center center'>
+
+    <div flex="80" >
+        <h3>
+            Section {{current_section}}
+        </h3>
+
+          <md-input-container>
+            <label>Theme</label>
+            <md-select ng-model="single.current_theme"
+                md-on-close="single.selectTheme()" >
+              <md-optgroup label="themes">
+                <md-option ng-value="item" ng-repeat="item in single.themes"
+                    >{{item}}</md-option>
+              </md-optgroup>
+            </md-select>
+          </md-input-container>
+
+        <div
+            ng-repeat="(theme, paintings) in sections[current_section]"
+            ng-if="theme != 'cover'"
+            >
+            <hr>
+            <h5> Theme: {{theme}} </h5>
+            <br>
+            <div layout="column" layout-align="center center">
+                <md-card ng-repeat="(position, data) in paintings">
+
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-subhead">
+        {{data.details.title}}
+      </span>
+    </md-card-title-text>
+  </md-card-title>
+
+                    <md-card-content>
+                        <img src="{{ root.imagesPath + data.thumb +'/TileGroup0/0-0-0.jpg' }}" width="200" >
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+    </div>
+
+</div>

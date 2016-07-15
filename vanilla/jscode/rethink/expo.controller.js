@@ -3,25 +3,67 @@
 
 angular.module('web')
     .controller('ExpoClient', ExpoClient)
+    .controller('ExpoSections', ExpoSections)
+    .controller('ExpoSingleSection', ExpoSingleSection)
     .controller('ExpoController', ExpoController);
 
-function ExpoClient($scope, $log,
-    $location, $window, $timeout, $anchorScroll,
-    AdminService)
+//recover data
+function reLoadSections(AdminService, reference, section)
+{
+
+    return AdminService.getExpo().then(function (out) {
+        console.log("OUT", out.data);
+        reference.sections = out.data;
+        if (section) {
+            reference.themes = Object.keys(reference.sections[section]);
+            reference.themes.splice(reference.themes.indexOf('cover'), 1);
+            console.log('Reference', reference.themes);
+        }
+    });
+}
+
+function ExpoClient($scope, $log, $rootScope, AdminService)
+{
+    //var self = this;
+    $log.info("EXPO: fork");
+    reLoadSections(AdminService, $scope);
+}
+
+function ExpoSections($scope, $log, $rootScope, AdminService)
 {
     var self = this;
-    $log.info("EXPO: client");
+    $log.info("EXPO: sections");
 
-    //recover data
-    self.reload = function () {
+    delete $rootScope.current_section;
+    //delete $rootScope.current_themes;
+    //delete $rootScope.current_theme;
+    //reLoadSections(AdminService, $rootScope, self);
+}
 
-        AdminService.getExpo().then(function (out) {
-            //console.log("OUT", out.data);
-            self.sections = out.data;
-        });
+function ExpoSingleSection($scope, $log,
+    $stateParams, $rootScope, AdminService)
+{
+    var self = this;
+    $log.info("EXPO: section", $stateParams);
+    $rootScope.current_section = $stateParams.section;
+    reLoadSections(AdminService, self, $rootScope.current_section);
+
+    self.selectTheme = function () {
+
+//activate a new url...
+
+      reLoadSections(AdminService, self, $rootScope.current_section)
+       .then(function () {
+          if (self.current_theme) {
+            var themes = {}
+            themes[self.current_theme] =
+                self.sections[$rootScope.current_section][self.current_theme];
+            self.sections = angular.copy({});
+            self.sections[$rootScope.current_section] = themes;
+            console.log("Selected", self.current_theme, self.sections);
+          }
+      });
     }
-
-    self.reload();
 }
 
 function ExpoController($scope, $log,

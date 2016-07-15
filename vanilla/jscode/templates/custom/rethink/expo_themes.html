@@ -1,7 +1,61 @@
 
-<div layout="column" layout-align='center center'>
-test
-    <div ng-repeat="(key, value) in expo.sections">
-        {{key}}
+<div layout="row" layout-padding
+    layout-align='center center'>
+
+  <nav class="red" flex="90" >
+    <div class="nav-wrapper" style='margin-left: 30px;'>
+      <div class="column">
+        <a ui-sref="public.expo" class="breadcrumb">EXPO</a>
+        <a ui-sref="public.expo.themes"
+            class="breadcrumb">By theme</a>
+        <a ng-if="current_section"
+            ui-sref="public.expo.themes.selected({section: current_section})"
+            class="breadcrumb">
+            section: '{{current_section}}' </a>
+        <a ng-if="current_theme"
+            href="#!" class="breadcrumb">
+            <i>theme</i> {{current_theme}} </a>
+      </div>
     </div>
+  </nav>
+
+</div>
+
+<div ui-view="themes">
+
+  <div ng-controller="ExpoSections as exsections"
+    layout="row" layout-align='center center'>
+
+    <div
+        ng-repeat="(key, value) in sections">
+        <md-card>
+
+         <md-card-title>
+            <md-card-title-text>
+      <span class="md-subhead">
+            section
+      </span>
+      <span class="md-headline">
+            {{key}}
+      </span>
+            </md-card-title-text>
+         </md-card-title>
+
+         <md-card-content style="min-height: 250px";>
+<!--          {{value}}
+ -->
+    <img src="{{ root.imagesPath + value.cover +'/TileGroup0/0-0-0.jpg' }}"
+        width="200" >
+         </md-card-content>
+
+          <md-card-actions layout="row" layout-align="end center">
+           <md-button
+           ui-sref="public.expo.themes.selected({section: key})">
+                 explore
+           </md-button>
+          </md-card-actions>
+        </md-card>
+    </div>
+
+  </div>
 </div>
