@@ -12,13 +12,17 @@ function reLoadSections(AdminService, reference, section)
 {
 
     return AdminService.getExpo().then(function (out) {
-        console.log("OUT", out.data);
+        console.log("Loaded sections", out.data);
         reference.sections = out.data;
+
+/*
         if (section) {
             reference.themes = Object.keys(reference.sections[section]);
             reference.themes.splice(reference.themes.indexOf('cover'), 1);
             console.log('Reference', reference.themes);
         }
+*/
+
     });
 }
 
@@ -27,6 +31,12 @@ function ExpoClient($scope, $log, $rootScope, AdminService)
     //var self = this;
     $log.info("EXPO: fork");
     reLoadSections(AdminService, $scope);
+
+    $scope.keylen = function (obj) {
+      if (obj)
+          return Object.keys(obj).length;
+      return 0;
+    }
 }
 
 function ExpoSections($scope, $log, $rootScope, AdminService)

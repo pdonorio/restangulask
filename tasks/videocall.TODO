@@ -1,14 +1,15 @@
 
 BUGS:
 
+ ☐ Convert bruxelles TIFF with operations
+
  ☐ Anvers_MS_2 traduzioni?
+
 
  ☐ next and previous when more than one underscore
  es. Anvers_MS_2
 
  ☐ thumbnails in search page are wrong
-
- ☐ Convert bruxelles TIFF with operations
 
  ☐ colors
    ☐ Rosso più scuro
@@ -61,10 +62,12 @@ EXPO':
      ✔ GET @done (16-07-13 00:38)
      ✔ DELETE @done (16-07-13 00:38)
 
- ☐ Update details:
+ ☐ View single element
+   ☐ zoom + description + details (+ position?)
+ ☐ Edit mode, Update details
    ☐ Option no zoom
 
- ☐  PERCORSO PER TEMI
+ ✔  PERCORSO PER TEMI @done (16-07-15 15:27)
   - elenco sale/sezioni
   - ogni sezione ha tendina/dropdown con elenco "temi"
 
