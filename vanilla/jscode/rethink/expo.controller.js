@@ -15,13 +15,11 @@ function reLoadSections(AdminService, reference, section)
         console.log("Loaded sections", out.data);
         reference.sections = out.data;
 
-/*
         if (section) {
             reference.themes = Object.keys(reference.sections[section]);
             reference.themes.splice(reference.themes.indexOf('cover'), 1);
             console.log('Reference', reference.themes);
         }
-*/
 
     });
 }
@@ -135,6 +133,7 @@ function ExpoController($scope, $log,
             for(var k in self.sectionsAndThemes) self.sections.push(k);
             //self.sections = Array(Object.keys(self.sectionsAndThemes));
           });
+
           //console.log("Getting data", out.data);
           console.log("Reloaded EXPO data.");
           var files = {};
@@ -223,6 +222,7 @@ function ExpoController($scope, $log,
 
       // THEMES
       self.themes = [];
+      console.log('SECTION', self.sectionsAndThemes);
       if (self.sectionsAndThemes[section])
           self.themes = angular.copy(self.sectionsAndThemes[section]);
 
