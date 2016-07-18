@@ -34,7 +34,7 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
         {
             if (! out_single)
             {
-              $scope.showSimpleToast("No data found for current id!");
+              $scope.showSimpleToast({"No data found": "unknown id"});
               return false;
             }
 
@@ -47,8 +47,8 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
 // SHOULD I CYCLE TO REMOVE EMPTY?
             forEach(tmp, function(element, index) {
                 forEach(element, function(obj, j) {
-                    console.log("element", j, "*" + obj + "*");
-                    if (obj.trim() == '') {
+                    //console.log("element", j, "*" + obj + "*");
+                    if (obj && obj.trim() == '') {
                         tmp[index][j] = null;
                     }
                 });
@@ -81,10 +81,11 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
             var
                 field = "Numero de l'extrait",
                 codes = out_single['Extrait'][field].split('_'),
-                prefix = codes[0],
-                num = parseInt(codes[1]),
+                num = parseInt(codes.pop()),
+                prefix = codes.join('_'),
                 previous_code = prefix + "_" + String(num - 1),
                 next_code = prefix + "_" + String(num + 1);
+                //console.log('CODES', num, previous_code, next_code);
 
             // SEARCH WITH APIs
             self.previous.text = previous_code;
@@ -114,6 +115,7 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
 // REWRITE IMAGES and TRANSCRIPTIONS
             //console.log("A TEST HTML", out_single);
             forEach(out_single.images, function(element, index) {
+
               if (element.transcriptions) {
                   forEach(element.transcriptions, function(trans, j) {
                     //console.log("Trans", j, trans);
@@ -124,6 +126,12 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
 
                   });
               }
+
+              self.translations = {};
+              if (element.translations) {
+                self.translations = element.translations;
+              }
+
             });
 
             self.data = out_single;

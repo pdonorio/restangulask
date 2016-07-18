@@ -2,11 +2,7 @@
 BUGS:
 
  ✔ Convert bruxelles TIFF with operations @done (16-07-15 23:48)
-
- ☐ Anvers_MS_2 traduzioni?
-
-
- ☐ next and previous when more than one underscore
+ ✔ next and previous when more than one underscore @done (16-07-18 17:26)
  es. Anvers_MS_2
 
  ☐ thumbnails in search page are wrong
@@ -30,6 +26,7 @@ TRADUZIONI:
    ✔ add swtich with select @done (16-06-29 00:11)
 
  ☐ Show translations
+   ☐ Anvers_MS_2
 
  ☐ Index translations in elastic
 
@@ -62,9 +59,11 @@ EXPO':
      ✔ GET @done (16-07-13 00:38)
      ✔ DELETE @done (16-07-13 00:38)
 
+
  ☐ View single element
    ☐ zoom + description + details (+ position?)
  ☐ Edit mode, Update details
+   ☐ description as text editor
    ☐ Option no zoom
 
  ✔  PERCORSO PER TEMI @done (16-07-15 15:27)
