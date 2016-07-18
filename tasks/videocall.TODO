@@ -5,7 +5,7 @@ BUGS:
  ✔ next and previous when more than one underscore @done (16-07-18 17:26)
  es. Anvers_MS_2
 
- ☐ thumbnails in search page are wrong
+ ☐ thumbnails in search page are wrong?
 
  ☐ colors
    ☐ Rosso più scuro
@@ -24,9 +24,8 @@ TRADUZIONI:
  From latin to french, usually
  ✔ change form @done (16-06-29 00:11)
    ✔ add swtich with select @done (16-06-29 00:11)
-
- ☐ Show translations
-   ☐ Anvers_MS_2
+ ✔ Show translations @done (16-07-18 19:47)
+   Anvers_MS_2
 
  ☐ Index translations in elastic
 

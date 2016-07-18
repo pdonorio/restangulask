@@ -10,6 +10,7 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
     var self = this;
     self.load = true;
     self.data = null;
+    self.texts = {}
     self.query = $stateParams.query;
 
     function loadData() {
@@ -113,8 +114,12 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
             ////////////////////////////////////
 
 // REWRITE IMAGES and TRANSCRIPTIONS
-            //console.log("A TEST HTML", out_single);
+
+            self.original_language = 'original';
+
             forEach(out_single.images, function(element, index) {
+
+              self.texts = {}
 
               if (element.transcriptions) {
                   forEach(element.transcriptions, function(trans, j) {
@@ -122,17 +127,30 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
 
                     out_single.images[index].transcriptions[j] =
                         angular.copy($sce.trustAsHtml(trans));
-                    self.test = $sce.trustAsHtml(trans);
+                    if (element.language)
+                        self.original_language = element.language;
+
+                    // Set the initial language
+                    self.texts[self.original_language] = $sce.trustAsHtml(trans);
+                    self.current_text = self.texts[self.original_language];
 
                   });
               }
 
-              self.translations = {};
               if (element.translations) {
-                self.translations = element.translations;
+                forEach(element.translations, function(trans, language) {
+                    // statements
+                    self.texts[language] = $sce.trustAsHtml(trans);
+                });
               }
 
+              // show select only if at least 2 elements
+
             });
+
+            console.log('LANGUAGES', self.texts);
+            self.languages = Object.keys(self.texts);
+            self.selected_language = self.original_language;
 
             self.data = out_single;
             self.load = false;
@@ -140,6 +158,12 @@ function DetailsController($scope, $log, $sce, $stateParams, SearchService)
         }); // single data
       }); // steps
     } // END loadData FUNCTION
+
+    self.selectLanguage = function () {
+      console.log('Selected', self.selected_language);
+      self.current_text = self.texts[self.selected_language];
+// Take focus out?
+    }
 
     // Use it
     loadData();

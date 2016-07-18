@@ -1,4 +1,5 @@
-<div ng-controller="DetailsController as detail" >
+<div ng-controller="ToastController as toast" >
+ <div ng-controller="DetailsController as detail" >
 
             <md-button>
                 <a ui-sref='public.fastsearch({text: detail.query})'
@@ -21,7 +22,7 @@
  </div>
 
   <div layout="row" layout-padding>
-  <div flex="65" ng-if="detail.data.id">
+   <div flex="65" ng-if="detail.data.id">
 
       <div>
         <span>
@@ -53,7 +54,7 @@
 
       <div layout="row">
 
-        <div flex=45 style="text-align: center;">
+        <div flex=50 style="text-align: center;">
             <a ng-if="detail.data.images[0].filename"
                 href="/zoom/{{ detail.data.id }}/{{ detail.data.images[0].code }}"
                 target="_blank">
@@ -68,12 +69,34 @@
                 <i class="material-icons">collections</i>
             </div>
         </div>
-        <div flex=10></div>
-        <div flex=45
-            layout="column" layout-align="start center"
-            ng-bind-html="detail.test"></div>
-      </div>
-  </div> <!-- END OF ROW -->
+
+<!-- IMAGE TEXT -->
+        <div flex=50 layout="column" layout-align="start center">
+
+            <div ng-if="detail.languages.length > 1">
+              <md-input-container>
+
+                <!-- <label>Languages</label> -->
+
+                <md-select
+                    aria-label="languages"
+                    ng-model="detail.selected_language"
+                    md-on-close="detail.selectLanguage()" >
+                  <md-optgroup label="languages">
+                    <md-option ng-value="item"
+                        ng-repeat="item in detail.languages"
+                        >{{item}}</md-option>
+                  </md-optgroup>
+                </md-select>
+              </md-input-container>
+            </div>
+
+            <div ng-bind-html="detail.current_text"></div>
+        </div>
+<!-- IMAGE TEXT -->
+     </div>
+
+  </div> <!-- END OF 65 -->
 
   <div flex="5"></div>
 
@@ -252,4 +275,6 @@
   </div> <!-- END OF COLUMN -->
 
  </div> <!-- END OF DATA -->
+</div>
+
 </div>
