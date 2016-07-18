@@ -43,8 +43,8 @@ function ExpoSections($scope, $log, $rootScope, AdminService)
     $log.info("EXPO: sections");
 
     delete $rootScope.current_section;
-    //delete $rootScope.current_themes;
     delete $rootScope.current_theme;
+    delete $rootScope.current_image;
     //reLoadSections(AdminService, $rootScope, self);
 }
 
@@ -58,20 +58,13 @@ function ExpoSingleSection($scope, $log,
         $rootScope.current_theme = $stateParams.theme;
 
     reLoadSections(AdminService, self, $rootScope.current_section)
-/*
      .then(function (out) {
-        // Selected theme
-        if ($stateParams.theme) {
-            $rootScope.current_theme = $stateParams.theme;
-            // var themes = {}
-            // themes[$rootScope.current_theme] =
-            //     $scope.sections[$rootScope.current_section][$rootScope.current_theme];
-            // $scope.sections = angular.copy({});
-            // $scope.sections[$rootScope.current_section] = themes;
-            // console.log('TEST', $scope.sections);
+        if ($stateParams.element) {
+            self.element = self.sections[$rootScope.current_section][$rootScope.current_theme][$stateParams.element];
+
+            $rootScope.current_image = self.element.details.title;
         }
      });
-*/
 
     self.selectTheme = function () {
 

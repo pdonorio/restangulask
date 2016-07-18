@@ -63,7 +63,6 @@ angular.module('web')
             }
         },
 
-    //////////////////////
         'public.expo.themes': {
             url: "/themes",
             views: {
@@ -74,7 +73,6 @@ angular.module('web')
             }
         },
 
-    //////////////////////
         'public.expo.themes.selected': {
             url: "/:section",
             views: {
@@ -85,13 +83,22 @@ angular.module('web')
             }
         },
 
-    //////////////////////
         'public.expo.themes.selected.theme': {
             url: "/:theme",
             views: {
                 "themes@public.expo.themes": {
                     dir: 'blueprint',
                     templateUrl: 'expo_theme.html',
+                }
+            }
+        },
+
+        'public.expo.themes.selected.theme.image': {
+            url: "/:element",
+            views: {
+                "themes@public.expo.themes": {
+                    dir: 'blueprint',
+                    templateUrl: 'expo_image.html',
                 }
             }
         },

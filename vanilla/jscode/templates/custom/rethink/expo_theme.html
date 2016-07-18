@@ -14,7 +14,9 @@
           </md-card-title>
 
         <md-card-content>
-            <img src="{{ root.imagesPath + data.thumb +'/TileGroup0/0-0-0.jpg' }}" width="200" >
+            <a ui-sref="public.expo.themes.selected.theme.image({section: current_section, theme: current_theme, element: position})">
+                <img src="{{ root.imagesPath + data.thumb +'/TileGroup0/0-0-0.jpg' }}" width="200" >
+            </a>
         </md-card-content>
        </md-card>
     </div>
