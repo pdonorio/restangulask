@@ -35,19 +35,19 @@ frontend:
         - ..:/data
         - ../backend/commons:/data/frontend/commons
         # js/css libraries installed via bower
-        - ../vanilla/libs/bower_components:/data/frontend/felask/static/bower
+        - ../libs/bower_components:/data/frontend/felask/static/bower
         # custom css files
-        - ../vanilla/templates/customcss:/data/frontend/felask/static/css
+        - ../templates/customcss:/data/frontend/felask/static/css
         # All the angular blueprints (&& templates)
-        - ../vanilla/jscode:/data/frontend/felask/static/app
+        - ../jscode:/data/frontend/felask/static/app
         # Python pages
-        - ../vanilla/pages:/data/frontend/felask/pypages
+        - ../pages:/data/frontend/felask/pypages
         # Python templates
-        - ../vanilla/templates/python:/data/frontend/felask/templates/custom
+        - ../templates/python:/data/frontend/felask/templates/custom
         # Angular blueprint
-        - ../vanilla/specs:/data/frontend/config/angular/blueprints
+        - ../specs:/data/frontend/config/angular/blueprints
         # Custom images
-        - ../vanilla/img:/data/frontend/felask/static/img/custom
+        - ../img:/data/frontend/felask/static/img/custom
     ports:
         - 80:5000
 
@@ -55,7 +55,7 @@ frontend:
 # Make automatic to install libraries
 bower:
     image: pdonorio/jsdev
-    working_dir: /data/vanilla/libs
+    working_dir: /data/libs
     volumes:
         - ..:/data
 
@@ -65,5 +65,5 @@ karma:
     image: pdonorio/jsdev
     working_dir: /data
     volumes:
-        - ../vanilla/libs/bower_components:/data/bower_components
-        - ../vanilla/jscode:/data
+        - ../libs/bower_components:/data/bower_components
+        - ../jscode:/data
