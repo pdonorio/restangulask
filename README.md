@@ -5,7 +5,7 @@
 
 [![Discuss and share the screen](http://www.tendrilmedia.com/wabiDemo/assets/f1424091903407/70b747e8043b295544ce09365a064af7.svg)](https://meet.jit.si/RestApiAndAngulaJs)
 
-FRONTEND(Flask and Angular interface) + BACKEND(Flask Resta API)
+FRONTEND with Flask and Angular interface
 
 ---
 
