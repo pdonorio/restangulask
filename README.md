@@ -1,5 +1,5 @@
 
-# restangulask
+# AngularJS-on-Flask
 
 [![Join the chat at https://gitter.im/pdonorio/restangulask](https://badges.gitter.im/pdonorio/restangulask.svg)](https://gitter.im/pdonorio/restangulask?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
