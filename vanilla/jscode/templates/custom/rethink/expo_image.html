@@ -1,16 +1,38 @@
 <div ng-controller="ExpoSingleSection as single"
-    layout="column" layout-align='center center'>
-
-<!-- {{single.element}}
- -->
-<img src="{{ root.imagesPath + single.element.filename }}" width="600" >
+    layout="column" layout-padding layout-align='center center'>
 
 <!--
+ {{current_element_uri}}
+<img src="{{ root.imagesPath + single.element.filename }}" width="600" >
+ -->
 
-pop out Description
+<h4> {{single.element.details.title}} </h4>
+<div
+    layout="row" layout-padding layout-align='start stretch'>
 
-a card for details in ng-repeat
+    <!-- Zooming image -->
+    <md-card>
+        <md-card-content>
+            <iframe ng-src="{{current_element_uri}}"
+                width="600" height="600"></iframe>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+           <md-button ng-href="{{current_element_uri}}" target="_blank">
+                view in full screen
+           </md-button>
+        </md-card-actions>
+    </md-card>
 
--->
+    <!-- Description -->
+    <md-card>
+        <md-card-content>
+            <div ng-repeat="(key, value) in single.element.details">
+                <b>{{key.capitalizeFirstLetter()}}</b>: {{value}}
+                <br>
+                <br>
+            </div>
+        </md-card-content>
+    </md-card>
+</div>
 
 </div>

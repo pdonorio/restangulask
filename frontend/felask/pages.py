@@ -215,13 +215,18 @@ def zoom(document, code):
     opts = {'stream': True, 'headers': HEADERS, 'timeout': 5}
     r = requests.get(API_URL + 'datadocs/' + document, **opts)
     out = r.json()
-    print("TEST\n\n", out)
+
+    # print("TEST\n\n", out)
     if len(out['data']) > 0:
         data = out['data'].pop()
-        print("TEST2\n\n", data['images'])
+        # print("TEST2\n\n", data['images'])
         for image in data['images']:
-            if image['code'] == code:
-                filename = '/static/uploads/' + code
+            if data['type'] != 'documents' and code == '0':
+                code = data['type'] + '/' + image['code']
+            elif image['code'] != code:
+                continue
+            filename = '/static/uploads/' + code
+            # print("TEST!", filename, "\n\n\n")
 
     variables = {
         'record': document,

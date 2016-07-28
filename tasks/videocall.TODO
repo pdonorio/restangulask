@@ -1,9 +1,22 @@
 
+ELASTIC:
+
+☐ index build
+ ☐ check thumbnails and pictures
+☐ add translations to known words
+
+
 BUGS:
+
+  ☐ online thumbs agen_1
+  search for "2.jpg" as file in the whole datadocs
 
  ✔ Convert bruxelles TIFF with operations @done (16-07-15 23:48)
  ✔ next and previous when more than one underscore @done (16-07-18 17:26)
  es. Anvers_MS_2
+
+ Text dimensions
+ /public/details/33a01280-485a-496c-b565-0f7266c65865
 
  ☐ thumbnails in search page are wrong?
 
@@ -25,7 +38,6 @@ TRADUZIONI:
  ✔ change form @done (16-06-29 00:11)
    ✔ add swtich with select @done (16-06-29 00:11)
  ✔ Show translations @done (16-07-18 19:47)
-   Anvers_MS_2
 
  ☐ Index translations in elastic
 

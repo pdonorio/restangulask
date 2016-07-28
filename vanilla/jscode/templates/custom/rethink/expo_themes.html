@@ -13,11 +13,13 @@
             class="breadcrumb">
             section: '{{current_section}}' </a>
         <a ng-if="current_theme"
-            nohref class="breadcrumb">
+            ui-sref="public.expo.themes.selected.theme(
+            {section: current_section, theme: current_theme})"
+            class="breadcrumb">
             theme: '{{current_theme}}' </a>
         <a ng-if="current_image"
             nohref class="breadcrumb">
-            image: '{{current_image}}' </a>
+            image: '{{current_image_short}}' </a>
       </div>
     </div>
   </nav>
@@ -29,7 +31,7 @@
 
 
   <div ng-controller="ExpoSections as exsections"
-    layout="row" layout-align='center center'>
+    layout="row" layout-align='center stretch' layout-padding>
 
     <div ng-if="keylen(sections) < 1">
         <br>
@@ -39,6 +41,7 @@
     </div>
 
     <div ng-if="keylen(sections) > 0"
+    style="min-width: 250px;"
         ng-repeat="(key, value) in sections">
         <md-card>
 
@@ -53,11 +56,9 @@
             </md-card-title-text>
          </md-card-title>
 
-         <md-card-content style="min-height: 250px";>
-<!--          {{value}}
- -->
+         <md-card-content>
     <img src="{{ root.imagesPath + value.cover +'/TileGroup0/0-0-0.jpg' }}"
-        width="200" >
+        width="250" >
          </md-card-content>
 
           <md-card-actions layout="row" layout-align="end center">

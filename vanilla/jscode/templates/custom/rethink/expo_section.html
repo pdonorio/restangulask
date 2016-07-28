@@ -8,7 +8,7 @@
         </h3>
 
           <md-input-container ng-if="single.themes.length > 1">
-            <label>Theme</label>
+            <label>Select a theme...</label>
             <md-select ng-model="single.current_theme"
                 md-on-close="single.selectTheme()" >
               <md-optgroup label="themes">
@@ -18,30 +18,32 @@
             </md-select>
           </md-input-container>
 
-        <div
+        <div ng-if="theme != 'cover'"
             ng-repeat="(theme, paintings) in sections[current_section]"
-            ng-if="theme != 'cover'"
-            >
-            <hr>
-            <h5> Theme: {{theme}} </h5>
-            <br>
-            <div layout="column" layout-align="center center">
-                <md-card ng-repeat="(position, data) in paintings">
+            layout="column" layout-padding layout-align="center center">
 
-  <md-card-title>
-    <md-card-title-text>
-      <span class="md-subhead">
-        {{data.details.title}}
-      </span>
-    </md-card-title-text>
-  </md-card-title>
+            <h5>
+                <hr>
+                <b>
+                <!-- Theme: -->
+                <a ui-sref="public.expo.themes.selected.theme(
+                    {section: current_section, theme: theme})">
+                {{theme}}
+                </a>
+                </b>
+            </h5>
 
-                    <md-card-content>
-            <a ui-sref="public.expo.themes.selected.theme.image({section: current_section, theme: theme, element: position})">
-                        <img src="{{ root.imagesPath + data.thumb +'/TileGroup0/0-0-0.jpg' }}" width="200" >
-            </a>
-                    </md-card-content>
-                </md-card>
+            <div ng-repeat="(position, data) in paintings"
+            layout="column" layout-align="center center">
+              <div>
+                <a ui-sref="public.expo.themes.selected.theme.image({section: current_section, theme: theme, element: position})">
+                    <img src="{{ root.imagesPath + data.thumb +'/TileGroup0/0-0-0.jpg' }}" width="200" >
+                </a>
+              </div>
+              <div>
+                {{data.details.title}}
+              </div>
+              <br>
             </div>
         </div>
     </div>

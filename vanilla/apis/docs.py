@@ -377,6 +377,8 @@ class RethinkExpo(BaseRethinkResource):
                     images[key]['thumb'] = path
                     thumbs[key] = path
 
+                    images[key]['_id'] = uuid
+
                     data[uuid] = {
                         'id': uuid,
                         'section': current_section,

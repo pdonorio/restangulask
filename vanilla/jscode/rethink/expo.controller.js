@@ -48,7 +48,7 @@ function ExpoSections($scope, $log, $rootScope, AdminService)
     //reLoadSections(AdminService, $rootScope, self);
 }
 
-function ExpoSingleSection($scope, $log,
+function ExpoSingleSection($scope, $log, $sce,
     $timeout, $state, $stateParams, $rootScope, AdminService)
 {
     var self = this;
@@ -60,13 +60,22 @@ function ExpoSingleSection($scope, $log,
     reLoadSections(AdminService, self, $rootScope.current_section)
      .then(function (out) {
         if ($stateParams.element) {
+
             self.element = self.sections[$rootScope.current_section][$rootScope.current_theme][$stateParams.element];
 
             $rootScope.current_image = self.element.details.title;
+            $rootScope.current_image_short =
+                self.element.details.title.slice(0, 10) + ' ...';
+
+            $rootScope.current_element_uri =
+                $sce.trustAsResourceUrl('/zoom/' + self.element._id + '/0');
+
         }
      });
 
     self.selectTheme = function () {
+        if (!self.current_theme)
+            return false;
 
 //activate a new url...
         $timeout(function () {
