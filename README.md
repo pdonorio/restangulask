@@ -8,15 +8,3 @@
 FRONTEND with Flask and Angular interface
 
 ---
-
-The idea is to do everything using the script `./do` inside the root directory
-of the project. To see all available actions just run:
-
-```bash
-./do help
-```
-
-See [documentation](docs/index.md) for getting started.
-
-*Note*:
-You can see the visual equivalent of this repository [here](http://codeology.braintreepayments.com/pdonorio/restangulask)
