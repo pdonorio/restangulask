@@ -59,7 +59,15 @@ function ExpoSingleSection($scope, $log, $sce,
 
     reLoadSections(AdminService, self, $rootScope.current_section)
      .then(function (out) {
-        if ($stateParams.element) {
+
+        if ($state.$current.name == "public.expo.pieces") {
+
+            AdminService.getExpoImagesOnly().then(function (out) {
+                console.log("Loaded images", out.data);
+                self.images = out.data;
+            });
+
+        } else if ($stateParams.element) {
 
             self.element = self.sections[$rootScope.current_section][$rootScope.current_theme][$stateParams.element];
 

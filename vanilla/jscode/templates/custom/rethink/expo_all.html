@@ -1,0 +1,36 @@
+<div ng-controller="ExpoSingleSection as source"
+    layout="column" layout-padding layout-align='center center'>
+
+  <nav class="red" flex="70" style="padding-left: 50px;">
+    <div class="nav-wrapper">
+      <div class="column">
+        <a ui-sref="public.expo" class="breadcrumb">EXPO</a>
+        <a ui-sref="public.expo.pieces"
+            class="breadcrumb">By images</a>
+        <a ng-if="current_image" class="breadcrumb">
+            image: '{{current_image}}' </a>
+      </div>
+    </div>
+  </nav>
+
+    <div ui-view="images">
+        <h4>All images</h4> <!-- {{source.images}} -->
+
+        <md-grid-list md-cols="4" md-row-height="fit"
+            style="width: 800px; height: 800px">
+
+            <md-grid-tile ng-repeat="element in source.images">
+
+                <a ui-sref="public.expo.pieces.image(
+                    {uuid: element._id})">
+
+                    <img src="{{ root.imagesPath + element.image
+                                +'/TileGroup0/0-0-0.jpg' }}" width="80" >
+                </a>
+
+            </md-grid-tile>
+
+        </md-grid-list>
+    </div>
+
+</div>

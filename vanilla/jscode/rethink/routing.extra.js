@@ -63,6 +63,26 @@ angular.module('web')
             }
         },
 
+        'public.expo.pieces': {
+            url: "/_all",
+            views: {
+                "test": {
+                    dir: 'blueprint',
+                    templateUrl: 'expo_all.html',
+                }
+            }
+        },
+
+        'public.expo.pieces.image': {
+            url: "/:uuid",
+            views: {
+                "images@public.expo.pieces": {
+                    dir: 'blueprint',
+                    templateUrl: 'expo_only_image.html',
+                }
+            }
+        },
+
         'public.expo.themes': {
             url: "/themes",
             views: {

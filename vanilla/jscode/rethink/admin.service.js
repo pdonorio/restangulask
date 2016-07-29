@@ -39,11 +39,14 @@ function AdminService($log, api) {
     self.getExpo = function() {
         return api.apiCall(self.endpoints.expo, 'GET');
     }
+    self.getExpoImagesOnly = function() {
+        return api.apiCall(self.endpoints.expo, 'GET', null, '_all');
+    }
     self.getExpoMissing = function() {
-        return api.apiCall(self.endpoints.expo, 'GET', null, 'nopartials');
+        return api.apiCall(self.endpoints.expo, 'GET', null, '_nopartials');
     }
     self.getExpoSections = function() {
-        return api.apiCall(self.endpoints.expo, 'GET', null, 'sections');
+        return api.apiCall(self.endpoints.expo, 'GET', null, '_sections');
     }
     self.delExpoElement = function(id) {
         return api.apiCall(self.endpoints.expo, 'DELETE', null, id);

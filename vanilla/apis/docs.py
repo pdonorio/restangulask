@@ -350,6 +350,7 @@ class RethinkExpo(BaseRethinkResource):
         data = {}
         sections = {}
         public = {}
+        only_images = []
 
         for element in self.get_table_query(self._type).run():
             # print(element)
@@ -388,6 +389,13 @@ class RethinkExpo(BaseRethinkResource):
                         'file': path,
                     }
 
+                    only_images.append({
+                        'image': path,
+                        'section': current_section,
+                        'theme': current_theme,
+                        '_id': uuid
+                    })
+
                 if len(images) > 0:
                     public[current_section][current_theme] = images
 
@@ -398,8 +406,12 @@ class RethinkExpo(BaseRethinkResource):
                     public[current_section]['cover'] = thumbs[key]
                     break
 
+        # Only images
+        if id == '_all':
+            return self.response(only_images)
+
         # Only sections
-        if id == 'sections':
+        if id == '_sections':
             return self.response(sections)
 
         # Data with no partial images
