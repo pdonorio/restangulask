@@ -57,19 +57,23 @@ function ExpoSingleSection($scope, $log, $sce,
 
     if ($stateParams.theme)
         $rootScope.current_theme = $stateParams.theme;
-    if ($stateParams.position)
-        $rootScope.current_position = $stateParams.position;
 
     reLoadSections(AdminService, self, $rootScope.current_section)
      .then(function (out) {
 
         if ($state.$current.name.slice(0,18) == "public.expo.pieces") {
 
+            delete $rootScope.current_image;
+
             AdminService.getExpoImagesOnly().then(function (out) {
                 console.log("Loaded images", out.data);
                 self.images = out.data;
                 if ($stateParams.position) {
-                    $scope.current_image = self.images[$stateParams.position].details.title;
+                    self.element = self.images[$stateParams.position];
+                    //console.log("TEST", self.element);
+                    $rootScope.current_image = self.element.details.title;
+                    $rootScope.current_element_uri =
+                        $sce.trustAsResourceUrl('/zoom/' + self.element.id + '/0');
 
                 }
             });

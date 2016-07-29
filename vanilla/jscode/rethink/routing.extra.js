@@ -78,7 +78,8 @@ angular.module('web')
             views: {
                 "images@public.expo.pieces": {
                     dir: 'blueprint',
-                    templateUrl: 'expo_only_image.html',
+                    //templateUrl: 'expo_only_image.html',
+                    templateUrl: 'expo_image.html',
                 }
             }
         },

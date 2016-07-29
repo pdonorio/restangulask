@@ -1,4 +1,4 @@
-<div ng-controller="ExpoSingleSection as source"
+<div
     layout="column" layout-padding layout-align='center center'>
 
   <nav class="red" flex="70" style="padding-left: 50px;">
@@ -14,23 +14,31 @@
   </nav>
 
     <div ui-view="images">
+
+      <div ng-controller="ExpoSingleSection as source">
         <h4>All images</h4> <!-- {{source.images}} -->
 
-        <md-grid-list md-cols="4" md-row-height="fit"
+        <md-grid-list
+            layout-padding
+            md-cols="4" md-row-height="fit"
             style="width: 800px; height: 800px">
 
             <md-grid-tile ng-repeat="(uuid, element) in source.images">
 
-                <a ui-sref="public.expo.pieces.image(
-                    {position: uuid})">
-
-                    <img src="{{ root.imagesPath + element.image
+              <div>
+                <a ui-sref="public.expo.pieces.image({position: uuid})">
+                    <img src="{{ root.imagesPath + element.file
                                 +'/TileGroup0/0-0-0.jpg' }}" width="80" >
                 </a>
+              </div>
+              <div>
+                <small> {{element.details.title}} </small>
+              </div>
 
             </md-grid-tile>
 
         </md-grid-list>
+      </div>
     </div>
 
 </div>
