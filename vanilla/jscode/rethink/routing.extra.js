@@ -74,7 +74,7 @@ angular.module('web')
         },
 
         'public.expo.pieces.image': {
-            url: "/:uuid",
+            url: "/:position",
             views: {
                 "images@public.expo.pieces": {
                     dir: 'blueprint',

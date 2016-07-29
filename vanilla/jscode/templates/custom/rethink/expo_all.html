@@ -19,10 +19,10 @@
         <md-grid-list md-cols="4" md-row-height="fit"
             style="width: 800px; height: 800px">
 
-            <md-grid-tile ng-repeat="element in source.images">
+            <md-grid-tile ng-repeat="(uuid, element) in source.images">
 
                 <a ui-sref="public.expo.pieces.image(
-                    {uuid: element._id})">
+                    {position: uuid})">
 
                     <img src="{{ root.imagesPath + element.image
                                 +'/TileGroup0/0-0-0.jpg' }}" width="80" >

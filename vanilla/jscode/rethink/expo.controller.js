@@ -54,17 +54,24 @@ function ExpoSingleSection($scope, $log, $sce,
     var self = this;
     $log.info("EXPO: section", $stateParams);
     $rootScope.current_section = $stateParams.section;
+
     if ($stateParams.theme)
         $rootScope.current_theme = $stateParams.theme;
+    if ($stateParams.position)
+        $rootScope.current_position = $stateParams.position;
 
     reLoadSections(AdminService, self, $rootScope.current_section)
      .then(function (out) {
 
-        if ($state.$current.name == "public.expo.pieces") {
+        if ($state.$current.name.slice(0,18) == "public.expo.pieces") {
 
             AdminService.getExpoImagesOnly().then(function (out) {
                 console.log("Loaded images", out.data);
                 self.images = out.data;
+                if ($stateParams.position) {
+                    $scope.current_image = self.images[$stateParams.position].details.title;
+
+                }
             });
 
         } else if ($stateParams.element) {

@@ -350,7 +350,7 @@ class RethinkExpo(BaseRethinkResource):
         data = {}
         sections = {}
         public = {}
-        only_images = []
+        only_images = {}
 
         for element in self.get_table_query(self._type).run():
             # print(element)
@@ -380,7 +380,7 @@ class RethinkExpo(BaseRethinkResource):
 
                     images[key]['_id'] = uuid
 
-                    data[uuid] = {
+                    element = {
                         'id': uuid,
                         'section': current_section,
                         'theme': current_theme,
@@ -388,13 +388,8 @@ class RethinkExpo(BaseRethinkResource):
                         'name': image['code'],
                         'file': path,
                     }
-
-                    only_images.append({
-                        'image': path,
-                        'section': current_section,
-                        'theme': current_theme,
-                        '_id': uuid
-                    })
+                    data[uuid] = element
+                    only_images[uuid] = element
 
                 if len(images) > 0:
                     public[current_section][current_theme] = images
