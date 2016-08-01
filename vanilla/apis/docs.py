@@ -8,6 +8,7 @@ from __future__ import absolute_import
 
 import os
 import re
+import time
 import rethinkdb as r
 
 from collections import OrderedDict
@@ -415,20 +416,40 @@ class RethinkExpo(BaseRethinkResource):
 
         # Load what is missing (images with no sections data)
         table = self.get_table_query()
-        query = table.filter({mykey: self._type})
+        query = \
+            table.filter({mykey: self._type}) \
+            .order_by("latest")
+# r.db('webapp').table('datadocs').filter({"type": "expo"}).orderBy(r.desc("latest")).limit(2)
+
         count, images = self.execute_query(query)
+
+        # Remapping data for admin purpose
+
+        now = int(time.time())
+        for key, _ in data.items():
+            data[key]['order'] = now * 9
+            data[key]['published'] = True
+        newdata = OrderedDict(data)
+
         for doc in images:
             # print("IMAGE\n\n", doc)
             uuid = doc['record']
-            if uuid not in data:
+            if uuid not in newdata:
                 # print("TO BE ADDED")
                 code = doc['images'].pop()['code']
-                data[uuid] = {
+                newdata[uuid] = {
                     'id': uuid,
+                    'published': False,
                     'name': code,
                     'file': os.path.join(self._type, code),
                 }
-        # return self.response(data, elements=count)
+                if 'latest' in doc:
+                    newdata[uuid]['order'] = int(doc['latest']) * 1
+                else:
+                    newdata[uuid]['order'] = now * 2
+
+        # reverse for starting with the last one
+        data = OrderedDict(reversed(list(newdata.items())))
 
         return self.response(data, elements=len(data))
 
@@ -961,6 +982,7 @@ class RethinkUploader(Uploader, BaseRethinkResource):
             key: id,
             "images": images,
             "type": img_destination,
+            "latest": time.time(),
         }
         try:
             logger.debug("RethinkDB pushing '%s'" % record)

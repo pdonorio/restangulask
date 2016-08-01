@@ -155,11 +155,12 @@ function ExpoController($scope, $log,
             //self.sections = Array(Object.keys(self.sectionsAndThemes));
           });
 
-          //console.log("Getting data", out.data);
-          console.log("Reloaded EXPO data.");
+          console.log("Reloaded EXPO data", out);
           var files = {};
           // IF DATA IS PRESENT
           if (out.data) {
+
+            console.log("TEST", $scope.current_section);
 
             forEach(out.data, function (element, index) {
                 if (element.details && element.details.position
@@ -168,11 +169,6 @@ function ExpoController($scope, $log,
                     self.position = element.details.position;
 
                 }
-            //   if (element && element != '') {
-            //     //console.log("Element", element.images[0]);
-            //     files[element.record] =
-            //         self.type + '/' + element.images[0].code;
-            //   }
             });
             // self.files = files;
 
@@ -210,13 +206,19 @@ function ExpoController($scope, $log,
       self.reloadThemes(self.files[uuid].section);
 
       self.current = self.files[uuid];
+
       $log.info("Selected", uuid, self.current);
       if (!self.current.details) {
         self.current.details = {}
       }
+
+      //console.log('TETS', self.current.details.position);
       if (!self.current.details.position) {
-        self.current.details.position = self.position + 1;
+// position only from current section...
+        //self.current.details.position = self.position + 1;
+        self.current.details.position = 1;
       }
+      console.log('TETS 2', self.current.details.position);
 
 
       $timeout(function () {
@@ -243,9 +245,12 @@ function ExpoController($scope, $log,
 
       // THEMES
       self.themes = [];
-      console.log('SECTION', self.sectionsAndThemes);
+      //console.log('SECTION', self.sectionsAndThemes);
       if (self.sectionsAndThemes[section])
           self.themes = angular.copy(self.sectionsAndThemes[section]);
+
+      if (self.current)
+          self.current.details.position = self.themes.length + 1;
 
       // Give the possibility to add new elements
       self.themes.push(self.newelement);
