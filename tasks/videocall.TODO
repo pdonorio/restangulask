@@ -1,4 +1,45 @@
 
+BUGS:
+
+ ☐ Regenarate @zooms
+
+☐ responsive
+ ☐ grid list?
+  Milan_3
+
+☐ translate
+  Anvers_MS_2
+
+LATEST:
+
+☐ Record Edit
+ ☐ "source" @priorità
+
+☐ EXPO
+ ☐ Immagine di copertina
+ ☐ Rapporto immagine delle copertine di sezione
+
+ ☐ Testo presentazione expo
+ ☐ Testo presentazione sezioni
+ ☐ Tendine sotto sezioni
+ ☐ Descrizione affianco immagine
+   ☐ Testo descrittivo? altro campo
+
+ ☐ opere
+   ☐ autore
+   ☐ titolo
+   ☐ anno
+
+   ☐ Manage
+
+  date, autore, posto
+  ☐ posizione sempre 2
+
+
+      --- ✄ -----------------------
+
+
+
 ELASTIC:
 
 ☐ index build
