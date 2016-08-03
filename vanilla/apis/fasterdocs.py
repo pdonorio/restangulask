@@ -19,11 +19,14 @@ class FastDocs(ExtendedApiResource, FastSearch):
     @deck.apimethod
     def get(self, searchterms=None):
 
-        self.get_instance()
+        if not self.get_instance():
+            return self.response(obj="Connection failed", fail=True)
         current_element, limit = self.get_paging()
         # current_page, limit = self.get_paging()
         # current_element = 1 + (current_page - 1) * limit
         data, count = self.fast_get(searchterms, current_element, limit)
+        if data is None:
+            return self.response(obj='Request failed', fail=True)
         return self.response(data, elements=count)
 
 
