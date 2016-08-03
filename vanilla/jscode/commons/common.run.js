@@ -1,7 +1,16 @@
 (function() {
   'use strict';
 
-// DISABLE THE MAIN RUN
+/* Boost performance!
+http://www.gros-engineering.com/angularjs-performance-tweaks/
+*/
+
+angular.module('web')
+    .config(['$compileProvider', function ($compileProvider) {
+      $compileProvider.debugInfoEnabled(false);
+    }]);
+
+// DISABLE THE MAIN RUN above
 //angular.module('web').run(runBlock);
 
 function runBlock($log,
