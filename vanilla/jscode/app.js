@@ -32,9 +32,9 @@ console.log('POST');
 // IMAGES LAZ LOAD
         'angularLazyImg',
 // MAKE DATA TREE explorer
-        'treeControl',
+        //'treeControl',
 // KEYBOARD SHORTCUTS
-        'cfp.hotkeys',
+        //'cfp.hotkeys',
 // DRAG AND DROP
         'angular-sortable-view',
 // FORMS FROM JSON SCHEMAS

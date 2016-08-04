@@ -11,16 +11,16 @@
 		// "bootstrap/dist/css/bootstrap.min.css",
 		// # MATERIAL
 		"angular-material/angular-material.min.css",	//official
-		"materialize/dist/css/materialize.min.css",
+		"materialize/dist/css/materialize.min.css"
         // # FOUNDATION?
 		//
         // # WHAT ELSE?
 		//"animate.css/animate.min.css"
 		//"angular-loading-bar/build/loading-bar.min.css",
-		"angular-tree-control/css/tree-control.css",
 		//"angular-tree-control/css/tree-control-attribute.css"
         //"angular-xeditable/dist/css/xeditable.css",
-        "angular-hotkeys/build/hotkeys.min.css"
+        //"angular-tree-control/css/tree-control.css",
+        //"angular-hotkeys/build/hotkeys.min.css"
 	],
 // USER CUSTOM CSS
 	"customcss" : [
@@ -70,12 +70,12 @@
 	    "satellizer/satellizer.min.js",
 	    //"angular-loading-bar/build/loading-bar.min.js",
 	    "angular-lazy-img/release/angular-lazy-img.min.js",
-	    "angular-tree-control/angular-tree-control.js",
+	    //"angular-tree-control/angular-tree-control.js",
         "ng-flow/dist/ng-flow-standalone.min.js",
 	// JWT ?
 		//
 	// libs on demand
-		"angular-hotkeys/build/hotkeys.min.js",
+		//"angular-hotkeys/build/hotkeys.min.js",
         "angular-sortable-view/src/angular-sortable-view.min.js",
 		"api-check/dist/api-check.min.js",
 		"angular-formly/dist/formly.min.js",

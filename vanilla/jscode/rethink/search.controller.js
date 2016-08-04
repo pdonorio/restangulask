@@ -6,7 +6,9 @@ angular.module('web')
     .controller('ChipsController', ChipsController)
     ;
 
-function SearchController($scope, $rootScope, $log, $state, SearchService, hotkeys, keyshortcuts)
+function SearchController($scope, $rootScope, $log, $state,
+    //hotkeys, keyshortcuts,
+    SearchService)
 {
 
   // INIT controller
@@ -14,6 +16,7 @@ function SearchController($scope, $rootScope, $log, $state, SearchService, hotke
   self.goToLastRoute = $rootScope.goToLastRoute;
   $log.debug("Main SEARCH controller");
 
+/*
     // Init keys
     hotkeys.bindTo($scope)
         .add({
@@ -23,6 +26,7 @@ function SearchController($scope, $rootScope, $log, $state, SearchService, hotke
                 keyshortcuts.exitSearch(event, self);
             }
         });
+*/
 
   // INIT scope variables
   $scope.data = {};

@@ -3,8 +3,9 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshot
 docker run --rm --volumes-from containers_searchindex_1 -v $(pwd):/mybackup ubuntu tar cvf /mybackup/elastic.tar /usr/share/elasticsearch/data/elasticsearch/nodes
 
 PRIORITY:
-☐ Record Edit
- ☐ "source" @priorità
+ ☐ Record Edit "source" @priorità
+   ☐ component
+   ☐ formly?
 ☐ responsive
  ☐ grid list?
   Milan_3

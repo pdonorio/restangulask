@@ -7,7 +7,9 @@ angular.module('web')
     .controller('HistorySidebarController', HistorySidebarController)
     .controller('ToolbarController', ToolbarController);
 
-function HistorySidebarController($scope, $rootScope, $log, $mdSidenav, $mdComponentRegistry, hotkeys, keyshortcuts, $timeout, $state)
+function HistorySidebarController($scope, $rootScope, $log, $mdSidenav, $mdComponentRegistry,
+    //hotkeys, keyshortcuts,
+    $timeout, $state)
 {
     // Init controller and variables
     $log.debug("Sidebar history controller");
@@ -104,7 +106,9 @@ function WelcomeMenuController($scope, $log, api, $auth)
     });
 }
 
-function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotkeys, keyshortcuts)
+function AppRootController($scope, $rootScope, $log, $state, $timeout,
+    //hotkeys, keyshortcuts,
+    api)
 {
     // Init controller
     var self = this;
@@ -156,6 +160,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
     // Init data for welcoming page
     $scope.sections = {};
 
+/*
     // Init keys
     hotkeys.bindTo($scope)
         .add({
@@ -165,6 +170,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout, api, hotk
                 keyshortcuts.search(event, self);
             }
         });
+*/
 
     // Handling logged states
     var loggedKey = 'logged.';

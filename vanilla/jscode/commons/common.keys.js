@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-angular.module('web')
-    .service('keyshortcuts', HotkeysService);
+// angular.module('web')
+//     .service('keyshortcuts', HotkeysService);
 
 function HotkeysService($timeout, $state) {
 

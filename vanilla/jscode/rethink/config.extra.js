@@ -2,8 +2,7 @@
 'use strict';
 
 angular.module('web')
-    .config(hotkeysConfig)
-//angular.module('web').run(formlyConfig)
+    //.config(hotkeysConfig)
     .config(uploaderConfig);
 
 function hotkeysConfig(hotkeysProvider) {
