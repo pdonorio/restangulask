@@ -1,7 +1,10 @@
 
+https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html
+docker run --rm --volumes-from containers_searchindex_1 -v $(pwd):/mybackup ubuntu tar cvf /mybackup/elastic.tar /usr/share/elasticsearch/data/elasticsearch/nodes
+
 BUGS:
 
- ☐ Regenarate @zooms
+ ✔ Regenarate @zooms @done (16-08-03 18:32)
 
 ☐ responsive
  ☐ grid list?
