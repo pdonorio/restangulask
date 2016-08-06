@@ -1,0 +1,62 @@
+
+<!-- HTML template for submission component -->
+
+<div layout="row" layout-align="center center">
+    <h3> Submission </h3>
+</div>
+
+<md-content layout="row" layout-padding layout-wrap>
+
+    <div flex=20>
+     <md-content>
+      <md-list flex>
+
+        <!-- <md-subheader class="md-no-sticky"> STEPs </md-subheader> -->
+
+        <md-divider ></md-divider>
+        <md-list-item class="md-2-line" ng-click="$ctrl.go(id)"
+            ng-if="item" ng-repeat="(id, item) in $ctrl._all['stepNames']">
+
+          <i ng-if="id == $ctrl.step" class="material-icons"> label </i>
+          <i ng-if="id != $ctrl.step" class="material-icons"> label_outline </i>
+
+          <div class="md-list-item-text" layout="column" layout-padding>
+            <h4>{{ item }}</h4>
+            <p>step {{ id }}</p>
+          </div>
+
+        </md-list-item>
+        <md-divider ></md-divider>
+      </md-list>
+     </md-content>
+    </div>
+
+    <div flex=60>
+    <form ng-submit="$ctrl.onSubmit()" name="$ctrl.form" novalidate>
+     <md-card>
+
+<md-card-title>
+<md-card-title-text>
+<md-headline>
+{{$ctrl._all['stepNames'][$ctrl.step]}}
+</md-headline>
+</md-card-title-text>
+</md-card-title>
+
+      <md-card-content
+        layout="row" layout-padding layout-margin layout-fill
+        >
+        <formly-form model="$ctrl.submitting"
+            fields="$ctrl.formFields"></formly-form>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+          <md-button type="submit"
+            ng-disabled="$ctrl.form.$invalid">Submit</md-button>
+          <md-button
+            ng-click="$ctrl.options.resetModel()">Reset</md-button>
+      </md-card-actions>
+     </md-card>
+    </form>
+    </div>
+
+</md-content>

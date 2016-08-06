@@ -1,45 +1,67 @@
 (function() {
   'use strict';
 
+function getType(key) {
+
+  var types = [
+      {value: 0, text: 'string', desc:
+          'All text is allowed'},
+      {value: 1, text: 'number', desc:
+          'Only integers values'},
+      {value: 2, text: 'email', desc:
+          'Only e-mail address (e.g. name@mailserver.org)'},
+      {value: 3, text: 'url', desc:
+          'Only web URL (e.g. http://website.com)'},
+      {value: 4, text: 'date', desc:
+          'Choose a day from a calendar'},
+      {value: 5, text: 'time', desc:
+          'Choose hour and minutes'},
+      {value: 6, text: 'pattern', desc:
+          'Define a regular expression for a custom type'},
+      {value: 7, text: 'color', desc:
+          'Only colors in hexadecimal value. Choose from color picker.'},
+      {value: 8, text: 'list', desc:
+          'Define a list of possible values (e.g. a dictionary)'},
+  ];
+  // save type to be sure in the future?
+  var type = types[0].text;
+  if (types[key])
+      type = types[key].text;
+  return type;
+}
+
 function FormFarmController (
-    $scope, $log, $sce, $stateParams, $q,
+    $scope, $log, $sce, $state, $stateParams, $q,
     SearchService, AdminService
     )
 {
     var self = this;
     $log.info("SUBMIT on", $stateParams.id);
-    self.load = true;
-    self.data = null;
-    self.step = $stateParams.step;
+    self.step = 1;
+    self.formFields = [];
+    if ($stateParams.step)
+        self.step = $stateParams.step;
 
-    self.loadData = function() {
-
-      self.load = true;
-
-      // Multiple and parallel calls
-      var promises = {
-        stepNames: SearchService.getSteps(),
-        stepTemplates: AdminService.getSteps(self.step),
-        data: SearchService.getSingleData($stateParams.id),
-      };
-
-      // Use the values
-      return $q.all(promises).then(
-        (values) =>
-        {
-            console.log('VALUES', values)
-            // $log.debug("Pushed updated order");
-            // self.load = false;
-            self._all = values;
-        });
+    self.go = function (step) {
+        $state.go("logged.submit", {id: $stateParams.id, step: step});
     }
 
-    self.$onInit = function() {
-      self.loadData();
-      $log.info("form component", self);
-    };
+    self.fillFields = function () {
+        var key = self._all['stepNames'][self.step];
+        forEach(self._all['stepTemplates'].data, function(element, index) {
+          console.log('FIELDS', element, getType(element.type));
+          self.formFields.push({
+              key: element.hash,
+              type: 'input',
+              templateOptions: {
+                type: 'text',
+                label: element.field,
+                //placeholder: 'Enter email'
+              }
+          });
+        });
 
-    self.formFields = [
+/*
         {
           key: 'emailer',
           type: 'input',
@@ -52,7 +74,27 @@ function FormFarmController (
             placeholder: 'Enter email'
           }
         },
-    ];
+*/
+    }
+
+    self.loadData = function() {
+
+      // Multiple and parallel calls
+      var promises = {
+        stepNames: SearchService.getSteps(),
+        stepTemplates: AdminService.getSteps(self.step),
+        data: SearchService.getSingleData($stateParams.id),
+      };
+
+      // Use the values
+      return $q.all(promises).then(
+        (values) =>
+        {
+            $log.info("Obtained values", values);
+            self._all = values;
+            self.fillFields();
+        });
+    }
 
     self.submitting = {};
     self.onSubmit = onSubmit;
@@ -61,6 +103,10 @@ function FormFarmController (
     function onSubmit() {
       console.log("Submit", JSON.stringify(self.submitting));
     }
+
+    self.$onInit = function() {
+      self.loadData();
+    };
 }
 
 // A COMPONENT
@@ -71,22 +117,7 @@ angular.module('web')
         count: '='
       },
       controller: FormFarmController,
-      template: function ($element, $attrs) {
-        //console.log('TEMPLATE', $element, $attrs);
-        return `
-<h3> title </h3>
-<md-content layout-padding layout-wrap>
-    <form ng-submit="$ctrl.onSubmit()" name="$ctrl.form" novalidate>
-        <formly-form model="$ctrl.submitting" fields="$ctrl.formFields">
-          <button type="submit" class="btn btn-primary submit-button"
-            ng-disabled="$ctrl.form.$invalid">Submit</button>
-          <button type="button" class="btn btn-default"
-            ng-click="$ctrl.options.resetModel()">Reset</button>
-        </formly-form>
-    </form>
-</md-content>
-`;
-      }
+      templateUrl: blueprintTemplateDir + 'submission.html',
 
     });
 
