@@ -24,6 +24,7 @@ angular.module('web')
             // },
         },
 
+/*
     ////////////////////// OLD
         'public.specialsearch': {
             url: "/search/:text",
@@ -40,6 +41,7 @@ angular.module('web')
                 $rootScope.avoidTheToolbar = false;
             },
         },
+*/
 
     //////////////////////
         'public.db': {
@@ -146,6 +148,18 @@ angular.module('web')
                 "unlogged": {
                     dir: 'blueprint',
                     templateUrl: 'details.html',
+                }
+            }
+        },
+
+    //////////////////////
+        'logged.submit': {
+            url: "/submit/:id?step",
+            views: {
+                "loggedview": {
+                    dir: 'blueprint',
+                    //templateUrl: 'submitter.html',
+                    template: '<formfarm> loading </formfarm>',
                 }
             }
         },

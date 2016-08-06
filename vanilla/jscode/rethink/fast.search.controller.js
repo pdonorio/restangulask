@@ -6,7 +6,8 @@ angular.module('web')
 
 function FastSearchController(
     $scope, $log, $stateParams,
-    SearchService, hotkeys, keyshortcuts)
+    //hotkeys, keyshortcuts,
+    SearchService)
 {
 
   // INIT controller

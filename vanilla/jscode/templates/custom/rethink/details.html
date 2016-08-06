@@ -12,13 +12,15 @@
   <div ng-if='detail.data' layout="column">
       <div ng-hide="detail.data.id"> No data... </div>
 
-      <counter count=3>TEST</counter>
-
  <div layout="column" layout-padding>
     <h3> NOTICE DETAILLEE:
     <b>
         {{detail.refinedData["Extrait"]["Numero de l'extrait"]}}
     </b>
+
+    <a ng-if="detail.logged" ui-sref="logged.submit({id: theid, step: 2})">
+        <i class="material-icons red-text">edit</i>
+    </a>
     </hr>
     </h3>
  </div>

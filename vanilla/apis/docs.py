@@ -1039,3 +1039,19 @@ class RethinkUploader(Uploader, BaseRethinkResource):
 
         # Reply to user
         return self.response(obj, code=status)
+
+
+class RethinkStepsTemplate(BaseRethinkResource):
+    """ Data keys administrable """
+
+    table = 'stepstemplate'
+    # table_index = 'steps'
+
+    @deck.apimethod
+    # @auth_token_required
+    def get(self, step=None):
+        query = self.get_table_query()
+        if step is not None:
+            query = query.filter({'step': int(step)})
+        count, data = self.execute_query(query)
+        return self.response(data, elements=count)

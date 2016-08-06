@@ -4,14 +4,17 @@
 angular.module('web')
     .controller('DetailsController', DetailsController);
 
-function DetailsController($scope, $log, $sce, $stateParams, SearchService)
+function DetailsController($scope, $log, $sce, $stateParams, $auth, SearchService)
 {
-    $log.info("Single view on", $stateParams.id);
     var self = this;
+    $log.info("Single view on", $stateParams.id);
+    self.logged = $auth.isAuthenticated();
+
     self.load = true;
     self.data = null;
     self.texts = {}
     self.query = $stateParams.query;
+    $scope.theid = $stateParams.id;
 
     function loadData() {
 

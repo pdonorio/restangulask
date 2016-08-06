@@ -5,10 +5,12 @@ angular.module('web')
     //.config(hotkeysConfig)
     .config(uploaderConfig);
 
+/*
 function hotkeysConfig(hotkeysProvider) {
   //Disable ngRoute integration to prevent listening for $routeChangeSuccess events
   hotkeysProvider.useNgRoute = false;
 }
+*/
 
 function uploaderConfig(flowFactoryProvider) {
 

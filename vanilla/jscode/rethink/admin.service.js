@@ -12,6 +12,13 @@ function AdminService($log, api) {
         expo: 'expo',
         imissing: 'dataimagemissing',
         tmissing: 'datatransmissing',
+        stepstemplate: 'steps',
+    }
+
+    //////////////////
+    // STEPS
+    self.getSteps = function(step) {
+        return api.apiCall(self.endpoints.stepstemplate, 'GET', null, step);
     }
 
     //////////////////

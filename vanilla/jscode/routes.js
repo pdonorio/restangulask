@@ -123,13 +123,23 @@ function routeConfig($stateProvider, $urlRouterProvider, $authProvider, $logProv
             // Build VIEWS for this single state
             var myViews = {};
             forEach(x.views, function(view, viewName){
-                var dir = templateDir;
-                if (view.dir == 'custom') {
-                    dir = customTemplateDir;
-                } else if (view.dir == 'blueprint') {
-                    dir = blueprintTemplateDir;
+
+                var myView = {};
+                // TEMPLATE URL?
+                if (view.template) {
+                    console.log('TEST TEMPLATE', view.template);
+                    myView.template = view.template;
+                // TEMPLATE FILE
+                } else {
+                    var dir = templateDir;
+                    if (view.dir == 'custom') {
+                        dir = customTemplateDir;
+                    } else if (view.dir == 'blueprint') {
+                        dir = blueprintTemplateDir;
+                    }
+                     myView.templateUrl = dir + view.templateUrl;
                 }
-                myViews[viewName] = {templateUrl: dir + view.templateUrl};
+                myViews[viewName] = myView;
                 //console.log("Added view", stateName, viewName, myViews[viewName]);
             });
 
