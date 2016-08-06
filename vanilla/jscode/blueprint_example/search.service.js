@@ -29,6 +29,7 @@ function SearchService($log, api) {
 
     // Single call
     self.getSingleData = function(id) {
+        //console.log('PAOLO', api.endpoints);
         return self.handleResponse(
             api.apiCall(api.endpoints.search, id)
             );

@@ -89,6 +89,7 @@ class RethinkDataValues(BaseRethinkResource):
 
     def single_element(self, data, details='full'):
         """ If I request here one single document """
+
         single = []
         for steps in data.pop()['steps']:
             title = ""

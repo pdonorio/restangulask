@@ -48,10 +48,14 @@ function FormFarmController (
 
     self.fillFields = function () {
         var key = self._all['stepNames'][self.step];
+        self.current = self._all['data'][key];
+        console.log('TEST', self.current);
+
         forEach(self._all['stepTemplates'].data, function(element, index) {
-          console.log('FIELDS', element, getType(element.type));
+          //console.log('FIELDS', element, getType(element.type));
           self.formFields.push({
-              key: element.hash,
+              //key: element.hash,
+              key: element.field,
               type: 'input',
               templateOptions: {
                 type: 'text',
@@ -59,6 +63,10 @@ function FormFarmController (
                 //placeholder: 'Enter email'
               }
           });
+          // if (self.current.hasOwnProperty(element.field)) {
+          //   self.submitting[element.field] = self.current[element.field];
+          // }
+          // console.log("TEST OUT", self.submitting);
         });
 
 /*
@@ -83,25 +91,24 @@ function FormFarmController (
       var promises = {
         stepNames: SearchService.getSteps(),
         stepTemplates: AdminService.getSteps(self.step),
-        data: SearchService.getSingleData($stateParams.id),
+        data: SearchService.getSingleData($stateParams.id, true),
       };
 
       // Use the values
       return $q.all(promises).then(
         (values) =>
         {
+            self._all = angular.copy(values);
             $log.info("Obtained values", values);
-            self._all = values;
             self.fillFields();
         });
     }
 
-    self.submitting = {};
     self.onSubmit = onSubmit;
 
     // function definition
     function onSubmit() {
-      console.log("Submit", JSON.stringify(self.submitting));
+      console.log("Submit", JSON.stringify(self.current));
     }
 
     self.$onInit = function() {

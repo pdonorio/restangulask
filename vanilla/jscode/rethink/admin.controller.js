@@ -1112,35 +1112,6 @@ function TreeController($scope, $rootScope, $log, SearchService)
 }
 ////////////////////////////////////////
 
-function getType(key) {
-
-  var types = [
-      {value: 0, text: 'string', desc:
-          'All text is allowed'},
-      {value: 1, text: 'number', desc:
-          'Only integers values'},
-      {value: 2, text: 'email', desc:
-          'Only e-mail address (e.g. name@mailserver.org)'},
-      {value: 3, text: 'url', desc:
-          'Only web URL (e.g. http://website.com)'},
-      {value: 4, text: 'date', desc:
-          'Choose a day from a calendar'},
-      {value: 5, text: 'time', desc:
-          'Choose hour and minutes'},
-      {value: 6, text: 'pattern', desc:
-          'Define a regular expression for a custom type'},
-      {value: 7, text: 'color', desc:
-          'Only colors in hexadecimal value. Choose from color picker.'},
-      {value: 8, text: 'list', desc:
-          'Define a list of possible values (e.g. a dictionary)'},
-  ];
-  // save type to be sure in the future?
-  var type = types[0].text;
-  if (types[key])
-      type = types[key].text;
-  return type;
-}
-
 function treeProcessData(SearchService, $scope) {
 
     var tree = [];
@@ -1152,7 +1123,7 @@ function treeProcessData(SearchService, $scope) {
               var infos = {
                 'name': field.name,
                 'values': field.options,
-                'type': getType(field.type),
+                //'type': getType(field.type),
                 'required': field.required,
               };
               fields.push({
