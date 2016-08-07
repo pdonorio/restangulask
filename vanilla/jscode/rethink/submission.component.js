@@ -77,10 +77,13 @@ function FormFarmController (
           self.formFields[element.position-1] =
               {
                   key: element.field, //key: element.hash,
-                  type: 'input',
+                  type: 'textarea', //type: 'input',
                   templateOptions: {
                     type: 'text',
                     label: element.field, //placeholder: 'Enter email'
+                    rows: 4,
+                    cols: 80,
+                    //grow: false,
                   },
               };
         });
