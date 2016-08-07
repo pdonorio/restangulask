@@ -31,7 +31,7 @@ function getType(key) {
 }
 
 function FormFarmController (
-    $scope, $log, $sce, $state, $stateParams, $q,
+    $scope, $log, $sce, $state, $stateParams, $q, $window, $timeout,
     SearchService, AdminService
     )
 {
@@ -126,19 +126,34 @@ function FormFarmController (
         .then(function (out) {
           console.log('updated', toSubmit, out);
 
-// TOFIX
           // show toast
+          $window.scrollTo(0, 0);
+          self.message =
+            "Updating step " + self.step + " content " +
+            "before moving to next...";
 
           // compute next step
+          var newstep = parseInt(self.step) + 1;
+          //console.log('STEP', self.step, self._all['stepNames'].length, newstep);
+          if (newstep > self._all['stepNames'].length-1)
+            newstep = 1;
 
           // go to next step
+          $timeout(function () {
+            self.message = null;
+            console.log('Cleaning');
+            self.go(newstep);
+          }, 3500);
 
       });
 
     };
 
     self.$onInit = function() {
+      self.message = null;
       self.loadData();
+      console.log('TESTING SCOPE', $scope);
+      //console.log('PARENT', self.parent);
     };
 }
 
@@ -146,9 +161,11 @@ function FormFarmController (
 
 angular.module('web')
     .component('formfarm', {
-      bindings: {
-        count: '='
-      },
+      //require: { parent: '^^parentComponent' },
+      // transclude: true,
+      // bindings: {
+      //   toast: '='
+      // },
       controller: FormFarmController,
       templateUrl: blueprintTemplateDir + 'submission.html',
 

@@ -1,8 +1,28 @@
-
 <!-- HTML template for submission component -->
+
+<!--
+<md-toast>
+  <span class="md-toast-text" flex>{{$ctrl.message}}</span>
+</md-toast>
+-->
 
 <div layout="row" layout-align="center center">
     <h3> Editing document </h3>
+</div>
+
+<div ng-if="$ctrl.message"
+    layout="row" layout-align="center center"
+    layout-wrap layout-padding flex>
+    <md-card flex=80>
+        <md-card-content
+            class="indigo white-text"
+            layout="row" layout-align="center center">
+        <i class="material-icons">hourglass_empty</i>
+        <i>
+            {{$ctrl.message}}...
+        </i>
+        </md-card-content>
+    </md-card>
 </div>
 
 <md-content layout="row" layout-padding layout-wrap>
