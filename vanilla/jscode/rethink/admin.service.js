@@ -13,6 +13,13 @@ function AdminService($log, api) {
         imissing: 'dataimagemissing',
         tmissing: 'datatransmissing',
         stepstemplate: 'steps',
+        data: 'datavalues',
+    }
+
+    //////////////////
+    // Insert data
+    self.updateDocument = function(docId, docData) {
+        return api.apiCall(self.endpoints.data, 'PUT', docData, docId);
     }
 
     //////////////////

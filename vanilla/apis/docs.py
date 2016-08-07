@@ -99,11 +99,13 @@ class RethinkDataValues(BaseRethinkResource):
                     title = row['value']
                     if details != 'full':
                         break
-                element[row['name']] = row['value']
+                element[row['name']] = ''
+                if 'value' in row:
+                    element[row['name']] = row['value']
             if details == 'full':
-                single.insert(steps['step'], element)
+                single.insert(int(steps['step']), element)
             else:
-                single.insert(steps['step'], title)
+                single.insert(int(steps['step']), title)
         return single
 
     def filter_nested_field(self, q, filter_value,
@@ -176,6 +178,27 @@ class RethinkDataValues(BaseRethinkResource):
                 data = self.single_element(data, self._args['details'])
 
         return self.response(data, elements=count)
+
+    @deck.apimethod
+    @auth_token_required
+    def put(self, data_key=None):
+        query = self.get_table_query().get(data_key)
+        json_req = self.get_input(False)
+
+        # print("TEST", data_key, query, json_req)
+        element = query.run()
+        # print(element)
+
+        for i in range(0, len(element['steps'])):
+            if (int(json_req['step']) == int(element['steps'][i]['step'])):
+                print("single", i, element['steps'][i])
+                element['steps'][i] = json_req
+                break
+
+      # // ELASTICSEARCH UPDATE??
+
+        # Update rethinkdb element
+        return query.update(element).run()
 
 #####################################
 # Keys for templates and submission

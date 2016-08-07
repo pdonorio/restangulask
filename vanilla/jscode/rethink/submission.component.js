@@ -49,27 +49,6 @@ function FormFarmController (
         $state.go("logged.submit", {id: $stateParams.id, step: step});
     }
 
-/*
-
-- HTTP API new GET : Recover from 'datavalues' with no modifications
-- add missing positions to input data
-- draw formatter for returning element.value
-- self.current = that data
-- draw parser for writing element.value
-- save self.current as it is with PUT
-
-
-    // UFF
-    function myParser(value) {
-        console.log('Parser', value);
-        return (value || '');
-    }
-    function myFormatter(value) {
-        console.log('Formatter', value);
-        return (value || '');
-    }
-
-*/
     self.fillFields = function () {
         var key = self._all['stepNames'][self.step];
         //var data = self._all['data'][key];
@@ -78,12 +57,23 @@ function FormFarmController (
         var current = self._all['stepTemplates'].data;
 
         for (var i = 0; i < current.length; i++) {
-            self.formFields[i] = {};
+            self.formFields[i] = {
+                name: '' + i,
+                template: '',
+                extras: { skipNgModelAttrsManipulator: true }
+            };
         }
 
         forEach(current, function(element, index) {
           //console.log('POS', element.position, element, getType(element.type));
           self.hashes[element.position] = element.hash;
+// TOFIX
+
+    // Base is Textarea
+    // Integer
+    // Select
+    // Date
+
           self.formFields[element.position-1] =
               {
                   key: element.field, //key: element.hash,
@@ -92,12 +82,8 @@ function FormFarmController (
                     type: 'text',
                     label: element.field, //placeholder: 'Enter email'
                   },
-                  //parsers: [myParser], //formatters: [myFormatter],
               };
         });
-
-        console.log("Hashes", self.hashes);
-
     }
 
     self.loadData = function() {
@@ -119,14 +105,37 @@ function FormFarmController (
         });
     }
 
-    self.onSubmit = onSubmit;
-
-    // function definition
-    function onSubmit() {
+    self.onSubmit = function (argument) {
       console.log("Submit", JSON.stringify(self.current));
-// TO FIX:
-// To convert AND save inside APIs
-    }
+      var toSubmit = {
+        step: self.step,
+        data: [],
+      }
+      forEach(self.formFields, function (element, index) {
+        //console.log("data is", index, self.current[element.key]);
+        toSubmit.data.push({
+            position: index + 1,
+            hash: self.hashes[index],
+            name: element.key,
+            value: self.current[element.key],
+        });
+
+      });
+
+      AdminService.updateDocument($stateParams.id, toSubmit)
+        .then(function (out) {
+          console.log('updated', toSubmit, out);
+
+// TOFIX
+          // show toast
+
+          // compute next step
+
+          // go to next step
+
+      });
+
+    };
 
     self.$onInit = function() {
       self.loadData();

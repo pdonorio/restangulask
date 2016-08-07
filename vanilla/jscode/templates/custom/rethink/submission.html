@@ -2,7 +2,7 @@
 <!-- HTML template for submission component -->
 
 <div layout="row" layout-align="center center">
-    <h3> Submission </h3>
+    <h3> Editing document </h3>
 </div>
 
 <md-content layout="row" layout-padding layout-wrap>
@@ -38,7 +38,10 @@
       <md-card-title>
         <md-card-title-text>
             <md-headline>
-                {{$ctrl._all['stepNames'][$ctrl.step]}}
+                <h5>
+                    {{$ctrl._all['stepNames'][$ctrl.step]}}
+                    <i> metadata </i>
+                </h5>
             </md-headline>
         </md-card-title-text>
       </md-card-title>
