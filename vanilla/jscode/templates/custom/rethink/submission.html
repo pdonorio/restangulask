@@ -35,25 +35,29 @@
     <form ng-submit="$ctrl.onSubmit()" name="$ctrl.form" novalidate>
      <md-card>
 
-<md-card-title>
-<md-card-title-text>
-<md-headline>
-{{$ctrl._all['stepNames'][$ctrl.step]}}
-</md-headline>
-</md-card-title-text>
-</md-card-title>
+      <md-card-title>
+        <md-card-title-text>
+            <md-headline>
+                {{$ctrl._all['stepNames'][$ctrl.step]}}
+            </md-headline>
+        </md-card-title-text>
+      </md-card-title>
 
       <md-card-content
         layout="row" layout-padding layout-margin layout-fill
         >
         <formly-form model="$ctrl.current"
-            fields="$ctrl.formFields"></formly-form>
+            fieldTransforms="$ctrl.myfunctions"
+            fields="$ctrl.formFields"
+            ></formly-form>
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
           <md-button type="submit"
-            ng-disabled="$ctrl.form.$invalid">Submit</md-button>
-          <md-button
+            ng-disabled="$ctrl.form.$invalid">update</md-button>
+
+<!--           <md-button
             ng-click="$ctrl.options.resetModel()">Reset</md-button>
+ -->
       </md-card-actions>
      </md-card>
     </form>

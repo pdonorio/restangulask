@@ -37,8 +37,11 @@ function FormFarmController (
 {
     var self = this;
     $log.info("SUBMIT on", $stateParams.id);
+
     self.step = 1;
+    self.current = {};
     self.formFields = [];
+    self.hashes = {};
     if ($stateParams.step)
         self.step = $stateParams.step;
 
@@ -46,43 +49,55 @@ function FormFarmController (
         $state.go("logged.submit", {id: $stateParams.id, step: step});
     }
 
+/*
+
+- HTTP API new GET : Recover from 'datavalues' with no modifications
+- add missing positions to input data
+- draw formatter for returning element.value
+- self.current = that data
+- draw parser for writing element.value
+- save self.current as it is with PUT
+
+
+    // UFF
+    function myParser(value) {
+        console.log('Parser', value);
+        return (value || '');
+    }
+    function myFormatter(value) {
+        console.log('Formatter', value);
+        return (value || '');
+    }
+
+*/
     self.fillFields = function () {
         var key = self._all['stepNames'][self.step];
+        //var data = self._all['data'][key];
         self.current = self._all['data'][key];
-        console.log('TEST', self.current);
+        //console.log('TEST', self.current);
+        var current = self._all['stepTemplates'].data;
 
-        forEach(self._all['stepTemplates'].data, function(element, index) {
-          //console.log('FIELDS', element, getType(element.type));
-          self.formFields.push({
-              //key: element.hash,
-              key: element.field,
-              type: 'input',
-              templateOptions: {
-                type: 'text',
-                label: element.field,
-                //placeholder: 'Enter email'
-              }
-          });
-          // if (self.current.hasOwnProperty(element.field)) {
-          //   self.submitting[element.field] = self.current[element.field];
-          // }
-          // console.log("TEST OUT", self.submitting);
+        for (var i = 0; i < current.length; i++) {
+            self.formFields[i] = {};
+        }
+
+        forEach(current, function(element, index) {
+          //console.log('POS', element.position, element, getType(element.type));
+          self.hashes[element.position] = element.hash;
+          self.formFields[element.position-1] =
+              {
+                  key: element.field, //key: element.hash,
+                  type: 'input',
+                  templateOptions: {
+                    type: 'text',
+                    label: element.field, //placeholder: 'Enter email'
+                  },
+                  //parsers: [myParser], //formatters: [myFormatter],
+              };
         });
 
-/*
-        {
-          key: 'emailer',
-          type: 'input',
-          //type: 'checkbox',
-          templateOptions: {
-            type: 'text',
-            //type: 'email',
-            //type: 'password',
-            label: 'My address',
-            placeholder: 'Enter email'
-          }
-        },
-*/
+        console.log("Hashes", self.hashes);
+
     }
 
     self.loadData = function() {
@@ -109,6 +124,8 @@ function FormFarmController (
     // function definition
     function onSubmit() {
       console.log("Submit", JSON.stringify(self.current));
+// TO FIX:
+// To convert AND save inside APIs
     }
 
     self.$onInit = function() {
