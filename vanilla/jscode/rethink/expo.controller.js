@@ -184,6 +184,10 @@ function ExpoController($scope, $log,
     }
     self.reload();
 
+    $scope.adjust = function(text) {
+        return text.replace(/_/g, ' ');
+    }
+
     //////////////////////////////
     // functions
 

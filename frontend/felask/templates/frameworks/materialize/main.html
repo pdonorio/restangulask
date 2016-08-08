@@ -57,13 +57,15 @@
     <div ng-if="root.load" ng-include="root.templateDir + 'loader.html'">
     <!-- WHILE WAITING -->
     </div>
-    <div layout="row">
-        <div ng-hide="root.load" flex='85' ui-view='main'></div>
+    <div layout="row" layout-wrap layout-fill>
+        <div ng-hide="root.load" flex='80' ui-view='main'></div>
         <div flex='15' ng-if="!disable_sidemenu"
             layout="column"
             ng-include="root.blueprintTemplateDir + 'side_menu.html'"></div>
     </div>
+<!--
     <div ui-view='sidebar'></div>
+-->
 </main>
 {% endblock %}
 

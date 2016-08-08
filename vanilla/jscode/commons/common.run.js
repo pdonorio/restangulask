@@ -1,14 +1,28 @@
 (function() {
   'use strict';
 
+angular.module('web')
+
 /* Boost performance!
 http://www.gros-engineering.com/angularjs-performance-tweaks/
 */
 
-angular.module('web')
     .config(['$compileProvider', function ($compileProvider) {
       $compileProvider.debugInfoEnabled(false);
-    }]);
+    }])
+
+// // angular material palette
+
+//     .config(function ($mdThemingProvider) {
+//       $mdThemingProvider
+//         .theme('default')
+//         // .primaryPalette('indigo')
+//         // .accentPalette('pink')
+//         // .warnPalette('red')
+//         //.backgroundPalette('white');
+// });
+
+;
 
 // DISABLE THE MAIN RUN above
 //angular.module('web').run(runBlock);

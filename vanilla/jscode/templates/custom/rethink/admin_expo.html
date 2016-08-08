@@ -1,6 +1,6 @@
 
 <div ng-controller='ToastController as toasting'>
- <div ng-controller="ExpoController as expo">
+ <div ng-controller="ExpoController as expo" layout-fill>
 
     <section id='upload'></section>
 
@@ -63,10 +63,11 @@
     </md-card-content> </md-card>
 
     <md-card ng-show="keylen(expo.files) > 0">
-        <md-card-content layout="column" layout-align="center center" >
+        <md-card-content
+            layout="column" layout-align="center center"
+            layout-wrap layout-fill>
         <h4>Uploaded images</h4>
 
-<center>
         <table>
             <thead>
                 <tr>
@@ -83,9 +84,9 @@
         + options.file +'/TileGroup0/0-0-0.jpg' }}"
          width=80>
      <br>
-     {{options.name}}
+     {{adjust(options.name)}}
             </td>
-            <td> {{options.details.title}} </td>
+            <td> {{adjust(options.details.title)}} </td>
             <td> {{options.section}} </td>
             <td> {{options.theme}} </td>
             <td>
@@ -106,7 +107,6 @@
             </td>
           </tr>
         </table>
-</center>
 
     </md-card-content> </md-card>
 

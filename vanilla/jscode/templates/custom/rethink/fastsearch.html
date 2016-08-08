@@ -1,9 +1,10 @@
 
-<div ng-controller="FastSearchController as search">
+<div ng-controller="FastSearchController as search"
+    style="background-color: #fff;">
 
 <!-- TOOLBAR -->
-<form ng-submit="$event.preventDefault()" layout="row">
- <div flex="15"></div>
+<form ng-submit="$event.preventDefault()"
+    layout="row" layout-fill layout-wrap layout-padding layout-align="center center">
  <div flex="70" layout="column">
  <h4> Resultats de la <i>Recherche</i> </h4>
  <md-toolbar class="white black-text">
@@ -54,7 +55,6 @@
     <b><i>Trouvés: {{search.elements}} éléments</i></b>
  </span>
  </div>
- <div flex="15"></div>
 </form>
 <!-- TOOLBAR -->
 

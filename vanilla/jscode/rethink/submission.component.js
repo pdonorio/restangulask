@@ -50,6 +50,9 @@ function FormFarmController (
     }
 
     self.fillFields = function () {
+
+        self.main = self._all['data']['Extrait']["Numero de l'extrait"];
+
         var key = self._all['stepNames'][self.step];
         //var data = self._all['data'][key];
         self.current = self._all['data'][key];
@@ -81,7 +84,7 @@ function FormFarmController (
                   templateOptions: {
                     type: 'text',
                     label: element.field, //placeholder: 'Enter email'
-                    rows: 4,
+                    rows: 2,
                     cols: 80,
                     //grow: false,
                   },
@@ -91,20 +94,28 @@ function FormFarmController (
 
     self.loadData = function() {
 
+      self.load = true;
       // Multiple and parallel calls
       var promises = {
-        stepNames: SearchService.getSteps(),
-        stepTemplates: AdminService.getSteps(self.step),
         data: SearchService.getSingleData($stateParams.id, true),
       };
+
+      if (!self._all['stepNames']) {
+        promises.stepNames = SearchService.getSteps();
+        promises.stepTemplates = AdminService.getSteps(self.step);
+      }
 
       // Use the values
       return $q.all(promises).then(
         (values) =>
         {
-            self._all = angular.copy(values);
-            $log.info("Obtained values", values);
+            forEach(values, function(element, index) {
+                self._all[index] = angular.copy(element);
+            });
+            //self._all = angular.copy(values);
+            $log.info("Updated values", self._all);
             self.fillFields();
+            self.load = false;
         });
     }
 
@@ -120,7 +131,7 @@ function FormFarmController (
             position: index + 1,
             hash: self.hashes[index],
             name: element.key,
-            value: self.current[element.key],
+            value: self.current[element.key] || '',
         });
 
       });
@@ -146,17 +157,17 @@ function FormFarmController (
             self.message = null;
             console.log('Cleaning');
             self.go(newstep);
-          }, 3500);
+          }, 2500);
 
       });
 
     };
 
     self.$onInit = function() {
+      self.templateDir = templateDir;
       self.message = null;
+      self._all = {};
       self.loadData();
-      console.log('TESTING SCOPE', $scope);
-      //console.log('PARENT', self.parent);
     };
 }
 
@@ -167,7 +178,7 @@ angular.module('web')
       //require: { parent: '^^parentComponent' },
       // transclude: true,
       // bindings: {
-      //   toast: '='
+      //   root: '&'
       // },
       controller: FormFarmController,
       templateUrl: blueprintTemplateDir + 'submission.html',

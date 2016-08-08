@@ -7,27 +7,22 @@
 -->
 
 <div layout="row" layout-align="center center">
-    <h3> Editing document </h3>
+    <md-button>
+        <a ui-sref='public.details({id: id})'
+            layout='row' layout-align="center center">
+            <i class="material-icons prefix">arrow_back</i> details
+        </a>
+    </md-button>
+    <h3> Editing '<b>{{$ctrl.main}}</b>' </h3>
 </div>
 
-<div ng-if="$ctrl.message"
-    layout="row" layout-align="center center"
-    layout-wrap layout-padding flex>
-    <md-card flex=80>
-        <md-card-content
-            class="indigo white-text"
-            layout="row" layout-align="center center">
-        <i class="material-icons">hourglass_empty</i>
-        <i>
-            {{$ctrl.message}}...
-        </i>
-        </md-card-content>
-    </md-card>
-</div>
+<div ng-if="$ctrl.load" ng-include="$ctrl.templateDir + 'loader.html'"></div>
 
-<md-content layout="row" layout-padding layout-wrap>
+<md-content ng-if="!$ctrl.load"
+    layout="row" layout-align="center start"
+    layout-padding layout-wrap ng-cloak>
 
-    <div flex=20>
+    <div flex=30>
      <md-content>
       <md-list flex>
 
@@ -42,7 +37,14 @@
 
           <div class="md-list-item-text" layout="column" layout-padding>
             <h4>{{ item }}</h4>
-            <p>step {{ id }}</p>
+            <p>
+                step {{ id }}
+                <span ng-if="id == $ctrl.step">
+                    <i>
+                        (CURRENT)
+                    </i>
+                </span>
+            </p>
           </div>
 
         </md-list-item>
@@ -51,7 +53,20 @@
      </md-content>
     </div>
 
-    <div flex=60>
+    <div ng-if="$ctrl.message"
+        layout="row" layout-align="center center"
+        layout-wrap layout-padding flex>
+        <md-card flex=50>
+            <md-card-content
+                class="indigo white-text"
+                layout="row" layout-align="center center">
+            <i class="material-icons">hourglass_empty</i>
+            <i> {{$ctrl.message}}... </i>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div ng-if="!$ctrl.message" flex=60>
     <form ng-submit="$ctrl.onSubmit()" name="$ctrl.form" novalidate>
      <md-card>
 
