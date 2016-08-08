@@ -8,6 +8,7 @@
     "animate.css": "~3.4.0",
     "angular-ui-router": "~0.2.15",
     "angular-materialize": "0.1.9",
+    "materialize": "0.97.7",
     "satellizer": "~0.13.2",
     "angular-lazy-img": "~1.2.2",
     "angular-material": "1.1.0-rc.5",
@@ -21,6 +22,9 @@
     "angular-sortable-view": "^0.0.15"
   },
   "resolutions": {
-    "angular": "1.5.8"
+    "angular": "1.5.8",
+    "angular-animate": "1.5.8",
+    "angular-formly": "8.3.0",
+    "angular-material": "1.1.0-rc.5"
   }
 }
