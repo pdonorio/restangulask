@@ -25,7 +25,20 @@ function SearchService($log, api) {
         return api.apiCall(self.endpoints.search);
     }
 
-    self.getSingleData = function(id, details) {
+    self.getDataToEdit = function(id)
+    {
+      return api.apiCall(self.endpoints.search, 'GET', {details: 'full'}, id)
+       .then(function(out)
+       {
+          if (!out || out.elements < 1) {
+              return false;
+          }
+          return out.data;
+        });
+    }
+
+    self.getSingleData = function(id, details)
+    {
 
       var detailed = 'short';
       if (details) {

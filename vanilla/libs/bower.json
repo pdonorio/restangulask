@@ -11,7 +11,7 @@
     "materialize": "0.97.7",
     "satellizer": "~0.13.2",
     "angular-lazy-img": "~1.2.2",
-    "angular-material": "1.1.0-rc.5",
+    "angular-material": "master",
     "angular-formly": "8.3.0",
     "angular-formly-material": "0.14.3",
     "api-check": "7.5.5",
@@ -25,6 +25,6 @@
     "angular": "1.5.8",
     "angular-animate": "1.5.8",
     "angular-formly": "8.3.0",
-    "angular-material": "1.1.0-rc.5"
+    "angular-material": "master"
   }
 }

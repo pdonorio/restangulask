@@ -17,12 +17,15 @@
     </div>
     <div flex="60">
         <h3> Editing
-        <span ng-if="!$ctrl.load">
+        <span ng-if="!$ctrl.load && $ctrl.main">
             '<b>{{$ctrl.main}}</b>'
         </span>
         </h3>
     </div>
 </div>
+
+<!-- {{$ctrl.current}}
+ -->
 
 <div ng-if="$ctrl.load" ng-include="$ctrl.templateDir + 'loader.html'"></div>
 
@@ -37,7 +40,10 @@
         <!-- <md-subheader class="md-no-sticky"> STEPs </md-subheader> -->
 
         <md-divider ></md-divider>
-        <md-list-item class="md-2-line blue lighten-4 md-whiteframe-3dp"
+        <md-list-item class="md-2-line blue md-whiteframe-3dp"
+            ng-class="{
+                'lighten-4': id == $ctrl.step,
+                'lighten-5': id != $ctrl.step }"
             ng-click="$ctrl.go(id)"
             ng-if="item" ng-repeat="(id, item) in $ctrl._all['stepNames']">
 

@@ -38,6 +38,25 @@ function FormFarmController (
     var self = this;
     $log.info("SUBMIT on", $stateParams.id);
 
+/*
+
+// TOFIX
+
+Handle 'draft' state for creating a new record
+
+1. fab button?
+2. if 'draft' on load:
+    do not load existing data and fill
+3. if 'draft' on save:
+    create a new id (empty element in 'datavalues')
+        separated with POST?
+    save step as usual
+    redirect submission to element
+    ... then it's a normal update
+
+*/
+
+
     self.step = 1;
     self.current = {};
     self.formFields = [];
@@ -51,12 +70,9 @@ function FormFarmController (
 
     self.fillFields = function () {
 
-        self.main = self._all['data']['Extrait']["Numero de l'extrait"];
+        self.main = self._all['data'][0]["Numero de l'extrait"];
+        self.current = angular.copy(self._all['data'][self.step-1]);
 
-        var key = self._all['stepNames'][self.step];
-        //var data = self._all['data'][key];
-        self.current = self._all['data'][key];
-        //console.log('TEST', self.current);
         var current = self._all['stepTemplates'].data;
 
         for (var i = 0; i < current.length; i++) {
@@ -69,26 +85,83 @@ function FormFarmController (
 
         forEach(current, function(element, index) {
           //console.log('POS', element.position, element, getType(element.type));
+          var choose = getType(element.type);
           self.hashes[element.position] = element.hash;
+
+          // TEXTAREA
+          var field = {
+              key: element.field, //key: element.hash,
+              type: 'textarea', //type: 'input',
+              templateOptions: {
+                type: 'text',
+                label: element.field, //placeholder: 'Enter email'
+                rows: 2,
+                cols: 80,
+                // grow: true,
+              },
+          };
+
+          // LIST / select
+          if (choose == "list") {
+            var options = [
+                {"value": "", "name": "-"}
+            ];
+            forEach(element.extra.split(','), function (obj, pos) {
+                options.push({"value":obj, "name": obj});
+            });
+            field = {
+                key: element.field,
+                type:'select',
+                defaultValue: options[0],
+                templateOptions: {
+                    label: element.field,
+                    options: options,
+                    // labelProp: 'name',
+                    // valueProp: 'name',
+                },
+            }
+          }
+
+          if (element.required) {
+            field.validation = {"show": true};
+          }
+
+          self.formFields[element.position-1] = field;
+
 // TOFIX
+    // other types
+    // string (textarea), list (select), date, url
 
-    // Base is Textarea
-    // Integer
-    // Select
-    // Date
+/*
 
-          self.formFields[element.position-1] =
-              {
-                  key: element.field, //key: element.hash,
-                  type: 'textarea', //type: 'input',
-                  templateOptions: {
-                    type: 'text',
-                    label: element.field, //placeholder: 'Enter email'
-                    rows: 2,
-                    cols: 80,
-                    //grow: false,
-                  },
-              };
+{
+  type: "datepicker",
+  key: "start",
+  templateOptions: {
+    theme: "custom",
+    placeholder: "Start date",
+    minDate: minDate, // instance of Date
+    maxDate: maxDate, // instance of Date
+    filterDate: function(date) {
+        // only weekends
+        var day = date.getDay();
+        return day === 0 || day === 6;
+    }
+  }
+}
+
+   formlyConfigProvider.setType({
+      name: 'url',
+      extends: 'input',
+      defaultOptions: {
+        templateOptions: {
+            type: 'url'
+        }
+      }
+    });
+
+
+*/
         });
     }
 
@@ -97,12 +170,10 @@ function FormFarmController (
       self.load = true;
       // Multiple and parallel calls
       var promises = {
-        data: SearchService.getSingleData($stateParams.id, true),
-      };
-
-      if (!self._all['stepNames']) {
-        promises.stepNames = SearchService.getSteps();
-        promises.stepTemplates = AdminService.getSteps(self.step);
+        data: SearchService.getDataToEdit($stateParams.id),
+        //data: SearchService.getSingleData($stateParams.id, true),
+        stepNames: SearchService.getSteps(),
+        stepTemplates: AdminService.getSteps(self.step)
       }
 
       // Use the values
@@ -121,6 +192,7 @@ function FormFarmController (
 
     self.onSubmit = function (argument) {
       console.log("Submit", JSON.stringify(self.current));
+      return false;
       var toSubmit = {
         step: self.step,
         data: [],
