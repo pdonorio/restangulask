@@ -7,13 +7,21 @@
 -->
 
 <div layout="row" layout-align="center center">
-    <md-button>
-        <a ui-sref='public.details({id: id})'
-            layout='row' layout-align="center center">
-            <i class="material-icons prefix">arrow_back</i> details
-        </a>
-    </md-button>
-    <h3> Editing '<b>{{$ctrl.main}}</b>' </h3>
+    <div flex="40">
+        <md-button ng-if="!$ctrl.load">
+            <a ui-sref='public.details({id: id})'
+                layout='row' layout-align="center center">
+                <i class="material-icons prefix">arrow_back</i> details
+            </a>
+        </md-button>
+    </div>
+    <div flex="60">
+        <h3> Editing
+        <span ng-if="!$ctrl.load">
+            '<b>{{$ctrl.main}}</b>'
+        </span>
+        </h3>
+    </div>
 </div>
 
 <div ng-if="$ctrl.load" ng-include="$ctrl.templateDir + 'loader.html'"></div>
@@ -29,7 +37,8 @@
         <!-- <md-subheader class="md-no-sticky"> STEPs </md-subheader> -->
 
         <md-divider ></md-divider>
-        <md-list-item class="md-2-line" ng-click="$ctrl.go(id)"
+        <md-list-item class="md-2-line blue lighten-4 md-whiteframe-3dp"
+        ng-click="$ctrl.go(id)"
             ng-if="item" ng-repeat="(id, item) in $ctrl._all['stepNames']">
 
           <i ng-if="id == $ctrl.step" class="material-icons"> label </i>
@@ -68,7 +77,7 @@
 
     <div ng-if="!$ctrl.message" flex=60>
     <form ng-submit="$ctrl.onSubmit()" name="$ctrl.form" novalidate>
-     <md-card>
+     <md-card class="md-whiteframe-6dp">
 
       <md-card-title>
         <md-card-title-text>

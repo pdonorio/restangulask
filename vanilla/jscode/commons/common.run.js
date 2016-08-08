@@ -11,18 +11,40 @@ http://www.gros-engineering.com/angularjs-performance-tweaks/
       $compileProvider.debugInfoEnabled(false);
     }])
 
-// // angular material palette
 
-//     .config(function ($mdThemingProvider) {
-//       $mdThemingProvider
-//         .theme('default')
-//         // .primaryPalette('indigo')
-//         // .accentPalette('pink')
-//         // .warnPalette('red')
-//         //.backgroundPalette('white');
-// });
+    .config(function ($mdThemingProvider) {
 
-;
+/* UHM
+// angular material palette
+// Note: default is grey, not cool
+        $mdThemingProvider.theme('white');
+        $mdThemingProvider.setDefaultTheme('white');
+*/
+
+// WTF
+        var background = $mdThemingProvider.extendPalette('grey', {
+          '50': 'ffffff',
+          //'A100': 'ffffff'
+        });
+        $mdThemingProvider.definePalette('background', background);
+
+        $mdThemingProvider
+            //.theme('indigo')
+            .theme('default')
+            // .primaryPalette('indigo')
+            // .accentPalette('pink')
+            // .warnPalette('red')
+            // .backgroundPalette('grey'
+            //     , {
+            //     'default': '50',
+            //     'hue-1': '300',
+            //     'hue-2': '600',
+            //     'hue-3': '900'
+            //  }
+            //  );
+            //.light();
+            .backgroundPalette('background');
+    });
 
 // DISABLE THE MAIN RUN above
 //angular.module('web').run(runBlock);
