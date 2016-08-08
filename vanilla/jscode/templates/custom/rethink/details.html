@@ -19,8 +19,9 @@
     </b>
 
     <a ng-if="detail.logged" ui-sref="logged.submit({id: theid})">
-        <i class="material-icons red-text">edit</i>
-<!-- TOFIX: add tooltip -->
+        <i class="material-icons red-text"
+           data-position="right" data-tooltip="Modify this record" tooltipped
+        >edit</i>
     </a>
 
     </hr>
