@@ -1,4 +1,19 @@
 
+for element in r.db('webapp').table('datavalues').run():
+    for step in element['steps']:
+        if step['step'] == 3:
+            for piece in step['data']:
+                if piece['name'] == 'Date de début de la fête':
+                    print(element['record'], piece)
+
+ 3e757726-a267-462b-9a23-f4109cdc91bc
+ 29543513-8c9f-46a7-91b6-033b27c6803a
+020ad317-d507-49b2-b238-351244bae67b
+ 50b459bf-32ea-4067-91c4-20b1ec665779
+
+TAGS
+https://github.com/formly-js/angular-formly-templates-material/blob/master/docs/types/chips.md
+
 PRIORITY:
 
 ☐ types

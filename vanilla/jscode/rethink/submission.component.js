@@ -38,13 +38,12 @@ function FormFarmController (
     var self = this;
     $log.info("SUBMIT on", $stateParams.id);
 
+    self.draft = ($stateParams.id == 'draft');
 /*
-
-// TOFIX
 
 Handle 'draft' state for creating a new record
 
-1. fab button?
+1. add button in topbar menu
 2. if 'draft' on load:
     do not load existing data and fill
 3. if 'draft' on save:
@@ -56,7 +55,7 @@ Handle 'draft' state for creating a new record
 
 */
 
-    self.draft = ($stateParams.id == 'draft');
+    self.myid = $stateParams.id;
     self.step = 1;
     self.current = {};
     self.formFields = [];
@@ -93,6 +92,7 @@ Handle 'draft' state for creating a new record
           var choose = getType(element.type);
           self.hashes[element.position] = element.hash;
 
+
           // TEXTAREA
           var field = {
               key: element.field, //key: element.hash,
@@ -125,6 +125,33 @@ Handle 'draft' state for creating a new record
                     // valueProp: 'name',
                 },
             }
+          } else if (choose == 'date') {
+            // update the element to parse the date
+            console.log("DATE", self.current[element.field], element.required);
+            if (self.current[element.field]) {
+                self.current[element.field] = new Date(self.current[element.field]);
+            } else {
+                // empty value for datepicker
+                self.current[element.field] = null;
+            }
+
+            field = {
+                key: element.field,
+                type: "datepicker",
+                templateOptions: {
+                  label: element.field,
+                  // theme: "custom",
+                  // disabled: true,
+                  //placeholder: element.field,
+                  // minDate: null,
+                  // maxDate: null,
+                  // minDate: new Date(Date.parse("1600")),
+                  // maxDate: new Date(Date.parse("1700")),
+                  // datepickerOptions: {
+                  //     "format": "DD-mm-yyyy"
+                  // },
+                }
+                }
           }
 
           if (element.required) {
@@ -139,23 +166,6 @@ Handle 'draft' state for creating a new record
     // string (textarea), list (select), date, url
 
 /*
-
-{
-  type: "datepicker",
-  key: "start",
-  templateOptions: {
-    theme: "custom",
-    placeholder: "Start date",
-    minDate: minDate, // instance of Date
-    maxDate: maxDate, // instance of Date
-    filterDate: function(date) {
-        // only weekends
-        var day = date.getDay();
-        return day === 0 || day === 6;
-    }
-  }
-}
-
    formlyConfigProvider.setType({
       name: 'url',
       extends: 'input',
@@ -165,9 +175,8 @@ Handle 'draft' state for creating a new record
         }
       }
     });
-
-
 */
+
         });
     }
 
@@ -200,21 +209,23 @@ Handle 'draft' state for creating a new record
     }
 
     self.onSubmit = function (argument) {
-      console.log("Submit", JSON.stringify(self.current));
       var toSubmit = {
         step: self.step,
         data: [],
       }
       forEach(self.formFields, function (element, index) {
         //console.log("data is", index, self.current[element.key]);
-        toSubmit.data.push({
-            position: index + 1,
-            hash: self.hashes[index],
-            name: element.key,
-            value: self.current[element.key] || '',
-        });
+        if (self.current[element.key])
+            toSubmit.data.push({
+                position: index + 1,
+                hash: self.hashes[index],
+                name: element.key,
+                value: self.current[element.key] || '',
+            });
 
       });
+      // console.log("Submit", JSON.stringify(self.current), "translated to", toSubmit);
+      return false;
 
       AdminService.updateDocument($stateParams.id, toSubmit)
         .then(function (out) {
