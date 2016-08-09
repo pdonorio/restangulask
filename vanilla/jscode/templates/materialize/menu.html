@@ -25,7 +25,7 @@
 
     <!-- Angular dynamic material menu -->
     <li ng-if="mymenu.buttons" ng-repeat="button in mymenu.buttons">
-        <a style="color: grey;" ui-sref="{{button.link}}">
+        <a ui-sref="{{button.link}}" class="btn" ng-class="button.color">
             {{ button.name.capitalizeFirstLetter() }}
         </a>
     </li>
