@@ -17,6 +17,12 @@
 
 <!-- IF NOT LOGGED -->
 
+    <li ng-if="mymenu.logged">
+        <a ui-sref="logged.submit({id: 'draft', step: 1})" class="btn red">
+            add
+        </a>
+    </li>
+
     <!-- Angular dynamic material menu -->
     <li ng-if="mymenu.buttons" ng-repeat="button in mymenu.buttons">
         <a style="color: grey;" ui-sref="{{button.link}}">
@@ -24,13 +30,14 @@
         </a>
     </li>
 
-<!-- IF LOGGED -->
+<!-- IF LOGGED
     <li style="color: grey;" ng-if="mymenu.logged">
         <div layout="row">
             <i class="material-icons prefix">face</i>
             &nbsp;
         </div>
     </li>
+-->
 
 <!-- BASIC MENU FROM ROUTING - if nothing else is available -->
 

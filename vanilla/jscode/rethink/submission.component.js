@@ -56,7 +56,7 @@ Handle 'draft' state for creating a new record
 
 */
 
-
+    self.draft = ($stateParams.id == 'draft');
     self.step = 1;
     self.current = {};
     self.formFields = [];
@@ -70,8 +70,13 @@ Handle 'draft' state for creating a new record
 
     self.fillFields = function () {
 
-        self.main = self._all['data'][0]["Numero de l'extrait"];
-        self.current = angular.copy(self._all['data'][self.step-1]);
+        if (!self.draft) {
+            if (self._all['data'][0] &&
+                self._all['data'][0].hasOwnProperty("Numero de l'extrait")) {
+                self.main = self._all['data'][0]["Numero de l'extrait"];
+            }
+            self.current = angular.copy(self._all['data'][self.step-1]);
+        }
 
         var current = self._all['stepTemplates'].data;
 
@@ -123,6 +128,7 @@ Handle 'draft' state for creating a new record
           }
 
           if (element.required) {
+            //console.log('TEST required', element);
             field.validation = {"show": true};
           }
 
@@ -175,6 +181,9 @@ Handle 'draft' state for creating a new record
         stepNames: SearchService.getSteps(),
         stepTemplates: AdminService.getSteps(self.step)
       }
+      if (self.draft) {
+        delete promises.data;
+      }
 
       // Use the values
       return $q.all(promises).then(
@@ -192,7 +201,6 @@ Handle 'draft' state for creating a new record
 
     self.onSubmit = function (argument) {
       console.log("Submit", JSON.stringify(self.current));
-      return false;
       var toSubmit = {
         step: self.step,
         data: [],
@@ -228,7 +236,15 @@ Handle 'draft' state for creating a new record
           $timeout(function () {
             self.message = null;
             console.log('Cleaning');
-            self.go(newstep);
+
+            if (self.draft) {
+            // THE MAGIC
+                $state.go('.', {id: out, step: newstep}, {notify: false});
+                self.step = newstep;
+            } else {
+                self.go(newstep);
+            }
+
           }, 2500);
 
       });

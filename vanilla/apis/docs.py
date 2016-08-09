@@ -91,7 +91,10 @@ class RethinkDataValues(BaseRethinkResource):
         """ If I request here one single document """
 
         single = []
-        for steps in data.pop()['steps']:
+        friend = data.pop()
+        if 'steps' not in friend:
+            return single
+        for steps in friend['steps']:
             title = ""
             element = {}
             for row in steps['data']:
@@ -142,6 +145,9 @@ class RethinkDataValues(BaseRethinkResource):
     # @auth_token_required
     def get(self, data_key=None):
 
+        if data_key == 'draft':
+            return 'drafting'
+
         args = self._args
         data = []
         count = len(data)
@@ -182,6 +188,12 @@ class RethinkDataValues(BaseRethinkResource):
     @deck.apimethod
     @auth_token_required
     def put(self, data_key=None):
+
+        # Create a key for drafts
+        if data_key == 'draft':
+            cursor = self.get_table_query().insert({}).run()
+            data_key = dict(cursor)['generated_keys'].pop()
+
         query = self.get_table_query().get(data_key)
         json_req = self.get_input(False)
 
@@ -189,16 +201,24 @@ class RethinkDataValues(BaseRethinkResource):
         element = query.run()
         # print(element)
 
-        for i in range(0, len(element['steps'])):
-            if (int(json_req['step']) == int(element['steps'][i]['step'])):
-                print("single", i, element['steps'][i])
-                element['steps'][i] = json_req
-                break
+        if 'steps' in element:
+            for i in range(0, len(element['steps'])):
+                if (int(json_req['step']) == int(element['steps'][i]['step'])):
+                    # print("single", i, element['steps'][i])
+                    element['steps'][i] = json_req
+                    break
+        else:
+            element['step'] = json_req['step']
+            element['steps'] = []
+            element['steps'].append(json_req)
 
+# //TOFIX
       # // ELASTICSEARCH UPDATE??
 
         # Update rethinkdb element
-        return query.update(element).run()
+        query.update(element).run()
+        #return query.update(element).run()
+        return data_key
 
 #####################################
 # Keys for templates and submission
