@@ -225,7 +225,7 @@ Handle 'draft' state for creating a new record
 
       });
       // console.log("Submit", JSON.stringify(self.current), "translated to", toSubmit);
-      return false;
+      // return false;
 
       AdminService.updateDocument($stateParams.id, toSubmit)
         .then(function (out) {
