@@ -91,6 +91,8 @@ class RethinkDataValues(BaseRethinkResource):
         """ If I request here one single document """
 
         single = []
+        if len(data) < 1:
+            return single
         friend = data.pop()
         if 'steps' not in friend:
             return single

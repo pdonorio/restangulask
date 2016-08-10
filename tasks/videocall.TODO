@@ -1,4 +1,6 @@
 
+ --- ✄ -----------------------
+
 for element in r.db('webapp').table('datavalues').run():
     for step in element['steps']:
         if step['step'] == 3:
@@ -6,18 +8,12 @@ for element in r.db('webapp').table('datavalues').run():
                 if piece['name'] == 'Date de début de la fête':
                     print(element['record'], piece)
 
- 3e757726-a267-462b-9a23-f4109cdc91bc
- 29543513-8c9f-46a7-91b6-033b27c6803a
-020ad317-d507-49b2-b238-351244bae67b
- 50b459bf-32ea-4067-91c4-20b1ec665779
+ --- ✄ -----------------------
 
 TAGS
 https://github.com/formly-js/angular-formly-templates-material/blob/master/docs/types/chips.md
 
 PRIORITY:
-
-☐ types
-☐ create + draft state
 
 ☐ responsive
  ☐ grid list?
@@ -30,6 +26,8 @@ PRIORITY:
    ✔ component @done (16-08-07 23:33)
    ✔ formly @done (16-08-07 23:33)
 ✔ md-theme white? @done (16-08-08 13:20)
+✔ types @done (16-08-10 16:05)
+✔ create + draft state @done (16-08-10 16:05)
 
 LATEST:
 

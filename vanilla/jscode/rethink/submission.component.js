@@ -55,13 +55,6 @@ Handle 'draft' state for creating a new record
 
 */
 
-    self.myid = $stateParams.id;
-    self.step = 1;
-    self.current = {};
-    self.formFields = [];
-    self.hashes = {};
-    if ($stateParams.step)
-        self.step = $stateParams.step;
 
     self.go = function (step) {
         $state.go("logged.submit", {id: $stateParams.id, step: step});
@@ -69,13 +62,13 @@ Handle 'draft' state for creating a new record
 
     self.fillFields = function () {
 
-        if (!self.draft) {
-            if (self._all['data'][0] &&
-                self._all['data'][0].hasOwnProperty("Numero de l'extrait")) {
+        if (!self.draft
+            && self._all['data'][0]
+            && self._all['data'][0].hasOwnProperty("Numero de l'extrait"))
+            {
                 self.main = self._all['data'][0]["Numero de l'extrait"];
+                self.current = angular.copy(self._all['data'][self.step-1]);
             }
-            self.current = angular.copy(self._all['data'][self.step-1]);
-        }
 
         var current = self._all['stepTemplates'].data;
 
@@ -86,6 +79,8 @@ Handle 'draft' state for creating a new record
                 extras: { skipNgModelAttrsManipulator: true }
             };
         }
+
+        //console.log('TEST current', self.current);
 
         forEach(current, function(element, index) {
           //console.log('POS', element.position, element, getType(element.type));
@@ -127,13 +122,13 @@ Handle 'draft' state for creating a new record
             }
           } else if (choose == 'date') {
             // update the element to parse the date
-            console.log("DATE", self.current[element.field], element.required);
             if (self.current[element.field]) {
                 self.current[element.field] = new Date(self.current[element.field]);
             } else {
                 // empty value for datepicker
                 self.current[element.field] = null;
             }
+            //console.log("DATE", self.current[element.field], element.required);
 
             field = {
                 key: element.field,
@@ -161,11 +156,9 @@ Handle 'draft' state for creating a new record
 
           self.formFields[element.position-1] = field;
 
-// TOFIX
-    // other types
-    // string (textarea), list (select), date, url
-
 /*
+// NOTE: FIXME other types - URL
+
    formlyConfigProvider.setType({
       name: 'url',
       extends: 'input',
@@ -224,8 +217,8 @@ Handle 'draft' state for creating a new record
             });
 
       });
-      // console.log("Submit", JSON.stringify(self.current), "translated to", toSubmit);
-      // return false;
+      console.log("Submit", JSON.stringify(self.current), "translated to", toSubmit);
+      //return false;
 
       AdminService.updateDocument($stateParams.id, toSubmit)
         .then(function (out) {
@@ -266,6 +259,14 @@ Handle 'draft' state for creating a new record
       self.templateDir = templateDir;
       self.message = null;
       self._all = {};
+      self.myid = $stateParams.id;
+      self.step = 1;
+      self.current = {};
+      self.formFields = [];
+      self.hashes = {};
+      if ($stateParams.step)
+          self.step = $stateParams.step;
+      console.log("TEST 1", self.current);
       self.loadData();
     };
 }
