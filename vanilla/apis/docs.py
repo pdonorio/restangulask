@@ -203,23 +203,26 @@ class RethinkDataValues(BaseRethinkResource):
         element = query.run()
         # print(element)
 
+        empty = True
         if 'steps' in element:
             for i in range(0, len(element['steps'])):
                 if (int(json_req['step']) == int(element['steps'][i]['step'])):
                     # print("single", i, element['steps'][i])
                     element['steps'][i] = json_req
+                    empty = False
                     break
         else:
-            element['step'] = json_req['step']
             element['steps'] = []
+
+        if empty:
+            print("EMPTY", json_req['step'])
+            element['step'] = json_req['step']
             element['steps'].append(json_req)
 
-# //TOFIX
-      # // ELASTICSEARCH UPDATE??
+# NOTE: TODO elasticsearch update
 
         # Update rethinkdb element
         query.update(element).run()
-        #return query.update(element).run()
         return data_key
 
 #####################################

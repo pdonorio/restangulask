@@ -208,13 +208,22 @@ Handle 'draft' state for creating a new record
       }
       forEach(self.formFields, function (element, index) {
         //console.log("data is", index, self.current[element.key]);
-        if (self.current[element.key])
-            toSubmit.data.push({
-                position: index + 1,
-                hash: self.hashes[index],
-                name: element.key,
-                value: self.current[element.key] || '',
-            });
+        if (self.current[element.key]) {
+
+            var pos = index + 1;
+            if (!self.hashes[pos])
+              $log.error("Failed to get hash", pos, self.hashes);
+            else if (!self.current[element.key].hasOwnProperty('value')) 
+              // note: this happens if element.type == 'select' and no data is there
+
+              toSubmit.data.push({
+                  position: index + 1,
+                  hash: self.hashes[index + 1],
+                  name: element.key,
+                  value: self.current[element.key] || '',
+              });
+
+        }
 
       });
       console.log("Submit", JSON.stringify(self.current), "translated to", toSubmit);
