@@ -24,7 +24,7 @@ angular.module('web')
 })
 ;
 
-/* NOTE TO SELF:
+/* Note to SELF:
 A quick note to make login/logout work in combination with flask:
 
 JS works wherever you want, while python pages has to be really loaded
