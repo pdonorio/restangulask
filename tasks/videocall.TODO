@@ -1,9 +1,12 @@
 
-PRIORITY:
+EXPO:
+  breadcrumb: SpectacleBaroque >  Expo > Sala/Sezione > Tema > Immagine
 
-☐ EXPO
- ☐ Immagine di copertina
- ☐ Rapporto immagine delle copertine di sezione
+☐ traduzioni
+☐ pagina per sezioni
+  ☐ Immagine di copertina
+  ☐ descrizione
+☐ Rapporto immagine delle copertine di sezione
 
  ☐ Testo presentazione expo
  ☐ Testo presentazione sezioni
@@ -23,33 +26,15 @@ PRIORITY:
    ☐ description as text editor
    ☐ Option no zoom
 
-      --- ✄ -----------------------
-
-@BUGS
+BUGS:
   ☐ responsive
    ☐ grid list?
     Milan_3
   ☐ translate
     Anvers_MS_2
 
-      --- ✄ -----------------------
-
-
-
-ELASTIC:
-
-☐ add translations to known words
-☐ add insert/updates to elastic
- ☐ how to remove existing data updated?
-☐ index rebuild
-
-LESSICO:
-  - excel
-  - sheets
-  - macro
-  - micro
-  - posizione
-  - lingue (francese, latino, italiano)
+LESSICO & ELASTIC:
+   excel > sheets > macro, micro, posizione, lingue (francese, latino, italiano)
 
   ☐ show with alphabetic french order (inside micro)
   ☐ upload page
@@ -57,12 +42,11 @@ LESSICO:
   ☐ show in search with modal + tabs
   ☐ list in search details
 
-EXPO':
-  breadcrumb: SpectacleBaroque >  Expo > Sala/Sezione > Tema > Immagine
-
-
-
-
+ELASTIC
+☐ add translations to known words
+☐ add insert/updates to elastic
+ ☐ how to remove existing data updated?
+☐ index rebuild
 
  SEARCH:
 
