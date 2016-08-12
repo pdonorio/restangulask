@@ -1,25 +1,5 @@
 
- --- ✄ -----------------------
-
-for element in r.db('webapp').table('datavalues').run():
-    for step in element['steps']:
-        if step['step'] == 3:
-            for piece in step['data']:
-                if piece['name'] == 'Date de début de la fête':
-                    print(element['record'], piece)
-
- --- ✄ -----------------------
-
-TAGS
-https://github.com/formly-js/angular-formly-templates-material/blob/master/docs/types/chips.md
-
 PRIORITY:
-
-☐ responsive
- ☐ grid list?
-  Milan_3
-☐ translate
-  Anvers_MS_2
 
 ☐ EXPO
  ☐ Immagine di copertina
@@ -39,8 +19,18 @@ PRIORITY:
    ☐ Manage
 
   date, autore, posto
-  ☐ posizione sempre 2
 
+   ☐ description as text editor
+   ☐ Option no zoom
+
+      --- ✄ -----------------------
+
+@BUGS
+  ☐ responsive
+   ☐ grid list?
+    Milan_3
+  ☐ translate
+    Anvers_MS_2
 
       --- ✄ -----------------------
 
@@ -48,53 +38,12 @@ PRIORITY:
 
 ELASTIC:
 
-☐ index build
- ☐ check thumbnails and pictures
 ☐ add translations to known words
-
-
-BUGS:
-
-  ☐ online thumbs agen_1
-  search for "2.jpg" as file in the whole datadocs
-
- ✔ Convert bruxelles TIFF with operations @done (16-07-15 23:48)
- ✔ next and previous when more than one underscore @done (16-07-18 17:26)
- es. Anvers_MS_2
-
- Text dimensions
- /public/details/33a01280-485a-496c-b565-0f7266c65865
-
- ☐ thumbnails in search page are wrong?
-
- ☐ colors
-   ☐ Rosso più scuro
-   ☐ Verde più scuro
-   ☐ invertire rosso e verde nel titolo
-
- ☐ tinymce angular?
- angular.js:13708 TypeError: Cannot read property 'body' of undefined
-    at Object.getBody (tinymce.min.js:11)
-
-TRADUZIONI:
- ✔ remove 'transcriptions_splitting' if exists @done (16-06-27 00:36)
- ✔ add image attribute @done (16-06-27 00:36)
-   ✔ translation (true/false: radio?) @done (16-06-27 00:36)
-   ✔ language (select  from francese, latino, italiano) @done (16-06-29 00:11)
- From latin to french, usually
- ✔ change form @done (16-06-29 00:11)
-   ✔ add swtich with select @done (16-06-29 00:11)
- ✔ Show translations @done (16-07-18 19:47)
-
- ☐ Index translations in elastic
-
- ☐ rebuild elastic
-   ☐ elastic is not updated when inserting/editing transcriptions??
-     ☐ should it be updated from javascript? see fasterdocs.py
-     ☐ should it be updated from docs.py itself? @probablyyes
+☐ add insert/updates to elastic
+ ☐ how to remove existing data updated?
+☐ index rebuild
 
 LESSICO:
-
   - excel
   - sheets
   - macro
@@ -111,83 +60,11 @@ LESSICO:
 EXPO':
   breadcrumb: SpectacleBaroque >  Expo > Sala/Sezione > Tema > Immagine
 
- ✔ EXPO UPLOADER PAGE @done (16-07-05 08:13)
- ✔ Expo edit @done (16-07-13 00:38)
-   ✔ API @done (16-07-13 00:38)
-     ✔ GET @done (16-07-13 00:38)
-     ✔ DELETE @done (16-07-13 00:38)
-
-
- ☐ View single element
-   ☐ zoom + description + details (+ position?)
- ☐ Edit mode, Update details
-   ☐ description as text editor
-   ☐ Option no zoom
-
- ✔  PERCORSO PER TEMI @done (16-07-15 15:27)
-  - elenco sale/sezioni
-  - ogni sezione ha tendina/dropdown con elenco "temi"
-
- ☐ PERCORSO PER OPERE
-  - tutte le opere thumbnail
-  - click on thumb goes to tema! (?)
-
-==================================
-
- - Expo = lista 3 sale
-   - mostra tutte immagini
- - sala
-https://material.angularjs.org/latest/demo/gridList
-  - tema
-  - immagini
-    - pagina/numero
-    - dettagli immagini
-    titolo, nome, artista, data, luogo di conservazione, titolo libro, descrizione, materiale
-
-NO SEARCH!
-
-- upload all images
-- list them and edit details/text/no zoom option
-- when hover image show info icon with z-index?
-- in details page directly with zoom
-
-STEPs
-1. immagine
-2. dettagli immagine
-3. testo/commento
-
-SUBMISSION:
-  ☐ edit
 
 
 
-
-
-
-
-
-
-
-order:
-1. trascrizione
-2. dettagli
-3. fete + source
-
-bug:
-  ☐ agen_1 search/details vignette/image diff
-  ☐ duplicates in suggestions
-  ☐ remove "prova"
-  ☐ search div with translucent
 
  SEARCH:
-
-   ✔ scroll with search text? @important @done (16-05-11 08:13)
-     ✔ adapter! @done (16-05-11 08:13)
-   ✔ search query in details @done (16-05-11 08:34)
-     ✔ go back to results search from details @done (16-05-11 09:57)
-     ✘ highlight the query inside the transcription? @cancelled (16-05-11 08:34)
-
-#elastic
 
    ☐ enter on a word which is not suggested?
    ☐ clear function? when pressing X button
@@ -196,49 +73,24 @@ bug:
    ☐ prefix query? give importance if what you write is in the prefix
    ☐ scroll cache!
    ☐ did you mean?
- ✔ list of fetes (no vignette) @done (16-05-10 01:53)
-   ✔ single fete @done (16-05-10 11:14)
-
-MORE:
- ✔ strawberry in the title letters ?? @done (16-05-12 15:30)
-☐ another
-  ☐ lexique: tabs from pdf
-  ☐ multiple source in fete: palermo
-  ☐ TIF/TIFF conversion
-☐ edit
- ☐ some transcriptions errors?
- ☐ translation (in different languages)
-☐ bugs
- ☐ filename extension yes or not?
- ☐ images! thumbnails! @WTH
 
 MOVE TO PRODUCTION:
- ✔ backup oceanmaster1 @done (16-04-30 15:00)
- ✔ leaseweb @done (16-04-30 15:00)
- ☐ uptime robot (both interface and api)
+ ✔ uptime robot (both interface and api) @done (16-08-12 09:36)
  ☐ disable rethinkdb monitor interface
  ☐ haproxy test?
- ☐ baroque HTTPS: nginx in production, letsencrypt
-  https://github.com/diafygi/acme-tiny
-  https://gist.github.com/renchap/c093702f06df69ba5cac
-  http://manas.com.ar/blog/2016/01/25/letsencrypt-certificate-auto-renewal-in-docker-powered-nginx-reverse-proxy.html
+ ☐ Profiles administration
+ ☐ send email?
 
-  note: stage environment
+ --- ✄ -----------------------
 
-  https://github.com/SteveLTN/https-portal
-  https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion
+TAGS
+https://github.com/formly-js/angular-formly-templates-material/blob/master/docs/types/chips.md
 
-- Submission
-inverted
-Multiple entries for single field
+ --- ✄ -----------------------
 
-LATER ON:
-
-- Expo
-
-- Translations (of transcriptions)
-
-- Cache problem (versioning?)
-
-- Profiles, administration and email
-
+for element in r.db('webapp').table('datavalues').run():
+    for step in element['steps']:
+        if step['step'] == 3:
+            for piece in step['data']:
+                if piece['name'] == 'Date de début de la fête':
+                    print(element['record'], piece)
