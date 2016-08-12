@@ -62,13 +62,17 @@ Handle 'draft' state for creating a new record
 
     self.fillFields = function () {
 
-        if (!self.draft
-            && self._all['data'][0]
-            && self._all['data'][0].hasOwnProperty("Numero de l'extrait"))
+        if (!self.draft) {
+
+            if ( self._all['data'][0] &&
+                self._all['data'][0].hasOwnProperty("Numero de l'extrait"))
             {
                 self.main = self._all['data'][0]["Numero de l'extrait"];
-                self.current = angular.copy(self._all['data'][self.step-1]);
             }
+            // console.log("TEST PAOLO", self._all['data'][self.step-1]);
+
+            self.current = angular.copy(self._all['data'][self.step-1]);
+        }
 
         var current = self._all['stepTemplates'].data;
 
@@ -183,6 +187,8 @@ Handle 'draft' state for creating a new record
         stepNames: SearchService.getSteps(),
         stepTemplates: AdminService.getSteps(self.step)
       }
+
+      // do not load existing data if this is just a draft
       if (self.draft) {
         delete promises.data;
       }
@@ -195,7 +201,7 @@ Handle 'draft' state for creating a new record
                 self._all[index] = angular.copy(element);
             });
             //self._all = angular.copy(values);
-            $log.info("Updated values", self._all);
+            $log.info("Updated values", self._all, self.current);
             self.fillFields();
             self.load = false;
         });
@@ -203,9 +209,10 @@ Handle 'draft' state for creating a new record
 
     self.onSubmit = function (argument) {
       var toSubmit = {
-        step: self.step,
+        step: parseInt(self.step),
         data: [],
       }
+
       forEach(self.formFields, function (element, index) {
         //console.log("data is", index, self.current[element.key]);
         if (self.current[element.key]) {
@@ -213,7 +220,7 @@ Handle 'draft' state for creating a new record
             var pos = index + 1;
             if (!self.hashes[pos])
               $log.error("Failed to get hash", pos, self.hashes);
-            else if (!self.current[element.key].hasOwnProperty('value')) 
+            else if (!self.current[element.key].hasOwnProperty('value'))
               // note: this happens if element.type == 'select' and no data is there
 
               toSubmit.data.push({
@@ -250,10 +257,13 @@ Handle 'draft' state for creating a new record
             self.message = null;
             console.log('Cleaning');
 
+            // if draft, this is the first step we are introducing
             if (self.draft) {
-            // THE MAGIC
+                // THE MAGIC
                 $state.go('.', {id: out, step: newstep}, {notify: false});
                 self.step = newstep;
+                self.current = {};
+                self.loadData();
             } else {
                 self.go(newstep);
             }
@@ -275,7 +285,6 @@ Handle 'draft' state for creating a new record
       self.hashes = {};
       if ($stateParams.step)
           self.step = $stateParams.step;
-      console.log("TEST 1", self.current);
       self.loadData();
     };
 }

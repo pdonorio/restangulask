@@ -93,9 +93,13 @@ class RethinkDataValues(BaseRethinkResource):
         single = []
         if len(data) < 1:
             return single
+
         friend = data.pop()
         if 'steps' not in friend:
             return single
+        for i in range(0, 4):
+            single.insert(i, {})
+
         for steps in friend['steps']:
             title = ""
             element = {}
@@ -107,10 +111,15 @@ class RethinkDataValues(BaseRethinkResource):
                 element[row['name']] = ''
                 if 'value' in row:
                     element[row['name']] = row['value']
+
+            print("TEST STEP", steps)
+            pos = int(steps['step']) - 1
             if details == 'full':
-                single.insert(int(steps['step']), element)
+                single[pos] = element
             else:
-                single.insert(int(steps['step']), title)
+                single[pos] = title
+
+        print("TEST", single)
         return single
 
     def filter_nested_field(self, q, filter_value,
@@ -215,11 +224,12 @@ class RethinkDataValues(BaseRethinkResource):
             element['steps'] = []
 
         if empty:
-            print("EMPTY", json_req['step'])
-            element['step'] = json_req['step']
+            # print("EMPTY", json_req['step'])
+            # element['step'] = json_req['step']
             element['steps'].append(json_req)
 
 # NOTE: TODO elasticsearch update
+# I should use the same id from rethinkdb also to elasticsearch
 
         # Update rethinkdb element
         query.update(element).run()
@@ -677,6 +687,7 @@ class RethinkGrouping(BaseRethinkResource):
         """ Get the record value and the party name associated """
         return self.get_query() \
             .table('datavalues') \
+            .has_fields("steps") \
             .concat_map(lambda doc: doc['steps'].concat_map(
                     lambda step: step['data'].concat_map(
                         lambda data: [{
@@ -702,6 +713,7 @@ class RethinkGrouping(BaseRethinkResource):
 
                 # Remove the records containing the images
                 query = self.get_query().table('datavalues') \
+                    .has_fields("steps") \
                     .filter(lambda doc: r.expr(list(elements))
                             .contains(doc['record']))
 
