@@ -52,7 +52,7 @@ function DetailsController($scope, $log, $sce, $stateParams, $auth, SearchServic
             forEach(tmp, function(element, index) {
                 forEach(element, function(obj, j) {
                     //console.log("element", j, "*" + obj + "*");
-                    if (obj && obj.trim() == '') {
+                    if (obj && obj.hasOwnProperty('trim') && obj.trim() == '') {
                         tmp[index][j] = null;
                     }
                 });
@@ -84,12 +84,24 @@ function DetailsController($scope, $log, $sce, $stateParams, $auth, SearchServic
             // FIND NAMES, and previous and next
             var
                 field = "Numero de l'extrait",
-                codes = out_single['Extrait'][field].split('_'),
+                name = out_single['Extrait'][field],
+                codes = name.split('_'),
                 num = parseInt(codes.pop()),
                 prefix = codes.join('_'),
                 previous_code = prefix + "_" + String(num - 1),
                 next_code = prefix + "_" + String(num + 1);
-                //console.log('CODES', num, previous_code, next_code);
+
+            var
+                regexp = /[0-9]+/g,
+                matches = name.match(regexp),
+                page = null;
+
+            if (matches.length > 0) {
+                page = parseInt(matches[0]);
+                previous_code = name.replace(regexp, page - 1);
+                next_code = name.replace(regexp, page + 1);
+            }
+            console.log('CODES', num, previous_code, next_code, page);
 
             // SEARCH WITH APIs
             self.previous.text = previous_code;
