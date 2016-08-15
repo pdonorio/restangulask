@@ -170,9 +170,17 @@
                     ng-required="options.required"
                     type="{{options.type}}">
             </md-input-container>
+
+            <md-input-container class="md-block">
+              <label>texte</label>
+              <textarea ng-model="expo.current.details.texte"
+              md-maxlength="150" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+
             <div ng-messages="expo.myForm.title.$error">
               <div ng-message="required">This is required!</div>
             </div>
+
         </form>
       </div>
 

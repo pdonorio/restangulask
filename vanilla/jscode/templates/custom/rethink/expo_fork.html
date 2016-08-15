@@ -1,56 +1,69 @@
 <div ui-view='test' ng-controller="ExpoClient as expo">
 
+<div layout="row" layout-align="center center">
+ <div flex="70">
+
+    <div style="position: relative;">
+        <!-- ng-style="{'background-image':'url('+
+            root.imagesPath + welcome.mainSubFolder + section.images[0].filename +')'}" -->
+        <div style="background-repeat: no-repeat; background-size: 100% 100%;
+            height: 300px; z-index: 1;
+        background-image: url('/static/uploads/welcome/Expo.jpg');" ></div>
+        <div style="position: absolute; top: 0px; background-color: #0f243d;
+            width: 100%; height: 30%; opacity: .5; z-index:2;">
+            </div>
+        <div style=" position: absolute; top: 0px;
+            padding-left: 1%; color: white; width: 100%; z-index:3;">
+            <h3 class="header" style="font-family: Leela;">
+                EXPOSITION VIRTUELLE
+            </h3>
+        </div>
+    </div>
+
+    <div layout="row" layout-align="center center"
+        style="padding-top:20px;">
+
+        <div style="position: relative; margin-right: 10px;" flex="50">
+          <a href ng-click="activateOther('expo.themes')" >
+            <div style="background-repeat: no-repeat; height: 400px; z-index: 1;
+            background-image: url('/static/uploads/welcome/Bienvenue.jpg');" ></div>
+            <div style="position: absolute; top: 0px; background-color: #0f243d;
+                width: 100%; height: 100%; opacity: .5; z-index:2;"></div>
+            <div style="text-align:center; position: absolute; top: 0px;
+                padding-left: 1%; color: white; width: 100%; z-index:3;">
+                <h4 class="header" style="font-family: Leela;">
+                   PARCOURS PAR SECTIONS
+                </h4>
+            </div>
+          </a>
+        </div>
+
+        <div style="position: relative; margin-left: 10px;" flex="50">
+          <a href ng-click="activateOther('expo.pieces')" >
+            <div style="background-repeat: no-repeat; height: 400px; z-index: 1;
+            background-image: url('/static/uploads/welcome/bodl_Douce387_roll330_frame63coupe.jpg');" ></div>
+            <div style="position: absolute; top: 0px; background-color: #0f243d;
+                width: 100%; height: 100%; opacity: .5; z-index:2;"></div>
+            <div style="text-align:center; position: absolute; top: 0px;
+                padding-left: 1%; color: white; width: 100%; z-index:3;">
+                <h4 class="header" style="font-family: Leela;">
+                    PARCOURS PAR OEUVRES
+                </h4>
+            </div>
+          </a>
+        </div>
+    </div>
+
+ </div>
+</div>
+
 <br>
 <br>
 
-<!--CONTENT -->
- <div layout="column" layout-align='center center'>
-
-   <div style="position: relative; height: 480px;">
-
-    <!-- IMAGE (with link) -->
-    <div style="background-repeat: no-repeat;
-        background-size: 100% 100%;
-        width: 750px; height: 470px;
-        z-index:1;
-        background-image: url('/static/uploads/welcome/Bienvenue.jpg')"
-        ></div>
-
-    <!-- BACKGROUND COLOR -->
-    <div style=" position: absolute; bottom: 10px;
-        background-color: #00838f;
-        width: 750px;
-        height: 470px;
-        opacity: .7;
-        z-index:2;">
-        </div>
-
-    <div layout="row" layout-align="center center"
-        style=" position: absolute; bottom: 200px; left: 30px;
-        background-color: white; width: 300px;
-        border-radius: 5px; padding: 10px 30px; z-index:3;">
-<!--             <i class="material-icons prefix">search</i>
- -->            <input value="Browse by themes path"
-                    ng-focus="activateOther('expo.themes')">
-        </div>
-
-    <div layout="row" layout-align="center center"
-        style=" position: absolute; bottom: 100px; left: 30px;
-        background-color: white; width: 300px;
-        border-radius: 5px; padding: 10px 30px; z-index:3;">
-<!--             <i class="material-icons prefix">list</i>
- -->            <input value="Browse by images"
-                    ng-focus="activateOther('expo.pieces')">
-        </div>
-
-    <!-- TITLE -->
-    <div style=" position: absolute; top: 10px;
-        padding-left: 5%; color: white; width: 100%; z-index:3;">
-        <!-- TITLE -->
-        <h2 class="header">
-            EXPO <hr>
-        </h2>
-        </div>
-   </div>
+ <div flex="70">
+<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, rerum ipsa amet quasi vero a ducimus soluta perspiciatis quo ratione, ipsam beatae obcaecati nobis repellat magnam, mollitia dolor sed asperiores.</div>
+<div>Quae doloremque ab dolor porro sapiente, tempora doloribus cupiditate voluptatem necessitatibus quia corrupti cumque asperiores omnis. Sequi maxime, quo, similique distinctio harum quas id quae, nostrum pariatur ipsa, dolorem dolor.</div>
+<div>Quos, itaque officiis quis eius facilis inventore quisquam vitae aliquam maxime aut ratione earum cum soluta. Hic, itaque culpa nemo temporibus vel, asperiores assumenda et tempore deserunt dolor autem sapiente!</div>
+</div>
 
 </div>

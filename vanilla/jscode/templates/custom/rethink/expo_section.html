@@ -7,6 +7,7 @@
             Section {{current_section}}
         </h3>
 
+<!--
           <md-input-container ng-if="single.themes.length > 1">
             <label>Select a theme...</label>
             <md-select ng-model="single.current_theme"
@@ -17,6 +18,7 @@
               </md-optgroup>
             </md-select>
           </md-input-container>
+-->
 
         <div ng-if="theme != 'cover'"
             ng-repeat="(theme, paintings) in sections[current_section]"

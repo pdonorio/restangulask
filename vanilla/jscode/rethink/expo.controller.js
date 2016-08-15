@@ -19,12 +19,17 @@ function reLoadSections(AdminService, reference, section)
             reference.themes = Object.keys(reference.sections[section]);
             reference.themes.splice(reference.themes.indexOf('cover'), 1);
             console.log('Reference', reference.themes);
+        } else {
+          AdminService.getExpoSections().then(function (output) {
+            //console.log('REFERENCE', reference);
+            reference.sectionsAndThemes = output.data;
+          });
         }
 
     });
 }
 
-function ExpoClient($scope, $log, $rootScope, AdminService)
+function ExpoClient($scope, $log, $rootScope, $state, $timeout, AdminService)
 {
     //var self = this;
     $log.info("EXPO: fork");
@@ -34,6 +39,19 @@ function ExpoClient($scope, $log, $rootScope, AdminService)
       if (obj)
           return Object.keys(obj).length;
       return 0;
+    }
+
+    $scope.selectTheme = function (section, data) {
+        if (!data.current_theme)
+            return false;
+        $timeout(function () {
+            $log.warn("Move to", self.current_theme);
+            $state.go('public.expo.themes.selected.theme',
+                {
+                    section: section,
+                    theme: data.current_theme,
+                });
+        });
     }
 }
 
@@ -71,6 +89,7 @@ function ExpoSingleSection($scope, $log, $sce,
                 if ($stateParams.position) {
                     self.element = self.images[$stateParams.position];
                     //console.log("TEST", self.element);
+// TO BE FIXED
                     $rootScope.current_image = self.element.details.title;
                     $rootScope.current_element_uri =
                         $sce.trustAsResourceUrl('/zoom/' + self.element.id + '/0');
@@ -82,6 +101,7 @@ function ExpoSingleSection($scope, $log, $sce,
 
             self.element = self.sections[$rootScope.current_section][$rootScope.current_theme][$stateParams.element];
 
+// TO BE FIXED
             $rootScope.current_image = self.element.details.title;
             $rootScope.current_image_short =
                 self.element.details.title.slice(0, 10) + ' ...';
@@ -105,7 +125,6 @@ function ExpoSingleSection($scope, $log, $sce,
                     theme: self.current_theme,
                 });
         });
-
     }
 }
 
@@ -129,16 +148,34 @@ function ExpoController($scope, $log,
       return 0;
     }
 
+
+// NOTE:
+// cycling this as ng-repeat on details i also get the right order...
+// and skip texte
     self.details = {
         position: {type: 'number'},
-        title: {type: 'text', required: true},
-        name: {type: 'text'},
-        author: {type: 'text'},
-        date: {type: 'text'},
-        place: {type: 'text'},
-        book: {type: 'text'},
-        material: {type: 'text'},
-        description: {type: 'text'},
+        'titre': {type: 'text', required: true, space: true},
+        //'nom': {type: 'text'},
+        'auteur(s)': {type: 'text', space: true},
+        'date et lieu de réalisation': {type: 'text', space: true},
+
+        'type': {type: 'text', space: false},
+        'matériaux': {type: 'text', space: false},
+        'technique': {type: 'text', space: false},
+        'dimensions': {type: 'text', space: true},
+
+        'source': {type: 'text', space: true},
+        'fête': {type: 'text', space: true},
+
+        'lieu de conservation': {type: 'text', space: false},
+        'inv.': {type: 'text', space: false},
+        'copyright': {type: 'text', space: true},
+
+// THIS IS A LINK
+        'voir aussi': {type: 'text', space: false},
+
+        // EXTRA, inserted by hand
+        //texte: {type: 'text'},
     }
 
     //recover data
@@ -151,6 +188,7 @@ function ExpoController($scope, $log,
           AdminService.getExpoSections().then(function (output) {
 
             self.sectionsAndThemes = output.data;
+            //console.log('PAOLO', self.sectionsAndThemes);
             for(var k in self.sectionsAndThemes) self.sections.push(k);
             //self.sections = Array(Object.keys(self.sectionsAndThemes));
           });

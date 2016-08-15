@@ -2,24 +2,24 @@
 <div layout="row" layout-padding
     layout-align='center center'>
 
-  <nav class="red" flex="90" >
+  <nav class="grey" flex="90" >
     <div class="nav-wrapper" style='margin-left: 30px;'>
       <div class="column">
         <a ui-sref="public.expo" class="breadcrumb">EXPO</a>
         <a ui-sref="public.expo.themes"
-            class="breadcrumb">By theme</a>
+            class="breadcrumb">PAR SECTIONS </a>
         <a ng-if="current_section"
             ui-sref="public.expo.themes.selected({section: current_section})"
             class="breadcrumb">
-            section: '{{current_section}}' </a>
+            {{current_section}} </a>
         <a ng-if="current_theme"
             ui-sref="public.expo.themes.selected.theme(
             {section: current_section, theme: current_theme})"
             class="breadcrumb">
-            theme: '{{current_theme}}' </a>
+            {{current_theme}} </a>
         <a ng-if="current_image"
             nohref class="breadcrumb">
-            image: '{{current_image_short}}' </a>
+            TOFIX: '{{current_image_short}}' </a>
       </div>
     </div>
   </nav>
@@ -28,7 +28,6 @@
 
 
 <div ui-view="themes">
-
 
   <div ng-controller="ExpoSections as exsections"
     layout="row" layout-align='center stretch' layout-padding>
@@ -40,35 +39,56 @@
         </i>
     </div>
 
-    <div ng-if="keylen(sections) > 0"
-    style="min-width: 250px;"
-        ng-repeat="(key, value) in sections">
-        <md-card>
+    <div ng-if="keylen(sections) > 0" flex="30"
+        ng-repeat="(key, value) in sections"
+        ng-mouseenter="value.select = true" ng-mouseleave="value.select = value.open">
 
-         <md-card-title>
-            <md-card-title-text>
-      <span class="md-subhead">
-            section
-      </span>
-      <span class="md-headline">
-            {{key}}
-      </span>
-            </md-card-title-text>
-         </md-card-title>
+        <div style=" position: relative;" md-whiteframe="3" >
+          <a ui-sref="public.expo.themes.selected({section: key})">
+            <div ng-style=" {'background-image':
+                'url(' + root.imagesPath + value.cover + '/TileGroup0/0-0-0.jpg)'}"
+                style="z-index: 1; min-height: 250px;
+                background-size: contain; background-repeat: no-repeat;
+                background-position: center; background-color: white; " >
+            </div>
+            <div style="position: absolute; top: 35%; background-color: #0f243d;
+                width: 100%; height: 30%; opacity: .5; z-index:2;"></div>
+            <div style="text-align:center; position: absolute; top: 35%;
+                padding-left: 1%; color: white; width: 100%; z-index:3;">
+                <h4 class="header" style="font-family: Leela;"> {{key}} </h4>
+            </div>
+          </a>
+        </div>
 
-         <md-card-content>
-    <img src="{{ root.imagesPath + value.cover +'/TileGroup0/0-0-0.jpg' }}"
-        width="250" >
-         </md-card-content>
+        <div style="width: 100%; text-align: right;
+        min-height: 35px; max-height: 35px;" >
+          <md-input-container ng-if="value.select">
+            <label> sélectionnez la chambre </label>
+            <md-select ng-model="value.current_theme"
+                md-on-open="value.open = true;"
+                md-on-close="value.open = false; selectTheme(key, value)" >
+              <md-optgroup label="themes">
+                <md-option ng-value="item"
+                ng-repeat="item in sectionsAndThemes[key]"
+                    >{{item}}</md-option>
+              </md-optgroup>
+            </md-select>
+          </md-input-container>
+        </div>
 
-          <md-card-actions layout="row" layout-align="end center">
-           <md-button
-           ui-sref="public.expo.themes.selected({section: key})">
-                 explore
-           </md-button>
-          </md-card-actions>
-        </md-card>
     </div>
 
   </div>
+
+    <div
+    layout="row" layout-align='center stretch' layout-padding>
+        <div flex=90>
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, voluptate, corrupti! Consequuntur mollitia deleniti omnis quis doloremque facilis, impedit amet obcaecati dolore inventore, nulla cupiditate voluptate eos. Obcaecati, doloribus, dignissimos.</div>
+        <div>Nulla illum autem eveniet, quam. At expedita eaque error numquam quae perferendis fugit obcaecati voluptate saepe odio, libero magnam possimus explicabo quo, reiciendis culpa repellendus neque enim accusantium accusamus rerum.</div>
+        <div>Architecto saepe ipsa blanditiis harum aut ut recusandae necessitatibus, numquam molestias veniam nisi omnis tempora odio perferendis, cum nam debitis impedit tenetur ratione mollitia velit incidunt quidem. Autem, quo, reiciendis.</div>
+        <div>Minima molestias itaque perspiciatis, aspernatur cum! Consequatur molestias quibusdam aliquid repellat ipsa in illum adipisci! Incidunt aperiam, eaque at unde quibusdam dignissimos molestias facilis voluptatem fugit, maiores reiciendis nulla perspiciatis.</div>
+
+        </div>
+    </div>
 </div>
+

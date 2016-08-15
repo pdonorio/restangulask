@@ -1,12 +1,12 @@
 <div
     layout="column" layout-padding layout-align='center center'>
 
-  <nav class="red" flex="70" style="padding-left: 50px;">
+  <nav class="grey" flex="70" style="padding-left: 50px;">
     <div class="nav-wrapper">
       <div class="column">
         <a ui-sref="public.expo" class="breadcrumb">EXPO</a>
         <a ui-sref="public.expo.pieces"
-            class="breadcrumb">By images</a>
+            class="breadcrumb">PAR OEUVRES</a>
         <a ng-if="current_image" class="breadcrumb">
             image: '{{current_image}}' </a>
       </div>
@@ -16,7 +16,6 @@
     <div ui-view="images">
 
       <div ng-controller="ExpoSingleSection as source">
-        <h4>All images</h4> <!-- {{source.images}} -->
 
         <md-grid-list
             layout-padding
@@ -30,9 +29,9 @@
                     <img src="{{ root.imagesPath + element.file
                                 +'/TileGroup0/0-0-0.jpg' }}" width="80" >
                 </a>
-              </div>
-              <div>
-                <small> {{element.details.title}} </small>
+                <br>
+                <small> {{element.details.date || '-'}} </small>
+
               </div>
 
             </md-grid-tile>

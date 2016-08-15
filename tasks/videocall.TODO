@@ -1,4 +1,24 @@
 
+a component to read from expo table
+
+ ☐ expo gallery
+
+ ☐ expo descriptions
+- main
+- par section
+- par oeuvres
+ ☐ expo sections
+- single section
+  -cover?
+
+  {
+  "id":  "bcc4ae76-1051-424b-9705-5e04f7f51291" ,
+  "section":  "Spectacle" ,
+  "description": ""
+  "themes": {
+  }
+}
+
 EXPO:
   breadcrumb: SpectacleBaroque >  Expo > Sala/Sezione > Tema > Immagine
 
