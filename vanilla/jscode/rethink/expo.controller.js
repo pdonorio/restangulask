@@ -196,9 +196,9 @@ function ExpoController($scope, $log,
           // IF DATA IS PRESENT
           if (out.data) {
 
-            console.log("TEST", $scope.current_section);
-
+            //console.log("TEST", $scope.current_section);
             forEach(out.data, function (element, index) {
+                // console.log('BOH', element, index);
                 if (element.details && element.details.position
                         && element.details.position > self.position
                         ) {
@@ -246,22 +246,23 @@ function ExpoController($scope, $log,
     self.update = function (uuid) {
 
       self.reloadThemes(self.files[uuid].section);
-
       self.current = self.files[uuid];
 
-      $log.info("Selected", uuid, self.current);
       if (!self.current.details) {
         self.current.details = {}
       }
 
-      //console.log('TETS', self.current.details.position);
       if (!self.current.details.position) {
 // position only from current section...
         //self.current.details.position = self.position + 1;
         self.current.details.position = 1;
       }
-      console.log('TETS 2', self.current.details.position);
 
+      if (!self.current.cover) {
+        self.current.cover = 0;
+      }
+
+      $log.info("Selected", uuid, self.current);
 
       $timeout(function () {
           $scope.gotoAnchor("edit");

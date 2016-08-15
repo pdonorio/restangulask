@@ -411,10 +411,16 @@ class RethinkExpo(BaseRethinkResource):
         sections = {}
         public = {}
         only_images = {}
+        covers = {}
+        thumbsid = {}
 
-        for element in self.get_table_query(self._type).run():
+        original_data = list(self.get_table_query(self._type).run())
+
+        for element in original_data:
             # print(element)
             current_section = element['section']
+            if 'cover' in element:
+                covers[element['cover']] = current_section
             sections[current_section] = []
             public[current_section] = {}
 
@@ -436,9 +442,10 @@ class RethinkExpo(BaseRethinkResource):
                     images[key]['filename'] = \
                         os.path.join(self._type, image['filename'])
                     images[key]['thumb'] = path
-                    thumbs[key] = path
-
                     images[key]['_id'] = uuid
+
+                    thumbs[key] = path
+                    thumbsid[uuid] = path
 
                     element = {
                         'id': uuid,
@@ -471,6 +478,11 @@ class RethinkExpo(BaseRethinkResource):
 
         # Data with no partial images
         if id is None:
+            # Fix cover if existing
+            for element in original_data:
+                if 'cover' in element:
+                    public[element['section']]['cover'] = \
+                        thumbsid[element['cover']]
             return self.response(public, elements=len(public))
 
         # Load what is missing (images with no sections data)
@@ -478,14 +490,18 @@ class RethinkExpo(BaseRethinkResource):
         query = \
             table.filter({mykey: self._type}) \
             .order_by("latest")
-# r.db('webapp').table('datadocs').filter({"type": "expo"}).orderBy(r.desc("latest")).limit(2)
 
         count, images = self.execute_query(query)
+        # print("TEST", covers)
 
         # Remapping data for admin purpose
 
         now = int(time.time())
         for key, _ in data.items():
+            if key in covers:
+                data[key]['cover'] = 1
+            else:
+                data[key]['cover'] = 0
             data[key]['order'] = now * 9
             data[key]['published'] = True
         newdata = OrderedDict(data)
@@ -524,6 +540,7 @@ class RethinkExpo(BaseRethinkResource):
         ######################################
         # Update expo tree
         # (sezione > tema > lista immagini)
+        cover = j.pop("cover")
 
         ##########
         # Section
@@ -578,6 +595,11 @@ class RethinkExpo(BaseRethinkResource):
         # Update rethink
         changes = section_query.update({'themes': section['themes']}).run()
         logger.debug(changes)
+
+        # Do something with the cover
+        if cover:
+            section_query.update({"cover": id}).run()
+            # print("TEST COVER", cover, sec, j, id)
 
         ######################################
         # Update image info

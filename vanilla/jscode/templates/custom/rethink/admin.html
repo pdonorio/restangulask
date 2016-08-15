@@ -8,13 +8,23 @@
 
 <!-- TABS -->
 
-    <md-tab label="Expo"
+    <md-tab label="Expo gallery"
         md-on-select="adm.onTabSelected('expo')">
       <md-content layout-padding flex='grow'>
         <div ng-include="root.blueprintTemplateDir
             + 'admin_expo.html'"></div>
       </md-content>
     </md-tab>
+
+<!--
+    <md-tab label="Expo "
+        md-on-select="adm.onTabSelected('expo')">
+      <md-content layout-padding flex='grow'>
+        <div ng-include="root.blueprintTemplateDir
+            + 'admin_expo.html'"></div>
+      </md-content>
+    </md-tab>
+-->
 
     <md-tab label="Welcoming sections"
         md-on-select="adm.onTabSelected('sections')">

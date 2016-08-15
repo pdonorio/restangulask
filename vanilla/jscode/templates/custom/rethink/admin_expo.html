@@ -12,7 +12,7 @@
           <div class="md-toolbar-item md-breadcrumb" aria-hidden="false">
             <span tabindex="0">
                 <br>
-                <b>EXPO gallery</b>
+                <b>Expo images management</b>
                 <br>
             </span>
           </div>
@@ -28,6 +28,22 @@
     flow-file-added="expo.adding($file, $event, $flow)"
     flow-file-error="expo.fileError($file, $message)"
     flow-progress="expo.progressing">
+
+    <md-card>
+        <md-card-content layout="column" layout-align="center center" >
+<!--      <span class="btn waves-effect waves-light red" flow-btn>new image</span>
+ -->
+        TODO: Descriptions?
+        </md-card-content>
+    </md-card>
+
+    <md-card>
+        <md-card-content layout="column" layout-align="center center" >
+<!--      <span class="btn waves-effect waves-light red" flow-btn>new image</span>
+ -->
+        TODO: List of sections?
+        </md-card-content>
+    </md-card>
 
     <md-card
         > <md-card-content layout="column" layout-align="center center"
@@ -74,23 +90,29 @@
                     <th>File</th>
                     <th>Title</th>
                     <th>Section</th>
+                    <th>Cover</th>
                     <th>Theme</th>
                     <th>Actions</th>
                 </tr>
             </thead>
           <tr ng-repeat="(uuid, options) in expo.files">
 
-            <td style="max-width: 150px;">
+            <td style="max-width: 250px;">
                 <img lazy-img="{{ root.imagesPath
                     + options.file +'/TileGroup0/0-0-0.jpg' }}"
                      width=80> <br> {{adjust(options.name)}}
             </td>
-            <td>
+            <td style="max-width: 250px;">
                 <span ng-if="options.details.titre">
                 {{adjust(options.details.titre)}}
                 </span>
             </td>
             <td> {{options.section}} </td>
+            <td>
+                <span ng-if="options.cover">
+                    <i class="material-icons">check</i>
+                </span>
+            </td>
             <td> {{options.theme}} </td>
             <td>
 
@@ -161,7 +183,20 @@
             <label>New Section</label>
             <input ng-model="expo.current.newtheme" type="text" required>
           </md-input-container>
+
         </div>
+
+    <!-- COVER -->
+      <div>
+            <md-radio-group ng-model="expo.current.cover">
+              <div layout="row" layout-padding>
+                  <label>Is this the section cover?</label>
+                  <div>&nbsp;</div>
+                  <md-radio-button value="1" class="md-primary"> yes </md-radio-button>
+                  <md-radio-button value="0"> no </md-radio-button>
+              </div>
+            </md-radio-group>
+      </div>
 
     <!-- DETAILS -->
       <div>
