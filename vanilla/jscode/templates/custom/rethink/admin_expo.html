@@ -79,14 +79,17 @@
                 </tr>
             </thead>
           <tr ng-repeat="(uuid, options) in expo.files">
-            <td>
-    <img lazy-img="{{ root.imagesPath
-        + options.file +'/TileGroup0/0-0-0.jpg' }}"
-         width=80>
-     <br>
-     {{adjust(options.name)}}
+
+            <td style="max-width: 150px;">
+                <img lazy-img="{{ root.imagesPath
+                    + options.file +'/TileGroup0/0-0-0.jpg' }}"
+                     width=80> <br> {{adjust(options.name)}}
             </td>
-            <td> {{adjust(options.details.title)}} </td>
+            <td>
+                <span ng-if="options.details.titre">
+                {{adjust(options.details.titre)}}
+                </span>
+            </td>
             <td> {{options.section}} </td>
             <td> {{options.theme}} </td>
             <td>
@@ -115,6 +118,7 @@
 
     </md-card-content> </md-card>
 
+    <section id='edit'></section>
     <md-card ng-if="expo.current">
         <md-card-content layout="column" layout-align="center center"
         class="light-blue lighten-5"
@@ -174,10 +178,10 @@
             <md-input-container class="md-block">
               <label>texte</label>
               <textarea ng-model="expo.current.details.texte"
-              md-maxlength="150" rows="5" md-select-on-focus></textarea>
+              md-maxlength="5000" rows="5" md-select-on-focus></textarea>
             </md-input-container>
 
-            <div ng-messages="expo.myForm.title.$error">
+            <div ng-messages="expo.myForm.titre.$error">
               <div ng-message="required">This is required!</div>
             </div>
 
@@ -188,7 +192,6 @@
             <md-button ng-click="expo.save()"> save </md-button>
             <md-button ng-click="expo.close()"> cancel </md-button>
         </div>
-        <section id='edit'></section>
         </md-card-content>
     </md-card>
 

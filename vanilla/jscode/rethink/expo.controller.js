@@ -89,8 +89,7 @@ function ExpoSingleSection($scope, $log, $sce,
                 if ($stateParams.position) {
                     self.element = self.images[$stateParams.position];
                     //console.log("TEST", self.element);
-// TO BE FIXED
-                    $rootScope.current_image = self.element.details.title;
+                    $rootScope.current_image = self.element.details.titre;
                     $rootScope.current_element_uri =
                         $sce.trustAsResourceUrl('/zoom/' + self.element.id + '/0');
 
@@ -101,10 +100,9 @@ function ExpoSingleSection($scope, $log, $sce,
 
             self.element = self.sections[$rootScope.current_section][$rootScope.current_theme][$stateParams.element];
 
-// TO BE FIXED
-            $rootScope.current_image = self.element.details.title;
+            $rootScope.current_image = self.element.details.titre;
             $rootScope.current_image_short =
-                self.element.details.title.slice(0, 10) + ' ...';
+                self.element.details.titre.slice(0, 10) + ' ...';
 
             $rootScope.current_element_uri =
                 $sce.trustAsResourceUrl('/zoom/' + self.element._id + '/0');
@@ -223,6 +221,8 @@ function ExpoController($scope, $log,
     self.reload();
 
     $scope.adjust = function(text) {
+        if (!text)
+            return '-';
         return text.replace(/_/g, ' ');
     }
 
