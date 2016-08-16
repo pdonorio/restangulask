@@ -1179,3 +1179,43 @@ class RethinkStepsTemplate(BaseRethinkResource):
             query = query.filter({'step': int(step)})
         count, data = self.execute_query(query)
         return self.response(data, elements=count)
+
+
+class RethinkExpoDescription(BaseRethinkResource):
+    """ Data keys administrable """
+
+    table = 'expodesc'
+
+    @deck.apimethod
+    # @auth_token_required
+    def get(self):
+        query = self.get_table_query()
+        # if step is not None:
+        #     query = query.filter({'step': int(step)})
+        count, data = self.execute_query(query)
+        return self.response(data, elements=count)
+
+    @deck.apimethod
+    @auth_token_required
+    def put(self, mode):
+        j = self.get_input(False)
+        q = self.get_table_query()
+        exists = list(q.filter({'mode': mode}).run())
+        # print("TEST", mode, j, exists, len(exists))
+
+        query = None
+        doc = {
+            'mode': mode,
+            'text': j['text'],
+        }
+
+        if len(exists) < 1:
+            query = q.insert(doc)
+        else:
+            element = exists.pop()
+            doc['id'] = element['id']
+            query = q.get(doc['id']).replace(doc)
+            # print("element", element, query)
+        query.run()
+
+        return self.response("Hello")

@@ -1,19 +1,24 @@
 
 EXPO:
 
+☐ Rapporto immagine delle copertine di sezione...?
+☐ Edit
+   ☐ Option no zoom?
+
  ☐ DESCRIPTIONS
 - main
 - par section
 - par oeuvres
 - sections...
+- texte
 
 ☐ Descrizione affianco immagine
-☐ Rapporto immagine delle copertine di sezione
+☐ Dettaglio
+   ☐ ordine campi
+   ☐ no campi vuoti
 
- ☐ opere
+ ☐ Par oeuvre text
   date, autore, posto
-
-   ☐ Option no zoom?
 
 BUGS:
   ☐ responsive
@@ -37,7 +42,14 @@ ELASTIC
  ☐ how to remove existing data updated?
 ☐ index rebuild
 
- SEARCH:
+MOVE TO PRODUCTION:
+ ✔ uptime robot (both interface and api) @done (16-08-12 09:36)
+ ☐ disable rethinkdb monitor interface
+ ☐ haproxy test?
+ ☐ Profiles administration
+ ☐ send email?
+
+extra SEARCH:
 
    ☐ enter on a word which is not suggested?
    ☐ clear function? when pressing X button
@@ -46,24 +58,3 @@ ELASTIC
    ☐ prefix query? give importance if what you write is in the prefix
    ☐ scroll cache!
    ☐ did you mean?
-
-MOVE TO PRODUCTION:
- ✔ uptime robot (both interface and api) @done (16-08-12 09:36)
- ☐ disable rethinkdb monitor interface
- ☐ haproxy test?
- ☐ Profiles administration
- ☐ send email?
-
- --- ✄ -----------------------
-
-TAGS
-https://github.com/formly-js/angular-formly-templates-material/blob/master/docs/types/chips.md
-
- --- ✄ -----------------------
-
-for element in r.db('webapp').table('datavalues').run():
-    for step in element['steps']:
-        if step['step'] == 3:
-            for piece in step['data']:
-                if piece['name'] == 'Date de début de la fête':
-                    print(element['record'], piece)

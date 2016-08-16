@@ -31,14 +31,73 @@
 
     <div layout="row" layout-padding>
         <md-card flex=50>
-            <md-card-content layout="column" layout-align="center center" >
-            Edit Descriptions from md-list
+
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Expo descriptions</span>
+            <span class="md-subhead">Main elements description text</span>
+          </md-card-title-text>
+        </md-card-title>
+
+            <md-card-content>
+
+      <md-list flex layout-padding>
+
+        <md-list-item class="md-2-line" ng-click="expo.editDescription('home')">
+            <i class="material-icons">home</i>
+          <div class="md-list-item-text" layout="column">
+            <h3>Expo main page</h3>
+            {{ (expo.descriptions.home|| 'no description yet...')
+                | limitTo:50  }}
+          </div>
+        </md-list-item>
+
+        <md-list-item class="md-2-line"
+            ng-click="expo.editDescription('parsections')">
+            <i class="material-icons">view_list</i>
+          <div class="md-list-item-text" layout="column">
+            <h3>Expo parcours par sections</h3>
+            {{ (expo.descriptions.parsections || 'no description yet...')
+                | limitTo:50  }}
+          </div>
+        </md-list-item>
+
+        <md-list-item class="md-2-line"
+            ng-click="expo.editDescription('paroeuvres')">
+            <i class="material-icons">view_module</i>
+          <div class="md-list-item-text" layout="column">
+            <h3>Expo parcours par oeuvres</h3>
+            {{ (expo.descriptions.paroeuvres || 'no description yet...')
+                | limitTo:50  }}
+          </div>
+        </md-list-item>
+
+        <md-list-item class="md-3-line"
+            ng-repeat="item in todos" ng-click="null">
+            <i class="material-icons">view_model</i>
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ item.who }}</h3>
+            <p>{{ item.notes }}</p>
+          </div>
+        </md-list-item>
+
+       </md-list>
+
             </md-card-content>
         </md-card>
-        <md-card flex=50>
-            <md-card-content layout="column" layout-align="center center" >
-            editor
+
+        <md-card flex=50 ng-if="expo.description.edit">
+            <md-card-content>
+            Change description:
+            <md-input-container class="md-block">
+              <label>texte</label>
+              <textarea ng-model="expo.description.edit"
+              md-maxlength="5000" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
             </md-card-content>
+            <md-card-actions>
+                <md-button ng-click="expo.saveDescription()"> save </md-button>
+            </md-card-actions>
         </md-card>
     </div>
 

@@ -181,9 +181,16 @@ function ExpoController($scope, $log,
     self.reload = function () {
 
         self.sections = [];
+        self.descriptions = {};
 
         AdminService.getExpoMissing().then(function (out)
         {
+          AdminService.getExpoDescription().then(function (output) {
+            forEach(output.data, function (element, index) {
+                // console.log('DESC', element);
+                self.descriptions[element.mode] = element.text;
+            });
+          });
           AdminService.getExpoSections().then(function (output) {
 
             self.sectionsAndThemes = output.data;
@@ -243,6 +250,24 @@ function ExpoController($scope, $log,
         $anchorScroll();
       }
     };
+
+    self.editDescription = function (mode) {
+        // console.log('Mode is ', mode);
+        var content = self.descriptions[mode] || ' ';
+        self.description = {'edit': content, mode: mode};
+    }
+
+    self.saveDescription = function (mode) {
+        // console.log('To save:', self.description);
+        AdminService.updateExpoDescription(
+            self.description.mode,
+            self.description.edit).then(function (out)
+        {
+            console.log('Saved description', out);
+            self.reload();
+        });
+        delete self.description;
+    }
 
     self.update = function (uuid) {
 

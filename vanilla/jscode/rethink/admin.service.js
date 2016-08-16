@@ -10,6 +10,7 @@ function AdminService($log, api) {
     self.endpoints = {
         admin: 'datadmins',
         expo: 'expo',
+        expod: 'expodesc',
         imissing: 'dataimagemissing',
         tmissing: 'datatransmissing',
         stepstemplate: 'steps',
@@ -17,14 +18,19 @@ function AdminService($log, api) {
     }
 
     //////////////////
-    // Insert data
+    // Expo data
+    self.updateDocument = function(docId, docData) {
+        return api.apiCall(self.endpoints.data, 'PUT', docData, docId);
+    }
     self.updateExpoImage = function(fileName, opts) {
         return api.apiCall(self.endpoints.expo, 'POST',
             {options: opts, name: fileName});
     }
-
-    self.updateDocument = function(docId, docData) {
-        return api.apiCall(self.endpoints.data, 'PUT', docData, docId);
+    self.updateExpoDescription = function (mode, data) {
+        return api.apiCall(self.endpoints.expod, 'PUT', {'text': data}, mode);
+    }
+    self.getExpoDescription = function () {
+        return api.apiCall(self.endpoints.expod);
     }
 
     //////////////////
