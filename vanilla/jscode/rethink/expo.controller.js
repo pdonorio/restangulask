@@ -357,6 +357,16 @@ function ExpoController($scope, $log,
         }
     }
 
+    self.changeImage = function(file, options) {
+      console.log('CHANGE', file, options);
+      // api call with id + file.name
+      AdminService.updateExpoImage(file.name, options).then(function (out) {
+          console.log('Updated', out);
+          // which removes old id record, and updates details to new one
+          self.reload();
+      })
+    };
+
     self.uploaded = function(file) {
       file.status = 'uploaded';
       $log.info("File uploaded", file);
@@ -384,6 +394,7 @@ function ExpoController($scope, $log,
       //console.log(message, json_message);
       file.errorMessage = apiErrorToHtml(json_message.data);
       $log.warn("File error", file, file.errorMessage);
+      $window.scrollTo(0, 0);
       $scope.showSimpleToast({
         "Failed to upload": file.name,
         //"Error message": message,

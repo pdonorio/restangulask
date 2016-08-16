@@ -433,6 +433,8 @@ class RethinkExpo(BaseRethinkResource):
 
                 for uuid in ids:
                     doc = self.get_table_query().get(uuid).run()
+                    if doc is None:
+                        continue
                     image = doc['images'].pop()
                     path = os.path.join(self._type, image['code'])
                     key = doc['details'].pop('position')
@@ -523,8 +525,47 @@ class RethinkExpo(BaseRethinkResource):
                 else:
                     newdata[uuid]['order'] = now * 2
 
-        # reverse for starting with the last one
+        # reverse for starting with the last one
         data = OrderedDict(reversed(list(newdata.items())))
+
+        return self.response(data, elements=len(data))
+
+    @deck.apimethod
+    @auth_token_required
+    def post(self):
+
+        data = {'Hello': 'World'}
+        j = self.get_input(False)
+        print("TEST", j)
+
+        section = j['options']['section']
+        theme = j['options']['theme']
+        id = j['options']['id']
+
+        query = self.get_table_query()
+        original = query.get(id).run()
+        print("original", original['details'])
+
+        query2 = self.get_table_query(self._type)
+        secdata = list(query2.filter({'section': section}).run()).pop()
+
+        q = query.filter({mykey: self._type})
+        for element in q.run():
+            if 'details' in element or 'images' not in element:
+                continue
+            if element['images'][0]['filename'] == j['name']:
+                # update new element
+                query.get(element['record']) \
+                    .update({'details': original['details']}).run()
+                # remove old one
+                query.get(id).delete().run()
+                # fix the section/theme
+                secdata['themes'][theme].remove(id)
+                secdata['themes'][theme].append(element['record'])
+                if secdata['cover'] == id:
+                    secdata['cover'] = element['record']
+                query2.get(secdata['id']).replace(secdata).run()
+                break
 
         return self.response(data, elements=len(data))
 

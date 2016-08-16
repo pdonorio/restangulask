@@ -18,6 +18,11 @@ function AdminService($log, api) {
 
     //////////////////
     // Insert data
+    self.updateExpoImage = function(fileName, opts) {
+        return api.apiCall(self.endpoints.expo, 'POST',
+            {options: opts, name: fileName});
+    }
+
     self.updateDocument = function(docId, docData) {
         return api.apiCall(self.endpoints.data, 'PUT', docData, docId);
     }

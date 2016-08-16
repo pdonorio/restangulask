@@ -1,14 +1,9 @@
 
 
- ☐ expo gallery
-
  ☐ expo descriptions
 - main
 - par section
 - par oeuvres
- ☐ expo sections
-- single section
-  -cover?
 
   {
   "id":  "bcc4ae76-1051-424b-9705-5e04f7f51291" ,
@@ -19,12 +14,7 @@
 }
 
 EXPO:
-  breadcrumb: SpectacleBaroque >  Expo > Sala/Sezione > Tema > Immagine
 
-☐ traduzioni
-☐ pagina per sezioni
-  ☐ Immagine di copertina
-  ☐ descrizione
 ☐ Rapporto immagine delle copertine di sezione
 
  ☐ Testo presentazione expo

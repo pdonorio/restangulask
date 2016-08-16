@@ -29,27 +29,24 @@
     flow-file-error="expo.fileError($file, $message)"
     flow-progress="expo.progressing">
 
-    <md-card>
-        <md-card-content layout="column" layout-align="center center" >
-<!--      <span class="btn waves-effect waves-light red" flow-btn>new image</span>
- -->
-        TODO: Descriptions?
-        </md-card-content>
-    </md-card>
-
-    <md-card>
-        <md-card-content layout="column" layout-align="center center" >
-<!--      <span class="btn waves-effect waves-light red" flow-btn>new image</span>
- -->
-        TODO: List of sections?
-        </md-card-content>
-    </md-card>
+    <div layout="row" layout-padding>
+        <md-card flex=50>
+            <md-card-content layout="column" layout-align="center center" >
+            Edit Descriptions from md-list
+            </md-card-content>
+        </md-card>
+        <md-card flex=50>
+            <md-card-content layout="column" layout-align="center center" >
+            editor
+            </md-card-content>
+        </md-card>
+    </div>
 
     <md-card
         > <md-card-content layout="column" layout-align="center center"
         >
      <span class="btn waves-effect waves-light red"
-        flow-btn>new image</span>
+        flow-btn>upload new image</span>
      <table>
       <tr ng-repeat="file in $flow.files">
         <td> Request {{$index+1}}</td>
@@ -92,7 +89,7 @@
                     <th>Section</th>
                     <th>Cover</th>
                     <th>Theme</th>
-                    <th>Actions</th>
+                    <th colspan="10">Actions</th>
                 </tr>
             </thead>
           <tr ng-repeat="(uuid, options) in expo.files">
@@ -115,11 +112,21 @@
             </td>
             <td> {{options.theme}} </td>
             <td>
-
-<!-- NOTE: TODO add change image button/action
-    (send to another page which takes care of it)
--->
-
+            <div ng-if="options.details.titre"
+                flow-init="expo.config"
+                flow-files-submitted="$flow.upload()"
+                flow-file-error="expo.fileError($file, $message)"
+                flow-file-success="expo.changeImage($file, options)" >
+               <span
+                   class="btn waves-effect waves-light btn-floating yellow"
+                   tooltipped data-position="down" data-tooltip="Substitute image"
+                    flow-btn
+                   >
+                   <i class="material-icons"> change_history </i>
+               </span>
+            </div>
+            </td>
+            <td>
        <a href tooltipped ng-click="expo.update(uuid)"
            data-position="down" data-tooltip="Edit content"
            class="waves-effect waves-light btn-floating blue">

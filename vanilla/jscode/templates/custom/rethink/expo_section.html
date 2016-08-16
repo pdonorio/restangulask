@@ -20,7 +20,8 @@
           </md-input-container>
 -->
 
-        <div ng-if="theme != 'cover'"
+        <div ng-if="theme != 'cover' && theme != 'select'
+            && theme != 'open' && theme != 'current_theme'"
             ng-repeat="(theme, paintings) in sections[current_section]"
             layout="column" layout-padding layout-align="center center">
 
