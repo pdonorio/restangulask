@@ -5,7 +5,21 @@ angular.module('web')
     .controller('ExpoClient', ExpoClient)
     .controller('ExpoSections', ExpoSections)
     .controller('ExpoSingleSection', ExpoSingleSection)
-    .controller('ExpoController', ExpoController);
+    .controller('ExpoController', ExpoController)
+
+    .filter('textToHtml', function($sce) {
+        return function(input) {
+            if (!input) {
+                return '';
+            }
+            // input = htmlEscapeFilter(input);
+            var output = '';
+            $.each(input.split("\n\n"), function(key, paragraph) {
+                output += '<p>' + paragraph + '</p>';
+            });
+            return $sce.trustAsHtml(output);
+        };
+    });
 
 //recover data
 function reLoadSections(AdminService, reference, section)
@@ -25,6 +39,14 @@ function reLoadSections(AdminService, reference, section)
             reference.sectionsAndThemes = output.data;
           });
         }
+
+        AdminService.getExpoDescription().then(function (output) {
+            reference.descriptions = {}
+            forEach(output.data, function (element, index) {
+                reference.descriptions[element.mode] = element.text;
+            });
+        });
+
 
     });
 }
