@@ -1,39 +1,19 @@
 
+EXPO:
 
- ☐ expo descriptions
+ ☐ DESCRIPTIONS
 - main
 - par section
 - par oeuvres
+- sections...
 
-  {
-  "id":  "bcc4ae76-1051-424b-9705-5e04f7f51291" ,
-  "section":  "Spectacle" ,
-  "description": ""
-  "themes": {
-  }
-}
-
-EXPO:
-
+☐ Descrizione affianco immagine
 ☐ Rapporto immagine delle copertine di sezione
 
- ☐ Testo presentazione expo
- ☐ Testo presentazione sezioni
- ☐ Tendine sotto sezioni
- ☐ Descrizione affianco immagine
-   ☐ Testo descrittivo? altro campo
-
  ☐ opere
-   ☐ autore
-   ☐ titolo
-   ☐ anno
-
-   ☐ Manage
-
   date, autore, posto
 
-   ☐ description as text editor
-   ☐ Option no zoom
+   ☐ Option no zoom?
 
 BUGS:
   ☐ responsive

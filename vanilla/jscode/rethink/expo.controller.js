@@ -170,6 +170,7 @@ function ExpoController($scope, $log,
         'copyright': {type: 'text', space: true},
 
 // THIS IS A LINK
+// WHAT TO DO?
         'voir aussi': {type: 'text', space: false},
 
         // EXTRA, inserted by hand
@@ -358,7 +359,7 @@ function ExpoController($scope, $log,
     }
 
     self.changeImage = function(file, options) {
-      console.log('CHANGE', file, options);
+      //console.log('CHANGE', file, options);
       // api call with id + file.name
       AdminService.updateExpoImage(file.name, options).then(function (out) {
           console.log('Updated', out);
