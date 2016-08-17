@@ -18,21 +18,23 @@
       <div ng-controller="ExpoSingleSection as source">
 
         <md-grid-list
-            layout-padding
             md-cols="4" md-row-height="fit"
-            style="width: 800px; height: 800px">
+            style="width: 900px; height: 1800px"
+            >
 
-            <md-grid-tile ng-repeat="(uuid, element) in source.images">
-
-              <div>
+            <md-grid-tile ng-repeat="(uuid, element) in source.images" md-whiteframe="1" >
                 <a ui-sref="public.expo.pieces.image({position: uuid})">
-                    <img src="{{ root.imagesPath + element.file
-                                +'/TileGroup0/0-0-0.jpg' }}" width="80" >
+            <div
+                ng-style=" {'background-image':
+                'url(' + root.imagesPath + element.file +'/TileGroup0/0-0-0.jpg'  + ')'}"
+                style="height: 150px; width: 150px;
+                background-size: contain; background-repeat: no-repeat;
+                background-position: center; background-color: white; " >
+            </div>
                 </a>
-                <br>
-                <small> {{element.details.date || '-'}} </small>
-
-              </div>
+                <md-grid-tile-footer> 
+                {{element.details['date et lieu de réalisation'] || '-'}}
+                </md-grid-tile-footer>
 
             </md-grid-tile>
 

@@ -32,7 +32,7 @@ function reLoadSections(AdminService, reference, section)
         if (section) {
             reference.themes = Object.keys(reference.sections[section]);
             reference.themes.splice(reference.themes.indexOf('cover'), 1);
-            console.log('Reference', reference.themes);
+            // console.log('Reference', reference.themes);
         } else {
           AdminService.getExpoSections().then(function (output) {
             //console.log('REFERENCE', reference);
@@ -45,6 +45,7 @@ function reLoadSections(AdminService, reference, section)
             forEach(output.data, function (element, index) {
                 reference.descriptions[element.mode] = element.text;
             });
+            // console.log("Uhm", reference.descriptions);
         });
 
 

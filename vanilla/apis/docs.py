@@ -437,17 +437,18 @@ class RethinkExpo(BaseRethinkResource):
                         continue
                     image = doc['images'].pop()
                     path = os.path.join(self._type, image['code'])
+                    filepath = os.path.join(self._type, image['filename'])
                     key = doc['details'].pop('position')
 
                     images[key] = {}
                     images[key]['details'] = doc['details']
-                    images[key]['filename'] = \
-                        os.path.join(self._type, image['filename'])
+                    images[key]['filename'] = filepath
                     images[key]['thumb'] = path
                     images[key]['_id'] = uuid
 
-                    thumbs[key] = path
-                    thumbsid[uuid] = path
+                    # thumbs[key] = path
+                    thumbs[key] = filepath
+                    thumbsid[uuid] = filepath
 
                     element = {
                         'id': uuid,

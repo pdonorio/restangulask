@@ -74,12 +74,14 @@
         </md-list-item>
 -->
 
-        <md-list-item class="md-3-line"
-            ng-repeat="item in todos" ng-click="null">
-            <i class="material-icons">view_model</i>
+        <md-list-item class="md-2-line" ng-repeat="item in expo.sections"
+            ng-if="item != expo.newelement"
+            ng-click="expo.editDescription(item)">
+            <i class="material-icons">picture_in_picture</i>
           <div class="md-list-item-text" layout="column">
-            <h3>{{ item.who }}</h3>
-            <p>{{ item.notes }}</p>
+            <h3>Expo section <b>{{item}}</b></h3>
+            {{ (expo.descriptions[item] || 'no description yet...')
+                | limitTo:50  }}
           </div>
         </md-list-item>
 
