@@ -179,6 +179,8 @@ function ExpoController($scope, $log,
         //'nom': {type: 'text'},
         'auteur(s)': {type: 'text', space: true},
         'date et lieu de réalisation': {type: 'text', space: true},
+        'date': {type: 'text', space: false},
+        'lieu': {type: 'text', space: false},
 
         'type': {type: 'text', space: false},
         'matériaux': {type: 'text', space: false},
@@ -362,6 +364,19 @@ function ExpoController($scope, $log,
 
         if (!self.current.theme && !self.current.newtheme)
             error = true;
+
+        var tmp = "";
+        if (self.current.details.date) {
+            tmp += self.current.details.date;
+            if (self.current.details.lieu) {
+                tmp += ", "
+            }
+        }
+        if (self.current.details.lieu) {
+            tmp += self.current.details.lieu;
+        }
+        self.current.details['date et lieu de réalisation'] = tmp;
+        // console.log("TEST", self.current.details);
 
         if (error) {
             console.log("Error")

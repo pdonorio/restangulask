@@ -272,6 +272,7 @@
       <div>
         <form name="expo.myForm">
             <md-input-container layout-padding
+              ng-if="detail != 'date et lieu de réalisation'"
               ng-repeat="(detail, options) in expo.details">
                 <label>{{detail}}</label>
                 <input
