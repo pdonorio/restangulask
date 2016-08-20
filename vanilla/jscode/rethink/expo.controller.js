@@ -1,6 +1,36 @@
 (function() {
   'use strict';
 
+var details_fields =
+{
+  position: {type: 'number'},
+  'titre': {type: 'text', required: true, space: true},
+  //'nom': {type: 'text'},
+  'auteur(s)': {type: 'text', space: true},
+  'date et lieu de réalisation': {type: 'text', space: true},
+  'date': {type: 'text', space: false},
+  'lieu': {type: 'text', space: false},
+
+  'type': {type: 'text', space: false},
+  'matériaux': {type: 'text', space: false},
+  'technique': {type: 'text', space: false},
+  'dimensions': {type: 'text', space: true},
+
+  'source': {type: 'text', space: true},
+  'fête': {type: 'text', space: true},
+
+  'lieu de conservation': {type: 'text', space: false},
+  'inv.': {type: 'text', space: false},
+  'copyright': {type: 'text', space: true},
+
+// THIS IS A LINK
+// WHAT TO DO?
+  'voir aussi': {type: 'text', space: false},
+
+  // EXTRA, inserted by hand
+  //texte: {type: 'text'},
+};
+
 angular.module('web')
     .controller('ExpoClient', ExpoClient)
     .controller('ExpoSections', ExpoSections)
@@ -93,6 +123,7 @@ function ExpoSingleSection($scope, $log, $sce,
     $timeout, $state, $stateParams, $rootScope, AdminService)
 {
     var self = this;
+    self.details_fields = details_fields;
     $log.info("EXPO: section", $stateParams);
     $rootScope.current_section = $stateParams.section;
 
@@ -162,44 +193,12 @@ function ExpoController($scope, $log,
     self.current = null;
     self.newelement = "ADD NEW ELEMENT";
     self.position = 1;
+    self.details = details_fields;
 
     $scope.keylen = function (obj) {
       if (obj)
           return Object.keys(obj).length;
       return 0;
-    }
-
-
-// NOTE:
-// cycling this as ng-repeat on details i also get the right order...
-// and skip texte
-    self.details = {
-        position: {type: 'number'},
-        'titre': {type: 'text', required: true, space: true},
-        //'nom': {type: 'text'},
-        'auteur(s)': {type: 'text', space: true},
-        'date et lieu de réalisation': {type: 'text', space: true},
-        'date': {type: 'text', space: false},
-        'lieu': {type: 'text', space: false},
-
-        'type': {type: 'text', space: false},
-        'matériaux': {type: 'text', space: false},
-        'technique': {type: 'text', space: false},
-        'dimensions': {type: 'text', space: true},
-
-        'source': {type: 'text', space: true},
-        'fête': {type: 'text', space: true},
-
-        'lieu de conservation': {type: 'text', space: false},
-        'inv.': {type: 'text', space: false},
-        'copyright': {type: 'text', space: true},
-
-// THIS IS A LINK
-// WHAT TO DO?
-        'voir aussi': {type: 'text', space: false},
-
-        // EXTRA, inserted by hand
-        //texte: {type: 'text'},
     }
 
     //recover data
