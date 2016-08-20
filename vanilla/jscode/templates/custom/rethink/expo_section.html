@@ -30,15 +30,16 @@
             layout="column">
 
             <!-- Theme name: -->
-                <a class="black-text" ui-sref="public.expo.themes.selected.theme(
-                    {section: current_section, theme: theme})">
-            <h5>
-                {{theme}}
-            </h5>
-                </a>
+            <a class="black-text" ui-sref="public.expo.themes.selected.theme(
+                {section: current_section, theme: theme})">
+                <h5>
+                    {{theme}}
+                </h5>
+            </a>
 
-            <div 
-                ng-repeat="(position, data) in paintings" 
+            <!-- Theme images: -->
+            <div
+                ng-repeat="(position, data) in paintings"
                 ng-if="data.thumb"
                 layout="row" layout-padding>
               <div flex=40>

@@ -82,11 +82,14 @@ function reLoadSections(AdminService, reference, section)
     });
 }
 
-function ExpoClient($scope, $log, $rootScope, $state, $timeout, AdminService)
+function ExpoClient(
+    $scope, $log, $rootScope, $state, $timeout, $window,
+    AdminService)
 {
     //var self = this;
     $log.info("EXPO: fork");
     reLoadSections(AdminService, $scope);
+    // $window.scrollTo(0, 0);
 
     $scope.keylen = function (obj) {
       if (obj)

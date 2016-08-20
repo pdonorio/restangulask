@@ -1,13 +1,13 @@
 <div ng-controller="ExpoSingleSection as single"
-    layout="column" layout-align='center center'>
+    layout="row" layout-align='center center'>
 
       <!-- <h3> Theme {{current_theme}} </h3> -->
+  <div flex="80" >
 
-    <div 
-        ng-repeat="(position, data) in sections[current_section][current_theme]"
+    <div ng-repeat="(position, data) in sections[current_section][current_theme]"
         ng-if="data.thumb"
         layout="row" layout-padding>
-      <div flex=40>
+      <div flex="40">
         <a ui-sref="public.expo.themes.selected.theme.image(
           {section: current_section, theme: theme, element: position})">
         <div ng-style=" {'background-image':
@@ -17,12 +17,17 @@
             background-position: center; background-color: white; " >
         </div>
         </a>
-        something else
+        <span class="grey-text text-darken-1">
+            {{data.details['auteur(s)']}}
+            ...
+            {{data.details['date']}}
+            <!-- {{data.details['date et lieu de réalisation']}} -->
+        </span>
       </div>
-      <div flex=60>
-        {{data.details.texte}} &nbsp;
+      <div flex="60">
+        {{data.details.texte}}
       </div>
-      <br>
     </div>
 
+  </div>
 </div>
