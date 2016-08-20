@@ -5,9 +5,10 @@
     <div flex="80" >
 
 <!-- COVER -->
-    <div style="position: relative;">
-          <div class="thumbnail" style="z-index:1;">
-              <img src="{{root.imagesPath + single.sections[current_section].cover}}">
+    <div style="position: relative;" ng-cloak>
+
+          <div class="thumbnail" style="z-index:1;" ng-if="single.sections[current_section]['cover']" >
+              <img ng-src="{{root.imagesPath + single.sections[current_section]['cover']}}">
           </div>
         <div style="position: absolute; top: 0px; background-color: #0f243d;
             width: 100%; height: 80px; opacity: .5; z-index:2;">
@@ -36,10 +37,14 @@
             </h5>
                 </a>
 
-            <div ng-repeat="(position, data) in paintings" layout="row" layout-padding>
+            <div 
+                ng-repeat="(position, data) in paintings" 
+                ng-if="data.thumb"
+                layout="row" layout-padding>
               <div flex=40>
                 <a ui-sref="public.expo.themes.selected.theme.image({section: current_section, theme: theme, element: position})">
-            <div ng-style=" {'background-image':
+            <div
+                ng-style=" {'background-image':
                 'url(' + root.imagesPath + data.thumb +'/TileGroup0/0-0-0.jpg'  + ')'}"
                 style="z-index: 1; min-height: 250px; min-width: 250px;
                 background-size: contain; background-repeat: no-repeat;

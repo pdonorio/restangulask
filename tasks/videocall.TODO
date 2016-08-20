@@ -1,22 +1,17 @@
 
 EXPO:
 
-☐ Rapporto immagine delle copertine di sezione...?
-☐ Edit
-   ☐ Option no zoom?
-☐ delete section?
-
- ☐ DESCRIPTIONS
-- sections...
-- texte
-
-☐ Descrizione affianco immagine
 ☐ Dettaglio
    ☐ ordine campi
    ☐ no campi vuoti
    ☐ spazi
-
- ☐ Par oeuvre text
+☐ Theme meta description below
+  date, autore, posto?
+☐ Edit
+   ☐ Option no zoom?
+☐ Manage description
+  ☐ button to delete section?
+ ☐ Par oeuvre: text
   date, autore, posto
 
 BUGS:

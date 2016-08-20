@@ -4,7 +4,8 @@
 
   <nav class="grey darken-1" flex="90" >
     <div class="nav-wrapper" style='margin-left: 30px;'>
-      <div class="column">
+
+      <div class="column" ng-if="!current_image">
         <a ui-sref="public.expo" class="breadcrumb">EXPO</a>
         <a ui-sref="public.expo.themes"
             class="breadcrumb">PAR SECTIONS </a>
@@ -17,9 +18,19 @@
             {section: current_section, theme: current_theme})"
             class="breadcrumb">
             {{current_theme}} </a>
+<!--
         <a ng-if="current_image"
             nohref class="breadcrumb">
             TOFIX: '{{current_image_short}}' </a>
+-->
+      </div>
+      <div ng-if="current_image">
+        <a
+            ui-sref="public.expo.themes.selected.theme(
+            {section: current_section, theme: current_theme})"
+            class="breadcrumb">
+            <i class="material-icons prefix">arrow_back</i>
+               RETOUR EXPOSITION </a>
       </div>
     </div>
   </nav>
@@ -46,7 +57,7 @@
         <div style="position: relative;">
           <a ui-sref="public.expo.themes.selected({section: key})">
           <div class="thumbnail">
-              <img src="{{root.imagesPath + value.cover}}">
+              <img ng-src="{{root.imagesPath + value.cover}}">
           </div>
             <div style="position: absolute; top: 0; background-color: #0f243d;
                 width: 100%; height: 30%; opacity: .5; z-index:2;"></div>
