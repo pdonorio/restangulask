@@ -164,6 +164,10 @@ $stateProvider
 // Welcome page
     .state("welcome", {
         url: "/welcome",
+        resolve: {
+            // skip: _skipAuthenticationCheckApiOnline,
+            redirect: _redirectIfNotAuthenticated,
+        },
         views: {
             "menu": {
                 templateUrl: templateDir + 'menu.html',
@@ -274,7 +278,8 @@ $stateProvider
     .state("public", {
         url: "/public",
         resolve: {
-            skip: _skipAuthenticationCheckApiOnline,
+            // skip: _skipAuthenticationCheckApiOnline,
+            redirect: _redirectIfNotAuthenticated,
         },
         views: {
             "menu": {
