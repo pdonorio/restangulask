@@ -39,7 +39,7 @@ def read_files(path):
     """ All user specifications """
     sections = [
         # Basic options
-        'content', 'models', 'options',
+        'content', 'options',
         # Framework specific and user custom files
         'frameworks',
         # Choose the blueprint to work with
