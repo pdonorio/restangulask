@@ -87,7 +87,7 @@ jfiles.extend(Path(blueprint_path).glob('**/*.js'))
 # Use all files found
 for pathfile in jfiles:
     strfile = str(pathfile)
-    jfile = strfile[len(prefix)+1:]
+    jfile = strfile[len(prefix) + 1:]
     if jfile not in js:
         js.append(jfile)
 
@@ -167,40 +167,11 @@ def jsblueprint():
 
     variables = {
         'name': CURRENT_BLUEPRINT,
-        'time': user_config['options']['load_timeout'],
+        'time': user_config['variables']['js']['load_timeout'],
         'api_url': request.url_root,
         'js_template': js_template
     }
     return render_template("blueprint.js", **variables)
-
-
-# ################################################
-# # ZOOM?
-# @cms.route('/zoom/<string:document>/<string:code>')
-# def zoom(document, code):
-
-#     template_path = 'custom' + '/' + CURRENT_BLUEPRINT
-#     filename = '/empty'
-#     HEADERS = {
-#         'content-type': 'application/json',
-#         'Authentication-Token': g.user.token
-#     }
-#     opts = {'stream': True, 'headers': HEADERS, 'timeout': 5}
-#     r = requests.get(API_URL + 'datadocs/' + document, **opts)
-#     out = r.json()
-#     if len(out['data']) > 0:
-#         data = out['data'].pop()
-#         for image in data['images']:
-#             if image['code'] == code:
-#                 filename = '/static/uploads/' + code
-
-#     variables = {
-#         'record': document,
-#         'page': code,
-#         'filename': filename,
-#         'name': CURRENT_BLUEPRINT,
-#     }
-#     return render_template(template_path + '/' + 'zoom.html', **variables)
 
 
 ######################################################
