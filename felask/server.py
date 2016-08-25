@@ -19,7 +19,7 @@ from commons.logs import get_logger
 from commons import htmlcodes as hcodes
 from .pages import cms
 from . import CONFIG_MODULE
-from .basemodel import lm  # , db
+# from .basemodel import lm  # , db
 
 logger = get_logger(__name__)
 
@@ -71,8 +71,8 @@ def create_app():
 
     ###############################
     # Flask LOGIN
-    lm.init_app(app)
-    lm.login_view = '.login'
+    # lm.init_app(app)
+    # lm.login_view = '.login'
 
     # Logging
     @app.after_request

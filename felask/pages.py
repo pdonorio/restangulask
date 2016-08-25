@@ -6,7 +6,7 @@ from __future__ import absolute_import
 import os
 from pathlib import Path
 from flask import Blueprint, render_template, request, jsonify
-from .basemodel import user_config
+from config import user_config
 from .security import login_api, register_api, logout_api
 from commons import htmlcodes as hcodes
 from commons.logs import get_logger
