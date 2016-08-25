@@ -14,8 +14,7 @@ from config import FRAMEWORKS  # , API_URL
 
 logger = get_logger(__name__)
 CURRENT_FRAMEWORK = None
-BLUEPRINT_KEY = 'blueprint'
-CURRENT_BLUEPRINT = BLUEPRINT_KEY + '_example'
+CURRENT_BLUEPRINT = 'blueprint_example'
 
 #######################################
 # Blueprint for base pages, if any
@@ -66,11 +65,10 @@ if 'logos' not in user_config['content']:
 # ## JS BLUEPRINTS
 
 # Load only a specified angular blueprint
-if 'blueprints' not in user_config or \
-   BLUEPRINT_KEY not in user_config['blueprints']:
-    logger.critical("No blueprint file/key found!")
+if 'blueprint' not in user_config:
+    logger.critical("No blueprint found in user config!")
 else:
-    CURRENT_BLUEPRINT = user_config['blueprints'][BLUEPRINT_KEY]
+    CURRENT_BLUEPRINT = user_config['blueprint']
 
 logger.info("Adding JS blueprint '%s'" % CURRENT_BLUEPRINT)
 prefix = __package__
