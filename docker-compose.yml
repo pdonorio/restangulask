@@ -45,7 +45,7 @@ frontend:
         # Python templates
         - ../templates/python:/data/frontend/felask/templates/custom
         # Angular blueprint
-        - ../specs:/data/frontend/config/angular/blueprints
+        - ../specs:/data/frontend/config/specs
         # Custom images
         - ../img:/data/frontend/felask/static/img/custom
     ports:
