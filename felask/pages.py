@@ -56,6 +56,7 @@ imgs = []
 for simg in fconfig['imgs']:
     js.append(staticdir + simg)
 # TO FIX!
+
 if 'logos' not in user_config['content']:
     user_config['content']['logos'] = [{
         "src": "static/img/default.png", "width": '90'

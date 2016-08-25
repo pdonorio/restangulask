@@ -8,7 +8,7 @@ import commentjson as json
 #######################
 # Warning: this decides about final configuration
 DEBUG = True
-PATH = 'angular'   # Main directory where all conf files are found
+PATH = 'specs'   # Main directory where all conf files are found
 # Warning: this decides about final configuration
 #######################
 
@@ -35,29 +35,20 @@ AUTH_URL = URL + '/auth/'
 
 ########################################
 # Read user config
-def read_files(path):
-    """ All user specifications """
-    sections = [
-        # Basic options
-        'content', 'options',
-        # Framework specific and user custom files
-        'frameworks',
-        # Choose the blueprint to work with
-        'blueprints/js_init'
-    ]
-    myjson = {}
-    for section in sections:
-        filename = os.path.join(CONFIG_PATH, path, section + "." + JSON_EXT)
-        with open(filename) as f:
-            name = section.split('/')[0]
-            myjson[name] = json.load(f)
+def get_json_conf(path, file):
+    filename = os.path.join(CONFIG_PATH, path, file + "." + JSON_EXT)
+    with open(filename) as f:
+        return json.load(f)
 
-        # if section == 'frameworks':
-        #     print(myjson[section])
-    return myjson
+    return None
 
-# Use the function
-user_config = read_files(PATH)
+
+blueprint = get_json_conf(PATH, "js_init")
+blueprint = blueprint['blueprint']
+
+user_config = get_json_conf(PATH, blueprint)
+
+user_config['frameworks'] = get_json_conf("angular", "frameworks")
 
 
 ########################################
@@ -82,7 +73,7 @@ class BaseConfig(object):
     PORT = int(os.environ.get('PORT', 5000))
 
     BASIC_USER = {
-        'username': user_config['content'].get('username', 'prototype'),
-        'password': user_config['content'].get('password', 'test'),
-        'email': user_config['content'].get('email', 'idonotexist@test.com')
+        'username': user_config['variables'].get('username', 'prototype'),
+        'password': user_config['variables'].get('password', 'test'),
+        'email': user_config['variables'].get('email', 'idonotexist@test.com')
     }
