@@ -10,10 +10,9 @@ from config import user_config
 from .security import login_api, register_api, logout_api
 from commons import htmlcodes as hcodes
 from commons.logs import get_logger
-from config import FRAMEWORKS  # , API_URL
+from config import CURRENT_FRAMEWORK
 
 logger = get_logger(__name__)
-CURRENT_FRAMEWORK = None
 CURRENT_BLUEPRINT = 'blueprint_example'
 
 #######################################
@@ -21,45 +20,43 @@ CURRENT_BLUEPRINT = 'blueprint_example'
 cms = Blueprint('pages', __name__)
 
 #######################################
-# Framework user configuration
+# DEFAULTs and CUSTOMs from FRAMEWORK CONFIGURATION
+
+# Framework system configuration
 fconfig = user_config['frameworks']
+
 # Static directories
 staticdir = fconfig['staticdir'] + '/'
 bowerdir = staticdir + fconfig['bowerdir'] + '/'
+
+# Custom configurations
+bwlibs = user_config['bower_components']
+customcss = user_config['css']
+
 # CSS files
 css = []
 for scss in fconfig['css']:
-    css.append(bowerdir + scss)
-for scss in fconfig['customcss']:
     css.append(staticdir + scss)
+for scss in customcss:
+    if 'http' not in scss:
+        scss = os.path.join(staticdir, 'css', scss)
+    css.append(scss)
+
 # JS: Angular framework and app files
 js = []
-for sjs in fconfig['js']:
-    js.append(bowerdir + sjs)
-    if CURRENT_FRAMEWORK is None:
-        for frame in FRAMEWORKS:
-            if frame in sjs:
-                CURRENT_FRAMEWORK = frame
-                logger.info("Found framework '%s'" % CURRENT_FRAMEWORK)
-for sjs in fconfig['customjs']:
-    js.append(staticdir + sjs)
-# Fonts
-fonts = []
-for sfont in fconfig['fonts']:
-    # This should be an external url
-    if 'http' not in sfont:
-        sfont = staticdir + sfont
-    fonts.append(sfont)
-# Images
-imgs = []
-for simg in fconfig['imgs']:
-    js.append(staticdir + simg)
-# TO FIX!
+# Custom bower libs
+for lib, files in fconfig['bower_components'].items():
+    for file in files:
+        filepath = os.path.join(bowerdir, lib, file)
+        if file.endswith('css'):
+            css.append(filepath)
+        else:
+            js.append(filepath)
 
-# if 'logos' not in user_config['content']:
-#     user_config['content']['logos'] = [{
-#         "src": "static/img/default.png", "width": '90'
-#     }]
+# Save the right order:
+# Main app angular js is right after bower libs
+mainapp = os.path.join(staticdir, 'app', 'app.js')
+js.append(mainapp)
 
 #######################################
 # ## JS BLUEPRINTS
@@ -97,8 +94,8 @@ user_config['content'] = {
 }
 user_config['content']['stylesheets'] = css
 user_config['content']['jsfiles'] = js
-user_config['content']['images'] = imgs
-user_config['content']['htmlfonts'] = fonts
+# user_config['content']['images'] = imgs
+# user_config['content']['htmlfonts'] = fonts
 
 
 #######################################

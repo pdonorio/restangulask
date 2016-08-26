@@ -4,6 +4,7 @@
 
 import os
 import commentjson as json
+from collections import OrderedDict
 from commons.logs import get_logger
 
 logger = get_logger(__name__)
@@ -17,19 +18,20 @@ PATH = 'specs'   # Main directory where all conf files are found
 
 CONFIG_PATH = 'config'
 JSON_EXT = 'json'
-FRAMEWORKS = ['bootstrap', 'materialize', 'foundation']
+FRAMEWORKS = ['materialize', 'bootstrap', 'foundation']
+CURRENT_FRAMEWORK = FRAMEWORKS.pop(0)
 
 
 ########################################
 # Read user config
 def get_json_conf(config_root, path, file):
 
-# print error
+# print error?
     filename = os.path.join(config_root, path, file + "." + JSON_EXT)
     logger.debug("Reading file %s" % filename)
 
     with open(filename) as f:
-        return json.load(f)
+        return json.load(f, object_pairs_hook=OrderedDict)
 
     return None
 
