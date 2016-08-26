@@ -24,17 +24,6 @@ from . import CONFIG_MODULE
 logger = get_logger(__name__)
 
 
-# # Fixing logging
-# import logging
-# root_logger = logging.getLogger()
-# # root_logger.addHandler(logger)
-# first = True
-# for handler in root_logger.handlers:
-#     print("HANDLER", handler)
-#     # handler.setLevel(logging.WARNING)
-#     root_logger.removeHandler(handler)
-
-
 def create_app():
     """ Create the istance for Flask application """
 

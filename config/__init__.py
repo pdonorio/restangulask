@@ -48,7 +48,7 @@ blueprint = tmp['blueprint']
 user_config = get_json_conf(CONFIG_PATH, PATH, blueprint)
 
 user_config['blueprint'] = blueprint
-user_config['frameworks'] = get_json_conf(CONFIG_PATH, "angular", "frameworks")
+user_config['frameworks'] = get_json_conf(CONFIG_PATH, "", "frameworks")
 
 auth = user_config['variables']['containers']['authentication']
 
