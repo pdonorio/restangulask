@@ -4,6 +4,9 @@
 
 import os
 import commentjson as json
+from commons.logs import get_logger
+
+logger = get_logger(__name__)
 
 #######################
 # Warning: this decides about final configuration
@@ -23,6 +26,7 @@ def get_json_conf(config_root, path, file):
 
 # print error
     filename = os.path.join(config_root, path, file + "." + JSON_EXT)
+    logger.debug("Reading file %s" % filename)
 
     with open(filename) as f:
         return json.load(f)
@@ -36,8 +40,8 @@ defaults = get_json_conf('commons', 'confs', file='defaults')
 
 ##################
 # # CUSTOM
-blueprint = get_json_conf(CONFIG_PATH, PATH, "js_init")
-blueprint = blueprint['blueprint']
+tmp = get_json_conf(CONFIG_PATH, PATH, "blueprint")
+blueprint = tmp['blueprint']
 
 user_config = get_json_conf(CONFIG_PATH, PATH, blueprint)
 
