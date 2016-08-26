@@ -75,10 +75,10 @@
 		"angular-hotkeys/build/hotkeys.min.js",
         "angular-sortable-view/src/angular-sortable-view.min.js",
 		"api-check/dist/api-check.min.js",
-		"angular-formly/dist/formly.min.js",
+		// "angular-formly/dist/formly.min.js",
         // "angular-xeditable/dist/js/xeditable.min.js"
         //"moment/min/moment.min.js",
-		"angular-formly-material/dist/formly-material.min.js"
+		// "angular-formly-material/dist/formly-material.min.js"
 	],
 // USER CUSTOM APP
 	"customjs": [

@@ -16,40 +16,49 @@ CONFIG_PATH = 'config'
 JSON_EXT = 'json'
 FRAMEWORKS = ['bootstrap', 'materialize', 'foundation']
 
-BACKEND = False
-BACKEND_NAME = 'myapi'
-for key in os.environ.keys():
-    if BACKEND_NAME == key.lower()[0:5]:
-        BACKEND = True
-
-if not BACKEND:
-    print("Fatal error: could not find a backend container.")
-    exit(1)
-
-PORT = 5000
-URL = 'http://%s:%s' % (BACKEND_NAME, PORT)
-API_URL = URL + '/api/'
-AUTH_URL = URL + '/auth/'
-########################################
-
 
 ########################################
 # Read user config
-def get_json_conf(path, file):
-    filename = os.path.join(CONFIG_PATH, path, file + "." + JSON_EXT)
+def get_json_conf(config_root, path, file):
+
+# print error
+    filename = os.path.join(config_root, path, file + "." + JSON_EXT)
+
     with open(filename) as f:
         return json.load(f)
 
     return None
 
+##################
+# # DEFAULT
+# Add a value for all possibilities
+defaults = get_json_conf('commons', 'confs', file='defaults')
 
-blueprint = get_json_conf(PATH, "js_init")
+##################
+# # CUSTOM
+blueprint = get_json_conf(CONFIG_PATH, PATH, "js_init")
 blueprint = blueprint['blueprint']
 
-user_config = get_json_conf(PATH, blueprint)
+user_config = get_json_conf(CONFIG_PATH, PATH, blueprint)
 
 user_config['blueprint'] = blueprint
-user_config['frameworks'] = get_json_conf("angular", "frameworks")
+user_config['frameworks'] = get_json_conf(CONFIG_PATH, "angular", "frameworks")
+
+auth = user_config['variables']['containers']['authentication']
+
+
+########################################
+BACKEND_NAME = None
+try:
+    BACKEND_NAME = os.environ.get('MYAPI_NAME').split('/').pop()
+except:
+    raise BaseException("Fatal error: could not find a backend container.")
+
+########################################
+PORT = os.environ.get('BACKEND_1_PORT', 5000).split(':').pop()
+URL = 'http://%s:%s' % (BACKEND_NAME, PORT)
+API_URL = URL + '/api/'
+AUTH_URL = URL + '/auth/'
 
 
 ########################################
@@ -74,7 +83,7 @@ class BaseConfig(object):
     PORT = int(os.environ.get('PORT', 5000))
 
     BASIC_USER = {
-        'username': user_config['variables'].get('username', 'prototype'),
-        'password': user_config['variables'].get('password', 'test'),
-        'email': user_config['variables'].get('email', 'idonotexist@test.com')
+        'username': auth.get('username', 'prototype'),
+        'password': auth.get('password', 'test'),
+        'email': auth.get('email', 'idonotexist@test.com')
     }

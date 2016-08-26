@@ -56,10 +56,10 @@ for simg in fconfig['imgs']:
     js.append(staticdir + simg)
 # TO FIX!
 
-if 'logos' not in user_config['content']:
-    user_config['content']['logos'] = [{
-        "src": "static/img/default.png", "width": '90'
-    }]
+# if 'logos' not in user_config['content']:
+#     user_config['content']['logos'] = [{
+#         "src": "static/img/default.png", "width": '90'
+#     }]
 
 #######################################
 # ## JS BLUEPRINTS
@@ -92,6 +92,9 @@ for pathfile in jfiles:
         js.append(jfile)
 
 #######################################
+user_config['content'] = {
+    'project': user_config['project']['title']
+}
 user_config['content']['stylesheets'] = css
 user_config['content']['jsfiles'] = js
 user_config['content']['images'] = imgs
