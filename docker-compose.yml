@@ -37,17 +37,14 @@ frontend:
         # js/css libraries installed via bower
         - ../libs/bower_components:/data/frontend/felask/static/bower
         # custom css files
-        - ../templates/customcss:/data/frontend/felask/static/css
+        - ../css:/data/frontend/felask/static/css
         # All the angular blueprints (&& templates)
-        - ../jscode:/data/frontend/felask/static/app
-        # Python pages
-        - ../pages:/data/frontend/felask/pypages
-        # Python templates
-        - ../templates/python:/data/frontend/felask/templates/custom
-        # Angular blueprint
+        - ../frontend/js/angular:/data/frontend/felask/static/app/commons
+        - ../js:/data/frontend/felask/static/app/custom
+        - ../frontend/templates:/data/frontend/felask/static/app/templates/common
+        - ../templates:/data/frontend/felask/static/app/templates/custom
+        # Configuration files 
         - ../specs:/data/frontend/config/specs
-        # Custom images
-        - ../img:/data/frontend/felask/static/img/custom
     ports:
         - 80:5000
 

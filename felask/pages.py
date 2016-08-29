@@ -53,11 +53,6 @@ for lib, files in fconfig['bower_components'].items():
         else:
             js.append(filepath)
 
-# Save the right order:
-# Main app angular js is right after bower libs
-mainapp = os.path.join(staticdir, 'app', 'app.js')
-js.append(mainapp)
-
 #######################################
 # ## JS BLUEPRINTS
 
@@ -68,18 +63,26 @@ else:
     CURRENT_BLUEPRINT = user_config['blueprint']
 
 logger.info("Adding JS blueprint '%s'" % CURRENT_BLUEPRINT)
+
+
 prefix = __package__
 # JS BLUEPRINT config
 jfiles = [Path(prefix + '/js/blueprint.js')]
 # JS files in the root directory
 app_path = os.path.join(prefix, staticdir, 'app')
-jfiles.extend(Path(app_path).glob('*.js'))
+custom_path = os.path.join(app_path, 'custom', CURRENT_BLUEPRINT)
+
+# Save the right order:
+# Main app angular js is right after bower libs
+mainapp = os.path.join(custom_path, 'app.js')
+jfiles.append(mainapp)
+
+# jfiles.extend(Path(app_path).glob('*.js'))
 # JS common files
 common_path = os.path.join(app_path, 'commons')
 jfiles.extend(Path(common_path).glob('*.js'))
 # JS files only inside the blueprint subpath
-blueprint_path = os.path.join(app_path, CURRENT_BLUEPRINT)
-jfiles.extend(Path(blueprint_path).glob('**/*.js'))
+jfiles.extend(Path(custom_path).glob('**/*.js'))
 
 # Use all files found
 for pathfile in jfiles:
