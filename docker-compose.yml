@@ -18,7 +18,7 @@ conf:
 
         ## If you are testing something that does not work
         ## (containers that do not start anything)
-        APP_MODE: debug
+        # APP_MODE: debug
 ###############################
 
 
