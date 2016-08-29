@@ -64,8 +64,8 @@ for lib, files in bwlibs.items():
 
 # Save the right order:
 # Main app angular js is right after bower libs
-mainapp = os.path.join(staticdir, 'app', 'app.js')
-js.append(mainapp)
+# mainapp = os.path.join(staticdir, 'app', 'app.js')
+# js.append(mainapp)
 
 #######################################
 # ## JS BLUEPRINTS
