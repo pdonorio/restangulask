@@ -44,7 +44,7 @@ for scss in customcss:
 
 # JS: Angular framework and app files
 js = []
-# Custom bower libs
+# Bower libs
 for lib, files in fconfig['bower_components'].items():
     for file in files:
         filepath = os.path.join(bowerdir, lib, file)
@@ -52,6 +52,20 @@ for lib, files in fconfig['bower_components'].items():
             css.append(filepath)
         else:
             js.append(filepath)
+
+# Custom bower libs
+for lib, files in bwlibs.items():
+    for file in files:
+        filepath = os.path.join(bowerdir, lib, file)
+        if file.endswith('css'):
+            css.append(filepath)
+        else:
+            js.append(filepath)
+
+# Save the right order:
+# Main app angular js is right after bower libs
+mainapp = os.path.join(staticdir, 'app', 'app.js')
+js.append(mainapp)
 
 #######################################
 # ## JS BLUEPRINTS
