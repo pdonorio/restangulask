@@ -90,6 +90,13 @@ function RestApiService($http, $q, $auth, $log, $mdToast) {
 
                 if (returnRawResponse) return response;
 
+                if (response.status == 204) {
+                    if (response.data == "") {
+                        response.data = {}
+                        response.data.Response = ""
+                    }
+                }
+
                 return response.data.Response;
           }, function errorCallback(response) {
                 $log.warn("API failed to call")
