@@ -13,6 +13,12 @@ function NotyService() {
 	self.INFO = 4;
 
 	// [label1: msg1, label2: msg2]
+
+	self.extractErrors = function(response, type) {
+		if (response)
+			if (response.errors)
+				return self.showAll(response.errors, type);
+	}
 	self.showAll = function(messages, type) {
 		if (messages)
 		for (var i=0; i<messages.length; i++) {
