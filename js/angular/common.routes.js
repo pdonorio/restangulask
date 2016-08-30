@@ -117,9 +117,9 @@ function routeConfig(
     try {
         extraRoutes = $injector.get(blueprintRoutes);
         extraRoutesSize = Object.keys(extraRoutes).length;
-        console.log("Loaded extra routes:", blueprintRoutes);
+        console.debug("Loaded extra routes:", blueprintRoutes);
     } catch(e) {
-        console.log("Error! Failed to find a JS object to define extra routes." +
+        console.error("Error! Failed to find a JS object to define extra routes." +
             "\nIt should be called '" + blueprintRoutes + "'");
     }
 
@@ -276,7 +276,6 @@ $stateProvider
 //https://github.com/angular-ui/ui-router/issues/1022#issuecomment-50628789
     // $urlRouterProvider.otherwise('/login');
     $urlRouterProvider.otherwise(function ($injector) {
-        console.log("OTHERWISE");
         var $state = $injector.get('$state');
         //return $state.go('login');
         return $state.go('welcome');
