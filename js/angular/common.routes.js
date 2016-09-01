@@ -36,7 +36,7 @@ function _redirectIfNotAuthenticated($log, $rootScope,
         $log.info("Removed token, because it seems expired.");
       }
 
-      $log.error("Failed resolve. Go to", state);
+      $log.debug("Authentication check failed, going to", state);
       // Not logged or API down
       $timeout(function () {
           // redirect

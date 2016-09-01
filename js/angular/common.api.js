@@ -69,7 +69,7 @@ function RestApiService($http, $q, $auth, $log, $mdToast) {
 //////////////////////////////
 
         var token = self.checkToken(),
-            timeout = 5500,
+            timeout = 60000,
             req = {
                 method: method,
                 url: currentUrl,
