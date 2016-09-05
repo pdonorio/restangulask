@@ -80,6 +80,19 @@ function NotyService() {
 	    });
 	}
 
+	self.showSuccess = function(msg) {
+
+	    var n = noty({
+	        text        : msg,
+	        type        : "success",
+	        dismissQueue: true,
+	        modal       : false,
+	        maxVisible  : 3,
+	        timeout     : 5000,
+	        layout      : 'bottomRight',
+	        theme       : 'relax'
+	    });
+	}
 	self.showInfo = function(msg) {
 
 	    var n = noty({
