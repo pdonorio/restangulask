@@ -110,8 +110,7 @@ function routeConfig(
 // WHERE THE MAGIC HAPPENS
 
     // Dinamically inject the routes from the choosen blueprint
-
-    var extraRoutes = null;
+    var extraRoutes = {};
     var extraRoutesSize = 0;
     var blueprintRoutes = blueprint + 'Routes';
     try {
@@ -123,10 +122,122 @@ function routeConfig(
             "\nIt should be called '" + blueprintRoutes + "'");
     }
 
-    // Build the routes from the blueprint configuration
-    if (extraRoutesSize > 0) {
-        forEach(extraRoutes, function(x, stateName){
 
+// If i find out that APIs are not available...
+    $stateProvider.state("offline", {
+        url: "/offline",
+        views: {
+            "main": {templateUrl: templateDir + 'offline.html'}
+        }
+    }).
+
+// A public state
+    state("public", {
+        url: "/public",
+        resolve: {
+            skip: _skipAuthenticationCheckApiOnline,
+        },
+        views: {
+            "main": {
+                template: "<div ui-view='unlogged' style='height: calc(100% - 5rem);'></div>",
+            }
+        }
+    }).
+
+// Base for the app views
+    state("logged", {
+        url: "/app",
+        // This parent checks for authentication and api online
+        resolve: {
+            redirect: _redirectIfNotAuthenticated
+        },
+        // Implement main route for landing page after login
+        views: {
+            "main": {
+                // templateUrl: templateDir + 'logged.html',
+                template: "<div ui-view='loggedview' style='height: calc(100% - 5rem);'></div>",
+            }
+        },
+    });
+
+
+    // DEFINE BASE ROUTES
+    var baseRoutes = {
+
+        // Welcome page
+        "public.welcome": {
+            url: "/welcome",
+            views: {
+                "unlogged": {
+                    dir: "base",
+                    templateUrl: 'welcome.html',
+                }
+            }
+        },
+
+        // To log the user in
+        "public.login": {
+            url: "/login",
+            views: {
+                "unlogged": {
+                    dir: "base",
+                    templateUrl: 'login.html'
+                }
+            }
+        },
+
+        // To log the user in
+        "public.register": {
+            url: "/register",
+            views: {
+                "unlogged": {
+                    dir: "base",
+                    templateUrl: 'registration.html'
+                }
+            }
+        },
+
+        "logged.logout": {
+            url: "/logout",
+            views: {
+                "loggedview": {
+                    dir: "base",
+                    templateUrl: 'logout.html'
+                }
+            }
+        },
+
+        "logged.profile": {
+            url: "/profile",
+            views: {
+                "loggedview@logged": {
+                    dir: "base",
+                    templateUrl: 'profile.html'
+                }
+            }
+        },
+
+        "logged.profile.sessions": {
+            url: "/sessions",
+            views: {
+                "loggedview@logged": {
+                    dir: "base",
+                    templateUrl: 'token_sessions.html'
+                }
+            }
+        }
+        // Routes definition ends here
+    };
+
+    var allRoutes = angular.copy(extraRoutes);
+    forEach(baseRoutes, function(x, stateName) {
+        if (!allRoutes.hasOwnProperty(stateName)) {
+            allRoutes[stateName] = x;
+        }
+    });
+
+    function loadStates(states) {
+        forEach(states, function(x, stateName){
             // Build VIEWS for this single state
             var myViews = {};
             forEach(x.views, function(view, viewName){
@@ -154,117 +265,9 @@ function routeConfig(
             $stateProvider.state(stateName, finalRoute);
         });
     }
+    // Build the routes from the blueprint configuration
+    loadStates(allRoutes);
 ////////////////////////////
-
-// ROUTES
-$stateProvider
-
-// Welcome page
-    .state("welcome", {
-        url: "/welcome",
-        views: {
-            // "menu": {
-            //     templateUrl: templateDir + 'intro_menu.html',
-            // },
-            // "sidebar": {
-            //     templateUrl: templateDir + 'history_sidenav.html',
-            // },
-            "main": {
-                templateUrl: templateDir + 'welcome.html',
-            }
-        }
-    })
-
-// If i find out that APIs are not available...
-    .state("offline", {
-        url: "/offline",
-        views: {
-            "main": {templateUrl: templateDir + 'offline.html'}
-        }
-    })
-
-// A public state
-    .state("public", {
-        url: "/public",
-        resolve: {
-            skip: _skipAuthenticationCheckApiOnline,
-        },
-        views: {
-            // "menu": {
-            //     templateUrl: templateDir + 'menu.html',
-            // },
-            // "sidebar": {
-            //     templateUrl: templateDir + 'history_sidenav.html',
-            // },
-            "main": {
-                template: "<div ui-view='unlogged'></div>",
-            }
-        }
-    })
-
-
-// To log the user in
-    .state("public.login", {
-        url: "/login",
-        views: {
-            "unlogged": {templateUrl: templateDir + 'login.html'}
-        }
-    })
-
-// To log the user in
-    .state("public.register", {
-        url: "/register",
-        views: {
-            "unlogged": {templateUrl: templateDir + 'registration.html'}
-        }
-    })
-
-// Base for the app views
-    .state("logged", {
-        url: "/app",
-        // This parent checks for authentication and api online
-        resolve: {
-            redirect: _redirectIfNotAuthenticated
-        },
-        // Implement main route for landing page after login
-        views: {
-            // "menu": {
-            //     templateUrl: templateDir + 'menu.html',
-            //     //controller: 'AppRootController',
-            // },
-            // "sidebar": {
-            //     templateUrl: templateDir + 'history_sidenav.html',
-            // },
-            "main": {
-        // and add a child view called 'loggedview' for logged pages
-                templateUrl: templateDir + 'logged.html',
-                //controller: 'AppRootController',
-            }
-        },
-    })
-
-    .state("logged.logout", {
-        url: "/logout",
-        views: {
-            "loggedview": {templateUrl: templateDir+'logout.html'}
-        }
-    })
-
-    .state("logged.profile", {
-        url: "/profile",
-        views: {
-            "loggedview@logged": {templateUrl: templateDir+'profile.html'}
-        }
-    })
-
-    .state("logged.profile.sessions", {
-        url: "/sessions",
-        views: {
-            "loggedview@logged": {templateUrl: templateDir+'token_sessions.html'}
-        }
-    })
-        // Routes definition ends here
-    ;
 
 // TO FIX: move it to custom routing somehow
 // Missing bar on some routes
@@ -278,7 +281,7 @@ $stateProvider
     $urlRouterProvider.otherwise(function ($injector) {
         var $state = $injector.get('$state');
         //return $state.go('login');
-        return $state.go('welcome');
+        return $state.go('public.welcome');
     });
 
 }   // END ROUTES

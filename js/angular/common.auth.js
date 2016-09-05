@@ -74,7 +74,7 @@ function LoginController($scope, $log, $window,
     {
         $timeout(function () {
             $log.warn("Already logged");
-            $state.go('logged');
+            $state.go(loggedLandingPage);
         });
     }
 
@@ -129,7 +129,7 @@ function RegisterController($scope, $log, $auth, api)
     {
         $timeout(function () {
             $log.warn("Already logged");
-            $state.go('logged');
+            $state.go(loggedLandingPage);
         });
     }
 

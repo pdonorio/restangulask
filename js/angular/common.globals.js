@@ -8,6 +8,7 @@ var templateDirBase = '/static/app/templates/';
 var templateDir = templateDirBase + 'common/';
 var blueprintTemplateDir = templateDirBase + 'custom/' + blueprint + '/';
 // var customTemplateDir = templateDir + 'custom/' + framework + '/';
+var loggedLandingPage = "public.welcome";
 
 ////////////////////////////
 // HISTORY GLOBAL OBJECT
