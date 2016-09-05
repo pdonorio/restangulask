@@ -113,7 +113,7 @@ Handle 'draft' state for creating a new record
                 options.push({"value": "", "name": "-"});
 
             forEach(element.extra.split(','), function (obj, pos) {
-                options.push({"value":obj, "name": obj});
+                options.push({"value":obj.trim(), "name": obj});
             });
             field = {
                 key: element.field,
@@ -130,9 +130,23 @@ Handle 'draft' state for creating a new record
             // Details MULTISELECT
             if (self.step == 4) {
                 field.templateOptions.multiple = true;
-                // field.type = 'multiselect';
                 // console.log('TEST MULTI', element);
-                self.current.multiselect[element.field] = [""];
+                // field.type = 'multiselect';
+                // self.current.multiselect[element.field] = [""];
+
+                // console.log("MULTI 1*" + self.current[element.field] + "*");
+                if (typeof(self.current[element.field]) == "string") {
+                    self.current[element.field] = [
+                        //" " +
+                        self.current[element.field]
+                    ];
+                }
+                var newarray = [];
+                forEach(self.current[element.field], function(element, index) {
+                    newarray.push(element.trim());
+                });
+                self.current[element.field] = angular.copy(newarray);
+                // console.log("MULTI 2", self.current[element.field]);
             }
 
           } else if (choose == 'date') {
