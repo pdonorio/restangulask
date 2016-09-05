@@ -38,9 +38,7 @@ function RestApiService($http, $q, $auth, $log, $mdToast) {
         //DEFAULTS
         returnRawResponse = self.getOrDefault(returnRawResponse, false);
         endpoint = self.getOrDefault(endpoint, self.endpoints.check);
-        if (typeof id !== 'undefined' && method != 'POST') {
-            endpoint += '/' + id;
-        }
+
         method = self.getOrDefault(method, 'GET');
         skipPromiseResolve = self.getOrDefault(skipPromiseResolve, false);
 
@@ -67,6 +65,10 @@ function RestApiService($http, $q, $auth, $log, $mdToast) {
             currentUrl = self.FRONTEND_URL + endpoint;
         }
 //////////////////////////////
+
+        if (typeof id !== 'undefined' && method != 'POST') {
+            currentUrl += '/' + id;
+        }
 
         var token = self.checkToken(),
             timeout = 60000,
@@ -137,6 +139,17 @@ function RestApiService($http, $q, $auth, $log, $mdToast) {
         return self.apiCall("tokens", 'GET').then(
             function(response) {
                 return response.data
+            }, function(response) {
+                return response
+            }
+            );
+    }
+
+    self.revokeToken = function(id)
+    {
+        return self.apiCall("tokens", 'DELETE', {}, id).then(
+            function(response) {
+                return response
             }, function(response) {
                 return response
             }

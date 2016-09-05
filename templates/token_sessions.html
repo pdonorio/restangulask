@@ -15,6 +15,7 @@
                 <th>Emitted</th>
                 <th>Last access</th>
                 <th>Expiration</th>
+                <th>Revoke</th>
                 <th>Token</th>
             </tr>
             <tr ng-repeat="(key, values) in ctrl.tokens">
@@ -49,9 +50,20 @@
                 </span>
             </td>
 
+            <td>
+                <i class="material-icons"
+                    ng-click='ctrl.revokeToken(values.id);'
+                >
+                    delete
+                </i>
+
+
+            </td>
+
             <td style='max-width:300px;font-size: 6px; word-break: break-all;'>
                 {{values.token}}
             </td>
+
 
             </tr>
         </table>
