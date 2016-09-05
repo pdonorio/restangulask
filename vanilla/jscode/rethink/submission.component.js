@@ -70,13 +70,12 @@ Handle 'draft' state for creating a new record
                 self.main = self._all['data'][0]["Numero de l'extrait"];
             }
             // console.log("TEST PAOLO", self._all['data'][self.step-1]);
-
             self.current = angular.copy(self._all['data'][self.step-1]);
         }
 
-        self.current.multiselect = {}
-
         var current = self._all['stepTemplates'].data;
+        self.current.multiselect = {}
+        // console.log('PAOLO', self.current);
 
         for (var i = 0; i < current.length; i++) {
             self.formFields[i] = {
@@ -93,7 +92,6 @@ Handle 'draft' state for creating a new record
           var choose = getType(element.type);
           self.hashes[element.position] = element.hash;
 
-
           // TEXTAREA
           var field = {
               key: element.field, //key: element.hash,
@@ -109,9 +107,11 @@ Handle 'draft' state for creating a new record
 
           // LIST / select
           if (choose == "list") {
-            var options = [
-                {"value": "", "name": "-"}
-            ];
+
+            var options = [];
+            if (self.step != 4)
+                options.push({"value": "", "name": "-"});
+
             forEach(element.extra.split(','), function (obj, pos) {
                 options.push({"value":obj, "name": obj});
             });
@@ -129,11 +129,10 @@ Handle 'draft' state for creating a new record
 
             // Details MULTISELECT
             if (self.step == 4) {
-                field.type = 'multiselect';
-                self.current.multiselect[element.field] = [
-                    'test' + element.field,
-                    'mah'
-                ];
+                field.templateOptions.multiple = true;
+                // field.type = 'multiselect';
+                // console.log('TEST MULTI', element);
+                self.current.multiselect[element.field] = [""];
             }
 
           } else if (choose == 'date') {
@@ -217,23 +216,35 @@ Handle 'draft' state for creating a new record
         if (self.current[element.key]) {
 
             var pos = index + 1;
-            if (!self.hashes[pos])
+            if (!self.hashes[pos]) {
               $log.error("Failed to get hash", pos, self.hashes);
-            else if (!self.current[element.key].hasOwnProperty('value'))
-              // note: this happens if element.type == 'select' and no data is there
-
-              toSubmit.data.push({
+            } else {
+                // note: this happens if element.type == 'select'
+                // and no data is there
+                var tmp = {
                   position: index + 1,
                   hash: self.hashes[index + 1],
                   name: element.key,
-                  value: self.current[element.key] || '',
-              });
+                };
+
+                if (!self.current[element.key].hasOwnProperty('value')) {
+                  tmp.value = self.current[element.key] || '';
+                } else if (self.step == 4) {
+                  var val = angular.copy(self.current.multiselect[element.key]);
+                  if (val.length > 0 && val[0] != '')
+                    tmp.values = val;
+                }
+
+                if (tmp.hasOwnProperty('value') || tmp.hasOwnProperty('values'))
+                    toSubmit.data.push(tmp);
+            }
 
         }
 
       });
-      console.log("Submit", JSON.stringify(self.current), "translated to", toSubmit);
-      //return false;
+      // console.log("Submit", JSON.stringify(self.current));
+      console.log("translated to", toSubmit);
+      // return false;
 
       AdminService.updateDocument($stateParams.id, toSubmit)
         .then(function (out) {

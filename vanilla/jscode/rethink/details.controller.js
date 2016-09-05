@@ -51,9 +51,24 @@ function DetailsController($scope, $log, $sce, $stateParams, $auth, SearchServic
 // SHOULD I CYCLE TO REMOVE EMPTY?
             forEach(tmp, function(element, index) {
                 forEach(element, function(obj, j) {
-                    //console.log("element", j, "*" + obj + "*");
-                    if (obj && obj.hasOwnProperty('trim') && obj.trim() == '') {
-                        tmp[index][j] = null;
+                    // console.log("element", j, "*" + obj + "*");
+                    if (obj) {
+                        if (obj.hasOwnProperty('trim') && obj.trim() == '') {
+                            tmp[index][j] = null;
+                        }
+                        if (obj instanceof Array) {
+                            tmp[index][j] = null;
+                            if (obj.length > 0) {
+                                tmp[index][j] = "";
+                                forEach(obj, function(x, y) {
+                    // console.log("UHM", x, y);
+                                    if (y > 0)
+                                        tmp[index][j] += ', ';
+                                    if (x.trim() != '')
+                                        tmp[index][j] += x.trim();
+                                });
+                            }
+                        }
                     }
                 });
 
@@ -101,7 +116,7 @@ function DetailsController($scope, $log, $sce, $stateParams, $auth, SearchServic
                 previous_code = name.replace(regexp, page - 1);
                 next_code = name.replace(regexp, page + 1);
             }
-            console.log('CODES', num, previous_code, next_code, page);
+            // console.log('CODES', num, previous_code, next_code, page);
 
             // SEARCH WITH APIs
             self.previous.text = previous_code;

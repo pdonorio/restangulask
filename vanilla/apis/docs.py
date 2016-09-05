@@ -109,7 +109,9 @@ class RethinkDataValues(BaseRethinkResource):
                     if details != 'full':
                         break
                 element[row['name']] = ''
-                if 'value' in row:
+                if 'values' in row:
+                    element[row['name']] = row['values']
+                elif 'value' in row:
                     element[row['name']] = row['value']
 
             # print("TEST STEP", steps)
@@ -119,7 +121,7 @@ class RethinkDataValues(BaseRethinkResource):
             else:
                 single[pos] = title
 
-        print("TEST", single)
+        # print("TEST", single)
         return single
 
     def filter_nested_field(self, q, filter_value,

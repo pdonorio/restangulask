@@ -134,8 +134,9 @@
             || detail.refinedData[key][field3 + " libres"]'>
           <th width="35%"> {{ field3 }} </th>
           <td>
-            {{detail.refinedData[key][field3]}}
-            , {{detail.refinedData[key][field3 + ' libres']}}
+            {{detail.refinedData[key][field3]}}<span
+                ng-if="detail.refinedData[key][field3] && detail.refinedData[key][field3 + ' libres']">,</span>
+            {{detail.refinedData[key][field3 + ' libres']}}
           </td>
         </tr>
         <tr ng-init="field4='Apparato'"
@@ -143,8 +144,9 @@
             || detail.refinedData[key][field4 + " libre"]'>
           <th width="35%"> {{ field4 }} </th>
           <td>
-            {{detail.refinedData[key][field4]}}
-            , {{detail.refinedData[key][field4 + ' libre']}}
+            {{detail.refinedData[key][field4]}}<span
+                ng-if="detail.refinedData[key][field4] && detail.refinedData[key][field4 + ' libres']">,</span>
+            {{detail.refinedData[key][field4 + ' libre']}}
           </td>
         </tr>
       </tbody>

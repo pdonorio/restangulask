@@ -1,10 +1,12 @@
 
 BUGS:
+✔ multifields @done (16-09-05 12:01)
  ☐ PONT_1 non ha immagine
 http://localhost/public/details/3caee5bc-e569-432e-9da9-db9baaf52252?query=Pont_2
  ☐ Dunkerque_MS_1 edition/format
  ☐ avignon_ non ha thumbnail?
  ☐ rigenera indici
+ ☐ virgole inizio campi
  ☐ pulsante cambio immagine vicino traduzione e trascrizioni
 
   ☐ responsive
@@ -12,18 +14,6 @@ http://localhost/public/details/3caee5bc-e569-432e-9da9-db9baaf52252?query=Pont_
     Milan_3
   ☐ translate
     Anvers_MS_2
-
-MULTIFIELD:
-
- ☐ edit
-if step == 4 and field is select
-  + add
-
-recover a list
-save it to "values" and cleanup "value"
-
- ☐ view
-if values exist build a string and override value
 
 DETAILS:
   ☐ delete button (are you really sure?)
