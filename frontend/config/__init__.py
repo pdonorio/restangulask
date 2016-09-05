@@ -63,7 +63,6 @@ user_config = read_files(PATH)
 class BaseConfig(object):
 
     DEBUG = bool(int(os.environ.get('APP_DEBUG', int(DEBUG))))
-    print("TEST DEBUG", DEBUG)
     TESTING = False
     MYCONFIG_PATH = os.path.join(CONFIG_PATH, PATH)
     BASE_DB_DIR = '/dbs'

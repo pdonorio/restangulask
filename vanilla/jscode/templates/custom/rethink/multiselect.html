@@ -1,0 +1,26 @@
+<!-- FOREACH -->
+<div layout="row"
+    ng-repeat="(id, element) in model.multiselect[options.key] track by $index">
+
+    <md-input-container>
+        <md-select ng-model="model.multiselect[options.key][id]"
+          md-theme="{{to.theme}}">
+            <md-option ng-repeat="option in to.options"
+              ng-value="option[to.valueProp || 'value']">
+                {{ option[to.labelProp || 'name'] }}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+    <!-- REMOVE BUTTON on the side -->
+    <a href ng-click="model.multiselect[options.key].splice(id, 1)">
+        <i class="material-icons"
+            ng-if="model.multiselect[options.key].length > 1">remove</i>
+    </a>
+</div>
+<!-- end FOREACH -->
+
+<!-- ADD BUTTON below -->
+<a href ng-click="model.multiselect[options.key].push('')">
+    <i class="material-icons">add</i>
+</a>

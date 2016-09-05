@@ -112,7 +112,7 @@ class RethinkDataValues(BaseRethinkResource):
                 if 'value' in row:
                     element[row['name']] = row['value']
 
-            print("TEST STEP", steps)
+            # print("TEST STEP", steps)
             pos = int(steps['step']) - 1
             if details == 'full':
                 single[pos] = element

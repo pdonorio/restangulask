@@ -100,14 +100,15 @@
         </md-card-title-text>
       </md-card-title>
 
+        <!-- {{$ctrl.current}} <br> -->
       <md-card-content
-        layout="row" layout-padding layout-margin layout-fill
-        >
+        layout="row" layout-padding layout-margin layout-fill >
         <formly-form model="$ctrl.current"
             fieldTransforms="$ctrl.myfunctions"
             fields="$ctrl.formFields"
             ></formly-form>
       </md-card-content>
+
       <md-card-actions layout="row" layout-align="end center">
           <md-button type="submit"
             ng-disabled="$ctrl.form.$invalid">update</md-button>

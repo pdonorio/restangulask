@@ -74,6 +74,8 @@ Handle 'draft' state for creating a new record
             self.current = angular.copy(self._all['data'][self.step-1]);
         }
 
+        self.current.multiselect = {}
+
         var current = self._all['stepTemplates'].data;
 
         for (var i = 0; i < current.length; i++) {
@@ -124,6 +126,16 @@ Handle 'draft' state for creating a new record
                     // valueProp: 'name',
                 },
             }
+
+            // Details MULTISELECT
+            if (self.step == 4) {
+                field.type = 'multiselect';
+                self.current.multiselect[element.field] = [
+                    'test' + element.field,
+                    'mah'
+                ];
+            }
+
           } else if (choose == 'date') {
             // update the element to parse the date
             if (self.current[element.field]) {
@@ -160,21 +172,8 @@ Handle 'draft' state for creating a new record
 
           self.formFields[element.position-1] = field;
 
-/*
-// NOTE: FIXME other types - URL
-
-   formlyConfigProvider.setType({
-      name: 'url',
-      extends: 'input',
-      defaultOptions: {
-        templateOptions: {
-            type: 'url'
-        }
-      }
-    });
-*/
-
         });
+
     }
 
     self.loadData = function() {
@@ -289,9 +288,25 @@ Handle 'draft' state for creating a new record
     };
 }
 
+
+///////////////////////////////////////////////////////
+function MultipleFields (formlyConfigProvider)
+{
+    // set templates here
+    formlyConfigProvider.setType({
+      name: 'multiselect',
+      templateUrl: blueprintTemplateDir + 'multiselect.html',
+      wrapper: ['label', 'messages', 'inputContainer'],
+      // template: '<h3> PROVA </h3>',
+    });
+}
+
+///////////////////////////////////////////////////////
+
 // A COMPONENT
 
 angular.module('web')
+    .config(MultipleFields)
     .component('formfarm', {
       //require: { parent: '^^parentComponent' },
       // transclude: true,

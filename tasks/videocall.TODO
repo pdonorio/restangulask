@@ -7,6 +7,12 @@ http://localhost/public/details/3caee5bc-e569-432e-9da9-db9baaf52252?query=Pont_
  ☐ rigenera indici
  ☐ pulsante cambio immagine vicino traduzione e trascrizioni
 
+  ☐ responsive
+   ☐ grid list?
+    Milan_3
+  ☐ translate
+    Anvers_MS_2
+
 MULTIFIELD:
 
  ☐ edit
@@ -19,22 +25,15 @@ save it to "values" and cleanup "value"
  ☐ view
 if values exist build a string and override value
 
+DETAILS:
+  ☐ delete button (are you really sure?)
 
 EXPO:
-
-  date, autore, posto?
-
+  date, autore, posto
 ☐ Edit
    ☐ Option no zoom?
 ☐ Manage description
   ☐ button to delete section?
-
-BUGS:
-  ☐ responsive
-   ☐ grid list?
-    Milan_3
-  ☐ translate
-    Anvers_MS_2
 
 LESSICO & ELASTIC:
    excel > sheets > macro, micro, posizione, lingue (francese, latino, italiano)
@@ -67,3 +66,6 @@ extra SEARCH:
    ☐ prefix query? give importance if what you write is in the prefix
    ☐ scroll cache!
    ☐ did you mean?
+
+   --- ✄ -----------------------
+   THE END
