@@ -142,11 +142,13 @@ Handle 'draft' state for creating a new record
                     ];
                 }
                 var newarray = [];
-                forEach(self.current[element.field], function(element, index) {
-                    newarray.push(element.trim());
-                });
-                self.current[element.field] = angular.copy(newarray);
-                // console.log("MULTI 2", self.current[element.field]);
+                if (self.current[element.field]) {
+                    forEach(self.current[element.field], function(element, index) {
+                        newarray.push(element.trim());
+                    });
+                    self.current[element.field] = angular.copy(newarray);
+                    // console.log("MULTI 2", self.current[element.field]);
+                }
             }
 
           } else if (choose == 'date') {
