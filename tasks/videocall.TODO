@@ -1,14 +1,11 @@
 
 BUGS:
 ✔ multifields @done (16-09-05 12:01)
- ☐ PONT_1 non ha immagine
-http://localhost/public/details/3caee5bc-e569-432e-9da9-db9baaf52252?query=Pont_2
+ ✔ PONT_1 non ha immagine @done (16-09-08 08:29)
  ☐ avignon_ non ha thumbnail?
  ☐ Dunkerque_MS_1 edition/format
- ☐ rigenera indici
- ☐ cambio immagine
-   ☐ vicino traduzione e trascrizioni
- ☐ virgole inizio campi
+ ☐ consentire cambio immagine: pulsante vicino traduzione e trascrizioni?
+ ☐ virgole inizio campi?
 
   responsive:
    ☐ grid list?
