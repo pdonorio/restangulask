@@ -3,13 +3,14 @@ BUGS:
 ✔ multifields @done (16-09-05 12:01)
  ☐ PONT_1 non ha immagine
 http://localhost/public/details/3caee5bc-e569-432e-9da9-db9baaf52252?query=Pont_2
- ☐ Dunkerque_MS_1 edition/format
  ☐ avignon_ non ha thumbnail?
+ ☐ Dunkerque_MS_1 edition/format
  ☐ rigenera indici
+ ☐ cambio immagine
+   ☐ vicino traduzione e trascrizioni
  ☐ virgole inizio campi
- ☐ pulsante cambio immagine vicino traduzione e trascrizioni
 
-  ☐ responsive
+  responsive:
    ☐ grid list?
     Milan_3
   ☐ translate

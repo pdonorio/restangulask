@@ -63,6 +63,7 @@ Handle 'draft' state for creating a new record
     self.fillFields = function () {
 
         if (!self.draft) {
+            // console.log('ALL IS', self._all['data']);
 
             if ( self._all['data'][0] &&
                 self._all['data'][0].hasOwnProperty("Numero de l'extrait"))
@@ -74,7 +75,7 @@ Handle 'draft' state for creating a new record
         }
 
         var current = self._all['stepTemplates'].data;
-        self.current.multiselect = {}
+        // self.current.multiselect = {}
         // console.log('PAOLO', self.current);
 
         for (var i = 0; i < current.length; i++) {
@@ -85,7 +86,7 @@ Handle 'draft' state for creating a new record
             };
         }
 
-        //console.log('TEST current', self.current);
+        console.log('current', self.current);
 
         forEach(current, function(element, index) {
           //console.log('POS', element.position, element, getType(element.type));
@@ -130,16 +131,24 @@ Handle 'draft' state for creating a new record
             // Details MULTISELECT
             if (self.step == 4) {
                 field.templateOptions.multiple = true;
-                // console.log('TEST MULTI', element);
-                // field.type = 'multiselect';
-                // self.current.multiselect[element.field] = [""];
-
-                // console.log("MULTI 1*" + self.current[element.field] + "*");
+                //field.modelOptions = {allowInvalid: true};
+                // field.validators = {
+                //   justatest: {
+                //     expression: function(viewValue, modelValue) {
+                //         console.log('Validate', viewValue, modelValue);
+                //         var value = modelValue || viewValue;
+                //         return true;
+                //     },
+                //     message: '$viewValue + " is not valid"'
+                //   }
+                // };
                 if (typeof(self.current[element.field]) == "string") {
                     self.current[element.field] = [
                         //" " +
                         self.current[element.field]
                     ];
+                } else {
+                    self.current[element.field] = [];
                 }
                 var newarray = [];
                 if (self.current[element.field]) {
@@ -217,6 +226,7 @@ Handle 'draft' state for creating a new record
             //self._all = angular.copy(values);
             $log.info("Updated values", self._all, self.current);
             self.fillFields();
+            // console.log('TEST', self.formFields);
             self.load = false;
         });
     }
@@ -245,11 +255,14 @@ Handle 'draft' state for creating a new record
 
                 if (!self.current[element.key].hasOwnProperty('value')) {
                   tmp.value = self.current[element.key] || '';
-                } else if (self.step == 4) {
+                }
+                /*
+                else if (self.step == 4) {
                   var val = angular.copy(self.current.multiselect[element.key]);
                   if (val.length > 0 && val[0] != '')
                     tmp.values = val;
                 }
+                */
 
                 if (tmp.hasOwnProperty('value') || tmp.hasOwnProperty('values'))
                     toSubmit.data.push(tmp);
