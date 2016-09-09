@@ -28,8 +28,8 @@
     </h3>
  </div>
 
-  <div layout="row" layout-padding>
-   <div flex="65" ng-if="detail.data.id">
+  <div layout="row">
+   <div flex="70" ng-if="detail.data.id" style="padding-right:20px;">
 
       <div>
         <span>
@@ -40,7 +40,7 @@
       </div>
 
       <div layout="row">
-          <md-content flex="20" layout-padding layout-wrap
+          <md-content flex="30" layout-padding style="text-align: left;"
             ng-if="detail.previous.link">
                 <a href layout="row" layout-align="center center"
                     ui-sref="public.details({id: detail.previous.link})">
@@ -48,8 +48,8 @@
                     {{detail.previous.text}}
                 </a>
           </md-content>
-          <div flex="60"></div>
-          <md-content flex="20" layout-padding layout-wrap
+          <div flex="40"></div>
+          <md-content flex="30" layout-padding style="text-align: right;"
             ng-if="detail.next.link">
                 <a href layout="row" layout-align="center center"
                     ui-sref="public.details({id: detail.next.link})">
@@ -103,9 +103,11 @@
 <!-- IMAGE TEXT -->
      </div>
 
-  </div> <!-- END OF 65 -->
+  </div> <!-- END OF 70 -->
 
+<!--
   <div flex="5"></div>
+-->
 
   <div flex="30" layout="column" layout="center end"
     class="rounder nospaces fullheight teal lighten-4"
