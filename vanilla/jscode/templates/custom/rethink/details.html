@@ -40,18 +40,18 @@
       </div>
 
       <div layout="row">
-          <md-content flex="30" layout-padding style="text-align: left;"
-            ng-if="detail.previous.link">
+          <md-content flex="30" layout-padding style="text-align: left;">
                 <a href layout="row" layout-align="center center"
+                ng-if="detail.previous.link"
                     ui-sref="public.details({id: detail.previous.link})">
                     <i class="material-icons">keyboard_arrow_left</i>
                     {{detail.previous.text}}
                 </a>
           </md-content>
           <div flex="40"></div>
-          <md-content flex="30" layout-padding style="text-align: right;"
-            ng-if="detail.next.link">
+          <md-content flex="30" layout-padding style="text-align: right;">
                 <a href layout="row" layout-align="center center"
+                ng-if="detail.next.link"
                     ui-sref="public.details({id: detail.next.link})">
                     {{detail.next.text}}
                     <i class="material-icons">keyboard_arrow_right</i>
@@ -167,7 +167,7 @@
             ng-show='detail.refinedData[key2][field12]'>
           <th width="35%"> {{ field12 }} </th>
           <td>
-            <div ng-show='detail.refinedData.date'>
+            <span ng-if='detail.refinedData.date'>
             {{
             detail.refinedData[key2]["Date de début de la fête"]
             | date:'dd/MM'
@@ -176,9 +176,8 @@
             {{
             detail.refinedData[key2]["Date de la fin de la fête"]
             | date:'dd/MM'
-            }}
-            ,
-            </div>
+            }},
+            </span>
             {{detail.refinedData[key2][field12]}}
             </td>
         </tr>
@@ -217,15 +216,23 @@
         </tr>
         <tr ng-init="field24='Edition'">
           <th width="35%"> {{ field24 }} </th>
-          <td> {{detail.refinedData[key3]["Lieu d'édition"]}},
+          <td ng-init="tmp='Lieu d' + quote + 'édition'">
+          {{detail.refinedData[key3][tmp]}}<span
+            ng-if="detail.refinedData[key3][tmp]"
+            >,</span>
           {{detail.refinedData[key3]["Année"]}} </td>
         </tr>
         <tr ng-init="field25='Format'">
           <th width="35%"> {{ field25 }} </th>
-          <td>
-            {{detail.refinedData[key3]["Dimensions"]}};
-            {{detail.refinedData[key3]["Nombre de pages/folio"]}};
-            {{detail.refinedData[key3]["Nombre d'illustrations"]}}
+          <td ng-init="tmp='Nombre d' + quote + 'illustrations'">
+            {{detail.refinedData[key3]["Dimensions"]}}<span
+            ng-if="detail.refinedData[key3]['Dimensions']"
+            >;</span>
+            {{detail.refinedData[key3]["Nombre de pages/folio"]}}<span
+            ng-if="detail.refinedData[key3]['Nombre de pages/folio']
+            && detail.refinedData[key3][tmp]"
+            >;</span>
+            {{detail.refinedData[key3][tmp]}}
           </td>
         </tr>
         <tr ng-init="field26='Cote'"

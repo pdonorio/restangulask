@@ -2,19 +2,20 @@
 BUGS:
 ✔ multifields @done (16-09-05 12:01)
  ✔ PONT_1 non ha immagine @done (16-09-08 08:29)
- ☐ avignon_ non ha thumbnail?
- ☐ Dunkerque_MS_1 edition/format
- ☐ consentire cambio immagine: pulsante vicino traduzione e trascrizioni?
- ☐ virgole inizio campi?
+ ✔ avignon_ non ha thumbnail? @done (16-09-09 06:52)
+ ✔ Dunkerque_MS_1 edition/format @done (16-09-09 07:09)
+ ✔ virgole inizio campi? @done (16-09-09 07:09)
+  ☐ translate
+    Anvers_MS_2
 
   responsive:
    ☐ grid list?
     Milan_3
-  ☐ translate
-    Anvers_MS_2
 
 DETAILS:
-  ☐ delete button (are you really sure?)
+ ☐ substitution of the image
+   ☐ button down the image
+ ☐ delete button (are you really sure?)
 
 EXPO:
   date, autore, posto

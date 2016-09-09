@@ -15,6 +15,7 @@ function DetailsController($scope, $log, $sce, $stateParams, $auth, SearchServic
     self.texts = {}
     self.query = $stateParams.query;
     $scope.theid = $stateParams.id;
+    $scope.quote = "'";
 
     function loadData() {
 
