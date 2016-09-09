@@ -166,6 +166,7 @@ function FixTransController($scope, $rootScope, $sce,
     // "language":  "something" ,   // cannot be empty
     // "translation": true
 
+
       // Prepare data for the dialog
       $scope.currentRecord = record;
       $scope.currentType = 'documents';
@@ -185,31 +186,33 @@ function FixTransController($scope, $rootScope, $sce,
       // Fill data if exists
       SearchService.getDocs(record).then(function (out) {
 
-          if (out.data[0].images && out.data[0].images.length > 0)
-          {
-                var trans = "";
-                var data = out.data[0].images[0];
+        if (out.data[0].images && out.data[0].images.length > 0) {
+            var trans = "";
+            var data = out.data[0].images[0];
 
-                if (data.hasOwnProperty('translations')) {
+            if (data.hasOwnProperty('translations')) {
 
-                    // Get all languages
-                    forEach(data.translations, function(trans, language) {
-                        $scope.translations[language] = trans;
-                    });
-                    //console.log("Translations", $scope.translations);
+              // Get all languages
+              forEach(data.translations, function(trans, language) {
+                  $scope.translations[language] = trans;
+              });
+              //console.log("Translations", $scope.translations);
 
-                    // Show the first one
-                    if (Object.keys($scope.translations).length > 0) {
-                        $scope.initialLanguage =
-                            Object.keys($scope.translations)[0];
-                        $scope.currentText = angular.copy(
-                            $scope.translations[$scope.initialLanguage]);
-                    }
-
+              // Show the first one
+              if (Object.keys($scope.translations).length > 0) {
+                $scope.initialLanguage = Object.keys($scope.translations)[0];
+                if (
+                    $scope.translations[$scope.initialLanguage] &&
+                    $scope.translations[$scope.initialLanguage].trim() != "")
+                {
+                    $scope.currentText = angular.copy(
+                          $scope.translations[$scope.initialLanguage]);
                 }
-          }
+              }
 
-          self.currentText = $scope.currentText;
+            }
+        }
+        self.currentText = $scope.currentText;
 
         }); // end of filling
     }
