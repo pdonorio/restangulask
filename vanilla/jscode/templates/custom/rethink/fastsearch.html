@@ -7,8 +7,9 @@
     layout="row" layout-fill layout-wrap layout-padding layout-align="center center">
  <div flex="70" layout="column">
  <h4> Resultats de la <i>Recherche</i> </h4>
- <md-toolbar class="white black-text">
-      <md-autocomplete md-autofocus
+ <md-toolbar class="white black-text"
+    layout="row" layout-padding flex >
+      <md-autocomplete md-autofocus flex
           md-min-length="1"
 
           md-search-text="search.searchText"
@@ -50,18 +51,19 @@
         <md-not-found> No matches... </md-not-found>
         -->
       </md-autocomplete>
+    <a layout="row" layout-align="center center"
+      style="font-size: 14px;"
+      href ng-click="advanced = !advanced">
+        <i class="material-icons" ng-if="!advanced">add</i>
+        <i class="material-icons" ng-if="advanced">remove</i>
+        Advanced Search
+    </a>
  </md-toolbar>
  <span ng-if="search.elements >= 0">
     <b><i>Trouvés: {{search.elements}} éléments</i></b>
  </span>
 
 <div layout="column" layout-padding>
-    <a layout="row" layout-align="center center"
-      href ng-click="advanced = !advanced">
-        <i class="material-icons" ng-if="!advanced">add</i>
-        <i class="material-icons" ng-if="advanced">remove</i>
-        Advanced Search
-    </a>
     <md-card ng-if="advanced">
 <!--
         <md-card-title>

@@ -27,9 +27,10 @@ ricerca parola nella tendina
 
 elastic:
  ✔ uso id rethinkdb? @done (16-09-11 18:39)
+ ✔ remove fete from suggestions @done (16-09-12 06:52)
+ ☐ remove source from suggestions
  ☐ aggiungere lessico alla suggestion e all'index
  ☐ aggiungere traduzione alla suggestion e all'index??
- ☐ remove fete and source from suggestions??
 
 DETAILS:
  ☐ substitution of the image
