@@ -1,12 +1,13 @@
 <div ng-controller="ToastController as toast" >
  <div ng-controller="DetailsController as detail" >
 
-            <md-button>
-                <a ui-sref='public.fastsearch({text: detail.query})'
-                    layout='row' layout-align="center center">
-                    <i class="material-icons prefix">arrow_back</i> Retour
-                </a>
-            </md-button>
+    <a ui-sref='public.fastsearch({text: detail.query})'>
+        <md-button>
+            <div layout='row' layout-align="center center" flex >
+                <i class="material-icons prefix">arrow_back</i> Retour
+            </div>
+        </md-button>
+    </a>
 
   <div ng-if="detail.load" ng-include="root.templateDir+'loader.html'"></div>
   <div ng-if='detail.data' layout="column">
