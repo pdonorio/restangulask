@@ -54,9 +54,52 @@
  <span ng-if="search.elements >= 0">
     <b><i>Trouvés: {{search.elements}} éléments</i></b>
  </span>
+
+<div layout="column" layout-padding>
+    <a layout="row" layout-align="center center"
+      href ng-click="advanced = !advanced">
+        <i class="material-icons" ng-if="!advanced">add</i>
+        <i class="material-icons" ng-if="advanced">remove</i>
+        Advanced Search
+    </a>
+    <md-card ng-if="advanced">
+<!--
+        <md-card-title>
+          <md-card-title-text>
+            <h2>Card headline</h2>
+          </md-card-title-text>
+        </md-card-title>
+-->
+        <md-card-content>
+
+Filters:
+<div layout=column>
+  <md-input-container>
+    <label>Fete</label>
+    <md-select ng-model="search.filters.fete"
+        md-on-close="search.filter()" >
+      <md-optgroup label="fetes">
+        <md-option ng-value="item" ng-repeat="item in search.fetes"
+            >{{item}}</md-option>
+      </md-optgroup>
+    </md-select>
+  </md-input-container>
+
+<!--
+<div>
+    Select 2
+</div>
+-->
+
+            </div>
+        </md-card-content>
+    </md-card>
+</div>
+
  </div>
 </form>
 <!-- TOOLBAR -->
+
 
 
 <md-content layout="row" layout-padding>
@@ -100,6 +143,7 @@
             ng-style="{'background-image':'url('+ row._source.thumbnail +')'}"
         ></div>
       </td>
+      <!-- <td> {{row._source}} </td> -->
       <td>
             <strong>
               <span

@@ -14,6 +14,24 @@ function FastSearchController(
   var self = this;
   $log.warn("New FAST search controller");
 
+  ///////////////////////////
+  ///////////////////////////
+  // FILTERS
+  $scope.advanced = false;
+  self.filters = {};
+  SearchService.getDistinctValuesFromStep(3).then(function (out) {
+    if (out.elements && out.elements > 0) {
+        self.fetes = out.data;
+        // console.log('TEST', self.fetes);
+    }
+  });
+
+  self.filter = function () {
+    console.log('Filter with', self.filters.fete);
+  }
+  ///////////////////////////
+  ///////////////////////////
+
   // HANDLE PARAMETER
   self.searchText = $stateParams.text;
 
@@ -39,6 +57,9 @@ function FastSearchController(
     var empty_response = [];
     if (!text || text.trim() == '')
         return empty_response;
+
+    // do something with filters?
+
     return SearchService.getSuggestionsFast(text).then(function (out) {
         //console.log("OUT", out);
         if (out.elements && out.elements > 0)

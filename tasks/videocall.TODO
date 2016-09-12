@@ -6,10 +6,12 @@ RESPONSIVE:
 
 BUGS:
  ☐ lista feste caricamento
+ ✔ risultati ricerca date lieu vuoti? @done (16-09-11 18:37)
+   ✔ elasticsearch index missing elements? @done (16-09-11 18:37)
+   problem of step as string instead of integer
  ☐ retour
 http://spectaclebaroque.eu/public/details/8ab884b9-fdba-4a8c-83ad-9a81478f0ce1?query=Milan_3
 SAFARI / FIREFOX?
- ☐ risultati ricerca date lieu vuoti?
  ☐ thumbnail expo build medium size
  ☐ prossima pagina nel full screen
  ☐ firefox / safari check
@@ -22,6 +24,12 @@ ricerca parola nella tendina
       ☐ luogo e fete
     ☐ data ricerca range
       ☐ gg/mm/aaaa (no date picker)
+
+elastic:
+ ✔ uso id rethinkdb? @done (16-09-11 18:39)
+ ☐ aggiungere lessico alla suggestion e all'index
+ ☐ aggiungere traduzione alla suggestion e all'index??
+ ☐ remove fete and source from suggestions??
 
 DETAILS:
  ☐ substitution of the image
