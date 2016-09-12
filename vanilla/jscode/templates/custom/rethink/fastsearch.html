@@ -65,21 +65,13 @@
 
 <div layout="column" layout-padding>
     <md-card ng-if="advanced">
-<!--
-        <md-card-title>
-          <md-card-title-text>
-            <h2>Card headline</h2>
-          </md-card-title-text>
-        </md-card-title>
--->
-        <md-card-content>
+        <md-card-content> Filters:
 
-Filters:
 <div layout=column>
   <md-input-container>
     <label>Fete</label>
     <md-select ng-model="search.filters.fete"
-        md-on-close="search.filter()" >
+        md-on-close="search.searchTextChange()" >
       <md-optgroup label="fetes">
         <md-option ng-value="item" ng-repeat="item in search.fetes"
             >{{item}}</md-option>
@@ -103,22 +95,12 @@ Filters:
 <!-- TOOLBAR -->
 
 
-
 <md-content layout="row" layout-padding>
  <div flex='5'>&nbsp;</div>
- <div flex='95'
-    ui-scroll-viewport
-    style=" height: 700px; "
-    >
+ <div flex='95' ui-scroll-viewport style=" height: 700px; ">
 
-<!--
-<div ng-if="!search.data"
-    ng-include="root.templateDir + 'loader.html'"></div>
-
- <table class='highlight' ng-if="search.elements > 0">
--->
  <table class='highlight'>
-  <thead>
+  <thead ng-if="search.elements > 0" >
     <tr>
         <th>Vignette</th>
         <th>Extrait</th>

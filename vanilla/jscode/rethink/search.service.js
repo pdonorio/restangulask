@@ -183,18 +183,15 @@ function SearchService($log, api) {
 //////////////////////////
 
     //////////////////////////
-    self.getDataFast = function(searchTerms, current) {
+    self.getDataFast = function(searchTerms, current, filters) {
 
-        // var perpage = 10;
-        // var page = 1;
-        // if (current > perpage) {
-        //     page = 1 + (current - 1) / perpage;
-        // }
-        //console.log("CURRENT IS", current);
+        var json_data = {
+            'currentpage': current,
+        }
+        if (filters.fete)
+            json_data.fete = filters.fete;
 
-        return api.apiCall(self.endpoints.fast, 'GET',
-            {'currentpage': current}
-            , searchTerms);
+        return api.apiCall(self.endpoints.fast, 'GET', json_data, searchTerms);
     }
 
     //////////////////////////

@@ -18,6 +18,7 @@ function FastSearchController(
   ///////////////////////////
   // FILTERS
   $scope.advanced = false;
+  self.elements = 0;
   self.filters = {};
 
 /* LOAD ADVANCED AT STARTUP
@@ -37,31 +38,31 @@ function FastSearchController(
 */
 
   SearchService.getDistinctValuesFromStep(3).then(function (out) {
-    if (out.elements && out.elements > 0) {
-        self.fetes = out.data;
-        // console.log('TEST', self.fetes);
-    }
+    if (out.elements && out.elements > 0) { self.fetes = out.data; }
   });
 
-  self.filter = function () {
-    console.log('Filter with', self.filters.fete);
-  }
   ///////////////////////////
   ///////////////////////////
 
   // HANDLE PARAMETER
-  self.searchText = $stateParams.text;
+  // self.searchText = $stateParams.text;
 
   $scope.myadapter = {};
   $scope.datasource = {
     get : function (index, count, success)
     {
-          //console.log("GET ME:", index, count, self.searchText);
+// do something with filters?
+          console.log("GET ME:", index, count, self.searchText, self.filters);
           var result = [];
           if (index > 0) {
-              SearchService.getDataFast(self.searchText, index)
+              SearchService.getDataFast(self.searchText, index, self.filters)
                .then(function (out) {
-                   success(out.data);
+                  // console.log('TEST', out.data, out.elements);
+                  self.elements = 0;
+                  if (out.elements) {
+                    self.elements = out.elements;
+                  }
+                  success(out.data);
               });
           } else {
             success([]);
@@ -74,8 +75,6 @@ function FastSearchController(
     var empty_response = [];
     if (!text || text.trim() == '')
         return empty_response;
-
-    // do something with filters?
 
     return SearchService.getSuggestionsFast(text).then(function (out) {
         //console.log("OUT", out);
@@ -100,7 +99,7 @@ function FastSearchController(
 
   // first call (based on the URL)
   self.searchText = $stateParams.text;
-  //console.log("Search parameter", self.parameter);
+  console.log("Search parameter", self.parameter);
 
 /*
   // Init keys
