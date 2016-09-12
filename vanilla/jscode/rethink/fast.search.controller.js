@@ -18,7 +18,7 @@ function FastSearchController(
   ///////////////////////////
   // FILTERS
   $scope.advanced = false;
-  self.elements = 0;
+  self.elements = null;
   self.filters = {};
 
 /* LOAD ADVANCED AT STARTUP
@@ -58,13 +58,14 @@ function FastSearchController(
               SearchService.getDataFast(self.searchText, index, self.filters)
                .then(function (out) {
                   // console.log('TEST', out.data, out.elements);
-                  self.elements = 0;
+                  self.elements = null;
                   if (out.elements) {
                     self.elements = out.elements;
+                    success(out.data);
                   }
-                  success(out.data);
               });
           } else {
+            console.log("Empty search");
             success([]);
           }
     }

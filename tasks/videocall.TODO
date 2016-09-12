@@ -3,17 +3,11 @@ RESPONSIVE:
  ☐ testo e immagine e insieme
  ☐ ascensorini
  ☐ colonna dei dettagli può finire giù
+ ☐ thumbnail expo build medium size
 
 BUGS:
- ✔ lista feste caricamento @done (16-09-12 07:09)
- ✔ risultati ricerca date lieu vuoti? @done (16-09-11 18:37)
-   ✔ elasticsearch index missing elements? @done (16-09-11 18:37)
-   problem of step as string instead of integer
- ✔ retour button (back) @done (16-09-12 07:18)
- problem was the md button must be inside the anchor??
- ☐ thumbnail expo build medium size
- ☐ prossima pagina nel full screen
- ☐ firefox / safari check
+  ✔ go back to search does not reload? @done (16-09-12 16:58)
+    MAH
 
 ricerca avanzata:
 prima ricerca tendina festa da subito
@@ -23,6 +17,9 @@ ricerca parola nella tendina
       ☐ luogo e fete
     ☐ data ricerca range
       ☐ gg/mm/aaaa (no date picker)
+
+  ☐ Save filters choises ?
+    ☐ probably inside a cookie?
 
 elastic:
  ✔ uso id rethinkdb? @done (16-09-11 18:39)
@@ -57,6 +54,10 @@ ELASTIC
 ☐ add insert/updates to elastic
  ☐ how to remove existing data updated?
 ☐ index rebuild
+
+ LAST:
+ ☐ prossima pagina nel full screen
+ ☐ firefox / safari check
 
 MOVE TO PRODUCTION:
  ✔ uptime robot (both interface and api) @done (16-08-12 09:36)
