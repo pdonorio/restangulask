@@ -29,12 +29,14 @@
         {{steps.element['Titre abrégé']}}
         <br>
         <table>
-            <tr>
-                <th width=50> Source: </th>
-                 <td ng-repeat="source in steps.element['Titre abrégé de la source']">
-                    {{source}}
-                 </td>
-            </tr>
+          <tr>
+            <th width="50"> Source: </th>
+            <td>
+            <div ng-repeat="source in steps.element['Titre abrégé de la source']">
+                {{source}}
+            </div>
+            </td>
+          </tr>
         </table>
 
         <table class="table table-hover bordered highlight responsive-table">

@@ -958,6 +958,8 @@ class RethinkElement(BaseRethinkResource):
                         tmp[element['name']] = element['value']
                 if step['step'] == 4:
                     for element in step['data']:
+                        if isinstance(element['value'], list):
+                            element['value'] = " ".join(element['value'])
                         if element['value'] is not None and \
                           element['value'].strip() == '':
                             element['value'] = '-'

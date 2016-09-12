@@ -5,7 +5,7 @@ RESPONSIVE:
  ☐ colonna dei dettagli può finire giù
 
 BUGS:
- ☐ lista feste caricamento
+ ✔ lista feste caricamento @done (16-09-12 07:09)
  ✔ risultati ricerca date lieu vuoti? @done (16-09-11 18:37)
    ✔ elasticsearch index missing elements? @done (16-09-11 18:37)
    problem of step as string instead of integer

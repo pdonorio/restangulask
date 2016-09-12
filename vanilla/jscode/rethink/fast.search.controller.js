@@ -19,6 +19,23 @@ function FastSearchController(
   // FILTERS
   $scope.advanced = false;
   self.filters = {};
+
+/* LOAD ADVANCED AT STARTUP
+
+  var promises = {
+    fete: SearchService.getDistinctValuesFromStep(3),
+    2: SearchService.getDistinctValuesFromStep(2),
+  }
+  $q.all(promises).then((values) =>
+  {
+    forEach(values, function (api_response, step) {
+      if (api_response.elements > 2) {
+      }
+    });
+  });
+
+*/
+
   SearchService.getDistinctValuesFromStep(3).then(function (out) {
     if (out.elements && out.elements > 0) {
         self.fetes = out.data;
