@@ -106,9 +106,10 @@ function RestApiService($http, $q, $auth, $log, $mdToast) {
                 if (returnRawResponse) return $q.reject(response);
 
                 if (!response.data || !response.data.hasOwnProperty('Response')) {
-                    return null;
-                } else if (typeof response.data.Response === 'undefined') {
-                    return null;
+                    return $q.reject(null);
+                } 
+                if (typeof response.data.Response === 'undefined') {
+                    return $q.reject(null);
                 }
 
                 return $q.reject(response.data.Response);
