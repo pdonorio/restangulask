@@ -1,25 +1,36 @@
 
 RESPONSIVE:
- ☐ testo e immagine e insieme
- ☐ ascensorini
- ☐ colonna dei dettagli può finire giù
+ ✔ testo e immagine e insieme @done (16-09-15 08:33)
+ ✔ ascensorini @done (16-09-15 08:33)
+ ✔ colonna dei dettagli può finire giù @done (16-09-15 08:33)
  ☐ thumbnail expo build medium size
-
-BUGS:
-  ✔ go back to search does not reload? @done (16-09-12 16:58)
-    MAH
 
 ricerca avanzata:
 prima ricerca tendina festa da subito
 
 ricerca parola nella tendina
-    ☐ campo a tendina
+    ✔ campo a tendina @done (16-09-12 19:43)
       ☐ luogo e fete
     ☐ data ricerca range
       ☐ gg/mm/aaaa (no date picker)
 
+Step 2: Type de sources : manuscrit ou imprimé
+ ☐ step 2 - position 2
+ Step 3 : lieu (= luogo della festa)
+ ☐ step 3 - position 5
+
+ ☐ multiple select?
+Step 3: temps (= tempi della festa: octave 1, 2, etc.)
+step 4 : action
+Step 5 : apparato
+
+Step 3 : Date (= data della festa)
+ ☐ step 3position 8 (inizio) and 9 (fine)
+
+
   ☐ Save filters choises ?
     ☐ probably inside a cookie?
+    http://stackoverflow.com/a/28095874/2114395
 
 elastic:
  ✔ uso id rethinkdb? @done (16-09-11 18:39)

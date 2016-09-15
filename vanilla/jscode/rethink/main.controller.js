@@ -17,6 +17,14 @@ function MenuInAppController($scope, $rootScope, $log, $auth, $state)
     // Where am i?
     self.currentPage = $state.current.name;
 
+    // https://material.angularjs.org/latest/demo/menu
+    var originatorEv;
+    self.openMenu = function($mdOpenMenu, ev) {
+      originatorEv = ev;
+      $mdOpenMenu(ev);
+    };
+
+
     // Remove normal/main menu
     $rootScope.menu = [];
 
