@@ -67,7 +67,8 @@
         <div flex=50 style="text-align: center;">
             <a ng-if="detail.data.images[0].filename"
                 href="/zoom/{{ detail.data.id }}/{{ detail.data.images[0].code }}"
-                target="_blank">
+                target="_blank" class="hoverable"
+                >
              <img tooltipped data-position="right" data-delay="50"
                 data-tooltip="Click to zoom this image"
                 height=500

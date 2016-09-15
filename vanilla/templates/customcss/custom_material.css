@@ -6,6 +6,13 @@
     /*-webkit-overflow-scrolling: touch;*/
 }
 
+.padbtn {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 3px;
+    padding-left: 3px;
+}
+
 /*
 http://stackoverflow.com/a/31278615/2114395
 */

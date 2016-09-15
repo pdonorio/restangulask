@@ -1,31 +1,31 @@
 <div ng-controller="MenuInAppController as mymenu">
 
- <ul ng-if="lastRoute.state.name != 'welcome.test'"
-    id="nav-mobile" class="right"
-    style="color: grey; padding-right: 20px;">
+ <div class="hide-on-med-and-down">
+  <ul class="right right-pad ">
 
 <!-- IF LOGGED AND NOT LOGGED -->
-    <li
-        ng-show="lastRoute.state.name != 'public.db'
+    <li ng-show="lastRoute.state.name != 'public.db'
             && lastRoute.state.name != 'public.fastsearch'"
+        class="hide-on-med-and-down"
         style="color: grey;">
         <div layout="row">
             <i class="material-icons prefix">search</i>
-            <input placeholder="Search" ng-focus="activateSearch()">
+            <input placeholder="Search" ng-focus="activateSearch()" size=15>
         </div>
     </li>
 
 <!-- IF NOT LOGGED -->
 
     <li ng-if="mymenu.logged">
-        <a ui-sref="logged.submit({id: 'draft', step: 1})" class="btn indigo">
+        <a ui-sref="logged.submit({id: 'draft', step: 1})"
+            class="btn indigo padbtn">
             add
         </a>
     </li>
 
     <!-- Angular dynamic material menu -->
     <li ng-if="mymenu.buttons" ng-repeat="button in mymenu.buttons">
-        <a ui-sref="{{button.link}}" class="btn" ng-class="button.color">
+        <a ui-sref="{{button.link}}" class="btn padbtn" ng-class="button.color">
             {{ button.name.capitalizeFirstLetter() }}
         </a>
     </li>
@@ -39,38 +39,30 @@
     </li>
 -->
 
-<!-- BASIC MENU FROM ROUTING - if nothing else is available -->
-
-    <!-- Angular menu from route -->
-	<li ng-if="menu && !mymenu.buttons" ng-repeat='item in menu'>
-		<a ui-sref="logged.{{item.toLowerCase()}}">{{item}}</a>
-	</li>
-
-
-<!-- <li hide-gt-xs> -->
-
-<!--
-<li>
- <md-menu md-position-mode="target-right target" >
-    <i class="material-icons" ng-click="mymenu.openMenu($mdOpenMenu, $event)"
-        >more_vert</i>
-    <md-menu-content width="4">
-        <md-menu-item>
-            <md-button ng-click="">
-                <i class="material-icons">add</i> test 1
-            </md-button>
-        </md-menu-item>
-        <md-menu-divider></md-menu-divider>
-        <md-menu-item>
-            <md-button ng-click="">
-                <i class="material-icons">remove</i> test 2
-            </md-button>
-        </md-menu-item>
-    </md-menu-content>
- </md-menu>
-</li>
-
--->
-
  </ul>
+ </div>
+
+<!-- MOBILE -->
+ <ul id="nav-mobile" class="right right-pad">
+    <li>
+     <md-menu md-position-mode="target-right target" >
+        <i class="material-icons" ng-click="mymenu.openMenu($mdOpenMenu, $event)"
+            >more_vert</i>
+        <md-menu-content width="4">
+            <md-menu-item>
+                <md-button ng-click="">
+                    <i class="material-icons">add</i> test 1
+                </md-button>
+            </md-menu-item>
+            <md-menu-divider></md-menu-divider>
+            <md-menu-item>
+                <md-button ng-click="">
+                    <i class="material-icons">remove</i> test 2
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+     </md-menu>
+    </li>
+ </ul>
+
 </div>
