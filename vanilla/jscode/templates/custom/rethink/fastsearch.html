@@ -28,15 +28,15 @@
           <span layout="row" layout-align="start center">
             <!-- TYPE -->
             <span style="width: 200px;">
-                <span ng-switch on="item._source.label">
-                  <i ng-switch-when="extrait"
-                    class="material-icons"> import_contacts </i>
-                  <i ng-switch-when="source"
-                    class="material-icons"> book </i>
-                  <i ng-switch-when="fete"
-                    class="material-icons"> bookmark_border </i>
-                  <i ng-switch-when="transcription"
-                    class="material-icons"> library_books </i>
+                <span ng-switch on="item._source.extra.cleanlabel">
+                  <i ng-switch-when="extrait" class="material-icons"> import_contacts </i>
+<!--
+                  <i ng-switch-when="source" class="material-icons"> book </i>
+                  <i ng-switch-when="fete" class="material-icons"> bookmark_border </i>
+-->
+                  <i ng-switch-when="transcription" class="material-icons"> library_books </i>
+                  <i ng-switch-when="traduction" class="material-icons"> bookmark_border </i>
+                  <i ng-switch-default class="material-icons"> book </i>
                 </span>
                   &nbsp; <strong>{{item._source.label}}</strong>
             </span>

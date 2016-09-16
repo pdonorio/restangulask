@@ -1,47 +1,39 @@
 
- ☐  cancellare prova
- ☐ ordinamento tabella lista delle feste
- ☐ dettagli
+DETTAGLI:
    ☐ allineamento top per i titoli
    ☐ spazi tra le righe
- ☐ dettagli
  http://spectaclebaroque.eu/app/submit/f98d423f-5bd3-4aa3-9d0c-e298a4972707
  pont
    ☐ aggiugere la pagina sotto source
    ☐ controllare se si può anticipare in pagina succ e prev che pagina sarà
    ☐ rimuovere titolo notice
 
-   ☐ controlla problemi di rete
+LATEST:
+ ☐  cancellare prova
+ ☐ ordinamento tabella lista delle feste
+ ☐ ui base de donné
+   ☐ cards invece di input
 
  ☐ thumbnail
    Besançon_1
    Bordeaux_1
+ ☐ thumbnail expo build medium size
 
  ☐ se modifico tendina dopo inserimento transcrition l'elemento non viene salvato
-
- ☐ ui base de donné
-   ☐ cards invece di input
-
+ ☐ controlla problemi di rete
  ☐ landscape!!
  http://spectaclebaroque.eu/public/details/7051ffc6-4db0-472a-943b-db04f0b6f555?query=Pont-%C3%A0-Mousson_46
 
-RESPONSIVE:
- ✔ testo e immagine e insieme @done (16-09-15 08:33)
- ✔ ascensorini @done (16-09-15 08:33)
- ✔ colonna dei dettagli può finire giù @done (16-09-15 08:33)
- ☐ thumbnail expo build medium size
-
 ricerca avanzata:
+ ☐ single select
+Step 4: temps (= tempi della festa: octave 1, 2, etc.)
+step 4 : action
+Step 4 : apparato
 
 Step 2: Type de sources : manuscrit ou imprimé
- ☐ step 2 - position 2
+ ✔ step 2 - position 2 @done (16-09-16 16:39)
  Step 3 : lieu (= luogo della festa)
  ✔ step 3 - position 5 @done (16-09-16 07:31)
-
- ☐ multiple select?
-Step 3: temps (= tempi della festa: octave 1, 2, etc.)
-step 4 : action
-Step 5 : apparato
 
 Step 3 : Date (= data della festa)
  ☐ step 3position 8 (inizio) and 9 (fine)
