@@ -108,13 +108,16 @@ function SearchService($log, api) {
         });
     }
 
-    self.getDistinctValuesFromStep = function(step) {
+    self.getDistinctValuesFromStep = function(step, position) {
+
+      if (!position)
+        position = 1;
       return self.doQuery(self.endpoints.search,
             {
                 perpage: 0, //all
                 filter: 'autocompletion',
                 step: step,
-                position: 1,
+                position: position
             }
         );
     }
@@ -185,13 +188,11 @@ function SearchService($log, api) {
     //////////////////////////
     self.getDataFast = function(searchTerms, current, filters) {
 
-        var json_data = {
-            'currentpage': current,
-        }
-        if (filters.fete)
-            json_data.fete = filters.fete;
+        if (!filters)
+            filters = {}
+        filters['currentpage'] = current;
 
-        return api.apiCall(self.endpoints.fast, 'GET', json_data, searchTerms);
+        return api.apiCall(self.endpoints.fast, 'GET', filters, searchTerms);
     }
 
     //////////////////////////

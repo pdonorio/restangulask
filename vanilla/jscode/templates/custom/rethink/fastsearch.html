@@ -68,22 +68,46 @@
         <md-card-content> Filters:
 
 <div layout=column>
+
   <md-input-container>
     <label>Fete</label>
-    <md-select ng-model="search.filters.fete"
-        md-on-close="search.searchTextChange()" >
+    <md-select ng-model="search.filters.fete" md-on-close="search.searchTextChange()" >
       <md-optgroup label="fetes">
-        <md-option ng-value="item" ng-repeat="item in search.fetes"
-            >{{item}}</md-option>
+        <md-option ng-value="">-</md-option>
+        <md-option ng-value="item" ng-repeat="item in search.fetes" >{{item}}</md-option>
       </md-optgroup>
     </md-select>
   </md-input-container>
 
-<!--
-<div>
-    Select 2
-</div>
--->
+  <md-input-container>
+    <label>Source</label>
+    <md-select ng-model="search.filters.source" md-on-close="search.searchTextChange()" >
+      <md-optgroup label="sources">
+        <md-option ng-value="">-</md-option>
+        <md-option ng-value="item" ng-repeat="item in search.sources" >{{item}}</md-option>
+      </md-optgroup>
+    </md-select>
+  </md-input-container>
+
+  <md-input-container>
+    <label>Lieu</label>
+    <md-select ng-model="search.filters.lieu" md-on-close="search.searchTextChange()" >
+      <md-optgroup label="lieus">
+        <md-option ng-value="">-</md-option>
+        <md-option ng-value="item" ng-repeat="item in search.lieus" >{{item}}</md-option>
+      </md-optgroup>
+    </md-select>
+  </md-input-container>
+
+  <md-input-container>
+    <label>Manuscrit</label>
+    <md-select ng-model="search.filters.manuscrit" md-on-close="search.searchTextChange()" >
+      <md-optgroup label="manuscrits">
+        <md-option ng-value="">-</md-option>
+        <md-option ng-value="item" ng-repeat="item in search.manuscrits" >{{item}}</md-option>
+      </md-optgroup>
+    </md-select>
+  </md-input-container>
 
             </div>
         </md-card-content>
@@ -146,7 +170,7 @@
             md-highlight-flags="^i">{{row._source.fete}}</span>
         <br>
         <i>Lieu</i>:
-        {{row._source.place}}
+        {{row._source.lieu}}
         <br>
         <i>Date</i>:
         {{row._source.date}}

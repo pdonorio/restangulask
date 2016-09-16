@@ -151,6 +151,7 @@ class RethinkDataValues(BaseRethinkResource):
 
     @deck.add_endpoint_parameter(name='filter', ptype=str)
     @deck.add_endpoint_parameter(name='step', ptype=int, default=1)
+    @deck.add_endpoint_parameter(name='position', ptype=int, default=1)
     @deck.add_endpoint_parameter(name='key')
     @deck.add_endpoint_parameter(name='field')
     @deck.add_endpoint_parameter(name='details', default='short')
@@ -174,7 +175,7 @@ class RethinkDataValues(BaseRethinkResource):
 
             if param == 'autocompletion':
                 query = self.get_autocomplete_data(
-                    query, args['step'])
+                    query, args['step'], args['position'])
             elif param == 'nested_filter' and args['key'] is not None:
                 query = self.filter_nested_field(
                     query, args['key'], default_position)

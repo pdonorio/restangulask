@@ -21,12 +21,14 @@ function FastSearchController(
   self.elements = null;
   self.filters = {};
 
-/* LOAD ADVANCED AT STARTUP
+// LOAD ADVANCED AT STARTUP
 
-  var promises = {
-    fete: SearchService.getDistinctValuesFromStep(3),
-    2: SearchService.getDistinctValuesFromStep(2),
-  }
+  // var promises = {
+  //   fete: SearchService.getDistinctValuesFromStep(3),
+  //   2: SearchService.getDistinctValuesFromStep(2),
+  // }
+
+/*
   $q.all(promises).then((values) =>
   {
     forEach(values, function (api_response, step) {
@@ -37,8 +39,20 @@ function FastSearchController(
 
 */
 
+  SearchService.getDistinctValuesFromStep(2).then(function (out) {
+    if (out && out.elements && out.elements > 0) { self.sources = out.data; }
+  });
+
+  SearchService.getDistinctValuesFromStep(2, 2).then(function (out) {
+    if (out && out.elements && out.elements > 0) { self.manuscrits = out.data; }
+  });
+
   SearchService.getDistinctValuesFromStep(3).then(function (out) {
-    if (out.elements && out.elements > 0) { self.fetes = out.data; }
+    if (out && out.elements && out.elements > 0) { self.fetes = out.data; }
+  });
+
+  SearchService.getDistinctValuesFromStep(3, 5).then(function (out) {
+    if (out && out.elements && out.elements > 0) { self.lieus = out.data; }
   });
 
   ///////////////////////////
@@ -58,10 +72,12 @@ function FastSearchController(
               SearchService.getDataFast(self.searchText, index, self.filters)
                .then(function (out) {
                   // console.log('TEST', out.data, out.elements);
-                  self.elements = null;
-                  if (out.elements) {
-                    self.elements = out.elements;
-                    success(out.data);
+                  if (out && out.elements) {
+                      self.elements = null;
+                      if (out.elements) {
+                        self.elements = out.elements;
+                        success(out.data);
+                      }
                   }
               });
           } else {
