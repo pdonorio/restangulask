@@ -225,7 +225,19 @@ function routeConfig(
                     templateUrl: 'token_sessions.html'
                 }
             }
+        },
+
+        "logged.profile.changepassword": {
+            url: "/changepassword",
+            views: {
+                "loggedview@logged": {
+                    dir: "base",
+                    templateUrl: 'changepassword.html'
+                }
+            }
         }
+
+
         // Routes definition ends here
     };
 
