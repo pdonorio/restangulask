@@ -112,7 +112,7 @@ function routeConfig(
     // Dinamically inject the routes from the choosen blueprint
     var extraRoutes = {};
     var extraRoutesSize = 0;
-    var blueprintRoutes = blueprint + 'Routes';
+    var blueprintRoutes = 'customRoutes';
     try {
         extraRoutes = $injector.get(blueprintRoutes);
         extraRoutesSize = Object.keys(extraRoutes).length;
