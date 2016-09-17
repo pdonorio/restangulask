@@ -13,6 +13,10 @@ from ... import get_logger
 logger = get_logger(__name__)
 
 PARTY_KEY = 'fete'
+SOURCE_KEY = 'source'
+SCRIPT_KEY = 'manuscrit'
+PLACE_KEY = 'lieu'
+DATE_KEY = 'date'
 
 
 class FastDocs(ExtendedApiResource, FastSearch):
@@ -20,24 +24,34 @@ class FastDocs(ExtendedApiResource, FastSearch):
 
     @deck.apimethod
     @deck.add_endpoint_parameter(name=PARTY_KEY, ptype=str)
+    @deck.add_endpoint_parameter(name=SOURCE_KEY, ptype=str)
+    @deck.add_endpoint_parameter(name=PLACE_KEY, ptype=str)
+    @deck.add_endpoint_parameter(name=DATE_KEY, ptype=str)
+    @deck.add_endpoint_parameter(name=SCRIPT_KEY, ptype=str)
     def get(self, searchterms=None):
 
         if not self.get_instance():
             return self.response(obj="Connection failed", fail=True)
 
+        #####################################
         # filters
+        from beeprint import pp
         filters = {}
-        # print("TEST", self._args)
-        party = self._args.get(PARTY_KEY)
-        if party is not None:
-            filters[PARTY_KEY] = party
+        pp(self._args)
+        filters_keys = [
+            PARTY_KEY, SOURCE_KEY, PLACE_KEY, DATE_KEY, SCRIPT_KEY
+        ]
+        for key in filters_keys:
+            tmp = self._args.get(key)
+            print("TEST", key, tmp)
+            if tmp is not None:
+                filters[key] = tmp
+        pp(filters)
 
+        #####################################
         current_element, limit = self.get_paging()
-
         data, count = self.fast_get(
-            searchterms, current_element, limit,
-            filters=filters)
-        # print("TEST", searchterms)
+            searchterms, current_element, limit, filters=filters)
 
         if data is None:
             return self.response(obj='Request failed', fail=True)
