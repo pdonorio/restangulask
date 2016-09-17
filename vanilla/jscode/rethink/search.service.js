@@ -17,6 +17,7 @@ function SearchService($log, api) {
         fast: 'datasearch',
         suggest: 'datasuggest',
         fete: 'datalist',
+        extra: 'steps',
     }
 
 //////////////////
@@ -105,6 +106,24 @@ function SearchService($log, api) {
             }
             self.latestSteps = steps;
             return steps;
+        });
+    }
+
+    self.getDistinctValuesFromMultiStep = function(position) {
+
+      var step = 4
+      return api.apiCall(self.endpoints.extra, 'POST',
+        {'step': step, 'position': position})
+       .then(function(out)
+       {
+          if (out.elements && out.elements > 0 && out.data[0].extra) {
+            var tmp = out.data[0].extra
+                .replace(new RegExp("[\.]+$"), "")
+                .split(', ');
+            out.data = tmp;
+            // console.log('TEST MULTI OUT', out, tmp);
+          }
+          return out;
         });
     }
 

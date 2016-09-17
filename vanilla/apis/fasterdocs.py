@@ -16,6 +16,11 @@ PARTY_KEY = 'fete'
 SOURCE_KEY = 'source'
 SCRIPT_KEY = 'manuscrit'
 PLACE_KEY = 'lieu'
+MULTI1_KEY = 'apparato'
+MULTI2_KEY = 'actions'
+MULTI3_KEY = 'temps'
+
+# UHM
 DATE_KEY = 'date'
 
 
@@ -26,8 +31,11 @@ class FastDocs(ExtendedApiResource, FastSearch):
     @deck.add_endpoint_parameter(name=PARTY_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=SOURCE_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=PLACE_KEY, ptype=str)
-    @deck.add_endpoint_parameter(name=DATE_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=SCRIPT_KEY, ptype=str)
+    # @deck.add_endpoint_parameter(name=DATE_KEY, ptype=str)
+    @deck.add_endpoint_parameter(name=MULTI1_KEY, ptype=str)
+    @deck.add_endpoint_parameter(name=MULTI2_KEY, ptype=str)
+    @deck.add_endpoint_parameter(name=MULTI3_KEY, ptype=str)
     def get(self, searchterms=None):
 
         if not self.get_instance():
@@ -39,7 +47,8 @@ class FastDocs(ExtendedApiResource, FastSearch):
         # from beeprint import pp
         # pp(self._args)
         filters_keys = [
-            PARTY_KEY, SOURCE_KEY, PLACE_KEY, DATE_KEY, SCRIPT_KEY
+            PARTY_KEY, SOURCE_KEY, PLACE_KEY, SCRIPT_KEY, DATE_KEY,
+            MULTI1_KEY, MULTI2_KEY, MULTI3_KEY
         ]
         for key in filters_keys:
             tmp = self._args.get(key)

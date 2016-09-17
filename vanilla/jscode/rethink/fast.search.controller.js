@@ -20,15 +20,14 @@ function FastSearchController(
   $scope.advanced = false;
   self.elements = null;
   self.filters = {};
+  self.load = false;
 
-// LOAD ADVANCED AT STARTUP
+/* // LOAD ADVANCED AT STARTUP
 
   // var promises = {
   //   fete: SearchService.getDistinctValuesFromStep(3),
   //   2: SearchService.getDistinctValuesFromStep(2),
   // }
-
-/*
   $q.all(promises).then((values) =>
   {
     forEach(values, function (api_response, step) {
@@ -40,22 +39,39 @@ function FastSearchController(
 */
 
 // TO FIX
+// MAKE ONE ENDPOINT
 
-  SearchService.getDistinctValuesFromStep(2).then(function (out) {
-    if (out && out.elements && out.elements > 0) { self.sources = out.data; }
+//promise 1
+  SearchService
+    .getDistinctValuesFromMultiStep(6)
+    .then(function (out) {
+      if (out && out.elements && out.elements > 0) { self.apparatos = out.data; }
+//promise 2.1
+      SearchService
+        .getDistinctValuesFromStep(2)
+        .then(function (out) {
+          if (out && out.elements && out.elements > 0) { self.sources = out.data; }
+//promise 3.1
+          SearchService
+            .getDistinctValuesFromStep(2, 2)
+            .then(function (out) {
+              if (out && out.elements && out.elements > 0) { self.manuscrits = out.data; }
+          });
+        });
+//promise 2.2
+      SearchService
+        .getDistinctValuesFromStep(3)
+        .then(function (out) {
+          if (out && out.elements && out.elements > 0) { self.fetes = out.data; }
+//promise 3.2
+          SearchService
+            .getDistinctValuesFromStep(3, 5)
+            .then(function (out) {
+              if (out && out.elements && out.elements > 0) { self.lieus = out.data; }
+          });
+      });
   });
 
-  SearchService.getDistinctValuesFromStep(2, 2).then(function (out) {
-    if (out && out.elements && out.elements > 0) { self.manuscrits = out.data; }
-  });
-
-  SearchService.getDistinctValuesFromStep(3).then(function (out) {
-    if (out && out.elements && out.elements > 0) { self.fetes = out.data; }
-  });
-
-  SearchService.getDistinctValuesFromStep(3, 5).then(function (out) {
-    if (out && out.elements && out.elements > 0) { self.lieus = out.data; }
-  });
 
   ///////////////////////////
   ///////////////////////////
@@ -75,15 +91,17 @@ function FastSearchController(
               SearchService.getDataFast(self.searchText, index, self.filters)
                .then(function (out) {
                   // console.log('TEST', out.data, out.elements);
+                  console.log("TEST 1");
                   if (out && out.elements) {
                       self.elements = null;
                       if (out.elements) {
-                        self.elements = out.elements;
                         success(out.data);
+                        self.elements = out.elements;
                       }
                   } else {
                       self.elements = 0;
                   }
+                  console.log("TEST 2");
               });
           } else {
             console.log("Empty search");

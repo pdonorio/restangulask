@@ -64,7 +64,8 @@
     <md-card ng-if="advanced">
         <md-card-content> Filters:
 
-<div layout=column>
+<div layout="row" layout-padding>
+<div layout="column" flex=50>
 
   <md-input-container>
     <label>Fete</label>
@@ -106,16 +107,51 @@
     </md-select>
   </md-input-container>
 
-            </div>
+</div>
+<div layout="column" flex=50>
+  <md-input-container>
+    <label>Apparato</label>
+    <md-select ng-model="search.filters.apparato" md-on-close="search.searchTextChange()" >
+      <md-optgroup label="apparatos">
+        <md-option ng-value="">-</md-option>
+        <md-option ng-value="item" ng-repeat="item in search.apparatos" >{{item}}</md-option>
+      </md-optgroup>
+    </md-select>
+  </md-input-container>
+
+  <md-input-container>
+    <label>Apparato</label>
+    <md-select ng-model="search.filters.apparato" md-on-close="search.searchTextChange()" >
+      <md-optgroup label="apparatos">
+        <md-option ng-value="">-</md-option>
+        <md-option ng-value="item" ng-repeat="item in search.apparatos" >{{item}}</md-option>
+      </md-optgroup>
+    </md-select>
+  </md-input-container>
+
+  <md-input-container>
+    <label>Apparato</label>
+    <md-select ng-model="search.filters.apparato" md-on-close="search.searchTextChange()" >
+      <md-optgroup label="apparatos">
+        <md-option ng-value="">-</md-option>
+        <md-option ng-value="item" ng-repeat="item in search.apparatos" >{{item}}</md-option>
+      </md-optgroup>
+    </md-select>
+  </md-input-container>
+
+</div>
+</div>
+
         </md-card-content>
     </md-card>
 </div>
 
-
-<div ng-if="search.load" ng-include="root.templateDir + 'loader.html'"></div>
-<span ng-if="search.elements >= 0">
-    <b><i>Trouvés: {{search.elements}} éléments</i></b>
-</span>
+<div>
+    <div ng-if="search.load" ng-include="root.templateDir + 'loader.html'"></div>
+    <span ng-if="!search.load && search.elements >= 0">
+        <b><i>Trouvés: {{search.elements}} éléments</i></b>
+    </span>
+</div>
 
  </div>
 </form>
@@ -142,15 +178,15 @@
 -->
       <td>
 
-        <div ng-if='!row._source.thumbnail'
+        <div ng-if='!row._source.doc.thumbnail'
             style=" background-repeat: no-repeat; background-size: 100% 100%;
                 width: 110px; height: 160px;"
             ng-style="{'background-image':'url(http://placehold.it/110x160)'}"
         ></div>
-        <div ng-if='row._source.thumbnail'
+        <div ng-if='row._source.doc.thumbnail'
             style=" background-repeat: no-repeat; background-size: 100% 100%;
                 width: 110px; height: 160px;"
-            ng-style="{'background-image':'url('+ row._source.thumbnail +')'}"
+            ng-style="{'background-image':'url('+ row._source.doc.thumbnail +')'}"
         ></div>
       </td>
       <!-- <td> {{row._source}} </td> -->

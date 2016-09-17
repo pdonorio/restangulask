@@ -1178,11 +1178,23 @@ class RethinkStepsTemplate(BaseRethinkResource):
     # table_index = 'steps'
 
     @deck.apimethod
-    # @auth_token_required
+    @auth_token_required
     def get(self, step=None):
         query = self.get_table_query()
         if step is not None:
             query = query.filter({'step': int(step)})
+        count, data = self.execute_query(query)
+        return self.response(data, elements=count)
+
+    @deck.apimethod
+    @auth_token_required
+    def post(self, step=None):
+        j = self.get_input(False)
+        q = self.get_table_query()
+        query = q.filter({
+            'step': j.get('step'),
+            'position': j.get('position')
+        })
         count, data = self.execute_query(query)
         return self.response(data, elements=count)
 
