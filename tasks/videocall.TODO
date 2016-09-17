@@ -1,12 +1,17 @@
 
 DETTAGLI:
-   ☐ allineamento top per i titoli
-   ☐ spazi tra le righe
- http://spectaclebaroque.eu/app/submit/f98d423f-5bd3-4aa3-9d0c-e298a4972707
+   ✔ rimuovere titolo notice @done (16-09-16 17:20)
+   ✔ spazi tra le righe @done (16-09-16 17:19)
  pont
-   ☐ aggiugere la pagina sotto source
+   ✔ aggiugere la pagina sotto source @done (16-09-16 17:20)
+   ✔ allineamento top per i titoli @done (16-09-17 09:26)
    ☐ controllare se si può anticipare in pagina succ e prev che pagina sarà
-   ☐ rimuovere titolo notice
+
+hyphotesis
+ ☐ substitution of the image
+   ☐ button down the image
+ ☐ delete button (are you really sure?)
+☐ presenza di ruoli @rbac
 
 LATEST:
  ☐  cancellare prova
@@ -50,11 +55,6 @@ elastic:
  ☐ remove source from suggestions
  ☐ aggiungere lessico alla suggestion e all'index
  ☐ aggiungere traduzione alla suggestion e all'index??
-
-DETAILS:
- ☐ substitution of the image
-   ☐ button down the image
- ☐ delete button (are you really sure?)
 
 EXPO:
   date, autore, posto

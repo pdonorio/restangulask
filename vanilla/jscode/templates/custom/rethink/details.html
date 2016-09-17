@@ -13,21 +13,16 @@
   <div ng-if='detail.data' layout="column">
       <div ng-hide="detail.data.id"> No data... </div>
 
+<!--
  <div layout="column" layout-padding>
-    <h3> NOTICE DETAILLEE:
-    <b>
-        {{detail.refinedData["Extrait"]["Numero de l'extrait"]}}
-    </b>
+    <h3>
+        NOTICE DETAILLEE:
+        <b> {{detail.refinedData["Extrait"]["Numero de l'extrait"]}} </b>
 
-    <a ng-if="detail.logged" ui-sref="logged.submit({id: theid})">
-        <i class="material-icons red-text"
-           data-position="right" data-tooltip="Modify this record" tooltipped
-        >edit</i>
-    </a>
-
-    </hr>
+        </hr>
     </h3>
  </div>
+ -->
 
   <div layout-gt-md="row" layout="column">
 
@@ -40,6 +35,10 @@
         <br>
         <b>Source</b>: {{detail.refinedData["Source"]["Titre abrégé"]}}
         </span>
+        <br>
+        <b>Page</b>: {{detail.refinedData["Extrait"]["Numero de page de l'extrait"]}}
+        </span>
+
       </div>
 
       <div layout="row">
@@ -112,13 +111,20 @@
 
 <!-- MAKE RESPONSIVE -->
   <div flex="30" layout="column" layout="center end"
-    class="rounder nospaces fullheight teal lighten-4 details-pad">
+    class="rounder fullheight teal lighten-4 details-pad">
 
-<div class="nospaces">
-    <table class="smalltext">
+    <table class=" topalign smalltexttable">
 
      <thead> <tr> <td colspan="2">
-        <h5> DÉTAILS DE LA PAGE </h5>
+        <h5>
+            DÉTAILS DE LA PAGE
+            <a ng-if="detail.logged" ui-sref="logged.submit({id: theid})">
+                <i class="material-icons red-text"
+                   data-position="right" data-tooltip="Modify this record" tooltipped
+                >edit</i>
+            </a>
+        </h5>
+
         </td> </tr> </thead>
       <tbody ng-init="key='Détails'">
         <tr ng-init="field1='Personnages'"
@@ -286,7 +292,6 @@
 -->
 
     </table>
-</div>
 
 
       </div>

@@ -87,7 +87,18 @@ http://jonathannicol.com/blog/2014/06/16/centre-crop-thumbnails-with-css/
 }
 
 .fullheight { height: 100%; }
-.smalltext { font-size: 12px; }
+
+.smalltexttable { font-size: 12px; }
+/*
+.smalltexttable table { padding: 0; }
+.smalltexttable tr { padding: 0; margin: 0; }
+*/
+.smalltexttable thead { border: 0; padding-top: 12px; padding-bottom: 2px; }
+.smalltexttable th,td { padding-top: 2px; padding-bottom: 10px; }
+.topaling td, th {
+    vertical-align: top;
+    line-height: 10px;
+}
 
 .resizetowindow {
  width: calc(100%);
