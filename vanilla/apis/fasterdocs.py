@@ -35,18 +35,17 @@ class FastDocs(ExtendedApiResource, FastSearch):
 
         #####################################
         # filters
-        from beeprint import pp
         filters = {}
-        pp(self._args)
+        # from beeprint import pp
+        # pp(self._args)
         filters_keys = [
             PARTY_KEY, SOURCE_KEY, PLACE_KEY, DATE_KEY, SCRIPT_KEY
         ]
         for key in filters_keys:
             tmp = self._args.get(key)
-            print("TEST", key, tmp)
             if tmp is not None:
                 filters[key] = tmp
-        pp(filters)
+        # pp(filters)
 
         #####################################
         current_element, limit = self.get_paging()
