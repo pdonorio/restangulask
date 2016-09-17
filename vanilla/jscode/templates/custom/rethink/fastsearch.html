@@ -59,9 +59,6 @@
         Advanced Search
     </a>
  </md-toolbar>
- <span ng-if="search.elements >= 0">
-    <b><i>Trouvés: {{search.elements}} éléments</i></b>
- </span>
 
 <div layout="column" layout-padding>
     <md-card ng-if="advanced">
@@ -114,19 +111,22 @@
     </md-card>
 </div>
 
+
+<div ng-if="search.load" ng-include="root.templateDir + 'loader.html'"></div>
+<span ng-if="search.elements >= 0">
+    <b><i>Trouvés: {{search.elements}} éléments</i></b>
+</span>
+
  </div>
 </form>
 <!-- TOOLBAR -->
 
-<div ng-if="!search.elements" ng-include="root.templateDir + 'loader.html'">
-</div>
-
-<md-content layout="row" layout-padding>
+<md-content layout="row" layout-padding ng-if="!search.load">
  <div flex='5'>&nbsp;</div>
  <div flex='95' ui-scroll-viewport style=" height: 700px; ">
 
  <table class='highlight'>
-  <thead ng-if="search.elements && search.elements > 0" >
+  <thead ng-if="search.elements > 0" >
     <tr>
         <th>Vignette</th>
         <th>Extrait</th>

@@ -39,6 +39,8 @@ function FastSearchController(
 
 */
 
+// TO FIX
+
   SearchService.getDistinctValuesFromStep(2).then(function (out) {
     if (out && out.elements && out.elements > 0) { self.sources = out.data; }
   });
@@ -67,6 +69,7 @@ function FastSearchController(
     {
 // do something with filters?
           console.log("GET ME:", index, count, self.searchText, self.filters);
+          self.load = true;
           var result = [];
           if (index > 0) {
               SearchService.getDataFast(self.searchText, index, self.filters)
@@ -78,12 +81,15 @@ function FastSearchController(
                         self.elements = out.elements;
                         success(out.data);
                       }
+                  } else {
+                      self.elements = 0;
                   }
               });
           } else {
             console.log("Empty search");
             success([]);
           }
+          self.load = false;
     }
   }
 
@@ -115,8 +121,10 @@ function FastSearchController(
   }
 
   // first call (based on the URL)
-  self.searchText = $stateParams.text;
-  console.log("Search parameter", self.parameter);
+  if ($stateParams.text) {
+      self.searchText = $stateParams.text;
+      console.log("Search parameter", self.parameter);
+  }
 
 /*
   // Init keys
