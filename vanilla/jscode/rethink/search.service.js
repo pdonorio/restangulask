@@ -26,6 +26,18 @@ function SearchService($log, api) {
         return api.apiCall(self.endpoints.search);
     }
 
+    self.getBaseSearchData = function(id)
+    {
+      return api.apiCall(self.endpoints.search, 'GET', {filter: 'basefastsearch'})
+       .then(function(out)
+       {
+          if (!out || out.elements < 1) {
+              return false;
+          }
+          return out.data;
+        });
+    }
+
     self.getDataToEdit = function(id)
     {
       return api.apiCall(self.endpoints.search, 'GET', {details: 'full'}, id)

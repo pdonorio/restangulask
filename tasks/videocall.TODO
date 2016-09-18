@@ -1,49 +1,12 @@
 
-GET /catalogue/_search
-{
-    "query": {
-        "filtered": {
-           "query": {
-            "match": {"_all": {"query": "Agen_2"}}
-           },
-           "filter": {
-               "bool": {
-                   "must": [
-                      {"term": {"date": "1622"}},
-                      {"term": {
-                         "lieu": "Agen"
-                      }}
-                   ]
-               }
-           }
-        }
-    }
-}
-
-
-
-DETTAGLI:
-   ✔ rimuovere titolo notice @done (16-09-16 17:20)
-   ✔ spazi tra le righe @done (16-09-16 17:19)
- pont
-   ✔ aggiugere la pagina sotto source @done (16-09-16 17:20)
-   ✔ allineamento top per i titoli @done (16-09-17 09:26)
-
-hyphotesis
- ☐ controllare se si può anticipare in pagina succ e prev che pagina sarà
- ☐ substitution of the image
-   ☐ button down the image
- ☐ record: delete button
-   ☐ with: are you really sure?
-☐ presenza di ruoli @rbac
 
 LATEST:
  ☐  cancellare prova
  ☐ ui base de donné
    ☐ cards invece di input
  ☐ thumbnail
-   Besançon_1
-   Bordeaux_1
+   ☐ in generale forse in certe occasioni non lo trova e prende a caso?
+   Besançon_1 Bordeaux_1
  ☐ thumbnail expo build medium size
  ☐ ordinamento tabella lista delle feste @datatable
  ☐ reenable authentication on docs  (and fastsearch) endpoints
@@ -54,25 +17,18 @@ enzo
  ✘ landscape!! @cancelled (16-09-17 09:28)
  http://spectaclebaroque.eu/public/details/7051ffc6-4db0-472a-943b-db04f0b6f555?query=Pont-%C3%A0-Mousson_46
 
-ricerca avanzata:
-
+Advanced SEARCH:
 ✔ bool elasticsearch query @done (16-09-17 10:47)
 ✔ No elements found after filter? @done (16-09-17 11:05)
    ✔ why is it not zero? @done (16-09-17 11:05)
-☐ single select
-  Step 4: temps, action, apparato
- ☐ searching one value among many
+✔ single select @done (16-09-18 22:35)
  array datatype
- https://www.elastic.co/guide/en/elasticsearch/reference/current/array.html
+ ☐ step 3position 8 (inizio) and 9 (fine) @date
+      ☐ gg/mm/aaaa (no date picker)
 ☐ Save filters choises ?
     ☐ probably inside a cookie?
     http://stackoverflow.com/a/28095874/2114395
 ☐ button clear filters
-
-Step 3 : Date (= data della festa)
- ☐ step 3position 8 (inizio) and 9 (fine)
-    ☐ data ricerca range
-      ☐ gg/mm/aaaa (no date picker)
 
 elastic:
  ✔ uso id rethinkdb? @done (16-09-11 18:39)
@@ -87,6 +43,16 @@ EXPO:
    ☐ Option no zoom?
 ☐ Manage description
   ☐ button to delete section?
+
+DETTAGLI:
+hyphotesis
+ ☐ controllare se si può anticipare in pagina succ e prev che pagina sarà
+ ☐ substitution of the image
+   ☐ button down the image
+ ☐ record: delete button
+   ☐ with: are you really sure?
+☐ presenza di ruoli @rbac
+
 
 LESSICO & ELASTIC:
    excel > sheets > macro, micro, posizione, lingue (francese, latino, italiano)

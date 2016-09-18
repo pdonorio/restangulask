@@ -61,6 +61,7 @@ def image_subfolder(args):
     logger.debug("Subfolder is %s" % subfolder)
     return subfolder
 
+
 #####################################
 # Main resource
 model = 'datavalues'
@@ -176,11 +177,50 @@ class RethinkDataValues(BaseRethinkResource):
             if param == 'autocompletion':
                 query = self.get_autocomplete_data(
                     query, args['step'], args['position'])
+
+            elif param == 'basefastsearch':
+
+                # from 'autocomplete'
+                _, sources = self.execute_query(
+                    self.get_autocomplete_data(query, 2, 1))
+                _, manuscrits = self.execute_query(
+                    self.get_autocomplete_data(query, 2, 2))
+                _, fetes = self.execute_query(
+                    self.get_autocomplete_data(query, 3, 1))
+                _, lieus = self.execute_query(
+                    self.get_autocomplete_data(query, 3, 5))
+
+                # multisteps
+                multi = self.get_table_query('stepstemplate')
+
+                _, tmp = self.execute_query(
+                    multi.filter({'step': 4, 'position': 4}))
+                actions = tmp.pop()['extra'].strip('.').split(', ')
+
+                _, tmp = self.execute_query(
+                    multi.filter({'step': 4, 'position': 3}))
+                temps = tmp.pop()['extra'].strip('.').split(', ')
+
+                _, tmp = self.execute_query(
+                    multi.filter({'step': 4, 'position': 6}))
+                apparatos = tmp.pop()['extra'].strip('.').split(', ')
+
+                return self.response({
+                    'sources': sources,
+                    'manuscrits': manuscrits,
+                    'fetes': fetes,
+                    'lieus': lieus,
+                    'apparatos': apparatos,
+                    'actions': actions,
+                    'temps': temps,
+                })
+
             elif param == 'nested_filter' and args['key'] is not None:
                 query = self.filter_nested_field(
                     query, args['key'], default_position)
-            elif param == 'recover_code' and \
-             args['key'] is not None and args['field'] is not None:
+
+            elif param == 'recover_code' \
+               and args['key'] is not None and args['field'] is not None:
 
                 query = query.get_all(args['key'], index="title")
                 # query = self.filter_nested_field(
@@ -540,7 +580,7 @@ class RethinkExpo(BaseRethinkResource):
 
         data = {'Hello': 'World'}
         j = self.get_input(False)
-        print("TEST", j)
+        # print("TEST", j)
 
         section = j['options']['section']
         theme = j['options']['theme']
