@@ -112,7 +112,7 @@ function DetailsController($scope, $log, $sce, $stateParams, $auth, SearchServic
                 matches = name.match(regexp),
                 page = null;
 
-            if (matches.length > 0) {
+            if (matches && matches.length > 0) {
                 page = parseInt(matches[0]);
                 previous_code = name.replace(regexp, page - 1);
                 next_code = name.replace(regexp, page + 1);

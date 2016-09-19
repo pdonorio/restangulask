@@ -1,21 +1,38 @@
 
+r.db('webapp').table('datavalues').concat_map(lambda doc: doc['steps'].concat_map(lambda step: step['data'].co
+    ...: ncat_map(lambda data:[{'record': doc['record'], 'name': step['step'], 'step': data}]))).filter({'name': 3}).ma
+    ...: p(lambda row: {'x': row['record'], 'y': row['step']['value'], 'z':row['step']['position']}).filter({'y': 'prov
+    ...: a'}).run()
+
+PERFORMANCES:
+ ☐ uwsgi
+   ☐ emperor on vassals
+   ☐ processes and threads
+ ☐ nginx mod
+   ☐ serve static (images and js)
+   ☐ cache?
 
 LATEST:
- ☐  cancellare prova
+ ☐ thumbnail problema @ugh
+     ☐ and thumbnail expo build medium size @meanwhile
+
+Agen_1
+http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
+Bordeaux_1
+http://localhost/public/details/5d6fb1f3-927c-48c7-aa10-b648f8d80d10
+
+Agen_2
+http://localhost/public/details/ff771300-d620-48b0-a1b3-12ccbe5f4cc7
+Besançon_1
+http://localhost/public/details/c45a94a0-d1a9-43a7-a977-70504fcb8dc9
+
+ ✔  remove useless? @done (16-09-19 07:42)
+ d2d5fcb6-81cc-4654-9f65-a436f0780c67
  ☐ ui base de donné
    ☐ cards invece di input
- ☐ thumbnail
-   ☐ in generale forse in certe occasioni non lo trova e prende a caso?
-   Besançon_1 Bordeaux_1
- ☐ thumbnail expo build medium size
  ☐ ordinamento tabella lista delle feste @datatable
- ☐ reenable authentication on docs  (and fastsearch) endpoints
+ ☐ reenable authentication on all docs  (and fastsearch) endpoints
 
-enzo
- ☐ se modifico tendina dopo inserimento transcrition l'elemento non viene salvato
- ☐ controlla problemi di rete
- ✘ landscape!! @cancelled (16-09-17 09:28)
- http://spectaclebaroque.eu/public/details/7051ffc6-4db0-472a-943b-db04f0b6f555?query=Pont-%C3%A0-Mousson_46
 
 Advanced SEARCH:
 ✔ bool elasticsearch query @done (16-09-17 10:47)
@@ -29,6 +46,8 @@ Advanced SEARCH:
     ☐ probably inside a cookie?
     http://stackoverflow.com/a/28095874/2114395
 ☐ button clear filters
+ ☐ se modifico tendina dopo inserimento transcrition l'elemento non viene salvato
+enzo
 
 elastic:
  ✔ uso id rethinkdb? @done (16-09-11 18:39)
