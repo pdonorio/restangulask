@@ -48,7 +48,6 @@ function FastSearchController(
               SearchService.getDataFast(self.searchText, index, self.filters)
                .then(function (out) {
                   // console.log('TEST', out.data, out.elements);
-                  console.log("TEST 1");
                   if (out && out.elements) {
                       self.elements = null;
                       if (out.elements) {
@@ -58,7 +57,6 @@ function FastSearchController(
                   } else {
                       self.elements = 0;
                   }
-                  console.log("TEST 2");
               });
           } else {
             console.log("Empty search");

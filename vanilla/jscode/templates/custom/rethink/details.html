@@ -63,25 +63,29 @@
 
       <div layout="row" style="min-width: 200px;">
 
-        <div flex=50 style="text-align: center;">
-            <a ng-if="detail.data.images[0].filename"
-                href="/zoom/{{ detail.data.id }}/{{ detail.data.images[0].code }}"
-                target="_blank" class="hoverable"
-                >
+    <!-- NO IMAGE? -->
+        <div flex=100 style="text-align: center; padding-top:50px;"
+            ng-if="!detail.data.images[0].filename">
+            <i class="material-icons">collections</i>
+            <br>
+            image indisponible
+        </div>
+
+    <!-- WITH IMAGE? -->
+        <div flex=50 style="text-align: center;"
+            ng-if="detail.data.images[0].filename">
+            <a href="/zoom/{{ detail.data.id }}/{{ detail.data.images[0].code }}"
+                target="_blank" class="hoverable" >
              <img tooltipped data-position="right" data-delay="50"
                 data-tooltip="Click to zoom this image"
                 height=500
                 ng-src="/static/uploads/{{detail.data.images[0].filename}}">
             </a>
-            <div ng-if="!detail.data.images[0].filename">
-                Image indisponible
-                <br>
-                <i class="material-icons">collections</i>
-            </div>
         </div>
 
-<!-- IMAGE TEXT -->
+        <!-- IMAGE TEXT -->
         <div flex=50 style="min-width: 200px;"
+            ng-if="detail.data.images[0].filename"
         class="scrolling" layout="column" layout-align="start center">
 
             <div ng-if="detail.languages.length > 1">

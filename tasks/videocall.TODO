@@ -1,4 +1,6 @@
 
+ls *.jpg *.JPG *.tif  | wc -l
+
 r.db('webapp').table('datavalues').concat_map(lambda doc: doc['steps'].concat_map(lambda step: step['data'].co
     ...: ncat_map(lambda data:[{'record': doc['record'], 'name': step['step'], 'step': data}]))).filter({'name': 3}).ma
     ...: p(lambda row: {'x': row['record'], 'y': row['step']['value'], 'z':row['step']['position']}).filter({'y': 'prov
@@ -13,8 +15,8 @@ PERFORMANCES:
    ☐ cache?
 
 LATEST:
+ ✔ and thumbnail expo build medium size @meanwhile @done (16-09-19 16:53)
  ☐ thumbnail problema @ugh
-     ☐ and thumbnail expo build medium size @meanwhile
 
 Agen_1
 http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
@@ -84,9 +86,10 @@ LESSICO & ELASTIC:
 
 ELASTIC
 ☐ add translations to known words
-☐ add insert/updates to elastic
+☐ add insert/updates to elastic @veryimportant
  ☐ how to remove existing data updated?
 ☐ index rebuild
+☐ image build for expo (thumbnail + medium size)
 
  LAST:
  ☐ prossima pagina nel full screen
