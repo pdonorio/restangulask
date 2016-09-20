@@ -16,24 +16,20 @@ PERFORMANCES:
 
 LATEST:
  ✔ and thumbnail expo build medium size @meanwhile @done (16-09-19 16:53)
+ ✔  remove useless? @done (16-09-19 07:42)
+ d2d5fcb6-81cc-4654-9f65-a436f0780c67
+ ✔ ui base de donné @done (16-09-20 07:25)
+ ☐ ordinamento tabella lista delle feste @datatable
+ ☐ reenable authentication on all docs  (and fastsearch) endpoints
  ☐ thumbnail problema @ugh
-
 Agen_1
 http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
 Bordeaux_1
 http://localhost/public/details/5d6fb1f3-927c-48c7-aa10-b648f8d80d10
-
 Agen_2
 http://localhost/public/details/ff771300-d620-48b0-a1b3-12ccbe5f4cc7
 Besançon_1
 http://localhost/public/details/c45a94a0-d1a9-43a7-a977-70504fcb8dc9
-
- ✔  remove useless? @done (16-09-19 07:42)
- d2d5fcb6-81cc-4654-9f65-a436f0780c67
- ☐ ui base de donné
-   ☐ cards invece di input
- ☐ ordinamento tabella lista delle feste @datatable
- ☐ reenable authentication on all docs  (and fastsearch) endpoints
 
 
 Advanced SEARCH:
