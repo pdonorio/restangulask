@@ -1,0 +1,169 @@
+(function() {
+  'use strict';
+
+angular.module('web').service('FormlyService', FormlyService);
+
+function FormlyService(noty)
+{
+
+	var self = this;
+
+	self.json2Form = function(schema, data, submitText) {
+		var fields = [];
+		var model = {}
+		for (var i=0; i<schema.length; i++) {
+
+			var s = schema[i];
+			var k = s.key;
+
+			var ftype = "";
+			var ttype = "";
+
+			var field = {}
+			field['templateOptions'] = {}
+
+			if (s['type'] == "text") {
+				ftype = "input";
+				ttype = "text";
+			} else if (s['type'] == "longtext") {
+				ftype = "textarea";
+				ttype = "text";
+			} else if (s['type'] == "int") {
+				ftype = "input";
+				ttype = "number";
+			} else if (s['type'] == "timestamp") {
+				ftype = "input";
+				ttype = "date";
+			} else if (s['type'] == "select") {
+				ftype = "select";
+				ttype = "select";
+			}
+
+			field['key'] = s['key'];
+			field['type'] = ftype; 
+			if ('default' in s)
+				field['defaultValue'] = s['default'];
+
+			field['templateOptions']['label'] = s['label'];
+			field['templateOptions']['placeholder'] = s['description'];
+			field['templateOptions']['type'] = ttype; 
+			field['templateOptions']['required'] = s['required'];
+
+			if (ttype == 'textarea') {
+				field['templateOptions']['rows'] = 5;
+			}
+			if (ttype == 'select') {
+				field['templateOptions']['labelProp'] = "value";
+      			field['templateOptions']['valueProp'] = "id";
+      			field['templateOptions']['options'] = s['options']
+      			//field['templateOptions']['multiple'] = false;
+			}
+
+			fields.push(field);
+
+			if (data) {
+				if (data[k] == null) {
+					model[k] = ""
+				} else if (typeof data[k] === "object") {
+					model[k] = data[k]["id"];
+				} else {
+					model[k] = data[k];
+				}
+				if (ttype == "number") {
+					model[k] = parseInt(model[k]);
+				}
+			}
+		}
+
+		// Return all information
+		return {"fields":fields, "model": model};
+	}
+
+	self.json2Fields = function(schema) {
+
+		var fields = [];
+		for (var i=0; i<schema.length; i++) {
+
+			var s = schema[i];
+
+			var ftype = "";
+			var ttype = "";
+
+			var field = {}
+			field['templateOptions'] = {}
+
+			if (s['type'] == "text") {
+				ftype = "input";
+				ttype = "text";
+			} else if (s['type'] == "longtext") {
+				ftype = "textarea";
+				ttype = "text";
+			} else if (s['type'] == "int") {
+				ftype = "input";
+				ttype = "number";
+			} else if (s['type'] == "timestamp") {
+				ftype = "input";
+				ttype = "date";
+			} else if (s['type'] == "select") {
+				ftype = "select";
+				ttype = "select";
+			}
+
+			field['key'] = s['key'];
+			field['type'] = ftype; 
+			if ('default' in s)
+				field['defaultValue'] = s['default'];
+
+			field['templateOptions']['label'] = s['label'];
+			field['templateOptions']['placeholder'] = s['description'];
+			field['templateOptions']['type'] = ttype; 
+			field['templateOptions']['required'] = s['required'];
+
+			if (ttype == 'textarea') {
+				field['templateOptions']['rows'] = 5;
+			}
+			if (ttype == 'select') {
+				field['templateOptions']['labelProp'] = "value";
+      			field['templateOptions']['valueProp'] = "id";
+      			field['templateOptions']['options'] = s['options']
+      			//field['templateOptions']['multiple'] = false;
+			}
+
+			fields.push(field);
+		}
+
+		return fields;
+	}
+
+
+	self.json2Model = function(schema, data, fields) {
+		var model = {}
+		if (!data) return model;
+
+		for (var i=0; i<schema.length; i++) {
+			var s = schema[i];
+			var k = s.key;
+
+			var inputType = "text";
+			for (var j=0; j<fields.length; j++) {
+				if (fields[j].key != k) continue;
+				inputType = fields[j].templateOptions.type;
+			}
+			if (data[k] == null) {
+				model[k] = ""
+			} else if (typeof data[k] === "object") {
+				model[k] = data[k]["id"];
+			} else {
+				model[k] = data[k];
+			}
+			if (inputType == "number") {
+				model[k] = parseInt(model[k]);
+			}
+		}
+
+		return model;
+	}
+
+}
+
+})();
