@@ -127,14 +127,12 @@ function SchemaFormService()
 					model[fieldname] = parseInt(model[fieldname]);
 				}
 			}
-
 		}
-
 
 		// Save	list of required fields
 		fields.required = required;
 
-		// Add submit button to the form
+		// // Add submit button to the form
 		var submit = {}
 		submit.type = "submit";
 		submit.title = submitText;
