@@ -1,0 +1,39 @@
+<md-dialog flex=50>
+  <md-dialog-content>
+  <md-content layout="row" layout-wrap layout-align="center start" layout-xs="column">
+  <div flex="100" layout="column">
+
+    <h5 class='md-padding green lighten-5'>
+    	{{dialogTitle}}
+    </h5>
+
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+
+          <form 
+            layout="column"
+            sf-schema="fields" 
+            sf-form="form" 
+            sf-model="model"
+            ng-submit="save()"
+            >
+
+          </form>
+
+
+        </md-card-title-text>
+      </md-card-title>
+    </md-card>
+
+  </div>
+  </md-content>
+  </md-dialog-content>
+
+  <md-dialog-actions layout="row">
+    <md-button ng-click="cancel()" style="margin-right:20px;">
+      Close
+    </md-button>
+  </md-dialog-actions>
+
+</md-dialog>
