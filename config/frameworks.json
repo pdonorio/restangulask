@@ -49,7 +49,17 @@
         "angular-hotkeys": [
             "build/hotkeys.min.js",
             "build/hotkeys.min.css"
+        ],
+        "api-check": [
+            "dist/api-check.min.js"
+        ],
+        "angular-formly": [
+            "dist/formly.min.js"
+        ],
+        "angular-formly-templates-bootstrap": [
+            "dist/angular-formly-templates-bootstrap.min.js"
         ]
+
     },
     "css" : [
         "css/style.css",
