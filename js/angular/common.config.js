@@ -33,4 +33,12 @@ function formlyConfig(formlyConfigProvider) {
               '</md-autocomplete>'
   });
 
+  //Custom template for Bootstrap autocomplete fields
+  formlyConfigProvider.setType({
+    name: 'typeahead',
+    controller: 'AutocompleteController as ctrl',
+    template: '<input type="text" ng-model="model[options.key]" uib-typeahead="item for item in to.options | filter:$viewValue | limitTo:8" class="form-control">',
+    wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+  });
+
 }

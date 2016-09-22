@@ -42,7 +42,12 @@ function FormlyService(noty)
 				// Custom defined type
 				ftype = "autocomplete";
 				ttype = "autocomplete";
+			} else if (s['type'] == "typeahead") {
+				// Custom defined type (bootstrap) - to ovveride autocomplete
+				ftype = "typeahead";
+				ttype = "typeahead";
 			}
+
 			field['key'] = s['key'];
 			field['type'] = ftype; 
 			if ('default' in s)
