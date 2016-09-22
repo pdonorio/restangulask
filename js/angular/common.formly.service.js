@@ -22,11 +22,7 @@ function FormlyService(noty)
 			var field = {}
 			field['templateOptions'] = {}
 
-			// TO BE IMPLEMENTED
-			if (s['type'] == "autocomplete") {
-				continue;
-				s['type'] = "select"
-			}
+
 			if (s['type'] == "text") {
 				ftype = "input";
 				ttype = "text";
@@ -42,8 +38,11 @@ function FormlyService(noty)
 			} else if (s['type'] == "select") {
 				ftype = "select";
 				ttype = "select";
+			} else if (s['type'] == "autocomplete") {
+				// Custom defined type
+				ftype = "autocomplete";
+				ttype = "autocomplete";
 			}
-
 			field['key'] = s['key'];
 			field['type'] = ftype; 
 			if ('default' in s)
@@ -61,6 +60,10 @@ function FormlyService(noty)
       			field['templateOptions']['valueProp'] = "id";
       			field['templateOptions']['options'] = s['options']
       			//field['templateOptions']['multiple'] = false;
+			}
+
+			if (ttype == 'autocomplete') {
+				field['templateOptions']['controller'] = "AutocompleteController";
 			}
 
 			fields.push(field);
