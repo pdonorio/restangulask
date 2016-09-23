@@ -18,8 +18,9 @@ PATH = 'specs'   # Main directory where all conf files are found
 
 CONFIG_PATH = 'config'
 JSON_EXT = 'json'
-FRAMEWORKS = ['materialize', 'bootstrap', 'foundation']
-CURRENT_FRAMEWORK = FRAMEWORKS.pop(0)
+# FRAMEWORKS = ['materialize', 'bootstrap', 'foundation']
+# CURRENT_FRAMEWORK = FRAMEWORKS.pop(0)
+CURRENT_FRAMEWORK = 'bootstrap'
 
 
 ########################################

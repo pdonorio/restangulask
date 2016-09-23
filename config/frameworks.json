@@ -62,7 +62,6 @@
 
     },
     "css" : [
-        "css/style.css",
-        "css/myfonts.css"
+        "css/material.icons.css"
     ]
 }

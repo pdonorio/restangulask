@@ -1,58 +1,31 @@
 {% extends 'index.html' %}
 
-{%- block topbar %}
-<!-- TOPBAR -->
-{%- if topbar_color %}
-    {% if topbar_color == 'dark' %}
-<nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
-    {% else %}
-<nav class="navbar navbar-fixed-top navbar-light bg-faded" style="background-color: #{{ topbar_color }};">
-    {% endif %}
-{% else %}
-<nav class="navbar navbar-inverse navbar-fixed-top">
-{% endif -%}
+{%- block title %} {{ jstitle }} {% endblock %}
 
-{%- for logo in logos -%}
-<a href="#" class="pull-right" style='padding-right:10px;'>
-    <img src="{{ logo.src }}" width="{{ logo.width }}">
-</a>
-{% endfor -%}
-<a class="navbar-brand pull-left" href="/"> <i class="fa fa-briefcase"></i> {{ project }} </a>
+{%- block content %}
 
-{%- if g.user.is_authenticated -%}
-<div ui-view='menu'></div>
-{%- endif -%}
+<!-- SPLASH SCREEN -->
+<div ng-if="main.splash" class="themaxsize cyan white-text"
+  layout="column" layout-align="center center">
+    <i class="large material-icons">insert_chart</i>
+    <md-progress-linear md-mode="query" style="width: 4rem;"></md-progress-linear> loading
+</div>
 
-</nav>
+<!-- THE SIDEBAR FOR MENUs -->
+<div ui-view='sidebar'></div>
+
+<!-- MAIN CONTAINER. Note: passing the project name from Jinja template to Angular -->
+<main ng-hide="main.splash" class="themaxsize"
+    ng-init="myproject = '{{ project[0].upper() + project[1:].lower() }}'">
+    <!-- TOPBAR -->
+    <div ng-hide="main.load" ng-include="main.templateDir + 'topbar.html'"></div>
+    <!-- WHILE WAITING (for API/RESOURCES) -->
+    <div ng-if="main.load" ng-include="main.templateDir + 'loader.html'"></div>
+    <!-- WHEN READY -->
+    <div ng-hide="main.load" style="height: calc(100% - 5rem);" ui-view='main'></div>
+</main>
+
+<!-- THE SIDEBAR FOR HISTORY -->
+<div ui-view='hsidebar'></div>
+
 {% endblock %}
-
-{%- block flashmessages %}
-    {%- with messages = get_flashed_messages(with_categories=true) %}
-    <!-- Possible alerts: info success warning danger -->
-        {% if messages %}
-            {% for category, message in messages %}
-                {% if category == 'message' %}
-                    <div class="alert alert-info alert-dismissible" role="alert">
-                {% else %}
-                    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
-                {% endif %}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {{ message }}
-                </div>
-            {% endfor -%}
-        {% endif -%}
-    {% endwith -%}
-{% endblock -%}
-
-
-{%- if footer %}
-    {% block footer %}
-    <footer class="footer">
-      <div class="container">
-          <br>
-          <p> {{ footer | safe }} </p>
-          {% block extrafootercontent %}{% endblock %}
-      </div>
-    </footer>
-    {% endblock %}
-{% endif -%}
