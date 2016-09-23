@@ -55,7 +55,7 @@ While for logout i made the button "Yes" to let it happen.
 
 //////////////////////////////
 function LoginController($scope, $log, $window,
-    $auth, $mdToast, $document, $timeout, $state, noty)
+    $auth, $document, $timeout, $state, noty)
 {
 
     // Init controller
@@ -101,22 +101,12 @@ function LoginController($scope, $log, $window,
                 $log.warn("Auth: failed", errorResponse);
                 noty.showAll(errorResponse.data.errors, noty.ERROR);
 
-                // self.userMessage = null;
-                // var errors = errorResponse.data.errors;
-                // $log.warn("Auth: failed", errors);
-                // var key = Object.keys(errors)[0];
-                // if (key == "Email requires confirmation.") {
-                //     self.userMessage = key;
-                // }
-                // $scope.showSimpleToast(errors);
-
-
             }
         );
     }
 }
 
-function RegisterController($scope, $log, $auth, api)
+function RegisterController($scope, $log, $auth, api, noty)
 {
     // Init controller
     var self = this;
@@ -159,10 +149,9 @@ function RegisterController($scope, $log, $auth, api)
                     var errors = response.data.errors;
                     $log.warn("Registration: failed", errors);
                     self.errors = errors;
-                    //$scope.showSimpleToast(errors);
-                    $scope.showSimpleToast({'Invalid':'Failed to register...'});
+                    noty.showError("Failed to register...")
                 } else {
-                    $scope.showSimpleToast({'Well done':'New user created'});
+                    noty.showSuccess("New user created")
                     self.errors = null;
                     self.userMessage =
                         "Account registered. Pending admin approval.";

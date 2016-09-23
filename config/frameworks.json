@@ -26,17 +26,17 @@
         "angular-ui-router": [
             "release/angular-ui-router.min.js"
         ],
-        "materialize": [
-            "dist/js/materialize.min.js",
-            "dist/css/materialize.min.css"
-        ],
-        "angular-materialize": [
-            "src/angular-materialize.js"
-        ],
-        "angular-material": [
-            "angular-material.min.css",
-            "angular-material.min.js"
-        ],
+        // "materialize": [
+        //     "dist/js/materialize.min.js",
+        //     "dist/css/materialize.min.css"
+        // ],
+        // "angular-materialize": [
+        //     "src/angular-materialize.js"
+        // ],
+        // "angular-material": [
+        //     "angular-material.min.css",
+        //     "angular-material.min.js"
+        // ],
         "satellizer": [
             "satellizer.min.js"
         ],

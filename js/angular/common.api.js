@@ -4,7 +4,7 @@
 angular.module('web')
     .service('api', RestApiService);
 
-function RestApiService($http, $q, $auth, $log, $mdToast) {
+function RestApiService($http, $q, $auth, $log) {
 
     var self = this;
     // Api URI
