@@ -21,7 +21,8 @@ MULTI2_KEY = 'actions'
 MULTI3_KEY = 'temps'
 
 # UHM
-DATE_KEY = 'date'
+DATE_SKEY = 'start_date'
+DATE_EKEY = 'end_date'
 
 
 class FastDocs(ExtendedApiResource, FastSearch):
@@ -32,10 +33,11 @@ class FastDocs(ExtendedApiResource, FastSearch):
     @deck.add_endpoint_parameter(name=SOURCE_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=PLACE_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=SCRIPT_KEY, ptype=str)
-    # @deck.add_endpoint_parameter(name=DATE_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=MULTI1_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=MULTI2_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=MULTI3_KEY, ptype=str)
+    @deck.add_endpoint_parameter(name=DATE_SKEY, ptype=str)
+    @deck.add_endpoint_parameter(name=DATE_EKEY, ptype=str)
     def get(self, searchterms=None):
 
         if not self.get_instance():
@@ -44,17 +46,19 @@ class FastDocs(ExtendedApiResource, FastSearch):
         #####################################
         # filters
         filters = {}
-        # from beeprint import pp
+        from beeprint import pp
         # pp(self._args)
         filters_keys = [
-            PARTY_KEY, SOURCE_KEY, PLACE_KEY, SCRIPT_KEY, DATE_KEY,
-            MULTI1_KEY, MULTI2_KEY, MULTI3_KEY
+            PARTY_KEY, SOURCE_KEY, PLACE_KEY, SCRIPT_KEY,
+            MULTI1_KEY, MULTI2_KEY, MULTI3_KEY,
+            DATE_SKEY, DATE_EKEY,
         ]
         for key in filters_keys:
             tmp = self._args.get(key)
-            if tmp is not None:
+            if tmp is not None and tmp.strip() != '':
                 filters[key] = tmp
-        # pp(filters)
+
+        pp(filters)
 
         #####################################
         current_element, limit = self.get_paging()

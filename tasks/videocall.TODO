@@ -1,4 +1,8 @@
+DATE:
+“range” : {start_date: HIGHEST_DAY || /y /M /d },
+“range” : {end_date: LOWEST_DAY || /y /M /d },
 
+others:
 ls *.jpg *.JPG *.tif  | wc -l
 
 r.db('webapp').table('datavalues').concat_map(lambda doc: doc['steps'].concat_map(lambda step: step['data'].co
@@ -7,12 +11,13 @@ r.db('webapp').table('datavalues').concat_map(lambda doc: doc['steps'].concat_ma
     ...: a'}).run()
 
 PERFORMANCES:
- ☐ uwsgi
-   ☐ emperor on vassals
-   ☐ processes and threads
- ☐ nginx mod
-   ☐ serve static (images and js)
-   ☐ cache?
+☐ postgres instead of sqllite??
+☐ uwsgi
+ ☐ emperor on vassals
+ ☐ processes and threads
+☐ nginx mod
+ ☐ serve static (images and js)
+ ☐ cache?
 
 LATEST:
  ✔ and thumbnail expo build medium size @meanwhile @done (16-09-19 16:53)
@@ -38,12 +43,14 @@ Advanced SEARCH:
    ✔ why is it not zero? @done (16-09-17 11:05)
 ✔ single select @done (16-09-18 22:35)
  array datatype
- ☐ step 3position 8 (inizio) and 9 (fine) @date
-      ☐ gg/mm/aaaa (no date picker)
+ ✔ step 3position 8 (inizio) and 9 (fine) @date @done (16-09-23 16:17)
+      ✔ gg/mm/aaaa (no date picker) @done (16-09-23 16:17)
+☐ button clear filters
 ☐ Save filters choises ?
     ☐ probably inside a cookie?
     http://stackoverflow.com/a/28095874/2114395
-☐ button clear filters
+
+BUGS:
  ☐ se modifico tendina dopo inserimento transcrition l'elemento non viene salvato
 enzo
 

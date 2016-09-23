@@ -139,6 +139,22 @@
     </md-select>
   </md-input-container>
 
+  <div layout="row">
+      Date:
+      <md-input-container class="md-block">
+        <label>From</label>
+        <input type="text" ng-model="search.filters.start_date"
+            ng-blur="search.searchTextChange()"
+            placeholder='yyyy-MM-gg' size="10" md-maxlength="10">
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>To</label>
+        <input type="text" ng-model="search.filters.end_date"
+            ng-blur="search.searchTextChange()"
+            placeholder='yyyy-MM-gg' size="10" md-maxlength="10">
+      </md-input-container>
+  </div>
+
 </div>
 </div>
 
