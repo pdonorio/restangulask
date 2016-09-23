@@ -8,7 +8,7 @@ function FormlyService(noty)
 
 	var self = this;
 
-	self.json2Form = function(schema, data) {
+	self.json2Form = function(schema, data, DataController) {
 		var fields = [];
 		var model = {}
 		for (var i=0; i<schema.length; i++) {
@@ -68,7 +68,7 @@ function FormlyService(noty)
 			}
 
 			if (ttype == 'autocomplete') {
-				field['templateOptions']['controller'] = "AutocompleteController";
+				field['controller'] = DataController+" as ctrl";
 			}
 
 			fields.push(field);

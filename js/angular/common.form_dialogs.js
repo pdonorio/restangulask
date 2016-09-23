@@ -6,10 +6,10 @@ angular.module('web').controller('SchemaFormDialogController', SchemaFormDialogC
 function FormlyDialogController($scope, $mdDialog, $controller, FormlyService, noty) {
     $controller('FormDialogController', {$scope: $scope});
 
-  $scope.createForm = function(promise, form_data) {
+  $scope.createForm = function(promise, form_data, DataController) {
     promise.then(
       function(out_data) {
-        var data = FormlyService.json2Form(out_data.data, form_data)
+        var data = FormlyService.json2Form(out_data.data, form_data, DataController)
 
         $scope.fields = data.fields;
         $scope.model = data.model;
@@ -26,7 +26,7 @@ function FormlyDialogController($scope, $mdDialog, $controller, FormlyService, n
 function SchemaFormDialogController($scope, $mdDialog, $controller, SchemaFormService, noty) {
     $controller('FormDialogController', {$scope: $scope});
 
-  $scope.createForm = function(promise, form_data) {
+  $scope.createForm = function(promise, form_data, DataController) {
     promise.then(
       function(out_data) {
         var data = SchemaFormService.json2Form(out_data.data, form_data, $scope.buttonText)

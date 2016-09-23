@@ -12,7 +12,7 @@ function formlyConfig(formlyConfigProvider) {
   formlyConfigProvider.setType({
     name: 'autocomplete',
     extends: 'input',
-    controller: 'AutocompleteController as ctrl',
+    // controller: 'AutocompleteController as ctrl',
     // templateUrl: templateDir+'show.formly.html'
     template: '<md-autocomplete '+
               // 'ng-model="model[options.key]"'+
