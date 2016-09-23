@@ -57,8 +57,7 @@ class FastDocs(ExtendedApiResource, FastSearch):
             tmp = self._args.get(key)
             if tmp is not None and tmp.strip() != '':
                 filters[key] = tmp
-
-        pp(filters)
+        # pp(filters)
 
         #####################################
         current_element, limit = self.get_paging()

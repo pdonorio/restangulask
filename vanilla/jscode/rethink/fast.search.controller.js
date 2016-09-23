@@ -23,6 +23,11 @@ function FastSearchController(
   self.base = {};
   self.load = false;
 
+  self.clearFilters = function() {
+      self.filters = {};
+      self.searchTextChange();
+  }
+
   ///////////////////////////
   // BASE data for advanced search
   SearchService
