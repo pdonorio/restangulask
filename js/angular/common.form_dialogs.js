@@ -103,9 +103,6 @@ function FormDialogService($log, $uibModal, $rootScope) {
         templateUrl: templateDir+'/show.formly.html',
         parent: angular.element(document.body),
         scope: scope,
-        // locals: {
-        //   form_data: form_data
-        // },
         clickOutsideToClose:true
       }).result;
   };
@@ -119,27 +116,9 @@ function FormDialogService($log, $uibModal, $rootScope) {
         templateUrl: templateDir+'/show.schemaform.html',
         parent: angular.element(document.body),
         scope: scope,
-        // locals: {
-        //   form_data: form_data
-        // },
         clickOutsideToClose:true
       }).result;
   };
 }
 
-
 })();
-
-
-  self.showFormlyDialog = function($uibModal, scope, dataCtrl) {
-    return $uibModal.open({
-        controller: dataCtrl,
-        templateUrl: self.templateDir+'/show.formly.html',
-        parent: angular.element(document.body),
-        scope: scope,
-        // locals: {
-        //   form_data: form_data
-        // },
-        clickOutsideToClose:true
-      }).result;
-  };
