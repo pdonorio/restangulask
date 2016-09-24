@@ -1,6 +1,25 @@
-DATE:
-“range” : {start_date: HIGHEST_DAY || /y /M /d },
-“range” : {end_date: LOWEST_DAY || /y /M /d },
+Nuova riunione:
+
+  ☐ formato data classico
+    ☐ gg-MM-aaaa
+
+☐ pagina ricerca
+  ☐ foto 2
+  ☐ colore giallo
+
+☐ agen_1
+ ☐ no data in search?
+
+DETTAGLI:
+☐ tasto cancella
+☐ tasto sostituisci immagine
+ ☐ cerca se c'è e cambia, altrimenti nuova?
+   ☐ se esiste la vecchia finisce nel cestino (solo immagine)
+     ☐ cestino con cartella nome documento
+       ☐ sottocartella con data?
+
+TESTI:
+  ☐ traduzioni in francese
 
 others:
 ls *.jpg *.JPG *.tif  | wc -l
@@ -11,22 +30,25 @@ r.db('webapp').table('datavalues').concat_map(lambda doc: doc['steps'].concat_ma
     ...: a'}).run()
 
 PERFORMANCES:
-☐ postgres instead of sqllite??
-☐ uwsgi
- ☐ emperor on vassals
- ☐ processes and threads
-☐ nginx mod
- ☐ serve static (images and js)
- ☐ cache?
+☐ Account DB
+  ☐ postgres instead of sqllite
+☐ Server
+  ☐ uwsgi
+   ☐ emperor on vassals
+   ☐ processes and threads
+  ☐ nginx mod
+   ☐ serve static (images and js)
+   ☐ cache?
 
 LATEST:
  ✔ and thumbnail expo build medium size @meanwhile @done (16-09-19 16:53)
  ✔  remove useless? @done (16-09-19 07:42)
  d2d5fcb6-81cc-4654-9f65-a436f0780c67
  ✔ ui base de donné @done (16-09-20 07:25)
- ☐ ordinamento tabella lista delle feste @datatable
  ☐ reenable authentication on all docs  (and fastsearch) endpoints
- ☐ thumbnail problema @ugh
+ ☐ ordinamento tabella lista delle feste @datatable
+ ☐ thumbnail
+   ☐ reedit image on existing documents without removing associated text
 Agen_1
 http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
 Bordeaux_1
