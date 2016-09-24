@@ -85,7 +85,16 @@ function FastSearchController(
     });
   }
 
+  self.cloneDate = function () {
+    if (self.filters.start_date && !self.filters.end_date) {
+        self.filters.end_date = self.filters.start_date;
+    } else if (self.filters.end_date && !self.filters.start_date) {
+        self.filters.start_date = self.filters.end_date;
+    }
+  }
+
   self.searchTextChange = function (text) {
+
     $log.info('Text changed', text, self.searchText);
     $scope.myadapter.reload(0);
   }

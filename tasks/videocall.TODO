@@ -45,7 +45,7 @@ Advanced SEARCH:
  array datatype
  ✔ step 3position 8 (inizio) and 9 (fine) @date @done (16-09-23 16:17)
       ✔ gg/mm/aaaa (no date picker) @done (16-09-23 16:17)
-      ☐ copy start date to end date if the second one is empty
+      ✔ copy start date to end date if the second one is empty @done (16-09-24 06:41)
 ✔ button clear filters @done (16-09-23 16:34)
 ☐ Save filters choises ?
     ☐ probably inside a cookie?
