@@ -222,12 +222,12 @@
         <i>Fete</i>:
         <span md-highlight-text="search.searchText"
             md-highlight-flags="^i">{{row._source.fete}}</span>
-        <br>
-        <i>Lieu</i>:
-        {{row._source.lieu}}
-        <br>
-        <i>Date</i>:
-        {{row._source.date}}
+        <span>
+            <br> <i>Lieu</i>: {{row._source.lieu}}
+        </span>
+        <span ng-if="row._source.date">
+            <br> <i>Date</i>: {{row._source.date}}
+        </span>
         <br>
       </td>
       <td>
