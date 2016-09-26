@@ -136,7 +136,7 @@ function SchemaFormService()
 		var submit = {}
 		submit.type = "submit";
 		submit.title = submitText;
-		submit.style = "btn-info";
+		submit.style = "btn-success";
 		form.push(submit);
 
 		// Return all information
