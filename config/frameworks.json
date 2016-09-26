@@ -58,10 +58,26 @@
         ],
         "angular-formly-templates-bootstrap": [
             "dist/angular-formly-templates-bootstrap.min.js"
+        ],
+        "bootstrap": [
+            "dist/css/bootstrap.min.css",
+            "dist/css/bootstrap-theme.min.css"
+            // "dist/fonts/glyphicons-halflings-regular.eot/svg/ttf/woff/woff2"
+        ],
+        "angular-bootstrap": [
+            "ui-bootstrap.min.js",
+            "ui-bootstrap-tpls.min.js"
+        ],
+        "google-material-icons": [
+            "dist/material-icons-font.min.css"
+        ],
+        "google-material-color": [
+            "dist/palette.css"
         ]
 
     },
     "css" : [
-        "css/material.icons.css"
+        "css/framework.css"
+        // "css/material.icons.css"
     ]
 }

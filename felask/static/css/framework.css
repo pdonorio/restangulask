@@ -1,0 +1,55 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.horizontal-center {
+	width:1000px;
+	text-align: center;
+}
+
+.flex-container {
+    padding: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flex-hcentered {
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-vcentered {
+    height: 100%;
+}
+.flex-element {
+    width: auto;
+}
+
+.material-icons.tiny {
+  font-size: 18px;
+}
+.material-icons.small {
+  font-size: 24px;
+}
+.material-icons.medium {
+  font-size: 36px;
+}
+.material-icons.large {
+  font-size: 48px;
+}
+.material-icons.xlarge {
+  font-size: 60px;
+}
