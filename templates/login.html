@@ -1,50 +1,45 @@
 
-<div
-    style="padding: 2em;"
-    class="themaxsize" layout="row" layout-align="center center">
+<div class="row" ng-controller='LoginController as login' ng-cloak>
+<div class="col-xs-6 col-xs-offset-3 text-center" style='padding-top:50px;'>
 
-    <!-- My login card -->
-    <div class="card" flex="60"
-        ng-controller='LoginController as login' ng-cloak>
+  <div class="panel panel-info">
 
-      <div class="card-content">
-        <span class="card-title">Provide your credentials</span>
-        <p>
-
-        <form name="myForm">
-            <div class="input-field">
-              <i class="material-icons prefix">account_circle</i>
-              <input
-                ng-model="login.user.username" id="username" name="username"
-                id="icon_prefix" type="text" class="validate"
-                required autofocus>
-              <label for="icon_prefix">Username</label>
-            </div>
-            <div class="input-field">
-              <i class="material-icons prefix">vpn_key</i>
-              <input
-                ng-model="login.user.password" id="password" name="password"
-                type="password" class="validate"
-                required>
-              <label for="icon_telephone">Password</label>
-            </div>
-
-          <div ng-if='login.userMessage'>
-            <b> <i> {{login.userMessage}} </i> </b>
-          </div>
-
-          <div class="input-field">
-              <button ng-click='login.check()'
-                type="submit" class="btn cyan darken-4">Signin</button>
-              <br>
-              or <a ui-sref='public.register'>register a new account</a>
-          </div>
-
-        </form>
-
-        </p>
-      </div>
+    <div class="panel-heading">
+      <h3 class="panel-title">Provide your credentials</h3>
     </div>
-    <!-- My login card -->
 
+    <div class="panel-body text-left">
+
+      <form name="myForm">
+
+          <div class="form-group">
+            <i class="material-icons prefix">account_circle</i>
+            <label for="icon_prefix">Username</label>
+            <input class="form-control"
+              ng-model="login.user.username" id="username" name="username"
+              id="icon_prefix" type="text" 
+              required autofocus>
+          </div>
+
+          <div class="form-group">
+            <i class="material-icons prefix">vpn_key</i>
+            <label for="icon_telephone">Password</label>
+            <input class="form-control"
+              ng-model="login.user.password" id="password" name="password"
+              type="password"
+              required>
+          </div>
+
+          <div class='text-right'>
+            <button type="submit" class="btn btn-default" ng-click='login.check()'>
+              Signin
+            </button>
+          </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>
 </div>

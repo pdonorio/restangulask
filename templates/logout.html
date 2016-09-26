@@ -1,15 +1,23 @@
-<div class="container" ng-controller="LogoutController as logout">
+<div class="row" ng-controller="LogoutController as logout">
 
-    <h4> Do you really want to exit from your profile? </h4>
-    <br>
+<br><br>
+<div class='text-center col-xs-6 col-xs-offset-3'>
 
-<!--
-    <a href="/loggedout" target="_self">
--->
-    <a href>
+<div class='panel panel-danger'>
+	<div class="panel-heading">
+	    <h4 class="panel-title">
+	    	Do you really want to exit from your profile?
+	    </h4>
+    </div>
+
+    <div class="panel-body">
     	<button ng-click='logout.exit()' type="submit" class="btn btn-danger">
-    	Yes
+	    	Yes, close this session
     	</button>
-    </a>
+    </div>
+</div>
 
+</div>
+
+</div>
 </div>

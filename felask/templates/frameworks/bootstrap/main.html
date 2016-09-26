@@ -5,24 +5,27 @@
 {%- block content %}
 
 <!-- SPLASH SCREEN -->
-<div ng-if="main.splash" class="themaxsize cyan white-text"
-  layout="column" layout-align="center center">
-    <i class="large material-icons">insert_chart</i>
-    <md-progress-linear md-mode="query" style="width: 4rem;"></md-progress-linear> loading
+<div ng-if="main.splash" class="flex-container flex-hcentered flex-vcentered palette-Cyan-500 bg">
+<div class='flex-element palette-White text'>
+    <i class="material-icons xlarge">insert_chart</i>
+    <br>
+    <!-- <md-progress-linear md-mode="query" style="width: 4rem;"></md-progress-linear> --> 
+    <span style='padding-left:8px;'>loading</span>
+</div>
 </div>
 
 <!-- THE SIDEBAR FOR MENUs -->
 <div ui-view='sidebar'></div>
 
 <!-- MAIN CONTAINER. Note: passing the project name from Jinja template to Angular -->
-<main ng-hide="main.splash" class="themaxsize"
+<main ng-hide="main.splash" class="container-fluid"
     ng-init="myproject = '{{ project[0].upper() + project[1:].lower() }}'">
     <!-- TOPBAR -->
     <div ng-hide="main.load" ng-include="main.templateDir + 'topbar.html'"></div>
     <!-- WHILE WAITING (for API/RESOURCES) -->
     <div ng-if="main.load" ng-include="main.templateDir + 'loader.html'"></div>
     <!-- WHEN READY -->
-    <div ng-hide="main.load" style="height: calc(100% - 5rem);" ui-view='main'></div>
+    <div class='container' ng-hide="main.load" style="height: calc(100% - 5rem);" ui-view='main'></div>
 </main>
 
 <!-- THE SIDEBAR FOR HISTORY -->

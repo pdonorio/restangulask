@@ -1,34 +1,49 @@
 
-<md-toolbar ng-if="!main.avoidTheToolbar"
+<nav class="navbar navbar-default" ng-if="!main.avoidTheToolbar"
     ng-class="main.toolbarColor + ' ' + main.shade">
-  <div class="md-toolbar-tools">
-    <a href>
-      <i class="material-icons">menu</i>
-    </a>
+    <div class="container-fluid">
 
-    <h2 style="padding-left: 1rem;">
-      <a ui-sref='public.welcome'>
-        {{ myproject }}
+
+    <div class="navbar-header">
+<!-- 
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" src="...">
       </a>
-    </h2>
-    <!-- SEPARATOR -->
-    <span flex></span>
-    <!-- login/logout buttons -->
-    <a href ui-sref="public.login">
-        <md-button ng-if="!logged" class="md-raised">
-            Login
-        </md-button>
-    </a>
+ -->
+      <h3>
+        <a ui-sref='public.welcome'>
+          {{ myproject }}
+        </a>
+      </h3>
+    </div>
 
-    <a href ui-sref="logged.profile" ng-if="logged">
-      <i class="material-icons">people</i>
-      <i><small>{{profile.email}}</small></i>
-    </a>
-    <a href ui-sref="logged.logout">
-        <md-button ng-if="logged" class="md-raised">
-        Logout
-        </md-button>
-    </a>
+  <div class="collapse navbar-collapse">
+
+    <ul class="nav navbar-nav navbar-right">
+
+      <li>
+        <a href ui-sref="logged.profile" ng-if="logged">
+          <i class="material-icons">people</i>
+          <i><small>{{profile.email}}</small></i>
+        </a>
+      </li>
+
+      <!-- login/logout buttons -->
+      <li>
+      <a href ui-sref="public.login" ng-if="!logged">
+              Login
+      </a>
+
+      <a href ui-sref="logged.logout" ng-if="logged">
+          Logout
+      </a>
+      </li>
+
+    </ul>
+  </div>
+
 
   </div>
-</md-toolbar>
+
+  </div>
+</nav>
