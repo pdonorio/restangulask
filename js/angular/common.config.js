@@ -17,7 +17,7 @@ function formlyConfig(formlyConfigProvider) {
     template: '<input type="text" '+
               ' ng-model="model[options.key]" '+
               ' ng-model-options="{ getterSetter: true }"'+
-              ' uib-typeahead="item as item.name for item in ctrl.querySearch($viewValue)"'+
+              ' uib-typeahead="item as item.name for item in ctrl.querySearch(options.key, $viewValue)"'+
               ' typeahead-select-on-blur=true'+
               ' typeahead-show-hint=true'+
               ' class="form-control"'+

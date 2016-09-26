@@ -32,7 +32,7 @@ function FormlyService(noty)
 			} else if (s['type'] == "int") {
 				ftype = "input";
 				ttype = "number";
-			} else if (s['type'] == "timestamp") {
+			} else if (s['type'] == "date") {
 				ftype = "input";
 				ttype = "date";
 			} else if (s['type'] == "select") {
