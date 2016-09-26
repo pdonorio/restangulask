@@ -46,6 +46,15 @@ function SchemaFormDialogController($scope, $controller, SchemaFormService, noty
   }
 }
 
+function DialogController($scope, $uibModalInstance) {
+    $scope.cancel = function() {
+      $uibModalInstance.dismiss();
+    };
+    $scope.confirm = function(answer) {
+      $uibModalInstance.close(answer);
+    };
+}
+
 function FormDialogController($scope, noty) {
 
   var self = this;
@@ -95,6 +104,30 @@ function FormDialogController($scope, noty) {
 function FormDialogService($log, $uibModal, $rootScope) {
   var self = this;
 
+  self.showConfirmDialog = function(text, subtext) {
+    var template = "<div class='panel panel-warning text-center' style='margin-bottom:0px;'>";
+        template+= "<div class='panel-heading'>Confirmation required</div>";
+        template+= "<div class='panel-body'><h4>"+text+"</h4><br>"+subtext+"</div>";
+        template+= "<div class='panel-footer'>";
+
+        template+= "<div class='row'>";
+        template+= "<div class='col-xs-4 col-xs-offset-2'>";
+        template+= "<button class='btn btn-danger' ng-click='confirm()'>Yes</button>";
+        template+= "</div>";
+        template+= "<div class='col-xs-4'>";
+        template+= "<button class='btn btn-default' ng-click='cancel()'>No</button>";
+        template+= "</div>";
+
+        template+= "</div>";
+        template+= "</div>";
+
+    return $uibModal.open({
+      controller: DialogController,
+      template: template,
+      parent: angular.element(document.body),
+      clickOutsideToClose:true
+    }).result;
+  }
   self.showFormlyDialog = function(form_data, dataCtrl) {
     var scope = $rootScope.$new()
     scope.form_data = form_data
