@@ -4,7 +4,7 @@
 angular.module('web')
     .controller('SessionsController', SessionsController);
 
-function SessionsController($scope, $log, $auth, $mdDialog, api)
+function SessionsController($scope, $log, $auth,  api, FormDialogService)
 {
 
 	var self = this;
@@ -26,28 +26,25 @@ function SessionsController($scope, $log, $auth, $mdDialog, api)
 	self.loadTokens();
 
 	self.revokeToken = function(id, $event) {
-		var confirm = $mdDialog.confirm()
-		          .title('Are you sure you want to invalidate this token?')
-		          .textContent('This token will no longer available. This operation cannot be undone.')
-		          .ariaLabel('revoke token')
-		          .targetEvent($event)
-		          .ok('DELETE')
-		          .cancel('UNDO');
-		$mdDialog.show(confirm).then(function() {
-
-			var data = {}
-			return api.revokeToken(id).then(
-				function(out_data) {
-		    		$log.debug("Token invalidated");
-					self.loadTokens();
-		        	return true;
-	    		},
-	    		function(out_data) {
-		        	return false;
-	    		});
-		}, function() {
-			return false;
-		});
+		var text = "Are you really sure you want to invalidate this token?";
+		var subtext = "This token will no longer available. This operation cannot be undone.";
+		FormDialogService.showConfirmDialog(text, subtext).then(
+			function(answer) {
+				var data = {}
+				return api.revokeToken(id).then(
+					function(out_data) {
+			    		$log.debug("Token invalidated");
+						self.loadTokens();
+			        	return true;
+		    		},
+		    		function(out_data) {
+			        	return false;
+		    		});
+			},
+			function() {
+				return false;
+			}
+		);
 	}
 }
 

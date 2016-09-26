@@ -1,22 +1,33 @@
-<md-content>
+<div class='row'>
+<div class='col-xs-6 col-xs-offset-3'>
 
-    <div layout='row' layout-align='center'>
-        <h3>
-        Server not reachable
-        </h3>
-    </div>
+<div class='panel panel-danger'>
 
-    <div layout='row' layout-align='center'>
-        <h5>
-        (or connection not available)
-        </h5>
-    </div>
+<div class='panel-heading text-center'>
+    <h3 class='panel-title'> Server not reachable </h3>
+</div>
 
-    <div layout='row' layout-align='center'>
-        <a ui-sref='public.login'>Retry again</a>
-        <span>&nbsp;
-            in a few minutes
-        </span>
-    </div>
+<div class='panel-body text-center'>
 
-</md-content>
+    <h5>
+
+    Server is not reachable or connection is not available. Please retry again in a few minutes
+
+    <br><br>
+     
+    <a ui-sref='public.login'>
+        <i class='material-icons'>refresh</i>
+        <br>
+        Reload 
+    </a>
+
+    </h5>
+</div>
+
+<div class='panel-footer'>
+</div>
+
+</div>
+
+</div>
+</div>

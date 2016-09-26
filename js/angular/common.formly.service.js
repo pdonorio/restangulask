@@ -70,6 +70,10 @@ function FormlyService(noty)
 			if (ttype == 'autocomplete') {
 				field['controller'] = DataController+" as ctrl";
 			}
+			if (ttype == 'date') {
+				console.log(data)
+			}
+
 
 			fields.push(field);
 

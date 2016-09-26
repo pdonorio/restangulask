@@ -1,75 +1,95 @@
 <div ng-controller='SessionsController as ctrl'>
 
-<div class="themaxsize" layout="column" layout-align="center center">
+<div class="row">
+<div class='col-xs-12'>
 
-    <br>
-    <h4>List of your open sessions</h4>
+<div class='panel panel-default'>
+<!-- PANEL HEADING START -->
+<div class='panel-heading'>
+    <h4 class='panel-title'>
+        List of your open sessions
+    </h4>
+</div>
+<!-- PANEL HEADING END -->
+<!-- PANEL BODY + TABLE START -->
+<div class='panel-body' ng-if='ctrl.tokens'>
+<div class="table-responsive">
+    <table class='table table-hover table-condensed'>
 
-    <md-content ng-if='ctrl.tokens'>
-        <table>
+        <tr>
+            <th>ID</th>
+            <th>IP</th>
+            <th>host</th>
+            <th>Emitted</th>
+            <th>Last access</th>
+            <th>Expiration</th>
+            <th>Revoke</th>
+            <th>Token</th>
+        </tr>
+        <tr ng-repeat="(key, values) in ctrl.tokens">
 
-            <tr>
-                <th>ID</th>
-                <th>IP</th>
-                <th>host</th>
-                <th>Emitted</th>
-                <th>Last access</th>
-                <th>Expiration</th>
-                <th>Revoke</th>
-                <th>Token</th>
-            </tr>
-            <tr ng-repeat="(key, values) in ctrl.tokens">
-
-            <td ng-class="{'green-text': values.inuse}">{{values.id}}</td>
-            <td>{{values.IP}}</td>
-            <td>{{values.hostname}}</td>
-            <td>
-                <span 
-                    data-toggle="tooltip" 
-                    title="{{1000*values.emitted | date : 'yyyy MMM dd HH:mm:ss'}}"
-                    >
-                    {{values.emitted | moment_unix: 'fromNow' }}
-                </span>
-            </td>
-
-            <td>
-                <span 
-                    data-toggle="tooltip" 
-                    title="{{1000*values.last_access | date : 'yyyy MMM dd HH:mm:ss'}}"
-                    >
-                    {{values.last_access | moment_unix: 'fromNow' }}
-                </span>
-            </td>
-
-            <td>
-                <span 
-                    data-toggle="tooltip" 
-                    title="{{1000*values.expiration | date : 'yyyy MMM dd HH:mm:ss'}}"
-                    >
-                    {{values.expiration | moment_unix: 'fromNow' }}
-                </span>
-            </td>
-
-            <td>
-                <i class="material-icons"
-                    ng-click='ctrl.revokeToken(values.id);'
+        <td ng-class="{'green-text': values.inuse}">{{values.id}}</td>
+        <td>{{values.IP}}</td>
+        <td>{{values.hostname}}</td>
+        <td>
+            <span 
+                uib-tooltip="{{1000*values.emitted | date : 'yyyy MMM dd HH:mm:ss'}}"
                 >
-                    delete
-                </i>
+                {{values.emitted | moment_unix: 'fromNow' }}
+            </span>
+        </td>
+
+        <td>
+            <span 
+                uib-tooltip="{{1000*values.last_access | date : 'yyyy MMM dd HH:mm:ss'}}"
+                >
+                {{values.last_access | moment_unix: 'fromNow' }}
+            </span>
+        </td>
+
+        <td>
+            <span 
+                uib-tooltip="{{1000*values.expiration | date : 'yyyy MMM dd HH:mm:ss'}}"
+                >
+                {{values.expiration | moment_unix: 'fromNow' }}
+            </span>
+        </td>
+
+        <td>
+            <i class="material-icons palette-Red-500 text"
+                ng-click='ctrl.revokeToken(values.id);'
+            >
+                delete
+            </i>
 
 
-            </td>
+        </td>
 
-            <td style='max-width:300px;font-size: 6px; word-break: break-all;'>
-                {{values.token}}
-            </td>
+        <td style='max-width:300px;font-size: 6px; word-break: break-all;'>
+            {{values.token}}
+        </td>
 
 
-            </tr>
-        </table>
-    </md-content>
+        </tr>
+    </table>
+</div>
+</div>
+<!-- PANEL BODY +  TABLE END -->
+
+
+<!-- PANEL FOOTER START -->
+<div class="panel-footer">
+<div class='text-right'>
 
 </div>
+</div>
+<!-- PANEL FOOTER END -->
+
+</form>
 
 </div>
+<!-- PANEL END -->
 
+</div>
+</div>
+</div>

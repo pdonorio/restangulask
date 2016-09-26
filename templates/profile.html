@@ -1,46 +1,70 @@
 
-<div class="themaxsize" layout="column" layout-align="center center">
-    <md-content>
-    	<table>
-    		<tr>
-    			<th colspan=2>User profile</th>
-    		</tr>
-    		<tr ng-repeat="(key, value) in profile">
-    		<th>{{key}}</th>
+<div class="row">
+<div class='col-xs-8 col-xs-offset-2'>
 
-    		<td ng-if="key != 'roles'">{{value}}</td>
+<div class='panel panel-default' ng-if='!datactrl.loadingPhenotypes'>
+<!-- PANEL HEADING START -->
+<div class='panel-heading'>
+    <h4 class='panel-title'>
+        <i class='material-icons'>face</i> User profile
+    </h4>
+</div>
+<!-- PANEL HEADING END -->
 
-            <td ng-if="key == 'roles'">
-                <md-chips 
-                    ng-model="value" 
-                    readonly="true"
-                >
-                </md-chips>
-            </td>
+<!-- PANEL BODY + TABLE START -->
+<div class='panel-body'>
+<div class="table-responsive">
+	<table class='table table-striped'>
 
-    		</tr>
+		<tr ng-repeat="(key, value) in profile">
+		<th>{{key}}</th>
 
-            <tr>
-            <th>Password</th>
-            <td>
-                <a ui-sref='logged.profile.changepassword'>
-                    <i>Change your password</i>
-                </a>
-            </td>
-            </tr>
+		<td ng-if="key != 'roles'">{{value}}</td>
 
-            <tr>
-            <th>Open Sessions</th>
-            <td>
-                <a ui-sref='logged.profile.sessions'>
-                    <i>View list of your open sessions</i>
-                </a>
-            </td>
-            </tr>
+        <td ng-if="key == 'roles'">
+            <md-chips 
+                ng-model="value" 
+                readonly="true"
+            >
+            </md-chips>
+        </td>
 
-    	</table>
-    </md-content>
+		</tr>
+
+        <tr>
+        <th>Password</th>
+        <td>
+            <a ui-sref='logged.profile.changepassword'>
+                <i>Change your password</i>
+            </a>
+        </td>
+        </tr>
+
+        <tr>
+        <th>Open Sessions</th>
+        <td>
+            <a ui-sref='logged.profile.sessions'>
+                <i>View list of your open sessions</i>
+            </a>
+        </td>
+        </tr>
+
+    </table>
+</div>
+</div>
+<!-- PANEL BODY +  TABLE END -->
+
+
+<!-- PANEL FOOTER START -->
+<div class="panel-footer">
+<div class='text-right'>
 
 </div>
+</div>
+<!-- PANEL FOOTER END -->
 
+</div>
+<!-- PANEL END -->
 
+</div>
+</div>
