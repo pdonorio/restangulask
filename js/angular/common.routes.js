@@ -154,7 +154,6 @@ function routeConfig(
         // Implement main route for landing page after login
         views: {
             "main": {
-                // templateUrl: templateDir + 'logged.html',
                 template: "<div ui-view='loggedview' style='height: calc(100% - 5rem);'></div>",
             }
         },
