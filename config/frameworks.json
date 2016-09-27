@@ -26,17 +26,6 @@
         "angular-ui-router": [
             "release/angular-ui-router.min.js"
         ],
-        // "materialize": [
-        //     "dist/js/materialize.min.js",
-        //     "dist/css/materialize.min.css"
-        // ],
-        // "angular-materialize": [
-        //     "src/angular-materialize.js"
-        // ],
-        // "angular-material": [
-        //     "angular-material.min.css",
-        //     "angular-material.min.js"
-        // ],
         "satellizer": [
             "satellizer.min.js"
         ],
@@ -68,16 +57,16 @@
             "ui-bootstrap.min.js",
             "ui-bootstrap-tpls.min.js"
         ],
-        "google-material-icons": [
-            "dist/material-icons-font.min.css"
-        ],
+        // "google-material-icons": [
+        //     "google-material-icons.min.css"
+        // ],
         "google-material-color": [
             "dist/palette.css"
         ]
 
     },
     "css" : [
-        "css/framework.css"
-        // "css/material.icons.css"
+        "css/framework.css",
+        "css/material.icons.css"
     ]
 }
