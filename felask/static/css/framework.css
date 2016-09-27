@@ -53,3 +53,6 @@ html, body {
 .material-icons.xlarge {
   font-size: 60px;
 }
+.table-borderless td, .table-borderless th {
+    border: none !important;
+}
