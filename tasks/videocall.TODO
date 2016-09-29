@@ -1,14 +1,13 @@
 Nuova riunione:
 
-  ☐ formato data classico
-    ☐ gg-MM-aaaa
-
+✔ formato data classico @done (16-09-29 17:28)
+  ✔ gg-MM-aaaa @done (16-09-29 17:28)
+✔ agen_1 @done (16-09-29 17:28)
+ ✔ no data in search? @done (16-09-29 17:28)
+☐ install timestring with pip
 ☐ pagina ricerca
   ☐ foto 2
   ☐ colore giallo
-
-☐ agen_1
- ☐ no data in search?
 
 DETTAGLI:
 ☐ tasto cancella
@@ -19,7 +18,7 @@ DETTAGLI:
        ☐ sottocartella con data?
 
 TESTI:
-  ☐ traduzioni in francese
+  ☐ traduzioni in francese?
 
 others:
 ls *.jpg *.JPG *.tif  | wc -l
