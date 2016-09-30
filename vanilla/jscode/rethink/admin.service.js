@@ -9,12 +9,18 @@ function AdminService($log, api) {
     var self = this;
     self.endpoints = {
         admin: 'datadmins',
+        up: 'update',
         expo: 'expo',
         expod: 'expodesc',
         imissing: 'dataimagemissing',
         tmissing: 'datatransmissing',
         stepstemplate: 'steps',
         data: 'datavalues',
+    }
+
+    self.updateDocImage = function(id, fileName) {
+        return api.apiCall(self.endpoints.up, 'POST',
+            {file: fileName, id: id})
     }
 
     //////////////////

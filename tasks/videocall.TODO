@@ -1,5 +1,5 @@
-Nuova riunione:
 
+LATEST:
 ✔ formato data classico @done (16-09-29 17:28)
   ✔ gg-MM-aaaa @done (16-09-29 17:28)
 ✔ agen_1 @done (16-09-29 17:28)
@@ -7,26 +7,40 @@ Nuova riunione:
 ✔ pagina ricerca @done (16-09-29 17:32)
   ✔ foto 2 @done (16-09-29 17:32)
   ✔ colore giallo @done (16-09-29 17:32)
-☐ install timestring with pip
+✔ install timestring with pip @done (16-09-29 19:00)
+ ☐ ordinamento tabella lista delle feste @datatable
+ ☐ cambia data su festa
 
-DETTAGLI:
+Advanced SEARCH:
+☐ alphabetic order for advanced selects
+☐ Save filters choises ?
+    ☐ probably inside a cookie?
+    http://stackoverflow.com/a/28095874/2114395
+
+DETAILS:
+
+☐ prima pagina << - indietro <  pagina, tendina_pagine > avanti - ultima >>
 ☐ tasto cancella
-☐ tasto sostituisci immagine
- ☐ cerca se c'è e cambia, altrimenti nuova?
+✔ tasto sostituisci immagine @done (16-09-30 08:35)
+Agen_1
+http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
+Bordeaux_1
+http://localhost/public/details/5d6fb1f3-927c-48c7-aa10-b648f8d80d10
+Agen_2
+http://localhost/public/details/ff771300-d620-48b0-a1b3-12ccbe5f4cc7
+Besançon_1
+http://localhost/public/details/c45a94a0-d1a9-43a7-a977-70504fcb8dc9
+ ✔ cerca se c'è e cambia, altrimenti nuova? @done (16-09-30 08:35)
    ☐ se esiste la vecchia finisce nel cestino (solo immagine)
      ☐ cestino con cartella nome documento
        ☐ sottocartella con data?
 
-TESTI:
-  ☐ traduzioni in francese?
+BUGS:
+Isabellaeae
+ ☐ bug traduzione in keyword
 
 others:
 ls *.jpg *.JPG *.tif  | wc -l
-
-r.db('webapp').table('datavalues').concat_map(lambda doc: doc['steps'].concat_map(lambda step: step['data'].co
-    ...: ncat_map(lambda data:[{'record': doc['record'], 'name': step['step'], 'step': data}]))).filter({'name': 3}).ma
-    ...: p(lambda row: {'x': row['record'], 'y': row['step']['value'], 'z':row['step']['position']}).filter({'y': 'prov
-    ...: a'}).run()
 
 PERFORMANCES:
 ☐ Account DB
@@ -39,42 +53,10 @@ PERFORMANCES:
    ☐ serve static (images and js)
    ☐ cache?
 
-LATEST:
- ✔ and thumbnail expo build medium size @meanwhile @done (16-09-19 16:53)
- ✔  remove useless? @done (16-09-19 07:42)
- d2d5fcb6-81cc-4654-9f65-a436f0780c67
- ✔ ui base de donné @done (16-09-20 07:25)
- ☐ reenable authentication on all docs  (and fastsearch) endpoints
- ☐ ordinamento tabella lista delle feste @datatable
- ☐ thumbnail
-   ☐ reedit image on existing documents without removing associated text
-Agen_1
-http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
-Bordeaux_1
-http://localhost/public/details/5d6fb1f3-927c-48c7-aa10-b648f8d80d10
-Agen_2
-http://localhost/public/details/ff771300-d620-48b0-a1b3-12ccbe5f4cc7
-Besançon_1
-http://localhost/public/details/c45a94a0-d1a9-43a7-a977-70504fcb8dc9
-
-
-Advanced SEARCH:
-✔ bool elasticsearch query @done (16-09-17 10:47)
-✔ No elements found after filter? @done (16-09-17 11:05)
-   ✔ why is it not zero? @done (16-09-17 11:05)
-✔ single select @done (16-09-18 22:35)
- array datatype
- ✔ step 3position 8 (inizio) and 9 (fine) @date @done (16-09-23 16:17)
-      ✔ gg/mm/aaaa (no date picker) @done (16-09-23 16:17)
-      ✔ copy start date to end date if the second one is empty @done (16-09-24 06:41)
-✔ button clear filters @done (16-09-23 16:34)
-☐ Save filters choises ?
-    ☐ probably inside a cookie?
-    http://stackoverflow.com/a/28095874/2114395
-
-BUGS:
- ☐ se modifico tendina dopo inserimento transcrition l'elemento non viene salvato
-enzo
+DETTAGLI:
+hyphotesis
+☐ controllare se si può anticipare in pagina succ e prev che pagina sarà
+☐ presenza di ruoli @rbac
 
 elastic:
  ✔ uso id rethinkdb? @done (16-09-11 18:39)
@@ -90,16 +72,6 @@ EXPO:
 ☐ Manage description
   ☐ button to delete section?
 
-DETTAGLI:
-hyphotesis
- ☐ controllare se si può anticipare in pagina succ e prev che pagina sarà
- ☐ substitution of the image
-   ☐ button down the image
- ☐ record: delete button
-   ☐ with: are you really sure?
-☐ presenza di ruoli @rbac
-
-
 LESSICO & ELASTIC:
    excel > sheets > macro, micro, posizione, lingue (francese, latino, italiano)
 
@@ -109,16 +81,11 @@ LESSICO & ELASTIC:
   ☐ show in search with modal + tabs
   ☐ list in search details
 
-ELASTIC
 ☐ add translations to known words
 ☐ add insert/updates to elastic @veryimportant
  ☐ how to remove existing data updated?
 ☐ index rebuild
 ☐ image build for expo (thumbnail + medium size)
-
- LAST:
- ☐ prossima pagina nel full screen
- ☐ firefox / safari check
 
 MOVE TO PRODUCTION:
  ✔ uptime robot (both interface and api) @done (16-08-12 09:36)
@@ -127,15 +94,9 @@ MOVE TO PRODUCTION:
  ☐ Profiles administration
  ☐ send email?
 
-extra SEARCH:
-
-   ☐ enter on a word which is not suggested?
-   ☐ clear function? when pressing X button
-   ☐ searching a phrase
-     ☐ avoid searching different words
-   ☐ prefix query? give importance if what you write is in the prefix
-   ☐ scroll cache!
-   ☐ did you mean?
+ LAST:
+ ☐ prossima pagina nel full screen
+ ☐ firefox / safari check
 
    --- ✄ -----------------------
    THE END

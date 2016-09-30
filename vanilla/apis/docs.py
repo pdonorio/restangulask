@@ -157,7 +157,7 @@ class RethinkDataValues(BaseRethinkResource):
     @deck.add_endpoint_parameter(name='field')
     @deck.add_endpoint_parameter(name='details', default='short')
     @deck.apimethod
-    # @auth_token_required
+    @auth_token_required
     def get(self, data_key=None):
 
         if data_key == 'draft':
@@ -293,7 +293,7 @@ class RethinkDataKeys(BaseRethinkResource):
     table_index = 'steps'
 
     @deck.apimethod
-    # @auth_token_required
+    @auth_token_required
     def get(self, step=None):
         count, data = super().get(step)
         return self.response(data, elements=count)
@@ -341,7 +341,7 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
     @deck.add_endpoint_parameter(name='filter')
     @deck.add_endpoint_parameter(name='key')
     @deck.apimethod
-    # @auth_token_required
+    @auth_token_required
     def get(self, document_id=None):
 
         # Init
@@ -386,7 +386,7 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
         return self.response(data, elements=count)
 
     @deck.apimethod
-    # @auth_token_required
+    @auth_token_required
     def post(self):
         """
         Not a real POST method at the moment...
@@ -447,7 +447,7 @@ class RethinkExpo(BaseRethinkResource):
     _type = 'expo'
 
     @deck.apimethod
-    # @auth_token_required
+    @auth_token_required
     def get(self, id=None):
 
         data = {}
@@ -749,7 +749,7 @@ class RethinkDataForAdministrators(BaseRethinkResource):
     @deck.apimethod
     # This method should be public
     # to show sections in the welcome page to unlogged users
-    # @auth_token_required
+    @auth_token_required
     def get(self, id=None):
 
         type = image_destination(self._args, key_type=mykey)
@@ -904,7 +904,7 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
         return self.response(final)
 
     @deck.apimethod
-    # @auth_token_required
+    @auth_token_required
     def put(self, id):
 
         j = self.get_input(False)
@@ -1073,7 +1073,7 @@ class RethinkMetaImages(BaseRethinkResource):
     table = mylabel
 
     @deck.apimethod
-    #@auth_token_required
+    @auth_token_required
     def get(self):
 
         # Handling one filter
@@ -1168,6 +1168,7 @@ class RethinkUploader(Uploader, BaseRethinkResource):
 
     @deck.add_endpoint_parameter('destination', default=DEFAULT_DESTINATION)
     @deck.apimethod
+    # @auth_token_required
     def get(self, filename=None):
 
         # Forward GET method from flow chunks, to POST method
@@ -1186,7 +1187,7 @@ class RethinkUploader(Uploader, BaseRethinkResource):
     @deck.add_endpoint_parameter(name='record', required=True)
     @deck.apimethod
 # // TO FIX: use ng-flow headers to set authentication?
-    #@auth_token_required
+    # @auth_token_required
     def post(self):
         """
         Let the file be uploaded, make stats
@@ -1209,6 +1210,58 @@ class RethinkUploader(Uploader, BaseRethinkResource):
 
         # Reply to user
         return self.response(obj, code=status)
+
+
+class RethinkUpdateImages(BaseRethinkResource):
+    # @deck.add_endpoint_parameter('file')
+    @deck.apimethod
+    # @auth_token_required
+    def post(self):
+
+        j = self.get_input(True)
+
+        id = j['id']
+        file = j['file']
+
+        query = self.get_table_query("datadocs")
+        original = query.get(id).run()
+        # from beeprint import pp
+        # pp(original)
+## // TO FIX:
+# pick the old file and move it to save it
+
+        q = query.filter({'type': 'documents'})
+        tmp = {}
+        for element in q.run():
+            if 'images' not in element:
+                continue
+            if element['images'][0]['filename'] == file:
+                # print("FOUND", element, file)
+                tmp = element['images'][0]
+
+## // TO FIX:
+# check that you are not removing something with data
+# (like transcriptions, translations, language)
+                # remove old one(s)
+                query.get(element['record']).delete().run()
+                logger.debug("Removed temporary %s" % element['record'])
+
+        if len(tmp) < 1:
+            return self.response("Something went wrong...", fail=True)
+
+        images = original['images']
+        images[0]['filename'] = tmp['filename']
+        images[0]['code'] = tmp['code']
+        images[0]['filename_type'] = tmp['filename_type']
+
+        # update
+        query.get(id).update({'images': images}).run()
+        logger.info("Updated %s" % images)
+
+## // TO FIX:
+# update elasticsearch ARGH
+
+        return self.response(id)
 
 
 class RethinkStepsTemplate(BaseRethinkResource):
@@ -1245,7 +1298,7 @@ class RethinkExpoDescription(BaseRethinkResource):
     table = 'expodesc'
 
     @deck.apimethod
-    # @auth_token_required
+    @auth_token_required
     def get(self):
         query = self.get_table_query()
         # if step is not None:

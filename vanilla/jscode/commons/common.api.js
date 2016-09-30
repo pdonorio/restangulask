@@ -114,7 +114,7 @@ with Angular.
                 $log.debug("API call successful", response);
                 return response.data;
           }, function errorCallback(response) {
-                $log.warn("API failed to call")
+                $log.warn("API failed to call", response);
                 if (errorCheck) {
                     return response;
                 } else {

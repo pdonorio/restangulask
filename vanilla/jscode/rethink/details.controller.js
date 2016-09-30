@@ -4,7 +4,9 @@
 angular.module('web')
     .controller('DetailsController', DetailsController);
 
-function DetailsController($scope, $log, $sce, $stateParams, $auth, SearchService)
+function DetailsController($scope,
+    $log, $sce, $stateParams, $auth, $window,
+    SearchService, AdminService)
 {
     var self = this;
     $log.info("Single view on", $stateParams.id);
@@ -196,8 +198,64 @@ function DetailsController($scope, $log, $sce, $stateParams, $auth, SearchServic
 // Take focus out?
     }
 
-    // Use it
+    //////////////////////////////
+    // Flow library upload
+    //////////////////////////////
+
+    self.config = {
+        // Passing data to the flow HTTP API call
+        query: function (flowFile, flowChunk) {
+          return {
+            // // record id with all the documents
+            record: "GENERATE",
+            // destination is what this document/image is for
+            destination: 'documents',
+          };
+        }
+    }
+
+    self.changeImage = function(file, options) {
+      $scope.showSimpleToast( {"Uploaded": file.name}, 1800);
+      console.log('CHANGE', file, $scope.theid);
+      // api call with id + file.name
+      AdminService.updateDocImage($scope.theid, file.name).then(function (out) {
+          console.log('Updated', out);
+          // which removes old id record, and updates details to new one
+          self.loadData();
+      })
+    };
+
+    self.adding = function(file, ev, flow) {
+
+      file.status = 'progress';
+      file.record = $scope.currentRecord;
+      $log.debug("File adding", file, ev, flow);
+      $scope.showSimpleToast( {"Uploading": file.name}, 2800);
+    };
+
+    self.fileError = function(file, message) {
+      file.status = 'fail';
+      var json_message = angular.fromJson(message);
+      console.log(message, json_message, json_message.data.errors[0]);
+      // file.errorMessage = apiErrorToHtml(json_message.data);
+      // $log.warn("File error", file, file.errorMessage);
+      $window.scrollTo(0, 0);
+      var arrayError = json_message.data.errors[0];
+      // arrayError['Failed to upload'] = file.name;
+      $scope.showSimpleToast(
+        arrayError
+          // {
+          //   "Failed to upload": file.name,
+          //   "Error message": json_message.data.errors[0],
+          // }
+      , 9000);
+    };
+
+    //////////////////////////////
+    // Init
+    //////////////////////////////
     loadData();
+
 }
 
 })();

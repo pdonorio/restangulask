@@ -35,6 +35,10 @@ http://stackoverflow.com/a/31278615/2114395
     padding-right:20px;
 }
 
+.left-pad: {
+    padding-left: 10px;
+}
+
 .details-pad {
     padding: 15px 2px 15px 2px;
 }

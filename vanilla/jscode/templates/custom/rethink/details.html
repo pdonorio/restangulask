@@ -120,14 +120,32 @@
     <table class=" topalign smalltexttable">
 
      <thead> <tr> <td colspan="2">
-        <h5>
-            DÉTAILS DE LA PAGE
-            <a ng-if="detail.logged" ui-sref="logged.submit({id: theid})">
-                <i class="material-icons red-text"
-                   data-position="right" data-tooltip="Modify this record" tooltipped
-                >edit</i>
-            </a>
-        </h5>
+        <div ng-if="detail.logged" layout="row">
+            <h5> DÉTAILS DE LA PAGE </h5>
+            <div flex="5"></div>
+            <div class="left-pad">
+                <a ui-sref="logged.submit({id: theid})" class="btn btn-floating">
+                    <i class="material-icons"
+                       data-position="down" data-tooltip="Modify this record" tooltipped
+                    >edit</i>
+                </a>
+            </div>
+            <div class="left-pad"
+                ng-if="detail.data.images[0].filename"
+                flow-init="detail.config"
+                flow-file-added="detail.adding($file, $event, $flow)"
+                flow-files-submitted="$flow.upload()"
+                flow-file-error="detail.fileError($file, $message)"
+                flow-file-success="detail.changeImage($file, options)" >
+               <span
+                   class="btn btn-floating"
+                   tooltipped data-position="down" data-tooltip="Change current image"
+                    flow-btn
+                   >
+                   <i class="material-icons"> change_history </i>
+               </span>
+            </div>
+        </div>
 
         </td> </tr> </thead>
       <tbody ng-init="key='Détails'">
