@@ -13,16 +13,11 @@
   <div ng-if='detail.data' layout="column">
       <div ng-hide="detail.data.id"> No data... </div>
 
-<!--
- <div layout="column" layout-padding>
-    <h3>
-        NOTICE DETAILLEE:
-        <b> {{detail.refinedData["Extrait"]["Numero de l'extrait"]}} </b>
-
-        </hr>
+<!-- <div layout="column" layout-padding>
+    <h3> NOTICE DETAILLEE:
+        <b> {{detail.refinedData["Extrait"]["Numero de l'extrait"]}} </b> </hr>
     </h3>
- </div>
- -->
+ </div> -->
 
   <div layout-gt-md="row" layout="column">
 
@@ -41,23 +36,24 @@
 
       </div>
 
+<!-- TO FIX -->
       <div layout="row">
           <md-content flex="30" layout-padding style="text-align: left;">
-                <a href layout="row" layout-align="center center"
-                ng-if="detail.previous.link"
-                    ui-sref="public.details({id: detail.previous.link})">
-                    <i class="material-icons">keyboard_arrow_left</i>
-                    {{detail.previous.text}}
-                </a>
+            <a href layout="row" layout-align="center center"
+            ng-if="detail.previous.link"
+                ui-sref="public.details({id: detail.previous.link})">
+                <i class="material-icons">keyboard_arrow_left</i>
+                {{detail.previous.text}}
+            </a>
           </md-content>
           <div flex="40"></div>
           <md-content flex="30" layout-padding style="text-align: right;">
-                <a href layout="row" layout-align="center center"
-                ng-if="detail.next.link"
-                    ui-sref="public.details({id: detail.next.link})">
-                    {{detail.next.text}}
-                    <i class="material-icons">keyboard_arrow_right</i>
-                </a>
+            <a href layout="row" layout-align="center center"
+            ng-if="detail.next.link"
+                ui-sref="public.details({id: detail.next.link})">
+                {{detail.next.text}}
+                <i class="material-icons">keyboard_arrow_right</i>
+            </a>
           </md-content>
       </div>
 
@@ -125,9 +121,8 @@
             <div flex="5"></div>
             <div class="left-pad">
                 <a ui-sref="logged.submit({id: theid})" class="btn btn-floating">
-                    <i class="material-icons"
-                       data-position="down" data-tooltip="Modify this record" tooltipped
-                    >edit</i>
+                    <i class="material-icons" data-position="down"
+                        data-tooltip="Modify this record" tooltipped>edit</i>
                 </a>
             </div>
             <div class="left-pad"
@@ -144,6 +139,12 @@
                    >
                    <i class="material-icons"> change_history </i>
                </span>
+            </div>
+            <div class="left-pad">
+                <a ui-sref="logged.remove({id: theid})" class="btn btn-floating">
+                    <i class="material-icons" data-position="down"
+                        data-tooltip="Delete this record" tooltipped>delete</i>
+                </a>
             </div>
         </div>
 

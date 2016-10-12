@@ -1,15 +1,24 @@
 
-LATEST:
-✔ formato data classico @done (16-09-29 17:28)
-  ✔ gg-MM-aaaa @done (16-09-29 17:28)
-✔ agen_1 @done (16-09-29 17:28)
- ✔ no data in search? @done (16-09-29 17:28)
-✔ pagina ricerca @done (16-09-29 17:32)
-  ✔ foto 2 @done (16-09-29 17:32)
-  ✔ colore giallo @done (16-09-29 17:32)
-✔ install timestring with pip @done (16-09-29 19:00)
- ☐ ordinamento tabella lista delle feste @datatable
- ☐ cambia data su festa
+Details:
+☐ prima pagina << - indietro <  pagina, tendina_pagine > avanti - ultima >>
+
+  ✔ substitution @done (16-10-12 11:09)
+   ✔ se esiste la vecchia finisce nel cestino (solo immagine) @done (16-10-12 07:53)
+     ✔ cestino con cartella nome documento @done (16-10-12 07:53)
+       ✘ sottocartella con data? @cancelled (16-10-12 07:53)
+       ✔ prefisso nuovo file con data @done (16-10-12 07:54)
+       ✔ elasticsearch @done (16-10-12 12:53)
+   ✘ upload può sovrascrivere un filename esistente? fare prova @cancelled (16-10-12 12:53)
+   ☐ applica subito a:
+Agen_1 http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
+Bordeaux_1 http://localhost/public/details/5d6fb1f3-927c-48c7-aa10-b648f8d80d10
+Agen_2 http://localhost/public/details/ff771300-d620-48b0-a1b3-12ccbe5f4cc7
+Besançon_1 http://localhost/public/details/c45a94a0-d1a9-43a7-a977-70504fcb8dc9
+✔ delete button @done (16-10-12 11:09)
+   ✔ landing page @done (16-10-12 11:09)
+   ☐ remove data
+     ☐ elasticsearch
+     ☐ rethinkdb
 
 Advanced SEARCH:
 ☐ alphabetic order for advanced selects
@@ -17,29 +26,17 @@ Advanced SEARCH:
     ☐ probably inside a cookie?
     http://stackoverflow.com/a/28095874/2114395
 
-DETAILS:
-
-☐ prima pagina << - indietro <  pagina, tendina_pagine > avanti - ultima >>
-☐ tasto cancella
-✔ tasto sostituisci immagine @done (16-09-30 08:35)
-Agen_1
-http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
-Bordeaux_1
-http://localhost/public/details/5d6fb1f3-927c-48c7-aa10-b648f8d80d10
-Agen_2
-http://localhost/public/details/ff771300-d620-48b0-a1b3-12ccbe5f4cc7
-Besançon_1
-http://localhost/public/details/c45a94a0-d1a9-43a7-a977-70504fcb8dc9
- ✔ cerca se c'è e cambia, altrimenti nuova? @done (16-09-30 08:35)
-   ☐ se esiste la vecchia finisce nel cestino (solo immagine)
-     ☐ cestino con cartella nome documento
-       ☐ sottocartella con data?
+Fete:
+ ☐ ordinamento tabella lista delle feste @datatable
+ ☐ azione admin nel campo data
+   ☐ cambia data a tutti i documenti di una festa
 
 BUGS:
 Isabellaeae
  ☐ bug traduzione in keyword
+   ☐ problem is related to suggests
 
-others:
+RSYNC automatically:
 ls *.jpg *.JPG *.tif  | wc -l
 
 PERFORMANCES:
@@ -75,6 +72,7 @@ EXPO:
 LESSICO & ELASTIC:
    excel > sheets > macro, micro, posizione, lingue (francese, latino, italiano)
 
+ ☐ xls.py
   ☐ show with alphabetic french order (inside micro)
   ☐ upload page
     ☐ inject in elastic

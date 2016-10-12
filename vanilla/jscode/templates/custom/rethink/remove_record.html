@@ -1,0 +1,21 @@
+
+<div ng-controller="DetailsController as detail" >
+
+    <a ui-sref='public.details({id: theid})'>
+        <md-button>
+            <div layout='row' layout-align="center center" flex >
+                <i class="material-icons prefix">arrow_back</i> Retour
+            </div>
+        </md-button>
+    </a>
+
+  <div>
+    <h4> Do you really want to remove this record? </h4>
+    <br>
+
+    <a href ng-click='detail.eternalRemoval()'>
+        <button  type="submit" class="btn red"> Yes </button>
+    </a>
+  </div>
+
+</div>

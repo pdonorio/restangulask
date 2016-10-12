@@ -10,6 +10,9 @@ import os
 import re
 import time
 import rethinkdb as r
+from beeprint import pp
+import timestring
+import shutil
 
 from collections import OrderedDict
 from jinja2._compat import iteritems
@@ -18,6 +21,7 @@ from rethinkdb.net import DefaultCursorEmpty
 from flask_security import auth_token_required, roles_required
 from confs import config
 from ..services.rethink import schema_and_tables, BaseRethinkResource
+from ..services.elastic import FastSearch
 from ..services.uploader import Uploader
 from .. import decorators as deck
 # from ..utilities import split_and_html_strip
@@ -27,8 +31,8 @@ logger = get_logger(__name__)
 
 
 #####################################
-# Tables
 DOCSTABLE = 'datadocs'
+TRASH_DIR = 'mytrash'
 
 #####################################
 # Extra function for handling the image destination
@@ -1215,6 +1219,8 @@ class RethinkUploader(Uploader, BaseRethinkResource):
 class RethinkUpdateImages(BaseRethinkResource):
     # @deck.add_endpoint_parameter('file')
     @deck.apimethod
+## // TO FIX:
+# didn't make flow upload work with authentication
     # @auth_token_required
     def post(self):
 
@@ -1225,10 +1231,7 @@ class RethinkUpdateImages(BaseRethinkResource):
 
         query = self.get_table_query("datadocs")
         original = query.get(id).run()
-        # from beeprint import pp
         # pp(original)
-## // TO FIX:
-# pick the old file and move it to save it
 
         q = query.filter({'type': 'documents'})
         tmp = {}
@@ -1238,10 +1241,6 @@ class RethinkUpdateImages(BaseRethinkResource):
             if element['images'][0]['filename'] == file:
                 # print("FOUND", element, file)
                 tmp = element['images'][0]
-
-## // TO FIX:
-# check that you are not removing something with data
-# (like transcriptions, translations, language)
                 # remove old one(s)
                 query.get(element['record']).delete().run()
                 logger.debug("Removed temporary %s" % element['record'])
@@ -1250,18 +1249,58 @@ class RethinkUpdateImages(BaseRethinkResource):
             return self.response("Something went wrong...", fail=True)
 
         images = original['images']
+        # In case we are reuploading the same file
+        if images[0]['filename'] != tmp['filename']:
+            self.trash(file=images[0]['filename'])
+        else:
+            logger.info("Uhm, same file?")
+
+        # change current values to new ones
         images[0]['filename'] = tmp['filename']
         images[0]['code'] = tmp['code']
         images[0]['filename_type'] = tmp['filename_type']
 
-        # update
+        # Update rethinkdb
         query.get(id).update({'images': images}).run()
-        logger.info("Updated %s" % images)
+        logger.info("Updated db %s" % id)
 
-## // TO FIX:
-# update elasticsearch ARGH
+        # Update elasticsearch...
+        FastSearch().fast_update(id=id, data=tmp['filename'], image=True)
 
         return self.response(id)
+
+    def trash(self, file):
+
+        full_path = Uploader.absolute_upload_file
+        trash_dir = full_path(TRASH_DIR)
+
+        # Create trash directory if not exists
+        if not os.path.exists(trash_dir):
+            os.mkdir(trash_dir)
+            logger.debug("Created trash %s" % trash_dir)
+
+        # Prefix for new name is timestamp/date
+        prefix = timestring.now().format('%y%m%d')
+        newfile = '%s_%s' % (prefix, file)
+        abs_file = full_path(file)
+        zoom_dir, fileext = os.path.splitext(abs_file)
+
+        # Move to trash
+        try:
+            # Remove zoom
+            if os.path.exists(zoom_dir):
+                shutil.rmtree(zoom_dir)
+                logger.debug("Removing zoom %s" % zoom_dir)
+            if os.path.exists(abs_file):
+                shutil.move(abs_file, full_path(newfile, subfolder=TRASH_DIR))
+                logger.info("Moved %s to trash as %s" % (abs_file, newfile))
+            else:
+                logger.critical("Missing original file %s" % abs_file)
+        except Exception as e:
+            logger.warning("Could not move file %s to trash:\n%s" % (file, e))
+            return False
+
+        return True
 
 
 class RethinkStepsTemplate(BaseRethinkResource):

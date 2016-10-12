@@ -197,6 +197,16 @@ angular.module('web')
                 }
             },
         },
+    //////////////////////
+        'logged.remove': {
+            url: "/remove/:id",
+            views: {
+                "loggedview": {
+                    dir: 'blueprint',
+                    templateUrl: 'remove_record.html',
+                }
+            },
+        },
 
     //////////////////////
         'logged.admin': {

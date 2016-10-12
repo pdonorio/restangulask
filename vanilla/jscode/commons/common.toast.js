@@ -4,10 +4,13 @@
 angular.module('web')
     .controller('ToastController', ToastController);
 
-function ToastController($scope, $log, $mdToast, $document)
+function ToastController($scope, $log, $mdToast, $document, $timeout)
 {
+    var self = this;
     $log.info("Toast is ready");
     //https://material.angularjs.org/latest/demo/toast
+
+    self.lastPromise = $timeout();
 
     var last = {
         bottom: false,
@@ -33,7 +36,6 @@ function ToastController($scope, $log, $mdToast, $document)
     $scope.showSimpleToast = function(messages, delay) {
 
         var message = "";
-// CHECK IF IT'S JUST A STRING INSTEAD OF ARRAY
 
         if (messages) {
             forEach(messages, function (value, key) {
@@ -53,14 +55,37 @@ function ToastController($scope, $log, $mdToast, $document)
         if (typeof(delay) === 'undefined') {
             delay = 3000;
         }
-        // Show the dialog
-        $mdToast.show(
-            $mdToast.simple()
-                .textContent(message)
-                .position($scope.getToastPosition())
-                .hideDelay(delay)
-        );
 
+        // // Show the dialog
+        // var toast = $mdToast.simple()
+        //     .textContent(message)
+        //     //.position($scope.getToastPosition())
+        //     .hideDelay(delay);
+
+        // console.log("Last promise", self.lastPromise);
+        // var promise = self.lastPromise;
+        // self.lastPromise = promise.then(function() {
+        //     console.log("Uhm");
+        //     //return
+        //     // $mdToast.show(toast);
+        // });
+        // // $mdToast.show(toast);
+        // $mdToast.hide(self.lastPromise);
+
+        $mdToast.hide().then(function(){
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .hideDelay(delay)
+                    .position('bottom left')
+            );
+        });
+
+        // return $mdToast.show({
+        //     template  : '<md-toast>' + message + '</md-toast>',
+        //     hideDelay : delay,
+        //     position  : 'bottom right',
+        // });
         return true;
     };
 }

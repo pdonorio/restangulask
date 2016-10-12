@@ -5,7 +5,7 @@ angular.module('web')
     .controller('DetailsController', DetailsController);
 
 function DetailsController($scope,
-    $log, $sce, $stateParams, $auth, $window,
+    $log, $sce, $stateParams, $auth, $window, $mdToast,
     SearchService, AdminService)
 {
     var self = this;
@@ -14,6 +14,7 @@ function DetailsController($scope,
 
     self.load = true;
     self.data = null;
+    self.toast = null;
     self.texts = {}
     self.query = $stateParams.query;
     $scope.theid = $stateParams.id;
@@ -215,13 +216,15 @@ function DetailsController($scope,
     }
 
     self.changeImage = function(file, options) {
-      $scope.showSimpleToast( {"Uploaded": file.name}, 1800);
+      $mdToast.hide(self.toast).then(function(){
+          $scope.showSimpleToast( {"Uploaded": file.name}, 1800);
+      });
       console.log('CHANGE', file, $scope.theid);
       // api call with id + file.name
       AdminService.updateDocImage($scope.theid, file.name).then(function (out) {
           console.log('Updated', out);
           // which removes old id record, and updates details to new one
-          self.loadData();
+          loadData();
       })
     };
 
@@ -230,10 +233,11 @@ function DetailsController($scope,
       file.status = 'progress';
       file.record = $scope.currentRecord;
       $log.debug("File adding", file, ev, flow);
-      $scope.showSimpleToast( {"Uploading": file.name}, 2800);
+      self.toast = $scope.showSimpleToast( {"Uploading": file.name}, 0);
     };
 
     self.fileError = function(file, message) {
+      //$mdToast.hide(self.toast);
       file.status = 'fail';
       var json_message = angular.fromJson(message);
       console.log(message, json_message, json_message.data.errors[0]);
@@ -242,14 +246,25 @@ function DetailsController($scope,
       $window.scrollTo(0, 0);
       var arrayError = json_message.data.errors[0];
       // arrayError['Failed to upload'] = file.name;
-      $scope.showSimpleToast(
-        arrayError
-          // {
-          //   "Failed to upload": file.name,
-          //   "Error message": json_message.data.errors[0],
-          // }
-      , 9000);
+      $mdToast.hide(self.toast).then(function(){
+          $scope.showSimpleToast(
+            arrayError
+              // {
+              //   "Failed to upload": file.name,
+              //   "Error message": json_message.data.errors[0],
+              // }
+              , 7000);
+        });
     };
+
+    self.eternalRemoval = function() {
+        console.log("Remove", $scope.theid);
+
+        // call admin/search service
+
+        // redirect to search page
+
+    }
 
     //////////////////////////////
     // Init

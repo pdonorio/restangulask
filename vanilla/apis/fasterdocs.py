@@ -5,9 +5,12 @@ Some FAST endpoints implementation
 """
 
 from __future__ import absolute_import
+
+from flask_security import auth_token_required, roles_required
 from ..base import ExtendedApiResource
 from ..services.elastic import FastSearch
 from .. import decorators as deck
+
 from ... import get_logger
 
 logger = get_logger(__name__)
@@ -25,6 +28,16 @@ DATE_SKEY = 'start_date'
 DATE_EKEY = 'end_date'
 
 
+class FastManage(ExtendedApiResource, FastSearch):
+
+    @deck.apimethod
+    @auth_token_required
+    def delete(self, id):
+        if not self.fast_remove(id):
+            return self.response(obj='Failed to delete id', fail=True)
+        return self.response(id)
+
+
 class FastDocs(ExtendedApiResource, FastSearch):
     """ A faster search on key values of the database documents """
 
@@ -38,6 +51,7 @@ class FastDocs(ExtendedApiResource, FastSearch):
     @deck.add_endpoint_parameter(name=MULTI3_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=DATE_SKEY, ptype=str)
     @deck.add_endpoint_parameter(name=DATE_EKEY, ptype=str)
+    @auth_token_required
     def get(self, searchterms=None):
 
         if not self.get_instance():
@@ -74,6 +88,7 @@ class FastSuggestion(ExtendedApiResource, FastSearch):
     """ A faster search on key values of the database documents """
 
     @deck.apimethod
+    @auth_token_required
     def get(self, searchterms=None):
         self.get_instance()
         return self.response(self.fast_suggest(searchterms))
