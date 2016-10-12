@@ -284,6 +284,48 @@ class RethinkDataValues(BaseRethinkResource):
         query.update(element).run()
         return data_key
 
+    def remove_image(self, file):
+        full_path = Uploader.absolute_upload_file
+        abs_file = full_path(file)
+        zoom_dir, fileext = os.path.splitext(abs_file)
+        # Move to trash
+        try:
+            # Remove zoom
+            if os.path.exists(zoom_dir):
+                shutil.rmtree(zoom_dir)
+                logger.debug("Removing zoom %s" % zoom_dir)
+            if os.path.exists(abs_file):
+                os.remove(abs_file)
+                logger.debug("Removing file %s" % abs_file)
+        except Exception as e:
+            logger.warning("Something wrong removing %s\n%s" % (abs_file, e))
+            return False
+        return True
+
+    @deck.apimethod
+    @auth_token_required
+    def delete(self, data_key=None):
+
+        query = self.get_table_query("datadocs").get(data_key)
+        data = query.run()
+
+        # Remove data values
+        query.delete().run()
+        # Remove data docs
+        self.get_table_query("datadocs").get(data_key).delete().run()
+        logger.info("Removed from rethink")
+        # Remove image
+        if isinstance(data, dict) and 'images' in data:
+            for image in data['images']:
+                if 'filename' in image:
+                    self.remove_image(image['filename'])
+        # Remove catalogue cache
+        FastSearch().fast_remove(data_key)
+        logger.info("Removed from elastic")
+
+        return "Hello World"
+
+
 #####################################
 # Keys for templates and submission
 model = 'datakeys'

@@ -22,6 +22,10 @@ function SearchService($log, api) {
 
 //////////////////
 // Base API calls with Rethinkdb
+    self.removeElement = function(id) {
+        return api.apiCall(self.endpoints.search, 'DELETE', null, id);
+    }
+
     self.getData = function() {
         return api.apiCall(self.endpoints.search);
     }

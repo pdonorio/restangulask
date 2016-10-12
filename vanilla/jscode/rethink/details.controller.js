@@ -5,7 +5,7 @@ angular.module('web')
     .controller('DetailsController', DetailsController);
 
 function DetailsController($scope,
-    $log, $sce, $stateParams, $auth, $window, $mdToast,
+    $log, $sce, $stateParams, $auth, $window, $mdToast, $timeout, $state,
     SearchService, AdminService)
 {
     var self = this;
@@ -258,11 +258,15 @@ function DetailsController($scope,
     };
 
     self.eternalRemoval = function() {
-        console.log("Remove", $scope.theid);
+
+        $scope.showSimpleToast({"Removing": "record " + $scope.theid});
 
         // call admin/search service
-
-        // redirect to search page
+        SearchService.removeElement($scope.theid).then(function() {
+            console.log("Removed", $scope.theid);
+            // redirect to search page
+            $timeout(function () { $state.go("public.fastsearch"); }, 2200);
+        });
 
     }
 

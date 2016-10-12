@@ -1,4 +1,8 @@
 
+Advanced SEARCH:
+✔ alphabetic order for advanced selects @done (16-10-12 16:15)
+✔ Save filters choises @cookie @done (16-10-12 22:35)
+
 Details:
   ✔ substitution @done (16-10-12 11:09)
    ☐ applica subito a:
@@ -6,26 +10,17 @@ Agen_1 http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
 Bordeaux_1 http://localhost/public/details/5d6fb1f3-927c-48c7-aa10-b648f8d80d10
 Agen_2 http://localhost/public/details/ff771300-d620-48b0-a1b3-12ccbe5f4cc7
 Besançon_1 http://localhost/public/details/c45a94a0-d1a9-43a7-a977-70504fcb8dc9
-✔ delete button @done (16-10-12 11:09)
-   ✔ landing page @done (16-10-12 11:09)
-   ☐ remove data
-     ☐ elasticsearch
-     ☐ rethinkdb
 ☐ prima pagina << - indietro <  pagina, tendina_pagine > avanti - ultima >>
-
-Advanced SEARCH:
-✔ alphabetic order for advanced selects @done (16-10-12 16:15)
-✔ Save filters choises @cookie @done (16-10-12 22:35)
-
-BUGS:
- ☐ bug translation in keyword
-  Isabellaeae
-   ☐ problem is related to elastic/suggests
 
 Fete:
  ☐ ordinamento tabella lista delle feste @datatable
  ☐ azione admin nel campo data
    ☐ cambia data a tutti i documenti di una festa
+
+BUGS:
+ ☐ bug translation in keyword
+  Isabellaeae
+   ☐ problem is related to elastic/suggests
 
 RSYNC automatically:
 ls *.jpg *.JPG *.tif  | wc -l
