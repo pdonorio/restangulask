@@ -7,8 +7,7 @@
     layout="row" layout-fill layout-wrap layout-padding layout-align="center center">
  <div flex="70" layout="column">
  <h4> Resultats de la <i>Recherche</i> </h4>
- <md-toolbar class="white black-text"
-    layout="row" layout-padding flex >
+ <md-toolbar class="white black-text" layout="row" layout-padding flex >
       <md-autocomplete md-autofocus flex
           md-min-length="1"
 
@@ -21,8 +20,7 @@
           md-item-text="item._source.suggest"
 
           md-menu-class="autocomplete-custom-template"
-          md-delay="500"
-          md-select-on-match="false"
+          md-delay="500" md-select-on-match="false"
           placeholder="Recherche" >
         <md-item-template>
           <span layout="row" layout-align="start center">
@@ -36,6 +34,9 @@
 -->
                   <i ng-switch-when="transcription" class="material-icons"> library_books </i>
                   <i ng-switch-when="traduction" class="material-icons"> bookmark_border </i>
+<!--
+traduction starts with...
+-->
                   <i ng-switch-default class="material-icons"> book </i>
                 </span>
                   &nbsp; <strong>{{item._source.label}}</strong>

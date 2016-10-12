@@ -9,6 +9,7 @@ function AdminService($log, api) {
     var self = this;
     self.endpoints = {
         admin: 'datadmins',
+        eladmin: 'datamanage',
         up: 'update',
         expo: 'expo',
         expod: 'expodesc',

@@ -90,7 +90,7 @@ class RethinkDataValues(BaseRethinkResource):
             ).concat_map(r.row['data']) \
             .filter(
                 lambda row: row['position'] == field_number
-            ).pluck('value').distinct()['value']
+            ).order_by('value').pluck('value').distinct()['value']
 
     def single_element(self, data, details='full'):
         """ If I request here one single document """
@@ -196,18 +196,20 @@ class RethinkDataValues(BaseRethinkResource):
 
                 # multisteps
                 multi = self.get_table_query('stepstemplate')
+                exq = self.execute_query
 
-                _, tmp = self.execute_query(
-                    multi.filter({'step': 4, 'position': 4}))
-                actions = tmp.pop()['extra'].strip('.').split(', ')
+                def manage_filter_query(data):
+                    _, tmp = data
+                    data = tmp.pop()['extra'].strip('.').split(', ')
+                    data.sort()
+                    return data
 
-                _, tmp = self.execute_query(
-                    multi.filter({'step': 4, 'position': 3}))
-                temps = tmp.pop()['extra'].strip('.').split(', ')
-
-                _, tmp = self.execute_query(
-                    multi.filter({'step': 4, 'position': 6}))
-                apparatos = tmp.pop()['extra'].strip('.').split(', ')
+                actions = manage_filter_query(
+                    exq(multi.filter({'step': 4, 'position': 4})))
+                temps = manage_filter_query(
+                    exq(multi.filter({'step': 4, 'position': 3})))
+                apparatos = manage_filter_query(
+                    exq(multi.filter({'step': 4, 'position': 6})))
 
                 return self.response({
                     'sources': sources,

@@ -5,7 +5,7 @@ angular.module('web')
     .controller('FastSearchController', FastSearchController);
 
 function FastSearchController(
-    $scope, $log, $stateParams,
+    $scope, $log, $stateParams, $timeout,
     //hotkeys, keyshortcuts,
     SearchService)
 {
@@ -15,16 +15,32 @@ function FastSearchController(
   $log.warn("New FAST search controller");
 
   ///////////////////////////
-  ///////////////////////////
   // FILTERS
+  self.cookieKey = 'searchParameters';
   $scope.advanced = false;
+  var filtersKey = ['fete', 'source', 'lieu', 'manuscrits', 'apparato', 'actions', 'temps'];
+  // local storage / cookie
+  self.filters = JSON.parse(localStorage.getItem(self.cookieKey));
+
+  if (self.filters) {
+    if (self.filters.searchText)
+      self.searchText = self.filters.searchText;
+    forEach(filtersKey, function(val, key){
+        if (self.filters[val])
+          $scope.advanced = true;
+    });
+  } else {
+    self.filters = {};
+  }
+
+  console.log("Start with", self.filters);
   self.elements = null;
-  self.filters = {};
   self.base = {};
   self.load = false;
 
   self.clearFilters = function() {
       self.filters = {};
+      localStorage.removeItem(self.cookieKey);
       self.searchTextChange();
   }
 
@@ -36,7 +52,6 @@ function FastSearchController(
         console.log('BASE', out);
     });
 
-
   ///////////////////////////
   // HANDLE PARAMETER
   // self.searchText = $stateParams.text;
@@ -46,8 +61,11 @@ function FastSearchController(
     get : function (index, count, success)
     {
 // do something with filters?
-          console.log("GET ME:", index, count, self.searchText, self.filters);
+          self.filters['searchText'] = self.searchText;
           self.load = true;
+          localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
+          console.log("GET ME:", index, count, self.searchText, self.filters);
+
           var result = [];
           if (index > 0) {
               SearchService.getDataFast(self.searchText, index, self.filters)

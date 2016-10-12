@@ -1,14 +1,6 @@
 
 Details:
-☐ prima pagina << - indietro <  pagina, tendina_pagine > avanti - ultima >>
-
   ✔ substitution @done (16-10-12 11:09)
-   ✔ se esiste la vecchia finisce nel cestino (solo immagine) @done (16-10-12 07:53)
-     ✔ cestino con cartella nome documento @done (16-10-12 07:53)
-       ✘ sottocartella con data? @cancelled (16-10-12 07:53)
-       ✔ prefisso nuovo file con data @done (16-10-12 07:54)
-       ✔ elasticsearch @done (16-10-12 12:53)
-   ✘ upload può sovrascrivere un filename esistente? fare prova @cancelled (16-10-12 12:53)
    ☐ applica subito a:
 Agen_1 http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
 Bordeaux_1 http://localhost/public/details/5d6fb1f3-927c-48c7-aa10-b648f8d80d10
@@ -19,22 +11,21 @@ Besançon_1 http://localhost/public/details/c45a94a0-d1a9-43a7-a977-70504fcb8dc9
    ☐ remove data
      ☐ elasticsearch
      ☐ rethinkdb
+☐ prima pagina << - indietro <  pagina, tendina_pagine > avanti - ultima >>
 
 Advanced SEARCH:
-☐ alphabetic order for advanced selects
-☐ Save filters choises ?
-    ☐ probably inside a cookie?
-    http://stackoverflow.com/a/28095874/2114395
+✔ alphabetic order for advanced selects @done (16-10-12 16:15)
+✔ Save filters choises @cookie @done (16-10-12 22:35)
+
+BUGS:
+ ☐ bug translation in keyword
+  Isabellaeae
+   ☐ problem is related to elastic/suggests
 
 Fete:
  ☐ ordinamento tabella lista delle feste @datatable
  ☐ azione admin nel campo data
    ☐ cambia data a tutti i documenti di una festa
-
-BUGS:
-Isabellaeae
- ☐ bug traduzione in keyword
-   ☐ problem is related to suggests
 
 RSYNC automatically:
 ls *.jpg *.JPG *.tif  | wc -l
@@ -49,6 +40,7 @@ PERFORMANCES:
   ☐ nginx mod
    ☐ serve static (images and js)
    ☐ cache?
+ ☐ auto BACKUP
 
 DETTAGLI:
 hyphotesis
