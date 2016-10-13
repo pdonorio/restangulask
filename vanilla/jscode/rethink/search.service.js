@@ -18,6 +18,7 @@ function SearchService($log, api) {
         suggest: 'datasuggest',
         fete: 'datalist',
         extra: 'steps',
+        fastmanage: 'datamanage',
     }
 
 //////////////////
@@ -177,6 +178,15 @@ function SearchService($log, api) {
                 field: field,
             }
         );
+    }
+
+    self.recoverPages = function(fete, current) {
+        return self.doQuery(self.endpoints.fastmanage,
+            {
+                field: 'fete',
+                value: fete,
+                current: current,
+            });
     }
 
     self.getDocs = function(id) {

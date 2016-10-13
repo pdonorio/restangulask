@@ -10,7 +10,11 @@ Agen_1 http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
 Bordeaux_1 http://localhost/public/details/5d6fb1f3-927c-48c7-aa10-b648f8d80d10
 Agen_2 http://localhost/public/details/ff771300-d620-48b0-a1b3-12ccbe5f4cc7
 Besançon_1 http://localhost/public/details/c45a94a0-d1a9-43a7-a977-70504fcb8dc9
-☐ prima pagina << - indietro <  pagina, tendina_pagine > avanti - ultima >>
+ ☐ cambia testo prime due home page
+✔ paging @importante @done (16-10-13 10:49)
+   ✔ use elastic @done (16-10-13 10:02)
+   ✔ previous and next @done (16-10-13 12:14)
+   ✔ first and last @done (16-10-13 12:14)
 
 Fete:
  ☐ ordinamento tabella lista delle feste @datatable

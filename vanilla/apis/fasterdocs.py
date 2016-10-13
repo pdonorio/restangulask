@@ -11,6 +11,7 @@ from ..base import ExtendedApiResource
 from ..services.elastic import FastSearch
 from .. import decorators as deck
 
+from beeprint import pp
 from ... import get_logger
 
 logger = get_logger(__name__)
@@ -29,6 +30,26 @@ DATE_EKEY = 'end_date'
 
 
 class FastManage(ExtendedApiResource, FastSearch):
+
+    @deck.apimethod
+    @deck.add_endpoint_parameter(name='field', ptype=str, required=True)
+    @deck.add_endpoint_parameter(name='value', ptype=str, required=True)
+    @deck.add_endpoint_parameter(name='current', ptype=str, required=True)
+    @auth_token_required
+    def get(self):
+
+        data = self.fast_query(self._args['field'], self._args['value'])
+        parties = {}
+        for element in data:
+            s = element['_source']
+            key = s['sort_number']
+            parties[key] = {
+                'id': element['_id'],
+                'name': s['extrait'],
+                'page': s['page'],
+                'current': s['extrait'] == self._args['current']
+            }
+        return self.response(parties)
 
     @deck.apimethod
     @auth_token_required
@@ -60,7 +81,6 @@ class FastDocs(ExtendedApiResource, FastSearch):
         #####################################
         # filters
         filters = {}
-        from beeprint import pp
         # pp(self._args)
         filters_keys = [
             PARTY_KEY, SOURCE_KEY, PLACE_KEY, SCRIPT_KEY,

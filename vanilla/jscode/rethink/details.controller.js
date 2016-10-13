@@ -15,7 +15,8 @@ function DetailsController($scope,
     self.load = true;
     self.data = null;
     self.toast = null;
-    self.texts = {}
+    self.texts = {};
+    self.pages = {};
     self.query = $stateParams.query;
     $scope.theid = $stateParams.id;
     $scope.quote = "'";
@@ -99,53 +100,94 @@ function DetailsController($scope,
                     new Date(self.refinedData[key][i]);
 
             ////////////////////////////////////
+            // PAGES
             ////////////////////////////////////
-            // FIND NAMES, and previous and next
+
+            self.first_page = null;
+            self.previous_page = null;
+            self.next_page = null;
+            self.last_page = null;
             var
                 field = "Numero de l'extrait",
-                name = out_single['Extrait'][field],
-                codes = name.split('_'),
-                num = parseInt(codes.pop()),
-                prefix = codes.join('_'),
-                previous_code = prefix + "_" + String(num - 1),
-                next_code = prefix + "_" + String(num + 1);
+                fete = self.refinedData["Fête"]["Titre abrégé"],
+                current = self.refinedData["Extrait"][field];
 
-            var
-                regexp = /[0-9]+/g,
-                matches = name.match(regexp),
-                page = null;
-
-            if (matches && matches.length > 0) {
-                page = parseInt(matches[0]);
-                previous_code = name.replace(regexp, page - 1);
-                next_code = name.replace(regexp, page + 1);
-            }
-            // console.log('CODES', num, previous_code, next_code, page);
-
-            // SEARCH WITH APIs
-            self.previous.text = previous_code;
-            SearchService.recoverCode(previous_code, field).then(function (out)
+            SearchService.recoverPages(fete, current).then(function (out)
             {
-                //$log.warn("OUT PREV IS", out);
-                if (out.elements && out.elements > 0) {
-                    self.previous.link = out.data[0].record;
-                } else {
-                    self.previous.link = null;
+                console.log("Pages", out);
+                if (out.elements && out.elements > 0)
+                    self.pages = out.data;
+                self.page = null;
+                var last = null, current = false, passed_current = false;
+                forEach(self.pages, function(value, key){
+                    if (last) {
+                        if (!self.first_page)
+                            self.first_page = last;
+                        if (!passed_current && !current)
+                            self.previous_page = last;
+                    }
+                    if (current) {
+                        self.next_page = value;
+                        current = false;
+                        passed_current = true;
+                    } else if (value.current) {
+                        // self.page = key;
+                        self.page = value.id;
+                        current = true;
+                    }
+                    last = value;
+                    self.last_page = value;
+                });
 
-                }
+                console.log(self.first_page, self.previous_page, self.next_page, self.last_page);
             });
-            self.next.text = next_code;
-            SearchService.recoverCode(next_code, field).then(function (out)
-            {
-                if (out.elements && out.elements > 0) {
-                    self.next.link = out.data[0].record;
-                } else {
-                    self.next.link = null;
-                }
-                //$log.warn("Link avaialble")
-            })
-            ////////////////////////////////////
-            ////////////////////////////////////
+
+            // ////////////////////////////////////
+            // ////////////////////////////////////
+            // // FIND NAMES, and previous and next
+            // var
+            //     field = "Numero de l'extrait",
+            //     name = out_single['Extrait'][field],
+            //     codes = name.split('_'),
+            //     num = parseInt(codes.pop()),
+            //     prefix = codes.join('_'),
+            //     previous_code = prefix + "_" + String(num - 1),
+            //     next_code = prefix + "_" + String(num + 1);
+
+            // var
+            //     regexp = /[0-9]+/g,
+            //     matches = name.match(regexp),
+            //     page = null;
+
+            // if (matches && matches.length > 0) {
+            //     page = parseInt(matches[0]);
+            //     previous_code = name.replace(regexp, page - 1);
+            //     next_code = name.replace(regexp, page + 1);
+            // }
+            // // console.log('CODES', num, previous_code, next_code, page);
+
+            // // SEARCH WITH APIs
+            // self.previous.text = previous_code;
+            // SearchService.recoverCode(previous_code, field).then(function (out)
+            // {
+            //     //$log.warn("OUT PREV IS", out);
+            //     if (out.elements && out.elements > 0) {
+            //         self.previous.link = out.data[0].record;
+            //     } else {
+            //         self.previous.link = null;
+            //     }
+            // });
+            // self.next.text = next_code;
+            // SearchService.recoverCode(next_code, field).then(function (out)
+            // {
+            //     if (out.elements && out.elements > 0) {
+            //         self.next.link = out.data[0].record;
+            //     } else {
+            //         self.next.link = null;
+            //     }
+            // })
+            // ////////////////////////////////////
+            // ////////////////////////////////////
 
 // REWRITE IMAGES and TRANSCRIPTIONS
 
@@ -182,7 +224,7 @@ function DetailsController($scope,
 
             });
 
-            console.log('LANGUAGES', self.texts);
+            // console.log('LANGUAGES', self.texts);
             self.languages = Object.keys(self.texts);
             self.selected_language = self.original_language;
 
@@ -192,6 +234,11 @@ function DetailsController($scope,
         }); // single data
       }); // steps
     } // END loadData FUNCTION
+
+    self.changePage = function() {
+        console.log("Selected", self.page);
+        $timeout(function () { $state.go("public.details", {id: self.page}); }, 200);
+    };
 
     self.selectLanguage = function () {
       console.log('Selected', self.selected_language);
