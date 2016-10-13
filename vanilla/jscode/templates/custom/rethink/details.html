@@ -13,12 +13,6 @@
   <div ng-if='detail.data' layout="column">
       <div ng-hide="detail.data.id"> No data... </div>
 
-<!-- <div layout="column" layout-padding>
-    <h3> NOTICE DETAILLEE:
-        <b> {{detail.refinedData["Extrait"]["Numero de l'extrait"]}} </b> </hr>
-    </h3>
- </div> -->
-
   <div layout-gt-md="row" layout="column">
 
 <!-- MAKE RESPONSIVE -->
@@ -129,6 +123,7 @@
               </md-input-container>
             </div>
 
+            <!-- CONTENT -->
             <div ng-bind-html="detail.current_text"></div>
         </div>
 <!-- IMAGE TEXT -->

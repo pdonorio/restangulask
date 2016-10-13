@@ -1,4 +1,8 @@
 
+.highlightedText {
+    background: yellow;
+}
+
 md-input-container .md-errors-spacer {
     min-height: 0;
 }

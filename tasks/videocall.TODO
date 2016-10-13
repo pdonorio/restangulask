@@ -20,7 +20,7 @@ Besançon_1? c45a94a0-d1a9-43a7-a977-70504fcb8dc9
 Advanced SEARCH:
 ✔ alphabetic order for advanced selects @done (16-10-12 16:15)
 ✔ Save filters choises @cookie @done (16-10-12 22:35)
-  ☐highlight in details?
+  ✔ highlight in details? @done (16-10-13 22:25)
 
 RSYNC automatically:
 ls *.jpg *.JPG *.tif  | wc -l

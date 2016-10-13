@@ -12,6 +12,13 @@ function DetailsController($scope,
     $log.info("Single view on", $stateParams.id);
     self.logged = $auth.isAuthenticated();
 
+    self.cookieKey = 'searchParameters';
+    self.filters = JSON.parse(localStorage.getItem(self.cookieKey));
+    self.highlightText = null;
+    if (self.filters)
+        if (self.filters.searchText)
+            self.highlightText = self.filters.searchText;
+
     self.load = true;
     self.data = null;
     self.toast = null;
@@ -206,8 +213,14 @@ function DetailsController($scope,
                         self.original_language = element.language;
 
                     // Set the initial language
+                    if (self.highlightText) {
+                        trans = trans.replace(
+                            new RegExp('(' + self.highlightText + ')', 'gi'),
+                            '<span class="highlightedText">$&</span>');
+                    }
                     self.texts[self.original_language] = $sce.trustAsHtml(trans);
                     self.current_text = self.texts[self.original_language];
+                    // console.log("TEST", self.current_text, trans, self.highlightText);
 
                   });
               }
