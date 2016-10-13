@@ -1024,6 +1024,7 @@ class RethinkElement(BaseRethinkResource):
             }
             name = None
             source_name = None
+            date = {}
             for step in obj['steps']:
                 if step['step'] == 1:
                     for element in step['data']:
@@ -1040,11 +1041,23 @@ class RethinkElement(BaseRethinkResource):
                     source_name = step['data'][0]['value']
                 if step['step'] == 3:
                     for element in step['data']:
+
+                        if element['position'] == 4:
+                            date['year'] = int(element['value'])
+                        elif element['position'] == 8:
+                            date['start'] = element['value']
+                        elif element['position'] == 9:
+                            date['end'] = element['value']
+
                         if element['value'].strip() == '':
                             element['value'] = '-'
-                        if element['position'] == 1:
+                        if int(element['position']) == 1:
                             name = element['value']
                         tmp[element['name']] = element['value']
+# // TO FIX
+                    # if name is None:
+                    #    pp(step['data'])
+                    #    print("Record", obj['record'])
                 if step['step'] == 4:
                     for element in step['data']:
                         if isinstance(element['value'], list):
@@ -1069,9 +1082,16 @@ class RethinkElement(BaseRethinkResource):
                                 else:
                                     details['Apparato'] += " " + element['value']
 
+            if name is None:
+                logger.warning("Missing fete in %s" % obj['record'])
+                continue
+
             details['filename'] = None
             if obj['record'] in documents:
                 details['filename'] = documents[obj['record']]
+
+            from restapi.dates import convert_to_ordered_string
+            tmp['Date'] = convert_to_ordered_string(date)
 
             if name not in extraits:
                 extraits[name] = []
@@ -1102,6 +1122,7 @@ class RethinkElement(BaseRethinkResource):
             # print("Sorted\n", dsorted)
             # # print(extraits[key])
             data[key]['extrait'] = extraits[key]
+
 
         return self.response(data)
 

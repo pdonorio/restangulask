@@ -139,7 +139,6 @@ function DetailsController($scope,
                     self.last_page = value;
                 });
 
-                console.log(self.first_page, self.previous_page, self.next_page, self.last_page);
             });
 
             // ////////////////////////////////////

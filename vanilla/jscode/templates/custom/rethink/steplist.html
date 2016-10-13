@@ -77,16 +77,32 @@
         <table class="table table-hover bordered highlight responsive-table">
             <thead style="font-style: italic;">
                 <tr>
-                    <th>Fête</th>
-                    <th>Titre abrégé de la source</th>
-                    <th>Type</th>
-                    <th>Lieu</th>
-                    <th>Date</th>
+                    <th ng-repeat="header in steps.headers" valign="top">
+                      <div layout="row" layout-align="center center">
+                        <!--
+                        <span ng-if="header =='Titre abrégé de la source'">
+                            {{ header }}
+                        </span>
+                        -->
+                        <a href ng-click="steps.toggleSort($index)">
+                            {{ steps.headers[$index] }}
+                        </a>
+                        <span ng-if="sortColumn == header">
+                            <i class="material-icons" ng-if="reverse"> arrow_drop_up </i>
+                            <i class="material-icons" ng-if="!reverse"> arrow_drop_down </i>
+                        </span>
+                      </div>
+                    </th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
+                <tr ng-repeat="fete in steps.parties | orderBy:sortColumn:reverse ">
+                    <td
+                        ng-repeat="header in steps.headers"
+                        ng-bind-html="fete[header]"></td>
+<!--
                 <tr ng-repeat="(key, fete) in steps.data">
                     <th> {{fete["Titre abrégé"]}} </th>
                     <td>
@@ -100,9 +116,10 @@
                     </td>
                     <td>{{fete["Lieu"]}}</td>
                     <td>{{fete["Date"]}}</td>
+-->
                     <td></td>
       <td>
-          <a href ng-click="steps.selectElement(key)"
+          <a href ng-click="steps.selectElement(fete.key)"
               class="waves-effect waves-light btn-floating lime lighten-3">
               <i class="material-icons blue-grey-text">list</i>
           </a>

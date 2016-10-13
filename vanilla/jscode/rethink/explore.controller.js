@@ -298,10 +298,59 @@ function FixTransController($scope, $rootScope, $sce,
 
 function StepsController($scope, $log, $state, $window, SearchService)
 {
-  // INIT controller
-  $log.debug("Stepping in pieces");
-  var self = this;
-  self.element = null;
+    // INIT controller
+    $log.debug("Stepping in pieces");
+    var self = this;
+    self.element = null;
+
+    self.headers = [
+        'Fete',
+        //'Fête',
+        'Source',
+        'Type',
+        'Lieu',
+        'Date',
+    ];
+
+    SearchService.getFetes().then(function (out) {
+      self.data = [];
+      if (out) {
+          self.data = out.data;
+          self.parties = [];
+          forEach(self.data, function(value, key){
+            var tmp = {
+                'Fete': String(value["Titre abrégé"]),
+                'Lieu': value['Lieu'],
+                'Date': value['Date'],
+                //'Date': parseInt(value['Date']),
+            };
+            var sources = "";
+            forEach(value['Titre abrégé de la source'], function(source, index){
+                sources += source + '<br> ';
+            });
+            tmp['Source'] = sources;
+            tmp['Type'] = value["Type de fête 1"] + ' <br> ' + value["Type de fête 2"];
+            tmp['key'] = key;
+            self.parties.push(tmp);
+          });
+          console.log("Parties", self.parties);
+
+           self.dataCount = out.elements;
+      } else {
+           self.dataCount = self.data.length;
+      }
+    });
+
+    $scope.reverse = false;
+    // $scope.reverse = true;
+
+    self.toggleSort = function(index) {
+        if($scope.sortColumn === self.headers[index]){
+            $scope.reverse = !$scope.reverse;
+        }
+        $scope.sortColumn = self.headers[index];
+        console.log("Sort", $scope.sortColumn, $scope.reverse)
+    }
 
     self.selectElement = function (name) {
       self.element = self.data[name];
@@ -312,16 +361,6 @@ function StepsController($scope, $log, $state, $window, SearchService)
     self.closeElement = function() {
       delete self.element;
     }
-
-    SearchService.getFetes().then(function (out) {
-      self.data = [];
-      if (out) {
-           self.data = out.data;
-           self.dataCount = out.elements;
-      } else {
-           self.dataCount = self.data.length;
-      }
-    });
 }
 
 

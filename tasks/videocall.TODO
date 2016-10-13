@@ -1,37 +1,34 @@
 
+Fete:
+ ✔ sort columns like @datatable @done (16-10-13 17:22)
+   ✔ doesn't work for one column? @done (16-10-13 18:34)
+ ☐ Date
+   ✔ fix date as rethink2elastic @done (16-10-13 21:56)
+   ☐ date edit
+     ☐ change for all elements in the whole party
+     ☐ also change elastic
+
+BUGS:
+☐ bug translation in keyword
+  Isabellaeae
+   ☐ problem is related to elastic/suggests
+☐ thumbnail
+Besançon_1? c45a94a0-d1a9-43a7-a977-70504fcb8dc9
+ ☐ missing fetes
+ (rerun details)
+
 Advanced SEARCH:
 ✔ alphabetic order for advanced selects @done (16-10-12 16:15)
 ✔ Save filters choises @cookie @done (16-10-12 22:35)
-
-Details:
-  ✔ substitution @done (16-10-12 11:09)
-   ☐ applica subito a:
-Agen_1 http://localhost/public/details/5dc610d5-9055-4d01-8378-6dd771b5f66b
-Bordeaux_1 http://localhost/public/details/5d6fb1f3-927c-48c7-aa10-b648f8d80d10
-Agen_2 http://localhost/public/details/ff771300-d620-48b0-a1b3-12ccbe5f4cc7
-Besançon_1 http://localhost/public/details/c45a94a0-d1a9-43a7-a977-70504fcb8dc9
- ☐ cambia testo prime due home page
-✔ paging @importante @done (16-10-13 10:49)
-   ✔ use elastic @done (16-10-13 10:02)
-   ✔ previous and next @done (16-10-13 12:14)
-   ✔ first and last @done (16-10-13 12:14)
-
-Fete:
- ☐ ordinamento tabella lista delle feste @datatable
- ☐ azione admin nel campo data
-   ☐ cambia data a tutti i documenti di una festa
-
-BUGS:
- ☐ bug translation in keyword
-  Isabellaeae
-   ☐ problem is related to elastic/suggests
+  ☐highlight in details?
 
 RSYNC automatically:
 ls *.jpg *.JPG *.tif  | wc -l
 
 PERFORMANCES:
 ☐ Account DB
-  ☐ postgres instead of sqllite
+  ☐ postgres instead of sqllite?
+  ☐ change root adminer
 ☐ Server
   ☐ uwsgi
    ☐ emperor on vassals
