@@ -69,7 +69,7 @@ function DetailsController($scope,
                     // console.log("UHM", x, y);
                                     if (y > 0)
                                         tmp[index][j] += ', ';
-                                    if (x.trim() != '')
+                                    if (x && x.trim() != '')
                                         tmp[index][j] += x.trim();
                                 });
                             }
