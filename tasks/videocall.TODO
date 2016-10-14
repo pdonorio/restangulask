@@ -1,20 +1,51 @@
 
+Consulting:
+1. Per la tendina delle pagine: In effetti lasciare solo visibile il numero della pagina e non del documento "Bruxelles, p. 23".
+  ☐ details page
+    ☐ select only page info, not extrait
+    ☐ remove names from arrow
+      ☐ use tooltips
+2. Per quanto riguarda i links da aggiungere a ogni "source" di Roma: perfetto! Nota bene che c'è lo steso problema per Palermo e per Anvers.
+ ☐ source links to search in fete list
+      ☐ clear cookie
+      ☐ apply only source
+      ☐ state.go
+3. Per la parola sottolineata che si puo cercare a partire dal record della pagina come lo proponi tu: Ok, Perfetto!
+4. Per il Lexique: per evitare troppo testo nella tendina della ricerca e mettere sulla pagina di ricerca un qualcosa di interattivo che indica quando la parola cercata ha una corrispondenza lessicale: Più che perfetto!
+ ☐ lessico modal & search & link
+
+--- ✄ -----------------------
+
+BUGS:
+  ☐ Anvers
+    ☐ MS, ordered before the rest
+  ☐ fastsearch click
+    ☐ image instead of a button
+  ☐ motcles z-index up
+
+Details:
+  ☐ arrow with no names
+    ☐ tooltip
+  ☐ what to show in the page select
 
 Suggestions:
 ☐ language
  ☐ what if I don't know the language
+ Christo italiano
+ http://localhost/public/details/091443e1-c5d6-4f36-af1c-f8e5585586bd?query=visitato
 ☐ mixing languages
+http://localhost/public/details/3db5a6ec-f8d4-4a12-8427-93b585e90e13?query=ambassadeur
+ ☐ lessico can tell you which language
 ☐ tests
- Isabellaeae
-
- ambassadeur
- http://localhost/public/details/3db5a6ec-f8d4-4a12-8427-93b585e90e13
-
-http://localhost/public/details/091443e1-c5d6-4f36-af1c-f8e5585586bd
 http://localhost/public/details/09b2c276-496a-49ff-b99f-218a57434c96
 
 Lessico:
   ☐ explore sheet @conventions
+  ☐ modal with lessico with search
+    ☐ insert selected text with javascript
+    ☐ redirect terms to search
+      ☐ clear filters
+  ☐ tooltip clickable to search lessico?
 
 Fete:
 ☐ date edit
