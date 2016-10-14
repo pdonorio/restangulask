@@ -1,24 +1,31 @@
 
---- ✄ -----------------------
-
-
-Fete:
-☐ date edit
- ☐ change for all elements in the whole party
- ☐ also change elastic
 
 Suggestions:
 ☐ language
  ☐ what if I don't know the language
- ☐
 ☐ mixing languages
+☐ tests
+ Isabellaeae
+
+ ambassadeur
+ http://localhost/public/details/3db5a6ec-f8d4-4a12-8427-93b585e90e13
+
 http://localhost/public/details/091443e1-c5d6-4f36-af1c-f8e5585586bd
 http://localhost/public/details/09b2c276-496a-49ff-b99f-218a57434c96
-☐ test
-  Isabellaeae
-  or
-  ambassadeur
-  http://localhost/public/details/3db5a6ec-f8d4-4a12-8427-93b585e90e13
+
+Lessico:
+  ☐ explore sheet @conventions
+
+Fete:
+☐ date edit
+ ☐ all elements
+ ☐ also elastic
+
+EXPO:
+☐ Option no zoom
+
+Performance:
+☐ uwsgi & nginx
 
 
 --- ✄ -----------------------
@@ -52,37 +59,12 @@ TO TEST:
 ☐ thumbnail
 Besançon_1? c45a94a0-d1a9-43a7-a977-70504fcb8dc9
 
-PERFORMANCES:
-☐ Account DB
-  ☐ postgres instead of sqllite?
-  ☐ change root adminer
-☐ Server
-  ☐ uwsgi
-   ☐ processes and threads
-     ☐ set logs to info or better warnings
-  ☐ nginx mod
-   ☐ serve static (images and js)
-   ☐ cache?
- ☐ auto BACKUP
-
-DETTAGLI:
-hyphotesis
-☐ controllare se si può anticipare in pagina succ e prev che pagina sarà
-☐ presenza di ruoli @rbac
-
 elastic:
  ✔ uso id rethinkdb? @done (16-09-11 18:39)
  ✔ remove fete from suggestions @done (16-09-12 06:52)
- ☐ remove source from suggestions
- ☐ aggiungere lessico alla suggestion e all'index
- ☐ aggiungere traduzione alla suggestion e all'index??
-
-EXPO:
-  date, autore, posto
-☐ Edit
-   ☐ Option no zoom?
-☐ Manage description
-  ☐ button to delete section?
+ ✔ aggiungere traduzione alla suggestion e all'index?? @done (16-10-14 07:34)
+ ✘ remove source from suggestions? @cancelled (16-10-14 07:37)
+ ✘ button to delete section? @cancelled (16-10-14 07:35)
 
 LESSICO & ELASTIC:
    excel > sheets > macro, micro, posizione, lingue (francese, latino, italiano)
@@ -101,15 +83,16 @@ LESSICO & ELASTIC:
 ☐ image build for expo (thumbnail + medium size)
 
 MOVE TO PRODUCTION:
- ✔ uptime robot (both interface and api) @done (16-08-12 09:36)
+ ☐ postgres instead of sqllite?
+   ☐ roles @rbac
+ ☐ uptime robot (both interface and api)
+ ☐ change root adminer
  ☐ disable rethinkdb monitor interface
- ☐ haproxy test?
- ☐ Profiles administration
+ ☐ Profiles administration for them too
+ ☐ automatic backup
  ☐ send email?
-
- LAST:
- ☐ prossima pagina nel full screen
  ☐ firefox / safari check
+ ✘ prossima pagina nel full screen @cancelled (16-10-14 07:36)
 
    --- ✄ -----------------------
    THE END
