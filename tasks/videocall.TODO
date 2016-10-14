@@ -1,29 +1,56 @@
 
+--- ✄ -----------------------
+
+
 Fete:
- ✔ sort columns like @datatable @done (16-10-13 17:22)
-   ✔ doesn't work for one column? @done (16-10-13 18:34)
- ☐ Date
-   ✔ fix date as rethink2elastic @done (16-10-13 21:56)
-   ☐ date edit
-     ☐ change for all elements in the whole party
-     ☐ also change elastic
+☐ date edit
+ ☐ change for all elements in the whole party
+ ☐ also change elastic
 
-BUGS:
-☐ bug translation in keyword
+Suggestions:
+☐ language
+ ☐ what if I don't know the language
+ ☐
+☐ mixing languages
+http://localhost/public/details/091443e1-c5d6-4f36-af1c-f8e5585586bd
+http://localhost/public/details/09b2c276-496a-49ff-b99f-218a57434c96
+☐ test
   Isabellaeae
-   ☐ problem is related to elastic/suggests
-☐ thumbnail
-Besançon_1? c45a94a0-d1a9-43a7-a977-70504fcb8dc9
- ☐ missing fetes
- (rerun details)
+  or
+  ambassadeur
+  http://localhost/public/details/3db5a6ec-f8d4-4a12-8427-93b585e90e13
 
-Advanced SEARCH:
-✔ alphabetic order for advanced selects @done (16-10-12 16:15)
-✔ Save filters choises @cookie @done (16-10-12 22:35)
-  ✔ highlight in details? @done (16-10-13 22:25)
+
+--- ✄ -----------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 RSYNC automatically:
 ls *.jpg *.JPG *.tif  | wc -l
+
+TO TEST:
+☐ thumbnail
+Besançon_1? c45a94a0-d1a9-43a7-a977-70504fcb8dc9
 
 PERFORMANCES:
 ☐ Account DB
@@ -31,8 +58,8 @@ PERFORMANCES:
   ☐ change root adminer
 ☐ Server
   ☐ uwsgi
-   ☐ emperor on vassals
    ☐ processes and threads
+     ☐ set logs to info or better warnings
   ☐ nginx mod
    ☐ serve static (images and js)
    ☐ cache?

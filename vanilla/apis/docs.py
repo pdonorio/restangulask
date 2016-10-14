@@ -1083,7 +1083,7 @@ class RethinkElement(BaseRethinkResource):
                                     details['Apparato'] += " " + element['value']
 
             if name is None:
-                logger.warning("Missing fete in %s" % obj['record'])
+                # logger.warning("Missing fete in %s" % obj['record'])
                 continue
 
             details['filename'] = None

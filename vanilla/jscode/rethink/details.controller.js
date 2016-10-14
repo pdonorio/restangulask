@@ -228,6 +228,11 @@ function DetailsController($scope,
               if (element.translations) {
                 forEach(element.translations, function(trans, language) {
                     // statements
+                    if (self.highlightText) {
+                        trans = trans.replace(
+                            new RegExp('(' + self.highlightText + ')', 'gi'),
+                            '<span class="highlightedText">$&</span>');
+                    }
                     self.texts[language] = $sce.trustAsHtml(trans);
                 });
               }
