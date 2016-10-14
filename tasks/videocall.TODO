@@ -19,14 +19,10 @@ Consulting:
 BUGS:
   ☐ Anvers
     ☐ MS, ordered before the rest
-  ☐ fastsearch click
-    ☐ image instead of a button
-  ☐ motcles z-index up
-
-Details:
-  ☐ arrow with no names
-    ☐ tooltip
-  ☐ what to show in the page select
+    should check elastic score for attribute 'sort_number'
+  ✔ fastsearch click @done (16-10-14 20:56)
+    ✔ image instead of a button @done (16-10-14 20:56)
+  ✔ motcles z-index up @done (16-10-14 20:57)
 
 Suggestions:
 ☐ language

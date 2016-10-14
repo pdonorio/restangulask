@@ -177,8 +177,8 @@ traduction starts with...
 <!-- TOOLBAR -->
 
 <md-content layout="row" layout-padding ng-if="!search.load">
- <div flex='5'>&nbsp;</div>
- <div flex='95' ui-scroll-viewport style=" height: 700px; ">
+ <div flex='10'>&nbsp;</div>
+ <div flex='80' ui-scroll-viewport style=" height: 700px; ">
 
  <table class='highlight'>
   <thead ng-if="search.elements > 0" >
@@ -186,7 +186,7 @@ traduction starts with...
         <th>Vignette</th>
         <th>Extrait</th>
         <th>Détails</th>
-        <th><i>links</i></th>
+        <!-- <th><i>links</i></th> -->
     </tr>
   </thead>
 
@@ -196,20 +196,19 @@ traduction starts with...
     ng-repeat='row in search.data'>
 -->
       <td>
-
-        <div ng-if='!row._source.doc.thumbnail'
+        <a ui-sref='public.details({id: row._id, query:search.searchText})'>
+         <div ng-if='!row._source.doc.thumbnail'
             style=" background-repeat: no-repeat; background-size: 100% 100%;
-                width: 110px; height: 160px;"
-            ng-style="{'background-image':'url(http://placehold.it/110x160)'}"
-        ></div>
-        <div ng-if='row._source.doc.thumbnail'
+                width: 130px; height: 160px;"
+            ng-style="{'background-image':'url(http://placehold.it/110x160)'}"></div>
+         <div ng-if='row._source.doc.thumbnail'
             style=" background-repeat: no-repeat; background-size: 100% 100%;
-                width: 110px; height: 160px;"
-            ng-style="{'background-image':'url('+ row._source.doc.thumbnail +')'}"
-        ></div>
+                width: 130px; height: 160px;"
+            ng-style="{'background-image':'url('+ row._source.doc.thumbnail +')'}"></div>
+        </a>
       </td>
       <!-- <td> {{row._source}} </td> -->
-      <td>
+      <td style="width: 200px;">
             <strong>
               <span
                 md-highlight-text="search.searchText"
@@ -231,16 +230,17 @@ traduction starts with...
         </span>
         <br>
       </td>
-      <td>
+      <!-- <td>
           <a ui-sref='public.details({id: row._id, query:search.searchText})'
               class="waves-effect waves-light btn-floating lime lighten-3">
               <i class="material-icons blue-grey-text">web</i>
           </a>
-      </td>
+      </td> -->
     </tr>
   </tbody>
  </table>
  </div>
+ <div flex='10'>&nbsp;</div>
  </md-content>
 
 </div>
