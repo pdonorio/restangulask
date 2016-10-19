@@ -24,7 +24,6 @@ MULTI1_KEY = 'apparato'
 MULTI2_KEY = 'actions'
 MULTI3_KEY = 'temps'
 
-# UHM
 DATE_SKEY = 'start_date'
 DATE_EKEY = 'end_date'
 
@@ -42,6 +41,7 @@ class FastManage(ExtendedApiResource, FastSearch):
         parties = {}
         for element in data:
             s = element['_source']
+            # print(s['sort_number'], s['extrait'])
             key = s['sort_number']
             parties[key] = {
                 'id': element['_id'],

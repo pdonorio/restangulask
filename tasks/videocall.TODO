@@ -12,20 +12,31 @@ Consulting:
       ☐ state.go
 3. Per la parola sottolineata che si puo cercare a partire dal record della pagina come lo proponi tu: Ok, Perfetto!
 4. Per il Lexique: per evitare troppo testo nella tendina della ricerca e mettere sulla pagina di ricerca un qualcosa di interattivo che indica quando la parola cercata ha una corrispondenza lessicale: Più che perfetto!
- ☐ elastic suggest
-   ☐ must contain a lessico field
-   ☐ that appears in a hidden line under the search input
- ☐ lessico modal & search & link @difficult
+ ☐ xls
+   ☐ fill rethinkdb table
+ ☐ elastic index build
+   ☐ fill elastic too
+   ☐ suggest
+     ☐ must contain a lessico field
+     ☐ that appears in a hidden line under the search input
+ ☐ lessico modal
+   ☐ with search inside for only lessico elements
+     ☐ elastic?
+   ☐ link to normal search
+     ☐ with cookie?
 
 --- ✄ -----------------------
 
 BUGS:
-  ☐ Anvers
-    ☐ MS, ordered before the rest
-    should check elastic score for attribute 'sort_number'
   ✔ fastsearch click @done (16-10-14 20:56)
     ✔ image instead of a button @done (16-10-14 20:56)
   ✔ motcles z-index up @done (16-10-14 20:57)
+  ✔ Anvers / Rome @done (16-10-19 15:48)
+    ✔ MS, ordered before the rest @done (16-10-19 15:48)
+
+Performance:
+☐ uwsgi & nginx
+ ☐ don't set debug in production?
 
 Suggestions:
 ☐ language
@@ -53,9 +64,6 @@ Fete:
 
 EXPO:
 ☐ Option no zoom
-
-Performance:
-☐ uwsgi & nginx
 
 
 --- ✄ -----------------------
@@ -106,6 +114,7 @@ LESSICO & ELASTIC:
   ☐ show in search with modal + tabs
   ☐ list in search details
 
+oh well...
 ☐ add translations to known words
 ☐ add insert/updates to elastic @veryimportant
  ☐ how to remove existing data updated?
