@@ -1,10 +1,10 @@
 
 Consulting:
 1. Per la tendina delle pagine: In effetti lasciare solo visibile il numero della pagina e non del documento "Bruxelles, p. 23".
-  ☐ details page
-    ☐ select only page info, not extrait
-    ☐ remove names from arrow
-      ☐ use tooltips
+  ✔ details page @done (16-10-19 07:51)
+    ✔ select only page info, not extrait @done (16-10-19 07:51)
+    ✔ remove names from arrow @done (16-10-19 07:51)
+      ✔ use tooltips @done (16-10-19 07:51)
 2. Per quanto riguarda i links da aggiungere a ogni "source" di Roma: perfetto! Nota bene che c'è lo steso problema per Palermo e per Anvers.
  ☐ source links to search in fete list
       ☐ clear cookie
@@ -12,7 +12,10 @@ Consulting:
       ☐ state.go
 3. Per la parola sottolineata che si puo cercare a partire dal record della pagina come lo proponi tu: Ok, Perfetto!
 4. Per il Lexique: per evitare troppo testo nella tendina della ricerca e mettere sulla pagina di ricerca un qualcosa di interattivo che indica quando la parola cercata ha una corrispondenza lessicale: Più che perfetto!
- ☐ lessico modal & search & link
+ ☐ elastic suggest
+   ☐ must contain a lessico field
+   ☐ that appears in a hidden line under the search input
+ ☐ lessico modal & search & link @difficult
 
 --- ✄ -----------------------
 

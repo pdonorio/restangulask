@@ -33,47 +33,53 @@
       </div>
 
       <div layout="row">
-          <md-content flex="35" layout="row" layout-padding layout-align="">
+          <md-content flex="40" layout="row" layout-padding layout-align="center center">
             <a href layout="row" layout-align="center center"
+                tooltipped data-position="bottom" data-delay="50"
+                data-tooltip="{{detail.first_page.name}}"
                 ng-if="detail.first_page && !detail.first_page.current
                     && detail.first_page.id != detail.previous_page.id"
                 ui-sref="public.details({id: detail.first_page.id})">
                 <i class="material-icons">skip_previous</i>
-                {{detail.first_page.name}}
+
             </a>
             <a href layout="row" layout-align="center center"
+                tooltipped data-position="bottom" data-delay="50"
+                data-tooltip="{{detail.previous_page.name}}"
                 ng-if="detail.previous_page && !detail.previous_page.current"
                 ui-sref="public.details({id: detail.previous_page.id})">
                 <i class="material-icons">keyboard_arrow_left</i>
-                {{detail.previous_page.name}}
             </a>
           </md-content>
-          <div flex="30" layout-align="center center">
+          <div flex="20" layout-align="center center" style="text-align:center;">
               <md-input-container>
                 <label>choisissez la page</label>
                 <md-select ng-model="detail.page" md-on-close="detail.changePage()" >
                   <md-optgroup label="pages">
                     <!-- <md-option ng-value="">-</md-option> -->
+                        <!-- {{item.name}} ({{item.page}}) -->
                     <md-option ng-value="item.id" ng-repeat="item in detail.pages" >
-                        {{item.name}} ({{item.page}})
+                        {{item.page}}
                     </md-option>
                   </md-optgroup>
                 </md-select>
               </md-input-container>
           </div>
-          <md-content flex="35" layout="row" layout-padding layout-align="">
+          <md-content flex="40" layout="row" layout-padding layout-align="center center">
             <a href layout="row" layout-align="center center"
+                tooltipped data-position="bottom" data-delay="50"
+                data-tooltip="{{detail.next_page.name}}"
                 ng-if="detail.next_page && !detail.next_page.current"
                 ui-sref="public.details({id: detail.next_page.id})">
                 <i class="material-icons">keyboard_arrow_right</i>
-                {{detail.next_page.name}}
             </a>
             <a href layout="row" layout-align="center center"
+                tooltipped data-position="bottom" data-delay="50"
+                data-tooltip="{{detail.last_page.name}}"
                 ng-if="detail.last_page && !detail.last_page.current
                     && detail.last_page.id != detail.next_page.id"
                 ui-sref="public.details({id: detail.last_page.id})">
                 <i class="material-icons">skip_next</i>
-                {{detail.last_page.name}}
             </a>
           </md-content>
       </div>
