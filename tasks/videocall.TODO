@@ -10,17 +10,18 @@ Consulting:
       ✔ clear cookie @done (16-10-20 06:39)
       ✔ apply only source @done (16-10-20 06:39)
       ✔ state.go @done (16-10-20 06:39)
-  ☐ extraits order on the fete detail page
+  ✔ extraits order on the fete detail page @done (16-10-20 06:42)
+  ☐ elastic update on main submit @ohboy
+    ☐ give only modified step data?
 3. Per la parola sottolineata che si puo cercare a partire dal record della pagina come lo proponi tu: Ok, Perfetto!
  ☐ to discuss
 4. Per il Lexique: per evitare troppo testo nella tendina della ricerca e mettere sulla pagina di ricerca un qualcosa di interattivo che indica quando la parola cercata ha una corrispondenza lessicale: Più che perfetto!
- ☐ xls
+ ☐ xls read data
    ☐ fill rethinkdb table
- ☐ elastic index build
-   ☐ fill elastic too
-   ☐ suggest
-     ☐ must contain a lessico field
-     ☐ that appears in a hidden line under the search input
+   ☐ fill elastic
+     ☐ suggest fix
+       ☐ must contain a lessico field
+       ☐ that appears in a hidden line under the search input?
  ☐ lessico modal
    ☐ with search inside for only lessico elements
      ☐ elastic?
@@ -36,7 +37,7 @@ BUGS:
   ✔ Anvers / Rome @done (16-10-19 15:48)
     ✔ MS, ordered before the rest @done (16-10-19 15:48)
  ☐ Fete & date
-   ☐ date edit
+   ☐ date edit new page for selected fete
      ☐ all elements
      ☐ also elastic
 
