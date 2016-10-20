@@ -20,6 +20,7 @@ from operator import itemgetter
 from rethinkdb.net import DefaultCursorEmpty
 from flask_security import auth_token_required, roles_required
 from confs import config
+from restapi.commons.conversions import Utils
 from ..services.rethink import schema_and_tables, BaseRethinkResource
 from ..services.elastic import FastSearch
 from ..services.uploader import Uploader
@@ -28,6 +29,7 @@ from .. import decorators as deck
 from ... import get_logger, htmlcodes as hcodes
 
 logger = get_logger(__name__)
+u = Utils()
 
 
 #####################################
@@ -1028,14 +1030,23 @@ class RethinkElement(BaseRethinkResource):
             for step in obj['steps']:
                 if step['step'] == 1:
                     for element in step['data']:
+                        if element['position'] == 1:
+                            details['name'] = element['value']
+
                         if element['position'] == 2:
-                            m = pattern.findall(element['value'])
-                            details['page'] = 0
-                            if len(m) > 0:
-                                details['page'] = int(m[0])
+                            details['page'] = element['value']
+                            group = u.group_extrait(element['value'])
+                            num, prob = u.get_numeric_extrait(group)
+                            details['sort'] = \
+                                u.get_sort_value(element['value'], num)
+                            # m = pattern.findall(element['value'])
+                            # details['page'] = 0
+                            # if len(m) > 0:
+                            #     details['page'] = int(m[0])
                             details['record'] = obj['record']
                             # else:
                             break
+                    # print("TEST", details)
 
                 if step['step'] == 2:
                     source_name = step['data'][0]['value']

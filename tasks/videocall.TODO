@@ -6,11 +6,13 @@ Consulting:
     ✔ remove names from arrow @done (16-10-19 07:51)
       ✔ use tooltips @done (16-10-19 07:51)
 2. Per quanto riguarda i links da aggiungere a ogni "source" di Roma: perfetto! Nota bene che c'è lo steso problema per Palermo e per Anvers.
- ☐ source links to search in fete list
-      ☐ clear cookie
-      ☐ apply only source
-      ☐ state.go
+ ✔ source links to search in fete list @done (16-10-20 06:39)
+      ✔ clear cookie @done (16-10-20 06:39)
+      ✔ apply only source @done (16-10-20 06:39)
+      ✔ state.go @done (16-10-20 06:39)
+  ☐ extraits order on the fete detail page
 3. Per la parola sottolineata che si puo cercare a partire dal record della pagina come lo proponi tu: Ok, Perfetto!
+ ☐ to discuss
 4. Per il Lexique: per evitare troppo testo nella tendina della ricerca e mettere sulla pagina di ricerca un qualcosa di interattivo che indica quando la parola cercata ha una corrispondenza lessicale: Più che perfetto!
  ☐ xls
    ☐ fill rethinkdb table
@@ -33,6 +35,10 @@ BUGS:
   ✔ motcles z-index up @done (16-10-14 20:57)
   ✔ Anvers / Rome @done (16-10-19 15:48)
     ✔ MS, ordered before the rest @done (16-10-19 15:48)
+ ☐ Fete & date
+   ☐ date edit
+     ☐ all elements
+     ☐ also elastic
 
 Performance:
 ☐ uwsgi & nginx
@@ -56,11 +62,6 @@ Lessico:
     ☐ redirect terms to search
       ☐ clear filters
   ☐ tooltip clickable to search lessico?
-
-Fete:
-☐ date edit
- ☐ all elements
- ☐ also elastic
 
 EXPO:
 ☐ Option no zoom

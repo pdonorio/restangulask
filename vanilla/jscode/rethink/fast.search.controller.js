@@ -4,10 +4,8 @@
 angular.module('web')
     .controller('FastSearchController', FastSearchController);
 
-function FastSearchController(
-    $scope, $log, $stateParams, $timeout,
     //hotkeys, keyshortcuts,
-    SearchService)
+function FastSearchController($scope, $log, $stateParams, $timeout, SearchService)
 {
 
   // INIT controller

@@ -302,6 +302,7 @@ function StepsController($scope, $log, $state, $window, SearchService)
     $log.debug("Stepping in pieces");
     var self = this;
     self.element = null;
+    self.cookieKey = 'searchParameters';
 
     self.headers = [
         'Fete',
@@ -360,6 +361,18 @@ function StepsController($scope, $log, $state, $window, SearchService)
 
     self.closeElement = function() {
       delete self.element;
+    }
+
+    // search for this source?
+    self.searchSource = function(source) {
+        console.log("search for", source)
+        localStorage.removeItem(self.cookieKey);
+        localStorage.setItem(self.cookieKey, JSON.stringify({
+            source: source
+        }));
+        console.log("TEST", self.cookieKey,
+            JSON.parse(localStorage.getItem(self.cookieKey)) )
+        $state.go('public.fastsearch');
     }
 }
 

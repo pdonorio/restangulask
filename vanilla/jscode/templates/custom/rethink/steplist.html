@@ -33,7 +33,9 @@
             <th width="50"> Source: </th>
             <td>
             <div ng-repeat="source in steps.element['Titre abrégé de la source']">
-                {{source}}
+                <a href ng-click="steps.searchSource(source)">
+                    {{source}}
+                </a>
             </div>
             </td>
           </tr>
@@ -47,20 +49,28 @@
                     <th>Temps</th>
                     <th>Actions</th>
                     <th>Apparato</th>
+<!--
                     <th></th>
                     <th></th>
+-->
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in steps.element.extrait | orderBy: '+page'">
-                    <td width=100>
+                <tr ng-repeat="row in steps.element.extrait | orderBy: '+sort'">
+                    <td width="20%">
+                    <a ui-sref='public.details({id: row.record})'>
                      <img height=160
                 ng-src="/static/uploads/{{row.filename}}/TileGroup0/0-0-0.jpg">
+                    </a>
                     </td>
-                    <td> {{row.page}} </td>
+                    <td>
+                        {{row.page}}
+                        <!-- <br> {{row.name}} [{{row.sort}}] -->
+                    </td>
                     <td> {{row.Temps}} </td>
                     <td> {{row.Actions}} </td>
                     <td> {{row.Apparato}} </td>
+<!--
                     <td></td>
                     <td>
           <a ui-sref='public.details({id: row.record})'
@@ -68,6 +78,7 @@
               <i class="material-icons blue-grey-text">web</i>
           </a>
                     </td>
+-->
                 </tr>
             </tbody>
         </table>
