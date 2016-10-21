@@ -1,0 +1,60 @@
+
+<md-content layout="row" layout-padding
+    ng-controller="LexiqueController as lex"
+    >
+
+<!--CONTENT -->
+ <div layout="column" layout-align='center center' flex>
+
+   <div style="position: relative; height: 700px;">
+
+    <!-- IMAGE (with link) -->
+    <div class="rounder" style="background-repeat: no-repeat;
+        background-size: 100% 100%; width: 900px; height: 570px; z-index:1;
+        background-image: url('/static/uploads/welcome/lexique.JPG')"
+        ></div>
+
+    <!-- BACKGROUND COLOR -->
+    <div class="rounder md-whiteframe-6dp"
+        style=" position: absolute; top: 00px; background-color: #ff0000;
+        width: 900px; height: 570px; opacity: .3; z-index:2;">
+        </div>
+
+    <div class="card-panel lighten-4 rounder z-depth-5" style="position: absolute;
+    top: 80px; left: 80px; width: 900px; z-index:4;">
+
+     <md-content style="height: 500px;">
+      <md-tabs md-selected='lex.tab'
+        md-no-ink md-no-ink-bar md-stretch-tabs='never'
+        md-no-pagination md-enable-disconnect md-autoselect
+        md-align-tabs="bottom"
+        >
+        <md-tab style="height: 600px;"
+            ng-repeat="(tabname, tabdata) in lex.data"
+            label="{{tabname}}" md-on-select="lex.current = tabdata ">
+            <table>
+                <thead>
+                    <tr> <th ng-repeat="header in lex.headers">{{header}}</th> </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in lex.current">
+                        <td ng-repeat="header in lex.headers" width="15%">
+                            {{row[header]}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-tab>
+      </md-tabs>
+     </md-content>
+    </div>
+
+    <!-- TITLE -->
+    <div style=" position: absolute; top: 0px; padding-left: 5%; color: white;
+        width: 100%; z-index:3;">
+        <h2 class="header"> LEXIQUE </h2>
+    </div>
+
+   </div>
+ </div>
+</md-content>

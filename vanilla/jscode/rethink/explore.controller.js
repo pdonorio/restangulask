@@ -6,6 +6,7 @@ angular.module('web')
     .controller('FixImagesController', FixImagesController)
     .controller('FixTransController', FixTransController)
     .controller('StepsController', StepsController)
+    .controller('LexiqueController', LexiqueController)
     ;
 
 ////////////////////////////////
@@ -374,6 +375,34 @@ function StepsController($scope, $log, $state, $window, SearchService)
             JSON.parse(localStorage.getItem(self.cookieKey)) )
         $state.go('public.fastsearch');
     }
+}
+
+
+function LexiqueController($scope, $log, SearchService)
+{
+    // INIT controller
+    $log.debug("lex!");
+    var self = this;
+    self.headers = ['macro', 'micro', 'titre', 'français', 'italien', 'latin'];
+
+    SearchService.getLex().then(function(out){
+      if (out && out.elements) {
+
+        // http://stackoverflow.com/a/31102605/2114395
+        var unordered = {};
+        Object.keys(out.data).sort().forEach(function(key) {
+          unordered[key.toLowerCase()] = out.data[key];
+        });
+
+        const ordered = {};
+        Object.keys(unordered).sort().forEach(function(key) {
+          ordered[key.toLowerCase()] = unordered[key];
+        });
+
+        self.data = angular.copy(ordered);
+        console.log("OUT", self.data);
+      }
+    });
 }
 
 

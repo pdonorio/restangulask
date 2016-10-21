@@ -1445,3 +1445,20 @@ class RethinkExpoDescription(BaseRethinkResource):
         query.run()
 
         return self.response("Hello")
+
+
+class RethinkLex(BaseRethinkResource):
+    """ Data keys administrable """
+
+    table = 'lexique'
+    group = 'sheet'
+    table_index = 'titre'
+
+    @deck.apimethod
+    @auth_token_required
+    def get(self, sheet=None):
+        query = self.get_table_query()
+        if sheet is not None:
+            query = query.filter({'sheet': int(sheet)})
+        count, data = self.execute_query(query, group=self.group)
+        return self.response(data, elements=count)

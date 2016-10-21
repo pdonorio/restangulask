@@ -19,6 +19,11 @@ function SearchService($log, api) {
         fete: 'datalist',
         extra: 'steps',
         fastmanage: 'datamanage',
+        lexique: 'lex',
+    }
+
+    self.getLex = function(id) {
+        return api.apiCall(self.endpoints.lexique);
     }
 
 //////////////////

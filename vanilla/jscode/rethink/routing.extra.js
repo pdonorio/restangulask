@@ -55,6 +55,17 @@ angular.module('web')
         },
 
     //////////////////////
+        'public.lex': {
+            url: "/lexique",
+            views: {
+                "unlogged": {
+                    dir: 'blueprint',
+                    templateUrl: 'lexique.html',
+                }
+            }
+        },
+
+    //////////////////////
         'public.expo': {
             url: "/expo",
             views: {

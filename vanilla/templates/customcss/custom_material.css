@@ -1,4 +1,14 @@
 
+
+md-tabs-canvas {
+    margin-top: 10px;
+    border: 1px black solid;
+}
+
+md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+    min-height: 100%;
+}
+
 .highlightedText {
     background: yellow;
 }

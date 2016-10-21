@@ -22,9 +22,11 @@ function SideMenuController($scope, $rootScope, $log, $timeout, $state)
         },
         {
             name: 'lexique',
+            link: "public.lex",
+            // link: "welcome.more",
             cls: null,
-            link: "welcome.more",
-            extra: {section_type: 'welcome', element: 3}
+            extra: {}
+            // extra: {section_type: 'welcome', element: 3}
         },
     ];
 
