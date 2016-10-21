@@ -136,7 +136,10 @@ else
         echo "Starting up"
         $com $files up -d --remove-orphans $services
     else
-        if [ "$2" == "start" ]; then
+        if [ "$2" == "production" ]; then
+            echo -e "PRODUCTION"
+            $com $files up -d --remove-orphans proxy
+        elif [ "$2" == "start" ]; then
             echo -e "ACTION: Start\n"
             $com $files up -d --remove-orphans $services
         elif [ "$2" == "stop" ]; then

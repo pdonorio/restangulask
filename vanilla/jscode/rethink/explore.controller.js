@@ -297,17 +297,22 @@ function FixTransController($scope, $rootScope, $sce,
 // controller
 ////////////////////////////////
 
-function StepsController($scope, $log, $state, $window, SearchService)
+function StepsController($scope, $log,
+    $state, $stateParams,
+    $window, SearchService)
 {
     // INIT controller
-    $log.debug("Stepping in pieces");
     var self = this;
+    console.log("Stepping in pieces", $stateParams);
+    self.selectedForDate = null;
+    if ($stateParams.hasOwnProperty('fetepos')) {
+        self.selectedForDate = $stateParams.fetepos;
+    }
+
     self.element = null;
     self.cookieKey = 'searchParameters';
-
     self.headers = [
-        'Fete',
-        //'Fête',
+        'Fete', //'Fête',
         'Source',
         'Type',
         'Lieu',
@@ -321,7 +326,10 @@ function StepsController($scope, $log, $state, $window, SearchService)
           self.parties = [];
           forEach(self.data, function(value, key){
             var tmp = {
-                'Fete': String(value["Titre abrégé"]),
+                'Fete':
+                    String(value["Titre abrégé"])
+                        .replace('Ignace', 'Ignace<br>')
+                        .replace('Xavier', 'Xavier<br>'),
                 'Lieu': value['Lieu'],
                 'Date': value['Date'],
                 //'Date': parseInt(value['Date']),
@@ -374,6 +382,12 @@ function StepsController($scope, $log, $state, $window, SearchService)
         console.log("TEST", self.cookieKey,
             JSON.parse(localStorage.getItem(self.cookieKey)) )
         $state.go('public.fastsearch');
+    }
+
+    self.changeDate = function() {
+        console.log("Changing to", self.newDate);
+        $scope.showSimpleToast({'New date': self.newDate});
+
     }
 }
 

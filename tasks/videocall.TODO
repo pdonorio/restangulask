@@ -11,35 +11,35 @@ Consulting:
       ✔ apply only source @done (16-10-20 06:39)
       ✔ state.go @done (16-10-20 06:39)
   ✔ extraits order on the fete detail page @done (16-10-20 06:42)
-  ☐ elastic update on main submit @ohboy
+  ☐ elastic update on main submit @notify
     ☐ give only modified step data?
 3. Per la parola sottolineata che si puo cercare a partire dal record della pagina come lo proponi tu: Ok, Perfetto!
- ☐ to discuss
 4. Per il Lexique: per evitare troppo testo nella tendina della ricerca e mettere sulla pagina di ricerca un qualcosa di interattivo che indica quando la parola cercata ha una corrispondenza lessicale: Più che perfetto!
- ☐ xls read data
-   ☐ fill rethinkdb table
+ ✔ xls read data @done (16-10-21 08:33)
+   ✔ fill rethinkdb table @done (16-10-21 08:33)
    ☐ fill elastic
      ☐ suggest fix
        ☐ must contain a lessico field
        ☐ that appears in a hidden line under the search input?
+ ✔ lessico main page @done (16-10-21 08:33)
  ☐ lessico modal
    ☐ with search inside for only lessico elements
      ☐ elastic?
    ☐ link to normal search
      ☐ with cookie?
 
---- ✄ -----------------------
+Date:
+ ☐ Fete & date
+   ✔ date edit new page for selected fete @done (16-10-21 17:32)
+     ☐ all elements
+     ☐ also elastic
 
-BUGS:
+bugs:
   ✔ fastsearch click @done (16-10-14 20:56)
     ✔ image instead of a button @done (16-10-14 20:56)
   ✔ motcles z-index up @done (16-10-14 20:57)
   ✔ Anvers / Rome @done (16-10-19 15:48)
     ✔ MS, ordered before the rest @done (16-10-19 15:48)
- ☐ Fete & date
-   ☐ date edit new page for selected fete
-     ☐ all elements
-     ☐ also elastic
 
 Performance:
 ☐ uwsgi & nginx
@@ -68,10 +68,6 @@ EXPO:
 ☐ Option no zoom
 
 
---- ✄ -----------------------
-
-
-
 
 
 
@@ -98,30 +94,6 @@ ls *.jpg *.JPG *.tif  | wc -l
 TO TEST:
 ☐ thumbnail
 Besançon_1? c45a94a0-d1a9-43a7-a977-70504fcb8dc9
-
-elastic:
- ✔ uso id rethinkdb? @done (16-09-11 18:39)
- ✔ remove fete from suggestions @done (16-09-12 06:52)
- ✔ aggiungere traduzione alla suggestion e all'index?? @done (16-10-14 07:34)
- ✘ remove source from suggestions? @cancelled (16-10-14 07:37)
- ✘ button to delete section? @cancelled (16-10-14 07:35)
-
-LESSICO & ELASTIC:
-   excel > sheets > macro, micro, posizione, lingue (francese, latino, italiano)
-
- ☐ xls.py
-  ☐ show with alphabetic french order (inside micro)
-  ☐ upload page
-    ☐ inject in elastic
-  ☐ show in search with modal + tabs
-  ☐ list in search details
-
-oh well...
-☐ add translations to known words
-☐ add insert/updates to elastic @veryimportant
- ☐ how to remove existing data updated?
-☐ index rebuild
-☐ image build for expo (thumbnail + medium size)
 
 MOVE TO PRODUCTION:
  ☐ postgres instead of sqllite?

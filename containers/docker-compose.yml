@@ -81,11 +81,18 @@ bower:
 
 # This image let you access the postgres db with a 'phpmyadmin' like web page
 sqladmin:
-    image: clue/adminer
-    # Sql lite database & common models
-    volumes:
-        - restangulask_apilitedb:/dbs
-    # links:
-    #     - sql:db
-    ports:
-        - 8888:80
+  image: clue/adminer
+  # Sql lite database & common models
+  volumes:
+      - restangulask_apilitedb:/dbs
+  # links:
+  #     - sql:db
+  ports:
+      - 8888:80
+
+#################################
+# PRODUCTION performance
+
+proxy:
+  image: nginx
+  command: echo "Hello"

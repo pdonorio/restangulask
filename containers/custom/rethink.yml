@@ -20,6 +20,8 @@ searchindex:
   volumes:
       - restangulask_elasticdata:/usr/share/elasticsearch/data
       - ../containers/elastic.confs:/usr/share/elasticsearch/config
+  ports:
+      - 9200:9200
 
 uploadsdata:
   image: busybox

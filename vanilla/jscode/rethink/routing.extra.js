@@ -220,6 +220,17 @@ angular.module('web')
         },
 
     //////////////////////
+        'logged.date': {
+            url: "/date/:fetepos",
+            views: {
+                "loggedview": {
+                    dir: 'blueprint',
+                    templateUrl: 'date.html',
+                }
+            },
+        },
+
+    //////////////////////
         'logged.admin': {
             url: "/admin/:tab?new",
 // TO FIX:

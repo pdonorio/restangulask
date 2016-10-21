@@ -1,0 +1,51 @@
+<div ng-controller="ToastController as toast" >
+<div ng-controller="StepsController as steps"
+    layout="column" layout-margin layout-padding>
+
+ <div ng-if="!steps.data">
+        <div ng-include="root.templateDir + 'loader.html'"></div>
+ </div>
+ <md-content ng-if="steps.data"
+    layout-align="center center" layout-padding layout-wrap>
+  <md-card flex=50>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">
+            <div ng-bind-html="steps.parties[steps.selectedForDate].Fete"></div>
+        </span>
+        <span class="md-subhead">
+            <i>
+                Change current date
+                '<b>{{steps.parties[steps.selectedForDate].Date}}</b>'
+            </i>
+        </span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+
+        <md-input-container>
+            <label>New date</label>
+            <input ng-model="steps.newDate" type="text"
+                placeholder="gg/mm/aaaa" required>
+        </md-input-container>
+
+<!--
+        <md-input-container>
+          <label > {{model.description}} </label>
+          <textarea name="{{model.name}}"
+            ng-model="model.text" ng-required="model.required"
+            cols="50" md-maxlength="model.chars || 99999" ></textarea>
+        </md-input-container>
+-->
+    </md-card-content>
+    <md-card-actions>
+      <md-button class="md-secondary" ng-click="steps.changeDate()">
+        update
+      </md-button>
+    </md-card-actions>
+  </md-card>
+
+ </md-content>
+
+</div>
+</div>
