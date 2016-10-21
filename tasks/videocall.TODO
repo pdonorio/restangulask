@@ -40,6 +40,13 @@ bugs:
   ✔ motcles z-index up @done (16-10-14 20:57)
   ✔ Anvers / Rome @done (16-10-19 15:48)
     ✔ MS, ordered before the rest @done (16-10-19 15:48)
+ ☐ details grouping
+   ☐ by source @important
+   ☐ not fete
+☐ list steps
+   ☐ source if len > 1
+ ☐ list of authorized views
+   ☐ no type column in fete list
 
 Performance:
 ☐ uwsgi & nginx

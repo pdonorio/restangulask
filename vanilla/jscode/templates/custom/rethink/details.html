@@ -23,6 +23,8 @@
         <b>Fête</b>: {{detail.refinedData["Fête"]["Titre abrégé"]}}
         <br>
         <b>Source</b>: {{detail.refinedData["Source"]["Titre abrégé"]}}
+        <br>
+        <b>Extrait</b>: {{detail.refinedData["Extrait"]["Numero de l'extrait"]}}
         </span>
 <!--
         <br>
@@ -59,7 +61,10 @@
                     <!-- <md-option ng-value="">-</md-option> -->
                         <!-- {{item.name}} ({{item.page}}) -->
                     <md-option ng-value="item.id" ng-repeat="item in detail.pages" >
+<!--                         {{item.page}}
+ -->
                         {{item.page}}
+                        ( {{item.name}} )
                     </md-option>
                   </md-optgroup>
                 </md-select>
