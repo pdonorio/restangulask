@@ -117,14 +117,18 @@ function DetailsController($scope,
             var
                 field = "Numero de l'extrait",
                 fete = self.refinedData["Fête"]["Titre abrégé"],
+                source = self.refinedData["Source"]["Titre abrégé"],
                 current = self.refinedData["Extrait"][field];
 
-            SearchService.recoverPages(fete, current).then(function (out)
+            // SearchService.recoverPages(fete, current).then(function (out)
+            SearchService.recoverPages(source, current).then(function (out)
             {
                 console.log("Pages", out);
+                self.page = null;
                 if (out.elements && out.elements > 0)
                     self.pages = out.data;
-                self.page = null;
+                else
+                    return false;
                 var last = null, current = false, passed_current = false;
                 forEach(self.pages, function(value, key){
                     if (last) {

@@ -185,11 +185,14 @@ function SearchService($log, api) {
         );
     }
 
-    self.recoverPages = function(fete, current) {
+    // self.recoverPages = function(fete, current) {
+    self.recoverPages = function(source, current) {
         return self.doQuery(self.endpoints.fastmanage,
             {
-                field: 'fete',
-                value: fete,
+                field: 'source',
+                value: source,
+                // field: 'fete',
+                // value: fete,
                 current: current,
             });
     }

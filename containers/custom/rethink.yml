@@ -4,8 +4,9 @@ rethinkdb:
   image: rethinkdb
   hostname: rdbmaster
   # Web admin
-  ports:
-      - 7778:8080
+#   ports:
+# ## TO BE REMOVED
+#       - 7778:8080
   volumes:
       - restangulask_rdbdata:/data
 
@@ -20,8 +21,9 @@ searchindex:
   volumes:
       - restangulask_elasticdata:/usr/share/elasticsearch/data
       - ../containers/elastic.confs:/usr/share/elasticsearch/config
-  ports:
-      - 9200:9200
+#   ports:
+# ## TO BE REMOVED
+#       - 9200:9200
 
 uploadsdata:
   image: busybox
