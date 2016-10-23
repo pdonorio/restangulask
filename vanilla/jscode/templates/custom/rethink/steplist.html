@@ -114,12 +114,27 @@
                 <tr ng-repeat="(key, fete) in steps.parties | orderBy:sortColumn:reverse ">
                     <td ng-repeat="header in steps.headers"
                         style="vertical-align: top;">
+
                         <span ng-if="header == 'Fete'">
                             <a href ng-click="steps.selectElement(fete.key)">
                               <div ng-bind-html="fete[header]"></div>
                             </a>
                         </span>
-                        <div ng-if="header != 'Fete'"
+
+                        <span ng-if="header == 'Source'">
+                            <div ng-repeat="source in fete[header]">
+                                <span ng-if="fete[header].length < 2">
+                                    {{source}}
+                                </span>
+                                <a ng-if="fete[header].length > 1"
+                                    style="color: blue;"
+                                    href ng-click="steps.searchSource(source)">
+                                    {{source}}
+                                </a>
+                            </div>
+                        </span>
+
+                        <div ng-if="header != 'Fete' && header != 'Source'"
                             ng-bind-html="fete[header]"></div>
                     </td>
                     <td></td>

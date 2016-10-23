@@ -330,15 +330,16 @@ function StepsController($scope, $log,
                     String(value["Titre abrégé"])
                         .replace('Ignace', 'Ignace<br>')
                         .replace('Xavier', 'Xavier<br>'),
+                'Source': value['Titre abrégé de la source'],
                 'Lieu': value['Lieu'],
                 'Date': value['Date'],
                 //'Date': parseInt(value['Date']),
             };
-            var sources = "";
-            forEach(value['Titre abrégé de la source'], function(source, index){
-                sources += source + '<br> ';
-            });
-            tmp['Source'] = sources;
+            // var sources = "";
+            // forEach(value['Titre abrégé de la source'], function(source, index){
+            //     sources += source + '<br> ';
+            // });
+            // tmp['Source'] = sources;
             tmp['Type'] = value["Type de fête 1"] + ' <br> ' + value["Type de fête 2"];
             tmp['key'] = key;
             self.parties.push(tmp);
