@@ -254,7 +254,10 @@ function DetailsController($scope,
 
     self.changePage = function() {
         console.log("Selected", self.page);
-        $timeout(function () { $state.go("public.details", {id: self.page}); }, 200);
+        if (self.page) {
+            $timeout(function () {
+                $state.go("public.details", {id: self.page}); }, 200);
+        }
     };
 
     self.selectLanguage = function () {
