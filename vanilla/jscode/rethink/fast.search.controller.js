@@ -5,12 +5,23 @@ angular.module('web')
     .controller('FastSearchController', FastSearchController);
 
     //hotkeys, keyshortcuts,
-function FastSearchController($scope, $log, $stateParams, $timeout, SearchService)
+function FastSearchController($scope, $log, $stateParams, SearchService)
 {
 
   // INIT controller
   var self = this;
   $log.warn("New FAST search controller");
+
+  ///////////////////////////
+  // BASE data for advanced search
+  self.base = {};
+  self.advancedLoader = true;
+  SearchService
+    .getBaseSearchData().then(function (out) {
+        self.base = out;
+        console.log('BASE', out);
+        self.advancedLoader = false;
+    });
 
   ///////////////////////////
   // FILTERS
@@ -33,7 +44,6 @@ function FastSearchController($scope, $log, $stateParams, $timeout, SearchServic
 
   console.log("Start with", self.filters);
   self.elements = null;
-  self.base = {};
   self.load = false;
 
   self.clearFilters = function() {
@@ -41,14 +51,6 @@ function FastSearchController($scope, $log, $stateParams, $timeout, SearchServic
       localStorage.removeItem(self.cookieKey);
       self.searchTextChange();
   }
-
-  ///////////////////////////
-  // BASE data for advanced search
-  SearchService
-    .getBaseSearchData().then(function (out) {
-        self.base = out;
-        console.log('BASE', out);
-    });
 
   ///////////////////////////
   // HANDLE PARAMETER

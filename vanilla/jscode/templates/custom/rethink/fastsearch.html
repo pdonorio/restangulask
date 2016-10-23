@@ -65,15 +65,18 @@ traduction starts with...
     <md-card ng-if="advanced">
         <md-card-content class="nospaces"> Filters:
 
-<div layout="row" layout-padding>
-<div layout="column" flex=50>
+<div ng-if="search.advancedLoader"
+    ng-include="root.templateDir + 'loader.html'"></div>
+<div ng-if="!search.advancedLoader" layout="row" layout-padding>
+
+<div layout="column" flex=50 ng-cloak>
 
   <md-input-container>
     <label>Fete</label>
     <md-select ng-model="search.filters.fete" md-on-close="search.searchTextChange()" >
       <md-optgroup label="fetes">
         <md-option ng-value="">-</md-option>
-        <md-option ng-value="item" ng-repeat="item in search.base.fetes" >{{item}}</md-option>
+        <md-option ng-value="item" ng-repeat="item in ::search.base.fetes" >{{item}}</md-option>
       </md-optgroup>
     </md-select>
   </md-input-container>
@@ -83,7 +86,7 @@ traduction starts with...
     <md-select ng-model="search.filters.source" md-on-close="search.searchTextChange()" >
       <md-optgroup label="sources">
         <md-option ng-value="">-</md-option>
-        <md-option ng-value="item" ng-repeat="item in search.base.sources" >{{item}}</md-option>
+        <md-option ng-value="item" ng-repeat="item in ::search.base.sources" >{{item}}</md-option>
       </md-optgroup>
     </md-select>
   </md-input-container>
@@ -93,7 +96,7 @@ traduction starts with...
     <md-select ng-model="search.filters.lieu" md-on-close="search.searchTextChange()" >
       <md-optgroup label="lieus">
         <md-option ng-value="">-</md-option>
-        <md-option ng-value="item" ng-repeat="item in search.base.lieus" >{{item}}</md-option>
+        <md-option ng-value="item" ng-repeat="item in ::search.base.lieus" >{{item}}</md-option>
       </md-optgroup>
     </md-select>
   </md-input-container>
@@ -103,7 +106,7 @@ traduction starts with...
     <md-select ng-model="search.filters.manuscrit" md-on-close="search.searchTextChange()" >
       <md-optgroup label="manuscrits">
         <md-option ng-value="">-</md-option>
-        <md-option ng-value="item" ng-repeat="item in search.base.manuscrits" >{{item}}</md-option>
+        <md-option ng-value="item" ng-repeat="item in ::search.base.manuscrits" >{{item}}</md-option>
       </md-optgroup>
     </md-select>
   </md-input-container>
@@ -115,7 +118,7 @@ traduction starts with...
     <md-select ng-model="search.filters.apparato" md-on-close="search.searchTextChange()" >
       <md-optgroup label="apparato">
         <md-option ng-value="">-</md-option>
-        <md-option ng-value="item" ng-repeat="item in search.base.apparatos" >{{item}}</md-option>
+        <md-option ng-value="item" ng-repeat="item in ::search.base.apparatos" >{{item}}</md-option>
       </md-optgroup>
     </md-select>
   </md-input-container>
@@ -125,7 +128,7 @@ traduction starts with...
     <md-select ng-model="search.filters.actions" md-on-close="search.searchTextChange()" >
       <md-optgroup label="actions">
         <md-option ng-value="">-</md-option>
-        <md-option ng-value="item" ng-repeat="item in search.base.actions" >{{item}}</md-option>
+        <md-option ng-value="item" ng-repeat="item in ::search.base.actions" >{{item}}</md-option>
       </md-optgroup>
     </md-select>
   </md-input-container>
@@ -135,7 +138,7 @@ traduction starts with...
     <md-select ng-model="search.filters.temps" md-on-close="search.searchTextChange()" >
       <md-optgroup label="temps">
         <md-option ng-value="">-</md-option>
-        <md-option ng-value="item" ng-repeat="item in search.base.temps" >{{item}}</md-option>
+        <md-option ng-value="item" ng-repeat="item in ::search.base.temps" >{{item}}</md-option>
       </md-optgroup>
     </md-select>
   </md-input-container>
@@ -158,7 +161,9 @@ traduction starts with...
 </div>
 
         </md-card-content>
-        <div class="md-actions" layout="row" layout-align="end end">
+        <div
+            ng-if="!search.advancedLoader"
+            class="md-actions" layout="row" layout-align="end end">
            <md-button ng-click="search.cloneDate()">clone date</md-button>
            <md-button ng-click="search.clearFilters()">clear filters</md-button>
          </div>
