@@ -143,7 +143,7 @@ def forward_response(response):
     return jsonify(**resp), code
 
 
-@cms.route('/auth', methods=['POST'])
+@cms.route('/doauth', methods=['POST'])
 def auth():
     """
     IMPORTANT: This route is a proxy for JS code to APIs login.
@@ -155,7 +155,7 @@ def auth():
         return "No valid (json) data credentials", hcodes.HTTP_BAD_UNAUTHORIZED
     # Request login (with or without API)
     return forward_response(login_point(
-            request.json['username'], request.json['password']))
+        request.json['username'], request.json['password']))
 
 
 @cms.route('/doregistration', methods=['POST'])
@@ -179,6 +179,8 @@ def jsblueprint():
         'name': CURRENT_BLUEPRINT,
         'time': user_config['options']['load_timeout'],
         'api_url': request.url_root,
+# TO BE FIXED FOR DEVELOPMENT
+        'api_port': 80,
         'js_template': js_template,
         'images_path': '/' + staticdir + UPLOAD_FOLDER.strip('/') + '/'
     }

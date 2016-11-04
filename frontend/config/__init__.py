@@ -27,6 +27,8 @@ for key in os.environ.keys():
     if BACKEND_NAME == key.lower()[0:5]:
         BACKEND = True
 PORT = 5000
+if os.environ.get('APP_MODE') == 'production':
+    PORT = 8080
 URL = 'http://%s:%s' % (BACKEND_NAME, PORT)
 API_URL = URL + '/api/'
 UPLOAD_FOLDER = '/uploads'

@@ -1,12 +1,7 @@
 
 rethinkdb:
-  # image: pdonorio/myrethinkdb
   image: rethinkdb
   hostname: rdbmaster
-  # Web admin
-#   ports:
-# ## TO BE REMOVED
-#       - 7778:8080
   volumes:
       - restangulask_rdbdata:/data
 
@@ -21,33 +16,30 @@ searchindex:
   volumes:
       - restangulask_elasticdata:/usr/share/elasticsearch/data
       - ../containers/elastic.confs:/usr/share/elasticsearch/config
-#   ports:
-# ## TO BE REMOVED
-#       - 9200:9200
 
 uploadsdata:
   image: busybox
+  command: echo 'launched'
   volumes:
-      # Upload directory
-      - ../uploads:/uploads
+    # Upload directory
+    - ../uploads:/uploads
 
 custombe:
   extends:
-      file: docker-compose.yml
-      service: backend
+    file: docker-compose.yml
+    service: backend
   links:
-      - rethinkdb:rdb
-      - searchindex:el
+    - rethinkdb:rdb
+    - searchindex:el
   volumes_from:
-      - uploadsdata
+    - uploadsdata
 
 customfe:
   extends:
-      file: docker-compose.yml
-      service: frontend
+    file: docker-compose.yml
+    service: frontend
   links:
-      - custombe:myapi
-# TO FIX
+    - custombe:myapi
   volumes_from:
-      - uploadsdata
-# TO FIX
+    - htmlfiles
+    - uploadsdata

@@ -115,14 +115,18 @@ def login_api(username, password):
 
     tokobj = None
     payload = {'email': username, 'password': password}
+    logger.info("Login Url is %s" % LOGIN_URL)
 
     try:
         r = requests.post(LOGIN_URL, stream=True,
                           data=json.dumps(payload), headers=HEADERS, timeout=5)
     except requests.exceptions.ConnectionError:
-        return {'errors':
-                {'API unavailable': "Cannot connect to APIs server"}}, \
-                hcodes.HTTP_DEFAULT_SERVICE_FAIL, tokobj
+        return {
+            'errors':
+            {
+                'API unavailable': "Cannot connect to APIs server"
+            }
+        }, hcodes.HTTP_DEFAULT_SERVICE_FAIL, tokobj
     out = r.json()
 
     response = {'errors': {'No autorization': "Invalid credentials"}}

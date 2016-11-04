@@ -1,0 +1,41 @@
+
+#################################
+# PRODUCTION performance
+
+proxy:
+  image: nginx
+  hostname: iamaproxy
+  # command: echo "Hello"
+  links:
+    - custombe:api
+    - customfe:html
+  # volumes_from:
+  #   - htmlfiles
+  volumes:
+    - ../containers/nginx_proxy:/etc/nginx/conf.d
+    - ../frontend/felask/static:/static
+    - ../uploads:/data/frontend/felask/static/uploads
+  volumes_from:
+    - htmlfiles
+    # - uploadsdata
+  ports:
+    - 80:80
+
+custombe:
+  command: init
+  environment:
+    APP_MODE: production
+    UWSGI_MASTER: /tmp/uwsgi/starter.ini
+    NGINX_ACTIVE: "True"
+  volumes:
+    - ../containers/wsgi:/tmp/uwsgi
+    - ../containers/nginx_internal:/etc/nginx/conf.d
+  # ports:
+  #   - 80:8080
+
+customfe:
+  environment:
+    APP_MODE: production
+#   command: sleep infinity
+# #   volumes_from:
+# #     - uploadsdata

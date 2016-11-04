@@ -1,0 +1,17 @@
+
+rethinkdb:
+  # Web admin
+  ports:
+    - 7778:8080
+
+searchindex:
+  ports:
+    - 9200:9200
+
+custombe:
+  ports:
+    - 8081:5000
+
+customfe:
+  ports:
+    - 80:5000

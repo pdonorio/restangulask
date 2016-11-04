@@ -11,7 +11,7 @@ var timeToWait = {{time}}; // measured in ms
 var welcomeTemplate = {{js_template}};
 
 // Api variables
-var apiPort = 8081;
+var apiPort = '{{api_port}}';
 var originalApiUrl = '{{api_url}}'.slice(0, -1);
 var serverUrl = originalApiUrl;
 var ifPort = originalApiUrl.indexOf(':', 5);
