@@ -138,9 +138,14 @@ else
     else
         if [ "$2" == "production" ]; then
             files="$files -f production.yml"
-            echo -e "PRODUCTION"
-            $com $files up -d --remove-orphans proxy
-            # $com $files up --remove-orphans custombe customfe proxy
+
+            if [ "$3" == "logs" ]; then
+                $com $files logs -f
+            else
+                echo -e "PRODUCTION"
+                $com $files up -d --remove-orphans proxy
+                # $com $files up --remove-orphans custombe customfe proxy
+            fi
         else
             files="$files -f development.yml"
         fi

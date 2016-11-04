@@ -1,18 +1,7 @@
 
-Projet #0097a7
-Base de données #bbc65b
-Exposition #0f243d
-Lexique #ff0000
-
-
-Performance:
-✔ uwsgi & nginx @done (16-11-04 12:06)
- ✔ poc @done (16-11-04 12:06)
- ✔ use the env var @done (16-11-04 12:06)
- ✘ don't set debug for flask in production @cancelled (16-11-04 12:06)
 ☐ images upload
+☐ sync home page clicks with side menu
 
-LATEST:
   ☐ elastic update on main submit
     ☐ give only modified step data
  ✔ xls read data @done (16-10-21 08:33)
@@ -78,7 +67,11 @@ EXPO:
 
 
 
-
+COLORS:
+Projet #0097a7
+Base de données #bbc65b
+Exposition #0f243d
+Lexique #ff0000
 
 RSYNC automatically:
 ls *.jpg *.JPG *.tif  | wc -l
