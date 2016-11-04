@@ -11,7 +11,6 @@ Performance:
  ✔ use the env var @done (16-11-04 12:06)
  ✘ don't set debug for flask in production @cancelled (16-11-04 12:06)
 ☐ images upload
-☐ colors
 
 LATEST:
   ☐ elastic update on main submit
@@ -36,7 +35,7 @@ Date:
      ☐ also elastic
 
 authorized views:
-   - 1. no type column in fete list
+   - no type column in fete list
 
 Suggestions:
 ☐ language
