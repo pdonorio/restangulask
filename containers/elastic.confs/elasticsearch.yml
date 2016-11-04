@@ -1,3 +1,11 @@
+cluster.name: "docker-cluster"
 network.host: 0.0.0.0
-script.engine.groovy.inline.search: on
+
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting-security.html
+
+## elastic 2.4.1
+script.engine.groovy.inline.search: true
 bootstrap.mlockall: true
+
+## elastic 5.0
+# script.inline: true

@@ -1,18 +1,20 @@
 
 rethinkdb:
-  image: rethinkdb
+  image: rethinkdb:2.3.5
   hostname: rdbmaster
   volumes:
       - restangulask_rdbdata:/data
 
 searchindex:
-  image: elasticsearch
+  image: elasticsearch:2.4.1
+  # image: elasticsearch:5.0.0
   hostname: elastic
   environment:
-      ES_HEAP_SIZE: 2g
       # curl http://el:9200/_nodes/process?pretty
       # http://stackoverflow.com/a/18152957/2114395
       #https://www.loggly.com/blog/nine-tips-configuring-elasticsearch-for-high-performance/
+      ES_HEAP_SIZE: 2g #deprecated in 5.0
+      # ES_JAVA_OPTS: "-Xms2g -Xmx2g" #this one works in 5.0
   volumes:
       - restangulask_elasticdata:/usr/share/elasticsearch/data
       - ../containers/elastic.confs:/usr/share/elasticsearch/config

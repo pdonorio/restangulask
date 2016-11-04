@@ -1,16 +1,20 @@
 
+# searchindex:
+#   ports:
+#     - 9200:9200
+
+# rethinkdb:
+#   # Web admin
+#   ports:
+#     - 7778:8080
+
 #################################
 # PRODUCTION performance
 
 proxy:
-  image: nginx
-  hostname: iamaproxy
-  # command: echo "Hello"
   links:
     - custombe:api
     - customfe:html
-  # volumes_from:
-  #   - htmlfiles
   volumes:
     - ../containers/nginx_proxy:/etc/nginx/conf.d
     - ../frontend/felask/static:/static

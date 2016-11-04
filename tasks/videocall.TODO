@@ -1,6 +1,24 @@
 
-☐ images upload
+Videocall:
+  ☐ fete list
+    ☐ select one is a new url
+  ☐ retour button
+    ☐ javascript history back
+  ☐ details
+    ☐ source
+    Lieu d'édition
+ ☐ double
+   ☐ elastic
+   Avignon_7
+ ☐ lexique selection inside details
+   ☐ avoid problems with copy and paste
+
+Others:
+
 ☐ sync home page clicks with side menu
+☐ changing image in details
+   ☐ does not find the old one?
+☐ lexique fixed table header
 
   ☐ elastic update on main submit
     ☐ give only modified step data

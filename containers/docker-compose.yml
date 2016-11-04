@@ -95,5 +95,6 @@ sqladmin:
       - 8888:80
 
 proxy:
-  image: nginx
+  image: nginx:1.11.5-alpine
+  hostname: iamaproxy
   # command: echo "Hello"
