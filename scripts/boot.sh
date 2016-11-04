@@ -129,18 +129,23 @@ else
     #############################
     # Run services if not adding another command
     if [ -z "$2" ]; then
-        echo -e "ACTION: Reboot\n"
-        echo "Cleaning project containers (if any)"
-        $com $files stop
-        $com $files rm -f
-        echo "Starting up"
-        $com $files up -d --remove-orphans $services
+        # echo -e "ACTION: Reboot\n"
+        # echo "Cleaning project containers (if any)"
+        # $com $files stop
+        # $com $files rm -f
+        # echo "Starting up"
+        # $com $files up -d --remove-orphans $services
+        echo "Add 'start'"
+        exit 1
     else
         if [ "$2" == "production" ]; then
             files="$files -f production.yml"
 
             if [ "$3" == "logs" ]; then
                 $com $files logs -f
+            elif [ "$3" == "restart" ]; then
+                $com $files stop
+                $com $files rm -f
             else
                 echo -e "PRODUCTION"
                 $com $files up -d --remove-orphans proxy
