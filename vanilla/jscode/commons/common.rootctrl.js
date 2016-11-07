@@ -258,7 +258,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
             // are defined in common.globals
 
         //DEBUG
-        //$log.debug("History stacks", temporaryRoutingHistory, totalRoutingHistory);
+        // console.log("History stacks", temporaryRoutingHistory, totalRoutingHistory);
       }
     )
 
@@ -297,9 +297,9 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
 
     // In case of special search available
     // Redirect to that state
-    $rootScope.activateOther = function (route)
+    $rootScope.activateOther = function (route, params)
     {
-        $state.go('public.' + route);
+        $state.go('public.' + route, params);
     }
 
 	$log.info("Menu", $rootScope.menu);

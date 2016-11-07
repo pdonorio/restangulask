@@ -139,7 +139,7 @@ angular.module('web')
 
     //////////////////////
         'public.list': {
-            url: "/list",
+            url: "/list?name",
             views: {
                 "unlogged": {
                     dir: 'blueprint',

@@ -14,7 +14,7 @@
 <div ng-if="loading"
     ng-include="root.templateDir + 'loader.html'"></div>
 
-<div ng-if="!loading">
+<div ng-if="!loading" ng-controller="SideMenuController as menu">
 <div style="padding-top: 50px;"></div>
 
 <!-- REPEATS -->
@@ -47,7 +47,10 @@
         padding-left: 1%; color: white;
         width: 100%;
         z-index:3;">
-        <a href ui-sref="{{section.link}}" style="color: white;">
+
+        <a href ng-click="menu.changeTo(section.data.Section)" style="color: white;">
+        <!-- <a href ui-sref="{{section.link}}" style="color: white;"> -->
+
         <!-- TITLE -->
         <h2 class="header" style='font-family: Leela;'>
             {{ section.data['Section'].capitalizeFirstLetter() }}

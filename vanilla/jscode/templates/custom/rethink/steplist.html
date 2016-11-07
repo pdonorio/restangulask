@@ -7,9 +7,11 @@
         <h4 ng-show="steps.element">
 
             <md-button class="md-raised">
-                <a ng-click='steps.closeElement()' layout='row' layout-align="center center">
-                    <i class="material-icons prefix">arrow_back</i> Retour
-                </a>
+              <!-- <a ng-click='steps.closeElement()' layout='row' layout-align="center center"> -->
+              <!-- <a ui-sref='public.list({name: ""})' layout='row' layout-align="center center"> -->
+              <a href ng-click="goToLastRoute()">
+                <i class="material-icons prefix">arrow_back</i> Retour
+              </a>
             </md-button>
             DETAILS DE LA FÊTE
         </h4>
@@ -116,7 +118,8 @@
                         style="vertical-align: top;">
 
                         <span ng-if="header == 'Fete'">
-                            <a href ng-click="steps.selectElement(fete.key)">
+                            <!-- <a href ng-click="steps.selectElement(fete.key)"> -->
+                            <a href ui-sref="public.list({name: fete.key})">
                               <div ng-bind-html="fete[header]"></div>
                             </a>
                         </span>

@@ -305,11 +305,11 @@ function StepsController($scope, $log,
     var self = this;
     console.log("Stepping in pieces", $stateParams);
     self.selectedForDate = null;
+    self.element = null;
     if ($stateParams.hasOwnProperty('fetepos')) {
         self.selectedForDate = $stateParams.fetepos;
     }
 
-    self.element = null;
     self.cookieKey = 'searchParameters';
     self.headers = [
         'Fete', //'Fête',
@@ -347,8 +347,11 @@ function StepsController($scope, $log,
           console.log("Parties", self.parties);
 
            self.dataCount = out.elements;
+           if ($stateParams.name) {
+             self.element = self.data[$stateParams.name];
+           }
       } else {
-           self.dataCount = self.data.length;
+       self.dataCount = self.data.length;
       }
     });
 
@@ -363,15 +366,15 @@ function StepsController($scope, $log,
         console.log("Sort", $scope.sortColumn, $scope.reverse)
     }
 
-    self.selectElement = function (name) {
-      self.element = self.data[name];
-      console.log("Element", self.element);
-      $window.scrollTo(0, 0);
-    }
+    // self.selectElement = function (name) {
+    //   self.element = self.data[name];
+    //   console.log("Element", self.element);
+    //   $window.scrollTo(0, 0);
+    // }
 
-    self.closeElement = function() {
-      delete self.element;
-    }
+    // self.closeElement = function() {
+    //   delete self.element;
+    // }
 
     // search for this source?
     self.searchSource = function(source) {

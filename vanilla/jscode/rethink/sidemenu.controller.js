@@ -11,10 +11,15 @@ function SideMenuController($scope, $rootScope, $log, $timeout, $state)
     $log.warn("Menu");
 
     self.links = [
-        { name: 'bienvenue', link: 'welcome.subsection', cls: null, extra: {}},
-        { name: 'base de données', link: 'public.db', cls: null, extra: {}},
+        { name: 'bienvenue',
+            section: 'Projet',
+            link: 'welcome.subsection', cls: null, extra: {}},
+        { name: 'base de données',
+            section: 'Base de données',
+            link: 'public.db', cls: null, extra: {}},
         {
             name: 'exposition',
+            section: 'Exposition',
             cls: null,
             link: "public.expo", extra: {}
             // link: "welcome.more",
@@ -22,6 +27,7 @@ function SideMenuController($scope, $rootScope, $log, $timeout, $state)
         },
         {
             name: 'lexique',
+            section: 'Lexique',
             link: "public.lex",
             // link: "welcome.more",
             cls: null,
@@ -36,6 +42,16 @@ function SideMenuController($scope, $rootScope, $log, $timeout, $state)
             $state.go(link, extra);
         else
             $state.go(link);
+    }
+
+    self.changeTo = function(sectionName) {
+        console.log('Section', sectionName);
+        forEach(self.links, function(value, key){
+            console.log("UHM", value, value.section);
+            if (value.section == sectionName) {
+                $state.go(value.link, value.extra);
+            }
+        });
     }
 
     $rootScope.$on('$stateChangeSuccess',

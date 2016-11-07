@@ -12,6 +12,10 @@ function DetailsController($scope,
     $log.info("Single view on", $stateParams.id);
     self.logged = $auth.isAuthenticated();
 
+    self.goBack = function() {
+      window.history.back();
+    };
+
     self.cookieKey = 'searchParameters';
     self.filters = JSON.parse(localStorage.getItem(self.cookieKey));
     self.highlightText = null;
