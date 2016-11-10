@@ -6,13 +6,13 @@
     <div style="padding-left: 40px;">
         <h4 ng-show="steps.element">
 
-            <md-button class="md-raised">
-              <!-- <a ng-click='steps.closeElement()' layout='row' layout-align="center center"> -->
-              <!-- <a ui-sref='public.list({name: ""})' layout='row' layout-align="center center"> -->
-              <a href ng-click="goToLastRoute()">
-                <i class="material-icons prefix">arrow_back</i> Retour
-              </a>
-            </md-button>
+            <a href ng-click="goToLastRoute()">
+                <md-button>
+                    <div layout='row' layout-align="center center" flex >
+                        <i class="material-icons prefix">arrow_back</i> Retour
+                    </div>
+                </md-button>
+            </a>
             DETAILS DE LA FÊTE
         </h4>
         <h4 ng-hide="steps.element"> LISTE DES FÊTES </h4>

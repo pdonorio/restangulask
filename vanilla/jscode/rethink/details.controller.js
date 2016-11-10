@@ -129,7 +129,7 @@ function DetailsController($scope,
             {
                 console.log("Pages", out);
                 self.page = null;
-                if (out.elements && out.elements > 0)
+                if (out && out.elements && out.elements > 0)
                     self.pages = out.data;
                 else
                     return false;

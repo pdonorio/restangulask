@@ -212,8 +212,10 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
     // HISTORY GLOBAL OBJECT
     $rootScope.goToLastRoute = function () {
         var last = lastRoute();
-        $log.debug("Going back to", last.state.name);
-        $state.go(last.state.name, last.params);
+        console.log("Going back to", last.state.name, last.params);
+        $timeout(function(){
+            $state.go(last.state.name, last.params);
+        });
     }
 
     $rootScope.$on('$stateChangeSuccess',

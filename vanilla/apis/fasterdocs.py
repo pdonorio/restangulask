@@ -6,6 +6,7 @@ Some FAST endpoints implementation
 
 from __future__ import absolute_import
 
+import urllib
 from flask_security import auth_token_required, roles_required
 from ..base import ExtendedApiResource
 from ..services.elastic import FastSearch
@@ -37,7 +38,11 @@ class FastManage(ExtendedApiResource, FastSearch):
     @auth_token_required
     def get(self):
 
-        data = self.fast_query(self._args['field'], self._args['value'])
+        tmp = self.get_input_new()
+        val = urllib.parse.unquote(tmp['value'])
+        # print("TEST", val)
+        data = self.fast_query(tmp['field'], val)
+
         parties = {}
         for element in data:
             s = element['_source']

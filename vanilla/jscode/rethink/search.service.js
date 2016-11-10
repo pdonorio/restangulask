@@ -190,7 +190,7 @@ function SearchService($log, api) {
         return self.doQuery(self.endpoints.fastmanage,
             {
                 field: 'source',
-                value: source,
+                value: encodeURIComponent(source),
                 // field: 'fete',
                 // value: fete,
                 current: current,
