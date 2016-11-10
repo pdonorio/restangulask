@@ -6,11 +6,40 @@ angular.module('web')
 
 function DetailsController($scope,
     $log, $sce, $stateParams, $auth, $window, $mdToast, $timeout, $state,
+    $mdBottomSheet,
     SearchService, AdminService)
 {
     var self = this;
     $log.info("Single view on", $stateParams.id);
     self.logged = $auth.isAuthenticated();
+
+    var getSelectionText = function() {
+          var text = "";
+          if (window.getSelection) {
+              text = window.getSelection().toString();
+          } else if (document.selection && document.selection.type != "Control") {
+              text = document.selection.createRange().text;
+          }
+          return text;
+    };
+
+    self.showListBottomSheet = function() {
+        $scope.alert = '';
+        $mdBottomSheet.show({
+          // template: 'just a test',
+          templateUrl: blueprintTemplateDir + 'bottom_sheet.html' ,
+          locals: {selection: getSelectionText()},
+          // controller: 'ListBottomSheetCtrl'
+          controller: function($scope, selection) {
+            // console.log("TEST", selection);
+            $scope.selected = selection;
+          }
+        }).then(function(clickedItem) {
+          $scope.alert = clickedItem['name'] + ' clicked!';
+        });
+    };
+
+
 
     self.goBack = function() {
       window.history.back();

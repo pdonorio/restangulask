@@ -32,7 +32,6 @@
         <b>Page</b>: {{detail.refinedData["Extrait"]["Numero de page de l'extrait"]}}
         </span>
 -->
-
       </div>
 
       <div layout="row">
@@ -133,7 +132,8 @@
             </div>
 
             <!-- CONTENT -->
-            <div ng-bind-html="detail.current_text"></div>
+            <div    ng-dblclick="detail.showListBottomSheet()"
+                    ng-bind-html="detail.current_text"></div>
         </div>
 <!-- IMAGE TEXT -->
      </div>
