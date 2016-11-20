@@ -1,11 +1,11 @@
 
 
 ## to do
-- details metadata submission
-  - 1er jour de l’octave
-- retour to list
-- detail source = celeste
-- DÉTAILS DE LA PAGE = double click
+✔ details metadata submission @done (16-11-20 23:13)
+  ✔ 1er jour de l’octave @done (16-11-20 23:13)
+✔ retour to list @done (16-11-20 23:13)
+✔ detail source = celeste @done (16-11-20 23:19)
+✔ DÉTAILS DE LA PAGE = double click @done (16-11-20 23:21)
 - set back order to extrait…
 - ricerca
   - scroll back to first results
@@ -43,17 +43,6 @@ Date:
 authorized views:
    - no type column in fete list
 
-Suggestions:
-☐ language
- ☐ what if I don't know the language
- Christo italiano
- http://localhost/public/details/091443e1-c5d6-4f36-af1c-f8e5585586bd?query=visitato
-☐ mixing languages
-http://localhost/public/details/3db5a6ec-f8d4-4a12-8427-93b585e90e13?query=ambassadeur
- ☐ lessico can tell you which language
-☐ tests
-http://localhost/public/details/09b2c276-496a-49ff-b99f-218a57434c96
-
 Lessico:
   ☐ explore sheet @conventions
   ☐ modal with lessico with search
@@ -65,6 +54,16 @@ Lessico:
 EXPO:
 ☐ Option no zoom
 
+Suggestions (MAH):
+☐ language
+ ☐ what if I don't know the language
+ Christo italiano
+ http://localhost/public/details/091443e1-c5d6-4f36-af1c-f8e5585586bd?query=visitato
+☐ mixing languages
+http://localhost/public/details/3db5a6ec-f8d4-4a12-8427-93b585e90e13?query=ambassadeur
+ ☐ lessico can tell you which language
+☐ tests
+http://localhost/public/details/09b2c276-496a-49ff-b99f-218a57434c96
 
 
 

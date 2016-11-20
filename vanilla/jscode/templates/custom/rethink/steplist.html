@@ -6,7 +6,8 @@
     <div style="padding-left: 40px;">
         <h4 ng-show="steps.element">
 
-            <a href ng-click="goToLastRoute()">
+            <!-- <a href ng-click="goToLastRoute()"> -->
+            <a ui-sref='public.list({name: null})'>
                 <md-button>
                     <div layout='row' layout-align="center center" flex >
                         <i class="material-icons prefix">arrow_back</i> Retour

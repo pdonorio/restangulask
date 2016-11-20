@@ -180,7 +180,8 @@
         </div>
 
         </td> </tr> </thead>
-      <tbody ng-init="key='Détails'">
+      <tbody ng-init="key='Détails'"
+          ng-dblclick="detail.showListBottomSheet()">
         <tr ng-init="field1='Personnages'"
             ng-show='detail.refinedData[key][field1]'>
           <th width="35%"> {{ field1 }} </th>
@@ -255,10 +256,14 @@
       </tbody>
 
 
-     <thead> <tr> <td colspan="2">
+     <thead
+        style="background-color: #C4FFEB;"
+        > <tr> <td colspan="2">
         <h5> SOURCE </h5>
         </td> </tr> </thead>
-      <tbody ng-init="key3='Source'">
+      <tbody
+        style="background-color: #C4FFEB;"
+        ng-init="key3='Source'">
         <tr ng-init="field21='Type de source'"
             ng-show='detail.refinedData[key3][field21]'>
           <th width="35%"> {{ field21 }} </th>
