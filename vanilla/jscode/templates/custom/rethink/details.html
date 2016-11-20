@@ -305,6 +305,16 @@
           <th width="35%"> {{ field26 }} </th>
           <td> {{detail.refinedData[key3][field26]}} </td>
         </tr>
+        <tr ng-init="field26bis='Liens'"
+            ng-show='detail.refinedData[key3][field26bis]'>
+          <th width="35%"> {{ field26bis }} </th>
+          <td>
+            <a target='_blank'
+                href="{{detail.refinedData[key3][field26bis]}}">
+                {{detail.refinedData[key3][field26bis]}}
+            </a>
+          </td>
+        </tr>
         <tr ng-init="field27='Notes'"
             ng-show='detail.refinedData[key3][field27]'>
           <th width="35%"> {{ field27 }} </th>
