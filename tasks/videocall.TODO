@@ -1,22 +1,19 @@
 
-Videocall:
-  ✔ fete list @done (16-11-07 07:06)
-    ✔ select one is a new url @done (16-11-07 07:06)
-  ✔ details @done (16-11-07 07:26)
-    ✔ retour button @done (16-11-07 07:26)
-      ✘ javascript history back @cancelled (16-11-07 07:26)
-      ✔ use the history @done (16-11-07 07:26)
-    ✔ source @done (16-11-07 07:11)
-      ✔ Lieu d'édition @done (16-11-07 07:26)
- ☐ double
-   ☐ elastic
-   Avignon_7
- ✔ lexique selection inside details @done (16-11-11 00:20)
-   ✔ avoid problems with copy and paste @done (16-11-11 00:20)
 
-Others:
-✔ sync home page clicks with side menu @done (16-11-07 07:41)
+## to do
+- details metadata submission
+  - 1er jour de l’octave
+- retour to list
+- detail source = celeste
+- DÉTAILS DE LA PAGE = double click
+- set back order to extrait…
+- ricerca
+  - scroll back to first results
+
+ ✔ double @done (16-11-12 06:44)
 ☐ lexique fixed table header
+☐ check details list of pages
+/public/details/01f30d57-4007-45a6-9ad8-8b8e52bfa34b
 ☐ changing image in details
    ☐ does not find the old one?
  ☐ submit

@@ -60,6 +60,10 @@ Handle 'draft' state for creating a new record
         $state.go("logged.submit", {id: $stateParams.id, step: step});
     }
 
+    function compare(a, b) {
+        return a.value.localeCompare(b.value)
+    }
+
     self.fillFields = function () {
 
         if (!self.draft) {
@@ -116,6 +120,9 @@ Handle 'draft' state for creating a new record
             forEach(element.extra.split(','), function (obj, pos) {
                 options.push({"value":obj.trim(), "name": obj});
             });
+            options.sort(compare);
+            // console.log("SELECT", options);
+
             field = {
                 key: element.field,
                 type:'select',

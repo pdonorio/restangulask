@@ -203,7 +203,9 @@ class RethinkDataValues(BaseRethinkResource):
                 def manage_filter_query(data):
                     _, tmp = data
                     data = tmp.pop()['extra'].strip('.').split(', ')
+                    # print("before", data)
                     data.sort()
+                    # print("after", data)
                     return data
 
                 actions = manage_filter_query(
