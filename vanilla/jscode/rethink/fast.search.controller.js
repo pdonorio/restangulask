@@ -5,12 +5,14 @@ angular.module('web')
     .controller('FastSearchController', FastSearchController);
 
     //hotkeys, keyshortcuts,
-function FastSearchController($scope, $log, $stateParams, SearchService)
+function FastSearchController($scope, $log, $stateParams,
+    SearchService, $mdBottomSheet)
 {
 
   // INIT controller
   var self = this;
   $log.warn("New FAST search controller");
+  $mdBottomSheet.hide("search");
 
   ///////////////////////////
   // BASE data for advanced search

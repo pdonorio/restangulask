@@ -24,22 +24,43 @@ function DetailsController($scope,
     };
 
     self.showListBottomSheet = function() {
-        $scope.alert = '';
+        // $scope.alert = '';
+        var text = getSelectionText();
+        if (text.trim() == '')
+            return false;
+
         $mdBottomSheet.show({
           // template: 'just a test',
           templateUrl: blueprintTemplateDir + 'bottom_sheet.html' ,
           locals: {selection: getSelectionText()},
           // controller: 'ListBottomSheetCtrl'
-          controller: function($scope, selection) {
-            // console.log("TEST", selection);
+          controller: function($scope, selection, SearchService)
+          {
+            $scope.rows = null;
             $scope.selected = selection;
+            $scope.fields = [
+                'sheet', 'macro', 'micro',
+                'titre', 'latin', 'français', 'italiano'
+            ];
+            // console.log("TEST", selection);
+
+            SearchService.getFastLex(selection).then(function(out){
+              if (out && out.elements) {
+                if (out.elements > 0) {
+                    console.log("OUT", out);
+                    $scope.rows = out.data;
+                }
+              }
+            });
+
           }
-        }).then(function(clickedItem) {
-          $scope.alert = clickedItem['name'] + ' clicked!';
-        });
+        })
+        .then(function(from) {
+            console.log("CLOSED", from);
+            // $scope.alert = clickedItem['name'] + ' clicked!';
+        })
+        ;
     };
-
-
 
     self.goBack = function() {
       window.history.back();

@@ -117,3 +117,13 @@ class FastSuggestion(ExtendedApiResource, FastSearch):
     def get(self, searchterms=None):
         self.get_instance()
         return self.response(self.fast_suggest(searchterms))
+
+
+class FastLex(ExtendedApiResource, FastSearch):
+
+    @deck.apimethod
+    @auth_token_required
+    def get(self, term=None):
+        self.get_instance()
+        data, count = self.fast_get_all(term)
+        return self.response(data, elements=count)

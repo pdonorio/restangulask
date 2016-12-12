@@ -20,10 +20,17 @@ function SearchService($log, api) {
         extra: 'steps',
         fastmanage: 'datamanage',
         lexique: 'lex',
+        elastic_lexique: 'fastlex',
     }
 
-    self.getLex = function(id) {
+//////////////////
+// Lexique ugh
+    self.getLex = function() {
         return api.apiCall(self.endpoints.lexique);
+    }
+
+    self.getFastLex = function(keyword) {
+        return api.apiCall(self.endpoints.elastic_lexique, 'GET', null, keyword);
     }
 
 //////////////////

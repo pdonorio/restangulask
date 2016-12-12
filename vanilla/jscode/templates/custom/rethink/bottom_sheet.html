@@ -1,8 +1,44 @@
 <md-bottom-sheet class="md-list md-has-header">
-  <md-subheader ng-cloak>Lookup</md-subheader>
+  <md-subheader ng-cloak>Selected <i>{{selected}}</i> </md-subheader>
 
   <md-content layout-padding layout-wrap>
-    Search <i>Lexique</i> for <b>{{selected}}</b>
+
+    <!-- Search <i>Lexique</i> for <b>{{selected}}</b> -->
+
+<!--
+"_source":
+{"sheet":"perfomance","titre":"miracle","français":"miracle","italien":null,"micro":"Religion","latin":null,"macro":"Action"}
+-->
+
+    <table class="stripes" ng-if="rows">
+        <thead>
+            <tr>
+                <th ng-repeat="field in fields"> {{field}} </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in rows">
+                <td ng-repeat="field in fields"
+                    ng-init="check = (
+                        (field=='latin') || (field=='français') || (field=='italiano')
+                    )">
+                  <span ng-if="row._source[field]">
+                    <a ui-sref='public.fastsearch({text: row._source[field]})'
+                        ng-if="check" > {{row._source[field]}} </a>
+                    <span ng-if="!check"> {{row._source[field]}} </span>
+                  </span>
+                  <span ng-if="!row._source[field]"> - </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p ng-if="!rows">
+        no lexique
+    </p>
+
+    <!-- see in documents? -->
+
   </md-content>
 <!--
   <md-list ng-cloak>
