@@ -173,7 +173,42 @@ traduction starts with...
 <div>
     <div ng-if="search.load" ng-include="root.templateDir + 'loader.html'"></div>
     <span ng-if="!search.load && search.elements >= 0">
-        <b><i>Trouvés: {{search.elements}} éléments</i></b>
+
+        <div ng-if="rows" class="md-whiteframe-6dp"
+            layout="row" layout-padding layout-align="center center">
+         <div>
+            Lexique:
+         </div>
+         <div>
+          <table class="striped">
+            <thead>
+                <tr>
+                    <th ng-repeat="field in fields"> {{field}} </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in rows">
+                    <td ng-repeat="field in fields">
+<!--                         ng-init="check = (
+                            (field=='latin') || (field=='français') || (field=='italiano')
+                        )">
+ -->                      <span ng-if="row._source[field]">
+<!--                         <a ui-sref='public.fastsearch({text: row._source[field]})'
+                            ng-if="check" > {{row._source[field]}} </a>
+                        <span ng-if="!check"> {{row._source[field]}} </span>
+ -->                        {{row._source[field]}}
+                      </span>
+                      <span ng-if="!row._source[field]"> - </span>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+         </div>
+        </div>
+
+        <br>
+        <b><i>Trouvés {{search.elements}} éléments</i></b>
+
     </span>
 </div>
 

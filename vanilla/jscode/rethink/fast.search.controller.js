@@ -63,6 +63,7 @@ function FastSearchController($scope, $log, $stateParams,
     get : function (index, count, success)
     {
 // do something with filters?
+          $scope.rows = null;
           self.filters['searchText'] = self.searchText;
           self.load = true;
           localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
@@ -74,6 +75,7 @@ function FastSearchController($scope, $log, $stateParams,
                .then(function (out) {
                   // console.log('TEST', out.data, out.elements);
                   if (out && out.elements) {
+                      self.checkLexique();
                       self.elements = null;
                       if (out.elements) {
                         success(out.data);
@@ -131,6 +133,27 @@ function FastSearchController($scope, $log, $stateParams,
   if ($stateParams.text) {
       self.searchText = $stateParams.text;
       console.log("Search parameter", self.parameter);
+  }
+
+  self.checkLexique = function () {
+    console.log("CHECK LEX");
+    $scope.rows = null;
+    $scope.selected = self.searchText;
+    $scope.fields = [
+        'sheet', 'macro', 'micro',
+        'titre', 'latin', 'français', 'italiano'
+    ];
+    // console.log("TEST", selection);
+
+    SearchService.getFastLex(self.searchText)
+      .then(function(out){
+          if (out && out.elements) {
+            if (out.elements > 0) {
+                console.log("OUT", out);
+                $scope.rows = out.data;
+            }
+          }
+    });
   }
 
 /*
