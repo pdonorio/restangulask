@@ -294,7 +294,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
     // Redirect to that state
     $rootScope.activateSearch = function ()
     {
-        $state.go('public.fastsearch');
+        $state.go('public.fastsearch', {'clean': true});
     }
 
     // In case of special search available

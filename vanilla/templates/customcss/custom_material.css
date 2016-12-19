@@ -51,6 +51,14 @@ http://stackoverflow.com/a/31278615/2114395
   -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
+.topv-align {
+    vertical-align: top;
+}
+
+.right-align {
+    text-align: right;
+}
+
 .right-pad {
     padding-right:20px;
 }

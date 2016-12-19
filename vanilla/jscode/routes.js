@@ -127,7 +127,7 @@ function routeConfig($stateProvider, $urlRouterProvider, $authProvider, $logProv
                 var myView = {};
                 // TEMPLATE URL?
                 if (view.template) {
-                    console.log('TEST TEMPLATE', view.template);
+                    // console.log('TEST TEMPLATE', view.template);
                     myView.template = view.template;
                 // TEMPLATE FILE
                 } else {

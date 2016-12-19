@@ -1076,7 +1076,7 @@ class RethinkElement(BaseRethinkResource):
                 if step['step'] == 4:
                     for element in step['data']:
                         if isinstance(element['value'], list):
-                            element['value'] = " ".join(element['value'])
+                            element['value'] = "<br>".join(element['value'])
                         if element['value'] is not None and \
                           element['value'].strip() == '':
                             element['value'] = '-'
@@ -1088,14 +1088,14 @@ class RethinkElement(BaseRethinkResource):
                                 if details['Actions'] == '-':
                                     details['Actions'] = element['value']
                                 else:
-                                    details['Apparato'] += " " + element['value']
+                                    details['Apparato'] += "<br>" + element['value']
                         if element['name'] == 'Apparato' or \
                           element['name'] == 'Apparato libres':
                             if element['value'] is not None:
                                 if details['Apparato'] == '-':
                                     details['Apparato'] = element['value']
                                 else:
-                                    details['Apparato'] += " " + element['value']
+                                    details['Apparato'] += "<br>" + element['value']
 
             if name is None:
                 # logger.warning("Missing fete in %s" % obj['record'])

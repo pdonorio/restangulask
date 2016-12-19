@@ -325,6 +325,15 @@ function StepsController($scope, $log,
           self.data = out.data;
           self.parties = [];
           forEach(self.data, function(value, key){
+
+            var test = value['Date'].split(' ');
+            var date = test[0];
+            if (test.length > 1 && test[1].trim() != '')
+                date += '/' + test[1]
+            if (test.length > 1 && test[2].trim() != '')
+                date += '/' + test[2]
+            // console.log("TEST", test, date);
+
             var tmp = {
                 'Fete':
                     String(value["Titre abrégé"])
@@ -332,7 +341,8 @@ function StepsController($scope, $log,
                         .replace('Xavier', 'Xavier<br>'),
                 'Source': value['Titre abrégé de la source'],
                 'Lieu': value['Lieu'],
-                'Date': value['Date'],
+                // 'Date': value['Date'],
+                'Date': date,
                 //'Date': parseInt(value['Date']),
             };
             // var sources = "";
@@ -344,7 +354,7 @@ function StepsController($scope, $log,
             tmp['key'] = key;
             self.parties.push(tmp);
           });
-          console.log("Parties", self.parties);
+          // console.log("Parties", self.parties);
 
            self.dataCount = out.elements;
            if ($stateParams.name) {
@@ -383,15 +393,14 @@ function StepsController($scope, $log,
         localStorage.setItem(self.cookieKey, JSON.stringify({
             source: source
         }));
-        console.log("TEST", self.cookieKey,
-            JSON.parse(localStorage.getItem(self.cookieKey)) )
+        // console.log("TEST", self.cookieKey,
+        //     JSON.parse(localStorage.getItem(self.cookieKey)) )
         $state.go('public.fastsearch');
     }
 
     self.changeDate = function() {
         console.log("Changing to", self.newDate);
         $scope.showSimpleToast({'New date': self.newDate});
-
     }
 }
 

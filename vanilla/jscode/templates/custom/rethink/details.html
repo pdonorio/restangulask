@@ -1,8 +1,9 @@
 <div ng-controller="ToastController as toast" >
  <div ng-controller="DetailsController as detail" >
 
+    <a ui-sref='public.fastsearch()'>
     <!-- <a ui-sref='public.fastsearch({text: detail.query})'> -->
-    <a href ng-click="goToLastRoute()">
+    <!-- <a href ng-click="goToLastRoute()"> -->
         <md-button>
             <div layout='row' layout-align="center center" flex >
                 <i class="material-icons prefix">arrow_back</i> Retour
@@ -237,7 +238,8 @@
             {{
             detail.refinedData[key2]["Date de la fin de la fête"]
             | date:'dd/MM'
-            }},
+            }}
+            /
             </span>
             {{detail.refinedData[key2][field12]}}
             </td>
@@ -286,6 +288,7 @@
         </tr>
         <tr ng-init="field24='Edition'">
           <th width="35%"> {{ field24 }} </th>
+<!-- TO FIX -->
           <td ng-init="tmp='Lieu d' + quote + 'édition'">
           {{detail.refinedData[key3][tmp]}}<span
             ng-if="detail.refinedData[key3][tmp]"
@@ -316,7 +319,7 @@
           <td>
             <a target='_blank'
                 href="{{detail.refinedData[key3][field26bis]}}">
-                {{detail.refinedData[key3][field26bis]}}
+                {{detail.link}}
             </a>
           </td>
         </tr>

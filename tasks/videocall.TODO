@@ -1,38 +1,19 @@
 
+Advanced search?
+autofocus...
 
-## to do
-✔ details metadata submission @done (16-11-20 23:13)
-  ✔ 1er jour de l’octave @done (16-11-20 23:13)
-✔ retour to list @done (16-11-20 23:13)
-✔ detail source = celeste @done (16-11-20 23:19)
-✔ DÉTAILS DE LA PAGE = double click @done (16-11-20 23:21)
-- set back order to extrait…
-- ricerca
-  - scroll back to first results
+Various:
+☐ search
+   ☐ scroll back to first results
 
- ✔ double @done (16-11-12 06:44)
 ☐ lexique fixed table header
 ☐ check details list of pages
 /public/details/01f30d57-4007-45a6-9ad8-8b8e52bfa34b
 ☐ changing image in details
    ☐ does not find the old one?
- ☐ submit
+   ☐ submit
     ☐ elastic @update
     ☐ give only modified step data
-
-Lexique:
- ✔ xls read data @done (16-10-21 08:33)
-   ✔ fill rethinkdb table @done (16-10-21 08:33)
-   ☐ elastic @fill
-     ☐ suggest fix
-       ☐ must contain a lessico field
-       ☐ appears in a hidden line under the search input @wui
- ✔ lessico main page @done (16-10-21 08:33)
- ☐ lessico modal
-   ☐ with search inside for only lessico elements
-     ☐ elastic?
-   ☐ link to normal search
-     ☐ with cookie?
 
 Date:
  ☐ Fete & date
@@ -40,8 +21,8 @@ Date:
      ☐ all elements
      ☐ also elastic
 
-authorized views:
-   - no type column in fete list
+Authorized views:
+    ☐ no type column in fete list
 
 Lessico:
   ☐ explore sheet @conventions
@@ -54,7 +35,8 @@ Lessico:
 EXPO:
 ☐ Option no zoom
 
-Suggestions (MAH):
+Suggestions:
+  MOST LIKELY NOT!
 ☐ language
  ☐ what if I don't know the language
  Christo italiano

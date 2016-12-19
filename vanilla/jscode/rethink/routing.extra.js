@@ -9,7 +9,7 @@ angular.module('web')
 
     ////////////////////// NEW
         'public.fastsearch': {
-            url: "/fastsearch/:text",
+            url: "/fastsearch/:text?clean",
             views: {
                 "unlogged": {
                     dir: 'blueprint',

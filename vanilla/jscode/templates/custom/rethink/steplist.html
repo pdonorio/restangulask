@@ -70,18 +70,15 @@
                         {{row.page}}
                         <!-- <br> {{row.name}} [{{row.sort}}] -->
                     </td>
-                    <td> {{row.Temps}} </td>
-                    <td> {{row.Actions}} </td>
-                    <td> {{row.Apparato}} </td>
-<!--
-                    <td></td>
                     <td>
-          <a ui-sref='public.details({id: row.record})'
-              class="waves-effect waves-light btn-floating lime lighten-3">
-              <i class="material-icons blue-grey-text">web</i>
-          </a>
+                      <div ng-bind-html="row.Temps"></div>
                     </td>
--->
+                    <td>
+                      <div ng-bind-html="row.Actions"></div>
+                    </td>
+                    <td>
+                      <div ng-bind-html="row.Apparato"></div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -93,15 +90,8 @@
                 <tr>
                     <th ng-repeat="header in steps.headers" valign="top">
                       <div layout="row" layout-align="center center">
-                        <!--
-                        <span ng-if="header =='Titre abrégé de la source'">
-                            {{ header }}
-                        </span>
-                        -->
                         <a href ng-click="steps.toggleSort($index)">
-                            <h5>
-                                {{ steps.headers[$index] }}
-                            </h5>
+                            <h5> {{ steps.headers[$index] }} </h5>
                         </a>
                         <span ng-if="sortColumn == header">
                             <i class="material-icons" ng-if="reverse"> arrow_drop_up </i>
@@ -116,7 +106,11 @@
             <tbody>
                 <tr ng-repeat="(key, fete) in steps.parties | orderBy:sortColumn:reverse ">
                     <td ng-repeat="header in steps.headers"
-                        style="vertical-align: top;">
+                        ng-class="{
+                         'right-align': (header == 'Lieu'),
+                         'topv-align': true
+                        }"
+                        >
 
                         <span ng-if="header == 'Fete'">
                             <!-- <a href ng-click="steps.selectElement(fete.key)"> -->

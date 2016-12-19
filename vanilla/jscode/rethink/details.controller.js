@@ -174,6 +174,17 @@ function DetailsController($scope,
                 source = self.refinedData["Source"]["Titre abrégé"],
                 current = self.refinedData["Extrait"][field];
 
+            var linkName = self.refinedData['Source']['Liens'];
+            if (linkName.trim() != '') {
+                var tmp = linkName
+                    .replace("https://", '')
+                    .replace("http://", '')
+                var n = tmp.indexOf('/');
+                linkName = tmp.substring(0, n != -1 ? n : tmp.length);
+                console.log("Link", linkName, tmp);
+            }
+            self.link = linkName;
+
             // SearchService.recoverPages(fete, current).then(function (out)
             SearchService.recoverPages(source, current).then(function (out)
             {

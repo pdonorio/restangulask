@@ -18,6 +18,8 @@ function FastSearchController($scope, $log, $stateParams,
   // BASE data for advanced search
   self.base = {};
   self.advancedLoader = true;
+  self.cookieKey = 'searchParameters';
+
   SearchService
     .getBaseSearchData().then(function (out) {
         self.base = out;
@@ -25,9 +27,26 @@ function FastSearchController($scope, $log, $stateParams,
         self.advancedLoader = false;
     });
 
+  self.searchTextChange = function (text) {
+    $log.info('Text changed', text, self.searchText);
+    $scope.myadapter.reload(0);
+  }
+
+  self.clearFilters = function() {
+      self.filters = {};
+      localStorage.removeItem(self.cookieKey);
+      $stateParams.text = '';
+      // self.searchTextChange();
+  }
+
   ///////////////////////////
   // FILTERS
-  self.cookieKey = 'searchParameters';
+
+  if ($stateParams.clean) {
+    console.log("Clean parameters");
+    self.clearFilters();
+  }
+
   $scope.advanced = false;
   var filtersKey = ['fete', 'source', 'lieu', 'manuscrits', 'apparato', 'actions', 'temps'];
   // local storage / cookie
@@ -44,15 +63,8 @@ function FastSearchController($scope, $log, $stateParams,
     self.filters = {};
   }
 
-  console.log("Start with", self.filters);
   self.elements = null;
   self.load = false;
-
-  self.clearFilters = function() {
-      self.filters = {};
-      localStorage.removeItem(self.cookieKey);
-      self.searchTextChange();
-  }
 
   ///////////////////////////
   // HANDLE PARAMETER
@@ -115,24 +127,12 @@ function FastSearchController($scope, $log, $stateParams,
     }
   }
 
-  self.searchTextChange = function (text) {
-
-    $log.info('Text changed', text, self.searchText);
-    $scope.myadapter.reload(0);
-  }
-
   self.selectedItemChange = function (item) {
     if (item && item.trim() != '') {
         $log.info('Item changed to ' + JSON.stringify(item));
         self.searchText = item;
         self.searchTextChange(item);
     }
-  }
-
-  // first call (based on the URL)
-  if ($stateParams.text) {
-      self.searchText = $stateParams.text;
-      console.log("Search parameter", self.parameter);
   }
 
   self.checkLexique = function () {
@@ -155,6 +155,21 @@ function FastSearchController($scope, $log, $stateParams,
           }
     });
   }
+
+  ///////////////////////////////////////
+  // FINAL INIT
+
+  // if ($stateParams.clean) {
+  //   console.log("Clean parameters");
+  //   self.clearFilters();
+  // }
+
+  if ($stateParams.text) {
+      self.searchText = $stateParams.text;
+      console.log("Search parameter", self.parameter);
+  }
+
+  console.log("Start with", self.filters);
 
 /*
   // Init keys

@@ -8,38 +8,30 @@
  <div flex="70" layout="column">
  <h4> Resultats de la <i>Recherche</i> </h4>
  <md-toolbar class="white black-text" layout="row" layout-padding flex >
-      <md-autocomplete md-autofocus flex
+      <md-autocomplete flex
           md-min-length="1"
-
           md-search-text="search.searchText"
           md-search-text-change="search.searchTextChange(search.searchText)"
-
           md-selected-item="search.selectedItem"
           md-selected-item-change="search.selectedItemChange(item._source.suggest)"
           md-items="item in search.querySearch(search.searchText)"
           md-item-text="item._source.suggest"
-
           md-menu-class="autocomplete-custom-template"
-          md-delay="500" md-select-on-match="false"
-          placeholder="Recherche" >
+          md-delay="300" md-select-on-match="false"
+          placeholder="Recherche"
+          md-autofocus
+          >
         <md-item-template>
           <span layout="row" layout-align="start center">
             <!-- TYPE -->
             <span style="width: 200px;">
-                <span ng-switch on="item._source.extra.cleanlabel">
-                  <i ng-switch-when="extrait" class="material-icons"> import_contacts </i>
-<!--
-                  <i ng-switch-when="source" class="material-icons"> book </i>
-                  <i ng-switch-when="fete" class="material-icons"> bookmark_border </i>
--->
-                  <i ng-switch-when="transcription" class="material-icons"> library_books </i>
-                  <i ng-switch-when="traduction" class="material-icons"> bookmark_border </i>
-<!--
-traduction starts with...
--->
-                  <i ng-switch-default class="material-icons"> book </i>
-                </span>
-                  &nbsp; <strong>{{item._source.label}}</strong>
+             <span ng-switch on="item._source.extra.cleanlabel">
+              <i ng-switch-when="extrait" class="material-icons"> import_contacts </i>
+              <i ng-switch-when="transcription" class="material-icons"> library_books </i>
+              <i ng-switch-when="traduction" class="material-icons"> bookmark_border </i>
+              <i ng-switch-default class="material-icons"> book </i>
+             </span>
+             &nbsp; <strong>{{item._source.label}}</strong>
             </span>
             <!-- VALUE -->
             <span
@@ -48,10 +40,8 @@ traduction starts with...
                 >{{item._source.suggest}}</span>
           </span>
         </md-item-template>
-        <!--
-        <md-not-found> No matches... </md-not-found>
-        -->
       </md-autocomplete>
+
     <a layout="row" layout-align="center center"
       style="font-size: 14px;"
       href ng-click="advanced = !advanced">
@@ -59,6 +49,7 @@ traduction starts with...
         <i class="material-icons" ng-if="advanced">remove</i>
         Advanced Search
     </a>
+
  </md-toolbar>
 
 <div layout="column" layout-padding>
@@ -170,6 +161,7 @@ traduction starts with...
     </md-card>
 </div>
 
+
 <div>
     <div ng-if="search.load" ng-include="root.templateDir + 'loader.html'"></div>
     <span ng-if="!search.load && search.elements >= 0">
@@ -188,18 +180,10 @@ traduction starts with...
             </thead>
             <tbody>
                 <tr ng-repeat="row in rows">
-                    <td ng-repeat="field in fields">
-<!--                         ng-init="check = (
-                            (field=='latin') || (field=='français') || (field=='italiano')
-                        )">
- -->                      <span ng-if="row._source[field]">
-<!--                         <a ui-sref='public.fastsearch({text: row._source[field]})'
-                            ng-if="check" > {{row._source[field]}} </a>
-                        <span ng-if="!check"> {{row._source[field]}} </span>
- -->                        {{row._source[field]}}
-                      </span>
-                      <span ng-if="!row._source[field]"> - </span>
-                    </td>
+                  <td ng-repeat="field in fields">
+                    <span ng-if="row._source[field]"> {{row._source[field]}} </span>
+                    <span ng-if="!row._source[field]"> - </span>
+                  </td>
                 </tr>
             </tbody>
           </table>
@@ -216,25 +200,20 @@ traduction starts with...
 </form>
 <!-- TOOLBAR -->
 
-<md-content layout="row" layout-padding ng-if="!search.load">
- <div flex='10'>&nbsp;</div>
- <div flex='80' ui-scroll-viewport style=" height: 700px; ">
+ <md-content layout="row" layout-padding ng-if="!search.load">
+  <div flex='10'>&nbsp;</div>
+  <div flex='80' ui-scroll-viewport style=" height: 700px; ">
 
- <table class='highlight'>
-  <thead ng-if="search.elements > 0" >
+  <table class='highlight'>
+   <thead ng-if="search.elements > 0" >
     <tr>
         <th>Vignette</th>
         <th>Extrait</th>
         <th>Détails</th>
-        <!-- <th><i>links</i></th> -->
     </tr>
-  </thead>
-
-  <tbody>
+   </thead>
+   <tbody>
     <tr ui-scroll="row in datasource" adapter="myadapter">
-<!--
-    ng-repeat='row in search.data'>
--->
       <td>
         <a ui-sref='public.details({id: row._id, query:search.searchText})'>
          <div ng-if='!row._source.doc.thumbnail'
@@ -247,7 +226,6 @@ traduction starts with...
             ng-style="{'background-image':'url('+ row._source.doc.thumbnail +')'}"></div>
         </a>
       </td>
-      <!-- <td> {{row._source}} </td> -->
       <td style="width: 200px;">
             <strong>
               <span
@@ -270,17 +248,12 @@ traduction starts with...
         </span>
         <br>
       </td>
-      <!-- <td>
-          <a ui-sref='public.details({id: row._id, query:search.searchText})'
-              class="waves-effect waves-light btn-floating lime lighten-3">
-              <i class="material-icons blue-grey-text">web</i>
-          </a>
-      </td> -->
-    </tr>
-  </tbody>
- </table>
- </div>
+     </tr>
+    </tbody>
+   </table>
+  </div>
  <div flex='10'>&nbsp;</div>
  </md-content>
+
 
 </div>
