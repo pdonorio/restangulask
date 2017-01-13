@@ -175,7 +175,7 @@ function DetailsController($scope,
                 current = self.refinedData["Extrait"][field];
 
             var linkName = self.refinedData['Source']['Liens'];
-            if (linkName.trim() != '') {
+            if (linkName && linkName.trim() != '') {
                 var tmp = linkName
                     .replace("https://", '')
                     .replace("http://", '')
