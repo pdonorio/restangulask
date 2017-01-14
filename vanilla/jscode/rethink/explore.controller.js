@@ -359,8 +359,9 @@ function StepsController($scope, $log,
           // console.log("Parties", self.parties);
 
            self.dataCount = out.elements;
-           if ($stateParams.name) {
+           if ($stateParams.name != "~") {
              self.element = self.data[$stateParams.name];
+             // console.log($stateParams.name, self.element[skey]);
              self.sources = self.element[skey];
              self.currentSource = self.sources[$stateParams.book];
              console.log("Current source", self.currentSource);

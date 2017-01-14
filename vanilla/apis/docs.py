@@ -1030,11 +1030,15 @@ class RethinkElement(BaseRethinkResource):
             }
             name = None
             source_name = None
+            ex_name = None
             date = {}
+
             for step in obj['steps']:
-                if step['step'] == 1:
+                current = int(step['step'])
+                if current == 1:
                     for element in step['data']:
                         if element['position'] == 1:
+                            ex_name = element['value']
                             details['name'] = element['value']
 
                         if element['position'] == 2:
@@ -1052,12 +1056,13 @@ class RethinkElement(BaseRethinkResource):
                             break
                     # print("TEST", details)
 
-                if step['step'] == 2:
+                elif current == 2:
                     source_name = step['data'][0]['value']
                     # print("SOURCE", source_name)
-                if step['step'] == 3:
+                elif current == 3:
+                    if len(step['data']) > 0:
+                        name = step['data'][0]['value']
                     for element in step['data']:
-
                         if element['position'] == 4:
                             date['year'] = int(element['value'])
                         elif element['position'] == 8:
@@ -1067,11 +1072,11 @@ class RethinkElement(BaseRethinkResource):
 
                         if element['value'].strip() == '':
                             element['value'] = '-'
-                        if int(element['position']) == 1:
-                            name = element['value']
+                        # if int(element['position']) == 1:
+                        #     name = element['value']
                         tmp[element['name']] = element['value']
 
-                if step['step'] == 4:
+                elif current == 4:
                     for element in step['data']:
                         if isinstance(element['value'], list):
                             element['value'] = "<br>".join(element['value'])
@@ -1095,8 +1100,9 @@ class RethinkElement(BaseRethinkResource):
                                 else:
                                     details['Apparato'] += "<br>" + element['value']
 
-            if name is None:
-                # logger.warning("Missing fete in %s" % obj['record'])
+            if ex_name is None or name is None or source_name is None:
+                self.get_table_query().get(obj['record']).delete().run()
+                print("Missing data in %s" % obj['record'])
                 continue
 
             details['filename'] = None
@@ -1107,7 +1113,6 @@ class RethinkElement(BaseRethinkResource):
             tmp['Date'] = convert_to_ordered_string(date)
 
             ##################
-
             # print("UHM", name, source_name, details['name'])
 
             # SOURCE
