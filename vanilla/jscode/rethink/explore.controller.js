@@ -298,12 +298,11 @@ function FixTransController($scope, $rootScope, $sce,
 ////////////////////////////////
 
 function StepsController($scope, $log,
-    $state, $stateParams,
-    $window, SearchService)
+    $state, $stateParams, $window, SearchService)
 {
     // INIT controller
     var self = this;
-    console.log("Stepping in pieces", $stateParams);
+    console.log("Fetes. Parameters:", $stateParams);
     self.selectedForDate = null;
     self.element = null;
     if ($stateParams.hasOwnProperty('fetepos')) {
@@ -323,7 +322,10 @@ function StepsController($scope, $log,
       self.data = [];
       if (out) {
           self.data = out.data;
+          console.log("DATA", out.data);
           self.parties = [];
+          var skey = 'Titre abrégé de la source'
+
           forEach(self.data, function(value, key){
 
             var test = value['Date'].split(' ');
@@ -339,7 +341,7 @@ function StepsController($scope, $log,
                     String(value["Titre abrégé"])
                         .replace('Ignace', 'Ignace<br>')
                         .replace('Xavier', 'Xavier<br>'),
-                'Source': value['Titre abrégé de la source'],
+                'Source': value[skey],
                 'Lieu': value['Lieu'],
                 // 'Date': value['Date'],
                 'Date': date,
@@ -359,6 +361,9 @@ function StepsController($scope, $log,
            self.dataCount = out.elements;
            if ($stateParams.name) {
              self.element = self.data[$stateParams.name];
+             self.sources = self.element[skey];
+             self.currentSource = self.sources[$stateParams.book];
+             console.log("Current source", self.currentSource);
            }
       } else {
        self.dataCount = self.data.length;

@@ -1015,7 +1015,7 @@ class RethinkElement(BaseRethinkResource):
             # documents[id] = image['filename']
 
         cursor = self.get_table_query().run()
-        pattern = re.compile(r'[0-9]+')
+        # pattern = re.compile(r'[0-9]+')
 
         data = {}
         sources = {}
@@ -1054,6 +1054,7 @@ class RethinkElement(BaseRethinkResource):
 
                 if step['step'] == 2:
                     source_name = step['data'][0]['value']
+                    # print("SOURCE", source_name)
                 if step['step'] == 3:
                     for element in step['data']:
 
@@ -1069,10 +1070,7 @@ class RethinkElement(BaseRethinkResource):
                         if int(element['position']) == 1:
                             name = element['value']
                         tmp[element['name']] = element['value']
-# // TO FIX
-                    # if name is None:
-                    #    pp(step['data'])
-                    #    print("Record", obj['record'])
+
                 if step['step'] == 4:
                     for element in step['data']:
                         if isinstance(element['value'], list):
@@ -1108,10 +1106,11 @@ class RethinkElement(BaseRethinkResource):
             from restapi.dates import convert_to_ordered_string
             tmp['Date'] = convert_to_ordered_string(date)
 
-            if name not in extraits:
-                extraits[name] = []
-            extraits[name].append(details)
+            ##################
 
+            # print("UHM", name, source_name, details['name'])
+
+            # SOURCE
             if source_name is not None:
                 if name not in sources:
                     sources[name] = []
@@ -1119,7 +1118,19 @@ class RethinkElement(BaseRethinkResource):
                     sources[name].index(source_name)
                 except:
                     sources[name].append(source_name)
+            # else:
+            #     source_name = 'unknown'
+            #     logger.warning("Missing source?")
 
+            # EXTRAITs
+            if name not in extraits:
+                extraits[name] = {}
+            if source_name not in extraits[name]:
+                extraits[name][source_name] = []
+            # TODO: should sort by page number
+            extraits[name][source_name].append(details)
+
+            ##################
             # tmp['Titre abrégé de la source'] = source_name
             flag = True
             if name in data:
@@ -1128,16 +1139,12 @@ class RethinkElement(BaseRethinkResource):
             if flag:
                 data[name] = tmp
 
-# SHOULD SORT BY PAGE NUMBER
+        # from beeprint import pp
+        # pp(extraits[source_name])
 
         for key, values in data.items():
             data[key]['Titre abrégé de la source'] = sources[key]
-            # from operator import itemgetter
-            # dsorted = sorted(extraits[key], key=itemgetter('page'))
-            # print("Sorted\n", dsorted)
-            # # print(extraits[key])
             data[key]['extrait'] = extraits[key]
-
 
         return self.response(data)
 

@@ -35,10 +35,17 @@
           <tr>
             <th width="50"> Source: </th>
             <td>
-            <div ng-repeat="source in steps.element['Titre abrégé de la source']">
-                <a href ng-click="steps.searchSource(source)">
+            <div ng-repeat="source in steps.sources">
+                <span ng-if="source == steps.currentSource">
+                    <i class="material-icons">navigate_next</i>
                     {{source}}
-                </a>
+                </span>
+                <span ng-if="source != steps.currentSource">
+                    <a ui-sref="public.list({
+                        name: fete.key, book: steps.sources.indexOf(source)})">
+                        {{source}}
+                    </a>
+                </span>
             </div>
             </td>
           </tr>
@@ -59,7 +66,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in steps.element.extrait | orderBy: '+sort'">
+                <!--
+                TO FIX: sort by page? what is a page?
+                -->
+                <tr ng-repeat="row in steps.element.extrait[steps.currentSource] | orderBy: '+sort'">
                     <td width="20%">
                     <a ui-sref='public.details({id: row.record})'>
                      <img height=160
@@ -87,71 +97,55 @@
       <div ng-if="steps.data && ! steps.element">
         <table class="table table-hover bordered highlight responsive-table">
             <thead style="font-style: italic;">
-                <tr>
-                    <th ng-repeat="header in steps.headers" valign="top">
-                      <div layout="row" layout-align="center center">
-                        <a href ng-click="steps.toggleSort($index)">
-                            <h5> {{ steps.headers[$index] }} </h5>
-                        </a>
-                        <span ng-if="sortColumn == header">
-                            <i class="material-icons" ng-if="reverse"> arrow_drop_up </i>
-                            <i class="material-icons" ng-if="!reverse"> arrow_drop_down </i>
-                        </span>
-                      </div>
-                    </th>
-                    <th></th>
-                    <th></th>
-                </tr>
+             <tr>
+                <th ng-repeat="header in steps.headers" valign="top">
+                  <div layout="row" layout-align="center center">
+                    <a href ng-click="steps.toggleSort($index)">
+                        <h5> {{ steps.headers[$index] }} </h5>
+                    </a>
+                    <span ng-if="sortColumn == header">
+                        <i class="material-icons" ng-if="reverse"> arrow_drop_up </i>
+                        <i class="material-icons" ng-if="!reverse"> arrow_drop_down </i>
+                    </span>
+                  </div>
+                </th>
+                <th></th>
+                <th></th>
+             </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="(key, fete) in steps.parties | orderBy:sortColumn:reverse ">
-                    <td ng-repeat="header in steps.headers"
-                        ng-class="{
-                         'right-align': (header == 'Lieu'),
-                         'topv-align': true
-                        }"
-                        >
+             <tr ng-repeat="(key, fete) in steps.parties | orderBy:sortColumn:reverse ">
+                <td ng-repeat="header in steps.headers"
+                    ng-class="{'right-align': (header == 'Lieu'),
+                     'topv-align': true}">
 
-                        <span ng-if="header == 'Fete'">
-                            <!-- <a href ng-click="steps.selectElement(fete.key)"> -->
-                            <a href ui-sref="public.list({name: fete.key})">
-                              <div ng-bind-html="fete[header]"></div>
-                            </a>
-                        </span>
+                    <span ng-if="header == 'Fete'">
+                     <!-- <a href ng-click="steps.selectElement(fete.key)"> -->
+                     <!-- <a href ui-sref="public.list({name: fete.key})"> -->
+                      <div ng-bind-html="fete[header]"></div>
+                     <!-- </a> -->
+                    </span>
 
-                        <span ng-if="header == 'Source'">
-                            <div ng-repeat="source in fete[header]">
-                                <span ng-if="fete[header].length < 2">
-                                    {{source}}
-                                </span>
-                                <a ng-if="fete[header].length > 1"
-                                    style="color: blue;"
-                                    href ng-click="steps.searchSource(source)">
-                                    {{source}}
-                                </a>
-                            </div>
-                        </span>
+                    <span ng-if="header == 'Source'">
+                     <div ng-repeat="source in fete[header]">
+                        <a ui-sref="public.list({name: fete.key, book: 0})">
+                            {{source}}
+                        </a>
+                     </div>
+                    </span>
 
-                        <div ng-if="header != 'Fete' && header != 'Source'"
-                            ng-bind-html="fete[header]"></div>
-                    </td>
-                    <td></td>
-<!--
-                    <td> {{fete}} ID:{{key}} </td>
-      <td>
-          <a href ng-click="steps.selectElement(fete.key)"
-              class="waves-effect waves-light btn-floating lime lighten-3">
-            <i class="material-icons blue-grey-text">list</i>
-          </a>
-      </td>
--->
-      <td>
-          <a ui-sref="logged.date({fetepos: key})" class="btn btn-floating">
-            <i class="material-icons" data-position="down"
-                data-tooltip="Modify fete 'date'" tooltipped>edit</i>
-          </a>
-      </td>
-                </tr>
+                    <div ng-if="header != 'Fete' && header != 'Source'"
+                        ng-bind-html="fete[header]"></div>
+                </td>
+                <td></td>
+                <td>
+                  <a ui-sref="logged.date({fetepos: key})"
+                    class="btn btn-floating">
+                    <i class="material-icons" data-position="down"
+                        data-tooltip="Modify fete 'date'" tooltipped>edit</i>
+                  </a>
+                </td>
+            </tr>
             </tbody>
         </table>
       </div>

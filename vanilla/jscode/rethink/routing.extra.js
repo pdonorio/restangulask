@@ -139,9 +139,17 @@ angular.module('web')
 
     //////////////////////
         'public.list': {
-            url: "/list?name",
+            url: "/list?name&book",
             params: {
-                name: '~',
+                name: {
+                    value: '~',
+                    // avoid showing in URL when value is default. cool
+                    squash: true
+                },
+                book: {
+                    value: null,
+                    squash: true
+                }
             },
             views: {
                 "unlogged": {
