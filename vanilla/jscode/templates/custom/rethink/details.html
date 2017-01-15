@@ -55,7 +55,12 @@
             </a>
           </md-content>
           <div flex="20" layout-align="center center" style="text-align:center;">
-              <md-input-container>
+              <div ng-if="!detail.pages">
+                <i>
+                    Date de la page manquante...
+                </i>
+              </div>
+              <md-input-container ng-if="detail.pages">
                 <label>choisissez la page</label>
                 <md-select ng-model="detail.page" md-on-close="detail.changePage()" >
                   <md-optgroup label="pages">

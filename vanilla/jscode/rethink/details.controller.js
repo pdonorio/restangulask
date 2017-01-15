@@ -77,7 +77,7 @@ function DetailsController($scope,
     self.data = null;
     self.toast = null;
     self.texts = {};
-    self.pages = {};
+    self.pages = null;
     self.query = $stateParams.query;
     $scope.theid = $stateParams.id;
     $scope.quote = "'";
