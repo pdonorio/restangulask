@@ -1,10 +1,17 @@
 
-autofocus...
-
-Various:
+bugs:
+☐ sorting
+ ✔ use extrait number @done (17-01-16 08:07)
+ ☐ ensure same score for two sources of the same party
 ☐ search
-   ☐ scroll back to first results
-
+ ☐ autofocus
+   ☐ library?
+     ☐ update material
+     ☐ check issues
+ ☐ scroll back to first results
+   ☐ library?
+      ☐ update
+      ☐ search on g / check issues
 ☐ lexique fixed table header
 ☐ check details list of pages
 /public/details/01f30d57-4007-45a6-9ad8-8b8e52bfa34b
@@ -18,7 +25,7 @@ Date:
  ☐ Fete & date
    ✔ date edit new page for selected fete @done (16-10-21 17:32)
      ☐ all elements
-     ☐ also elastic
+     ☐ also elastic?
 
 Authorized views:
     ☐ no type column in fete list
