@@ -282,9 +282,9 @@ class RethinkDataValues(BaseRethinkResource):
             element['steps'].append(json_req)
 
         from operations.rethink2elastic import single_update
+        # TO FIX: elasticsearch update
         single_update(element)
-# NOTE: TODO elasticsearch update
-# I should use the same id from rethinkdb also to elasticsearch
+        # Check:I should use the same id from rethinkdb also to elasticsearch
 
         # Update rethinkdb element
         query.update(element).run()

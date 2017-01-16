@@ -77,7 +77,8 @@ function DetailsController($scope,
     self.data = null;
     self.toast = null;
     self.texts = {};
-    self.pages = null;
+    self.pages = {}
+    self.pagesElements = 0;
     self.query = $stateParams.query;
     $scope.theid = $stateParams.id;
     $scope.quote = "'";
@@ -190,10 +191,13 @@ function DetailsController($scope,
             {
                 console.log("Pages", out);
                 self.page = null;
-                if (out && out.elements && out.elements > 0)
+                if (out && out.elements && out.elements > 0) {
                     self.pages = out.data;
-                else
+                    self.pagesElements = out.elements;
+                } else {
+                    self.pages = null;
                     return false;
+                }
                 var last = null, current = false, passed_current = false;
                 forEach(self.pages, function(value, key){
                     if (last) {

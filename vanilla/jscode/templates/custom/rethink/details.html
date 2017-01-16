@@ -60,7 +60,7 @@
                     Date de la page manquante...
                 </i>
               </div>
-              <md-input-container ng-if="detail.pages">
+              <md-input-container ng-if="detail.pages && detail.pagesElements > 0">
                 <label>choisissez la page</label>
                 <md-select ng-model="detail.page" md-on-close="detail.changePage()" >
                   <md-optgroup label="pages">

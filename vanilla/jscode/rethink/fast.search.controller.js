@@ -87,7 +87,10 @@ function FastSearchController($scope, $log, $stateParams,
                .then(function (out) {
                   // console.log('TEST', out.data, out.elements);
                   if (out && out.elements) {
-                      self.checkLexique();
+                      // Search for lexique
+                      if (self.searchText.length > 2) {
+                          self.checkLexique();
+                      }
                       self.elements = null;
                       if (out.elements) {
                         success(out.data);
@@ -136,7 +139,7 @@ function FastSearchController($scope, $log, $stateParams,
   }
 
   self.checkLexique = function () {
-    console.log("CHECK LEX");
+    // console.log("CHECK LEX");
     $scope.rows = null;
     $scope.selected = self.searchText;
     $scope.fields = [
