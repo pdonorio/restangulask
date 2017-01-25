@@ -2,9 +2,6 @@
 JS: encodeURIComponent -> Python: urllib.parse.unquote
 
 bugs:
-✔ sorting @done (17-01-16 10:22)
- ✔ use extrait number @done (17-01-16 08:07)
- ✔ ensure same score for two sources of the same party @done (17-01-16 10:22)
 ☐ details
  ☐ wrong order in page list
 http://localhost/public/details/634561c8-8445-426f-a39b-1b99d002bb27

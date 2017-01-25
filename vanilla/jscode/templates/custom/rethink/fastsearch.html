@@ -21,6 +21,7 @@
           placeholder="Recherche"
           md-autofocus
           >
+<!-->TO FIX: autofocus not working anymore... Update with bower?</!-->
         <md-item-template>
           <span layout="row" layout-align="start center">
             <!-- TYPE -->
@@ -42,16 +43,19 @@
         </md-item-template>
       </md-autocomplete>
 
+<!-- COMMENT START -bug -->
     <a layout="row" layout-align="center center"
       style="font-size: 14px;"
       href ng-click="advanced = !advanced">
         <i class="material-icons" ng-if="!advanced">add</i>
         <i class="material-icons" ng-if="advanced">remove</i>
-        Advanced Search
+        Recherche Avancée
     </a>
+<!-- COMMENT END -bug -->
 
  </md-toolbar>
 
+<!-- COMMENT START - bug -->
 <div layout="column" layout-padding>
     <md-card ng-if="advanced">
         <md-card-content class="nospaces"> Filters:
@@ -161,6 +165,7 @@
     </md-card>
 </div>
 
+<!-- COMMENT END - bug -->
 
 <div>
     <div ng-if="search.load" ng-include="root.templateDir + 'loader.html'"></div>
@@ -200,11 +205,24 @@
 </form>
 <!-- TOOLBAR -->
 
+BUSY: {{search.busy}}
+
+<!-- COMMENT START - bug -->
  <md-content layout="row" layout-padding ng-if="!search.load">
+
   <div flex='10'>&nbsp;</div>
+<!--
   <div flex='80' ui-scroll-viewport style=" height: 700px; ">
+    infinite-scroll-use-document-bottom="true"
+    infinite-scroll-disabled='search.busy'
+-->
+  <div flex='80' style="height:700px;"
+    infinite-scroll="myPagingFunction()"
+    infinite-scroll-distance="1">
 
   <table class='highlight'>
+
+<!--
    <thead ng-if="search.elements > 0" >
     <tr>
         <th>Vignette</th>
@@ -212,8 +230,10 @@
         <th>Détails</th>
     </tr>
    </thead>
+-->
    <tbody>
-    <tr ui-scroll="row in datasource" adapter="myadapter">
+    <!-- <tr ui-scroll="row in datasource" adapter="myadapter"> -->
+    <tr ng-repeat="row in extraits">
       <td>
         <a ui-sref='public.details({id: row._id, query:search.searchText})'>
          <div ng-if='!row._source.doc.thumbnail'
@@ -251,9 +271,11 @@
      </tr>
     </tbody>
    </table>
+   <div ng-show='search.busy'>Loading data...</div>
   </div>
  <div flex='10'>&nbsp;</div>
  </md-content>
 
+<!-- COMMENT END - bug -->
 
 </div>

@@ -6,13 +6,13 @@ Some FAST endpoints implementation
 
 from __future__ import absolute_import
 
-# import urllib
+import urllib
 from flask_security import auth_token_required  # , roles_required
 from ..base import ExtendedApiResource
 from ..services.elastic import FastSearch
 from .. import decorators as deck
 
-from beeprint import pp
+# from beeprint import pp
 from ... import get_logger
 
 logger = get_logger(__name__)
@@ -47,7 +47,7 @@ class FastManage(ExtendedApiResource, FastSearch):
         parties = {}
         # pp(self._args)
         # pp(self.get_input_new())
-        extrait = self.get_input_new().get('extrait')
+        extrait = urllib.parse.unquote(self.get_input_new().get('extrait'))
         if extrait is None:
             return self.response(parties)
         ex = self.fast_query('extrait', extrait)

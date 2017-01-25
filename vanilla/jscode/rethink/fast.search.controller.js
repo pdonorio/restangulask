@@ -1,11 +1,14 @@
 (function() {
   'use strict';
 
+// // you might call this after your module initalization
+// angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 250);
+
 angular.module('web')
     .controller('FastSearchController', FastSearchController);
 
     //hotkeys, keyshortcuts,
-function FastSearchController($scope, $log, $stateParams,
+function FastSearchController($scope, $log, $stateParams, $timeout,
     SearchService, $mdBottomSheet)
 {
 
@@ -23,13 +26,17 @@ function FastSearchController($scope, $log, $stateParams,
   SearchService
     .getBaseSearchData().then(function (out) {
         self.base = out;
-        console.log('BASE', out);
         self.advancedLoader = false;
+        console.log('Obtained BASE', out);
     });
 
   self.searchTextChange = function (text) {
     $log.info('Text changed', text, self.searchText);
-    $scope.myadapter.reload(0);
+    // $scope.myadapter.reload(0);
+    $scope.extraits = [];
+    $scope.myPagingFunction();
+
+    // $scope.$emit('list:filtered');
   }
 
   self.clearFilters = function() {
@@ -69,44 +76,93 @@ function FastSearchController($scope, $log, $stateParams,
   ///////////////////////////
   // HANDLE PARAMETER
   // self.searchText = $stateParams.text;
+  //
+  $scope.extraits = [];
+  self.busy = false;
 
+  $scope.myPagingFunction = function() {
+
+    if (self.busy) return;
+    self.busy = true;
+
+    console.log("Infinite scroll activated", $scope.extraits.length);
+    self.filters['searchText'] = self.searchText;
+    localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
+
+    SearchService.getDataFast(self.searchText, $scope.extraits.length+1, self.filters)
+       .then(function (out) {
+          // console.log('TEST', out.data, out.elements);
+          if (out && out.elements) {
+              // Search for lexique
+              if (self.searchText.length > 2) {
+                  self.checkLexique();
+              }
+              self.elements = null;
+              if (out.elements) {
+                self.elements = out.elements;
+                console.log("Received", out.data);
+                forEach(out.data, function(element, index) {
+                    $scope.extraits.push(element);
+                });
+              }
+          } else {
+              self.elements = $scope.extraits.length;
+          }
+          self.busy = false;
+      });
+    // // NOT WORKING?
+    // $scope.$emit('list:filtered');
+  }
+
+//////////////////
+// TO BE REMOVED
   $scope.myadapter = {};
   $scope.datasource = {
     get : function (index, count, success)
     {
-// do something with filters?
+          // count = 7;
           $scope.rows = null;
           self.filters['searchText'] = self.searchText;
-          self.load = true;
           localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
           console.log("GET ME:", index, count, self.searchText, self.filters);
 
-          var result = [];
-          if (index > 0) {
-              SearchService.getDataFast(self.searchText, index, self.filters)
-               .then(function (out) {
-                  // console.log('TEST', out.data, out.elements);
-                  if (out && out.elements) {
-                      // Search for lexique
-                      if (self.searchText.length > 2) {
-                          self.checkLexique();
-                      }
-                      self.elements = null;
-                      if (out.elements) {
-                        success(out.data);
-                        self.elements = out.elements;
-                      }
-                  } else {
-                      self.elements = 0;
-                  }
-              });
-          } else {
-            console.log("Empty search");
-            success([]);
+          index--;
+          if (index < 0) {
+            count = count + index;
+            index = 0;
+            if (count <= 0) {
+                console.log("UHM", index, count);
+                success([]);
+                return $timeout(function(){}, 100);
+            }
           }
+
+          console.log("DO SOMETHING", index, count);
+
+          self.load = true;
+          SearchService.getDataFast(self.searchText, index, self.filters)
+           .then(function (out) {
+              // console.log('TEST', out.data, out.elements);
+              if (out && out.elements) {
+                  // Search for lexique
+                  if (self.searchText.length > 2) {
+                      self.checkLexique();
+                  }
+                  self.elements = null;
+                  if (out.elements) {
+                    success(out.data);
+                    self.elements = out.elements;
+                  }
+              } else {
+                  self.elements = 0;
+              }
+          });
           self.load = false;
+          return;
     }
   }
+// TO BE REMOVED
+//////////////////
 
   self.querySearch = function (text) {
 
