@@ -1,8 +1,13 @@
 
+JS: encodeURIComponent -> Python: urllib.parse.unquote
+
 bugs:
 ✔ sorting @done (17-01-16 10:22)
  ✔ use extrait number @done (17-01-16 08:07)
  ✔ ensure same score for two sources of the same party @done (17-01-16 10:22)
+☐ details
+ ☐ wrong order in page list
+http://localhost/public/details/634561c8-8445-426f-a39b-1b99d002bb27
 ☐ search
  ☐ autofocus
    ☐ library?
@@ -14,9 +19,8 @@ bugs:
       ☐ search on g / check issues
  ☐ enter with non complete word in search?
  ☐ suggestion score...
-☐ details
- ☐ wrong order in page list
-http://localhost/public/details/634561c8-8445-426f-a39b-1b99d002bb27
+☐ a better update on leaseweb
+  (which takes care of restarting only backend after update)
 ☐ lexique fixed table header
 ☐ check details list of pages
 /public/details/01f30d57-4007-45a6-9ad8-8b8e52bfa34b

@@ -6,8 +6,8 @@ Some FAST endpoints implementation
 
 from __future__ import absolute_import
 
-import urllib
-from flask_security import auth_token_required, roles_required
+# import urllib
+from flask_security import auth_token_required  # , roles_required
 from ..base import ExtendedApiResource
 from ..services.elastic import FastSearch
 from .. import decorators as deck
@@ -31,28 +31,41 @@ DATE_EKEY = 'end_date'
 
 class FastManage(ExtendedApiResource, FastSearch):
 
+    # @deck.add_endpoint_parameter(name='field', ptype=str, required=True)
+    # @deck.add_endpoint_parameter(name='value', ptype=str, required=True)
+    @deck.add_endpoint_parameter(name='extrait')
+    # @deck.add_endpoint_parameter(name='extrait', ptype=str, required=True)
     @deck.apimethod
-    @deck.add_endpoint_parameter(name='field', ptype=str, required=True)
-    @deck.add_endpoint_parameter(name='value', ptype=str, required=True)
-    @deck.add_endpoint_parameter(name='current', ptype=str, required=True)
     @auth_token_required
     def get(self):
+        """
+        NOTE: this method is not generic anymore
 
-        tmp = self.get_input_new()
-        val = urllib.parse.unquote(tmp['value'])
-        # print("TEST", val)
-        data = self.fast_query(tmp['field'], val)
+        I made it work only to recover sources pages
+        """
 
         parties = {}
+        # pp(self._args)
+        # pp(self.get_input_new())
+        extrait = self.get_input_new().get('extrait')
+        if extrait is None:
+            return self.response(parties)
+        ex = self.fast_query('extrait', extrait)
+        source = ex.pop()['_source']['source']
+        data = self.fast_query('source', source)
+
         for element in data:
+            # from beeprint import pp
+            # pp(element)
             s = element['_source']
-            # print(s['sort_number'], s['extrait'])
-            key = s['sort_number']
+            # print(s['sort_number'], s['extrait_number'])
+            # key = s['sort_number']
+            key = s['extrait_number']
             parties[key] = {
                 'id': element['_id'],
                 'name': s['extrait'],
                 'page': s['page'],
-                'current': s['extrait'] == self._args['current']
+                'current': s['extrait'] == extrait
             }
         return self.response(parties)
 
@@ -67,7 +80,6 @@ class FastManage(ExtendedApiResource, FastSearch):
 class FastDocs(ExtendedApiResource, FastSearch):
     """ A faster search on key values of the database documents """
 
-    @deck.apimethod
     @deck.add_endpoint_parameter(name=PARTY_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=SOURCE_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=PLACE_KEY, ptype=str)
@@ -77,6 +89,7 @@ class FastDocs(ExtendedApiResource, FastSearch):
     @deck.add_endpoint_parameter(name=MULTI3_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=DATE_SKEY, ptype=str)
     @deck.add_endpoint_parameter(name=DATE_EKEY, ptype=str)
+    @deck.apimethod
     @auth_token_required
     def get(self, searchterms=None):
 

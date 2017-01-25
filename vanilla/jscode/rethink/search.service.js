@@ -194,13 +194,14 @@ function SearchService($log, api) {
 
     // self.recoverPages = function(fete, current) {
     self.recoverPages = function(source, current) {
+        // return api.apiCall(self.endpoints.fastmanage, 'GET', filters);
         return self.doQuery(self.endpoints.fastmanage,
             {
-                field: 'source',
-                value: encodeURIComponent(source),
+                // field: 'source',
+                // value: encodeURIComponent(source),
+                extrait: encodeURIComponent(current),
                 // field: 'fete',
                 // value: fete,
-                current: current,
             });
     }
 
