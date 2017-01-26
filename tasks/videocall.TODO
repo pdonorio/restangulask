@@ -1,24 +1,17 @@
 
 bugs:
-UPDATE BOWER!
-
- ✔ scroll back to first results @done (17-01-26 13:39)
-   ✔ library? @done (17-01-26 00:34)
-      ✔ update @done (17-01-26 00:34)
-      ✔ search on g / check issues @done (17-01-26 00:34)
-    ✘ still not working @cancelled (17-01-26 13:39)
-    ✔ material solved it @done (17-01-26 13:39)
 
 ☐ highlight
 ☐ search
  ☐ enter with non complete word in search?
  ☐ suggestion score...
 
-☐ a better update script on leaseweb
- ☐ download code
- ☐ pull new images
+☐ a better update script on leaseweb @important
+ ✔ download code @done (17-01-26 15:38)
+ ✔ pull new images @done (17-01-26 15:38)
  ☐ update bower
  ☐ restart only backend if possible
+☐ test production @important
 
  ☐ autofocus
    ☐ library?
