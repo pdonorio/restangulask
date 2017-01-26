@@ -1,5 +1,5 @@
 .virtualRepeatInfiniteScroll #vertical-container {
-  height: 550px;
+  height: 700px;
   width: 100%;
   max-width: 800px;
 }
@@ -42,6 +42,14 @@ md-tabs-canvas {
 
 md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
     min-height: 100%;
+}
+
+md-list .highlight {
+    color: black;
+    background: #eee;
+    border: 1px solid red;
+    border-radius: 2px;
+    margin: -1px;
 }
 
 .highlightedText {

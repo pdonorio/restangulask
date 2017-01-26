@@ -19,8 +19,11 @@
           md-items="item in search.querySearch(search.searchText)"
           md-item-text="item._source.suggest"
           md-menu-class="autocomplete-custom-template"
-          md-delay="300" md-select-on-match="false"
+          md-delay="400"
+          md-select-on-match="true"
+          md-match-case-insensitive="true"
           placeholder="Recherche"
+          md-require-match="false"
           md-autofocus
           >
 <!-->TO FIX: autofocus not working anymore... Update with bower?</!-->
@@ -207,26 +210,18 @@
 </form>
 <!-- TOOLBAR -->
 
-<!--
-SPAN: <span
-  md-highlight-text="searchText"
-  md-highlight-flags="i"
->
-{{search.searchText}}
-</span>
--->
-
 <!-- COMMENT START - bug -->
 <md-content
     class="virtualRepeatInfiniteScroll"
-    ng-if="!search.load"
     flex id="inf-wrapper"
     layout="row" layout-padding layout-align="center center"
     >
     <div flex="10"></div>
     <div flex="auto">
 
-<md-virtual-repeat-container id="vertical-container">
+<md-virtual-repeat-container
+    ng-hide="search.load || (check && search.elements < 1)"
+    id="vertical-container">
   <md-list class="activity-feed"
     md-virtual-repeat="item in search.extraitsLoop"
     md-on-demand
@@ -234,7 +229,9 @@ SPAN: <span
 
     <!-- {{search.extraits[item]._source.extrait}} -->
 
-    <md-list-item>
+    <md-list-item
+    ng-if="search.elements > 0"
+    >
 
         <!-- {{item}} : {{row._source.extrait}} -->
 

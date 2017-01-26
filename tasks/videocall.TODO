@@ -9,8 +9,9 @@ bugs:
 ☐ a better update script on leaseweb @important
  ✔ download code @done (17-01-26 15:38)
  ✔ pull new images @done (17-01-26 15:38)
- ☐ update bower
+ ✔ update bower @done (17-01-26 16:39)
  ☐ restart only backend if possible
+☐ update image oldflask
 ☐ test production @important
 
  ☐ autofocus

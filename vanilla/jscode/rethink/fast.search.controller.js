@@ -14,6 +14,7 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
 
   // INIT controller
   var self = this;
+  self.elements = null;
   $log.warn("New FAST search controller");
   $mdBottomSheet.hide("search");
 
@@ -25,9 +26,14 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
 
   SearchService
     .getBaseSearchData().then(function (out) {
-        self.base = out;
         self.advancedLoader = false;
-        console.log('Obtained BASE', out);
+        console.log('Base', out);
+        if (out) {
+          self.base = out;
+        } else {
+          console.log("UHM");
+          self.elements = 0;
+        }
     });
 
   self.searchTextChange = function (text) {
@@ -64,7 +70,10 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
   }
 
   $scope.advanced = false;
-  var filtersKey = ['fete', 'source', 'lieu', 'manuscrits', 'apparato', 'actions', 'temps'];
+  var filtersKey = [
+    'fete', 'source', 'lieu', 'manuscrits',
+    'apparato', 'actions', 'temps'
+  ];
   // local storage / cookie
   self.filters = JSON.parse(localStorage.getItem(self.cookieKey));
 
@@ -79,7 +88,6 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
     self.filters = {};
   }
 
-  self.elements = null;
   self.load = false;
 
   ///////////////////////////
@@ -91,13 +99,16 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
   self.extraitsLoop = {
     numLoaded_: 0,
     toLoad_: 0,
+    hold_: false,
+    stop_: false,
 
     getItemAtIndex: function(index) {
-      // console.log("MD VR: Getting", index);
-      if (index > this.numLoaded_) {
-        this.fetchMoreItems_(index, this);
-        // console.log("MD VR: loaded", this.numLoaded_, this.toLoad_);
-        return null;
+      if (!this.hold_) {
+          // console.log("get item at index", index);
+          if (index > this.numLoaded_) {
+            this.fetchMoreItems_(index, this);
+            return null;
+          }
       }
       return index;
     },
@@ -105,45 +116,74 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
     // For infinite scroll behavior, we always return a slightly higher
     // number than the previously loaded items.
     getLength: function() {
-      return this.numLoaded_ + 5;
+      if (this.stop_ || this.hold_) {
+        return this.numLoaded_;
+      console.log("PAUSE length", this.numLoaded_);
+      } else {
+      // console.log("Get length", this.numLoaded_);
+        return this.numLoaded_ + 5;
+      }
     },
 
     refresh : function() {
+        $scope.check = true;
+        self.load = true;
+        this.stop_ = false;
+        self.extraits = [];
         this.toLoad_ = 0;
         this.numLoaded_ = 0;
-        self.extraits = [];
         // this.items = [];
     },
 
     fetchMoreItems_: function(index, reference) {
 
-        if (this.toLoad_ < index) {
-          console.log("MD VR: More", index);
+        reference.hold_ = true;
+        // if (this.toLoad_ < index) {
+          // console.log("MD VR: More", index);
           this.toLoad_ += 10;
 
-          self.loadMore(this.numLoaded_).then(function(elements) {
-            console.log("Obtained", elements);
-            reference.numLoaded_ = reference.toLoad_;
+          self.loadMore(reference).then(function(elements) {
+            var loaded = angular.copy(reference.numLoaded_);
+            var toload = angular.copy(reference.toLoad_);
+            console.log("Obtained", elements, loaded, toload);
+
+            if (elements < reference.toLoad_) {
+                reference.numLoaded_ = elements;
+                console.log("Should stop");
+                reference.stop_ = true;
+            } else {
+                reference.numLoaded_ = reference.toLoad_;
+            }
+            self.load = false;
+            reference.hold_ = false;
+            // console.log("LOADED", reference.numLoaded_, reference.toLoad_);
           });
 
-        }
+        // }
 
     }
   };
 
-  self.loadMore = function(start) {
+  $scope.check = false;
+  self.loadMore = function(reference) {
 
+    reference.hold_ = true;
     // Note: loading 10 at the time
 
     self.filters['searchText'] = self.searchText;
     localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
+    var start = reference.numLoaded_;
+    if (start > 0)
+        start++;
 
+    console.log("INDEX", start);
     return SearchService.getDataFast(
       self.searchText, start, self.filters).then(
         function (out) {
           // console.log('Data fast:', out.data, out.elements);
           if (out && out.elements) {
               self.elements = null;
+              $scope.check = false;
 
               // // Search for lexique
               // if (self.searchText.length > 2) {
@@ -153,11 +193,13 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
               if (out.elements) {
                 self.elements = out.elements;
                 forEach(out.data, function(element, index) {
+                    console.log("push", element._source.extrait)
                     self.extraits.push(element);
                 });
                 console.log("Received", out.data);
               }
           } else {
+              $scope.check = true;
               self.elements = self.extraits.length;
           }
           console.log("Total", self.extraits);
