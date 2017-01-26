@@ -1,13 +1,4 @@
 
-# searchindex:
-#   ports:
-#     - 9200:9200
-
-# rethinkdb:
-#   # Web admin
-#   ports:
-#     - 7778:8080
-
 #################################
 # PRODUCTION performance
 
@@ -43,3 +34,12 @@ customfe:
 #   command: sleep infinity
 # #   volumes_from:
 # #     - uploadsdata
+
+# searchindex:
+#   ports:
+#     - 9200:9200
+
+# rethinkdb:
+#   # Web admin
+#   ports:
+#     - 7778:8080
