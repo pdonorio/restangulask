@@ -1,26 +1,33 @@
 
-JS: encodeURIComponent -> Python: urllib.parse.unquote
-
 bugs:
-☐ details
- ☐ wrong order in page list
-http://localhost/public/details/634561c8-8445-426f-a39b-1b99d002bb27
+UPDATE BOWER!
+
+ ✔ scroll back to first results @done (17-01-26 13:39)
+   ✔ library? @done (17-01-26 00:34)
+      ✔ update @done (17-01-26 00:34)
+      ✔ search on g / check issues @done (17-01-26 00:34)
+    ✘ still not working @cancelled (17-01-26 13:39)
+    ✔ material solved it @done (17-01-26 13:39)
+
+☐ highlight
 ☐ search
+ ☐ enter with non complete word in search?
+ ☐ suggestion score...
+
+☐ a better update script on leaseweb
+ ☐ download code
+ ☐ pull new images
+ ☐ update bower
+ ☐ restart only backend if possible
+
  ☐ autofocus
    ☐ library?
      ☐ update material
      ☐ check issues
- ☐ scroll back to first results
-   ☐ library?
-      ☐ update
-      ☐ search on g / check issues
- ☐ enter with non complete word in search?
- ☐ suggestion score...
-☐ a better update on leaseweb
-  (which takes care of restarting only backend after update)
-☐ lexique fixed table header
+
 ☐ check details list of pages
 /public/details/01f30d57-4007-45a6-9ad8-8b8e52bfa34b
+☐ lexique fixed table header
 ☐ changing image in details
    ☐ does not find the old one?
    ☐ submit

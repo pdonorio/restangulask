@@ -32,11 +32,20 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
 
   self.searchTextChange = function (text) {
     $log.info('Text changed', text, self.searchText);
-    // $scope.myadapter.reload(0);
-    $scope.extraits = [];
-    $scope.myPagingFunction();
 
+    // RELOAD?
+
+    // VERY OLD
+    // $scope.myadapter.reload(0);
+
+    // OLD
+    // $scope.extraits = [];
+    // $scope.myPagingFunction();
     // $scope.$emit('list:filtered');
+
+    // NEW
+    self.extraitsLoop.refresh();
+    // self.loadMore(0);
   }
 
   self.clearFilters = function() {
@@ -76,93 +85,86 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
   ///////////////////////////
   // HANDLE PARAMETER
   // self.searchText = $stateParams.text;
-  //
-  $scope.extraits = [];
-  self.busy = false;
 
-  $scope.myPagingFunction = function() {
+  ///////////////////////////
+  self.extraits = []
+  self.extraitsLoop = {
+    numLoaded_: 0,
+    toLoad_: 0,
 
-    if (self.busy) return;
-    self.busy = true;
+    getItemAtIndex: function(index) {
+      // console.log("MD VR: Getting", index);
+      if (index > this.numLoaded_) {
+        this.fetchMoreItems_(index, this);
+        // console.log("MD VR: loaded", this.numLoaded_, this.toLoad_);
+        return null;
+      }
+      return index;
+    },
 
-    console.log("Infinite scroll activated", $scope.extraits.length);
+    // For infinite scroll behavior, we always return a slightly higher
+    // number than the previously loaded items.
+    getLength: function() {
+      return this.numLoaded_ + 5;
+    },
+
+    refresh : function() {
+        this.toLoad_ = 0;
+        this.numLoaded_ = 0;
+        self.extraits = [];
+        // this.items = [];
+    },
+
+    fetchMoreItems_: function(index, reference) {
+
+        if (this.toLoad_ < index) {
+          console.log("MD VR: More", index);
+          this.toLoad_ += 10;
+
+          self.loadMore(this.numLoaded_).then(function(elements) {
+            console.log("Obtained", elements);
+            reference.numLoaded_ = reference.toLoad_;
+          });
+
+        }
+
+    }
+  };
+
+  self.loadMore = function(start) {
+
+    // Note: loading 10 at the time
+
     self.filters['searchText'] = self.searchText;
     localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
 
-    SearchService.getDataFast(self.searchText, $scope.extraits.length+1, self.filters)
-       .then(function (out) {
-          // console.log('TEST', out.data, out.elements);
+    return SearchService.getDataFast(
+      self.searchText, start, self.filters).then(
+        function (out) {
+          // console.log('Data fast:', out.data, out.elements);
           if (out && out.elements) {
-              // Search for lexique
-              if (self.searchText.length > 2) {
-                  self.checkLexique();
-              }
               self.elements = null;
+
+              // // Search for lexique
+              // if (self.searchText.length > 2) {
+              //     self.checkLexique();
+              // }
+
               if (out.elements) {
                 self.elements = out.elements;
-                console.log("Received", out.data);
                 forEach(out.data, function(element, index) {
-                    $scope.extraits.push(element);
+                    self.extraits.push(element);
                 });
+                console.log("Received", out.data);
               }
           } else {
-              self.elements = $scope.extraits.length;
+              self.elements = self.extraits.length;
           }
-          self.busy = false;
-      });
-    // // NOT WORKING?
-    // $scope.$emit('list:filtered');
+          console.log("Total", self.extraits);
+          return self.elements;
+        });
   }
 
-//////////////////
-// TO BE REMOVED
-  $scope.myadapter = {};
-  $scope.datasource = {
-    get : function (index, count, success)
-    {
-          // count = 7;
-          $scope.rows = null;
-          self.filters['searchText'] = self.searchText;
-          localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
-          console.log("GET ME:", index, count, self.searchText, self.filters);
-
-          index--;
-          if (index < 0) {
-            count = count + index;
-            index = 0;
-            if (count <= 0) {
-                console.log("UHM", index, count);
-                success([]);
-                return $timeout(function(){}, 100);
-            }
-          }
-
-          console.log("DO SOMETHING", index, count);
-
-          self.load = true;
-          SearchService.getDataFast(self.searchText, index, self.filters)
-           .then(function (out) {
-              // console.log('TEST', out.data, out.elements);
-              if (out && out.elements) {
-                  // Search for lexique
-                  if (self.searchText.length > 2) {
-                      self.checkLexique();
-                  }
-                  self.elements = null;
-                  if (out.elements) {
-                    success(out.data);
-                    self.elements = out.elements;
-                  }
-              } else {
-                  self.elements = 0;
-              }
-          });
-          self.load = false;
-          return;
-    }
-  }
-// TO BE REMOVED
-//////////////////
 
   self.querySearch = function (text) {
 

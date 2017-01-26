@@ -48,7 +48,7 @@ console.log('POST');
         'ui.tinymce',
 // infinite (bi-directional) scrolling 'angular-ui-scroll'
         // 'ui.scroll',
-        'infinite-scroll'
+        // 'infinite-scroll'
 
 /* Custom end */
 //////////////////////////////////////

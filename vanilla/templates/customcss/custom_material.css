@@ -1,3 +1,32 @@
+.virtualRepeatInfiniteScroll #vertical-container {
+  height: 550px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.virtualRepeatInfiniteScroll .repeated-item {
+
+/*
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+*/
+  height: 40px;
+  /*padding-top: 10px;*/
+}
+
+.virtualRepeatInfiniteScroll md-content {
+  margin: 16px;
+}
+
+/*
+.virtualRepeatInfiniteScroll md-virtual-repeat-container {
+  border: solid 1px grey;
+}
+*/
+
+.virtualRepeatInfiniteScroll .md-virtual-repeat-container .md-virtual-repeat-offsetter div {
+  padding-left: 16px;
+}
 
 /*
 .diff a:link {color:#039be5;}
@@ -36,6 +65,21 @@ md-input-container .md-errors-spacer {
     padding-bottom: 0px;
     padding-right: 3px;
     padding-left: 3px;
+}
+
+.minextrait {
+    min-width: 200px;
+}
+
+.nobox {
+    box-shadow: 0 0 0 0;
+}
+
+.searchthumb {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 130px;
+    height: 160px;
 }
 
 /*

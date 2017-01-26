@@ -6,7 +6,9 @@
 <form ng-submit="$event.preventDefault()"
     layout="row" layout-fill layout-wrap layout-padding layout-align="center center">
  <div flex="70" layout="column">
- <h4> Resultats de la <i>Recherche</i> </h4>
+
+ <!-- <h4> Resultats de la <i>Recherche</i> </h4> -->
+
  <md-toolbar class="white black-text" layout="row" layout-padding flex >
       <md-autocomplete flex
           md-min-length="1"
@@ -205,76 +207,89 @@
 </form>
 <!-- TOOLBAR -->
 
-BUSY: {{search.busy}}
+<!--
+SPAN: <span
+  md-highlight-text="searchText"
+  md-highlight-flags="i"
+>
+{{search.searchText}}
+</span>
+-->
 
 <!-- COMMENT START - bug -->
- <md-content layout="row" layout-padding ng-if="!search.load">
+<md-content
+    class="virtualRepeatInfiniteScroll"
+    ng-if="!search.load"
+    flex id="inf-wrapper"
+    layout="row" layout-padding layout-align="center center"
+    >
+    <div flex="10"></div>
+    <div flex="auto">
 
-  <div flex='10'>&nbsp;</div>
-<!--
-  <div flex='80' ui-scroll-viewport style=" height: 700px; ">
-    infinite-scroll-use-document-bottom="true"
-    infinite-scroll-disabled='search.busy'
--->
-  <div flex='80' style="height:700px;"
-    infinite-scroll="myPagingFunction()"
-    infinite-scroll-distance="1">
+<md-virtual-repeat-container id="vertical-container">
+  <md-list class="activity-feed"
+    md-virtual-repeat="item in search.extraitsLoop"
+    md-on-demand
+    class="repeated-item" flex>
 
-  <table class='highlight'>
+    <!-- {{search.extraits[item]._source.extrait}} -->
 
-<!--
-   <thead ng-if="search.elements > 0" >
-    <tr>
-        <th>Vignette</th>
-        <th>Extrait</th>
-        <th>Détails</th>
-    </tr>
-   </thead>
--->
-   <tbody>
-    <!-- <tr ui-scroll="row in datasource" adapter="myadapter"> -->
-    <tr ng-repeat="row in extraits">
-      <td>
-        <a ui-sref='public.details({id: row._id, query:search.searchText})'>
-         <div ng-if='!row._source.doc.thumbnail'
-            style=" background-repeat: no-repeat; background-size: 100% 100%;
-                width: 130px; height: 160px;"
+    <md-list-item>
+
+        <!-- {{item}} : {{row._source.extrait}} -->
+
+        <md-card>
+         <a ui-sref='public.details({id: search.extraits[item]._id, query:search.searchText})'>
+          <div ng-if='!search.extraits[item]._source.doc.thumbnail'
+            class="searchthumb"
             ng-style="{'background-image':'url(http://placehold.it/110x160)'}"></div>
-         <div ng-if='row._source.doc.thumbnail'
-            style=" background-repeat: no-repeat; background-size: 100% 100%;
-                width: 130px; height: 160px;"
-            ng-style="{'background-image':'url('+ row._source.doc.thumbnail +')'}"></div>
-        </a>
-      </td>
-      <td style="width: 200px;">
-            <strong>
-              <span
-                md-highlight-text="search.searchText"
-                md-highlight-flags="^i">{{row._source.extrait}}</span>
-            </strong> </td>
-      <td>
+          <div ng-if='search.extraits[item]._source.doc.thumbnail'
+            class="searchthumb"
+            ng-style="{'background-image':'url('+ search.extraits[item]._source.doc.thumbnail +')'}"></div>
+         </a>
+        </md-card>
+        <md-card class="nobox">
+            <md-card-content class="minextrait"
+                layout="column" layout-align="center center">
+                <p>
+                <strong>
+                  <span
+                    md-highlight-text="search.searchText"
+                    md-highlight-flags="^i">{{search.extraits[item]._source.extrait}}</span>
+                </strong>
+                </p>
+            </md-card-content>
+        </md-card>
+        <md-card>
+            <md-card-content>
+             <p>
         <i>Source</i>:
         <span md-highlight-text="search.searchText"
-            md-highlight-flags="^i">{{row._source.source}}</span>
+            md-highlight-flags="^i">{{search.extraits[item]._source.source}}</span>
         <br>
         <i>Fete</i>:
         <span md-highlight-text="search.searchText"
-            md-highlight-flags="^i">{{row._source.fete}}</span>
+            md-highlight-flags="^i">{{search.extraits[item]._source.fete}}</span>
         <span>
-            <br> <i>Lieu</i>: {{row._source.lieu}}
+            <br> <i>Lieu</i>: {{search.extraits[item]._source.lieu}}
         </span>
-        <span ng-if="row._source.date">
-            <br> <i>Date</i>: {{row._source.date}}
+        <span ng-if="search.extraits[item]._source.date">
+            <br> <i>Date</i>: {{search.extraits[item]._source.date}}
         </span>
         <br>
-      </td>
-     </tr>
-    </tbody>
-   </table>
-   <div ng-show='search.busy'>Loading data...</div>
-  </div>
- <div flex='10'>&nbsp;</div>
- </md-content>
+
+             </p>
+            </md-card-content>
+        </md-card>
+    </md-list-item>
+  </md-list>
+</md-virtual-repeat-container>
+
+
+    </div>
+</md-content>
+
+   <!-- <md-list-item ng-show='search.busy'>Loading data...</md-list-item> -->
 
 <!-- COMMENT END - bug -->
 
