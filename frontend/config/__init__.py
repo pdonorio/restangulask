@@ -5,8 +5,8 @@
 import os
 import logging
 from logging.config import fileConfig
-# import json
-import commentjson as json
+# import commentjson as json
+import json
 
 # Default. Will be changed inside the different configurations.
 DEBUG = True
@@ -48,10 +48,12 @@ def read_files(path):
         'frameworks',
         # Choose the blueprint to work with
         'blueprints/js_init',
-        ]
+    ]
+
     myjson = {}
     for section in sections:
         filename = os.path.join(CONFIG_PATH, path, section + "." + JSON_EXT)
+        # print("TEST", filename)
         with open(filename) as f:
             name = section.split('/')[0]
             myjson[name] = json.load(f)
@@ -59,6 +61,7 @@ def read_files(path):
         # if section == 'frameworks':
         #     print(myjson[section])
     return myjson
+
 
 # Use the function
 user_config = read_files(PATH)

@@ -59,7 +59,8 @@ htmlfiles:
 frontend:
   extends:
     service: conf
-  image: rapydo/frontend
+  image: pdonorio/oldflask
+  # image: rapydo/frontend
   hostname: frontend
   working_dir: /data/frontend
   volumes:
