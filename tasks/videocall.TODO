@@ -1,15 +1,15 @@
 
 1:
 FULL UPDATE
-☐ a better update script on leaseweb
+✔ a better update script on leaseweb @done (17-01-27 11:44)
  ✔ download code @done (17-01-26 15:38)
  ✔ pull new images @done (17-01-26 15:38)
  ✔ update bower @done (17-01-26 16:39)
  ✔ restart only backend if possible @done (17-01-27 10:25)
  ✔ python3.6 operations.py @done (17-01-27 10:25)
-☐ test production @important
+✔ test production @important @done (17-01-27 11:44)
   ✔ test lexique too @done (17-01-27 10:26)
-  ☐ pull images
+  ✔ pull images @done (17-01-27 11:44)
 
 2:
 ☐ search
