@@ -40,7 +40,6 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
         if (out) {
           self.base = out;
         } else {
-          console.log("UHM");
           self.elements = 0;
         }
     });
@@ -158,7 +157,7 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
       self.filters = {};
       localStorage.removeItem(self.cookieKey);
       $stateParams.text = '';
-      self.searchText = null;
+      self.searchText = "";
       // RELOAD
       self.extraits.refresh();
   }
