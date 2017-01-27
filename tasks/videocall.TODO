@@ -1,32 +1,31 @@
 
 1:
-☐ a better update script on leaseweb @important
+FULL UPDATE
+☐ a better update script on leaseweb
  ✔ download code @done (17-01-26 15:38)
  ✔ pull new images @done (17-01-26 15:38)
  ✔ update bower @done (17-01-26 16:39)
- ☐ restart only backend if possible
-☐ update image oldflask
+ ✔ restart only backend if possible @done (17-01-27 10:25)
+ ✔ python3.6 operations.py @done (17-01-27 10:25)
 ☐ test production @important
+  ✔ test lexique too @done (17-01-27 10:26)
+  ☐ pull images
 
 2:
-✔ highlight @done (17-01-27 00:03)
- ✔ not starting from the beginning? @done (17-01-27 07:31)
- ✔ scroll @done (17-01-27 07:23)
-   ✔ ng-hide on autocomplete text change/loading @uhm @done (17-01-27 07:23)
 ☐ search
- ✘ enter with non complete word in search? @cancelled (17-01-27 00:04)
+ ☐ some thumbnails are missing
+   ☐ rigenerate?
  ☐ suggestion score
 
-3:
- ☐ autofocus
-   ✘ library? @cancelled (17-01-27 00:05)
-     ✔ update material @done (17-01-27 00:04)
-     ☐ check issues
-
 other bugs:
-☐ check details list of pages
-/public/details/01f30d57-4007-45a6-9ad8-8b8e52bfa34b
-☐ lexique fixed table header
+☐ autofocus
+ ☐ check github issues?
+☐ details
+ ☐ highligth with material, add class into CSS
+ ✔ check details list of pages @done (17-01-27 10:25)
+☐ lexique
+ ☐ split on commas
+ ☐ fixed table header
 ☐ changing image in details
    ☐ does not find the old one?
    ☐ submit
