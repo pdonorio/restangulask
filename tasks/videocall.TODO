@@ -1,6 +1,5 @@
 
-bugs:
-
+1:
 ☐ a better update script on leaseweb @important
  ✔ download code @done (17-01-26 15:38)
  ✔ pull new images @done (17-01-26 15:38)
@@ -9,18 +8,22 @@ bugs:
 ☐ update image oldflask
 ☐ test production @important
 
+2:
 ✔ highlight @done (17-01-27 00:03)
+ ✔ not starting from the beginning? @done (17-01-27 07:31)
  ✔ scroll @done (17-01-27 07:23)
    ✔ ng-hide on autocomplete text change/loading @uhm @done (17-01-27 07:23)
 ☐ search
  ✘ enter with non complete word in search? @cancelled (17-01-27 00:04)
  ☐ suggestion score
 
+3:
  ☐ autofocus
    ✘ library? @cancelled (17-01-27 00:05)
      ✔ update material @done (17-01-27 00:04)
      ☐ check issues
 
+other bugs:
 ☐ check details list of pages
 /public/details/01f30d57-4007-45a6-9ad8-8b8e52bfa34b
 ☐ lexique fixed table header

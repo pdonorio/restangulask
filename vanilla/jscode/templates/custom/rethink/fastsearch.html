@@ -7,8 +7,6 @@
     layout="row" layout-fill layout-wrap layout-padding layout-align="center center">
  <div flex="70" layout="column">
 
- <!-- <h4> Resultats de la <i>Recherche</i> </h4> -->
-
  <md-toolbar class="white black-text" layout="row" layout-padding flex >
       <md-autocomplete flex
           md-min-length="1"
@@ -24,9 +22,9 @@
           md-match-case-insensitive="true"
           placeholder="Recherche"
           md-require-match="false"
-          md-autofocus
+          md-autofocus autofocus
           >
-<!-->TO FIX: autofocus not working anymore... Update with bower?</!-->
+<!-- TO FIX: autofocus not working anymore -->
         <md-item-template>
           <span layout="row" layout-align="start center">
             <!-- TYPE -->
@@ -222,6 +220,8 @@
 <md-virtual-repeat-container
     ng-hide="search.extraits.hold"
     id="vertical-container">
+
+  <h5>Resultats de la recherche:</h5>
   <md-list class="activity-feed"
     md-virtual-repeat="item in search.extraits"
     md-on-demand
@@ -246,7 +246,7 @@
                 <strong>
                   <span
                     md-highlight-text="search.searchText"
-                    md-highlight-flags="^i">{{item._source.extrait}}</span>
+                    md-highlight-flags="i">{{item._source.extrait}}</span>
                 </strong>
                 </p>
             </md-card-content>
@@ -256,14 +256,13 @@
              <p>
         <i>Source</i>:
         <span md-highlight-text="search.searchText"
-            md-highlight-flags="^i">{{item._source.source}}</span>
-        <br>
-        <i>Fete</i>:
+            md-highlight-flags="i">{{item._source.source}}</span>
+        <br> <i>Fete</i>:
         <span md-highlight-text="search.searchText"
-            md-highlight-flags="^i">{{item._source.fete}}</span>
-        <span>
-            <br> <i>Lieu</i>: {{item._source.lieu}}
-        </span>
+            md-highlight-flags="i">{{item._source.fete}}</span>
+        <br> <i>Lieu</i>:
+        <span md-highlight-text="search.searchText"
+            md-highlight-flags="i">{{item._source.lieu}}</span>
         <span ng-if="item._source.date">
             <br> <i>Date</i>: {{item._source.date}}
         </span>
@@ -280,8 +279,6 @@
 
     </div>
 </md-content>
-
-   <!-- <md-list-item ng-show='search.busy'>Loading data...</md-list-item> -->
 
 <!-- COMMENT END - bug -->
 
