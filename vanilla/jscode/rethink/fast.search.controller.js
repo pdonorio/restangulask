@@ -19,6 +19,15 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
   $mdBottomSheet.hide("search");
 
   ///////////////////////////
+  // http://stackoverflow.com/a/37826964/2114395
+  self.setFocus=function() {
+    setTimeout(function() {
+        console.log("Trying to focus");
+        document.querySelector('#autoCompleteId').focus();
+    },100);
+  }
+
+  ///////////////////////////
   // BASE data for advanced search
   self.base = {};
   self.advancedLoader = true;
@@ -149,7 +158,7 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
       self.filters = {};
       localStorage.removeItem(self.cookieKey);
       $stateParams.text = '';
-      // self.searchTextChange();
+      self.searchText = '';
       // RELOAD
       self.extraits.refresh();
   }
@@ -158,6 +167,7 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
     console.log("Clean parameters");
     self.clearFilters();
   }
+  self.setFocus();
 
   self.querySearch = function (text) {
 

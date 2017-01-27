@@ -69,6 +69,10 @@ function DetailsController($scope,
     self.cookieKey = 'searchParameters';
     self.filters = JSON.parse(localStorage.getItem(self.cookieKey));
     self.highlightText = null;
+    self.query = $stateParams.query;
+    if (self.query) {
+        self.highlightText = self.query;
+    }
     if (self.filters)
         if (self.filters.searchText)
             self.highlightText = self.filters.searchText;
@@ -79,7 +83,6 @@ function DetailsController($scope,
     self.texts = {};
     self.pages = {}
     self.pagesElements = 0;
-    self.query = $stateParams.query;
     $scope.theid = $stateParams.id;
     $scope.quote = "'";
 
@@ -285,11 +288,14 @@ function DetailsController($scope,
                     if (element.language)
                         self.original_language = element.language;
 
+// BUG: it can highlight HTML element too!
+// http://localhost/public/details/05e1fd2f-fd11-4283-a172-737ee2d2933c?query=ass
                     // Set the initial language
                     if (self.highlightText) {
                         trans = trans.replace(
                             new RegExp('(' + self.highlightText + ')', 'gi'),
                             '<span class="highlightedText">$&</span>');
+                        console.log("PAOLO", trans);
                     }
                     self.texts[self.original_language] = $sce.trustAsHtml(trans);
                     self.current_text = self.texts[self.original_language];
@@ -300,7 +306,7 @@ function DetailsController($scope,
 
               if (element.translations) {
                 forEach(element.translations, function(trans, language) {
-                    // statements
+                    // highlight also translations
                     if (self.highlightText) {
                         trans = trans.replace(
                             new RegExp('(' + self.highlightText + ')', 'gi'),
