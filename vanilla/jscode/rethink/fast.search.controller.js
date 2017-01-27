@@ -158,7 +158,7 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
       self.filters = {};
       localStorage.removeItem(self.cookieKey);
       $stateParams.text = '';
-      self.searchText = '';
+      self.searchText = null;
       // RELOAD
       self.extraits.refresh();
   }

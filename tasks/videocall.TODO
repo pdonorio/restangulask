@@ -1,3 +1,6 @@
+ls -d /uploads/*\.
+/uploads/0_Rouen_Front.    /uploads/1_Perigueux_front.  /uploads/2_Paris_np.  /uploads/4_Per.  /uploads/6_Per.  /uploads/8_Per.
+/uploads/1_Paris_frontes.  /uploads/1_Reims_front.      /uploads/3_Per.       /uploads/5_Per.  /uploads/7_Per.
 
 bugs:
 ✔ autofocus @done (17-01-27 12:34)

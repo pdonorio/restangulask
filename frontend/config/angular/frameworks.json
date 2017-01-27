@@ -33,8 +33,7 @@
 		"api-check/dist/api-check.min.js",
 		"angular-formly/dist/formly.min.js",
 		"angular-formly-material/dist/formly-material.min.js",
-        "angular-ui-tinymce/dist/tinymce.min.js",
-        "ngInfiniteScroll/build/ng-infinite-scroll.min.js"
+        "angular-ui-tinymce/dist/tinymce.min.js"
 	],
 	"customjs": [
 	    "app/app.js"
