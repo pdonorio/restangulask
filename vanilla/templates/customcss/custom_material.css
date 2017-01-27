@@ -1,7 +1,7 @@
 .virtualRepeatInfiniteScroll #vertical-container {
   height: 700px;
   width: 100%;
-  max-width: 800px;
+  max-width: 950px;
 }
 
 .virtualRepeatInfiniteScroll .repeated-item {

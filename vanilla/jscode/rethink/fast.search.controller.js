@@ -50,7 +50,7 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
     // $scope.$emit('list:filtered');
 
     // NEW
-    self.extraitsLoop.refresh();
+    self.extraits.refresh();
     // self.loadMore(0);
   }
 
@@ -87,13 +87,84 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
   } else {
     self.filters = {};
   }
+  // console.log("current filters", self.filters);
 
   self.load = false;
 
   ///////////////////////////
   // HANDLE PARAMETER
   // self.searchText = $stateParams.text;
+  //
+  self.extraits = {
 
+    stop_: false,
+    hold: false,
+    numLoaded_: 0,
+    toLoad_: 0,
+    items: [],
+
+    refresh: function() {
+        this.stop_ = false;
+        this.hold = false;
+        this.numLoaded_ = 0;
+        this.toLoad_ = 0;
+        this.items = [];
+    },
+
+    getItemAtIndex: function (index) {
+        if (!this.hold) {
+            if (index > this.numLoaded_) {
+                this.fetchMoreItems_(index);
+                return null;
+            }
+        }
+        return this.items[index];
+    },
+
+    getLength: function () {
+        if (this.stop_) {
+            return this.items.length;
+        }
+        return this.numLoaded_ + 5;
+    },
+
+    fetchMoreItems_: function (index) {
+        if (this.toLoad_ < index) {
+
+            this.hold = true;
+            this.toLoad_ += 5;
+
+            var start = this.numLoaded_;
+            if (start > 0) start++;
+
+            SearchService.getDataFast(self.searchText, start, self.filters)
+            .then(angular.bind(this, function (obj) {
+
+                // console.log("Saving search", self.filters);
+                // Save filters
+                self.filters['searchText'] = self.searchText;
+                localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
+
+              if (obj && obj.elements > 0) {
+                self.elements = obj.elements;
+                // console.log('Data fast:', obj.data, obj.elements);
+                this.items = this.items.concat(obj.data);
+
+                if (obj.elements < this.toLoad_) {
+                    this.stop_ = true;
+                    // console.log("Should stop");
+                }
+                this.numLoaded_ = this.items.length;
+                this.hold = false;
+              } else {
+                self.elements = 0;
+              }
+            }));
+        }
+    }
+  }
+
+/*
   ///////////////////////////
   self.extraits = []
   self.extraitsLoop = {
@@ -206,7 +277,7 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
           return self.elements;
         });
   }
-
+*/
 
   self.querySearch = function (text) {
 

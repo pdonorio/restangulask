@@ -220,29 +220,23 @@
     <div flex="auto">
 
 <md-virtual-repeat-container
-    ng-hide="search.load || (check && search.elements < 1)"
+    ng-hide="search.extraits.hold"
     id="vertical-container">
   <md-list class="activity-feed"
-    md-virtual-repeat="item in search.extraitsLoop"
+    md-virtual-repeat="item in search.extraits"
     md-on-demand
     class="repeated-item" flex>
 
-    <!-- {{search.extraits[item]._source.extrait}} -->
-
-    <md-list-item
-    ng-if="search.elements > 0"
-    >
-
-        <!-- {{item}} : {{row._source.extrait}} -->
+    <md-list-item>
 
         <md-card>
-         <a ui-sref='public.details({id: search.extraits[item]._id, query:search.searchText})'>
-          <div ng-if='!search.extraits[item]._source.doc.thumbnail'
+         <a ui-sref='public.details({id: item._id, query:search.searchText})'>
+          <div ng-if='!item._source.doc.thumbnail'
             class="searchthumb"
             ng-style="{'background-image':'url(http://placehold.it/110x160)'}"></div>
-          <div ng-if='search.extraits[item]._source.doc.thumbnail'
+          <div ng-if='item._source.doc.thumbnail'
             class="searchthumb"
-            ng-style="{'background-image':'url('+ search.extraits[item]._source.doc.thumbnail +')'}"></div>
+            ng-style="{'background-image':'url('+ item._source.doc.thumbnail +')'}"></div>
          </a>
         </md-card>
         <md-card class="nobox">
@@ -252,7 +246,7 @@
                 <strong>
                   <span
                     md-highlight-text="search.searchText"
-                    md-highlight-flags="^i">{{search.extraits[item]._source.extrait}}</span>
+                    md-highlight-flags="^i">{{item._source.extrait}}</span>
                 </strong>
                 </p>
             </md-card-content>
@@ -262,22 +256,23 @@
              <p>
         <i>Source</i>:
         <span md-highlight-text="search.searchText"
-            md-highlight-flags="^i">{{search.extraits[item]._source.source}}</span>
+            md-highlight-flags="^i">{{item._source.source}}</span>
         <br>
         <i>Fete</i>:
         <span md-highlight-text="search.searchText"
-            md-highlight-flags="^i">{{search.extraits[item]._source.fete}}</span>
+            md-highlight-flags="^i">{{item._source.fete}}</span>
         <span>
-            <br> <i>Lieu</i>: {{search.extraits[item]._source.lieu}}
+            <br> <i>Lieu</i>: {{item._source.lieu}}
         </span>
-        <span ng-if="search.extraits[item]._source.date">
-            <br> <i>Date</i>: {{search.extraits[item]._source.date}}
+        <span ng-if="item._source.date">
+            <br> <i>Date</i>: {{item._source.date}}
         </span>
         <br>
 
              </p>
             </md-card-content>
         </md-card>
+
     </md-list-item>
   </md-list>
 </md-virtual-repeat-container>
