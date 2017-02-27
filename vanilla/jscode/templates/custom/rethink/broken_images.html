@@ -1,0 +1,25 @@
+
+<md-content layout-padding layout-wrap ng-controller="BrokenController as c">
+
+    <h3>
+        Images to be re-uploaded
+    </h3>
+
+    <table class="bordered" style="width: 300px;">
+        <tbody>
+
+            <tr ng-repeat="key in c.order">
+              <td> {{key}} </td>
+              <td>
+                <a ui-sref="public.details({id: c.list[key]})">
+                  <i class="material-icons" tooltipped
+                    data-position="right" data-tooltip="View record">
+                    pageview </i>
+                </a>
+              </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</md-content>

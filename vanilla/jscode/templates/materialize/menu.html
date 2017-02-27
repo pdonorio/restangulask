@@ -3,46 +3,25 @@
  <div class="hide-on-med-and-down">
   <ul class="right right-pad ">
 
-<!-- IF LOGGED AND NOT LOGGED -->
     <li ng-show="lastRoute.state.name != 'public.db'
             && lastRoute.state.name != 'public.fastsearch'"
-        class="hide-on-med-and-down"
-        style="color: grey;">
+        class="hide-on-med-and-down" style="color: grey;">
         <div layout="row">
             <i class="material-icons prefix">search</i>
             <input placeholder="Search" ng-focus="activateSearch()" size=15>
         </div>
     </li>
 
-<!-- IF NOT LOGGED -->
-
-    <li ng-if="mymenu.logged">
-        <a ui-sref="logged.submit({id: 'draft', step: 1})"
-            class="btn indigo padbtn">
-            add
-        </a>
-    </li>
-
-    <!-- Angular dynamic material menu -->
-    <li ng-if="mymenu.buttons" ng-repeat="button in mymenu.buttons">
+    <li ng-if="mymenu.logged && mymenu.buttons" ng-repeat="button in mymenu.buttons">
         <a ui-sref="{{button.link}}" class="btn padbtn" ng-class="button.color">
             {{ button.name.capitalizeFirstLetter() }}
         </a>
     </li>
 
-<!-- IF LOGGED
-    <li style="color: grey;" ng-if="mymenu.logged">
-        <div layout="row">
-            <i class="material-icons prefix">face</i>
-            &nbsp;
-        </div>
-    </li>
--->
-
- </ul>
+  </ul>
  </div>
 
-<!-- MOBILE -->
+<!-- MOBILE
  <ul id="nav-mobile" class="right right-pad">
     <li>
      <md-menu md-position-mode="target-right target" >
@@ -64,5 +43,6 @@
      </md-menu>
     </li>
  </ul>
+-->
 
 </div>

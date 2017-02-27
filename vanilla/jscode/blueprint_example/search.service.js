@@ -10,7 +10,7 @@ function SearchService($log, api) {
 
     self.endpoints = {
         search: 'filter',
-        users : 'accounts',
+        users: 'accounts',
     }
 
     self.handleResponse = function (promise) {

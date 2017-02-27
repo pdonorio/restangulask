@@ -1463,6 +1463,26 @@ class RethinkExpoDescription(BaseRethinkResource):
         return self.response("Hello")
 
 
+class RethinkCorrupted(BaseRethinkResource):
+
+    table = 'datadocs'
+
+    @deck.apimethod
+    @auth_token_required
+    def get(self):
+        q1 = self.get_table_query()
+        q2 = self.get_table_query('datavalues')
+        data = {}
+
+        for element in q1.has_fields('bad').run():
+            value = element['record']
+            tmp = q2.get(value).run()
+            key = tmp['steps'][0]['data'][0]['value']
+            data[key] = value
+
+        return data
+
+
 class RethinkLex(BaseRethinkResource):
     """ Data keys administrable """
 

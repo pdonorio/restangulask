@@ -2,7 +2,23 @@
   'use strict';
 
 angular.module('web')
-    .controller('DetailsController', DetailsController);
+    .controller('DetailsController', DetailsController)
+    .controller('BrokenController', BrokenController);
+
+function BrokenController($scope, $log, AdminService)
+{
+    var self = this;
+    $log.info("Broke");
+    self.list = {};
+
+    AdminService.listCorrupted().then(function(out) {
+        if (out) {
+            self.order = Object.keys(out).sort();
+            self.list = out;
+            console.log("Uhm", self);
+        }
+    });
+}
 
 function DetailsController($scope,
     $log, $sce, $stateParams, $auth, $window, $mdToast, $timeout, $state,
@@ -288,14 +304,14 @@ function DetailsController($scope,
                     if (element.language)
                         self.original_language = element.language;
 
-// BUG: it can highlight HTML element too!
+// TO FIX: BUG it may highlight HTML element too!
 // http://localhost/public/details/05e1fd2f-fd11-4283-a172-737ee2d2933c?query=ass
                     // Set the initial language
                     if (self.highlightText) {
                         trans = trans.replace(
                             new RegExp('(' + self.highlightText + ')', 'gi'),
                             '<span class="highlightedText">$&</span>');
-                        console.log("PAOLO", trans);
+                        // console.log("traduzioni", trans);
                     }
                     self.texts[self.original_language] = $sce.trustAsHtml(trans);
                     self.current_text = self.texts[self.original_language];
@@ -320,7 +336,7 @@ function DetailsController($scope,
 
             });
 
-            // console.log('LANGUAGES', self.texts);
+            console.log('LANGUAGES', self.texts);
             self.languages = Object.keys(self.texts);
             self.selected_language = self.original_language;
 

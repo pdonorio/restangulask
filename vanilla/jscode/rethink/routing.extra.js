@@ -231,6 +231,28 @@ angular.module('web')
         },
 
     //////////////////////
+        'logged.actions': {
+            url: "/manage",
+            views: {
+                "loggedview": {
+                    dir: 'blueprint',
+                    templateUrl: 'operations.html',
+                }
+            },
+        },
+
+    //////////////////////
+        'logged.corrupted': {
+            url: "/broken",
+            views: {
+                "loggedview": {
+                    dir: 'blueprint',
+                    templateUrl: 'broken_images.html',
+                }
+            },
+        },
+
+    //////////////////////
         'logged.date': {
             url: "/date/:fetepos",
             views: {
@@ -244,8 +266,7 @@ angular.module('web')
     //////////////////////
         'logged.admin': {
             url: "/admin/:tab?new",
-// TO FIX:
-// ONLY ADMIN ROLE IS ALLOWED
+// TO FIX: only admin role is allowed. It should change in the main routes.js
             views: {
                 "loggedview": {
                     dir: 'blueprint',

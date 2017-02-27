@@ -11,7 +11,7 @@ angular
 
 function MenuInAppController($scope, $rootScope, $log, $auth, $state)
 {
-    $log.info("Force a new menu");
+    $log.info("Menu");
     var self = this;
 
     // Where am i?
@@ -33,10 +33,13 @@ function MenuInAppController($scope, $rootScope, $log, $auth, $state)
 
     if (self.logged) {
         self.buttons = [
-            //{ name: 'submit', link: 'logged.submission', icon: null, },
-            { name: 'manage', link: 'logged.admin', color: 'cyan', },
-            { name: 'edit', link: 'logged.explore', color: 'cyan', },
+            { name: 'manage', link: 'logged.actions', color: 'cyan', },
             { name: 'logout', link: 'logged.logout', color: 'blue-grey', },
+
+            // //{ name: 'submit', link: 'logged.submission', icon: null, },
+            // { name: 'manage', link: 'logged.admin', color: 'cyan', },
+            // { name: 'edit', link: 'logged.explore', color: 'cyan', },
+            // { name: 'logout', link: 'logged.logout', color: 'blue-grey', },
         ];
     } else {
         self.buttons = [

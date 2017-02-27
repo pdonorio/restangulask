@@ -17,11 +17,16 @@ function AdminService($log, api) {
         tmissing: 'datatransmissing',
         stepstemplate: 'steps',
         data: 'datavalues',
+        corruption: 'broken',
     }
 
     self.updateDocImage = function(id, fileName) {
         return api.apiCall(self.endpoints.up, 'POST',
             {file: fileName, id: id})
+    }
+
+    self.listCorrupted = function() {
+        return api.apiCall(self.endpoints.corruption);
     }
 
     //////////////////

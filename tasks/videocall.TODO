@@ -1,46 +1,61 @@
 
-BUGS:
+- build https cert with proxy trick
+  - letsencrypt
 
- ☐ wrong names
-ls -d /uploads/*\.
-/uploads/0_Rouen_Front.    /uploads/1_Perigueux_front.  /uploads/2_Paris_np.  /uploads/4_Per.  /uploads/6_Per.  /uploads/8_Per.
-/uploads/1_Paris_frontes.  /uploads/1_Reims_front.      /uploads/3_Per.       /uploads/5_Per.  /uploads/7_Per.
+- email?
 
-- SEARCH
- some thumbnails are missing
-   ☐ rigenerate?
+- fix public pages
+
+- zoom pagination
+
+- broken images
+  - mark missing images? @probablynot
+  ✔ wrong names @done (17-02-24 18:09)
+  ✔ update server `apiwithlibs` image @done (17-02-24 18:09)
+    - pull new docker image @warning
+  ✔ thumbnails: check @done (17-02-26 23:17)
+  - upload new image @bug
+
+ --- ✄ -----------------------
+
+- roles
+  - user page
+    - remove current flask-admin
+    spectaclebaroque.eu/api/manage
+    - change main user email and pw
+  - set js function for checking roles
+  - set route for only admin on user page
 
 - lexique
- ☐ italiano/italien
- ☐ split on commas
- ☐ fixed table header
+ - italiano/italien
+ - split on commas
+ - fixed table header
 
-- changing image in details
- ☐ does not find the old one?
- ☐ submit
-  ☐ elastic @update
-  ☐ give only modified step data
+- details page
+ - highlight bug on html elements
 
-- details
- ☐ highlight bug on html elements
-
-Date:
- ☐ Fete & date
+ - fete & date
    ✔ date edit new page for selected fete @done (16-10-21 17:32)
      ☐ all elements
      ☐ also elastic?
-Authorized views:
-  ☐ no type column in fete list
-EXPO:
-☐ Option no zoom
 
-MOVE TO PRODUCTION:
- ☐ postgres instead of sqllite?
-   ☐ roles @rbac
- ☐ uptime robot (both interface and api)
+ --- ✄ -----------------------
+
+ - EXPO
+  ☐ Option no zoom
+
+ - Authorized @views
+  ☐ no type column in fete list
+  ☐ roles @rbac
+   ☐ profiles administration for others
+
+in PRODUCTION:
+ ✔ uptime robot (both interface and api) @done (17-02-16 17:12)
  ☐ change root adminer
  ☐ disable rethinkdb monitor interface
- ☐ Profiles administration for them too
  ☐ automatic backup
- ☐ send email?
+   ☐ send email?
+
+LAST:
+ ☐ medium_expo_thumbnail
  ☐ firefox / safari check
