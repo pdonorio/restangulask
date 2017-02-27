@@ -1,4 +1,6 @@
 
+- flow upload auth
+
 - build https cert with proxy trick
   - letsencrypt
 
@@ -8,13 +10,13 @@
 
 - zoom pagination
 
-- broken images
-  - mark missing images? @probablynot
+✔ broken images @done (17-02-27 07:37)
+  ✘ mark missing images? @probablynot @cancelled (17-02-27 07:37)
   ✔ wrong names @done (17-02-24 18:09)
   ✔ update server `apiwithlibs` image @done (17-02-24 18:09)
-    - pull new docker image @warning
+    ✔ pull new docker image @warning @done (17-02-27 07:37)
   ✔ thumbnails: check @done (17-02-26 23:17)
-  - upload new image @bug
+  ✔ upload new image @bug @done (17-02-27 07:37)
 
  --- ✄ -----------------------
 

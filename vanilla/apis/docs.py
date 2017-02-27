@@ -1311,25 +1311,28 @@ class RethinkUploader(Uploader, BaseRethinkResource):
 class RethinkUpdateImages(BaseRethinkResource):
     # @deck.add_endpoint_parameter('file')
     @deck.apimethod
-## // TO FIX:
-# didn't make flow upload work with authentication
-    # @auth_token_required
+    @auth_token_required
     def post(self):
 
         j = self.get_input(True)
+        from werkzeug import secure_filename
 
+        # Recover data
         id = j['id']
-        file = j['file']
-
+        file = secure_filename(j['file'])
         query = self.get_table_query("datadocs")
         original = query.get(id).run()
+        images = original['images']
         # pp(original)
 
+        # Remove new useless record from upload...
         q = query.filter({'type': 'documents'})
         tmp = {}
         for element in q.run():
             if 'images' not in element:
                 continue
+            if len(element['images']) < 1:
+                logger.warning("Missing images?", element['record'])
             if element['images'][0]['filename'] == file:
                 # print("FOUND", element, file)
                 tmp = element['images'][0]
@@ -1338,9 +1341,9 @@ class RethinkUpdateImages(BaseRethinkResource):
                 logger.debug("Removed temporary %s" % element['record'])
 
         if len(tmp) < 1:
+            # logger.warning("Failed to remove tmp document")
             return self.response("Something went wrong...", fail=True)
 
-        images = original['images']
         # In case we are reuploading the same file
         if images[0]['filename'] != tmp['filename']:
             self.trash(file=images[0]['filename'])
@@ -1353,7 +1356,14 @@ class RethinkUpdateImages(BaseRethinkResource):
         images[0]['filename_type'] = tmp['filename_type']
 
         # Update rethinkdb
-        query.get(id).update({'images': images}).run()
+
+        try:
+            original.pop('bad')
+        except KeyError:
+            pass
+        original['images'] = images
+        # query.get(id).update({'images': images}).run()
+        query.get(id).replace(original).run()
         logger.info("Updated db %s" % id)
 
         # Update elasticsearch...

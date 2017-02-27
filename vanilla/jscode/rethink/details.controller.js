@@ -380,14 +380,21 @@ function DetailsController($scope,
     self.changeImage = function(file, options) {
       $mdToast.hide(self.toast).then(function(){
           $scope.showSimpleToast( {"Uploaded": file.name}, 1800);
+
+          // api call with id + file.name
+          AdminService.updateDocImage($scope.theid, file.name)
+           .then(function (out) {
+            if (out) {
+              console.log('Updated', out);
+              // which removes old id record, and updates details to new one
+              loadData();
+              // $scope.showSimpleToast( {"": "Reloading image"}, 1500);
+            } else {
+              $scope.showSimpleToast( {"ERROR": "Failed to store new image"}, 3000);
+            }
+          })
       });
       console.log('CHANGE', file, $scope.theid);
-      // api call with id + file.name
-      AdminService.updateDocImage($scope.theid, file.name).then(function (out) {
-          console.log('Updated', out);
-          // which removes old id record, and updates details to new one
-          loadData();
-      })
     };
 
     self.adding = function(file, ev, flow) {
