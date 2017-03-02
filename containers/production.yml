@@ -7,7 +7,8 @@ proxy:
     - custombe:api
     - customfe:html
   volumes:
-    - ../containers/nginx_proxy:/etc/nginx/conf.d
+    - ../containers/nginx_proxy/theproxy.conf:/etc/nginx/sites-enabled/production
+    # - ../containers/nginx_proxy:/etc/nginx/conf.d
     - ../frontend/felask/static:/static
     - ../uploads:/data/frontend/felask/static/uploads
   volumes_from:
@@ -15,6 +16,7 @@ proxy:
     # - uploadsdata
   ports:
     - 80:80
+    - 443:443
 
 custombe:
   command: init

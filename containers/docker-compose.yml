@@ -95,7 +95,21 @@ sqladmin:
   ports:
       - 8888:80
 
+# proxy:
+#   image: nginx:1.11.5-alpine
+#   hostname: iamaproxy
+#   # command: echo "Hello"
+
+# Nginx proxy
 proxy:
-  image: nginx:1.11.5-alpine
+  build: ../builds/sslproxy
+  image: nginx:rapydo
+  # OLD: using the official image directly with no letsencrypt
+  # image: nginx:1.11-alpine
   hostname: iamaproxy
-  # command: echo "Hello"
+  environment:
+    DOMAIN: spectaclebaroque.eu
+    MODE: ""
+    # MODE: "--staging"
+  volumes:
+    - restangulask_sslcerts:/etc/letsencrypt

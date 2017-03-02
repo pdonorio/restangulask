@@ -1,22 +1,20 @@
 
-- flow upload auth
-
+✔ broken images @done (17-02-27 07:37)
 - build https cert with proxy trick
   - letsencrypt
-
 - email?
-
+- zoom pagination?
 - fix public pages
-
-- zoom pagination
-
-✔ broken images @done (17-02-27 07:37)
-  ✘ mark missing images? @probablynot @cancelled (17-02-27 07:37)
-  ✔ wrong names @done (17-02-24 18:09)
-  ✔ update server `apiwithlibs` image @done (17-02-24 18:09)
-    ✔ pull new docker image @warning @done (17-02-27 07:37)
-  ✔ thumbnails: check @done (17-02-26 23:17)
-  ✔ upload new image @bug @done (17-02-27 07:37)
+- flow upload auth
+nel template
+  <div flow-init="ctrl.flowOptionsResources()"
+nel controller
+ self.flowOptionsResources = function() {
+    return {
+      [...]
+          headers: {Authorization : 'Bearer ' + $auth.getToken()}
+      }
+    }
 
  --- ✄ -----------------------
 
