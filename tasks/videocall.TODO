@@ -1,10 +1,12 @@
 
 ✔ broken images @done (17-02-27 07:37)
-- build https cert with proxy trick
-  - letsencrypt
-- email?
+✔ build https cert with proxy trick @done (17-03-03 01:18)
+  ✔ letsencrypt @done (17-03-03 01:18)
+- fix public pages when ready
 - zoom pagination?
-- fix public pages
+- email?
+- python frontend is not multithread?
+
 - flow upload auth
 nel template
   <div flow-init="ctrl.flowOptionsResources()"
