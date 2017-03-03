@@ -3,7 +3,9 @@
 """ Main routes """
 
 from __future__ import absolute_import
+
 import os
+from collections import OrderedDict
 import requests
 from pathlib import Path
 from flask import Blueprint, render_template, request, jsonify, g
@@ -236,12 +238,42 @@ def zoom(document, code):
             filename = '/static/uploads/' + code
             # print("TEST!", filename, "\n\n\n")
 
+        r = requests.get(API_URL + 'datamanage/' + data['record'], **opts)
+        pages = r.json().pop('data', {})
+
+        # ordered_pages = OrderedDict(sorted(pages.items()))
+        ordered_pages = OrderedDict(
+            sorted((int(key), value) for key, value in pages.items()))
+
+        x = {
+            'prev': None,
+            'curr': None,
+            'next': None
+        }
+        last_element = None
+
+        for page, element in ordered_pages.items():
+            # print("Page", page)
+            element['num'] = page
+            if x['curr'] is None:
+                if element['current']:
+                    x['curr'] = element
+                    x['prev'] = last_element
+            else:
+                if x['next'] is None:
+                    x['next'] = element
+                    break
+            last_element = element
+        # print(x)
+
     variables = {
         'record': document,
         'page': code,
         'filename': filename,
+        'pages': x,
         'name': CURRENT_BLUEPRINT,
     }
+
     return render_template(template_path + '/' + 'zoom.html', **variables)
 
 

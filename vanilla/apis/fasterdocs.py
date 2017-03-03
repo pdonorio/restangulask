@@ -37,7 +37,7 @@ class FastManage(ExtendedApiResource, FastSearch):
     # @deck.add_endpoint_parameter(name='extrait', ptype=str, required=True)
     @deck.apimethod
     @auth_token_required
-    def get(self):
+    def get(self, id=None):
         """
         NOTE: this method is not generic anymore
 
@@ -45,12 +45,19 @@ class FastManage(ExtendedApiResource, FastSearch):
         """
 
         parties = {}
+
         # pp(self._args)
         # pp(self.get_input_new())
-        extrait = urllib.parse.unquote(self.get_input_new().get('extrait'))
-        if extrait is None:
-            return self.response(parties)
-        ex = self.fast_query('extrait', extrait)
+
+        extrait = None
+        if id is not None:
+            ex = self.fast_id(id)
+        else:
+            extrait = urllib.parse.unquote(self.get_input_new().get('extrait'))
+            if extrait is None:
+                return self.response(parties)
+            ex = self.fast_query('extrait', extrait)
+
         source = ex.pop()['_source']['source']
         data = self.fast_query('source', source)
 
@@ -61,12 +68,24 @@ class FastManage(ExtendedApiResource, FastSearch):
             # print(s['sort_number'], s['extrait_number'])
             # key = s['sort_number']
             key = s['extrait_number']
+
+            try:
+                key = int(key)
+            except:
+                pass
+
+            if extrait is None:
+                current = element['_id'] == id
+            else:
+                current = s['extrait'] == extrait
+
             parties[key] = {
                 'id': element['_id'],
                 'name': s['extrait'],
                 'page': s['page'],
-                'current': s['extrait'] == extrait
+                'current': current
             }
+
         return self.response(parties)
 
     @deck.apimethod

@@ -2,8 +2,9 @@
 ✔ broken images @done (17-02-27 07:37)
 ✔ build https cert with proxy trick @done (17-03-03 01:18)
   ✔ letsencrypt @done (17-03-03 01:18)
-- fix public pages when ready
-- zoom pagination?
+✔ zoom pagination @done (17-03-03 15:02)
+- ascii/utf8 docker images py
+- my blog??
 - email?
 - python frontend is not multithread?
 
@@ -20,13 +21,19 @@ nel controller
 
  --- ✄ -----------------------
 
-- roles
+- move from private to public @production
+- roles @production
   - user page
     - remove current flask-admin
     spectaclebaroque.eu/api/manage
     - change main user email and pw
   - set js function for checking roles
   - set route for only admin on user page
+
+- authorized @views
+  ☐ no type column in fete list
+  ☐ roles @rbac
+   ☐ profiles administration for others
 
 - lexique
  - italiano/italien
@@ -46,10 +53,6 @@ nel controller
  - EXPO
   ☐ Option no zoom
 
- - Authorized @views
-  ☐ no type column in fete list
-  ☐ roles @rbac
-   ☐ profiles administration for others
 
 in PRODUCTION:
  ✔ uptime robot (both interface and api) @done (17-02-16 17:12)

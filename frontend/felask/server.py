@@ -110,13 +110,9 @@ def create_app():
     # Application context
     with app.app_context():
         db.create_all()
-        # OLD & BAD
-        #logger.critical("Dropping DB")
-        #db.drop_all()
-        #init_insert(db, app.config)
         logger.info("Initialized Database")
 
-# SANITY CHECKS?
+    # SANITY CHECKS?
         # from .sanity_checks import is_sane_database
         # from .models import MyModel
         # # Note, this will check all models, not only MyModel...
@@ -125,10 +121,10 @@ def create_app():
     # Logging
     @app.after_request
     def log_response(resp):
-        log = logger.info
-        if resp.status_code == hcodes.HTTP_NOT_MODIFIED:
-            log = logger.debug
-        log("{} {} {} {}".format(req.method, req.url, req.data, resp))
+        # log = logger.info
+        # if resp.status_code == hcodes.HTTP_NOT_MODIFIED:
+        #     log = logger.debug
+        # log("{} {} {} {}".format(req.method, req.url, req.data, resp))
         return resp
 
     return app
