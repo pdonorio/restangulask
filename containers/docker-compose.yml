@@ -103,9 +103,10 @@ sqladmin:
 # Nginx proxy
 proxy:
   build: ../builds/sslproxy
-  image: nginx:rapydo
+  #image: nginx:rapydo
   # OLD: using the official image directly with no letsencrypt
   # image: nginx:1.11-alpine
+  #command: sleep 1234567890
   hostname: iamaproxy
   environment:
     DOMAIN: spectaclebaroque.eu

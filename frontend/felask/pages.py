@@ -176,10 +176,16 @@ def jsblueprint():
     if key in user_config['content']:
         js_template = "'" + user_config['content'][key] + "'"
 
+    api_url = request.url_root
+    #print("APP MODE", os.environ.get('APP_MODE', ''))
+
+    if os.environ.get('APP_MODE', '') == 'production':
+        api_url = api_url.replace('http:', 'https:')
+
     variables = {
         'name': CURRENT_BLUEPRINT,
         'time': user_config['options']['load_timeout'],
-        'api_url': request.url_root,
+        'api_url': api_url,
         'api_port': EXTERNAL_PORT,
         'js_template': js_template,
         'images_path': '/' + staticdir + UPLOAD_FOLDER.strip('/') + '/'

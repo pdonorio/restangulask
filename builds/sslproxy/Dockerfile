@@ -27,7 +27,6 @@ RUN chown -R nginx /usr/share/nginx/html
 WORKDIR $ACMEDIR
 
 # Save production certificates across multiple run
-VOLUME /etc/letsencrypt
 ENV CERTDIR /etc/letsencrypt/real
 ENV WWWDIR /usr/share/nginx/html
 RUN mkdir -p $CERTDIR
@@ -36,3 +35,9 @@ RUN mkdir -p $CERTDIR
 # + read configurations in "sites-enabled" dir
 ADD nginx.conf /etc/nginx/nginx.conf
 ADD letsencrypt.sh /updatecertificates
+
+RUN touch $CERTDIR/fullchain1.pem
+RUN touch $CERTDIR/privkey1.pem
+
+VOLUME /etc/letsencrypt
+

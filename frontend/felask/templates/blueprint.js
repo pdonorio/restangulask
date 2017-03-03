@@ -14,11 +14,17 @@ var welcomeTemplate = {{js_template}};
 var apiPort = '{{api_port}}';
 var originalApiUrl = '{{api_url}}'.slice(0, -1);
 var serverUrl = originalApiUrl;
-var ifPort = originalApiUrl.indexOf(':', 5);
-if (ifPort > 0) {
-    serverUrl = serverUrl.slice(0, ifPort);
-}
-var apiUrl = serverUrl + ':' + apiPort + '/api';
+
+// var ifPort = originalApiUrl.indexOf(':', 5);
+// if (ifPort > 0) {
+//     serverUrl = serverUrl.slice(0, ifPort);
+// }
+
+var apiUrl;
+if (apiPort == '80')
+    apiUrl = serverUrl + '/api';
+else
+    apiUrl = serverUrl + ':' + apiPort + '/api';
 
 // Other
 var imagesPath = '{{images_path}}'

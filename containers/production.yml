@@ -31,9 +31,9 @@ custombe:
   #   - 80:8080
 
 customfe:
+  #command: sleep infinity
   environment:
     APP_MODE: production
-#   command: sleep infinity
 # #   volumes_from:
 # #     - uploadsdata
 
