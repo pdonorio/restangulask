@@ -1,23 +1,28 @@
 
-✔ broken images @done (17-02-27 07:37)
-✔ build https cert with proxy trick @done (17-03-03 01:18)
-  ✔ letsencrypt @done (17-03-03 01:18)
-✔ zoom pagination @done (17-03-03 15:02)
-- ascii/utf8 docker images py
-- my blog??
-- email?
-- python frontend is not multithread?
+- roles/profiles
+  - admin actions
+- backup
+- firefox
+  - details page (table)
+- email
+- lexique
 
-- flow upload auth
-nel template
-  <div flow-init="ctrl.flowOptionsResources()"
-nel controller
- self.flowOptionsResources = function() {
-    return {
-      [...]
-          headers: {Authorization : 'Bearer ' + $auth.getToken()}
-      }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  --- ✄ -----------------------
 
@@ -40,13 +45,9 @@ nel controller
  - split on commas
  - fixed table header
 
-- details page
- - highlight bug on html elements
-
- - fete & date
-   ✔ date edit new page for selected fete @done (16-10-21 17:32)
-     ☐ all elements
-     ☐ also elastic?
+- fete & date
+   ☐ all elements
+   ☐ also elastic?
 
  --- ✄ -----------------------
 
@@ -57,10 +58,20 @@ nel controller
 in PRODUCTION:
  ✔ uptime robot (both interface and api) @done (17-02-16 17:12)
  ☐ change root adminer
- ☐ disable rethinkdb monitor interface
- ☐ automatic backup
-   ☐ send email?
+ ☐ disable rethinkdb monitor interface...
 
 LAST:
- ☐ medium_expo_thumbnail
- ☐ firefox / safari check
+- medium_expo_thumbnail
+- python frontend not really multithread @urgh
+- details page
+ - highlight bug on html elements
+- flow upload auth
+  nel template <div flow-init="ctrl.flowOptionsResources()"
+  nel controller
+   self.flowOptionsResources = function() {
+      return { headers: {Authorization : 'Bearer ' + $auth.getToken()} }
+      }
+- avoid refresh of angularjs pages when busy
+  http://j.mp/2lNxQqV
+- assets
+  https://flask-assets.readthedocs.io/en/latest/

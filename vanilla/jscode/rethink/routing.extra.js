@@ -242,6 +242,28 @@ angular.module('web')
         },
 
     //////////////////////
+        'logged.accounts': {
+            url: "/accounts",
+            views: {
+                "loggedview": {
+                    dir: 'blueprint',
+                    templateUrl: 'accounting.html',
+                }
+            },
+        },
+
+    //////////////////////
+        'logged.backups': {
+            url: "/backups",
+            views: {
+                "loggedview": {
+                    dir: 'blueprint',
+                    templateUrl: 'dbbackups.html',
+                }
+            },
+        },
+
+    //////////////////////
         'logged.corrupted': {
             url: "/broken",
             views: {

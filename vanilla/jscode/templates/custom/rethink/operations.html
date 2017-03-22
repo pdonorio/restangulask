@@ -2,34 +2,52 @@
 <md-content layout-padding layout-wrap>
 
     <h3>
-        Actions
+        Organize this web site
     </h3>
 
     <table class="bordered" style="width: 300px;">
         <tbody>
 
             <tr>
+                <td> Manage users </td>
+                <td class="center-align">
+                    <a ui-sref="logged.accounts" class="btn indigo padbtn">
+                        accounts </a> </td>
+            </tr>
+
+            <tr>
                 <td> Create a new record </td>
-                <td> <a ui-sref="logged.submit({id: 'draft', step: 1})"
+                <td class="center-align">
+                    <a ui-sref="logged.submit({id: 'draft', step: 1})"
                         class="btn indigo padbtn">
                         create </a> </td>
             </tr>
 
             <tr>
                 <td> Explore current records </td>
-                <td> <a ui-sref="logged.explore" class="btn indigo padbtn">
+                <td class="center-align">
+                    <a ui-sref="logged.explore" class="btn indigo padbtn">
                         explore </a> </td>
             </tr>
 
             <tr>
+                <td> Database backup </td>
+                <td class="center-align">
+                    <a ui-sref="logged.backups" class="btn indigo padbtn">
+                        backups </a> </td>
+            </tr>
+
+            <tr>
                 <td> Modify site pages </td>
-                <td> <a ui-sref="logged.admin" class="btn indigo padbtn">
+                <td class="center-align">
+                    <a ui-sref="logged.admin" class="btn indigo padbtn">
                         site </a> </td>
             </tr>
 
             <tr>
                 <td> List corrupted images </td>
-                <td> <a ui-sref="logged.corrupted" class="btn indigo padbtn">
+                <td class="center-align">
+                    <a ui-sref="logged.corrupted" class="btn indigo padbtn">
                         broken </a> </td>
             </tr>
 

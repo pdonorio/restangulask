@@ -107,6 +107,10 @@ http://stackoverflow.com/a/31278615/2114395
     vertical-align: top;
 }
 
+.center-align {
+    text-align: center;
+}
+
 .right-align {
     text-align: right;
 }

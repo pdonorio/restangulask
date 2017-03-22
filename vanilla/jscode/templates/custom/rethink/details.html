@@ -150,14 +150,13 @@
 
 <!-- MAKE RESPONSIVE -->
   <div flex="30" layout="column" layout="center end"
-    class="rounder fullheight teal lighten-4 details-pad">
+    class="rounder details-pad">
 
-    <table class=" topalign smalltexttable">
+    <table class="topalign smalltexttable">
 
      <thead> <tr> <td colspan="2">
         <div ng-if="detail.logged" layout="row">
-            <h5> DÉTAILS DE LA PAGE </h5>
-            <div flex="5"></div>
+          <div flex="60" layout="row">
             <div class="left-pad">
                 <a ui-sref="logged.submit({id: theid})" class="btn btn-floating">
                     <i class="material-icons" data-position="down"
@@ -185,6 +184,13 @@
                         data-tooltip="Delete this record" tooltipped>delete</i>
                 </a>
             </div>
+          </div>
+          <div flex="40">
+                <h4 class="teal-text text-darken-2">
+                DÉTAILS
+                <!-- DE LA PAGE -->
+                </h4>
+          </div>
         </div>
 
         </td> </tr> </thead>
@@ -222,11 +228,12 @@
         </tr>
       </tbody>
 
-
-     <thead> <tr> <td colspan="2">
-        <h5> FÊTE </h5>
-        </td> </tr> </thead>
-      <tbody ng-init="key2='Fête'">
+     <thead style="background-color: #b3ccd9;">
+      <tr>
+        <td colspan="2"> <h5> FÊTE </h5> </td>
+       </tr> </thead>
+      <tbody ng-init="key2='Fête'"
+      style="background-color: #b3ccd9;">
         <tr ng-init="field11='Titre abrégé'"
             ng-show='detail.refinedData[key2][field11]'>
           <th width="35%"> {{ field11 }} </th>
@@ -265,13 +272,11 @@
       </tbody>
 
 
-     <thead
-        style="background-color: #C4FFEB;"
-        > <tr> <td colspan="2">
+     <thead style="background-color: #C4FFEB;" >
+      <tr> <td colspan="2">
         <h5> SOURCE </h5>
         </td> </tr> </thead>
-      <tbody
-        style="background-color: #C4FFEB;"
+      <tbody style="background-color: #C4FFEB;"
         ng-init="key3='Source'">
         <tr ng-init="field21='Type de source'"
             ng-show='detail.refinedData[key3][field21]'>
@@ -361,27 +366,12 @@
         </tr>
       </tbody>
 
-<!--
-     <thead> <tr> <td colspan="2">
-        <h5> <u> {{name}} </u> </h5>
-        </td> </tr> </thead>
-      <tbody>
-        <tr ng-if='value' ng-repeat='(key, value) in rows'>
-          <th width="35%"> {{ key }} </th>
-          <td ng-if="name == 'Extrait' && key.indexOf('ero de l') >= 0">
-            <b> <i>{{ value }}</i> </b> </td>
-          <td ng-if="!(name == 'Extrait' && key.indexOf('ero de l') >= 0)"> {{ value }} </td>
-        </tr>
-      </tbody>
--->
-
     </table>
 
-
-      </div>
+   </div> <!-- END OF 30 -->
   </div> <!-- END OF COLUMN -->
 
  </div> <!-- END OF DATA -->
-</div>
 
+</div>
 </div>
