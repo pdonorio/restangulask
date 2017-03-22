@@ -67,7 +67,9 @@
     </div>
     <div layout-gt-sm="row" layout="column"
         layout-wrap layout-fill layout-padding>
-        <div ng-hide="root.load" flex='85' ui-view='main'></div>
+        <div flex='85'>
+            <div ng-hide="root.load" ui-view='main'></div>
+        </div>
         <div flex='15'
             ng-if="!disable_sidemenu"
             layout="column"
