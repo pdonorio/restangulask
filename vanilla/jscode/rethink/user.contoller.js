@@ -7,11 +7,12 @@ angular.module('web')
 function UserManagerController($scope, $log, AdminService)
 {
     var self = this;
-    $log.info("UM");
+    $log.debug("UM");
 
     AdminService.listUsers().then(function(out) {
         if (out) {
-            console.log("Uhm", out);
+            console.log("DATA", out);
+            self.users = out.data;
         }
     });
 }

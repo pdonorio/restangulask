@@ -23,7 +23,7 @@ function AdminService($log, api) {
 
     //////////////////
     self.listUsers = function() {
-        return api.apiCall(self.endpoints.useradminer);
+        return api.apiCall(self.endpoints.useradminer, 'GET');
     }
 
     //////////////////

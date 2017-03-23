@@ -9,15 +9,24 @@
 
   <thead>
     <tr>
-      <th> username </th>
-      <th> something </th>
+      <th> Username </th>
+      <th> Identity </th>
+      <th> Roles </th>
+      <th> Operations </th>
     </tr>
   </thead>
 
   <tbody>
-    <tr>
-      <td> user </td>
-      <td> something </td>
+    <tr ng-repeat="user in umc.users">
+      <td> {{user.email}} </td>
+      <td> {{user.surname}} {{user.name}} </td>
+      <td> {{user.roles}} </td>
+      <td>
+        <a href class="btn btn-floating">
+            <i class="material-icons" data-position="down"
+                data-tooltip="Edit" tooltipped>edit</i>
+        </a>
+      </td>
     </tr>
   </tbody>
  </table>
