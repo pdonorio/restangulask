@@ -287,7 +287,7 @@ def home(mypath=None):
     The main and only real HTML route in this server.
     The only real purpose is to serve angular pages and routes.
     """
-    logger.debug("Using angular route. PATH is '%s'" % mypath)
+    logger.debug("Path: /%s" % mypath)
     if mypath is None:
         # return templating('welcome.html')
         pass

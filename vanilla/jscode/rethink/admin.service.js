@@ -18,8 +18,15 @@ function AdminService($log, api) {
         stepstemplate: 'steps',
         data: 'datavalues',
         corruption: 'broken',
+        useradmin: 'adminer',
     }
 
+    //////////////////
+    self.listUsers = function() {
+        return api.apiCall(self.endpoints.useradminer);
+    }
+
+    //////////////////
     self.updateDocImage = function(id, fileName) {
         return api.apiCall(self.endpoints.up, 'POST',
             {file: fileName, id: id})

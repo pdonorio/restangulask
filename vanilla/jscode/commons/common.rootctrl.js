@@ -304,7 +304,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
         $state.go('public.' + route, params);
     }
 
-	$log.info("Menu", $rootScope.menu);
+	// $log.info("Menu", $rootScope.menu);
 
 }
 

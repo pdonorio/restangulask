@@ -67,13 +67,14 @@
     </div>
     <div layout-gt-sm="row" layout="column"
         layout-wrap layout-fill layout-padding>
-        <div flex='85'>
+        <div flex=85>
             <div ng-hide="root.load" ui-view='main'></div>
         </div>
-        <div flex='15'
-            ng-if="!disable_sidemenu"
-            layout="column"
-            ng-include="root.blueprintTemplateDir + 'side_menu.html'"></div>
+        <div flex=15 ng-if="!disable_sidemenu"
+            layout="column" layout-wrap layout-padding
+            ng-include="root.blueprintTemplateDir + 'side_menu.html'"
+            ng-cloak
+            ></div>
     </div>
 <!--
     <div ui-view='sidebar'></div>

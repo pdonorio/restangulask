@@ -11,7 +11,7 @@ angular
 
 function MenuInAppController($scope, $rootScope, $log, $auth, $state)
 {
-    $log.info("Menu");
+    $log.debug("Menu controller");
     var self = this;
 
     // Where am i?

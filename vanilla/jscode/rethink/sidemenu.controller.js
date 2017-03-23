@@ -8,7 +8,7 @@ angular
 function SideMenuController($scope, $rootScope, $log, $timeout, $state)
 {
     var self = this;
-    $log.warn("Menu");
+    // $log.warn("Menu");
 
     self.links = [
         { name: 'bienvenue',
