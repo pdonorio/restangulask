@@ -1,0 +1,28 @@
+html {
+  height: 100%;
+}
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  height: 100%;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+md-content {
+  background-color: #eee;
+}
+
+.rad {
+  border-radius: 0px 0px 10px 10px;
+}
+
+.white {
+  background-color: #fff;
+  height: 1000px;
+
+}
