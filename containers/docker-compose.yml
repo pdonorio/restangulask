@@ -93,7 +93,7 @@ sqladmin:
   # links:
   #     - sql:db
   ports:
-      - 8888:80
+      - 8888:8888
 
 # proxy:
 #   image: nginx:1.11.5-alpine
