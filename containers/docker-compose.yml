@@ -86,7 +86,7 @@ bower:
 
 # This image let you access the postgres db with a 'phpmyadmin' like web page
 sqladmin:
-  image: clue/adminer
+  image: eudatb2stage/sqladminer:latest
   # Sql lite database & common models
   volumes:
       - restangulask_apilitedb:/dbs
