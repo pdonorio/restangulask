@@ -55,6 +55,16 @@
         <i class="material-icons" ng-if="advanced">remove</i>
         Recherche Avancée
     </a>
+
+<!--
+    <a layout="row" layout-align="center center"
+      style="font-size: 14px;"
+      href ng-click="toggle()">
+        <i class="material-icons" ng-if="!advanced">help</i>
+        Lexique
+    </a>
+-->
+
 <!-- COMMENT END -bug -->
 
  </md-toolbar>
@@ -62,7 +72,7 @@
 <!-- COMMENT START - bug -->
 <div layout="column" layout-padding>
     <md-card ng-if="advanced">
-        <md-card-content class="nospaces"> Filters:
+        <md-card-content class="nospaces"> Filtres:
 
 <div ng-if="search.advancedLoader"
     ng-include="root.templateDir + 'loader.html'"></div>
@@ -70,6 +80,11 @@
 
 <div layout="column" flex=50 ng-cloak>
 
+<!--
+filt: {{search.filters}}
+-->
+
+<!--
   <md-input-container>
     <label>Fete</label>
     <md-select ng-model="search.filters.fete" md-on-close="search.searchTextChange()" >
@@ -89,6 +104,7 @@
       </md-optgroup>
     </md-select>
   </md-input-container>
+  -->
 
   <md-input-container>
     <label>Lieu</label>
@@ -101,7 +117,7 @@
   </md-input-container>
 
   <md-input-container>
-    <label>Manuscrit</label>
+    <label>Support</label>
     <md-select ng-model="search.filters.manuscrit" md-on-close="search.searchTextChange()" >
       <md-optgroup label="manuscrits">
         <md-option ng-value="">-</md-option>
@@ -110,14 +126,37 @@
     </md-select>
   </md-input-container>
 
+<!--
+  <md-input-container>
+    <label>Langue</label>
+    <md-select ng-model="search.filters.langue" md-on-close="search.searchTextChange()" >
+      <md-optgroup label="langues">
+        <md-option ng-value="">-</md-option>
+        <md-option value="français" >français</md-option>
+        <md-option value="latin" >latin</md-option>
+        <md-option value="italien" >italien</md-option>
+      </md-optgroup>
+    </md-select>
+  </md-input-container>
+-->
+
+
+<!--
+  <br>
+  <br>
+      <input type="checkbox" id="cb" ng-model="search.filters.gravure" />
+      <label for="cb">Gravure</label>
+-->
+
 </div>
 <div layout="column" flex=50>
+
   <md-input-container>
-    <label>Apparato</label>
-    <md-select ng-model="search.filters.apparato" md-on-close="search.searchTextChange()" >
-      <md-optgroup label="apparato">
+    <label>Temps</label>
+    <md-select ng-model="search.filters.temps" md-on-close="search.searchTextChange()" >
+      <md-optgroup label="temps">
         <md-option ng-value="">-</md-option>
-        <md-option ng-value="item" ng-repeat="item in ::search.base.apparatos" >{{item}}</md-option>
+        <md-option ng-value="item" ng-repeat="item in ::search.base.temps" >{{item}}</md-option>
       </md-optgroup>
     </md-select>
   </md-input-container>
@@ -133,26 +172,26 @@
   </md-input-container>
 
   <md-input-container>
-    <label>Temps</label>
-    <md-select ng-model="search.filters.temps" md-on-close="search.searchTextChange()" >
-      <md-optgroup label="temps">
+    <label>Apparato</label>
+    <md-select ng-model="search.filters.apparato" md-on-close="search.searchTextChange()" >
+      <md-optgroup label="apparato">
         <md-option ng-value="">-</md-option>
-        <md-option ng-value="item" ng-repeat="item in ::search.base.temps" >{{item}}</md-option>
+        <md-option ng-value="item" ng-repeat="item in ::search.base.apparatos" >{{item}}</md-option>
       </md-optgroup>
     </md-select>
   </md-input-container>
 
   <div layout="row" layout-align="center center">
-      <label for="inputs" style="padding-right: 20px;"> Date range </label>
+      <label for="inputs" style="padding-right: 20px;"> Date </label>
       <md-input-container style="margin: 0px;">
-        <label>From</label>
+        <label>De</label>
         <input type="text" ng-model="search.filters.start_date"
-            ng-blur="search.searchTextChange()" placeholder='gg-mm-aaaa' size="13">
+            ng-blur="search.searchTextChange()" placeholder='jj-mm-aaaa' size="13">
       </md-input-container>
       <md-input-container style="margin: 0px;">
-        <label>To</label>
+        <label>À</label>
         <input type="text" ng-model="search.filters.end_date"
-            ng-blur="search.searchTextChange()" placeholder='gg-mm-aaaa' size="13">
+            ng-blur="search.searchTextChange()" placeholder='jj-mm-aaaa' size="13">
       </md-input-container>
   </div>
 
@@ -163,8 +202,13 @@
         <div
             ng-if="!search.advancedLoader"
             class="md-actions" layout="row" layout-align="end end">
+            <!--
            <md-button ng-click="search.cloneDate()">clone date</md-button>
-           <md-button ng-click="search.clearFilters()">clear filters</md-button>
+           -->
+
+           <md-button ng-click="search.clearFilters()">
+               Effacer
+           </md-button>
          </div>
     </md-card>
 </div>
@@ -230,26 +274,49 @@
 
     <md-list-item>
 
-        <md-card>
+        <md-card
+        style="width: 80px; height: 130px;"
+            >
          <a ui-sref='public.details({id: item._id, query:search.searchText})'>
           <div ng-if='!item._source.doc.thumbnail'
             class="searchthumb"
             ng-style="{'background-image':'url(placehold.it/110x160)'}"></div>
           <div ng-if='item._source.doc.thumbnail'
+            style="background-size: 80px 130px;"
+
             class="searchthumb"
             ng-style="{'background-image':'url('+ item._source.doc.thumbnail +')'}"></div>
          </a>
         </md-card>
+
         <md-card class="nobox">
             <md-card-content class="minextrait"
                 layout="column" layout-align="center center">
-                <p>
-                <strong>
+
+                <table class="nospaces bordered">
+                    <tr>
+                        <th>
+                        ID
+                        </th>
+                        <td>
+
                   <span
                     md-highlight-text="search.searchText"
-                    md-highlight-flags="i">{{item._source.extrait}}</span>
-                </strong>
-                </p>
+                    md-highlight-flags="i">
+                    {{item._source.extrait}}
+                    </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                        Page
+                        </th>
+                        <td>
+                    {{item._source.page}}
+                        </td>
+                    </tr>
+                </table>
+
             </md-card-content>
         </md-card>
         <md-card>
@@ -282,5 +349,74 @@
 </md-content>
 
 <!-- COMMENT END - bug -->
+
+
+<section layout="row" flex>
+    <md-sidenav class="md-sidenav-right" md-component-id="left"
+                md-disable-backdrop md-whiteframe="4">
+
+      <md-toolbar class="blue-grey">
+        <h1 class="md-toolbar-tools">
+            Index
+            <a href ng-click="toggle()">
+              <i class="material-icons">close</i>
+            </a>
+        </h1>
+      </md-toolbar>
+
+      <md-content layout-margin>
+
+          <md-list class="md-dense" flex>
+
+  <md-input-container>
+  <label>recherche</label>
+      <input type="text" ng-model="lexvar" ng-change="findLex()"/>
+  </md-input-container>
+
+<!--
+            <md-subheader class="md-no-sticky">
+                search results:
+            </md-subheader>
+-->
+
+            <div ng-repeat="lex in lexers">
+            <md-list-item class="md-3-line">
+              <div class="md-list-item-text" layout="column">
+                <h3>titre:
+
+                    <b>
+                    <a href ng-click="search.searchText = lex._source.titre ">
+                        {{lex._source.titre}}
+
+                    </a>
+                    </b>
+                </h3>
+                <h4>
+                    français: {{lex._source["français"]}}
+                </h4><h4>
+                    latin: {{lex._source.latin}}
+                </h4><h4>
+                    italien: {{lex._source.italien}}
+                </h4>
+                <h4>
+                <i>
+                {{lex._source.sheet}}
+                &gt; {{lex._source.macro}}
+                &gt; {{lex._source.micro}}
+                </i>
+                </h4>
+                <br>
+              </div>
+            </md-list-item>
+            <md-divider ></md-divider>
+            </div>
+
+          </md-list>
+
+      </md-content>
+
+    </md-sidenav>
+
+</section>
 
 </div>

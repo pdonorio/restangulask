@@ -37,7 +37,6 @@
             <td>
             <div ng-repeat="source in steps.sources">
                 <span ng-if="source == steps.currentSource">
-                    <i class="material-icons">navigate_next</i>
                     {{source}}
                 </span>
                 <span ng-if="source != steps.currentSource">
@@ -51,6 +50,7 @@
           </tr>
         </table>
 
+        <div flex=70>
         <table class="table table-hover bordered highlight responsive-table">
             <thead style="font-style: italic;">
                 <tr>
@@ -70,9 +70,9 @@
                 TO FIX: sort by page? what is a page?
                 -->
                 <tr ng-repeat="row in steps.element.extrait[steps.currentSource] | orderBy: '+sort'">
-                    <td width="20%">
+                    <td>
                     <a ui-sref='public.details({id: row.record})'>
-                     <img height=160
+                     <img height=80 width=50
                 ng-src="/static/uploads/{{row.filename}}/TileGroup0/0-0-0.jpg">
                     </a>
                     </td>
@@ -92,6 +92,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
       </div>
 
       <div ng-if="steps.data && ! steps.element">
@@ -116,8 +117,7 @@
             <tbody>
              <tr ng-repeat="(key, fete) in steps.parties | orderBy:sortColumn:reverse ">
                 <td ng-repeat="header in steps.headers"
-                    ng-class="{'right-align': (header == 'Lieu'),
-                     'topv-align': true}">
+                    ng-class="{'topv-align': true}">
 
                     <span ng-if="header == 'Fete'">
                      <!-- <a href ng-click="steps.selectElement(fete.key)"> -->
@@ -128,7 +128,7 @@
 
                     <span ng-if="header == 'Source'">
                      <div ng-repeat="source in fete[header]">
-                        <a ui-sref="public.list({name: fete.key, book: 0})">
+                        <a ui-sref="public.list({name: fete.key, book: fete[header].indexOf(source)})">
                             {{source}}
                         </a>
                      </div>

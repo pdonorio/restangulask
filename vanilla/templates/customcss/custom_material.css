@@ -1,3 +1,9 @@
+
+md-sidenav {
+    width: 520px;
+    max-width: 620px;
+}
+
 .virtualRepeatInfiniteScroll #vertical-container {
   height: 700px;
   width: 100%;
@@ -169,10 +175,18 @@ http://jonathannicol.com/blog/2014/06/16/centre-crop-thumbnails-with-css/
     color: #F50057;
 }
 
+/* UHM */
+.lefty table thead th {
+    text-align: left;
+    padding: 0px;
+}
+
 .nospaces { padding: 0; margin: 0; border:0; }
 .nospaces table { padding: 0; margin: 0; border:0; }
 .nospaces table th { padding: 0; margin: 0; border:0; }
 .nospaces table td { padding: 0; margin: 0; border:0; }
+.nospaces table tbody th { padding: 0; margin: 0; border:0; }
+.nospaces table tbody td { padding: 0; margin: 0; border:0; }
 
 .rounder {
     border-radius: 5px;
@@ -186,8 +200,8 @@ http://jonathannicol.com/blog/2014/06/16/centre-crop-thumbnails-with-css/
 .smalltexttable table { padding: 0; }
 .smalltexttable tr { padding: 0; margin: 0; }
 */
-.smalltexttable thead { border: 0; padding-top: 12px; padding-bottom: 2px; }
-.smalltexttable th,td { padding-top: 2px; padding-bottom: 10px; }
+.smalltexttable thead { border: 0; padding-top: 2px; padding-bottom: 2px; }
+.smalltexttable th,td { padding-top: 0px; padding-bottom: 5px; }
 .topaling td, th {
     vertical-align: top;
     line-height: 10px;

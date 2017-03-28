@@ -9,7 +9,7 @@ angular.module('web')
 
     //hotkeys, keyshortcuts,
 function FastSearchController($scope, $log, $stateParams, $timeout,
-    SearchService, $mdBottomSheet)
+    SearchService, $mdBottomSheet, $mdSidenav)
 {
 
   // INIT controller
@@ -17,6 +17,31 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
   self.elements = null;
   $log.warn("New FAST search controller");
   $mdBottomSheet.hide("search");
+
+  ///////////////////////////
+  $scope.toggle = function() {
+    $mdSidenav('left').toggle();
+    $scope.lexvar = "";
+    $scope.findLex();
+  }
+  $scope.findLex = function() {
+
+    console.log("Calling find lex");
+      SearchService.getFastLex($scope.lexvar, 50)
+        .then(function(out){
+          if (out && out.elements) {
+            if (out.elements > 0) {
+                console.log("LEX", out);
+                $scope.lexers = out.data;
+            }
+          }
+      });
+  }
+
+  // $timeout(function(){
+  //   // $scope.toggle();
+  //   $scope.advanced = true;
+  // }, 1000);
 
   ///////////////////////////
   // http://stackoverflow.com/a/37826964/2114395
@@ -49,7 +74,7 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
 
   $scope.advanced = false;
   var filtersKey = [
-    'fete', 'source', 'lieu', 'manuscrits',
+    'fete', 'source', 'lieu', 'manuscrits', 'gravure',
     'apparato', 'actions', 'temps'
   ];
   // local storage / cookie
@@ -63,7 +88,8 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
           $scope.advanced = true;
     });
   } else {
-    self.filters = {};
+    self.filters = {
+    };
   }
   // console.log("current filters", self.filters);
 
@@ -198,16 +224,16 @@ function FastSearchController($scope, $log, $stateParams, $timeout,
     }
   }
 
+  $scope.fields = [
+    'sheet', 'macro', 'micro',
+    'titre', 'latin', 'français', 'italiano'
+  ];
   self.checkLexique = function () {
     $scope.rows = null;
     $scope.selected = self.searchText;
-    $scope.fields = [
-        'sheet', 'macro', 'micro',
-        'titre', 'latin', 'français', 'italiano'
-    ];
     console.log("CHECK LEX", $scope.selected);
 
-    SearchService.getFastLex(self.searchText)
+    SearchService.getFastLex(self.searchText, 5)
       .then(function(out){
           if (out && out.elements) {
             if (out.elements > 0) {

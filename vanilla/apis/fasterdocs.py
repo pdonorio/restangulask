@@ -153,9 +153,12 @@ class FastSuggestion(ExtendedApiResource, FastSearch):
 
 class FastLex(ExtendedApiResource, FastSearch):
 
+    @deck.add_endpoint_parameter(name='size')
     @deck.apimethod
     @auth_token_required
     def get(self, term=None):
+        size = self.get_input_new().get('size', 5)
+        # print("SIZE", size)
         self.get_instance()
-        data, count = self.fast_get_all(term)
+        data, count = self.fast_get_all(term, size=size)
         return self.response(data, elements=count)

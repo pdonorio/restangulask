@@ -12,6 +12,23 @@ http://www.zoomify.com/products.htm
 
 <body>
 
+<div style="text-align:center; width:100%;" >
+    <a href="/zoom/{{pages['prev']['id']}}/{{pages['prev']['num']}}">
+        &lt; {{pages['prev']['name']}}
+    </a>
+
+    <b>
+        {{pages['curr']['name']}}
+    </b>
+
+    <a href="/zoom/{{pages['next']['id']}}/{{pages['next']['num']}}">
+        {{pages['next']['name']}} &gt;
+    </a>
+
+</div>
+
+<br>
+
 <script type="text/javascript">
   Z.showImage(
     "myContainer",
@@ -35,21 +52,6 @@ http://www.zoomify.com/products.htm
     " ></div>
 
 </br>
-
-<div style="text-align:center; width:100%;" >
-    <a href="/zoom/{{pages['prev']['id']}}/{{pages['prev']['num']}}">
-        {{pages['prev']['name']}}
-    </a>
-
-    <b>
-        {{pages['curr']['name']}}
-    </b>
-
-    <a href="/zoom/{{pages['next']['id']}}/{{pages['next']['num']}}">
-        {{pages['next']['name']}}
-    </a>
-
-</div>
 
     <!-- <br> <br> {{pages}} -->
 

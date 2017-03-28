@@ -29,8 +29,9 @@ function SearchService($log, api) {
         return api.apiCall(self.endpoints.lexique);
     }
 
-    self.getFastLex = function(keyword) {
-        return api.apiCall(self.endpoints.elastic_lexique, 'GET', null, keyword);
+    self.getFastLex = function(keyword, size) {
+        return api.apiCall(self.endpoints.elastic_lexique, 'GET',
+            {size: size}, keyword);
     }
 
 //////////////////

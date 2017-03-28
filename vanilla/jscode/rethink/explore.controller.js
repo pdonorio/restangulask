@@ -311,11 +311,11 @@ function StepsController($scope, $log,
 
     self.cookieKey = 'searchParameters';
     self.headers = [
-        'Fete', //'Fête',
-        'Source',
-        'Type',
         'Lieu',
+        'Fete', //'Fête',
         'Date',
+        'Source',
+        //'Type',
     ];
 
     SearchService.getFetes().then(function (out) {

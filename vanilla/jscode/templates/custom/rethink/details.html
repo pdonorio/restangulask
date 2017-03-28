@@ -20,6 +20,7 @@
 <!-- MAKE RESPONSIVE -->
    <div flex="70" class="right-pad" ng-if="detail.data.id">
 
+<!--
       <div>
         <span>
         <b>Fête</b>: {{detail.refinedData["Fête"]["Titre abrégé"]}}
@@ -28,12 +29,11 @@
         <br>
         <b>Extrait</b>: {{detail.refinedData["Extrait"]["Numero de l'extrait"]}}
         </span>
-<!--
         <br>
         <b>Page</b>: {{detail.refinedData["Extrait"]["Numero de page de l'extrait"]}}
         </span>
--->
       </div>
+-->
 
       <div layout="row">
           <md-content flex="40" layout="row" layout-padding layout-align="center center">
@@ -67,7 +67,10 @@
                     <!-- <md-option ng-value="">-</md-option> -->
                         <!-- {{item.name}} ({{item.page}}) -->
                     <md-option ng-value="item.id" ng-repeat="item in detail.pages" >
-                        {{item.page}} ( {{item.name}} )
+                        {{item.page}}
+                        <!--
+                        ( {{item.name}} )
+                        -->
                     </md-option>
                   </md-optgroup>
                 </md-select>
@@ -138,7 +141,7 @@
             </div>
 
             <!-- CONTENT -->
-            <div
+            <div style="padding-right: 20px;"
                 ng-dblclick="detail.showListBottomSheet()"
                 ng-bind-html="detail.current_text"
                 ></div>
@@ -156,7 +159,7 @@
 
      <thead> <tr> <td colspan="2">
         <div ng-if="detail.logged" layout="row">
-          <div flex="60" layout="row">
+          <div flex="40" layout="row">
             <div class="left-pad">
                 <a ui-sref="logged.submit({id: theid})" class="btn btn-floating">
                     <i class="material-icons" data-position="down"
@@ -185,49 +188,15 @@
                 </a>
             </div>
           </div>
-          <div flex="40">
+          <div flex="60">
                 <h4 class="teal-text text-darken-2">
-                DÉTAILS
+                Métadonnées
                 <!-- DE LA PAGE -->
                 </h4>
           </div>
         </div>
 
         </td> </tr> </thead>
-      <tbody ng-init="key='Détails'"
-          ng-dblclick="detail.showListBottomSheet()">
-        <tr ng-init="field1='Personnages'"
-            ng-show='detail.refinedData[key][field1]'>
-          <th width="35%"> {{ field1 }} </th>
-          <td> {{detail.refinedData[key][field1]}} </td>
-        </tr>
-        <tr ng-init="field2='Temps'"
-            ng-show='detail.refinedData[key][field2]'>
-          <th width="35%"> {{ field2 }} </th>
-          <td> {{detail.refinedData[key][field2]}} </td>
-        </tr>
-        <tr ng-init="field3='Actions'"
-            ng-show='detail.refinedData[key][field3]
-            || detail.refinedData[key][field3 + " libres"]'>
-          <th width="35%"> {{ field3 }} </th>
-          <td>
-            {{detail.refinedData[key][field3]}}<span
-                ng-if="detail.refinedData[key][field3] && detail.refinedData[key][field3 + ' libres']">,</span>
-            {{detail.refinedData[key][field3 + ' libres']}}
-          </td>
-        </tr>
-        <tr ng-init="field4='Apparato'"
-            ng-show='detail.refinedData[key][field4]
-            || detail.refinedData[key][field4 + " libre"]'>
-          <th width="35%"> {{ field4 }} </th>
-          <td>
-            {{detail.refinedData[key][field4]}}<span
-                ng-if="detail.refinedData[key][field4] && detail.refinedData[key][field4 + ' libres']">,</span>
-            {{detail.refinedData[key][field4 + ' libre']}}
-          </td>
-        </tr>
-      </tbody>
-
      <thead style="background-color: #b3ccd9;">
       <tr>
         <td colspan="2"> <h5> FÊTE </h5> </td>
@@ -236,7 +205,7 @@
       style="background-color: #b3ccd9;">
         <tr ng-init="field11='Titre abrégé'"
             ng-show='detail.refinedData[key2][field11]'>
-          <th width="35%"> {{ field11 }} </th>
+          <th width="35%"> Fête </th>
           <td> {{detail.refinedData[key2][field11]}} </td>
         </tr>
         <tr ng-init="field12='Date'"
@@ -271,6 +240,45 @@
 
       </tbody>
 
+     <thead style="background-color: #89E885;">
+      <tr>
+        <td colspan="2"> <h5> UHM </h5> </td>
+       </tr> </thead>
+     <tbody style="background-color: #89E885;"
+      ng-init="key='Détails'"
+          ng-dblclick="detail.showListBottomSheet()">
+        <tr ng-init="field1='Personnages'"
+            ng-show='detail.refinedData[key][field1]'>
+          <th width="35%"> {{ field1 }} </th>
+          <td> {{detail.refinedData[key][field1]}} </td>
+        </tr>
+        <tr ng-init="field2='Temps'"
+            ng-show='detail.refinedData[key][field2]'>
+          <th width="35%"> {{ field2 }} </th>
+          <td> {{detail.refinedData[key][field2]}} </td>
+        </tr>
+        <tr ng-init="field3='Actions'"
+            ng-show='detail.refinedData[key][field3]
+            || detail.refinedData[key][field3 + " libres"]'>
+          <th width="35%"> {{ field3 }} </th>
+          <td>
+            {{detail.refinedData[key][field3]}}<span
+                ng-if="detail.refinedData[key][field3] && detail.refinedData[key][field3 + ' libres']">,</span>
+            {{detail.refinedData[key][field3 + ' libres']}}
+          </td>
+        </tr>
+        <tr ng-init="field4='Apparato'"
+            ng-show='detail.refinedData[key][field4]
+            || detail.refinedData[key][field4 + " libre"]'>
+          <th width="35%"> {{ field4 }} </th>
+          <td>
+            {{detail.refinedData[key][field4]}}<span
+                ng-if="detail.refinedData[key][field4] && detail.refinedData[key][field4 + ' libres']">,</span>
+            {{detail.refinedData[key][field4 + ' libre']}}
+          </td>
+        </tr>
+      </tbody>
+
 
      <thead style="background-color: #C4FFEB;" >
       <tr> <td colspan="2">
@@ -278,15 +286,25 @@
         </td> </tr> </thead>
       <tbody style="background-color: #C4FFEB;"
         ng-init="key3='Source'">
+        <tr ng-init="field22='Titre'"
+            ng-show='detail.refinedData[key3][field22]'>
+          <th width="35%"> {{ field22 }} </th>
+          <td>
+            <a href>
+          {{detail.refinedData[key3][field22]}}
+            </a>
+          </td>
+        </tr>
+        <tr>
+           <th> Titre abrégé </th>
+           <td>
+                {{detail.refinedData["Source"]["Titre abrégé"]}}
+           </td>
+        </tr>
         <tr ng-init="field21='Type de source'"
             ng-show='detail.refinedData[key3][field21]'>
           <th width="35%"> {{ field21 }} </th>
           <td> {{detail.refinedData[key3][field21]}} </td>
-        </tr>
-        <tr ng-init="field22='Titre'"
-            ng-show='detail.refinedData[key3][field22]'>
-          <th width="35%"> {{ field22 }} </th>
-          <td> {{detail.refinedData[key3][field22]}} </td>
         </tr>
         <tr ng-init="field22bis='Lieu d' + quote + 'édition'"
             ng-show='detail.refinedData[key3][field22bis]'>
