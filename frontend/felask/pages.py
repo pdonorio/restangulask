@@ -36,7 +36,10 @@ css = []
 for scss in fconfig['css']:
     css.append(bowerdir + scss)
 for scss in fconfig['customcss']:
-    css.append(staticdir + scss)
+    if not scss.startswith('http'):
+        css.append(staticdir + scss)
+    else:
+        css.append(scss)
 # JS: Angular framework and app files
 js = []
 for sjs in fconfig['js']:
@@ -113,10 +116,10 @@ def templating(page, framework=CURRENT_FRAMEWORK, **whatever):
     return render_template(templ, **tmp)
 
 
-def jstemplate(title='App', mydomain='/'):
+def jstemplate(title='App', mydomain='/', page='main.html'):
     """ If you decide a different domain, use slash as end path,
         e.g. /app/ """
-    return templating('main.html', mydomain=mydomain, jstitle=title)
+    return templating(page, mydomain=mydomain, jstitle=title)
 
 
 # #################################
@@ -278,11 +281,23 @@ def zoom(document, code):
 
 
 ######################################################
-# MAIN ROUTE: give angular the power
+######################################################
+# @cms.route('/', methods=["GET"])
+# def welcome():
+#     """ welcome page """
+#     return jstemplate(mydomain='/', page='welcome.html')
 
+
+# @cms.route('/test', methods=["GET"])
+# def app():
+#     """ welcome page """
+#     return jstemplate(mydomain='/test', page='app.html')
+
+
+# MAIN ROUTE: give angular the power
 @cms.route('/', methods=["GET"])
 @cms.route('/<path:mypath>', methods=["GET"])
-def home(mypath=None):
+def angular(mypath=None):
     """
     The main and only real HTML route in this server.
     The only real purpose is to serve angular pages and routes.
@@ -293,4 +308,4 @@ def home(mypath=None):
         pass
     elif mypath == 'loggedout':
         logout_user()
-    return jstemplate()
+    return jstemplate(mydomain='/', page='none.html')

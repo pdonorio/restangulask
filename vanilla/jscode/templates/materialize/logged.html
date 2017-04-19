@@ -1,19 +1,54 @@
-<md-content>
- <div ui-view='loggedview'>
-    <!-- BECOMES REPLACED WHEN A CHILD INHERITS THIS VIEW -->
 
-  <div layout="row" layout-align='center'>
-    <h3>Well done!</h3>
-  </div>
+<md-content
+    style=" background-color: #eee; "
+    layout="row" layout-wrap layout-align="center start" layout-fill
+    >
+ <div layout="column" flex=90>
 
-  <div layout="row" layout-align='center'>
-    <p>
-        <i class="material-icons">account_circle</i>
-        <span>
-            Now, you are <b>logged</b> inside our app.
-        </span>
-    </p>
-  </div>
+    <md-toolbar class="blue-grey md-whiteframe-4dp ">
+      <div class="md-toolbar-tools">
+        <h2 flex md-truncate
+    style=" font-family: 'Montserrat', sans-serif; font-size: 30px; "
+        >
+        <a ui-sref='welcome'>
+        CSB
+        </a>
+        </h2>
+
+    <md-button
+        class="md-raised lime darken-2 white-text"
+         aria-label="Learn More">
+      Recherche
+    </md-button>
+    <md-button
+        class="md-raised lime darken-2 white-text"
+     aria-label="Learn More">
+      Liste de Fetes
+    </md-button>
+    <md-button
+        class="md-raised lime darken-2 white-text"
+     aria-label="Learn More">
+      Exposition
+    </md-button>
+
+      </div>
+    </md-toolbar>
+
+ <md-content layout="column" layout-padding
+    style=" background-color: #fff; min-height: 700px; "
+    class="md-whiteframe-4dp"
+    >
+     <div ui-view='loggedview'>
+      <div layout="row" layout-align='center'>
+        <h3>Well done!</h3>
+      </div>
+      <div layout="row" layout-align='center'>
+        <p> <i class="material-icons">account_circle</i>
+            <span> Now, you are <b>logged</b> inside our app. </span>
+        </p>
+      </div>
+     </div>
+  </md-content>
 
  </div>
 </md-content>

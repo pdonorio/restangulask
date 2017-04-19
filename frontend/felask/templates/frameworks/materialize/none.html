@@ -1,0 +1,8 @@
+{% extends 'index.html' %}
+
+{%- block content %}
+<main ng-controller='AppRootController as root' layout-fill ng-cloak>
+    <div ng-if="root.load" ng-include="root.templateDir + 'loader.html'"></div>
+    <div ng-hide="root.load" ui-view='main' layout-fill></div>
+</main>
+{% endblock %}

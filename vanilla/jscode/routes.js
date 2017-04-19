@@ -164,51 +164,17 @@ $stateProvider
 // Welcome page
     .state("welcome", {
         url: "/welcome",
-        resolve: {
-            // skip: _skipAuthenticationCheckApiOnline,
-            redirect: _redirectIfNotAuthenticated,
-        },
         views: {
-            "menu": {
-                templateUrl: templateDir + 'menu.html',
-                //templateUrl: templateDir + 'intro_menu.html',
-            },
-            // "sidebar": {
-            //     templateUrl: templateDir + 'history_sidenav.html',
+            // "menu": {
+            //     templateUrl: templateDir + 'menu.html',
             // },
             "main": {
-                templateUrl: templateDir + 'intro.html',
+                templateUrl: templateDir + 'welcome.html',
             }
         },
     })
 
-    .state("welcome.alternative", {
-        url: "/alternative",
-        views: {
-            "main@": {
-                templateUrl: templateDir + 'sliders.html',
-            }
-        },
-        onEnter: function ($rootScope) {
-            $rootScope.avoidTheToolbar = true;
-            $rootScope.disable_sidemenu = true;
-        },
-        onExit: function ($rootScope) {
-            $rootScope.avoidTheToolbar = false;
-            $rootScope.disable_sidemenu = false;
-        }
-    })
-
-    .state("welcome.test", {
-        url: "/test",
-        views: {
-            "menu@": {template: 'test'},
-            "main@": {
-                templateUrl: blueprintTemplateDir + 'justatester.html',
-            },
-        },
-    })
-
+/*
     .state("welcome.more", {
         url: "/info/:element?section_type",
         views: {
@@ -221,30 +187,26 @@ $stateProvider
             $rootScope.disable_sidemenu = false;
         }
     })
+*/
 
-    .state("welcome.subsection", {
-        url: "/project",
-        views: {
-            "main@": {
-                templateUrl: templateDir + 'project_explain.html',
-            }
+// Base for the app views
+// a parent that checks for authentication and api online
+    .state("logged", {
+        url: "/app",
+        resolve: {
+            redirect: _redirectIfNotAuthenticated
         },
-        onEnter: function ($rootScope) {
-            $rootScope.avoidTheToolbar = false;
-            $rootScope.disable_sidemenu = false;
-        }
-    })
-
-    .state("welcome.workinprogress", {
-        url: "/workinprogress",
         views: {
-            "main@": {
-                templateUrl: templateDir + 'workinprogress.html',
+            "menu": {
+                templateUrl: templateDir + 'menu.html',
+            },
+            "main": {
+                templateUrl: templateDir + 'logged.html',
             }
         },
     })
 
-// If i see API are not available
+/*
     .state("offline", {
         url: "/offline",
         views: {
@@ -274,49 +236,22 @@ $stateProvider
         }
     })
 
-// A public state
-    .state("public", {
-        url: "/public",
-        resolve: {
-            // skip: _skipAuthenticationCheckApiOnline,
-            redirect: _redirectIfNotAuthenticated,
-        },
-        views: {
-            "menu": {
-                templateUrl: templateDir + 'menu.html',
-            },
-            // "sidebar": {
-            //     templateUrl: templateDir + 'history_sidenav.html',
-            // },
-            "main": {
-                template: "<div ui-view='unlogged'></div>",
-            }
-        }
-    })
+    // .state("public", {
+    //     url: "/public",
+    //     resolve: {
+    //         // skip: _skipAuthenticationCheckApiOnline,
+    //         redirect: _redirectIfNotAuthenticated,
+    //     },
+    //     views: {
+    //         "menu": {
+    //             templateUrl: templateDir + 'menu.html',
+    //         },
+    //         "main": {
+    //             template: "<div ui-view='unlogged'></div>",
+    //         }
+    //     }
+    // })
 
-// Base for the app views
-    .state("logged", {
-        url: "/app",
-        // This parent checks for authentication and api online
-        resolve: {
-            redirect: _redirectIfNotAuthenticated
-        },
-        // Implement main route for landing page after login
-        views: {
-            "menu": {
-                templateUrl: templateDir + 'menu.html',
-                //controller: 'AppRootController',
-            },
-            // "sidebar": {
-            //     templateUrl: templateDir + 'history_sidenav.html',
-            // },
-            "main": {
-        // and add a child view called 'loggedview' for logged pages
-                templateUrl: templateDir + 'logged.html',
-                //controller: 'AppRootController',
-            }
-        },
-    })
 
     .state("logged.logout", {
         url: "/logout",
@@ -325,6 +260,7 @@ $stateProvider
         }
     })
 
+*/
     // Routes definition ends here
     ;
 
@@ -332,16 +268,19 @@ $stateProvider
 // Missing bar on some routes
     $urlRouterProvider.when("/app/search", "/app/search/");
     $urlRouterProvider.when("/app/admin", "/app/admin/");
+    // $urlRouterProvider.when("", "/");
 
 // Ui router kinda bug fixing
 // CHECK THIS IN THE NEAR FUTURE
 //https://github.com/angular-ui/ui-router/issues/1022#issuecomment-50628789
     // $urlRouterProvider.otherwise('/login');
+
     $urlRouterProvider.otherwise(function ($injector) {
-        console.log("OTHERWISE");
+        // console.log("OTHERWISE");
         var $state = $injector.get('$state');
         //return $state.go('login');
         return $state.go('welcome');
+        // return $state.go('notfound');
     });
 
 }   // END CONFIG
