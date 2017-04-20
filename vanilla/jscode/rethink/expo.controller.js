@@ -86,6 +86,8 @@ function ExpoClient(
     $scope, $log, $rootScope, $state, $timeout, $window,
     AdminService)
 {
+    $rootScope.appFlexSize = 80;
+    $rootScope.appScrollY = false;
     //var self = this;
     $log.info("EXPO: fork");
     reLoadSections(AdminService, $scope);
@@ -102,7 +104,7 @@ function ExpoClient(
             return false;
         $timeout(function () {
             $log.warn("Move to", self.current_theme);
-            $state.go('public.expo.themes.selected.theme',
+            $state.go('logged.expo.themes.selected.theme',
                 {
                     section: section,
                     theme: data.current_theme,
@@ -136,7 +138,7 @@ function ExpoSingleSection($scope, $log, $sce,
     reLoadSections(AdminService, self, $rootScope.current_section)
      .then(function (out) {
 
-        if ($state.$current.name.slice(0,18) == "public.expo.pieces") {
+        if ($state.$current.name.slice(0,18) == "logged.expo.pieces") {
 
             delete $rootScope.current_image;
 
@@ -174,7 +176,7 @@ function ExpoSingleSection($scope, $log, $sce,
 //activate a new url...
         $timeout(function () {
             $log.warn("Move to", self.current_theme);
-            $state.go('public.expo.themes.selected.theme',
+            $state.go('logged.expo.themes.selected.theme',
                 {
                     section: $rootScope.current_section,
                     theme: self.current_theme,

@@ -21,7 +21,7 @@ function SideMenuController($scope, $rootScope, $log, $timeout, $state)
             name: 'exposition',
             section: 'Exposition',
             cls: null,
-            link: "public.expo", extra: {}
+            link: "logged.expo", extra: {}
             // link: "welcome.more",
             // extra: {section_type: 'welcome', element: 2}
         },

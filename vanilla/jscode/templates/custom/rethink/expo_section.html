@@ -30,7 +30,7 @@
             layout="column">
 
             <!-- Theme name: -->
-            <a class="black-text" ui-sref="public.expo.themes.selected.theme(
+            <a class="black-text" ui-sref="logged.expo.themes.selected.theme(
                 {section: current_section, theme: theme})">
                 <h5>
                     {{theme}}
@@ -43,7 +43,7 @@
                 ng-if="data.thumb"
                 layout="row" layout-padding>
               <div flex=40>
-                <a ui-sref="public.expo.themes.selected.theme.image({section: current_section, theme: theme, element: position})">
+                <a ui-sref="logged.expo.themes.selected.theme.image({section: current_section, theme: theme, element: position})">
             <div
                 ng-style=" {'background-image':
                 'url(' + root.imagesPath + data.thumb +'.medium.jpg' + ')'}"

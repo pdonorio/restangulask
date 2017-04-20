@@ -302,7 +302,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
     // Redirect to that state
     $rootScope.activateOther = function (route, params)
     {
-        $state.go('public.' + route, params);
+        $state.go('logged.' + route, params);
     }
 
 	// $log.info("Menu", $rootScope.menu);

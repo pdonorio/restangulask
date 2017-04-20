@@ -36,6 +36,16 @@ angular.module('web').constant('rethinkRoutes', {
             }
         },
     },
+    //////////////////////
+    'public.lex': {
+        url: "/lexique",
+        views: {
+            "unlogged": {
+                dir: 'blueprint',
+                templateUrl: 'lexique.html',
+            }
+        }
+    },
 */
 
     // 'logged.fastsearch': {
@@ -123,114 +133,58 @@ angular.module('web').constant('rethinkRoutes', {
             "loggedview": {dir: 'blueprint', templateUrl: 'admin.html'}
         },
     },
-
-/*
     //////////////////////
-        'public.lex': {
-            url: "/lexique",
-            views: {
-                "unlogged": {
-                    dir: 'blueprint',
-                    templateUrl: 'lexique.html',
-                }
-            }
-        },
-
+    'logged.expo': {
+        url: "/expo",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'expo_fork.html'}
+        }
+    }, 'logged.expo.pieces': {
+        url: "/_all",
+        views: {
+            "test": {dir: 'blueprint', templateUrl: 'expo_all.html'}
+        }
+    }, 'logged.expo.pieces.image': {
+        url: "/:position",
+        views: {
+            "images@logged.expo.pieces": {
+                dir: 'blueprint', templateUrl: 'expo_image.html'}
+        }
+    }, 'logged.expo.themes': {
+        url: "/themes",
+        views: {
+            "test": {dir: 'blueprint', templateUrl: 'expo_themes.html'}
+        }
+    }, 'logged.expo.themes.selected': {
+        url: "/:section",
+        views: {
+            "themes": {dir: 'blueprint', templateUrl: 'expo_section.html'}
+        }
+    }, 'logged.expo.themes.selected.theme': {
+        url: "/:theme",
+        views: {
+            "themes@logged.expo.themes": {
+                dir: 'blueprint', templateUrl: 'expo_theme.html'}
+        }
+    }, 'logged.expo.themes.selected.theme.image': {
+        url: "/:element",
+        views: {
+            "themes@logged.expo.themes": {
+                dir: 'blueprint', templateUrl: 'expo_image.html'}
+        }
+    },
     //////////////////////
-        'public.expo': {
-            url: "/expo",
-            views: {
-                "unlogged": {
-                    dir: 'blueprint',
-                    templateUrl: 'expo_fork.html',
-                }
-            }
+    'logged.list': {
+        url: "/list?name&book",
+        params: {
+            // squash: avoid showing in URL when value is default. cool
+            name: { value: '~', squash: true },
+            book: { value: null, squash: true }
         },
-
-        'public.expo.pieces': {
-            url: "/_all",
-            views: {
-                "test": {
-                    dir: 'blueprint',
-                    templateUrl: 'expo_all.html',
-                }
-            }
-        },
-
-        'public.expo.pieces.image': {
-            url: "/:position",
-            views: {
-                "images@public.expo.pieces": {
-                    dir: 'blueprint',
-                    //templateUrl: 'expo_only_image.html',
-                    templateUrl: 'expo_image.html',
-                }
-            }
-        },
-
-        'public.expo.themes': {
-            url: "/themes",
-            views: {
-                "test": {
-                    dir: 'blueprint',
-                    templateUrl: 'expo_themes.html',
-                }
-            }
-        },
-
-        'public.expo.themes.selected': {
-            url: "/:section",
-            views: {
-                "themes": {
-                    dir: 'blueprint',
-                    templateUrl: 'expo_section.html',
-                }
-            }
-        },
-
-        'public.expo.themes.selected.theme': {
-            url: "/:theme",
-            views: {
-                "themes@public.expo.themes": {
-                    dir: 'blueprint',
-                    templateUrl: 'expo_theme.html',
-                }
-            }
-        },
-
-        'public.expo.themes.selected.theme.image': {
-            url: "/:element",
-            views: {
-                "themes@public.expo.themes": {
-                    dir: 'blueprint',
-                    templateUrl: 'expo_image.html',
-                }
-            }
-        },
-
-    //////////////////////
-        'public.list': {
-            url: "/list?name&book",
-            params: {
-                name: {
-                    value: '~',
-                    // avoid showing in URL when value is default. cool
-                    squash: true
-                },
-                book: {
-                    value: null,
-                    squash: true
-                }
-            },
-            views: {
-                "unlogged": {
-                    dir: 'blueprint',
-                    templateUrl: 'steplist.html',
-                }
-            }
-        },
-*/
-
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'steplist.html'}
+        }
+    },
   }
 
 ); // END CONSTANT

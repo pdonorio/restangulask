@@ -6,15 +6,15 @@
     <div class="nav-wrapper" style='margin-left: 30px;'>
 
       <div class="column" ng-if="!current_image">
-        <a ui-sref="public.expo" class="breadcrumb">EXPO</a>
-        <a ui-sref="public.expo.themes"
+        <a ui-sref="logged.expo" class="breadcrumb">EXPO</a>
+        <a ui-sref="logged.expo.themes"
             class="breadcrumb">PAR SECTIONS </a>
         <a ng-if="current_section"
-            ui-sref="public.expo.themes.selected({section: current_section})"
+            ui-sref="logged.expo.themes.selected({section: current_section})"
             class="breadcrumb">
             {{current_section}} </a>
         <a ng-if="current_theme"
-            ui-sref="public.expo.themes.selected.theme(
+            ui-sref="logged.expo.themes.selected.theme(
             {section: current_section, theme: current_theme})"
             class="breadcrumb">
             {{current_theme}} </a>
@@ -26,7 +26,7 @@
       </div>
       <div ng-if="current_image">
         <a
-            ui-sref="public.expo.themes.selected.theme(
+            ui-sref="logged.expo.themes.selected.theme(
             {section: current_section, theme: current_theme})"
             class="breadcrumb">
             <i class="material-icons prefix">arrow_back</i>
@@ -55,7 +55,7 @@
         ng-mouseenter="value.select = true" ng-mouseleave="value.select = value.open">
 
         <div style="position: relative;">
-          <a ui-sref="public.expo.themes.selected({section: key})">
+          <a ui-sref="logged.expo.themes.selected({section: key})">
           <div class="thumbnail">
               <img ng-src="{{root.imagesPath + value.cover}}">
           </div>

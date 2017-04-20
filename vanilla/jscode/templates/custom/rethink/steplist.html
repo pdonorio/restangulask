@@ -7,7 +7,7 @@
         <h4 ng-show="steps.element">
 
             <!-- <a href ng-click="goToLastRoute()"> -->
-            <a ui-sref='public.list({name: null})'>
+            <a ui-sref='logged.list({name: null})'>
                 <md-button>
                     <div layout='row' layout-align="center center" flex >
                         <i class="material-icons prefix">arrow_back</i> Retour
@@ -40,7 +40,7 @@
                     {{source}}
                 </span>
                 <span ng-if="source != steps.currentSource">
-                    <a ui-sref="public.list({
+                    <a ui-sref="logged.list({
                         name: fete.key, book: steps.sources.indexOf(source)})">
                         {{source}}
                     </a>
@@ -121,14 +121,14 @@
 
                     <span ng-if="header == 'Fete'">
                      <!-- <a href ng-click="steps.selectElement(fete.key)"> -->
-                     <!-- <a href ui-sref="public.list({name: fete.key})"> -->
+                     <!-- <a href ui-sref="logged.list({name: fete.key})"> -->
                       <div ng-bind-html="fete[header]"></div>
                      <!-- </a> -->
                     </span>
 
                     <span ng-if="header == 'Source'">
                      <div ng-repeat="source in fete[header]">
-                        <a ui-sref="public.list({name: fete.key, book: fete[header].indexOf(source)})">
+                        <a ui-sref="logged.list({name: fete.key, book: fete[header].indexOf(source)})">
                             {{source}}
                         </a>
                      </div>

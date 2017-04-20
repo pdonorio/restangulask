@@ -8,7 +8,7 @@
         ng-if="data.thumb"
         layout="row" layout-padding>
       <div flex="40">
-        <a ui-sref="public.expo.themes.selected.theme.image(
+        <a ui-sref="logged.expo.themes.selected.theme.image(
           {section: current_section, theme: theme, element: position})">
         <div ng-style=" {'background-image':
             'url(' + root.imagesPath + data.thumb +'.medium.jpg' + ')'}"

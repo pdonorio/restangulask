@@ -4,8 +4,8 @@
   <nav class="grey" flex="70" style="padding-left: 50px;">
     <div class="nav-wrapper">
       <div class="column">
-        <a ui-sref="public.expo" class="breadcrumb">EXPO</a>
-        <a ui-sref="public.expo.pieces"
+        <a ui-sref="logged.expo" class="breadcrumb">EXPO</a>
+        <a ui-sref="logged.expo.pieces"
             class="breadcrumb">PAR OEUVRES</a>
         <a ng-if="current_image" class="breadcrumb">
             image: '{{current_image}}' </a>
@@ -25,7 +25,7 @@
             >
 
             <md-grid-tile ng-repeat="(uuid, element) in source.images">
-                <a ui-sref="public.expo.pieces.image({position: uuid})">
+                <a ui-sref="logged.expo.pieces.image({position: uuid})">
             <div flex="grow"
                 ng-style=" {'background-image':
                 'url(' + root.imagesPath + element.file +'.small.jpg' + ')'}"

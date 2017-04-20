@@ -297,9 +297,11 @@ function FixTransController($scope, $rootScope, $sce,
 // controller
 ////////////////////////////////
 
-function StepsController($scope, $log,
+function StepsController($scope, $rootScope, $log,
     $state, $stateParams, $window, SearchService)
 {
+    $rootScope.appFlexSize = 80;
+    $rootScope.appScrollY = false;
     // INIT controller
     var self = this;
     console.log("Fetes. Parameters:", $stateParams);
