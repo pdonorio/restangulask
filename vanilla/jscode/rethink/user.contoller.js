@@ -13,6 +13,7 @@ function UserManagerController($scope, $log, AdminService)
         if (out) {
             console.log("DATA", out);
             self.users = out.data;
+            console.log("a test");
         }
     });
 }

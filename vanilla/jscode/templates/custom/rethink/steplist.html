@@ -71,7 +71,7 @@
                 -->
                 <tr ng-repeat="row in steps.element.extrait[steps.currentSource] | orderBy: '+sort'">
                     <td>
-                    <a ui-sref='public.details({id: row.record})'>
+                    <a ui-sref='logged.details({id: row.record})'>
                      <img height=80 width=50
                 ng-src="/static/uploads/{{row.filename}}/TileGroup0/0-0-0.jpg">
                     </a>

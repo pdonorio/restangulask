@@ -1,9 +1,7 @@
 <div ng-controller="ToastController as toast" >
  <div ng-controller="DetailsController as detail" >
 
-    <a ui-sref='public.fastsearch()'>
-    <!-- <a ui-sref='public.fastsearch({text: detail.query})'> -->
-    <!-- <a href ng-click="goToLastRoute()"> -->
+    <a ui-sref='logged.fastsearch()'>
         <md-button>
             <div layout='row' layout-align="center center" flex >
                 <i class="material-icons prefix">arrow_back</i> Retour
@@ -42,7 +40,7 @@
                 data-tooltip="{{detail.first_page.name}}"
                 ng-if="detail.first_page && !detail.first_page.current
                     && detail.first_page.id != detail.previous_page.id"
-                ui-sref="public.details({id: detail.first_page.id})">
+                ui-sref="logged.details({id: detail.first_page.id})">
                 <i class="material-icons">skip_previous</i>
 
             </a>
@@ -50,7 +48,7 @@
                 tooltipped data-position="bottom" data-delay="50"
                 data-tooltip="{{detail.previous_page.name}}"
                 ng-if="detail.previous_page && !detail.previous_page.current"
-                ui-sref="public.details({id: detail.previous_page.id})">
+                ui-sref="logged.details({id: detail.previous_page.id})">
                 <i class="material-icons">keyboard_arrow_left</i>
             </a>
           </md-content>
@@ -81,7 +79,7 @@
                 tooltipped data-position="bottom" data-delay="50"
                 data-tooltip="{{detail.next_page.name}}"
                 ng-if="detail.next_page && !detail.next_page.current"
-                ui-sref="public.details({id: detail.next_page.id})">
+                ui-sref="logged.details({id: detail.next_page.id})">
                 <i class="material-icons">keyboard_arrow_right</i>
             </a>
             <a href layout="row" layout-align="center center"
@@ -89,7 +87,7 @@
                 data-tooltip="{{detail.last_page.name}}"
                 ng-if="detail.last_page && !detail.last_page.current
                     && detail.last_page.id != detail.next_page.id"
-                ui-sref="public.details({id: detail.last_page.id})">
+                ui-sref="logged.details({id: detail.last_page.id})">
                 <i class="material-icons">skip_next</i>
             </a>
           </md-content>
@@ -112,7 +110,9 @@
                 target="_blank" class="hoverable" >
              <img tooltipped data-position="right" data-delay="50"
                 data-tooltip="Click to zoom this image"
-                height=500
+                style="
+                height: 500px; max-width: 300px;
+                "
                 ng-src="/static/uploads/{{detail.data.images[0].filename}}">
             </a>
         </div>

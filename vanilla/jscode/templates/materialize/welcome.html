@@ -1,0 +1,108 @@
+
+<md-content
+    layout="row" layout-wrap layout-align="center start" layout-fill
+    style="
+        background-image: url('static/img/bg_mod.jpg');
+        background-position: 0px 90px;
+        background-size: 100% 800px ;
+    text-align: justify;
+  height: 1000px;
+    "
+    ng-cloak>
+
+<md-toolbar class="md-hue-2 md-whiteframe-6dp"
+    style="
+    top: 0; position:absolute; z-index: 3;
+    height: 100px;
+    line-height: 100px;
+    background-color: #455A64;"
+    >
+  <div class="md-toolbar-tools">
+
+<div flex md-truncate>
+    <h2
+    style="
+    font-family: 'Montserrat', sans-serif;
+    font-size: 46px; font-style: 'Light';
+    "
+    > Cultures du
+    <a ui-sref="welcome">
+    Spectacle Baroque
+    </a>
+    </h2>
+  </div>
+
+<div style=" bottom: 0; ">
+    <md-button
+        class="md-raised lime darken-2 white-text"
+         aria-label="Learn More">
+      Recherche
+    </md-button>
+    <md-button
+        class="md-raised lime darken-3 white-text"
+     aria-label="Learn More">
+      Liste de Fetes
+    </md-button>
+    <md-button
+        class="md-raised lime darken-4 white-text"
+     aria-label="Learn More">
+      Exposition
+    </md-button>
+</div>
+
+      </div>
+    </md-toolbar>
+
+
+ <div layout="column" flex=75 style="padding-top: 200px;">
+ <md-content layout="column" layout-padding
+    class="md-whiteframe-9dp rounder"
+    style=" background-color: rgba(239, 239, 239, 0.85); "
+    >
+    <div ui-view='welcomeview'>
+      <h4 align="center">Bienvenue</h4>
+      <br>
+
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum deserunt excepturi voluptatum nisi. Itaque, consectetur maiores iusto laborum repudiandae. Expedita possimus voluptas at, natus mollitia rerum voluptatibus nam iste sit.
+
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat dolores cum, vitae placeat voluptatem itaque. Ratione repellat minus hic rem, nam laborum ut dolor amet, dignissimos vitae, non maxime! Itaque?
+
+      <br> <br>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit earum totam ea eaque quia iste consequatur expedita, facere vitae voluptas sunt, nam magni tempore dolorum maxime. Saepe, officia rerum consequatur.
+
+      <br> <br>
+      <center>
+      <i class="material-icons">
+        <a ui-sref='logged'>
+            expand_more
+        </a>
+      </i>
+      </center>
+
+
+      <br> <br>
+    </div>
+
+  </md-content>
+
+ </div>
+</md-content>
+
+
+ <footer class="page-footer lime darken-3" ng-cloak>
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright ">
+    <div class="container">
+    Copyright
+    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+    </div>
+  </div>
+ </footer>

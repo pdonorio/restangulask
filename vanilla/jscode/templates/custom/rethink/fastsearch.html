@@ -277,7 +277,7 @@ filt: {{search.filters}}
         <md-card
         style="width: 80px; height: 130px;"
             >
-         <a ui-sref='public.details({id: item._id, query:search.searchText})'>
+         <a ui-sref='logged.details({id: item._id, query:search.searchText})'>
           <div ng-if='!item._source.doc.thumbnail'
             class="searchthumb"
             ng-style="{'background-image':'url(placehold.it/110x160)'}"></div>

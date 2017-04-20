@@ -1,9 +1,9 @@
 
-<md-content
+<md-content ng-controller='AppedController'
     style=" background-color: #eee; "
     layout="row" layout-wrap layout-align="center start" layout-fill
     >
- <div layout="column" flex=90>
+ <div layout="column" flex="{{appFlexSize}}">
 
     <md-toolbar class="blue-grey md-whiteframe-4dp ">
       <div class="md-toolbar-tools">
@@ -15,27 +15,41 @@
         </a>
         </h2>
 
-    <md-button
-        class="md-raised lime darken-2 white-text"
-         aria-label="Learn More">
+    <md-button class="md-raised lime darken-2 white-text">
+      <a ui-sref="logged.fastsearch">
       Recherche
+      </a>
     </md-button>
-    <md-button
-        class="md-raised lime darken-2 white-text"
-     aria-label="Learn More">
+    <md-button class="md-raised lime darken-2 white-text">
+      <a ui-sref="test">
       Liste de Fetes
+      </a>
     </md-button>
-    <md-button
-        class="md-raised lime darken-2 white-text"
-     aria-label="Learn More">
+    <md-button class="md-raised lime darken-2 white-text">
+      <a ui-sref="test">
       Exposition
+      </a>
+    </md-button>
+    <md-button class="md-raised lime darken-3 white-text">
+      <a ui-sref="test">
+      Manage
+      </a>
+    </md-button>
+    <md-button class="md-raised lime darken-4 white-text">
+      <a ui-sref="logged.logout">
+      Logout
+      </a>
     </md-button>
 
       </div>
     </md-toolbar>
 
  <md-content layout="column" layout-padding
-    style=" background-color: #fff; min-height: 700px; "
+    style="
+    background-color: #fff; min-height: 700px;
+    overflow-y: hidden; // hide vertical
+    overflow-x: hidden; // hide horizontal
+    "
     class="md-whiteframe-4dp"
     >
      <div ui-view='loggedview'>

@@ -3,29 +3,19 @@
 
 angular.module('web')
     .controller('DetailsController', DetailsController)
+    .controller('AppedController', AppedController)
     .controller('BrokenController', BrokenController);
 
-function BrokenController($scope, $log, AdminService)
-{
-    var self = this;
-    $log.info("Broke");
-    self.list = {};
-
-    AdminService.listCorrupted().then(function(out) {
-        if (out) {
-            self.order = Object.keys(out).sort();
-            self.list = out;
-            console.log("Uhm", self);
-        }
-    });
+function AppedController($scope, $rootScope) {
+    $rootScope.appFlexSize = 80;
 }
 
-function DetailsController($scope,
+function DetailsController($scope, $rootScope,
     $log, $sce, $stateParams, $auth, $window, $mdToast, $timeout, $state,
-    $mdBottomSheet,
-    SearchService, AdminService)
+    $mdBottomSheet, SearchService, AdminService)
 {
     var self = this;
+    $rootScope.appFlexSize = 100;
     $log.info("Single view on", $stateParams.id);
     self.logged = $auth.isAuthenticated();
 
@@ -351,7 +341,7 @@ function DetailsController($scope,
         console.log("Selected", self.page);
         if (self.page) {
             $timeout(function () {
-                $state.go("public.details", {id: self.page}); }, 200);
+                $state.go("logged.details", {id: self.page}); }, 200);
         }
     };
 
@@ -434,7 +424,7 @@ function DetailsController($scope,
         SearchService.removeElement($scope.theid).then(function() {
             console.log("Removed", $scope.theid);
             // redirect to search page
-            $timeout(function () { $state.go("public.fastsearch"); }, 2200);
+            $timeout(function () { $state.go("logged.fastsearch"); }, 2200);
         });
 
     }
@@ -444,6 +434,21 @@ function DetailsController($scope,
     //////////////////////////////
     loadData();
 
+}
+
+function BrokenController($scope, $log, AdminService)
+{
+    var self = this;
+    $log.info("Broke");
+    self.list = {};
+
+    AdminService.listCorrupted().then(function(out) {
+        if (out) {
+            self.order = Object.keys(out).sort();
+            self.list = out;
+            console.log("Uhm", self);
+        }
+    });
 }
 
 })();

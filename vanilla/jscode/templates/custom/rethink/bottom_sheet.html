@@ -23,7 +23,7 @@
                         (field=='latin') || (field=='français') || (field=='italiano')
                     )">
                   <span ng-if="row._source[field]">
-                    <a ui-sref='public.fastsearch({text: row._source[field]})'
+                    <a ui-sref='logged.fastsearch({text: row._source[field]})'
                         ng-if="check" > {{row._source[field]}} </a>
                     <span ng-if="!check"> {{row._source[field]}} </span>
                   </span>

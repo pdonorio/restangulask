@@ -19,10 +19,10 @@ function _redirectIfNotAuthenticated($state, $auth, $timeout, $log, api)
       if (response && $auth.isAuthenticated()) {
         return true;
       }
-      var state = 'login';
+      var state = 'welcome.login';
       // API not reachable
       if (response === null) {
-        state = 'offline';
+        state = 'welcome.offline';
       } else {
         // Token has expired...
         $auth.removeToken();
@@ -54,7 +54,7 @@ function _skipAuthenticationCheckApiOnline($state, $timeout, $auth, api)
         }
         // Not available
         $timeout(function () {
-            $state.go('offline');
+            $state.go('welcome.offline');
             return response;
         });
     });
@@ -197,42 +197,41 @@ $stateProvider
             redirect: _redirectIfNotAuthenticated
         },
         views: {
-            "menu": {
-                templateUrl: templateDir + 'menu.html',
-            },
+            // "menu": {
+            //     templateUrl: templateDir + 'menu.html',
+            // },
             "main": {
                 templateUrl: templateDir + 'logged.html',
             }
         },
     })
 
-/*
-    .state("offline", {
+    .state("welcome.offline", {
         url: "/offline",
         views: {
-            "main": {templateUrl: templateDir + 'offline.html'}
+            "welcomeview": {templateUrl: templateDir + 'offline.html'}
         }
     })
 
 // To log the user in
-    .state("login", {
+    .state("welcome.login", {
         url: "/login",
         resolve: {
             skip: _skipAuthenticationCheckApiOnline,
         },
         views: {
-            "main": {templateUrl: templateDir + 'login.html'}
+            "welcomeview": {templateUrl: templateDir + 'login.html'}
         }
     })
 
 // Registration page
-    .state("register", {
+    .state("welcome.register", {
         url: "/register",
         resolve: {
             skip: _skipAuthenticationCheckApiOnline,
         },
         views: {
-            "main": {templateUrl: templateDir + 'registration.html'}
+            "welcomeview": {templateUrl: templateDir + 'registration.html'}
         }
     })
 
@@ -252,15 +251,12 @@ $stateProvider
     //     }
     // })
 
-
     .state("logged.logout", {
         url: "/logout",
         views: {
-            "loggedview": {templateUrl: templateDir+'logout.html'}
+            "loggedview": {templateUrl: templateDir + 'logout.html'}
         }
     })
-
-*/
     // Routes definition ends here
     ;
 

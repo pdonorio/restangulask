@@ -113,6 +113,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
     // Init controller
     var self = this;
     $log.debug("Root controller");
+    $rootScope.appFlexSize = 80;
 
     // Utilities
     $rootScope.goTo = function (element) {
@@ -294,7 +295,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
     // Redirect to that state
     $rootScope.activateSearch = function ()
     {
-        $state.go('public.fastsearch', {'clean': true});
+        $state.go('logged.fastsearch', {'clean': true});
     }
 
     // In case of special search available

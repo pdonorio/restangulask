@@ -8,12 +8,14 @@ angular.module('web')
     .controller('FastSearchController', FastSearchController);
 
     //hotkeys, keyshortcuts,
-function FastSearchController($scope, $log, $stateParams, $timeout,
+function FastSearchController($scope, $rootScope,
+    $log, $stateParams, $timeout,
     SearchService, $mdBottomSheet, $mdSidenav)
 {
 
   // INIT controller
   var self = this;
+  $rootScope.appFlexSize = 80;
   self.elements = null;
   $log.warn("New FAST search controller");
   $mdBottomSheet.hide("search");

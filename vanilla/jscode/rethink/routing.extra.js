@@ -1,48 +1,10 @@
 (function() {
 'use strict';
 
-angular.module('web')
- .constant('rethinkRoutes',
-
 // EXTRA ROUTES
-    {
+angular.module('web').constant('rethinkRoutes', {
 
-    ////////////////////// NEW
-        'public.fastsearch': {
-            url: "/fastsearch/:text?clean",
-            views: {
-                "unlogged": {
-                    dir: 'blueprint',
-                    templateUrl: 'fastsearch.html',
-                }
-            },
-            // onEnter: function ($rootScope) {
-            //     $rootScope.avoidTheToolbar = true;
-            // },
-            // onExit: function ($rootScope) {
-            //     $rootScope.avoidTheToolbar = false;
-            // },
-        },
-
-/*
-    ////////////////////// OLD
-        'public.specialsearch': {
-            url: "/search/:text",
-            views: {
-                "unlogged": {
-                    dir: 'blueprint',
-                    templateUrl: 'search.html',
-                }
-            },
-            onEnter: function ($rootScope) {
-                $rootScope.avoidTheToolbar = true;
-            },
-            onExit: function ($rootScope) {
-                $rootScope.avoidTheToolbar = false;
-            },
-        },
-*/
-
+/* TO BE REMOVED...
     //////////////////////
         'public.db': {
             url: "/db",
@@ -53,7 +15,63 @@ angular.module('web')
                 }
             }
         },
+     // Much easier if it's on python template
+    //////////////////////
+        'logged.zoom': {
+            url: "/zoom/:id",
+            views: {
+                "loggedview": {
+                    dir: 'blueprint',
+                    templateUrl: 'zoom.html',
+                }
+            }
+        },
+*/
 
+    // 'logged.fastsearch': {
+    'logged.fastsearch': {
+        url: "/fastsearch/:text?clean",
+        views: {
+            // "unlogged": {
+            "loggedview": {
+                dir: 'blueprint', templateUrl: 'fastsearch.html', }
+        },
+        // onEnter: function ($rootScope) {
+        //     $rootScope.avoidTheToolbar = true;
+        // },
+        // onExit: function ($rootScope) {
+        //     $rootScope.avoidTheToolbar = false;
+        // },
+    },
+    //////////////////////
+    'logged.details': {
+        url: "/details/:id?query",
+        views: {
+            "loggedview": {
+                dir: 'blueprint', templateUrl: 'details.html', }
+        }
+    },
+    //////////////////////
+    'logged.submit': {
+        url: "/submit/:id?step",
+        views: {
+            "loggedview": {
+                dir: 'blueprint', template: '<formfarm> loading </formfarm>',
+            }
+        }
+    },
+    //////////////////////
+    'logged.remove': {
+        url: "/remove/:id",
+        views: {
+            "loggedview": {
+                dir: 'blueprint',
+                templateUrl: 'remove_record.html',
+            }
+        },
+    },
+
+/*
     //////////////////////
         'public.lex': {
             url: "/lexique",
@@ -160,46 +178,6 @@ angular.module('web')
         },
 
     //////////////////////
-        'public.details': {
-            url: "/details/:id?query",
-            views: {
-                // "menu": {
-                //     dir: 'template',
-                //     templateUrl: 'menu.html',
-                // },
-                "unlogged": {
-                    dir: 'blueprint',
-                    templateUrl: 'details.html',
-                }
-            }
-        },
-
-    //////////////////////
-        'logged.submit': {
-            url: "/submit/:id?step",
-            views: {
-                "loggedview": {
-                    dir: 'blueprint',
-                    //templateUrl: 'submitter.html',
-                    template: '<formfarm> loading </formfarm>',
-                }
-            }
-        },
-
-/* Much easier if it's on python template
-    //////////////////////
-        'logged.zoom': {
-            url: "/zoom/:id",
-            views: {
-                "loggedview": {
-                    dir: 'blueprint',
-                    templateUrl: 'zoom.html',
-                }
-            }
-        },
-*/
-
-    //////////////////////
         'logged.explore': {
             url: "/explore",
             views: {
@@ -216,16 +194,6 @@ angular.module('web')
                 "loggedview": {
                     dir: 'blueprint',
                     templateUrl: 'submit.html',
-                }
-            },
-        },
-    //////////////////////
-        'logged.remove': {
-            url: "/remove/:id",
-            views: {
-                "loggedview": {
-                    dir: 'blueprint',
-                    templateUrl: 'remove_record.html',
                 }
             },
         },
@@ -295,21 +263,11 @@ angular.module('web')
                     templateUrl: 'admin.html',
                 }
             },
-/*
-            onEnter: function ($rootScope) {
-              $rootScope.toolbarColor = 'red darken-4';
-            },
-            onExit: function ($rootScope) {
-              $rootScope.toolbarColor =
-                angular.copy($rootScope.originalColor);
-            },
-*/
         },
+*/
 
-    //////////////////////
+  }
 
-    }
-
- ); // END CONSTANT
+); // END CONSTANT
 
 })();
