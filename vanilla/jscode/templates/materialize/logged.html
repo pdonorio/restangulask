@@ -31,7 +31,7 @@
       </a>
     </md-button>
     <md-button class="md-raised lime darken-3 white-text">
-      <a ui-sref="test">
+      <a ui-sref="logged.actions">
       Manage
       </a>
     </md-button>
@@ -45,11 +45,8 @@
     </md-toolbar>
 
  <md-content layout="column" layout-padding
-    style="
-    background-color: #fff; min-height: 700px;
-    overflow-y: hidden; // hide vertical
-    overflow-x: hidden; // hide horizontal
-    "
+    style=" background-color: #fff; min-height: 700px; "
+    ng-class="{'hidy': appScrollY}"
     class="md-whiteframe-4dp"
     >
      <div ui-view='loggedview'>

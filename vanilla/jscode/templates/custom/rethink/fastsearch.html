@@ -107,9 +107,9 @@ filt: {{search.filters}}
   -->
 
   <md-input-container>
-    <label>Lieu</label>
+    <label>Lieux</label>
     <md-select ng-model="search.filters.lieu" md-on-close="search.searchTextChange()" >
-      <md-optgroup label="lieus">
+      <md-optgroup label="Lieux">
         <md-option ng-value="">-</md-option>
         <md-option ng-value="item" ng-repeat="item in ::search.base.lieus" >{{item}}</md-option>
       </md-optgroup>
@@ -119,7 +119,7 @@ filt: {{search.filters}}
   <md-input-container>
     <label>Support</label>
     <md-select ng-model="search.filters.manuscrit" md-on-close="search.searchTextChange()" >
-      <md-optgroup label="manuscrits">
+      <md-optgroup label="Support">
         <md-option ng-value="">-</md-option>
         <md-option ng-value="item" ng-repeat="item in ::search.base.manuscrits" >{{item}}</md-option>
       </md-optgroup>

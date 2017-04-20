@@ -4,10 +4,17 @@
 angular.module('web')
     .controller('DetailsController', DetailsController)
     .controller('AppedController', AppedController)
+    .controller('OperationsController', OperationsController)
     .controller('BrokenController', BrokenController);
 
 function AppedController($scope, $rootScope) {
     $rootScope.appFlexSize = 80;
+    $rootScope.appScrollY = false;
+}
+
+function OperationsController($scope, $rootScope) {
+    $rootScope.appFlexSize = 80;
+    $rootScope.appScrollY = false;
 }
 
 function DetailsController($scope, $rootScope,
@@ -15,7 +22,10 @@ function DetailsController($scope, $rootScope,
     $mdBottomSheet, SearchService, AdminService)
 {
     var self = this;
+
     $rootScope.appFlexSize = 100;
+    $rootScope.appScrollY = false;
+
     $log.info("Single view on", $stateParams.id);
     self.logged = $auth.isAuthenticated();
 

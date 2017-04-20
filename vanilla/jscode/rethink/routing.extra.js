@@ -26,6 +26,16 @@ angular.module('web').constant('rethinkRoutes', {
                 }
             }
         },
+    //////////////////////
+    'logged.submission': {
+        url: "/create",
+        views: {
+            "loggedview": {
+                dir: 'blueprint',
+                templateUrl: 'submit.html',
+            }
+        },
+    },
 */
 
     // 'logged.fastsearch': {
@@ -33,8 +43,7 @@ angular.module('web').constant('rethinkRoutes', {
         url: "/fastsearch/:text?clean",
         views: {
             // "unlogged": {
-            "loggedview": {
-                dir: 'blueprint', templateUrl: 'fastsearch.html', }
+            "loggedview": {dir: 'blueprint', templateUrl: 'fastsearch.html'}
         },
         // onEnter: function ($rootScope) {
         //     $rootScope.avoidTheToolbar = true;
@@ -47,8 +56,7 @@ angular.module('web').constant('rethinkRoutes', {
     'logged.details': {
         url: "/details/:id?query",
         views: {
-            "loggedview": {
-                dir: 'blueprint', templateUrl: 'details.html', }
+            "loggedview": {dir: 'blueprint', templateUrl: 'details.html'}
         }
     },
     //////////////////////
@@ -56,18 +64,63 @@ angular.module('web').constant('rethinkRoutes', {
         url: "/submit/:id?step",
         views: {
             "loggedview": {
-                dir: 'blueprint', template: '<formfarm> loading </formfarm>',
-            }
+                dir: 'blueprint', template: '<formfarm> loading </formfarm>'}
         }
     },
     //////////////////////
     'logged.remove': {
         url: "/remove/:id",
         views: {
-            "loggedview": {
-                dir: 'blueprint',
-                templateUrl: 'remove_record.html',
-            }
+            "loggedview": {dir: 'blueprint', templateUrl: 'remove_record.html'}
+        },
+    },
+    //////////////////////
+    'logged.actions': {
+        url: "/manage",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'operations.html'}
+        },
+    },
+    //////////////////////
+    'logged.accounts': {
+        url: "/accounts",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'accounting.html'}
+        },
+    },
+    //////////////////////
+    'logged.explore': {
+        url: "/explore",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'explore.html'}
+        },
+    },
+    //////////////////////
+    'logged.backups': {
+        url: "/backups",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'dbbackups.html'}
+        },
+    },
+    //////////////////////
+    'logged.corrupted': {
+        url: "/broken",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'broken_images.html'}
+        },
+    },
+    //////////////////////
+    'logged.date': {
+        url: "/date/:fetepos",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'date.html'}
+        },
+    },
+    //////////////////////
+    'logged.admin': {
+        url: "/admin/:tab?new",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'admin.html'}
         },
     },
 
@@ -175,94 +228,6 @@ angular.module('web').constant('rethinkRoutes', {
                     templateUrl: 'steplist.html',
                 }
             }
-        },
-
-    //////////////////////
-        'logged.explore': {
-            url: "/explore",
-            views: {
-                "loggedview": {
-                    dir: 'blueprint',
-                    templateUrl: 'explore.html',
-                }
-            },
-        },
-    //////////////////////
-        'logged.submission': {
-            url: "/create",
-            views: {
-                "loggedview": {
-                    dir: 'blueprint',
-                    templateUrl: 'submit.html',
-                }
-            },
-        },
-
-    //////////////////////
-        'logged.actions': {
-            url: "/manage",
-            views: {
-                "loggedview": {
-                    dir: 'blueprint',
-                    templateUrl: 'operations.html',
-                }
-            },
-        },
-
-    //////////////////////
-        'logged.accounts': {
-            url: "/accounts",
-            views: {
-                "loggedview": {
-                    dir: 'blueprint',
-                    templateUrl: 'accounting.html',
-                }
-            },
-        },
-
-    //////////////////////
-        'logged.backups': {
-            url: "/backups",
-            views: {
-                "loggedview": {
-                    dir: 'blueprint',
-                    templateUrl: 'dbbackups.html',
-                }
-            },
-        },
-
-    //////////////////////
-        'logged.corrupted': {
-            url: "/broken",
-            views: {
-                "loggedview": {
-                    dir: 'blueprint',
-                    templateUrl: 'broken_images.html',
-                }
-            },
-        },
-
-    //////////////////////
-        'logged.date': {
-            url: "/date/:fetepos",
-            views: {
-                "loggedview": {
-                    dir: 'blueprint',
-                    templateUrl: 'date.html',
-                }
-            },
-        },
-
-    //////////////////////
-        'logged.admin': {
-            url: "/admin/:tab?new",
-// TO FIX: only admin role is allowed. It should change in the main routes.js
-            views: {
-                "loggedview": {
-                    dir: 'blueprint',
-                    templateUrl: 'admin.html',
-                }
-            },
         },
 */
 

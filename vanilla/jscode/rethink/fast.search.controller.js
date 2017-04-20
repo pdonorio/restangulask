@@ -16,6 +16,8 @@ function FastSearchController($scope, $rootScope,
   // INIT controller
   var self = this;
   $rootScope.appFlexSize = 80;
+  $rootScope.appScrollY = true;
+
   self.elements = null;
   $log.warn("New FAST search controller");
   $mdBottomSheet.hide("search");

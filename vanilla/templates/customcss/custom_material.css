@@ -1,4 +1,8 @@
 
+.hidy {
+  overflow-y: hidden;
+}
+
 md-sidenav {
     width: 520px;
     max-width: 620px;

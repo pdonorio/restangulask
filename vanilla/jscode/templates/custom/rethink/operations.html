@@ -1,8 +1,9 @@
 
-<md-content layout-padding layout-wrap>
+<md-content layout-padding layout-wrap ng-controller="OperationsController">
 
     <h3>
-        Organize this web site
+        <!-- Organize this web site -->
+        Organiser ce site web
     </h3>
 
     <table class="bordered" style="width: 300px;">
@@ -31,13 +32,6 @@
             </tr>
 
             <tr>
-                <td> Database backup </td>
-                <td class="center-align">
-                    <a ui-sref="logged.backups" class="btn indigo padbtn">
-                        backups </a> </td>
-            </tr>
-
-            <tr>
                 <td> Modify site pages </td>
                 <td class="center-align">
                     <a ui-sref="logged.admin" class="btn indigo padbtn">
@@ -49,6 +43,13 @@
                 <td class="center-align">
                     <a ui-sref="logged.corrupted" class="btn indigo padbtn">
                         broken </a> </td>
+            </tr>
+
+            <tr>
+                <td> Database backup </td>
+                <td class="center-align">
+                    <a ui-sref="logged.backups" class="btn indigo padbtn">
+                        backups </a> </td>
             </tr>
 
         </tbody>
