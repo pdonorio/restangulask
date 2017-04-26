@@ -5,9 +5,10 @@
 <!-- TOOLBAR -->
 <form ng-submit="$event.preventDefault()"
     layout="row" layout-fill layout-wrap layout-padding layout-align="center center">
- <div flex="70" layout="column">
+ <div flex layout="column">
 
- <md-toolbar class="white black-text" layout="row" layout-padding flex >
+ <md-toolbar class="white black-text" layout="row" layout-padding flex>
+    <div flex="20"></div>
       <md-autocomplete
           md-min-length="1"
           md-input-id="autoCompleteId"
@@ -23,13 +24,12 @@
           md-match-case-insensitive="true"
           placeholder="Recherche"
           md-require-match="false"
-          flex
+          flex="40"
           >
-<!-- TO FIX: autofocus not working anymore -->
         <md-item-template>
           <span layout="row" layout-align="start center">
             <!-- TYPE -->
-            <span style="width: 200px;">
+            <span style="min-width: 100px;">
              <span ng-switch on="item._source.extra.cleanlabel">
               <i ng-switch-when="extrait" class="material-icons"> import_contacts </i>
               <i ng-switch-when="transcription" class="material-icons"> library_books </i>
@@ -47,38 +47,47 @@
         </md-item-template>
       </md-autocomplete>
 
-<!-- COMMENT START -bug -->
-    <a layout="row" layout-align="center center"
-      style="font-size: 14px;"
-      href ng-click="advanced = !advanced">
-        <i class="material-icons" ng-if="!advanced">add</i>
-        <i class="material-icons" ng-if="advanced">remove</i>
-        Recherche Avancée
-    </a>
-
-<!--
-    <a layout="row" layout-align="center center"
-      style="font-size: 14px;"
-      href ng-click="toggle()">
-        <i class="material-icons" ng-if="!advanced">help</i>
-        Lexique
-    </a>
--->
-
-<!-- COMMENT END -bug -->
+      <div ng-if="!search.load && search.elements >= 0"
+        flex="10"
+        style="font-size: 14px;" >
+            <!-- Trouvés -->
+            <b>{{search.elements}}</b>
+            <br>
+            éléments
+      </div>
+      <div flex="20">
+        <a layout="row" layout-align="center center"
+          style="font-size: 14px;"
+          href ng-click="advanced = !advanced">
+            Recherche Avancée
+            <i class="material-icons" ng-if="!advanced">add</i>
+            <i class="material-icons" ng-if="advanced">remove</i>
+        </a>
+      </div>
+      <div flex="10" ng-if="lexique_close">
+        <a layout="row" layout-align="center center"
+          style="font-size: 14px;"
+          href ng-click="toggle('open')">
+            Lexique
+            <i class="material-icons">help</i>
+        </a>
+      </div>
 
  </md-toolbar>
 
-<!-- COMMENT START - bug -->
-<div layout="column" layout-padding>
+<div layout="column">
     <md-card ng-if="advanced">
-        <md-card-content class="nospaces"> Filtres:
+        <md-card-content class="nospaces">
 
 <div ng-if="search.advancedLoader"
     ng-include="root.templateDir + 'loader.html'"></div>
-<div ng-if="!search.advancedLoader" layout="row" layout-padding>
+<div ng-if="!search.advancedLoader" layout="row"
 
-<div layout="column" flex=50 ng-cloak>
+    class="smaller-margin"
+>
+
+<div layout="column" ng-cloak flex="90"
+    style="margin-left: 25px; padding-right: 25px;">
 
 <!--
 filt: {{search.filters}}
@@ -126,7 +135,6 @@ filt: {{search.filters}}
     </md-select>
   </md-input-container>
 
-<!--
   <md-input-container>
     <label>Langue</label>
     <md-select ng-model="search.filters.langue" md-on-close="search.searchTextChange()" >
@@ -138,15 +146,11 @@ filt: {{search.filters}}
       </md-optgroup>
     </md-select>
   </md-input-container>
--->
 
-
-<!--
-  <br>
-  <br>
-      <input type="checkbox" id="cb" ng-model="search.filters.gravure" />
-      <label for="cb">Gravure</label>
--->
+  <div style="padding-top: 10px;">
+    <input type="checkbox" id="cb" ng-model="search.filters.gravure" />
+    <label for="cb">Gravure</label>
+  </div>
 
 </div>
 <div layout="column" flex=50>
@@ -181,7 +185,8 @@ filt: {{search.filters}}
     </md-select>
   </md-input-container>
 
-  <div layout="row" layout-align="center center">
+  <div layout="row" layout-align="center center"
+    style="padding-top: 10px;">
       <label for="inputs" style="padding-right: 20px;"> Date </label>
       <md-input-container style="margin: 0px;">
         <label>De</label>
@@ -197,11 +202,11 @@ filt: {{search.filters}}
 
 </div>
 </div>
-
         </md-card-content>
         <div
-            ng-if="!search.advancedLoader"
-            class="md-actions" layout="row" layout-align="end end">
+            ng-if="!search.advancedLoader" style="margin: 0px;"
+            class="md-actions" layout="row" layout-align="end end"
+            >
             <!--
            <md-button ng-click="search.cloneDate()">clone date</md-button>
            -->
@@ -213,7 +218,6 @@ filt: {{search.filters}}
     </md-card>
 </div>
 
-<!-- COMMENT END - bug -->
 
 <div>
     <div ng-if="search.load" ng-include="root.templateDir + 'loader.html'"></div>
@@ -243,9 +247,6 @@ filt: {{search.filters}}
          </div>
         </div>
 
-        <br>
-        <b><i>Trouvés {{search.elements}} éléments</i></b>
-
     </span>
 </div>
 
@@ -253,7 +254,6 @@ filt: {{search.filters}}
 </form>
 <!-- TOOLBAR -->
 
-<!-- COMMENT START - bug -->
 <md-content
     class="virtualRepeatInfiniteScroll"
     flex id="inf-wrapper"
@@ -266,7 +266,10 @@ filt: {{search.filters}}
     ng-hide="search.extraits.hold"
     id="vertical-container">
 
+<!--
   <h5>Resultats de la recherche:</h5>
+-->
+
   <md-list class="activity-feed"
     md-virtual-repeat="item in search.extraits"
     md-on-demand
@@ -348,73 +351,91 @@ filt: {{search.filters}}
     </div>
 </md-content>
 
-<!-- COMMENT END - bug -->
 
-
-<section layout="row" flex>
+<section layout="row"
+>
     <md-sidenav class="md-sidenav-right" md-component-id="left"
-                md-disable-backdrop md-whiteframe="4">
+          style="overflow-y: hidden;"
+                md-disable-backdrop md-whiteframe="4" >
 
-      <md-toolbar class="blue-grey">
+      <md-content flex>
+       <md-toolbar  layout="column" class="blue-grey">
         <h1 class="md-toolbar-tools">
-            Index
-            <a href ng-click="toggle()">
-              <i class="material-icons">close</i>
-            </a>
+            <div flex="90">
+                Lexique indéx
+            </div>
+            <div flex="10" style="text-align: right;">
+                <a href ng-click="toggle('close')">
+                  <i class="material-icons">close</i>
+                </a>
+            </div>
         </h1>
-      </md-toolbar>
+       </md-toolbar>
+       <div layout="row" layout-padding layout="center center">
+           <div flex=20></div>
+           <md-input-container flex=60>
+              <label>Recherche lexique</label>
+              <input type="text" ng-model="lexvar" ng-change="findLex()"/>
+           </md-input-container>
+           <div flex=20></div>
+       </div>
+      </md-content>
 
-      <md-content layout-margin>
-
+      <md-content layout-padding style="overflow-y: scroll; height: 100%;">
           <md-list class="md-dense" flex>
 
-  <md-input-container>
-  <label>recherche</label>
-      <input type="text" ng-model="lexvar" ng-change="findLex()"/>
-  </md-input-container>
+    <div ng-if="lexlen == 0">
+        no results found...
+    </div>
 
 <!--
-            <md-subheader class="md-no-sticky">
-                search results:
-            </md-subheader>
+          style="overflow-y: scroll;"
 -->
 
-            <div ng-repeat="lex in lexers">
+    <div >
+        <div ng-if="lexlen === null">
+            loading...
+        </div>
+
+        <div ng-repeat="lex in lexers">
             <md-list-item class="md-3-line">
               <div class="md-list-item-text" layout="column">
-                <h3>titre:
-
-                    <b>
-                    <a href ng-click="search.searchText = lex._source.titre ">
-                        {{lex._source.titre}}
-
-                    </a>
-                    </b>
+                <h3>
+                <!--titre:-->
+                  <b> <a href ng-click="search.searchText = lex._source.titre ">
+                    {{lex._source.titre}}
+                  </a> </b>
                 </h3>
-                <h4>
+                <h4 ng-if="lex._source['français']">
                     français: {{lex._source["français"]}}
-                </h4><h4>
+                </h4>
+                <h4 ng-if="lex._source.latin">
                     latin: {{lex._source.latin}}
-                </h4><h4>
+                </h4>
+                <h4 ng-if="lex._source.italien">
                     italien: {{lex._source.italien}}
                 </h4>
+                <br>
                 <h4>
-                <i>
-                {{lex._source.sheet}}
-                &gt; {{lex._source.macro}}
-                &gt; {{lex._source.micro}}
-                </i>
+                    <i>
+                        {{lex._source.sheet}}
+                          &gt; {{lex._source.macro}}
+                            &gt; {{lex._source.micro}}
+                    </i>
                 </h4>
                 <br>
               </div>
             </md-list-item>
+
+            <br>
             <md-divider ></md-divider>
-            </div>
+            <br>
+
+        </div>
+    </div>
 
           </md-list>
-
       </md-content>
-
     </md-sidenav>
 
 </section>

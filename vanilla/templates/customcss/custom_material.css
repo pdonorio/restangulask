@@ -66,6 +66,10 @@ md-list .highlight {
     background: yellow;
 }
 
+.smaller-margin md-input-container {
+    margin: 5px 0px 5px 0px;
+}
+
 md-input-container .md-errors-spacer {
     min-height: 0;
 }

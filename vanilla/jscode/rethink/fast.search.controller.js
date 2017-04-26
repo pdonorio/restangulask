@@ -15,29 +15,45 @@ function FastSearchController($scope, $rootScope,
 
   // INIT controller
   var self = this;
-  $rootScope.appFlexSize = 80;
+  self.appSize = 80;
+  $rootScope.appFlexSize = self.appSize;
   $rootScope.appScrollY = true;
 
   self.elements = null;
   $log.warn("New FAST search controller");
   $mdBottomSheet.hide("search");
+  $scope.lexique_close = true;
 
   ///////////////////////////
-  $scope.toggle = function() {
+  $scope.toggle = function(action) {
+
+    if (action == 'open') {
+      $rootScope.appFlexSize = 100;
+      $scope.lexique_close = false;
+    } else if (action == 'close') {
+      $rootScope.appFlexSize = self.appSize;
+      $scope.lexique_close = true;
+    }
+
     $mdSidenav('left').toggle();
     $scope.lexvar = "";
     $scope.findLex();
   }
   $scope.findLex = function() {
 
-    console.log("Calling find lex");
+    console.log("Calling find lex", $scope.lexvar);
+    $scope.lexers = {}
+    $scope.lexlen = null;
+
       SearchService.getFastLex($scope.lexvar, 50)
         .then(function(out){
           if (out && out.elements) {
-            if (out.elements > 0) {
-                console.log("LEX", out);
-                $scope.lexers = out.data;
-            }
+            console.log("LEX", out);
+            $scope.lexers = out.data;
+            $scope.lexlen = out.elements;
+          } else {
+            $scope.lexlen = 0;
+            // console.log("LEX", $scope.lexlen);
           }
       });
   }
@@ -117,6 +133,8 @@ function FastSearchController($scope, $rootScope,
         this.numLoaded_ = 0;
         this.toLoad_ = 0;
         this.items = [];
+        $scope.rows = null;
+        $scope.selected = null;
     },
 
     getItemAtIndex: function (index) {

@@ -2,123 +2,18 @@
 THE PROJECT
 http://codeology.braintreepayments.com/pdonorio/restangulask
 
- download    http -d GET http://192.168.64.7:8081/api/upload/retro.png\?record=22
- upload         http --form POST http://192.168.64.7:8081/api/upload file@~/Dropbox/Screenshot/retro.png record=22
-
-PROTOTYPING:
-  ☐ get feedback from ui
-https://www.invisionapp.com/tour/design-feedback-collaboration-tool
- ☐ Roadmapping
- http://blog.trello.com/going-public-roadmapping-with-a-public-trello-board/
-
-MORE OVER:
-☐ admin page to check informations about other users
- ☐ user ranks on interface side
-
-☐ delete buttons: undo with long timeout to promise
-☐ API Decorator: to parse arguments from the function args list and add them to flask parameters
-☐ GET methods with json in body... in angular $http?
-   http://www.benfranklinlabs.com/delete-item-list-angularjs/
-☐ after login go to latest requested url
-
-☐ rethinkdb ping before request?
- ☐ Rebuild connection on backend side  if error is like below
- rethinkdb.errors.ReqlDriverError: RqlQuery.run must be given a connection to run on.
- A default connection has been set with `repl()` on another thread, but not this one.
-☐ Rethinkdb logs
-  ☐  append an element inside a nested array
-☐ ng-flow
-    ☐ missing authenticatation (header config)
-
-OTHER:
-  ☐ one time binding
- <li ng-repeat=“item in ::vastArray”>{{ ::item.velocity }}</li>
-☐ LOGINER
-   ☐ save in flask db ip @idea
-  ☐ prompt login if no token found for that ip?
-    ☐ ummm @dontknow
-  ☐ Popolate user data and profile dropdown in topbar via python?
-    ☐ maybe wait for JWT
-   ✔ main page @done (16-01-02 16:47)
-     ✔ search @done (16-01-02 16:47)
-     ✔ submission @done (16-01-02 16:47)
-  ☐ Real Logout
-    ☐ js -> flask frontend -> api flask
-  ☐ change loading bar template
-
-======
-
-More about PRODUCTION
-
-Uglify:
+- one time binding:
+https://www.binpress.com/tutorial/speeding-up-angular-js-with-simple-optimizations/135
+<li ng-repeat=“item in ::vastArray”>{{ ::item.velocity }}</li>
+- Uglify
 http://labs.qandidate.com/blog/2014/09/02/minifying-an-existing-angularjs-project/
-
-NGINX:
-  https://www.nginx.com/blog/maximizing-python-performance-with-nginx-parti-web-serving-and-caching/
-  https://www.nginx.com/blog/maximizing-python-performance-with-nginx-part-ii-load-balancing-and-monitoring/
-
-SEARCH A NEW PROJECT NAME:
-  https://foxtype.com/thesaurus?text=linux
-
-Flask security and rethinkdb:
+- nginx
+https://www.nginx.com/blog/maximizing-python-performance-with-nginx-parti-web-serving-and-caching/
+- new project name
+https://foxtype.com/thesaurus?text=linux
+- flask security and rethinkdb
  https://github.com/mattupstate/flask-security/issues/388#issuecomment-203394522
-
-======
-
-JS LIBS:
-  ☐ controller filters
-  https://toddmotto.com/use-controller-filters-to-prevent-digest-performance-issues/
-  ✔ foreach implementation @done (15-12-30 16:37)
-  https://toddmotto.com/simple-foreach-implementation-for-objects-nodelists-arrays-with-automatic-type-looping/
-  ☐ detect no wifi
-  https://toddmotto.com/nofi-detecting-no-wifi-callbacks-for-offline-states-with-html5/
-
-ui router pitfall:
-  http://www.codelord.net/2015/06/02/angularjs-pitfalls-using-ui-routers-resolve/
-☐ Api connection retry?
-https://github.com/rholder/retrying
-☐ reduce html size on whitespaces
-https://github.com/mitsuhiko/jinja2-htmlcompress
-☐ How to quickly add a blueprint for a whole new suburl
-http://flask.pocoo.org/snippets/59/
-
-Database cluster:
-  http://thenewstack.io/crate-addresses-database-speed-scaling-standard-sql/
-
-One time binding:
-    https://www.binpress.com/tutorial/speeding-up-angular-js-with-simple-optimizations/135
-
-JS  LAZY LOAD:
-    # https://oclazyload.readme.io/docs/systemjs
-    bowerdir + "oclazyload/dist/ocLazyLoad.min.js",
-
-PIPELINE STEPS:
-  http://devcenter.wercker.com/learn/pipelines/how-it-works.html
-
---- ✄ -----------------------
-
-# PRIVATE GIT
-git remote add private ssh://git@mygitlab.dev:10022/pdonorio/restangulask.git
-# GOOD API DESIGN
-should be profoundly discussed
-# UI ROUTER and params
-http://stackoverflow.com/a/25647714/2114395
-# HTML5 validator
+- detect no wifi
+https://toddmotto.com/nofi-detecting-no-wifi-callbacks-for-offline-states-with-html5/
+- HTML5 validator
 https://github.com/svenkreiss/html5validator
-
-RELEASE protocol:
-
-  ☐ stop other services
-  ☐ eventually remove volumes
-  ☐ clone restangulask
-  ☐ move images
-  ☐ project init
-  ☐ bower check/update!!!
-  ☐ check permissions vanilla dir
-  user 1000
-    ☐ bower install
-  ☐ fix jquery to 2.1
-  ☐ import rdb
-  ☐ launch operations.py
-  ☐ change content.json
-  ☐ let users register
