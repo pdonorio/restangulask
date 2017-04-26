@@ -25,6 +25,9 @@ MULTI1_KEY = 'apparato'
 MULTI2_KEY = 'actions'
 MULTI3_KEY = 'temps'
 
+GRAV_KEY = 'gravure'
+MULTI4_KEY = 'langue'
+
 DATE_SKEY = 'start_date'
 DATE_EKEY = 'end_date'
 
@@ -71,7 +74,7 @@ class FastManage(ExtendedApiResource, FastSearch):
 
             try:
                 key = int(key)
-            except:
+            except BaseException:
                 pass
 
             if extrait is None:
@@ -103,9 +106,11 @@ class FastDocs(ExtendedApiResource, FastSearch):
     @deck.add_endpoint_parameter(name=SOURCE_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=PLACE_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=SCRIPT_KEY, ptype=str)
+    @deck.add_endpoint_parameter(name=GRAV_KEY, ptype=bool)
     @deck.add_endpoint_parameter(name=MULTI1_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=MULTI2_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=MULTI3_KEY, ptype=str)
+    @deck.add_endpoint_parameter(name=MULTI4_KEY, ptype=str)
     @deck.add_endpoint_parameter(name=DATE_SKEY, ptype=str)
     @deck.add_endpoint_parameter(name=DATE_EKEY, ptype=str)
     @deck.apimethod
@@ -120,14 +125,19 @@ class FastDocs(ExtendedApiResource, FastSearch):
         filters = {}
         # pp(self._args)
         filters_keys = [
-            PARTY_KEY, SOURCE_KEY, PLACE_KEY, SCRIPT_KEY,
-            MULTI1_KEY, MULTI2_KEY, MULTI3_KEY,
+            PARTY_KEY, SOURCE_KEY, PLACE_KEY, SCRIPT_KEY, GRAV_KEY,
+            MULTI1_KEY, MULTI2_KEY, MULTI3_KEY, MULTI4_KEY,
             DATE_SKEY, DATE_EKEY,
         ]
         for key in filters_keys:
             tmp = self._args.get(key)
-            if tmp is not None and tmp.strip() != '':
-                filters[key] = tmp
+            if tmp is not None:
+                flag = True
+                if isinstance(tmp, str) and tmp.strip() == '':
+                    flag = False
+
+                if flag:
+                    filters[key] = tmp
         # pp(filters)
 
         #####################################
