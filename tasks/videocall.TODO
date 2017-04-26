@@ -2,11 +2,12 @@
 ✔ firefox & safari @done (17-03-28 21:57)
 
 - search
-  - lexique
-    ☐ elastic: prefix search/filter
   - filters
+    ✔ langue @done (17-04-26 23:52)
     ☐ gravure
-    ☐ langue
+    bool not working with multimatch?
+  - lexique
+    elastic: prefix search/filter
 
 - managing users
 - roles/profiles

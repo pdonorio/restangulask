@@ -95,7 +95,7 @@ function FastSearchController($scope, $rootScope,
   $scope.advanced = false;
   var filtersKey = [
     'fete', 'source', 'lieu', 'manuscrits', 'gravure',
-    'apparato', 'actions', 'temps'
+    'apparato', 'actions', 'temps', 'langue'
   ];
   // local storage / cookie
   self.filters = JSON.parse(localStorage.getItem(self.cookieKey));
@@ -165,12 +165,21 @@ function FastSearchController($scope, $rootScope,
             // console.log("Saving search", self.filters);
             // Save filters
             self.filters['searchText'] = self.searchText;
+            if (!self.filters.gravure) {
+                self.filters.gravure = null;
+            }
+            /* else {
+                self.filters.gravure = null;
+            } */
+            console.log("PAOLO", self.filters);
+
             localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
 
             // Search for lexique
             if (self.searchText.length > 2) {
                 self.checkLexique();
             }
+
 
             SearchService.getDataFast(self.searchText, start, self.filters)
             .then(angular.bind(this, function (obj) {
