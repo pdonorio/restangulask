@@ -25,6 +25,11 @@ function FastSearchController($scope, $rootScope,
   $scope.lexique_close = true;
 
   ///////////////////////////
+  $scope.splitter = function(text) {
+    return text.split(',');
+  }
+
+  ///////////////////////////
   $scope.toggle = function(action) {
 
     if (action == 'open') {

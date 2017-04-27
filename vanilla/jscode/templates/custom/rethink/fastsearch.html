@@ -87,7 +87,8 @@
 >
 
 <div layout="column" ng-cloak flex="90"
-    style="margin-left: 25px; padding-right: 25px;">
+    style="margin-left: 25px; padding-right: 25px; padding-top: 10px;"
+    >
 
 <!--
 filt: {{search.filters}}
@@ -147,16 +148,28 @@ filt: {{search.filters}}
     </md-select>
   </md-input-container>
 
-  <div style="padding-top: 10px;">
-    <input type="checkbox" id="cb"
-        ng-model="search.filters.gravure"
-        ng-change="search.searchTextChange()"
-        />
-    <label for="cb">Gravure</label>
+
+  <div layout="row" layout-align="center center"
+    style="padding-top: 10px;">
+      <label for="inputs" style="padding-right: 20px;"> Date </label>
+      De
+      <md-input-container style="margin: 0px;">
+        <!-- <label>De</label> -->
+        <input type="text" ng-model="search.filters.start_date"
+            ng-blur="search.searchTextChange()" placeholder='jj-mm-aaaa' size="13">
+      </md-input-container>
+      À
+      <md-input-container style="margin: 0px;">
+        <!-- <label>À</label> -->
+        <input type="text" ng-model="search.filters.end_date"
+            ng-blur="search.searchTextChange()" placeholder='jj-mm-aaaa' size="13">
+      </md-input-container>
   </div>
 
 </div>
-<div layout="column" flex=50>
+<div layout="column"
+    style="padding-right: 25px; padding-top: 10px;"
+    flex=50>
 
   <md-input-container>
     <label>Temps</label>
@@ -187,20 +200,12 @@ filt: {{search.filters}}
       </md-optgroup>
     </md-select>
   </md-input-container>
-
-  <div layout="row" layout-align="center center"
-    style="padding-top: 10px;">
-      <label for="inputs" style="padding-right: 20px;"> Date </label>
-      <md-input-container style="margin: 0px;">
-        <label>De</label>
-        <input type="text" ng-model="search.filters.start_date"
-            ng-blur="search.searchTextChange()" placeholder='jj-mm-aaaa' size="13">
-      </md-input-container>
-      <md-input-container style="margin: 0px;">
-        <label>À</label>
-        <input type="text" ng-model="search.filters.end_date"
-            ng-blur="search.searchTextChange()" placeholder='jj-mm-aaaa' size="13">
-      </md-input-container>
+  <div style="padding-top: 10px;">
+    <input type="checkbox" id="cb"
+        ng-model="search.filters.gravure"
+        ng-change="search.searchTextChange()"
+        />
+    <label for="cb">Gravure</label>
   </div>
 
 </div>
@@ -391,10 +396,6 @@ filt: {{search.filters}}
         no results found...
     </div>
 
-<!--
-          style="overflow-y: scroll;"
--->
-
     <div >
         <div ng-if="lexlen === null">
             loading...
@@ -405,9 +406,13 @@ filt: {{search.filters}}
               <div class="md-list-item-text" layout="column">
                 <h3>
                 <!--titre:-->
-                  <b> <a href ng-click="search.searchText = lex._source.titre ">
-                    {{lex._source.titre}}
-                  </a> </b>
+                  <b>
+                    <a href
+                        ng-repeat="single in splitter(lex._source.titre)"
+                        ng-click="search.searchText = single ">
+                        {{single}}
+                    </a>
+                  </b>
                 </h3>
                 <h4 ng-if="lex._source['français']">
                     français: {{lex._source["français"]}}

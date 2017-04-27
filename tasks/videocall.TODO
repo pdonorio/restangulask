@@ -2,9 +2,9 @@
 ✔ firefox & safari @done (17-03-28 21:57)
 
 - search
-  - filters
+   filters @done (17-04-27 00:01)
     ✔ langue @done (17-04-26 23:52)
-    ☐ gravure
+    ✔ gravure @done (17-04-27 00:01)
     bool not working with multimatch?
   - lexique
     elastic: prefix search/filter
