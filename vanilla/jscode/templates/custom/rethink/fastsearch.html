@@ -29,7 +29,7 @@
         <md-item-template>
           <span layout="row" layout-align="start center">
             <!-- TYPE -->
-            <span style="min-width: 100px;">
+            <span style="min-width: 250px;">
              <span ng-switch on="item._source.extra.cleanlabel">
               <i ng-switch-when="extrait" class="material-icons"> import_contacts </i>
               <i ng-switch-when="transcription" class="material-icons"> library_books </i>
@@ -58,7 +58,7 @@
       <div flex="20">
         <a layout="row" layout-align="center center"
           style="font-size: 14px;"
-          href ng-click="advanced = !advanced">
+          href ng-click="advancing()">
             Recherche Avancée
             <i class="material-icons" ng-if="!advanced">add</i>
             <i class="material-icons" ng-if="advanced">remove</i>
@@ -82,39 +82,12 @@
 <div ng-if="search.advancedLoader"
     ng-include="root.templateDir + 'loader.html'"></div>
 <div ng-if="!search.advancedLoader" layout="row"
+    class="smaller-margin">
 
-    class="smaller-margin"
->
-
-<div layout="column" ng-cloak flex="90"
+<div layout="column"
     style="margin-left: 25px; padding-right: 25px; padding-top: 10px;"
+    flex
     >
-
-<!--
-filt: {{search.filters}}
--->
-
-<!--
-  <md-input-container>
-    <label>Fete</label>
-    <md-select ng-model="search.filters.fete" md-on-close="search.searchTextChange()" >
-      <md-optgroup label="fetes">
-        <md-option ng-value="">-</md-option>
-        <md-option ng-value="item" ng-repeat="item in ::search.base.fetes" >{{item}}</md-option>
-      </md-optgroup>
-    </md-select>
-  </md-input-container>
-
-  <md-input-container>
-    <label>Source</label>
-    <md-select ng-model="search.filters.source" md-on-close="search.searchTextChange()" >
-      <md-optgroup label="sources">
-        <md-option ng-value="">-</md-option>
-        <md-option ng-value="item" ng-repeat="item in ::search.base.sources" >{{item}}</md-option>
-      </md-optgroup>
-    </md-select>
-  </md-input-container>
-  -->
 
   <md-input-container>
     <label>Lieux</label>
@@ -229,8 +202,9 @@ filt: {{search.filters}}
 
 <div>
     <div ng-if="search.load" ng-include="root.templateDir + 'loader.html'"></div>
-    <span ng-if="!search.load && search.elements >= 0">
 
+<!--
+    <span ng-if="!search.load && search.elements >= 0">
         <div ng-if="rows" class="md-whiteframe-6dp"
             layout="row" layout-padding layout-align="center center">
          <div>
@@ -254,8 +228,9 @@ filt: {{search.filters}}
           </table>
          </div>
         </div>
-
     </span>
+-->
+
 </div>
 
  </div>
@@ -291,7 +266,11 @@ filt: {{search.filters}}
          <a ui-sref='logged.details({id: item._id, query:search.searchText})'>
           <div ng-if='!item._source.doc.thumbnail'
             class="searchthumb"
-            ng-style="{'background-image':'url(placehold.it/110x160)'}"></div>
+            >
+            <!-- PLACEHOLDER
+            ng-style="{'background-image':'url(placehold.it/110x160)'}"
+            -->
+            </div>
           <div ng-if='item._source.doc.thumbnail'
             style="background-size: 80px 130px;"
 
@@ -363,7 +342,7 @@ filt: {{search.filters}}
 <section layout="row"
 >
     <md-sidenav class="md-sidenav-right" md-component-id="left"
-          style="overflow-y: hidden; width: 300px;"
+          style="overflow-y: hidden; width: 410px;"
                 md-disable-backdrop md-whiteframe="4" >
 
       <md-content flex>
@@ -380,12 +359,20 @@ filt: {{search.filters}}
         </h1>
        </md-toolbar>
        <div layout="row" layout-padding layout="center center">
-           <div flex=20></div>
-           <md-input-container flex=60>
-              <label>Recherche lexique</label>
-              <input type="text" ng-model="lexvar" ng-change="findLex()"/>
+           <md-input-container flex=40>
+              <label>Lexique</label>
+              <input type="text"
+                ng-model="search.lexvar" ng-change="findLex()"
+                ng-focus="search.catvar = ''"
+                    focus-on="focusMe"/>
            </md-input-container>
-           <div flex=20></div>
+           <div flex=10></div>
+           <md-input-container flex=40>
+              <label>Catégorie</label>
+              <input type="text"
+                ng-model="search.catvar" ng-change="findLex()"
+                ng-focus="search.lexvar = ''"/>
+           </md-input-container>
        </div>
       </md-content>
 
@@ -393,13 +380,15 @@ filt: {{search.filters}}
           <md-list class="md-dense" flex>
 
     <div ng-if="lexlen == 0">
-        no results found...
+        -
     </div>
 
     <div >
+    <!--
         <div ng-if="lexlen === null">
             loading...
         </div>
+    -->
 
         <div ng-repeat="lex in lexers">
             <md-list-item class="md-3-line">
@@ -409,33 +398,49 @@ filt: {{search.filters}}
                   <b>
                     <a href
                         ng-repeat="single in splitter(lex._source.titre)"
-                        ng-click="search.searchText = single; toggle('close'); ">
+                        ng-click="search.searchText = single;">
                         {{single}}
                     </a>
                   </b>
                 </h3>
                 <h4 ng-if="lex._source['français']">
-                    français: {{lex._source["français"]}}
+                    français:
+                    <a href ng-click="search.searchText = lex._source['français'];">
+                        {{lex._source["français"]}}
+                    </a>
                 </h4>
                 <h4 ng-if="lex._source.latin">
-                    latin: {{lex._source.latin}}
+                    latin:
+                    <a href ng-click="search.searchText = lex._source.latin;">
+                        {{lex._source.latin}}
+                    </a>
                 </h4>
                 <h4 ng-if="lex._source.italien">
-                    italien: {{lex._source.italien}}
+                    italien:
+                    <a href ng-click="search.searchText = lex._source.italien;">
+                        {{lex._source.italien}}
+                    </a>
                 </h4>
                 <br>
                 <h4>
-                    <i>
+                  <i>
+                    <a href ng-click="search.lexvar = ''; search.catvar = lex._source.sheet; findLex()">
                         {{lex._source.sheet}}
-                          &gt; {{lex._source.macro}}
-                            &gt; {{lex._source.micro}}
-                    </i>
+                    </a>
+                    &gt;
+                    <a href ng-click="search.lexvar = ''; search.catvar = lex._source.macro; findLex()">
+                        {{lex._source.macro}}
+                    </a>
+                    &gt;
+                    <a href ng-click="search.lexvar = ''; search.catvar = lex._source.micro; findLex()">
+                        {{lex._source.micro}}
+                    </a>
+                  </i>
                 </h4>
                 <br>
               </div>
             </md-list-item>
 
-            <br>
             <md-divider ></md-divider>
             <br>
 

@@ -9,6 +9,7 @@ angular.module('web')
 
     //hotkeys, keyshortcuts,
 function FastSearchController($scope, $rootScope,
+    focus,
     $log, $stateParams, $timeout,
     SearchService, $mdBottomSheet, $mdSidenav)
 {
@@ -26,7 +27,20 @@ function FastSearchController($scope, $rootScope,
 
   ///////////////////////////
   $scope.splitter = function(text) {
-    return text.split(',');
+    if (text)
+        return text.split(',');
+    else
+        return [''];
+  }
+
+  ///////////////////////////
+  $scope.advancing = function() {
+    $scope.advanced = !$scope.advanced;
+    if ($scope.advanced) {
+      $rootScope.appScrollY = false;
+    } else {
+      $rootScope.appScrollY = true;
+    }
   }
 
   ///////////////////////////
@@ -35,25 +49,38 @@ function FastSearchController($scope, $rootScope,
     if (action == 'open') {
       $rootScope.appFlexSize = 100;
       $scope.lexique_close = false;
+      $timeout(function() {
+          focus('focusMe');
+      }, 500);
     } else if (action == 'close') {
       $rootScope.appFlexSize = self.appSize;
       $scope.lexique_close = true;
     }
 
     $mdSidenav('left').toggle();
-    $scope.lexvar = "";
+    self.lexvar = "";
     $scope.findLex();
   }
   $scope.findLex = function() {
 
-    console.log("Calling find lex", $scope.lexvar);
+    // console.log("Calling find lex", self.lexvar);
     $scope.lexers = {}
     $scope.lexlen = null;
 
-      SearchService.getFastLex($scope.lexvar, 50)
+    var term = '';
+    var cat = 0;
+    if (self.lexvar && self.lexvar.length > 0) {
+        term = self.lexvar;
+    } else if (self.catvar && self.catvar.length > 0) {
+        term = self.catvar;
+        cat = 1;
+    }
+    // console.log("TERM", term, cat);
+
+      SearchService.getFastLex(term, 80, cat)
         .then(function(out){
           if (out && out.elements) {
-            console.log("LEX", out);
+            // console.log("LEX", out);
             $scope.lexers = out.data;
             $scope.lexlen = out.elements;
           } else {

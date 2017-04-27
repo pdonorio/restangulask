@@ -133,6 +133,7 @@ angular.module('web').constant('rethinkRoutes', {
             "loggedview": {dir: 'blueprint', templateUrl: 'admin.html'}
         },
     },
+/*
     //////////////////////
     'logged.expo': {
         url: "/expo",
@@ -173,6 +174,7 @@ angular.module('web').constant('rethinkRoutes', {
                 dir: 'blueprint', templateUrl: 'expo_image.html'}
         }
     },
+*/
     //////////////////////
     'logged.list': {
         url: "/list?name&book",

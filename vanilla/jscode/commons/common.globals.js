@@ -9,6 +9,25 @@ var templateDir = templateDirBase + framework + '/';
 var customTemplateDir = templateDirBase + 'custom/' + framework + '/';
 var blueprintTemplateDir = templateDirBase + 'custom/' + blueprint + '/';
 
+
+angular.module('web').directive('focusOn', function() {
+   return function(scope, elem, attr) {
+      scope.$on('focusOn', function(e, name) {
+        if(name === attr.focusOn) {
+          elem[0].focus();
+        }
+      });
+   };
+});
+
+angular.module('web').factory('focus', function ($rootScope, $timeout) {
+  return function(name) {
+    $timeout(function (){
+      $rootScope.$broadcast('focusOn', name);
+    });
+  }
+});
+
 ////////////////////////////
 // HISTORY GLOBAL OBJECT
 var temporaryRoutingHistory = [];
