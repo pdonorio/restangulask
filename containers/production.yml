@@ -1,15 +1,48 @@
 
 #################################
+#################################
+
+wpdb:
+  image: mysql:5.7.18
+  volumes:
+    - restangulask_wpdbdata:/var/lib/mysql
+  restart: always
+  environment:
+    MYSQL_ROOT_PASSWORD: thisistherootpassword
+    MYSQL_DATABASE: wordpress
+    MYSQL_USER: wordpress
+    MYSQL_PASSWORD: example
+
+wp:
+  image: wordpress:latest
+  volumes:
+    - restangulask_wpdata:/var/www/html
+  # ports:
+  #   - "8000:80"
+  # restart: always
+  expose:
+    - 443
+  environment:
+    WORDPRESS_DB_HOST: db:3306
+    WORDPRESS_DB_USER: wordpress
+    WORDPRESS_DB_PASSWORD: example
+  links:
+    - wpdb:db
+
+#################################
+#################################
 # PRODUCTION performance
 
 proxy:
+  # command: sleep 1234567890
   links:
     - custombe:api
     - customfe:html
+    - wp:newwp
   volumes:
     - ../containers/nginx_proxy/theproxy.conf:/etc/nginx/sites-enabled/production
     # - ../containers/nginx_proxy:/etc/nginx/conf.d
-    - ../frontend/felask/static:/static
+    # - ../frontend/felask/static:/static
     - ../uploads:/data/frontend/felask/static/uploads
   volumes_from:
     - htmlfiles

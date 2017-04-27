@@ -182,7 +182,7 @@ def jsblueprint():
         js_template = "'" + user_config['content'][key] + "'"
 
     api_url = request.url_root
-    #print("APP MODE", os.environ.get('APP_MODE', ''))
+    # print("APP MODE", os.environ.get('APP_MODE', ''))
 
     if os.environ.get('APP_MODE', '') == 'production':
         api_url = api_url.replace('http:', 'https:')
@@ -204,7 +204,8 @@ def jsblueprint():
 # def testing_templates():
 #     template_path = 'custom' + '/' + CURRENT_BLUEPRINT
 #     variables = {}
-#     return render_template(template_path + '/' + 'justatest.html', **variables)
+#     return render_template(
+#       template_path + '/' + 'justatest.html', **variables)
 
 
 ################################################
@@ -219,7 +220,7 @@ def zoom(document, code):
         return "Server has restarted after your last login." + \
             "<br>Please logout and login again..."
 
-# https://teamtreehouse.com/community/attributeerror-anonymoususermixin-object-has-no-attribute-username
+# https://teamtreehouse.com/community/attributeerror-anonymoususermixin-object-has-no-attribute-username
 
     HEADERS = {
         'content-type': 'application/json',
@@ -295,8 +296,8 @@ def zoom(document, code):
 
 
 # MAIN ROUTE: give angular the power
-@cms.route('/', methods=["GET"])
-@cms.route('/<path:mypath>', methods=["GET"])
+@cms.route('/app', methods=["GET"])
+@cms.route('/app/<path:mypath>', methods=["GET"])
 def angular(mypath=None):
     """
     The main and only real HTML route in this server.
@@ -308,4 +309,12 @@ def angular(mypath=None):
         pass
     elif mypath == 'loggedout':
         logout_user()
-    return jstemplate(mydomain='/', page='none.html')
+    return jstemplate(mydomain='/app', page='none.html')
+
+
+# MAIN ROUTE: give angular the power
+@cms.route('/welcome', methods=["GET"])
+@cms.route('/welcome/<path:mypath>', methods=["GET"])
+def angularwelcome(mypath=None):
+    logger.debug("Welcome Path: /%s" % mypath)
+    return jstemplate(mydomain='/app', page='none.html')

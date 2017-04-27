@@ -363,7 +363,7 @@ filt: {{search.filters}}
 <section layout="row"
 >
     <md-sidenav class="md-sidenav-right" md-component-id="left"
-          style="overflow-y: hidden;"
+          style="overflow-y: hidden; width: 300px;"
                 md-disable-backdrop md-whiteframe="4" >
 
       <md-content flex>
@@ -409,7 +409,7 @@ filt: {{search.filters}}
                   <b>
                     <a href
                         ng-repeat="single in splitter(lex._source.titre)"
-                        ng-click="search.searchText = single ">
+                        ng-click="search.searchText = single; toggle('close'); ">
                         {{single}}
                     </a>
                   </b>

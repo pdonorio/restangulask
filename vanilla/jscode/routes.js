@@ -274,8 +274,8 @@ $stateProvider
     $urlRouterProvider.otherwise(function ($injector) {
         // console.log("OTHERWISE");
         var $state = $injector.get('$state');
-        //return $state.go('login');
-        return $state.go('welcome');
+        return $state.go('welcome.login');
+        // return $state.go('welcome');
         // return $state.go('notfound');
     });
 
