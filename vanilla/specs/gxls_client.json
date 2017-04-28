@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "spectaclebaroque",
+  "private_key_id": "41c6b3ac9f8c5b3c00f48031013706fb1ef5bcb0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCxOVAXGwpirlqj\nOvxjHbrWEx8fHr6FKSbBNm1V2fT53qNOGnjTlGEM/Zb++rJxsODNhOdGTM+zcDPO\n/QsuSxf2tDfXt3KUSb429CGrekSFAa8Cu+XS3yWtAmFt2ZH3lUGvKRZ1puAmAQkz\n0yU+hDnmvd49Qu3xMyPilZv8YU6pF1yCYQC4mmQbWMWEwn39AhI5DkMFvCIa8cJT\nZCbKJlngH7FPPdtNU0QumTIjb5WecImvE4BU08zs5MPs2OhthoGf+Adqb/4z0uer\niJ+O6RuUTUf8jzIgmrfLywvrxL4fYeV/0kVGiw2e7lUQXywO4NmrOY6wDb4R4JWh\nZDo5WiFVAgMBAAECggEADHgO1YFWirjfsapdxY967MLtpp/gIbhSfLeam7a5ELeE\nX+Nm6uP+rA5PiGMVGQCr4GngZ8bRujtDueV92uT3q6jkYO4MRrilhHJKyCjTF1SV\n/qg/tEV0/iYzuqnbJkM/GtbWOLLkBGiAQEAz16Ev/bcQItlJqnXBqZiDIA+snCLl\nh2gIQ16UxS7/RDGzG7BX80XeFxfoIaRn0uiUfEBCMLfjHX/yr3iSp4enKUz5MkCi\ndVZQBfh0TUDuHSduAgUHIZz0LbSpf4Z20pUzCybosIIBAB5DzDuoSkn7TEJA4yVm\n1tStpnrbhTG/zztiaVkNcmjtF9ZZlIbI7mU7eOLY4QKBgQDqopwdGZH3kNmf82cU\nnPTjndsYWzxlkI1yxbYM5rX9VqOP6TmfstHURiK1zXFG8hTBKJwoTReXjMIvwMSL\nq2xkUpEgrGjHN7uSeTh/QeKh/5S70mh3nedZ5WZ08Vq5NZelyQbMSXQx5gfoN1ZM\nB04Ooe/IMKhzCddzazJGAaRl3QKBgQDBXG89tPjCf4RI+oNB/Yj0cXWabcLKnK71\nX1q+n7gt2LTvobJGoO54ZZYmHelLG4SM9FoQrAvO5yU5K9PIxicnNGna/bfBVCWj\nMt3xiLYXdHsrnA/4YxW32Co0zne5cK+n6Tu0xjU6NqL4CTb53Gi4hcwpnOhLtFkA\nKxUJJFDd2QKBgBPiZ/yHWDl0yxylEg1LJ+3KSPENelbZI0OgwcbiHnYzy3S8vSdt\njh7BOtvRZ1It3dhoyqMXtXIgeax2V7HGe08dODNeqRqI/JpzL3iJat1zvXUVZckN\nVrflmwM6GQgtJIbmPG8/oltANVdWqTeUPuc6jgmXJg9pvBqJ8R7BsN75AoGBAKQm\nKHmmLJhRUKfzo4JeDeoWd9QF4hvHL/A2Zv708JJbKh9UkdfLvyaOdw0cz3Rng/t1\nZRBKPiwDpmIGhuAm+A4cPNEgGuMQ4HLPOANYH92BkR7Qee5Pj5xm8k2qCZFvzG8r\nXPh2W7FzuJ4AlJ9BMdWUIGIjRkEedX/jExSTs+LhAoGBALF10OWA31HMX5NnP3Hy\nNQL1A79W7KZ9fwkHhClGTBMTy/VlNLO+CgwxHEnQ0armEpIucfsPQXTY8uI9swx1\nqxTBqDyIN5Rh793IULd/cz6d0QVyVERn4wxnf2bBbbuuRhH05DriN/RU0SmBqU+W\nEWE3uGpIZCK4YZQzmIs60CVF\n-----END PRIVATE KEY-----\n",
+  "client_email": "baroque@spectaclebaroque.iam.gserviceaccount.com",
+  "client_id": "115500364068340729187",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/baroque%40spectaclebaroque.iam.gserviceaccount.com"
+}

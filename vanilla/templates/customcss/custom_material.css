@@ -1,4 +1,8 @@
 
+md-list-item.md-2-line .md-list-item-text h4, md-list-item.md-2-line>.md-no-style .md-list-item-text h4, md-list-item.md-3-line .md-list-item-text h4, md-list-item.md-3-line>.md-no-style .md-list-item-text h4 {
+  white-space: normal;
+}
+
 .hidy {
   overflow-y: hidden;
 }

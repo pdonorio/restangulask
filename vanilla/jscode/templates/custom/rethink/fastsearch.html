@@ -363,7 +363,7 @@
               <label>Lexique</label>
               <input type="text"
                 ng-model="search.lexvar" ng-change="findLex()"
-                ng-focus="search.catvar = ''"
+                ng-focus="search.catvar = ''; findLex()"
                     focus-on="focusMe"/>
            </md-input-container>
            <div flex=10></div>
@@ -376,7 +376,8 @@
        </div>
       </md-content>
 
-      <md-content layout-padding style="overflow-y: scroll; height: 100%;">
+      <md-content layout-padding
+        style="overflow-y: scroll; height: 100%; width: 350px;">
           <md-list class="md-dense" flex>
 
     <div ng-if="lexlen == 0">
@@ -398,44 +399,58 @@
                   <b>
                     <a href
                         ng-repeat="single in splitter(lex._source.titre)"
-                        ng-click="search.searchText = single;">
+                        ng-click="search.searchText = single">
                         {{single}}
                     </a>
                   </b>
                 </h3>
                 <h4 ng-if="lex._source['français']">
                     français:
-                    <a href ng-click="search.searchText = lex._source['français'];">
-                        {{lex._source["français"]}}
+                    <a href
+                        ng-repeat="single in splitter(lex._source['français'])"
+                        ng-click="search.searchText = single">
+                        {{single}}
                     </a>
                 </h4>
                 <h4 ng-if="lex._source.latin">
                     latin:
-                    <a href ng-click="search.searchText = lex._source.latin;">
-                        {{lex._source.latin}}
+                    <a href
+                        ng-repeat="single in splitter(lex._source.latin)"
+                        ng-click="search.searchText = single">
+                        {{single}}
                     </a>
                 </h4>
                 <h4 ng-if="lex._source.italien">
                     italien:
-                    <a href ng-click="search.searchText = lex._source.italien;">
-                        {{lex._source.italien}}
+                    <a href
+                        ng-repeat="single in splitter(lex._source.italien)"
+                        ng-click="search.searchText = single">
+                        {{single}}
                     </a>
                 </h4>
                 <br>
                 <h4>
-                  <i>
+                 <i>
+                  <span>
                     <a href ng-click="search.lexvar = ''; search.catvar = lex._source.sheet; findLex()">
                         {{lex._source.sheet}}
                     </a>
+                  </span>
+
+                  <span ng-if="lex._source.macro != '-'">
                     &gt;
                     <a href ng-click="search.lexvar = ''; search.catvar = lex._source.macro; findLex()">
                         {{lex._source.macro}}
                     </a>
+                  </span>
+
+                  <span ng-if="lex._source.macro != '-'">
                     &gt;
                     <a href ng-click="search.lexvar = ''; search.catvar = lex._source.micro; findLex()">
                         {{lex._source.micro}}
                     </a>
-                  </i>
+                  </span>
+                 </i>
                 </h4>
                 <br>
               </div>
