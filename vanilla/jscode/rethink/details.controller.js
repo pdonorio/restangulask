@@ -135,12 +135,17 @@ function DetailsController($scope, $rootScope,
             delete tmp.images;
 
 // SHOULD I CYCLE TO REMOVE EMPTY?
+            self.detailExist = false;
             forEach(tmp, function(element, index) {
                 forEach(element, function(obj, j) {
-                    // console.log("element", j, "*" + obj + "*");
+                    // console.log(index, ": element", j, "*" + obj + "*");
                     if (obj) {
                         if (obj.hasOwnProperty('trim') && obj.trim() == '') {
                             tmp[index][j] = null;
+                        } else {
+                            if (index == 'Détails') {
+                                self.detailExist = true;
+                            }
                         }
                         if (obj instanceof Array) {
                             tmp[index][j] = null;
@@ -239,53 +244,6 @@ function DetailsController($scope, $rootScope,
                 });
 
             });
-
-            // ////////////////////////////////////
-            // ////////////////////////////////////
-            // // FIND NAMES, and previous and next
-            // var
-            //     field = "Numero de l'extrait",
-            //     name = out_single['Extrait'][field],
-            //     codes = name.split('_'),
-            //     num = parseInt(codes.pop()),
-            //     prefix = codes.join('_'),
-            //     previous_code = prefix + "_" + String(num - 1),
-            //     next_code = prefix + "_" + String(num + 1);
-
-            // var
-            //     regexp = /[0-9]+/g,
-            //     matches = name.match(regexp),
-            //     page = null;
-
-            // if (matches && matches.length > 0) {
-            //     page = parseInt(matches[0]);
-            //     previous_code = name.replace(regexp, page - 1);
-            //     next_code = name.replace(regexp, page + 1);
-            // }
-            // // console.log('CODES', num, previous_code, next_code, page);
-
-            // // SEARCH WITH APIs
-            // self.previous.text = previous_code;
-            // SearchService.recoverCode(previous_code, field).then(function (out)
-            // {
-            //     //$log.warn("OUT PREV IS", out);
-            //     if (out.elements && out.elements > 0) {
-            //         self.previous.link = out.data[0].record;
-            //     } else {
-            //         self.previous.link = null;
-            //     }
-            // });
-            // self.next.text = next_code;
-            // SearchService.recoverCode(next_code, field).then(function (out)
-            // {
-            //     if (out.elements && out.elements > 0) {
-            //         self.next.link = out.data[0].record;
-            //     } else {
-            //         self.next.link = null;
-            //     }
-            // })
-            // ////////////////////////////////////
-            // ////////////////////////////////////
 
 // REWRITE IMAGES and TRANSCRIPTIONS
 

@@ -10,16 +10,21 @@
     "
     ng-cloak>
 
-<md-toolbar class="md-hue-2 md-whiteframe-6dp"
+<md-toolbar class="md-whiteframe-4dp"
     style="
     top: 0; position:absolute; z-index: 3;
     height: 100px;
     line-height: 100px;
-    background-color: #455A64;"
+    background-color: #fafafa;
+    "
     >
   <div class="md-toolbar-tools">
+        <div style="padding-right: 10px; padding-top: 85px;">
+            <img src="https://spectaclebaroque.eu/wp-content/uploads/2017/04/cropped-csb3.png"
+                alt="spectaclebaroque logo" style="width: 85px;">
+        </div>
 
-<div flex md-truncate>
+<div flex md-truncate class="black-text">
     <h2
     style="
     font-family: 'Montserrat', sans-serif;
@@ -33,22 +38,18 @@
   </div>
 
 <div style=" bottom: 0; ">
+
     <a ui-sref="logged.fastsearch">
-     <md-button class="md-raised lime darken-2 white-text">
+     <md-button class="menu-button md-raised">
       Recherche
      </md-button>
+    </a>
     <a ui-sref="logged.list">
-     <md-button class="md-raised lime darken-3 white-text">
-      Liste de Fetes
+     <md-button class="md-raised menu-button">
+      Liste des fêtes
      </md-button>
     </a>
-<!--
-    <a ui-sref="logged.expo">
-     <md-button class="md-raised lime darken-4 white-text">
-      Exposition
-     </md-button>
-    </a>
--->
+
 </div>
 
       </div>
@@ -89,6 +90,7 @@
  </div>
 </md-content>
 
+<!--
 
  <footer class="page-footer lime darken-3" ng-cloak>
   <div class="container">
@@ -107,3 +109,5 @@
     </div>
   </div>
  </footer>
+
+-->

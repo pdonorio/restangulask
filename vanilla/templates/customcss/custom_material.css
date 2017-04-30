@@ -1,4 +1,19 @@
 
+.md-button.md-default-theme.md-raised, .md-button.md-raised {
+    background-color: #DDD4C8;
+}
+
+md-tabs-canvas {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border: 0px;
+}
+
+md-tab-content, md-tabs-content-wrapper {
+    margin-top: 10px;
+}
+
+
 md-list-item.md-2-line .md-list-item-text h4, md-list-item.md-2-line>.md-no-style .md-list-item-text h4, md-list-item.md-3-line .md-list-item-text h4, md-list-item.md-3-line>.md-no-style .md-list-item-text h4 {
   white-space: normal;
 }
@@ -47,12 +62,12 @@ md-sidenav {
 .diff a:visited {color:#039be5;}
 .diff a:hover {color:#039be5;}
 .diff a:active {color:#039be5;}
-*/
 
 md-tabs-canvas {
     margin-top: 10px;
     border: 1px black solid;
 }
+*/
 
 md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
     min-height: 100%;
@@ -207,12 +222,16 @@ http://jonathannicol.com/blog/2014/06/16/centre-crop-thumbnails-with-css/
 
 .fullheight { height: 100%; }
 
-.smalltexttable { font-size: 12px; }
+.smalltexttable {
+    font-size: 12px;
+    margin-top: 20px;
+}
 /*
 .smalltexttable table { padding: 0; }
 .smalltexttable tr { padding: 0; margin: 0; }
 */
-.smalltexttable thead { border: 0; padding-top: 2px; padding-bottom: 2px; }
+.smalltexttable thead {
+    border: 0; padding-top: 30px; padding-bottom: 2px; }
 .smalltexttable th,td { padding-top: 0px; padding-bottom: 5px; }
 .topaling td, th {
     vertical-align: top;

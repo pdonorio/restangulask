@@ -1,28 +1,15 @@
 
 ✔ firefox & safari @done (17-03-28 21:57)
-
 ✔ wordpress @done (17-04-27 15:33)
 https://blog.virtualzone.de/2016/08/howto-https-ssl-wordpress-behind-proxy-nginx-haproxy-apache-lighttpd.html
 https://spectaclebaroque.wordpress.com/
-
-- search
-   filters @done (17-04-27 00:01)
-    ✔ langue @done (17-04-26 23:52)
-    ✔ gravure @done (17-04-27 00:01)
-    bool not working with multimatch?
-   ✔ scroll if advanced open @done (17-04-27 23:58)
-  - lexique
-    ✔ elastic: prefix search/filter @done (17-04-28 01:09)
-    ☐ google reader
-    ✘ categorie design? @cancelled (17-04-27 23:59)
-    ✔ link @done (17-04-27 23:59)
-     ✔ langues @done (17-04-27 23:59)
-     ✔ categorie @done (17-04-27 23:59)
+✔ search @done (17-04-28 10:50)
    ☐ one interface
      ☐ bug in details?
+ - details
+   ☐ link titre non funziona
  - placeholder
  http://joshdmiller.github.io/angular-placeholders/
-
 - managing users
 - roles/profiles
   - admin actions
@@ -31,6 +18,7 @@ https://spectaclebaroque.wordpress.com/
   http://blog.leandot.com/elasticsearch/2017/03/04/create-elastic-search-snapshot-docker.html
  - rethinkdb
  - email
+ - wordpress...
 
 
 

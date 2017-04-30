@@ -297,7 +297,7 @@ function FixTransController($scope, $rootScope, $sce,
 // controller
 ////////////////////////////////
 
-function StepsController($scope, $rootScope, $log,
+function StepsController($scope, $rootScope, $log, $timeout,
     $state, $stateParams, $window, SearchService)
 {
     $rootScope.appFlexSize = 80;
@@ -314,10 +314,9 @@ function StepsController($scope, $rootScope, $log,
     self.cookieKey = 'searchParameters';
     self.headers = [
         'Lieu',
-        'Fete', //'Fête',
+        'Fête',
         'Date',
         'Source',
-        //'Type',
     ];
 
     SearchService.getFetes().then(function (out) {
@@ -339,7 +338,7 @@ function StepsController($scope, $rootScope, $log,
             // console.log("TEST", test, date);
 
             var tmp = {
-                'Fete':
+                'Fête':
                     String(value["Titre abrégé"])
                         .replace('Ignace', 'Ignace<br>')
                         .replace('Xavier', 'Xavier<br>'),
@@ -382,7 +381,11 @@ function StepsController($scope, $rootScope, $log,
         }
         $scope.sortColumn = self.headers[index];
         console.log("Sort", $scope.sortColumn, $scope.reverse)
+        console.log(self.headers);
     }
+    $timeout(function() {
+        self.toggleSort(0);
+    } , 300);
 
     // self.selectElement = function (name) {
     //   self.element = self.data[name];

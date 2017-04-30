@@ -279,7 +279,9 @@
          </a>
         </md-card>
 
-        <md-card class="nobox">
+        <md-card class="nobox"
+        style="width: 300px;"
+        >
             <md-card-content class="minextrait"
                 layout="column" layout-align="center center">
 
@@ -315,7 +317,7 @@
         <i>Source</i>:
         <span md-highlight-text="search.searchText"
             md-highlight-flags="i">{{item._source.source}}</span>
-        <br> <i>Fete</i>:
+        <br> <i>Fête</i>:
         <span md-highlight-text="search.searchText"
             md-highlight-flags="i">{{item._source.fete}}</span>
         <br> <i>Lieu</i>:
@@ -343,7 +345,7 @@
 >
     <md-sidenav class="md-sidenav-right" md-component-id="left"
           style="overflow-y: hidden; width: 410px;"
-                md-disable-backdrop md-whiteframe="4" >
+          md-is-open="lexiquesn" md-disable-backdrop md-whiteframe="4" >
 
       <md-content flex>
        <md-toolbar  layout="column" class="blue-grey">

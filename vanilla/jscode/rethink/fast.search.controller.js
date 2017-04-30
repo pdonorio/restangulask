@@ -53,14 +53,25 @@ function FastSearchController($scope, $rootScope,
           focus('focusMe');
       }, 500);
     } else if (action == 'close') {
-      $rootScope.appFlexSize = self.appSize;
-      $scope.lexique_close = true;
+      // $rootScope.appFlexSize = self.appSize;
+      // $scope.lexique_close = true;
     }
 
     $mdSidenav('left').toggle();
     self.lexvar = "";
     $scope.findLex();
   }
+
+  $scope.$watch('lexiquesn', function(newValue, oldValue) {
+    console.log("UHM", newValue, oldValue)
+    // CLOSE ACTION
+    if (oldValue == true && newValue == false) {
+      $rootScope.appFlexSize = self.appSize;
+      $scope.lexique_close = true;
+    }
+  });
+
+
   $scope.findLex = function() {
 
     // console.log("Calling find lex", self.lexvar);

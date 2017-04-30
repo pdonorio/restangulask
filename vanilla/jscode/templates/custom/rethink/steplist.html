@@ -14,9 +14,9 @@
                     </div>
                 </md-button>
             </a>
-            DETAILS DE LA FÊTE
+            Détails de la fête
         </h4>
-        <h4 ng-hide="steps.element"> LISTE DES FÊTES </h4>
+        <h4 ng-hide="steps.element"> Liste des fêtes </h4>
     </div>
 
     <hr style="padding:0px;">
@@ -33,7 +33,7 @@
         <br>
         <table>
           <tr>
-            <th width="50"> Source: </th>
+            <th width="50"> Source(s): </th>
             <td>
             <div ng-repeat="source in steps.sources">
                 <span ng-if="source == steps.currentSource">
@@ -102,7 +102,9 @@
                 <th ng-repeat="header in steps.headers" valign="top">
                   <div layout="row" layout-align="center center">
                     <a href ng-click="steps.toggleSort($index)">
-                        <h5> {{ steps.headers[$index] }} </h5>
+                        <h5>
+                        {{ steps.headers[$index] }}<span ng-if="header == 'Source'">(s)</span>
+                        </h5>
                     </a>
                     <span ng-if="sortColumn == header">
                         <i class="material-icons" ng-if="reverse"> arrow_drop_up </i>
@@ -119,7 +121,7 @@
                 <td ng-repeat="header in steps.headers"
                     ng-class="{'topv-align': true}">
 
-                    <span ng-if="header == 'Fete'">
+                    <span ng-if="header == 'Fête'">
                      <!-- <a href ng-click="steps.selectElement(fete.key)"> -->
                      <!-- <a href ui-sref="logged.list({name: fete.key})"> -->
                       <div ng-bind-html="fete[header]"></div>
@@ -134,7 +136,7 @@
                      </div>
                     </span>
 
-                    <div ng-if="header != 'Fete' && header != 'Source'"
+                    <div ng-if="header != 'Fête' && header != 'Source'"
                         ng-bind-html="fete[header]"></div>
                 </td>
                 <td></td>
