@@ -9,6 +9,8 @@
 
  <md-toolbar class="white black-text" layout="row" layout-padding flex>
     <div flex="20"></div>
+    <div>
+
       <md-autocomplete
           md-min-length="1"
           md-input-id="autoCompleteId"
@@ -46,6 +48,13 @@
           </span>
         </md-item-template>
       </md-autocomplete>
+
+      <span ng-if="advancedIsActivated && !advanced"
+        style="color: red; font-size: 12px;">
+        warning: advanced filters activated
+      </span>
+
+    </div>
 
       <div ng-if="!search.load && search.elements >= 0"
         flex="10"

@@ -31,7 +31,7 @@ function FastSearchController($scope, $rootScope,
         return text.split(',');
     else
         return [''];
-  }
+  };
 
   ///////////////////////////
   $scope.advancing = function() {
@@ -41,7 +41,7 @@ function FastSearchController($scope, $rootScope,
     } else {
       $rootScope.appScrollY = true;
     }
-  }
+  };
 
   ///////////////////////////
   $scope.toggle = function(action) {
@@ -60,12 +60,12 @@ function FastSearchController($scope, $rootScope,
     $mdSidenav('left').toggle();
     self.lexvar = "";
     $scope.findLex();
-  }
+  };
 
   $scope.$watch('lexiquesn', function(newValue, oldValue) {
-    console.log("UHM", newValue, oldValue)
+    // console.log("UHM", newValue, oldValue)
     // CLOSE ACTION
-    if (oldValue == true && newValue == false) {
+    if (oldValue === true && newValue === false) {
       $rootScope.appFlexSize = self.appSize;
       $scope.lexique_close = true;
     }
@@ -75,7 +75,7 @@ function FastSearchController($scope, $rootScope,
   $scope.findLex = function() {
 
     // console.log("Calling find lex", self.lexvar);
-    $scope.lexers = {}
+    $scope.lexers = {};
     $scope.lexlen = null;
 
     var term = '';
@@ -99,7 +99,7 @@ function FastSearchController($scope, $rootScope,
             // console.log("LEX", $scope.lexlen);
           }
       });
-  }
+  };
 
   // $timeout(function(){
   //   // $scope.toggle();
@@ -110,10 +110,10 @@ function FastSearchController($scope, $rootScope,
   // http://stackoverflow.com/a/37826964/2114395
   self.setFocus=function() {
     setTimeout(function() {
-        console.log("Trying to focus");
+        // console.log("Trying to focus");
         document.querySelector('#autoCompleteId').focus();
     },100);
-  }
+  };
 
   ///////////////////////////
   // BASE data for advanced search
@@ -124,7 +124,7 @@ function FastSearchController($scope, $rootScope,
   SearchService
     .getBaseSearchData().then(function (out) {
         self.advancedLoader = false;
-        console.log('Base', out);
+        // console.log('Base', out);
         if (out) {
           self.base = out;
         } else {
@@ -157,6 +157,7 @@ function FastSearchController($scope, $rootScope,
   // console.log("current filters", self.filters);
 
   self.load = false;
+  $scope.advancedIsActivated = false;
 
   ///////////////////////////
   // HANDLE PARAMETER
@@ -207,14 +208,19 @@ function FastSearchController($scope, $rootScope,
 
             // console.log("Saving search", self.filters);
             // Save filters
-            self.filters['searchText'] = self.searchText;
+            self.filters.searchText = self.searchText;
             if (!self.filters.gravure) {
                 self.filters.gravure = null;
             }
             /* else {
                 self.filters.gravure = null;
             } */
-            console.log("PAOLO", self.filters);
+            // console.log("PAOLO", self.filters)
+
+            $scope.advancedIsActivated = (
+                Object.keys(self.filters).length > 2 &&
+                self.filters.gravure
+            );
 
             localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
 
@@ -245,13 +251,13 @@ function FastSearchController($scope, $rootScope,
             }));
         }
     }
-  }
+  };
 
   self.searchTextChange = function (text) {
     $log.info('Text changed', text, self.searchText);
     // RELOAD
     self.extraits.refresh();
-  }
+  };
 
   self.clearFilters = function() {
       self.filters = {};
@@ -260,7 +266,7 @@ function FastSearchController($scope, $rootScope,
       self.searchText = "";
       // RELOAD
       self.extraits.refresh();
-  }
+  };
 
   if ($stateParams.clean) {
     console.log("Clean parameters");
@@ -280,7 +286,7 @@ function FastSearchController($scope, $rootScope,
             return out.data;
         return empty_response;
     });
-  }
+  };
 
   self.cloneDate = function () {
     if (self.filters.start_date && !self.filters.end_date) {
@@ -288,7 +294,7 @@ function FastSearchController($scope, $rootScope,
     } else if (self.filters.end_date && !self.filters.start_date) {
         self.filters.start_date = self.filters.end_date;
     }
-  }
+  };
 
   self.selectedItemChange = function (item) {
     if (item && item.trim() != '') {
@@ -296,7 +302,7 @@ function FastSearchController($scope, $rootScope,
         self.searchText = item;
         self.searchTextChange(item);
     }
-  }
+  };
 
   $scope.fields = [
     'sheet', 'macro', 'micro',
@@ -316,7 +322,7 @@ function FastSearchController($scope, $rootScope,
             }
           }
     });
-  }
+  };
 
   ///////////////////////////////////////
   // FINAL INIT
@@ -343,6 +349,6 @@ function FastSearchController($scope, $rootScope,
   });
 */
 
-};
+}
 
 })();

@@ -1,4 +1,9 @@
 
+ ☐ letsencrypt
+   ☐ check again
+   ☐ cronjob
+ every 10 weeks
+
 https://spectaclebaroque.wordpress.com/
 ✔ docker image @done (17-05-23 16:38)
  ✔ install oauth2client gspread @done (17-05-23 16:37)
