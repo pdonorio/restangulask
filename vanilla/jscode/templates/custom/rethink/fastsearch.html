@@ -264,9 +264,7 @@
         style="width: 80px; height: 130px;"
             >
          <a ui-sref='logged.details({id: item._id, query:search.searchText})'>
-          <div ng-if='!item._source.doc.thumbnail'
-            class="searchthumb"
-            >
+          <div ng-if='!item._source.doc.thumbnail' class="searchthumb" >
             <!-- PLACEHOLDER
             ng-style="{'background-image':'url(placehold.it/110x160)'}"
             -->
@@ -279,57 +277,43 @@
          </a>
         </md-card>
 
-        <md-card class="nobox"
-        style="width: 300px;"
-        >
-            <md-card-content class="minextrait"
-                layout="column" layout-align="center center">
+        <md-card class="nobox" style="width: 300px;" ng-if="item._source">
+         <md-card-content class="minextrait"
+            layout="column" layout-align="center center">
 
-                <table class="nospaces bordered">
-                    <tr>
-                        <th>
-                        ID
-                        </th>
-                        <td>
-
-                  <span
-                    md-highlight-text="search.searchText"
-                    md-highlight-flags="i">
-                    {{item._source.extrait}}
-                    </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                        Page
-                        </th>
-                        <td>
-                    {{item._source.page}}
-                        </td>
-                    </tr>
-                </table>
-
-            </md-card-content>
+          <table class="nospaces bordered">
+            <tr>
+             <th> ID </th>
+             <td> <span
+                md-highlight-text="search.searchText" md-highlight-flags="i">
+                {{item._source.extrait}}
+                </span>
+             </td>
+            </tr> <tr>
+             <th> Page </th>
+             <td> {{item._source.page}} </td>
+            </tr>
+          </table>
+         </md-card-content>
         </md-card>
-        <md-card>
-            <md-card-content>
-             <p>
-        <i>Source</i>:
-        <span md-highlight-text="search.searchText"
-            md-highlight-flags="i">{{item._source.source}}</span>
-        <br> <i>Fête</i>:
-        <span md-highlight-text="search.searchText"
-            md-highlight-flags="i">{{item._source.fete}}</span>
-        <br> <i>Lieu</i>:
-        <span md-highlight-text="search.searchText"
-            md-highlight-flags="i">{{item._source.lieu}}</span>
-        <span ng-if="item._source.date">
-            <br> <i>Date</i>: {{item._source.date}}
-        </span>
-        <br>
-
-             </p>
-            </md-card-content>
+        <md-card ng-if="item._source" >
+         <md-card-content>
+          <p>
+            <i>Source</i>:
+            <span md-highlight-text="search.searchText"
+                md-highlight-flags="i">{{item._source.source}}</span>
+            <br> <i>Fête</i>:
+            <span md-highlight-text="search.searchText"
+                md-highlight-flags="i">{{item._source.fete}}</span>
+            <br> <i>Lieu</i>:
+            <span md-highlight-text="search.searchText"
+                md-highlight-flags="i">{{item._source.lieu}}</span>
+            <span ng-if="item._source.date">
+                <br> <i>Date</i>: {{item._source.date}}
+            </span>
+            <br>
+          </p>
+         </md-card-content>
         </md-card>
 
     </md-list-item>

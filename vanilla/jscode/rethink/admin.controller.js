@@ -41,11 +41,11 @@ angular.module('web')
 ;
 
 var
-    data_type = 'welcome'
-    , slide_type = 'slides'
-    , sub_type = 'subwelcome'
-    , mysection = 'admin_sections'
-    , mysubsection = 'admin_subsections'
+    data_type = 'welcome',
+    slide_type = 'slides',
+    sub_type = 'subwelcome',
+    mysection = 'admin_sections',
+    mysubsection = 'admin_subsections'
     //, myslide = 'admin_slides'
     ;
 

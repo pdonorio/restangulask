@@ -19,4 +19,4 @@ function SubController($scope, $log)
   self.sub = 'sub!';
 }
 
-})()
+})();

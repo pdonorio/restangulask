@@ -1,8 +1,7 @@
 
-✔ firefox & safari @done (17-03-28 21:57)
-✔ wordpress @done (17-04-27 15:33)
-https://blog.virtualzone.de/2016/08/howto-https-ssl-wordpress-behind-proxy-nginx-haproxy-apache-lighttpd.html
 https://spectaclebaroque.wordpress.com/
+✔ docker image @done (17-05-23 16:38)
+ ✔ install oauth2client gspread @done (17-05-23 16:37)
 ✔ search @done (17-04-28 10:50)
    ☐ one interface
      ☐ bug in details?
@@ -10,6 +9,8 @@ https://spectaclebaroque.wordpress.com/
    ☐ link titre non funziona
  - placeholder
  http://joshdmiller.github.io/angular-placeholders/
+- lexique
+ ☐ reload button...
 - managing users
 - roles/profiles
   - admin actions

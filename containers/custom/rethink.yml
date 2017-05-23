@@ -1,5 +1,6 @@
 
 rethinkdb:
+  # image: pdonorio/rethinkdb:alpine
   image: rethinkdb:2.3.5
   hostname: rdbmaster
   volumes:
