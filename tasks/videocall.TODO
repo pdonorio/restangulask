@@ -6,21 +6,21 @@ https://spectaclebaroque.wordpress.com/
  ☐ cronjob
  every 10 weeks
 
-☐ details
-  ☐ link titre non funziona
+✔ details @done (17-05-25 07:34)
+  ✔ link titre non funziona @done (17-05-25 07:34)
+✔ red text @done (17-05-25 23:11)
+ ✔ implement @done (17-05-23 17:15)
+ ✔ translation @quick @done (17-05-25 23:11)
 ✔ docker image @done (17-05-23 16:38)
  ✔ install oauth2client gspread @done (17-05-23 16:37)
- ☐ slow? @bug
-☐ red text
- ✔ implement @done (17-05-23 17:15)
- ☐ translation @quick
+ ☐ elasticsearch slow? @bug
 ☐ search
  - placeholder @onlyforme?
    http://joshdmiller.github.io/angular-placeholders/
 ☐ lexique to be completed
-   ☐ bug in details?
-   ☐ admin reload button
-   container?
+   ✔ bug in details? @done (17-05-25 23:52)
+☐ admin reload button
+  ☐ lexique
 
 - managing users
 - roles/profiles

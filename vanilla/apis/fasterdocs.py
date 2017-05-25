@@ -164,7 +164,7 @@ class FastSuggestion(ExtendedApiResource, FastSearch):
 class FastLex(ExtendedApiResource, FastSearch):
 
     @deck.add_endpoint_parameter(name='size')
-    @deck.add_endpoint_parameter(name='category', ptype=int)
+    @deck.add_endpoint_parameter(name='category', ptype=int, default=0)
     @deck.apimethod
     @auth_token_required
     def get(self, term=None):
