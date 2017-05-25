@@ -11,14 +11,11 @@ https://spectaclebaroque.wordpress.com/
 ✔ red text @done (17-05-25 23:11)
  ✔ implement @done (17-05-23 17:15)
  ✔ translation @quick @done (17-05-25 23:11)
+✔ lexique to be completed @done (17-05-26 00:45)
+   ✔ bug in details? @done (17-05-25 23:52)
 ✔ docker image @done (17-05-23 16:38)
  ✔ install oauth2client gspread @done (17-05-23 16:37)
  ☐ elasticsearch slow? @bug
-☐ search
- - placeholder @onlyforme?
-   http://joshdmiller.github.io/angular-placeholders/
-☐ lexique to be completed
-   ✔ bug in details? @done (17-05-25 23:52)
 ☐ admin reload button
   ☐ lexique
 
@@ -29,6 +26,9 @@ https://spectaclebaroque.wordpress.com/
  - rethinkdb
  - elastic
   http://blog.leandot.com/elasticsearch/2017/03/04/create-elastic-search-snapshot-docker.html
+☐ search
+ - placeholder @onlyforme?
+   http://joshdmiller.github.io/angular-placeholders/
 
 
 
