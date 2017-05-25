@@ -199,6 +199,23 @@ function DetailsController($scope, $rootScope,
                 source = self.refinedData["Source"]["Titre abrégé"],
                 current = self.refinedData["Extrait"][field];
 
+            $scope.currentFete = fete;
+            $scope.currentSource = source;
+
+            ////////////////////////////////////////////////
+            SearchService.getFetes().then(function (out) {
+              self.parties = {};
+              if (out) {
+                var skey = 'Titre abrégé de la source';
+                // console.log("BOOK DATA", out.data);
+                forEach(out.data, function(value, key) {
+                    self.parties[String(value["Titre abrégé"])] = value[skey];
+                });
+              }
+              console.log("PARTIES", self.parties);
+            });
+            ////////////////////////////////////////////////
+
             var linkName = self.refinedData['Source']['Liens'];
             if (linkName && linkName.trim() != '') {
                 var tmp = linkName
@@ -251,7 +268,7 @@ function DetailsController($scope, $rootScope,
 
             forEach(out_single.images, function(element, index) {
 
-              self.texts = {}
+              self.texts = {};
 
               if (element.transcriptions) {
                   forEach(element.transcriptions, function(trans, j) {
@@ -294,12 +311,13 @@ function DetailsController($scope, $rootScope,
 
             });
 
-            console.log('LANGUAGES', self.texts);
+            // console.log('LANGUAGES', self.texts);
             self.languages = Object.keys(self.texts);
             self.selected_language = self.original_language;
 
             self.data = out_single;
             self.load = false;
+
 
         }); // single data
       }); // steps

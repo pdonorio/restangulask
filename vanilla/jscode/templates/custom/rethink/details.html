@@ -293,12 +293,11 @@
             ng-show='detail.refinedData[key3][field22]'>
           <th> {{ field22 }} </th>
           <td>
-            <a href>
-              <i>
-              <b>
-                {{detail.refinedData[key3][field22]}}
-              </b>
-              </i>
+            <a ui-sref="logged.list({
+                    name: currentFete,
+                    book: detail.parties[currentFete].indexOf(currentSource)
+                })">
+              <i> <b> {{detail.refinedData[key3][field22]}} </b> </i>
             </a>
           </td>
         </tr>

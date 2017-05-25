@@ -357,7 +357,7 @@ function StepsController($scope, $rootScope, $log, $timeout,
             tmp['key'] = key;
             self.parties.push(tmp);
           });
-          // console.log("Parties", self.parties);
+          console.log("Parties", self.parties);
 
            self.dataCount = out.elements;
            if ($stateParams.name != "~") {

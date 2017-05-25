@@ -1,30 +1,34 @@
 
- ☐ letsencrypt
-   ☐ check again
-   ☐ cronjob
+https://spectaclebaroque.wordpress.com/
+
+☐ letsencrypt
+ ☐ check again
+ ☐ cronjob
  every 10 weeks
 
-https://spectaclebaroque.wordpress.com/
+☐ details
+  ☐ link titre non funziona
 ✔ docker image @done (17-05-23 16:38)
  ✔ install oauth2client gspread @done (17-05-23 16:37)
-✔ search @done (17-04-28 10:50)
-   ☐ one interface
-     ☐ bug in details?
- - details
-   ☐ link titre non funziona
- - placeholder
- http://joshdmiller.github.io/angular-placeholders/
-- lexique
- ☐ reload button...
+ ☐ slow? @bug
+☐ red text
+ ✔ implement @done (17-05-23 17:15)
+ ☐ translation @quick
+☐ search
+ - placeholder @onlyforme?
+   http://joshdmiller.github.io/angular-placeholders/
+☐ lexique to be completed
+   ☐ bug in details?
+   ☐ admin reload button
+   container?
+
 - managing users
 - roles/profiles
   - admin actions
 - backup
+ - rethinkdb
  - elastic
   http://blog.leandot.com/elasticsearch/2017/03/04/create-elastic-search-snapshot-docker.html
- - rethinkdb
- - email
- - wordpress...
 
 
 
