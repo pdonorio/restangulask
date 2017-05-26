@@ -23,7 +23,8 @@ conf:
 backend:
   extends:
     service: conf
-  image: pdonorio/py3apil
+  image: pdonorio/backend:baroque
+  # image: pdonorio/py3apil
   hostname: restapi
   volumes:
     # Sql lite database

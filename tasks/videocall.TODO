@@ -1,4 +1,6 @@
 
+# SPECTACLE BAROQUE
+
 https://spectaclebaroque.wordpress.com/
 
 ☐ letsencrypt
@@ -6,28 +8,17 @@ https://spectaclebaroque.wordpress.com/
  ☐ cronjob
  every 10 weeks
 
-✔ details @done (17-05-25 07:34)
-  ✔ link titre non funziona @done (17-05-25 07:34)
-✔ red text @done (17-05-25 23:11)
- ✔ implement @done (17-05-23 17:15)
- ✔ translation @quick @done (17-05-25 23:11)
-✔ lexique to be completed @done (17-05-26 00:45)
-   ✔ bug in details? @done (17-05-25 23:52)
-✔ docker image @done (17-05-23 16:38)
- ✔ install oauth2client gspread @done (17-05-23 16:37)
- ☐ elasticsearch slow? @bug
-☐ admin reload button
-  ☐ lexique
-
-- managing users
-- roles/profiles
-  - admin actions
-- backup
- - rethinkdb
- - elastic
+☐ admin
+  ☐ lexique reload
+  ☐ users
+    - roles/profiles
+  ☐ admin actions
+  ☐ backup
   http://blog.leandot.com/elasticsearch/2017/03/04/create-elastic-search-snapshot-docker.html
+
 ☐ search
- - placeholder @onlyforme?
+  - coma language bug
+  - placeholder
    http://joshdmiller.github.io/angular-placeholders/
 
 
