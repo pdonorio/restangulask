@@ -215,7 +215,6 @@ function FastSearchController($scope, $rootScope,
             /* else {
                 self.filters.gravure = null;
             } */
-            // console.log("PAOLO", self.filters)
 
             $scope.advancedIsActivated = (
                 Object.keys(self.filters).length > 2 &&
@@ -223,12 +222,12 @@ function FastSearchController($scope, $rootScope,
             );
 
             localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
+            // console.log("PAOLO", self.filters);
 
             // Search for lexique
             if (self.searchText.length > 2) {
                 self.checkLexique();
             }
-
 
             SearchService.getDataFast(self.searchText, start, self.filters)
             .then(angular.bind(this, function (obj) {
@@ -306,8 +305,9 @@ function FastSearchController($scope, $rootScope,
 
   $scope.fields = [
     'sheet', 'macro', 'micro',
-    'titre', 'latin', 'français', 'italiano'
+    'titre', 'latin', 'français', 'italien'
   ];
+
   self.checkLexique = function () {
     $scope.rows = null;
     $scope.selected = self.searchText;
