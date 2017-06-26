@@ -32,6 +32,10 @@ custombe:
   extends:
     file: docker-compose.yml
     service: backend
+  environment:
+    PYTHONIOENCODING: UTF-8
+    DEVOP: python3.6 operations.py
+    # DEVOP: PYTHONIOENCODING=UTF-8 python3.6 operations.py
   links:
     - rethinkdb:rdb
     - searchindex:el

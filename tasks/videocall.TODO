@@ -3,18 +3,21 @@
 
 https://spectaclebaroque.wordpress.com/
 
-☐ letsencrypt
- ☐ check again
- ☐ cronjob
- every 10 weeks
-
 ☐ admin
   ☐ lexique reload
+  ☐ edit step details options
+    rethinkdb datakeys collection
   ☐ users
     - roles/profiles
   ☐ admin actions
   ☐ backup
   http://blog.leandot.com/elasticsearch/2017/03/04/create-elastic-search-snapshot-docker.html
+
+☐ letsencrypt
+ ☐ check again
+ ☐ cronjob
+ every 10 weeks
+
 
 ☐ search
   - coma language bug

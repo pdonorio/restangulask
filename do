@@ -17,6 +17,8 @@ elif [ "$in" == "restore" ]; then
     $dc $bc python3.6 operations.py
 elif [ "$in" == "backshell" ]; then
     $dc $bc bash
+elif [ "$in" == "frontshell" ]; then
+    $dc $fc bash
 else
     echo "Unknown command: $in"
 fi
