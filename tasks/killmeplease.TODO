@@ -2,42 +2,17 @@
 
 GOT ME THINKING:
 
-✔ extrait @done (17-06-26 22:36)
-  + remove the number when saving!
-  + if space, put quotes around when searching
-- results number ordering?!?
-
-"la fléche" and SUGGESTIONS **TOKEN FILTERS**
-
-- accents not matching
-asciifolding
+☐ lingua e virgola
+☐ token filters
+  - accents not matching
+  asciifolding
 
 Source: Le triomphe des saincts... à la Fleche.
 Fête: Canonisation d'Ignace et François Xavier à La Flèche
 
-- transciption: fleche / fleches PLURALS
-stemmer: light_french
-- transcription: split with single quote
-apostrophe
-- transcription: Fleche / fleche LOWERCASE
-lowercase
-
 - scytalosagittipelliger
 La Flèche_48
 https://spectaclebaroque.eu/app/details/953a7a13-3593-43a2-a8f7-1e54df378d2c
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

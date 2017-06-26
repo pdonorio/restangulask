@@ -203,6 +203,7 @@ function FastSearchController($scope, $rootScope,
 
             this.hold = true;
             this.toLoad_ += 5;
+
             var start = this.numLoaded_;
             if (start > 0) start++;
 
@@ -235,15 +236,18 @@ function FastSearchController($scope, $rootScope,
               if (obj && obj.elements > 0) {
                 self.elements = obj.elements;
 
-                // console.log('Data fast:', obj.data, obj.elements);
-                this.items = this.items.concat(obj.data);
-
                 if (obj.elements < this.toLoad_) {
                     this.stop_ = true;
-                    // console.log("Should stop");
+                    // console.log("Should stop", this.numLoaded_);
                 }
-                this.numLoaded_ = this.items.length;
+
+                if (this.numLoaded_ < obj.elements) {
+                    // console.log('Data fast:', obj.data, obj.elements);
+                    this.items = this.items.concat(obj.data);
+                    this.numLoaded_ = this.items.length;
+                }
                 this.hold = false;
+
               } else {
                 self.elements = 0;
               }

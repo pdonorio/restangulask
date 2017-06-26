@@ -34,7 +34,7 @@
 -->
 
       <div layout="row">
-          <md-content flex="40" layout="row" layout-padding layout-align="center center">
+          <md-content flex="30" layout="row" layout-padding layout-align="center center">
             <a href layout="row" layout-align="center center"
                 tooltipped data-position="bottom" data-delay="50"
                 data-tooltip="{{detail.first_page.name}}"
@@ -52,15 +52,18 @@
                 <i class="material-icons">keyboard_arrow_left</i>
             </a>
           </md-content>
-          <div flex="20" layout-align="center center" style="text-align:center;">
+          <div flex="40" layout-align="center center" style="text-align:center;">
               <div ng-if="!detail.pages">
                 <i>
                     Date de la page manquante...
                 </i>
               </div>
-              <md-input-container ng-if="detail.pages && detail.pagesElements > 0">
+              <md-input-container
+                style="min-width:200px;"
+                ng-if="detail.pages && detail.pagesElements > 0">
                 <label>choisissez la page</label>
-                <md-select ng-model="detail.page" md-on-close="detail.changePage()" >
+                <md-select ng-model="detail.page"
+                    md-on-close="detail.changePage()" >
                   <md-optgroup label="pages">
                     <!-- <md-option ng-value="">-</md-option> -->
                         <!-- {{item.name}} ({{item.page}}) -->
@@ -74,7 +77,7 @@
                 </md-select>
               </md-input-container>
           </div>
-          <md-content flex="40" layout="row" layout-padding layout-align="center center">
+          <md-content flex="30" layout="row" layout-padding layout-align="center center">
             <a href layout="row" layout-align="center center"
                 tooltipped data-position="bottom" data-delay="50"
                 data-tooltip="{{detail.next_page.name}}"

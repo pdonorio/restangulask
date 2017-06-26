@@ -252,9 +252,10 @@
     layout="row" layout-padding layout-align="center center"
     >
     <div flex="10"></div>
-    <div flex="auto">
+    <div flex="auto" id="onlyme">
 
 <md-virtual-repeat-container
+    class="onlyme"
     ng-hide="search.extraits.hold"
     id="vertical-container">
 
@@ -290,17 +291,17 @@
          <md-card-content class="minextrait"
             layout="column" layout-align="center center">
 
-          <table class="nospaces bordered">
+          <table class="nospaces bordered ">
             <tr>
-             <th> ID </th>
-             <td> <span
+             <th style="width: 70px;"> ID </th>
+             <td style="text-align: left;"> <span
                 md-highlight-text="search.searchText" md-highlight-flags="i">
                 {{item._source.extrait}}
                 </span>
              </td>
             </tr> <tr>
              <th> Page </th>
-             <td> {{item._source.page}} </td>
+             <td style="text-align: left;"> {{item._source.page}} </td>
             </tr>
           </table>
          </md-card-content>
