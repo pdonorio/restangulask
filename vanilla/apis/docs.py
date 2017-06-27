@@ -1031,6 +1031,7 @@ class RethinkElement(BaseRethinkResource):
             name = None
             source_name = None
             ex_name = None
+            fete = None
             date = {}
 
             for step in obj['steps']:
@@ -1072,8 +1073,8 @@ class RethinkElement(BaseRethinkResource):
 
                         if element['value'].strip() == '':
                             element['value'] = '-'
-                        # if int(element['position']) == 1:
-                        #     name = element['value']
+                        if int(element['position']) == 1:
+                            fete = element['value']
                         tmp[element['name']] = element['value']
 
                 elif current == 4:
@@ -1121,7 +1122,7 @@ class RethinkElement(BaseRethinkResource):
                     sources[name] = []
                 try:
                     sources[name].index(source_name)
-                except:
+                except BaseException:
                     sources[name].append(source_name)
             # else:
             #     source_name = 'unknown'
@@ -1143,6 +1144,10 @@ class RethinkElement(BaseRethinkResource):
                     flag = False
             if flag:
                 data[name] = tmp
+
+            if fete is None:
+                print("TEST PARTY", fete)
+                print(ex_name, obj)
 
         # from beeprint import pp
         # pp(extraits[source_name])

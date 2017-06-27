@@ -197,96 +197,8 @@
 
 <md-tabs md-selected="detail.tabIndex">
 
+
   <md-tab id="tab1">
-   <!-- background-color: #ADCDDB;" -->
-      <md-tab-label>FÊTE</md-tab-label>
-      <md-tab-body  style="min-height: 250px;">
-
-    <table class="topalign smalltexttable">
-      <tbody ng-init="key2='Fête'">
-        <tr ng-init="field11='Titre abrégé'"
-            ng-show='detail.refinedData[key2][field11]'>
-          <th> Fête </th>
-          <td> {{detail.refinedData[key2][field11]}} </td>
-        </tr>
-        <tr ng-init="field12='Date'"
-            ng-show='detail.refinedData[key2][field12]'>
-          <th> {{ field12 }} </th>
-          <td>
-            <span ng-if='detail.refinedData.date'>
-            {{
-            detail.refinedData[key2]["Date de début de la fête"]
-            | date:'dd/MM'
-            }}
-            -
-            {{
-            detail.refinedData[key2]["Date de la fin de la fête"]
-            | date:'dd/MM'
-            }}
-            /
-            </span>
-            {{detail.refinedData[key2][field12]}}
-            </td>
-        </tr>
-        <tr ng-init="field13='Lieu'"
-            ng-show='detail.refinedData[key2][field13]'>
-          <th> {{ field13 }} </th>
-          <td> {{detail.refinedData[key2][field13]}} </td>
-        </tr>
-        <tr ng-init="field14='Notes'"
-            ng-show='detail.refinedData[key2][field14]'>
-          <th> {{ field14 }} </th>
-          <td> {{detail.refinedData[key2][field14]}} </td>
-        </tr>
-
-      </tbody>
-      </table>
-      </md-tab-body>
-  </md-tab>
-
-  <md-tab id="tab2" ng-if="detail.detailExist">
-      <md-tab-label>DÉTAILS</md-tab-label>
-      <md-tab-body>
-    <table class="topalign smalltexttable">
-
-     <tbody ng-init="key='Détails'"
-          ng-dblclick="detail.sideLex('open')">
-        <tr ng-init="field1='Personnages'"
-            ng-show='detail.refinedData[key][field1]'>
-          <th> {{ field1 }} </th>
-          <td> {{detail.refinedData[key][field1]}} </td>
-        </tr>
-        <tr ng-init="field2='Temps'"
-            ng-show='detail.refinedData[key][field2]'>
-          <th> {{ field2 }} </th>
-          <td> {{detail.refinedData[key][field2]}} </td>
-        </tr>
-        <tr ng-init="field3='Actions'"
-            ng-show='detail.refinedData[key][field3]
-            || detail.refinedData[key][field3 + " libres"]'>
-          <th> {{ field3 }} </th>
-          <td>
-            {{detail.refinedData[key][field3]}}<span
-                ng-if="detail.refinedData[key][field3] && detail.refinedData[key][field3 + ' libres']">,</span>
-            {{detail.refinedData[key][field3 + ' libres']}}
-          </td>
-        </tr>
-        <tr ng-init="field4='Apparato'"
-            ng-show='detail.refinedData[key][field4]
-            || detail.refinedData[key][field4 + " libre"]'>
-          <th> {{ field4 }} </th>
-          <td>
-            {{detail.refinedData[key][field4]}}<span
-                ng-if="detail.refinedData[key][field4] && detail.refinedData[key][field4 + ' libres']">,</span>
-            {{detail.refinedData[key][field4 + ' libre']}}
-          </td>
-        </tr>
-      </tbody>
-
-      </table>
-      </md-tab-body>
-  </md-tab>
-  <md-tab id="tab3">
       <md-tab-label>SOURCE</md-tab-label>
       <md-tab-body>
 
@@ -373,6 +285,100 @@
       </md-tab-body>
     </md-tab>
 
+
+
+  <md-tab id="tab2" ng-if="detail.detailExist">
+      <md-tab-label>DÉTAILS</md-tab-label>
+      <md-tab-body>
+    <table class="topalign smalltexttable">
+
+     <tbody ng-init="key='Détails'"
+          ng-dblclick="detail.sideLex('open')">
+        <tr ng-init="field1='Personnages'"
+            ng-show='detail.refinedData[key][field1]'>
+          <th> {{ field1 }} </th>
+          <td> {{detail.refinedData[key][field1]}} </td>
+        </tr>
+        <tr ng-init="field2='Temps'"
+            ng-show='detail.refinedData[key][field2]'>
+          <th> {{ field2 }} </th>
+          <td> {{detail.refinedData[key][field2]}} </td>
+        </tr>
+        <tr ng-init="field3='Actions'"
+            ng-show='detail.refinedData[key][field3]
+            || detail.refinedData[key][field3 + " libres"]'>
+          <th> {{ field3 }} </th>
+          <td>
+            {{detail.refinedData[key][field3]}}<span
+                ng-if="detail.refinedData[key][field3] && detail.refinedData[key][field3 + ' libres']">,</span>
+            {{detail.refinedData[key][field3 + ' libres']}}
+          </td>
+        </tr>
+        <tr ng-init="field4='Apparato'"
+            ng-show='detail.refinedData[key][field4]
+            || detail.refinedData[key][field4 + " libre"]'>
+          <th> {{ field4 }} </th>
+          <td>
+            {{detail.refinedData[key][field4]}}<span
+                ng-if="detail.refinedData[key][field4] && detail.refinedData[key][field4 + ' libres']">,</span>
+            {{detail.refinedData[key][field4 + ' libre']}}
+          </td>
+        </tr>
+      </tbody>
+
+      </table>
+      </md-tab-body>
+  </md-tab>
+
+
+  <md-tab id="tab3">
+      <md-tab-label>FÊTE</md-tab-label>
+      <md-tab-body  style="min-height: 250px;">
+
+    <table class="topalign smalltexttable">
+      <tbody ng-init="key2='Fête'">
+        <tr ng-init="field11='Titre abrégé'"
+            ng-show='detail.refinedData[key2][field11]'>
+          <th> Fête </th>
+          <td> {{detail.refinedData[key2][field11]}} </td>
+        </tr>
+        <tr ng-init="field12='Date'"
+            ng-show='detail.refinedData[key2][field12]'>
+          <th> {{ field12 }} </th>
+          <td>
+            <span ng-if='detail.refinedData.date'>
+            {{
+            detail.refinedData[key2]["Date de début de la fête"]
+            | date:'dd/MM'
+            }}
+            -
+            {{
+            detail.refinedData[key2]["Date de la fin de la fête"]
+            | date:'dd/MM'
+            }}
+            /
+            </span>
+            {{detail.refinedData[key2][field12]}}
+            </td>
+        </tr>
+        <tr ng-init="field13='Lieu'"
+            ng-show='detail.refinedData[key2][field13]'>
+          <th> {{ field13 }} </th>
+          <td> {{detail.refinedData[key2][field13]}} </td>
+        </tr>
+        <tr ng-init="field14='Notes'"
+            ng-show='detail.refinedData[key2][field14]'>
+          <th> {{ field14 }} </th>
+          <td> {{detail.refinedData[key2][field14]}} </td>
+        </tr>
+
+      </tbody>
+      </table>
+      </md-tab-body>
+  </md-tab>
+
+
+
   <md-tab id="tab4"
        ng-if='detail.refinedData[key2][field31]'>
       <md-tab-label>AUTRES SOURCES LIEES</md-tab-label>
@@ -389,6 +395,9 @@
     </table>
       </md-tab-body>
     </md-tab>
+
+
+
 
   <md-tab id="tab5"
            ng-if='detail.refinedData[key2][field31]'>
