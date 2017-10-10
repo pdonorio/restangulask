@@ -11,8 +11,10 @@
     <meta name="author" content="">
     <!-- /meta -->
 {%- if mydomain -%}
-    <!-- needed by angular location routing -->
+    <!-- needed by angular location routing
     <base href="{{ mydomain }}"/>
+    -->
+    <base href="/"/>
 {%- endif %}
     <!-- styles -->
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">

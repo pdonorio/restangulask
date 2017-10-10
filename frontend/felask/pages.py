@@ -309,7 +309,7 @@ def angular(mypath=None):
         pass
     elif mypath == 'loggedout':
         logout_user()
-    return jstemplate(mydomain='/app', page='none.html')
+    return jstemplate(mydomain='/test1', page='none.html')
 
 
 # MAIN ROUTE: give angular the power
@@ -317,4 +317,4 @@ def angular(mypath=None):
 @cms.route('/welcome/<path:mypath>', methods=["GET"])
 def angularwelcome(mypath=None):
     logger.debug("Welcome Path: /%s" % mypath)
-    return jstemplate(mydomain='/app', page='none.html')
+    return jstemplate(mydomain='/test2', page='none.html')
