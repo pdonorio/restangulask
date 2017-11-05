@@ -10,13 +10,6 @@
         <tbody>
 
             <tr>
-                <td> Manage users </td>
-                <td class="center-align">
-                    <a ui-sref="logged.accounts" class="btn indigo padbtn">
-                        accounts </a> </td>
-            </tr>
-
-            <tr>
                 <td> Create a new record </td>
                 <td class="center-align">
                     <a ui-sref="logged.submit({id: 'draft', step: 1})"
@@ -25,17 +18,18 @@
             </tr>
 
             <tr>
-                <td> Explore current records </td>
+                <td> List uncompleted records </td>
                 <td class="center-align">
-                    <a ui-sref="logged.explore" class="btn indigo padbtn">
-                        explore </a> </td>
+                    <a ui-sref="logged.uncomplete"
+                        class="btn indigo padbtn">
+                        finish </a> </td>
             </tr>
 
             <tr>
-                <td> Modify site pages </td>
+                <td> Edit transcriptions or add missing images </td>
                 <td class="center-align">
-                    <a ui-sref="logged.admin" class="btn indigo padbtn">
-                        site </a> </td>
+                    <a ui-sref="logged.explore" class="btn indigo padbtn">
+                        explore </a> </td>
             </tr>
 
             <tr>
@@ -46,9 +40,24 @@
             </tr>
 
             <tr>
+                <td> Manage users </td>
+                <td class="center-align">
+                    <a ui-sref="logged.accounts" class="btn lime padbtn">
+                        accounts </a> </td>
+            </tr>
+
+            <tr>
+                <td> Modify site pages </td>
+                <td class="center-align">
+                    <a ui-sref="logged.admin" class="btn lime padbtn">
+                        site </a> </td>
+            </tr>
+
+            <tr>
                 <td> Database backup </td>
                 <td class="center-align">
-                    <a ui-sref="logged.backups" class="btn indigo padbtn">
+                    <a ui-sref="logged.backups"
+                    ng-disabled="true" class="btn lime padbtn">
                         backups </a> </td>
             </tr>
 

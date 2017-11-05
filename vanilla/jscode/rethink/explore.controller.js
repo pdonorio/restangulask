@@ -325,16 +325,16 @@ function StepsController($scope, $rootScope, $log, $timeout,
           self.data = out.data;
           console.log("DATA", out.data);
           self.parties = [];
-          var skey = 'Titre abrégé de la source'
+          var skey = 'Titre abrégé de la source';
 
           forEach(self.data, function(value, key){
 
             var test = value['Date'].split(' ');
             var date = test[0];
-            if (test.length > 1 && test[1].trim() != '')
-                date += '/' + test[1]
-            if (test.length > 1 && test[2].trim() != '')
-                date += '/' + test[2]
+            if (test.length > 1 && test[1].trim() !== '')
+                date += '/' + test[1];
+            if (test.length > 1 && test[2].trim() !== '')
+                date += '/' + test[2];
             // console.log("TEST", test, date);
 
             var tmp = {

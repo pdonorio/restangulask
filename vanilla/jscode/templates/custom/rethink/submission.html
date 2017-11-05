@@ -49,9 +49,11 @@
             <p>
                 step {{ id }}
                 <span ng-if="id == $ctrl.step">
-                    <i>
-                        (CURRENT)
-                    </i>
+                    <i> (CURRENT) </i>
+                </span>
+                <span ng-if="id == 3">
+                    <br>
+                    <i> <small>Fill up to here to appear in searches </small> </i>
                 </span>
             </p>
           </div>
@@ -92,7 +94,21 @@
 
         <!-- {{$ctrl.current}} <br> -->
       <md-card-content
-        layout="row" layout-padding layout-margin layout-fill >
+        layout="column" layout-padding layout-margin layout-fill >
+
+       <md-content layout-padding layout-wrap ng-if="$ctrl._all.sources.length > 0">
+        Autofill from source:<br>
+        <md-input-container>
+        <label>choisissez la source</label>
+        <md-select ng-model="$ctrl.source" md-on-close="$ctrl.fillSource()" >
+         <md-optgroup label="source">
+          <md-option ng-value="$index" ng-repeat="item in $ctrl._all.sources track by $index">
+            {{item.id}}
+          </md-option>
+         </md-optgroup>
+        </md-input-container>
+        </md-content>
+
         <formly-form model="$ctrl.current"
             fieldTransforms="$ctrl.myfunctions"
             fields="$ctrl.formFields"

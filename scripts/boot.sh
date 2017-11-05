@@ -153,6 +153,7 @@ else
             fi
         else
             files="$files -f development.yml"
+            services="$services elasticui"
         fi
 
 

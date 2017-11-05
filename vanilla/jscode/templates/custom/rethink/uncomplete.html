@@ -1,0 +1,19 @@
+
+<md-content layout-padding layout-wrap ng-controller="UncompletedController">
+
+    <h3>
+        Uncompleted record
+    </h3>
+
+    Records not completed in the first 3 steps,<br>
+    and not yet listed in the search page.<br>
+    <br>
+    <ul>
+        <li ng-repeat="element in data">
+            <a ui-sref="logged.submit({id: element.id, step: 1})"
+                > {{ element.name }} </a>
+                (Completed steps: {{ element.count }})
+        </li>
+    </ul>
+
+</md-content>

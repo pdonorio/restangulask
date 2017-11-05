@@ -7,10 +7,20 @@ rethinkdb:
 searchindex:
   ports:
     - 9200:9200
+    - 9300:9300
 
 custombe:
   ports:
     - 8081:5000
+
+elasticui:
+  # image: geertvb/elastichq
+  image: yannart/cerebro:0.6.6
+  links:
+    - searchindex:elastic
+  ports:
+    # - 9000:80
+    - 9000:9000
 
 customfe:
   ports:

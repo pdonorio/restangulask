@@ -281,10 +281,9 @@ class RethinkDataValues(BaseRethinkResource):
             # element['step'] = json_req['step']
             element['steps'].append(json_req)
 
+        # NOTE: it works only if the first three steps are filled
         from operations.rethink2elastic import single_update
-        # TO FIX: elasticsearch update
         single_update(element)
-        # Check:I should use the same id from rethinkdb also to elasticsearch
 
         # Update rethinkdb element
         query.update(element).run()
@@ -996,12 +995,58 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
 ##########################################
 # The end is the beginning is the end
 ##########################################
+class RethinkSources(BaseRethinkResource):
+    table = 'datavalues'
+
+    @deck.apimethod
+    @auth_token_required
+    def get(self):
+
+        cursor = self.get_table_query().run()
+        sources = {}
+        for obj in cursor:
+            name = None
+            party = None
+            source_data = []
+            for step in obj.get('steps', []):
+                current = int(step['step'])
+                data = step.get('data', [])
+                if len(data) < 1:
+                    continue
+                elif current == 3:
+                    party = data[0]['value']
+                elif current == 2:
+                    name = data[0]['value']
+                    source_data = data
+
+            if name is not None and name not in sources:
+                newdata = {}
+                for piece in source_data:
+                    newdata[piece.get('name')] = piece.get('value')
+                newdata['party'] = party
+                newdata['id'] = name
+                sources[name] = newdata
+
+        from collections import OrderedDict
+        sorted_sources = OrderedDict(
+            sorted(sources.items(), key=lambda element: element[0].lower()))
+        # sorted_sources = [
+        #     (k, sources[k])
+        #     for k in sorted(sources, key=sources.get, reverse=True)
+        # ]
+        output = []
+        for name, source in sorted_sources.items():
+            output.append(source)
+        return output
+
+
 class RethinkElement(BaseRethinkResource):
     """ Meta informations about uploaded documents """
 
     table = 'datavalues'
 
     @deck.apimethod
+    @auth_token_required
     def get(self):
 
         documents = {}
@@ -1102,8 +1147,11 @@ class RethinkElement(BaseRethinkResource):
                                     details['Apparato'] += "<br>" + element['value']
 
             if ex_name is None or name is None or source_name is None:
-                self.get_table_query().get(obj['record']).delete().run()
-                print("Missing data in %s" % obj['record'])
+
+                # # NOTE: this would remove the wrong record...
+                # self.get_table_query().get(obj['record']).delete().run()
+                # print("Missing data in %s" % obj['record'])
+
                 continue
 
             details['filename'] = None
@@ -1306,7 +1354,7 @@ class RethinkUploader(Uploader, BaseRethinkResource):
             obj = self.image_rdb_insert(obj)
             if 'id' not in obj:
 
-# // TO FIX: remove if fail to insert inside database
+                # FIXME: remove if fail to insert inside database
                 status = hcodes.HTTP_BAD_CONFLICT
 
         # Reply to user
@@ -1476,6 +1524,37 @@ class RethinkExpoDescription(BaseRethinkResource):
         query.run()
 
         return self.response("Hello")
+
+
+class RethinkUncompleted(BaseRethinkResource):
+
+    table = 'datavalues'
+
+    @deck.apimethod
+    @auth_token_required
+    def get(self):
+        q = self.get_table_query()
+        cursor = q.map(
+            lambda data: {
+                'id': data['record'],
+                'tmp': data['steps'],
+                'count': data['steps'].count(),
+            }).filter(lambda row: row['count'] < 3).run()
+        # return list(cursor)
+
+        name = 'unknown'
+        data = []
+        for element in cursor:
+            print("TEST", element['id'])
+            tmp = element.pop('tmp')
+            if len(tmp) > 0:
+                s1 = tmp[0].get('data', [])
+                if len(s1) > 0:
+                    name = s1[0].get('value')
+            element['name'] = name
+            data.append(element)
+
+        return data
 
 
 class RethinkCorrupted(BaseRethinkResource):

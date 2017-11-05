@@ -21,13 +21,23 @@ function SearchService($log, api) {
         fastmanage: 'datamanage',
         lexique: 'lex',
         elastic_lexique: 'fastlex',
-    }
+        uncompleted: 'uncomplete',
+        sources: 'sources',
+    };
+
+    self.getSourcesData = function() {
+        return api.apiCall(self.endpoints.sources);
+    };
+
+    self.getUncompleted = function() {
+        return api.apiCall(self.endpoints.uncompleted);
+    };
 
 //////////////////
 // Lexique ugh
     self.getLex = function() {
         return api.apiCall(self.endpoints.lexique);
-    }
+    };
 
     self.getFastLex = function(keyword, size, cat) {
         return api.apiCall(self.endpoints.elastic_lexique, 'GET',
@@ -255,17 +265,17 @@ function SearchService($log, api) {
         filters['currentpage'] = current;
 
         return api.apiCall(self.endpoints.fast, 'GET', filters, searchTerms);
-    }
+    };
 
     //////////////////////////
     self.getSuggestionsFast = function(searchTerms) {
         return api.apiCall(self.endpoints.suggest, 'GET', null, searchTerms);
-    }
+    };
 
     //////////////////////////
     self.getFetes = function() {
         return api.apiCall(self.endpoints.fete);
-    }
+    };
     // self.getFete = function(fete) {
     //     return api.apiCall(self.endpoints.fete, 'POST', {fete: fete});
     // }

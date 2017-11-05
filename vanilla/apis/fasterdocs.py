@@ -61,7 +61,10 @@ class FastManage(ExtendedApiResource, FastSearch):
                 return self.response(parties)
             ex = self.fast_query('extrait', extrait)
 
-        source = ex.pop()['_source']['source']
+        hits = ex.pop()['_source']
+        source = hits.get('source')
+        if source is None:
+            return parties
         data = self.fast_query('source', source)
 
         for element in data:

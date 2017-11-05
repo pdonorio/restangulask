@@ -92,6 +92,13 @@ angular.module('web').constant('rethinkRoutes', {
         },
     },
     //////////////////////
+    'logged.uncomplete': {
+        url: "/uncomplete",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'uncomplete.html'}
+        },
+    },
+    //////////////////////
     'logged.accounts': {
         url: "/accounts",
         views: {

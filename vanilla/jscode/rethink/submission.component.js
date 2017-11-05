@@ -58,10 +58,10 @@ Handle 'draft' state for creating a new record
 
     self.go = function (step) {
         $state.go("logged.submit", {id: $stateParams.id, step: step});
-    }
+    };
 
     function compare(a, b) {
-        return a.value.localeCompare(b.value)
+        return a.value.localeCompare(b.value);
     }
 
     self.fillFields = function () {
@@ -205,7 +205,11 @@ Handle 'draft' state for creating a new record
 
         });
 
-    }
+    };
+
+    self.fillSource = function() {
+        console.log("SOURCE", self.source);
+    };
 
     self.loadData = function() {
 
@@ -215,8 +219,17 @@ Handle 'draft' state for creating a new record
         data: SearchService.getDataToEdit($stateParams.id),
         //data: SearchService.getSingleData($stateParams.id, true),
         stepNames: SearchService.getSteps(),
-        stepTemplates: AdminService.getSteps(self.step)
+        stepTemplates: AdminService.getSteps(self.step),
+        // sources: SearchService.getSourcesData(),
+      };
+
+      if (self.step == 2) {
+          promises.sources = SearchService.getSourcesData();
       }
+
+      // if (self.step == 3) {
+      //     promises.parties = SearchService.self.getFetes();
+      // }
 
       // do not load existing data if this is just a draft
       if (self.draft) {
@@ -236,7 +249,7 @@ Handle 'draft' state for creating a new record
             // console.log('TEST', self.formFields);
             self.load = false;
         });
-    }
+    };
 
     self.onSubmit = function (argument) {
       var toSubmit = {

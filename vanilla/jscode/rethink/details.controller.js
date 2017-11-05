@@ -5,7 +5,14 @@ angular.module('web')
     .controller('DetailsController', DetailsController)
     .controller('AppedController', AppedController)
     .controller('OperationsController', OperationsController)
+    .controller('UncompletedController', UncompletedController)
     .controller('BrokenController', BrokenController);
+
+function UncompletedController($scope, SearchService) {
+    SearchService.getUncompleted().then(function(out) {
+      $scope.data = out;
+    });
+}
 
 function AppedController($scope, $rootScope) {
     $rootScope.appFlexSize = 80;
