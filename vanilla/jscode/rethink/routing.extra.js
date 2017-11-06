@@ -106,12 +106,28 @@ angular.module('web').constant('rethinkRoutes', {
         },
     },
     //////////////////////
+    'logged.tedit': {
+        url: "/tedit",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'fixtrans.html'}
+        },
+    },
+    //////////////////////
+    'logged.iedit': {
+        url: "/iedit",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'fiximages.html'}
+        },
+    },
+/*
+    //////////////////////
     'logged.explore': {
         url: "/explore",
         views: {
             "loggedview": {dir: 'blueprint', templateUrl: 'explore.html'}
         },
     },
+*/
     //////////////////////
     'logged.backups': {
         url: "/backups",

@@ -4,13 +4,13 @@
 http://localhost:9000/#/rest?host=http:%2F%2Felastic:9200
 
 - [ ] submission new iter
-    + list unfinished
-        * button to go to details/edit if id is available
-    + when does elastic gets updated
-        * only if you complete the first 3 steps
-            * same id as rethinkdb
-    + BUG:if you finish 4 steps, it goes back to 1 but missing the data
-    + fill step 2 and/or step 3 choosing a select
+    - [x] list unfinished
+    - [x] button to go to details/edit if id is available
+    - [x] fill step 2 and/or step 3 choosing a select
+    + elastic gets updated only if you complete the first 3 steps
+        * same id as rethinkdb
+    - [x] BUG: step 1 -> type de l'extrait does not work (value=False?)
+    - [x] BUG:if you finish 4 steps, it goes back to 1 but missing the data
 - [ ] ONLINE: update bower!!
 - [ ] search types
     + show type and word search in list? is it possible?

@@ -6,59 +6,79 @@
         Organiser ce site web
     </h3>
 
-    <table class="bordered" style="width: 300px;">
+    <table class="bordered" style="width: 400px;">
         <tbody>
 
             <tr>
-                <td> Create a new record </td>
+                <th> Step 1 </th>
+                <td> New record </td>
                 <td class="center-align">
                     <a ui-sref="logged.submit({id: 'draft', step: 1})"
-                        class="btn indigo padbtn">
+                        class="btn blue lighten-1 ">
                         create </a> </td>
             </tr>
 
             <tr>
-                <td> List uncompleted records </td>
+                <td> &nbsp; </td>
+                <td> Uncompleted records </td>
                 <td class="center-align">
                     <a ui-sref="logged.uncomplete"
-                        class="btn indigo padbtn">
+                        class="btn blue darken-3 padbtn">
                         finish </a> </td>
             </tr>
 
             <tr>
-                <td> Edit transcriptions or add missing images </td>
+                <th> Step 2 </th>
+                <td> Add images </td>
                 <td class="center-align">
-                    <a ui-sref="logged.explore" class="btn indigo padbtn">
-                        explore </a> </td>
+                    <a ui-sref="logged.iedit" class="btn indigo padbtn">
+                        upload </a> </td>
             </tr>
 
             <tr>
-                <td> List corrupted images </td>
+                <td> &nbsp; </td>
+                <td> Corrupted images </td>
                 <td class="center-align">
-                    <a ui-sref="logged.corrupted" class="btn indigo padbtn">
-                        broken </a> </td>
+                    <a ui-sref="logged.corrupted" class="btn deep-purple darken-4 padbtn">
+                        fix </a> </td>
             </tr>
 
             <tr>
-                <td> Manage users </td>
+                <th> Step 3 </th>
+                <td> Manage transcriptions</td>
                 <td class="center-align">
-                    <a ui-sref="logged.accounts" class="btn lime padbtn">
-                        accounts </a> </td>
+                    <a ui-sref="logged.tedit" class="btn indigo darken-2 padbtn">
+                        edit </a> </td>
             </tr>
 
             <tr>
-                <td> Modify site pages </td>
-                <td class="center-align">
-                    <a ui-sref="logged.admin" class="btn lime padbtn">
-                        site </a> </td>
+                <td>&nbsp;</td>
+                <td></td>
             </tr>
 
             <tr>
+                <td> &nbsp; </td>
+                <td> Manage accounts </td>
+                <td class="center-align">
+                    <a ui-sref="logged.accounts" class="btn teal darken-2 padbtn">
+                        users </a> </td>
+            </tr>
+
+            <tr>
+                <td> &nbsp; </td>
+                <td> Modify the site </td>
+                <td class="center-align">
+                    <a ui-sref="logged.admin" class="btn cyan darken-3 padbtn">
+                        pages </a> </td>
+            </tr>
+
+            <tr>
+                <td> &nbsp; </td>
                 <td> Database backup </td>
                 <td class="center-align">
                     <a ui-sref="logged.backups"
-                    ng-disabled="true" class="btn lime padbtn">
-                        backups </a> </td>
+                    ng-disabled="true" class="btn green lighten-1 padbtn">
+                        save </a> </td>
             </tr>
 
         </tbody>

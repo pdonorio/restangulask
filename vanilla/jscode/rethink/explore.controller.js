@@ -56,23 +56,23 @@ function getMissingImagesData(AdminService, $scope) {
         $scope.partiesElements = out.elements;
         $scope.parties = out.data;
     });
-};
+}
 
 function FixImagesController($scope, $log, $mdDialog, $window, AdminService)
 {
-    $log.debug("Fix Controller");
     var self = this;
+    getMissingImagesData(AdminService, $scope);
+    console.log("Fix Controller");
+
     self.noImageList = function (name, data) {
       self.elements = data;
       self.currentParty = name;
       $window.scrollTo(0, 0);
-    }
+    };
 
     self.closeCard = function() {
       delete self.elements;
-    }
-
-/////////////////////////////////////
+    };
 
     self.uploaderDialog = function(record, name)
     {
@@ -96,7 +96,7 @@ function FixImagesController($scope, $log, $mdDialog, $window, AdminService)
 // Otherwise, closing the modal would destroy the parent's scope
         //clickOutsideToClose:true,
         //onComplete: function
-      }
+      };
 
       // Open
       $mdDialog.show(dialogOptions)
@@ -112,10 +112,10 @@ function FixImagesController($scope, $log, $mdDialog, $window, AdminService)
                 getMissingImagesData(AdminService, $scope);
             }
         });
-    }
+    };
 /////////////////////////////////////
 
-};
+}
 
 ////////////////////////////////
 // fix transcriptions
@@ -130,15 +130,15 @@ function getMissingTransData(AdminService, $scope) {
         $scope.transcriptsElements = out.elements;
         $scope.transcripts = out.data;
     });
-};
+}
 
 function FixTransController($scope, $rootScope, $sce,
     $log, $timeout, $mdDialog, $window, AdminService, SearchService)
 {
     var self = this;
     self.elements = null;
-
-    $log.debug("Fix Transcriptions Controller");
+    getMissingTransData(AdminService, $scope);
+    console.log("Fix Transcriptions Controller");
 
     self.noImageList = function (name, data) {
       self.elements = data;

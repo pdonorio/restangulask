@@ -133,7 +133,7 @@ Handle 'draft' state for creating a new record
                     // labelProp: 'name',
                     // valueProp: 'name',
                 },
-            }
+            };
 
             // Details MULTISELECT
             if (self.step == 4) {
@@ -193,7 +193,7 @@ Handle 'draft' state for creating a new record
                   //     "format": "DD-mm-yyyy"
                   // },
                 }
-                }
+            };
           }
 
           if (element.required) {
@@ -208,7 +208,13 @@ Handle 'draft' state for creating a new record
     };
 
     self.fillSource = function() {
-        console.log("SOURCE", self.source);
+        // console.log("SOURCE", self.source, self._all.sources[self.source]);
+        self.current = angular.copy(self._all.sources[self.source]);
+    };
+
+    self.fillParty = function() {
+        // console.log("Fete", self.fete); //, self._all.sources[self.source]);
+        self.current = angular.copy(self._all.parties[self.fete]);
     };
 
     self.loadData = function() {
@@ -227,9 +233,9 @@ Handle 'draft' state for creating a new record
           promises.sources = SearchService.getSourcesData();
       }
 
-      // if (self.step == 3) {
-      //     promises.parties = SearchService.self.getFetes();
-      // }
+      if (self.step == 3) {
+          promises.parties = SearchService.getPartiesData();
+      }
 
       // do not load existing data if this is just a draft
       if (self.draft) {
@@ -255,10 +261,10 @@ Handle 'draft' state for creating a new record
       var toSubmit = {
         step: parseInt(self.step),
         data: [],
-      }
+      };
 
       forEach(self.formFields, function (element, index) {
-        //console.log("data is", index, self.current[element.key]);
+        // console.log("data is", index, self.current[element.key]);
         if (self.current[element.key]) {
 
             var pos = index + 1;
@@ -292,7 +298,7 @@ Handle 'draft' state for creating a new record
 
       });
       // console.log("Submit", JSON.stringify(self.current));
-      console.log("translated to", toSubmit);
+      // console.log("translated to", toSubmit);
       // return false;
 
       AdminService.updateDocument($stateParams.id, toSubmit)

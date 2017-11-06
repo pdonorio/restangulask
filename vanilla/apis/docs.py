@@ -263,7 +263,6 @@ class RethinkDataValues(BaseRethinkResource):
 
         # print("TEST", data_key, query, json_req)
         element = query.run()
-        # print(element)
 
         empty = True
         if 'steps' in element:
@@ -283,7 +282,8 @@ class RethinkDataValues(BaseRethinkResource):
 
         # NOTE: it works only if the first three steps are filled
         from operations.rethink2elastic import single_update
-        single_update(element)
+        import copy
+        single_update(copy.deepcopy(element))
 
         # Update rethinkdb element
         query.update(element).run()
@@ -995,6 +995,7 @@ class RethinkTranscriptsAssociations(RethinkGrouping):
 ##########################################
 # The end is the beginning is the end
 ##########################################
+
 class RethinkSources(BaseRethinkResource):
     table = 'datavalues'
 
@@ -1030,12 +1031,45 @@ class RethinkSources(BaseRethinkResource):
         from collections import OrderedDict
         sorted_sources = OrderedDict(
             sorted(sources.items(), key=lambda element: element[0].lower()))
-        # sorted_sources = [
-        #     (k, sources[k])
-        #     for k in sorted(sources, key=sources.get, reverse=True)
-        # ]
         output = []
         for name, source in sorted_sources.items():
+            output.append(source)
+        return output
+
+
+class RethinkParties(BaseRethinkResource):
+    table = 'datavalues'
+
+    @deck.apimethod
+    @auth_token_required
+    def get(self):
+
+        cursor = self.get_table_query().run()
+        parties = {}
+        for obj in cursor:
+            name = None
+            party_data = []
+            for step in obj.get('steps', []):
+                current = int(step['step'])
+                data = step.get('data', [])
+                if len(data) < 1:
+                    continue
+                elif current == 3:
+                    name = data[0]['value']
+                    party_data = data
+
+            if name is not None and name not in parties:
+                newdata = {}
+                for piece in party_data:
+                    newdata[piece.get('name')] = piece.get('value')
+                newdata['id'] = name
+                parties[name] = newdata
+
+        from collections import OrderedDict
+        sorted_parties = OrderedDict(
+            sorted(parties.items(), key=lambda element: element[0].lower()))
+        output = []
+        for name, source in sorted_parties.items():
             output.append(source)
         return output
 
@@ -1375,6 +1409,10 @@ class RethinkUpdateImages(BaseRethinkResource):
         file = secure_filename(j['file'])
         query = self.get_table_query("datadocs")
         original = query.get(id).run()
+        if original is None:
+            logger.critical("Previous image not existing")
+            return False
+
         images = original['images']
         # pp(original)
 

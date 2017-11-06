@@ -23,10 +23,15 @@ function SearchService($log, api) {
         elastic_lexique: 'fastlex',
         uncompleted: 'uncomplete',
         sources: 'sources',
+        parties: 'parties',
     };
 
     self.getSourcesData = function() {
         return api.apiCall(self.endpoints.sources);
+    };
+
+    self.getPartiesData = function() {
+        return api.apiCall(self.endpoints.parties);
     };
 
     self.getUncompleted = function() {

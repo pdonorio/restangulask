@@ -362,7 +362,7 @@ function DetailsController($scope, $rootScope,
             destination: 'documents',
           };
         }
-    }
+    };
 
     self.changeImage = function(file, options) {
       $mdToast.hide(self.toast).then(function(){
