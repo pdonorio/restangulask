@@ -100,7 +100,7 @@
             <thead style="font-style: italic;">
              <tr>
                 <th ng-repeat="header in steps.headers" valign="top">
-                  <div layout="row" layout-align="center center">
+                  <div layout="row" layout-align="start start">
                     <a href ng-click="steps.toggleSort($index)">
                         <h5>
                         {{ steps.headers[$index] }}<span ng-if="header == 'Source'">(s)</span>

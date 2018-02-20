@@ -23,7 +23,7 @@ conf:
 backend:
   extends:
     service: conf
-  image: pdonorio/backend:baroque
+  image: pdonorio/backend:baroque-1.1
   # image: pdonorio/py3apil
   hostname: restapi
   volumes:

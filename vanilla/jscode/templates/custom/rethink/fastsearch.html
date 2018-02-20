@@ -310,17 +310,17 @@
         <md-card ng-if="item._source" style="width: 500px;">
          <md-card-content>
           <p>
-            <i>Source</i>:
+            <i>Source</i>&nbsp;:
             <span md-highlight-text="search.searchText"
                 md-highlight-flags="i">{{item._source.source}}</span>
-            <br> <i>Fête</i>:
+            <br> <i>Fête</i>&nbsp;:
             <span md-highlight-text="search.searchText"
                 md-highlight-flags="i">{{item._source.fete}}</span>
-            <br> <i>Lieu</i>:
+            <br> <i>Lieu</i>&nbsp;:
             <span md-highlight-text="search.searchText"
                 md-highlight-flags="i">{{item._source.lieu}}</span>
             <span ng-if="item._source.date">
-                <br> <i>Date</i>: {{item._source.date}}
+                <br> <i>Date</i>&nbsp;: {{item._source.date}}
             </span>
             <br>
           </p>
@@ -345,7 +345,7 @@
        <md-toolbar  layout="column" class="blue-grey">
         <h1 class="md-toolbar-tools">
             <div flex="90">
-                Lexique indéx
+                Lexique indexé
             </div>
             <div flex="10" style="text-align: right;">
                 <a href ng-click="toggle('close')">

@@ -1,7 +1,7 @@
 
 rethinkdb:
   # image: pdonorio/rethinkdb:alpine
-  image: rethinkdb:2.3.5
+  image: rethinkdb:2.3.6
   hostname: rdbmaster
   volumes:
       - restangulask_rdbdata:/data
