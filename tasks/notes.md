@@ -1,4 +1,39 @@
 
+## notes
+
+- [ ] TRIVIAL: recherche lexique: + icon
+- [ ] BUG: zoomed image?
+- [ ] BUG: highlight parole accentate
+http://localhost/app/details/4c2cc77c-3fba-49a8-918d-f036a2b06478?query=ador%C3%A9
+- [ ] lexique
+    + main topbar button "lexique"
+    + page
+        * introduction text
+        * image 
+        * reload button @veryhard
+    + scrolling table
+- [ ] add labels to step 4
+- [ ] automatic search
+    + remove transcript languages where only spaces and \s+
+- [ ] quanto impegnativo avere le icone con traduzione/trascrizioni della parola cercate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## working
 
 http://localhost:9000/#/rest?host=http:%2F%2Felastic:9200
