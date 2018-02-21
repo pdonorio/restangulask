@@ -19,18 +19,27 @@ function AdminService($log, api) {
         data: 'datavalues',
         corruption: 'broken',
         useradmin: 'adminer',
-    }
+        lexiqueproc: 'process',
+    };
+
+    //////////////////
+    self.checkLexique = function() {
+        return api.apiCall(self.endpoints.lexiqueproc, 'GET');
+    };
+    self.launchLexique = function() {
+        return api.apiCall(self.endpoints.lexiqueproc, 'POST');
+    };
 
     //////////////////
     self.listUsers = function() {
-        return api.apiCall(self.endpoints.useradminer, 'GET');
-    }
+        return api.apiCall(self.endpoints.useradmin, 'GET');
+    };
 
     //////////////////
     self.updateDocImage = function(id, fileName) {
         return api.apiCall(self.endpoints.up, 'POST',
-            {file: fileName, id: id})
-    }
+            {file: fileName, id: id});
+    };
 
     self.listCorrupted = function() {
         return api.apiCall(self.endpoints.corruption);

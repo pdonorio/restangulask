@@ -24,6 +24,7 @@ class Manager(ExtendedApiResource):
     def get(self):
 
         users = User.query.all()
+        # print("TEST", users)
         response = []
         for user in users:
             print(user.__dict__)
@@ -38,3 +39,11 @@ class Manager(ExtendedApiResource):
             })
 
         return self.response(response)
+
+    @deck.apimethod
+    @auth_token_required
+    def put(self, username):
+
+        # toggle (enable/disable) the account
+
+        return "Hello world!"

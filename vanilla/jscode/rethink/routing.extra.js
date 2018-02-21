@@ -136,6 +136,13 @@ angular.module('web').constant('rethinkRoutes', {
         },
     },
     //////////////////////
+    'logged.lexdmin': {
+        url: "/lexorg",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'lexique_admin.html'}
+        },
+    },
+    //////////////////////
     'logged.corrupted': {
         url: "/broken",
         views: {

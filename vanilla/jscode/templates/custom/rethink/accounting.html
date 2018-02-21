@@ -11,7 +11,8 @@
     <tr>
       <th> Username </th>
       <th> Identity </th>
-      <th> Roles </th>
+      <th> Active </th>
+      <!-- <th> Roles </th> -->
       <th> Operations </th>
     </tr>
   </thead>
@@ -20,10 +21,12 @@
     <tr ng-repeat="user in umc.users">
       <td> {{user.email}} </td>
       <td> {{user.surname}} {{user.name}} </td>
-      <td> {{user.roles}} </td>
+      <!-- <td> {{user.roles}} </td> -->
+      <td> - </td>
       <td>
-        <a href class="btn btn-floating">
+        <a href ng-disabled="true" class="btn btn-floating">
             <i class="material-icons" data-position="down"
+
                 data-tooltip="Edit" tooltipped>edit</i>
         </a>
       </td>
@@ -31,6 +34,9 @@
   </tbody>
  </table>
 
+<!--
+    NOT WORKING?
 {{umc}}
+-->
 
 </md-content>
