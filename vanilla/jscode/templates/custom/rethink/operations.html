@@ -11,11 +11,11 @@
 
             <tr>
                 <th> Step 1 </th>
-                <td> New record </td>
+                <td> Create record </td>
                 <td class="center-align">
                     <a ui-sref="logged.submit({id: 'draft', step: 1})"
-                        class="btn blue lighten-1 ">
-                        create </a> </td>
+                        class="btn blue lighten-1 padbtn">
+                        new </a> </td>
             </tr>
 
             <tr>
@@ -60,7 +60,7 @@
                 <th> Accounts </th>
                 <td> Manage people </td>
                 <td class="center-align">
-                    <a ui-sref="logged.accounts" class="btn teal darken-2 padbtn">
+                 <a ui-sref="logged.accounts" class="btn cyan darken-1 padbtn">
                         users </a> </td>
             </tr>
 
@@ -68,25 +68,33 @@
                 <th> Content </th>
                 <td> Modify the site </td>
                 <td class="center-align">
-                    <a ui-sref="logged.admin" class="btn cyan darken-3 padbtn">
+                    <a ui-sref="logged.admin" class="btn cyan darken-2 padbtn">
                         pages </a> </td>
             </tr>
 
             <tr>
-                <td> &nbsp; </td>
-                <td> Load lexique </td>
-                <td class="center-align">
-                    <a ui-sref="logged.lexdmin" class="btn cyan darken-4 padbtn">
-                        vocabulary </a> </td>
+              <td> &nbsp; </td>
+              <td> Fields list </td>
+              <td class="center-align">
+               <a ui-sref="logged.fieldsadmin" class="btn cyan darken-3 padbtn">
+                steps </a> </td>
             </tr>
 
             <tr>
-                <td> &nbsp; </td>
-                <td> Database backup </td>
-                <td class="center-align">
-                    <a ui-sref="logged.backups"
-                    ng-disabled="true" class="btn green lighten-1 padbtn">
-                        save </a> </td>
+              <td> &nbsp; </td>
+              <td> (Re)Load lexique vocabulary</td>
+              <td class="center-align">
+               <a ui-sref="logged.lexdmin" class="btn cyan darken-4 padbtn">
+                terms </a> </td>
+            </tr>
+
+            <tr>
+              <td> &nbsp; </td>
+              <td> Database backup </td>
+              <td class="center-align">
+               <a ui-sref="logged.backups"
+                ng-disabled="true" class="btn green lighten-1 padbtn">
+                save </a> </td>
             </tr>
 
         </tbody>

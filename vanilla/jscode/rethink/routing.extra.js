@@ -47,6 +47,13 @@ angular.module('web').constant('rethinkRoutes', {
         }
     },
 */
+    //////////////////////
+    'logged.lex': {
+        url: "/lexique",
+        views: {
+            "loggedview": { dir: 'blueprint', templateUrl: 'lexique.html' }
+        }
+    },
 
     // 'logged.fastsearch': {
     'logged.fastsearch': {
@@ -140,6 +147,13 @@ angular.module('web').constant('rethinkRoutes', {
         url: "/lexorg",
         views: {
             "loggedview": {dir: 'blueprint', templateUrl: 'lexique_admin.html'}
+        },
+    },
+    //////////////////////
+    'logged.fieldsadmin': {
+        url: "/stepsorg",
+        views: {
+            "loggedview": {dir: 'blueprint', templateUrl: 'fields_admin.html'}
         },
     },
     //////////////////////

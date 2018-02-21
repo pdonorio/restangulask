@@ -37,7 +37,7 @@
           <md-content flex="30" layout="row" layout-padding layout-align="center center">
             <a href layout="row" layout-align="center center"
                 tooltipped data-position="bottom" data-delay="50"
-                data-tooltip="{{detail.first_page.name}}"
+                data-tooltip="{{detail.first_page.page}}"
                 ng-if="detail.first_page && !detail.first_page.current
                     && detail.first_page.id != detail.previous_page.id"
                 ui-sref="logged.details({id: detail.first_page.id})">
@@ -46,7 +46,7 @@
             </a>
             <a href layout="row" layout-align="center center"
                 tooltipped data-position="bottom" data-delay="50"
-                data-tooltip="{{detail.previous_page.name}}"
+                data-tooltip="{{detail.previous_page.page}}"
                 ng-if="detail.previous_page && !detail.previous_page.current"
                 ui-sref="logged.details({id: detail.previous_page.id})">
                 <i class="material-icons">keyboard_arrow_left</i>
@@ -80,14 +80,14 @@
           <md-content flex="30" layout="row" layout-padding layout-align="center center">
             <a href layout="row" layout-align="center center"
                 tooltipped data-position="bottom" data-delay="50"
-                data-tooltip="{{detail.next_page.name}}"
+                data-tooltip="{{detail.next_page.page}}"
                 ng-if="detail.next_page && !detail.next_page.current"
                 ui-sref="logged.details({id: detail.next_page.id})">
                 <i class="material-icons">keyboard_arrow_right</i>
             </a>
             <a href layout="row" layout-align="center center"
                 tooltipped data-position="bottom" data-delay="50"
-                data-tooltip="{{detail.last_page.name}}"
+                data-tooltip="{{detail.last_page.page}}"
                 ng-if="detail.last_page && !detail.last_page.current
                     && detail.last_page.id != detail.next_page.id"
                 ui-sref="logged.details({id: detail.last_page.id})">
@@ -112,7 +112,7 @@
             <a href="/zoom/{{ detail.data.id }}/{{ detail.data.images[0].code }}"
                 target="_blank" class="hoverable" >
              <img tooltipped data-position="right" data-delay="50"
-                data-tooltip="Click to zoom this image"
+                data-tooltip="Cliquez pour agrandir cette image"
                 style="
                 height: 500px; max-width: 300px;
                 "
@@ -269,7 +269,7 @@
             ng-show='detail.refinedData[key3][field26bis]'>
           <th> {{ field26bis }} </th>
           <td>
-            <a target='_blank' style="color: white;"
+            <a target='_blank' style="color: blue;"
                 href="{{detail.refinedData[key3][field26bis]}}">
                 {{detail.link}}
             </a>
@@ -420,6 +420,7 @@
 
  </div> <!-- END OF DATA -->
 
+<!-- LEXIQUE SIDEBAR -->
  <section layout="row" >
    <md-sidenav class="md-sidenav-right" md-component-id="right"
           style="overflow-y: hidden; width: 410px;"

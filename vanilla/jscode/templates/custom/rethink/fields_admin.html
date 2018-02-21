@@ -1,0 +1,47 @@
+
+<div ng-controller="ToastController">
+<md-content layout-padding layout-wrap
+    ng-controller="FieldsController as fields">
+
+ <h3>Fields management</h3>
+ </hr>
+
+<div ng-repeat="(step, data) in fields.fields" ng-if="data.length > 0" flex="50">
+  <h5> Step {{step}}</h5>
+  <hr>
+ <table>
+  <tr ng-repeat="element in data">
+    <td> {{element.field}} </td>
+    <td>
+        <md-select ng-model="element.select" placeholder="{{element.field}}"
+            style="margin: 0" >
+            <md-option ng-repeat="option in element.options"
+                value="{{option}}"> {{option}}
+            </md-option>
+        </md-select>
+    </td>
+    <td>
+      <md-input-container style="margin: 0;">
+        <!-- <label>{{element.field}}</label> -->
+        <label> add element </label>
+        <input ng-model="element.input">
+      </md-input-container>
+    </td>
+    <td>
+        <a href ng-click="
+            fields.addElement(step, element.hash, element.input);
+            element.input = '';">
+          <i class="material-icons">add</i>
+        </a>
+    </td>
+  </tr>
+ </table>
+</div>
+
+<!--
+<a class="btn cyan darken-4 padbtn"
+    ng-click="lex.launchLexique()"> launch </a>
+ -->
+
+</md-content>
+</div>

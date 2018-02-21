@@ -3,7 +3,45 @@
 
 angular.module('web')
     .controller('UserManagerController', UserManagerController)
-    .controller('LexiqueController', LexiqueController);
+    .controller('LexiqueController', LexiqueController)
+    .controller('FieldsController', FieldsController);
+
+function FieldsController($scope, $log, $interval, AdminService)
+{
+    var self = this;
+    $log.info("fields");
+
+    self.load = function() {
+
+        self.fields = { // init
+            1: [], 2: [], 3: [], 4: [],
+            5: [],
+        };
+
+        AdminService.getSteps().then(function (out) {
+          if (out) {
+            forEach(out.data, function(element) {
+              if (element.extra) {
+                element.input = null;
+                element.select = null;
+                element.options = element.extra.split(',');
+                self.fields[element.step].push(element);
+              }
+            });
+          }
+        });
+    };
+    self.load();
+
+    self.addElement = function(step, field, value) {
+        // console.log("test", step, field, value);
+        $scope.showSimpleToast({'Added': value});
+        AdminService.updateStep(step, field, value).then(function(out) {
+            if (out)
+                self.load();
+        });
+    };
+}
 
 function LexiqueController($scope, $log, $interval, AdminService)
 {

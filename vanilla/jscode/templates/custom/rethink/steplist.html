@@ -1,9 +1,10 @@
 
-<div ng-controller="StepsController as steps"
-    layout="column"
-    layout-margin layout-padding>
+<md-content layout="row" layout-align="center center"
+    ng-controller="StepsController as steps">
 
-    <div style="padding-left: 40px;">
+ <div layout="column" layout-margin layout-padding flex>
+
+    <div style="padding-left: 40px;" >
         <h4 ng-show="steps.element">
 
             <!-- <a href ng-click="goToLastRoute()"> -->
@@ -50,9 +51,10 @@
           </tr>
         </table>
 
-        <div flex=70>
-        <table class="table table-hover bordered highlight responsive-table">
-            <thead style="font-style: italic;">
+       <div style="height: 700px; overflow: auto;"">
+        <table class="table table-hover bordered highlight responsive-table"
+            ng-dblclick="steps.sideLex('open')">
+          <thead style="font-style: italic;">
                 <tr>
                     <th>Vignette</th>
                     <th>Page</th>
@@ -151,8 +153,130 @@
             </tbody>
         </table>
       </div>
-
     </div>
-
 </div>
 
+<!-- LEXIQUE SIDEBAR -->
+<div>
+ <section layout="row">
+   <md-sidenav class="md-sidenav-right" md-component-id="right"
+          style="overflow-y: hidden; width: 410px;"
+          md-disable-backdrop md-whiteframe="4" >
+
+      <md-content flex>
+       <md-toolbar  layout="column" class="blue-grey">
+        <h1 class="md-toolbar-tools">
+            <div flex="90">
+                Lexique indexé
+            </div>
+            <div flex="10" style="text-align: right;">
+                <a href ng-click="steps.sideLex('close')">
+                  <i class="material-icons">close</i>
+                </a>
+            </div>
+        </h1>
+       </md-toolbar>
+       <div layout="row" layout-padding layout="center center">
+           <md-input-container flex=40>
+              <label>Lexique</label>
+              <input type="text"
+                ng-model="steps.lexvar" ng-change="findLex()"
+                ng-focus="steps.catvar = ''; findLex()"
+                    focus-on="focusMe"/>
+           </md-input-container>
+           <div flex=10></div>
+           <md-input-container flex=40>
+              <label>Catégorie</label>
+              <input type="text"
+                ng-model="steps.catvar" ng-change="findLex()"
+                ng-focus="steps.lexvar = ''"/>
+           </md-input-container>
+       </div>
+      </md-content>
+
+      <md-content layout-padding
+        style="overflow-y: scroll; height: 100%; width: 350px;">
+          <md-list class="md-dense" flex>
+
+    <div ng-if="lexlen == 0">
+        ...
+    </div>
+
+    <div >
+    <!--
+        <div ng-if="lexlen === null">
+            loading...
+        </div>
+    -->
+
+        <div ng-repeat="lex in lexers">
+            <md-list-item class="md-3-line">
+              <div class="md-list-item-text" layout="column">
+                <h3>
+                <!--titre:-->
+                  <b>
+                    <a ui-sref="logged.fastsearch({text: single})"
+                        ng-repeat="single in splitter(lex._source.titre)">
+                        {{single}}
+                    </a>
+                  </b>
+                </h3>
+                <h4 ng-if="lex._source['français']">
+                    français:
+                    <a ui-sref="logged.fastsearch({text: single})"
+                        ng-repeat="single in splitter(lex._source['français'])">
+                        {{single}}
+                    </a>
+                </h4>
+                <h4 ng-if="lex._source.latin">
+                    latin:
+                    <a ui-sref="logged.fastsearch({text: single})"
+                        ng-repeat="single in splitter(lex._source.latin)">
+                        {{single}}
+                    </a>
+                </h4>
+                <h4 ng-if="lex._source.italien">
+                    italien:
+                    <a ui-sref="logged.fastsearch({text: single})"
+                        ng-repeat="single in splitter(lex._source.italien)">
+                        {{single}}
+                    </a>
+                </h4>
+                <br>
+                <h4>
+                 <i>
+                  <span>
+                    <a href ng-click="steps.lexvar = ''; steps.catvar = lex._source.sheet; findLex()">
+                        {{lex._source.sheet}}
+                    </a>
+                  </span>
+
+                  <span ng-if="lex._source.macro != '-'">
+                    &gt;
+                    <a href ng-click="steps.lexvar = ''; steps.catvar = lex._source.macro; findLex()">
+                        {{lex._source.macro}}
+                    </a>
+                  </span>
+
+                  <span ng-if="lex._source.macro != '-'">
+                    &gt;
+                    <a href ng-click="steps.lexvar = ''; steps.catvar = lex._source.micro; findLex()">
+                        {{lex._source.micro}}
+                    </a>
+                  </span>
+                 </i>
+                </h4>
+                <br>
+              </div>
+            </md-list-item>
+            <md-divider ></md-divider>
+            <br>
+        </div>
+    </div>
+          </md-list>
+      </md-content>
+    </md-sidenav>
+ </section>
+</div>
+<!-- LEXIQUE SIDEBAR -->
+</md-content>

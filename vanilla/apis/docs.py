@@ -1503,7 +1503,7 @@ class RethinkStepsTemplate(BaseRethinkResource):
     # table_index = 'steps'
 
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, step=None):
         query = self.get_table_query()
         if step is not None:
@@ -1511,17 +1511,45 @@ class RethinkStepsTemplate(BaseRethinkResource):
         count, data = self.execute_query(query)
         return self.response(data, elements=count)
 
+    # @deck.apimethod
+    # @auth_token_required
+    # def post(self, step=None):
+    #     j = self.get_input(False)
+    #     q = self.get_table_query()
+    #     query = q.filter({
+    #         'step': j.get('step'),
+    #         'position': j.get('position')
+    #     })
+    #     count, data = self.execute_query(query)
+    #     return self.response(data, elements=count)
+
+    @deck.add_endpoint_parameter(name='newvalue', ptype=str)
+    @deck.add_endpoint_parameter(name='field', ptype=str)
+    @deck.add_endpoint_parameter(name='step', ptype=int)
     @deck.apimethod
     @auth_token_required
-    def post(self, step=None):
+    def post(self):
+        # args = self._args
         j = self.get_input(False)
-        q = self.get_table_query()
-        query = q.filter({
-            'step': j.get('step'),
-            'position': j.get('position')
-        })
-        count, data = self.execute_query(query)
-        return self.response(data, elements=count)
+        step = j.get('step')
+        field_hash = j.get('field')
+
+        table = self.get_table_query()
+        element = None
+        for field in table.filter({'step': int(step)}).run():
+            if field.get('hash') == field_hash:
+                element = field
+                break
+
+        if element is None:
+            return 'Not found'
+        current_list = element.get('extra')
+        if current_list is None:
+            return 'Invalid'
+        element['extra'] = current_list + ',' + j.get('newvalue')
+        table.update(element).run()
+        logger.info("Updated: %s", field_hash)
+        return "Updated"
 
 
 class RethinkExpoDescription(BaseRethinkResource):

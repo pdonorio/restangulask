@@ -223,7 +223,7 @@ function FastSearchController($scope, $rootScope,
             );
 
             localStorage.setItem(self.cookieKey, JSON.stringify(self.filters));
-            console.log("PAOLO", self.filters);
+            // console.log("PAOLO", self.filters);
 
             // Search for lexique
             if (self.searchText.length > 2) {
@@ -315,13 +315,13 @@ function FastSearchController($scope, $rootScope,
   self.checkLexique = function () {
     $scope.rows = null;
     $scope.selected = self.searchText;
-    console.log("CHECK LEX", $scope.selected);
+    // console.log("CHECK LEX", $scope.selected);
 
     SearchService.getFastLex(self.searchText, 5)
       .then(function(out){
           if (out && out.elements) {
             if (out.elements > 0) {
-                console.log("OUT", out);
+                // console.log("OUT", out);
                 $scope.rows = out.data;
             }
           }

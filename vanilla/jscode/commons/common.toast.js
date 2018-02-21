@@ -45,10 +45,10 @@ function ToastController($scope, $log, $mdToast, $document, $timeout)
                     line += ' ' + value;
                 }
                 message += line + '\r\n';
-            })
+            });
         }
         // Skip empty message
-        if (message == "") {
+        if (message === "") {
             return false;
         }
         // Choose the delay

@@ -39,7 +39,7 @@ function SearchService($log, api) {
     };
 
 //////////////////
-// Lexique ugh
+// Lexique
     self.getLex = function() {
         return api.apiCall(self.endpoints.lexique);
     };

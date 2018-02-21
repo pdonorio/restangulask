@@ -78,7 +78,7 @@
           style="font-size: 14px;"
           href ng-click="toggle('open')">
             Lexique
-            <i class="material-icons">help</i>
+            <i class="material-icons">add</i>
         </a>
       </div>
 
@@ -310,17 +310,17 @@
         <md-card ng-if="item._source" style="width: 500px;">
          <md-card-content>
           <p>
-            <i>Source</i>&nbsp;:
+            <i>Source</i>:
             <span md-highlight-text="search.searchText"
                 md-highlight-flags="i">{{item._source.source}}</span>
-            <br> <i>Fête</i>&nbsp;:
+            <br> <i>Fête</i>:
             <span md-highlight-text="search.searchText"
                 md-highlight-flags="i">{{item._source.fete}}</span>
-            <br> <i>Lieu</i>&nbsp;:
+            <br> <i>Lieu</i>:
             <span md-highlight-text="search.searchText"
                 md-highlight-flags="i">{{item._source.lieu}}</span>
             <span ng-if="item._source.date">
-                <br> <i>Date</i>&nbsp;: {{item._source.date}}
+                <br> <i>Date</i>: {{item._source.date}}
             </span>
             <br>
           </p>

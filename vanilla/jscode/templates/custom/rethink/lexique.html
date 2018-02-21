@@ -1,35 +1,37 @@
 
-<md-content layout="row" layout-padding
-    ng-controller="LexiqueController as lex"
-    >
+<md-content layout="column" layout-padding
+    ng-controller="PublicLexiqueController as lex">
 
-<!--CONTENT -->
- <div layout="column" layout-align='center center' flex>
+    <!-- <h3>TEST</h3> -->
 
-   <div style="position: relative; height: 700px;">
+    <md-content layout="column" flex="grow" layout-align="center center">
 
-    <!-- IMAGE (with link) -->
-    <div class="rounder" style="background-repeat: no-repeat;
-        background-size: 100% 100%; width: 900px; height: 570px; z-index:1;
-        background-image: url('/static/uploads/welcome/lexique.JPG')"
-        ></div>
-
-    <!-- BACKGROUND COLOR -->
-    <div class="rounder md-whiteframe-6dp"
-        style=" position: absolute; top: 00px; background-color: #ff0000;
-        width: 900px; height: 570px; opacity: .3; z-index:2;">
+        <div>
+            <img src="http://via.placeholder.com/500x300">
         </div>
 
-    <div class="card-panel lighten-4 rounder z-depth-5" style="position: absolute;
-    top: 80px; left: 80px; width: 900px; z-index:4;">
+        <md-content layout="row" flex="70" layout-align="center center">
+         <md-content layout-padding layout-wrap
+            flex="70" style="text-align: justify;">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate delectus similique explicabo ea molestias vitae voluptas. Nostrum quas in deleniti repellendus culpa repellat, deserunt quam cumque inventore magnam sapiente voluptas.
+            </br>
+            Expedita provident magnam neque similique, molestias consectetur accusamus cumque rerum vel, optio corporis. Totam omnis eligendi voluptates corporis cupiditate, provident architecto saepe quos eius ut voluptatibus tempore dolores accusamus magnam.
+            </br>
+            Id adipisci soluta iste, autem cumque sequi dicta molestias et reiciendis veniam placeat suscipit, odio voluptates. Numquam nulla laudantium, reprehenderit provident aspernatur nobis consequatur. Deserunt quod dolorem adipisci numquam fuga.
+            </br>
+            Neque, maiores quidem sit vitae inventore facilis? Quos consequatur voluptate, iste sunt soluta, ratione fugit voluptatibus, placeat minus explicabo harum tempore porro architecto facilis quidem? Commodi reprehenderit, nobis quasi omnis.
+            </br>
+         </md-content>
+        </md-content>
 
-     <md-content style="height: 500px;">
-      <md-tabs md-selected='lex.tab'
+    </md-content>
+
+    <md-tabs md-selected='lex.tab'
         md-no-ink md-no-ink-bar md-stretch-tabs='never'
         md-no-pagination md-enable-disconnect md-autoselect
         md-align-tabs="bottom"
         >
-        <md-tab style="height: 600px;"
+        <md-tab
             ng-repeat="(tabname, tabdata) in lex.data"
             label="{{tabname}}" md-on-select="lex.current = tabdata ">
             <table>
@@ -46,15 +48,9 @@
             </table>
         </md-tab>
       </md-tabs>
-     </md-content>
-    </div>
 
-    <!-- TITLE -->
-    <div style=" position: absolute; top: 0px; padding-left: 5%; color: white;
-        width: 100%; z-index:3;">
-        <h2 class="header"> LEXIQUE </h2>
-    </div>
+    <md-content layout-padding layout-wrap>
+        Lorem ipsum dolor sit amet, ne quod novum mei
+    </md-content>
 
-   </div>
- </div>
 </md-content>

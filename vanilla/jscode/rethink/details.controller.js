@@ -100,9 +100,22 @@ function DetailsController($scope, $rootScope,
     if (self.query) {
         self.highlightText = self.query;
     }
-    if (self.filters)
-        if (self.filters.searchText)
+    if (self.filters) {
+        if (self.filters.searchText) {
             self.highlightText = self.filters.searchText;
+        }
+    }
+    if (self.highlightText) {
+        self.highlightText = self.highlightText
+            .replace(/é/g, ".eacute.")
+            .replace(/à/g, ".agrave.")
+            .replace(/è/g, ".egrave.")
+            .replace(/ì/g, ".egrave.")
+            .replace(/ò/g, ".egrave.")
+            .replace(/ù/g, ".egrave.")
+            ;
+        // console.log("Highl:", self.highlightText);
+    }
 
     self.load = true;
     self.data = null;
@@ -112,6 +125,14 @@ function DetailsController($scope, $rootScope,
     self.pagesElements = 0;
     $scope.theid = $stateParams.id;
     $scope.quote = "'";
+
+    function HtmlEncode(s)
+    {
+      var el = document.createElement("div");
+      el.innerText = el.textContent = s;
+      s = el.innerHTML;
+      return s;
+    }
 
     function loadData() {
 
@@ -308,13 +329,16 @@ function DetailsController($scope, $rootScope,
 
               if (element.translations) {
                 forEach(element.translations, function(trans, language) {
-                    // highlight also translations
-                    if (self.highlightText) {
-                        trans = trans.replace(
-                            new RegExp('(' + self.highlightText + ')', 'gi'),
-                            '<span class="highlightedText">$&</span>');
+                    // console.log("Translation", language, trans);
+                    if (trans.trim() !== '') {
+                        // highlight also translations
+                        if (self.highlightText) {
+                            trans = trans.replace(
+                                new RegExp('(' + self.highlightText + ')', 'gi'),
+                                '<span class="highlightedText">$&</span>');
+                        }
+                        self.texts[language] = $sce.trustAsHtml(trans);
                     }
-                    self.texts[language] = $sce.trustAsHtml(trans);
                 });
               }
 
@@ -381,7 +405,7 @@ function DetailsController($scope, $rootScope,
             }
           })
       });
-      console.log('CHANGE', file, $scope.theid);
+      // console.log('CHANGE', file, $scope.theid);
     };
 
     self.adding = function(file, ev, flow) {
@@ -471,13 +495,13 @@ function DetailsController($scope, $rootScope,
         term = self.catvar;
         cat = 1;
     }
-    console.log("Calling find lex", self.lexvar, term, cat);
+    // console.log("Calling find lex", self.lexvar, term, cat);
     // console.log("TERM", term, cat);
 
     SearchService.getFastLex(term, 80, cat).then(function(out)
     {
         if (out && out.elements) {
-          console.log("LEX", out);
+          // console.log("LEX", out);
           $scope.lexers = out.data;
           $scope.lexlen = out.elements;
         } else {
@@ -505,7 +529,7 @@ function BrokenController($scope, $log, AdminService)
         if (out) {
             self.order = Object.keys(out).sort();
             self.list = out;
-            console.log("Uhm", self);
+            // console.log("Uhm", self);
         }
     });
 }

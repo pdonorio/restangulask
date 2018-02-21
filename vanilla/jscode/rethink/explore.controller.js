@@ -6,7 +6,7 @@ angular.module('web')
     .controller('FixImagesController', FixImagesController)
     .controller('FixTransController', FixTransController)
     .controller('StepsController', StepsController)
-    .controller('LexiqueController', LexiqueController)
+    .controller('PublicLexiqueController', PublicLexiqueController)
     ;
 
 ////////////////////////////////
@@ -298,7 +298,7 @@ function FixTransController($scope, $rootScope, $sce,
 ////////////////////////////////
 
 function StepsController($scope, $rootScope, $log, $timeout,
-    $state, $stateParams, $window, SearchService)
+    $state, $stateParams, $window, SearchService, $mdSidenav)
 {
     $rootScope.appFlexSize = 80;
     $rootScope.appScrollY = false;
@@ -361,6 +361,10 @@ function StepsController($scope, $rootScope, $log, $timeout,
 
            self.dataCount = out.elements;
            if ($stateParams.name != "~") {
+
+            $rootScope.appFlexSize = 100;
+            $rootScope.appScrollY = false;
+
              self.element = self.data[$stateParams.name];
              // console.log($stateParams.name, self.element[skey]);
              self.sources = self.element[skey];
@@ -412,11 +416,86 @@ function StepsController($scope, $rootScope, $log, $timeout,
     self.changeDate = function() {
         console.log("Changing to", self.newDate);
         $scope.showSimpleToast({'New date': self.newDate});
+    };
+
+///////////////////////////
+  $scope.lexlen = null;
+
+  var getSelectionText = function() {
+      var text = "";
+      if (window.getSelection) {
+          text = window.getSelection().toString();
+      } else if (document.selection && document.selection.type != "Control") {
+          text = document.selection.createRange().text;
+      }
+      return text;
+  };
+
+
+  self.sideLex = function(action) {
+
+    // $mdSidenav('left').toggle();
+    if (action == 'close') {
+        $mdSidenav('right').close();
+        return false;
     }
+
+    $timeout(function() {
+        focus('focusMe');
+    }, 500);
+
+    $mdSidenav('right').open();
+    self.lexvar = "";
+    $scope.findLex();
+    return true;
+  };
+
+  $scope.splitter = function(text) {
+    if (text)
+        return text.split(',');
+    else
+        return [''];
+  };
+
+  $scope.findLex = function() {
+
+    var text = getSelectionText();
+    if (text.trim() !== '') {
+        self.lexvar = text;
+    }
+
+    $scope.lexers = {};
+    $scope.lexlen = null;
+
+    var term = '';
+    var cat = 0;
+    if (self.lexvar && self.lexvar.length > 0) {
+        term = self.lexvar;
+    } else if (self.catvar && self.catvar.length > 0) {
+        term = self.catvar;
+        cat = 1;
+    }
+    console.log("Calling find lex", self.lexvar, term, cat);
+    // console.log("TERM", term, cat);
+
+    SearchService.getFastLex(term, 80, cat).then(function(out)
+    {
+        if (out && out.elements) {
+          console.log("LEX", out);
+          $scope.lexers = out.data;
+          $scope.lexlen = out.elements;
+        } else {
+          $scope.lexlen = 0;
+          // console.log("LEX", $scope.lexlen);
+        }
+    });
+  };
+
+
 }
 
 
-function LexiqueController($scope, $log, SearchService)
+function PublicLexiqueController($scope, $log, SearchService)
 {
     // INIT controller
     $log.debug("lex!");
