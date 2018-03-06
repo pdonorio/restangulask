@@ -64,6 +64,19 @@
             <br>
             éléments
       </div>
+
+    <!-- piece -->
+      <div flex="10">
+        <a ng-if="!advanced && search.searchText.length > 0"
+            style="font-size: 14px;"
+        layout="row" layout-align="center center"
+          href ng-click="search.clearFilters()">
+            Effacer
+            <i class="material-icons">format_clear</i>
+        </a>
+      </div>
+
+    <!-- piece -->
       <div flex="20">
         <a layout="row" layout-align="center center"
           style="font-size: 14px;"
@@ -73,6 +86,8 @@
             <i class="material-icons" ng-if="advanced">remove</i>
         </a>
       </div>
+
+    <!-- piece -->
       <div flex="10" ng-if="lexique_close">
         <a layout="row" layout-align="center center"
           style="font-size: 14px;"
