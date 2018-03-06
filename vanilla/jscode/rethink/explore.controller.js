@@ -323,7 +323,7 @@ function StepsController($scope, $rootScope, $log, $timeout,
       self.data = [];
       if (out) {
           self.data = out.data;
-          console.log("DATA", out.data);
+          // console.log("DATA", out.data);
           self.parties = [];
           var skey = 'Titre abrégé de la source';
 
@@ -357,7 +357,7 @@ function StepsController($scope, $rootScope, $log, $timeout,
             tmp['key'] = key;
             self.parties.push(tmp);
           });
-          console.log("Parties", self.parties);
+          // console.log("Parties", self.parties);
 
            self.dataCount = out.elements;
            if ($stateParams.name != "~") {
@@ -370,6 +370,8 @@ function StepsController($scope, $rootScope, $log, $timeout,
              self.sources = self.element[skey];
              self.currentSource = self.sources[$stateParams.book];
              console.log("Current source", self.currentSource);
+             self.extraits = self.element.extrait[self.currentSource];
+             console.log(self.extraits);
            }
       } else {
        self.dataCount = self.data.length;
