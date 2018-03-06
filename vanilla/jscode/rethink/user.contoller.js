@@ -45,7 +45,7 @@ function FieldsController($scope, $log, $interval, AdminService)
     };
 
     self.removeElements = function(step, field, value) {
-        console.log("test", step, field, value);
+        // console.log("test", step, field, value);
 
         var newvalue = '';
         forEach(value, function(element) {
