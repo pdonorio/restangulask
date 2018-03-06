@@ -22,9 +22,11 @@ function FieldsController($scope, $log, $interval, AdminService)
           if (out) {
             forEach(out.data, function(element) {
               if (element.extra) {
+                // console.log(element);
                 element.input = null;
                 element.select = null;
-                element.options = element.extra.split(',');
+                // element.options = element.extra.split(',');
+                element.options = element.extra;
                 self.fields[element.step].push(element);
               }
             });
@@ -41,6 +43,21 @@ function FieldsController($scope, $log, $interval, AdminService)
                 self.load();
         });
     };
+
+    self.removeElements = function(step, field, value) {
+        console.log("test", step, field, value);
+
+        var newvalue = '';
+        forEach(value, function(element) {
+            newvalue += element.trim() + ',';
+            $scope.showSimpleToast({'Removed': element});
+        });
+        AdminService.updateStep(step, field, newvalue, true)
+        .then(function(out) {
+            if (out)
+                self.load();
+        });
+};
 }
 
 function LexiqueController($scope, $log, $interval, AdminService)

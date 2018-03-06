@@ -66,9 +66,15 @@ function AdminService($log, api) {
     self.getSteps = function(step) {
         return api.apiCall(self.endpoints.stepstemplate, 'GET', null, step);
     };
-    self.updateStep = function(step, field_name, newvalue) {
+    self.updateStep = function(step, field_name, newvalue, remove) {
         return api.apiCall(self.endpoints.stepstemplate, 'POST',
-            {newvalue: newvalue, field: field_name, step: step});
+            {
+                value: newvalue,
+                field: field_name,
+                step: step,
+                remove: remove
+            }
+        );
     };
 
     //////////////////

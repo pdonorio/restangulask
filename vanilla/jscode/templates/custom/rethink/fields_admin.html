@@ -14,11 +14,19 @@
     <td> {{element.field}} </td>
     <td>
         <md-select ng-model="element.select" placeholder="{{element.field}}"
-            style="margin: 0" >
+            style="margin: 0"
+            multiple>
             <md-option ng-repeat="option in element.options"
                 value="{{option}}"> {{option}}
             </md-option>
         </md-select>
+    </td>
+    <td>
+        <a href ng-click="
+            fields.removeElements(step, element.hash, element.select);
+            element.input = '';">
+          <i class="material-icons">remove</i>
+        </a>
     </td>
     <td>
       <md-input-container style="margin: 0;">

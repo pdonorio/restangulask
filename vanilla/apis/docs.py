@@ -1509,6 +1509,19 @@ class RethinkStepsTemplate(BaseRethinkResource):
         if step is not None:
             query = query.filter({'step': int(step)})
         count, data = self.execute_query(query)
+        for key, value in enumerate(data):
+            extra = value.get('extra')
+            if extra is None:
+                continue
+            arr = extra.split(',')
+            if len(arr) < 1:
+                continue
+            tmp = []
+            for element in set(arr):
+                if element.strip() != '':
+                    tmp.append(element)
+            # print(tmp)
+            data[key]['extra'] = tmp
         return self.response(data, elements=count)
 
     # @deck.apimethod
@@ -1523,9 +1536,10 @@ class RethinkStepsTemplate(BaseRethinkResource):
     #     count, data = self.execute_query(query)
     #     return self.response(data, elements=count)
 
-    @deck.add_endpoint_parameter(name='newvalue', ptype=str)
+    @deck.add_endpoint_parameter(name='value', ptype=str)
     @deck.add_endpoint_parameter(name='field', ptype=str)
     @deck.add_endpoint_parameter(name='step', ptype=int)
+    @deck.add_endpoint_parameter(name='remove', ptype=bool, default=False)
     @deck.apimethod
     @auth_token_required
     def post(self):
@@ -1546,7 +1560,25 @@ class RethinkStepsTemplate(BaseRethinkResource):
         current_list = element.get('extra')
         if current_list is None:
             return 'Invalid'
-        element['extra'] = current_list + ',' + j.get('newvalue')
+
+        # ADD OR REMOVE?
+        remove = j.get('remove')
+        values = j.get('value').strip()
+
+        if remove:
+            for value in values.split(','):
+                print("current", current_list)
+                pieces = current_list.split(',')
+                current_list = ''
+                for piece in pieces:
+                    piece = piece.strip()
+                    if piece != value:
+                        current_list += piece.strip() + ','
+                print("new", current_list)
+            element['extra'] = current_list
+        else:
+            element['extra'] = current_list + ',' + values
+
         table.update(element).run()
         logger.info("Updated: %s", field_hash)
         return "Updated"
