@@ -195,7 +195,7 @@ function SearchService($log, api) {
                 key: filter,
             }
         );
-    }
+    };
 
     self.recoverCode = function(filter, field) {
         return self.doQuery(
@@ -206,7 +206,7 @@ function SearchService($log, api) {
                 field: field,
             }
         );
-    }
+    };
 
     // self.recoverPages = function(fete, current) {
     self.recoverPages = function(source, current) {
@@ -219,13 +219,13 @@ function SearchService($log, api) {
                 // field: 'fete',
                 // value: fete,
             });
-    }
+    };
 
     self.getDocs = function(id) {
         return api.apiCall(
             self.endpoints.documents,
             undefined, undefined, id);
-    }
+    };
 
 /*
     self.getDocsFromType = function(type) {

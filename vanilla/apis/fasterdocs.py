@@ -68,10 +68,13 @@ class FastManage(ExtendedApiResource, FastSearch):
         data = self.fast_query('source', source)
 
         for element in data:
-            # from beeprint import pp
-            # pp(element)
             s = element['_source']
+
+            # from beeprint import pp
+            # # pp(element)
+            # pp(s)
             # print(s['sort_number'], s['extrait_number'])
+
             # key = s['sort_number']
             key = s['extrait_number']
 
@@ -89,6 +92,7 @@ class FastManage(ExtendedApiResource, FastSearch):
                 'id': element['_id'],
                 'name': s['extrait'],
                 'page': s['page'],
+                # Temps: "-", Actions: "-", Apparato: "-"
                 'current': current
             }
 

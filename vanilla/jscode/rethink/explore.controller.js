@@ -318,9 +318,11 @@ function StepsController($scope, $rootScope, $log, $timeout,
         'Date',
         'Source',
     ];
+    self.pages = [];
 
     SearchService.getFetes().then(function (out) {
       self.data = [];
+      self.pages = out.data;
       if (out) {
           self.data = out.data;
           // console.log("DATA", out.data);
@@ -359,20 +361,39 @@ function StepsController($scope, $rootScope, $log, $timeout,
           });
           // console.log("Parties", self.parties);
 
-           self.dataCount = out.elements;
-           if ($stateParams.name != "~") {
-
+          self.dataCount = out.elements;
+          if ($stateParams.name != "~") {
             $rootScope.appFlexSize = 100;
             $rootScope.appScrollY = false;
 
-             self.element = self.data[$stateParams.name];
-             // console.log($stateParams.name, self.element[skey]);
-             self.sources = self.element[skey];
-             self.currentSource = self.sources[$stateParams.book];
-             console.log("Current source", self.currentSource);
-             self.extraits = self.element.extrait[self.currentSource];
-             console.log(self.extraits);
-           }
+            self.element = self.data[$stateParams.name];
+            // console.log($stateParams.name, self.element[skey]);
+            self.sources = self.element[skey];
+            self.currentSource = self.sources[$stateParams.book];
+            console.log("Current source", self.currentSource);
+            var tmp = self.element.extrait[self.currentSource];
+            // console.log(tmp);
+            var extraits = {};
+            forEach(tmp, function(value, key) {
+                extraits[value.name] = value;
+            });
+            // console.log(extraits);
+
+            var pages = [];
+            self.extraits = [];
+            SearchService.recoverPages(null, tmp[0].name)
+             .then(function (out) {
+                if (out) {
+                  pages = out.data;
+                  console.log("Pages", pages);
+                  forEach(pages, function(value){
+                    self.extraits.push(extraits[value.name]);
+                  });
+                  console.log("final:", self.extraits);
+                }
+            });
+
+          }
       } else {
        self.dataCount = self.data.length;
       }

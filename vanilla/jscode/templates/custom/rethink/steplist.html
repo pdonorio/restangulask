@@ -71,8 +71,9 @@
                 <!--
                 TO FIX: sort by page? what is a page?
                 <tr ng-repeat="row in steps.element.extrait[steps.currentSource] | orderBy: '+sort'">
-                -->
                 <tr ng-repeat="row in steps.extraits | orderBy: '+name'">
+                -->
+                <tr ng-repeat="row in steps.extraits">
                     <td>
                     <a ui-sref='logged.details({id: row.record})'>
                      <img height=80 width=50
