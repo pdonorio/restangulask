@@ -17,38 +17,56 @@
         </h2>
 
     <a ui-sref="logged.fastsearch">
-     <md-button class="menu-button md-raised">
+     <md-button
+     style='border-radius:8px;'
+     class="menu-button md-raised">
       Recherche
      </md-button>
     </a>
     <a ui-sref='logged.list({name: null, book: null})'>
-     <md-button class="menu-button md-raised">
+     <md-button
+     style='border-radius:7px;'
+     class="menu-button md-raised">
       Liste des fêtes
      </md-button>
     </a>
     <a ui-sref="logged.lex">
-     <md-button class="menu-button md-raised">
-      Lexique
+     <md-button
+     style='border-radius:7px;'
+     class="menu-button md-raised">
+      Index
      </md-button>
     </a>
 
+<!-- Map / carte -->
+    <a ui-sref="logged.chart">
+     <md-button class="menu-button md-raised"
+        style='border-radius:7px; line-height: 0; min-width: 50px;'>
+        <i class="material-icons" style='padding-top: 5px;' >map</i>
+     </md-button>
+    </a>
+
+<!-- mode d’emploi -->
+    <a ui-sref="logged.help">
+     <md-button class="menu-button md-raised"
+        style='border-radius:7px; line-height: 0; min-width: 50px;'>
+        <i class="material-icons" style='padding-top: 5px;' >live_help</i>
+     </md-button>
+    </a>
+
+<!-- Manage -->
     <a ui-sref="logged.actions">
-     <md-button class="menu-button md-raised">
-      Manage
+     <md-button class="menu-button md-raised"
+        style='border-radius:7px; line-height: 0; min-width: 50px;'>
+        <i class="material-icons" style='padding-top: 5px;' >build</i>
      </md-button>
     </a>
 
-<!--
-    <a ui-sref="logged.expo">
-     <md-button class="md-raised lime darken-2 white-text">
-      Exposition
-     </md-button>
-    </a>
--->
-
+<!-- Logout -->
     <a ui-sref="logged.logout">
-     <md-button class="md-raised menu-button">
-      Logout
+     <md-button class="menu-button md-raised"
+        style='border-radius:7px; line-height: 0; min-width: 50px;'>
+        <i class="material-icons" style='padding-top: 5px;'>exit_to_app</i>
      </md-button>
     </a>
 

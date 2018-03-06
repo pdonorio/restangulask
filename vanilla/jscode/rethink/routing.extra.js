@@ -92,10 +92,19 @@ angular.module('web').constant('rethinkRoutes', {
         },
     },
     //////////////////////
+    'logged.chart': {
+        url: "/map",
+        views: {"loggedview": {dir: 'blueprint', templateUrl: 'map.html'}},
+    },
+    //////////////////////
+    'logged.help': {
+        url: "/help",
+        views: {"loggedview": {dir: 'blueprint', templateUrl: 'help.html'}},
+    },
+    //////////////////////
     'logged.actions': {
         url: "/manage",
-        views: {
-            "loggedview": {dir: 'blueprint', templateUrl: 'operations.html'}
+        views: { "loggedview": {dir: 'blueprint', templateUrl: 'operations.html'}
         },
     },
     //////////////////////
