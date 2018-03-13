@@ -41,8 +41,10 @@
                     {{source}}
                 </span>
                 <span ng-if="source != steps.currentSource">
-                    <a ui-sref="logged.list({
-                        name: fete.key, book: steps.sources.indexOf(source)})">
+                    <a class='above'
+                        ui-sref="logged.list({
+                            name: fete.key,
+                            book: steps.sources.indexOf(source)})">
                         {{source}}
                     </a>
                 </span>
@@ -134,7 +136,10 @@
 
                     <span ng-if="header == 'Source'">
                      <div ng-repeat="source in fete[header]">
-                        <a ui-sref="logged.list({name: fete.key, book: fete[header].indexOf(source)})">
+                        <a class='above'
+                            ui-sref="logged.list({
+                                name: fete.key,
+                                book: fete[header].indexOf(source)})">
                             {{source}}
                         </a>
                      </div>
@@ -169,7 +174,7 @@
        <md-toolbar  layout="column" class="blue-grey">
         <h1 class="md-toolbar-tools">
             <div flex="90">
-                Lexique indexé
+                Index
             </div>
             <div flex="10" style="text-align: right;">
                 <a href ng-click="steps.sideLex('close')">
@@ -180,7 +185,7 @@
        </md-toolbar>
        <div layout="row" layout-padding layout="center center">
            <md-input-container flex=40>
-              <label>Lexique</label>
+              <label>Recherche par mot</label>
               <input type="text"
                 ng-model="steps.lexvar" ng-change="findLex()"
                 ng-focus="steps.catvar = ''; findLex()"
@@ -188,7 +193,7 @@
            </md-input-container>
            <div flex=10></div>
            <md-input-container flex=40>
-              <label>Catégorie</label>
+              <label>Recherche par catégorie</label>
               <input type="text"
                 ng-model="steps.catvar" ng-change="findLex()"
                 ng-focus="steps.lexvar = ''"/>

@@ -370,7 +370,7 @@
        </md-toolbar>
        <div layout="row" layout-padding layout="center center">
            <md-input-container flex=40>
-              <label>Index</label>
+              <label>Recherche par mot</label>
               <input type="text"
                 ng-model="search.lexvar" ng-change="findLex()"
                 ng-focus="search.catvar = ''; findLex()"
@@ -378,7 +378,7 @@
            </md-input-container>
            <div flex=10></div>
            <md-input-container flex=40>
-              <label>Catégorie</label>
+              <label>Recherche par catégorie</label>
               <input type="text"
                 ng-model="search.catvar" ng-change="findLex()"
                 ng-focus="search.lexvar = ''"/>

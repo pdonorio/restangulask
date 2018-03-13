@@ -1,4 +1,9 @@
 
+a.above:hover {
+  text-decoration:underline !important;
+  color: #000;
+}
+
 #onlyme .md-virtual-repeat-container .md-virtual-repeat-scroller {
     margin-bottom: 120px;
 }
