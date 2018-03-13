@@ -17,11 +17,18 @@ from ... import get_logger
 logger = get_logger(__name__)
 PYTHON_BIN_NAME = 'python3.6'
 PYTHON_FILE_NAME = 'operations.py'
+RETHINK_DUMP_BIN = 'rethinkdb-dump'
+BACKUP_PATH = '/code/backup'
+BACKUP_PREFIX = 'online_'
+BACKUP_EXT = '.tar.gz'
 
 
-class RethinkProcess(ExtendedApiResource):
+class BaseProcess(ExtendedApiResource):
 
-    def process_exists(self, process_name):
+    def process_exists(self, process_name, process_base=None):
+
+        if process_base is None:
+            process_base = PYTHON_BIN_NAME
 
         current_pid = os.getpid()
         for pid in psutil.pids():
@@ -29,22 +36,27 @@ class RethinkProcess(ExtendedApiResource):
             if pid == current_pid or not psutil.pid_exists(pid):
                 continue
             process = psutil.Process(pid)
-            # print(process)
+            print(process)
 
-            if process.name() == PYTHON_BIN_NAME:
+            # print(process.name(), process_base)
+            if process.name() == process_base:
                 cmd = process.cmdline()
+                # print("TEST", cmd)
                 if process_name in cmd:
                     return True
 
         return False
 
-    def process_launch(self, python_file, extra_args):
+    def python_launch(self, python_file, extra_args):
         from plumbum import local, BG
         pybin = local[PYTHON_BIN_NAME]
         args = [python_file]
         for arg in extra_args:
             args.append(arg)
         return pybin[args] & BG
+
+
+class RethinkProcess(BaseProcess):
 
     @deck.apimethod
     @auth_token_required
@@ -59,11 +71,63 @@ class RethinkProcess(ExtendedApiResource):
     @auth_token_required
     def post(self):
 
-        # How to launch?
         if self.process_exists(PYTHON_FILE_NAME):
             return False
 
-        bgproc = self.process_launch(PYTHON_FILE_NAME, ['1'])
+        bgproc = self.python_launch(PYTHON_FILE_NAME, ['1'])
+        if bgproc.ready():
+            raise BaseException("Process launch failed")
+        else:
+            return True
+
+
+class RethinkBackup(BaseProcess):
+
+    @deck.apimethod
+    @auth_token_required
+    def get(self):
+
+        # list files
+        import os
+        from glob import glob
+        files = glob("%s/%s*%s" % (BACKUP_PATH, BACKUP_PREFIX, BACKUP_EXT))
+        names = []
+        for file in files:
+            name = file.replace(BACKUP_PREFIX, '').replace(BACKUP_EXT, '')
+            names.append(next(reversed(name.split(os.sep))).replace('T', ' '))
+
+        return {
+            'exists': self.process_exists(
+                process_name='rdb',
+                process_base=RETHINK_DUMP_BIN),
+            'files': names,
+            # 'counter': GExReader.read_counter(),
+        }
+
+    def python_launch(self, python_file, extra_args):
+        from plumbum import local, BG
+        pybin = local[python_file]
+        args = []
+        for arg in extra_args:
+            args.append(arg)
+        # return pybin(args)
+        return pybin[args] & BG
+
+    @deck.apimethod
+    @auth_token_required
+    def post(self):
+
+        if self.process_exists('rdb', RETHINK_DUMP_BIN):
+            return False
+
+        import datetime
+        dt = datetime.datetime.utcnow().isoformat()
+        name = str(dt).split('.')[0]
+        filepath = '%s/%s%s%s' % (BACKUP_PATH, BACKUP_PREFIX, name, BACKUP_EXT)
+
+        args = ['-c', 'rdb', '--file', filepath, '--overwrite']
+        bgproc = self.python_launch(RETHINK_DUMP_BIN, args)
+        # print(bgproc)
         if bgproc.ready():
             raise BaseException("Process launch failed")
         else:

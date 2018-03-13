@@ -19,7 +19,16 @@ function AdminService($log, api) {
         data: 'datavalues',
         corruption: 'broken',
         useradmin: 'adminer',
+        backupproc: 'backup',
         lexiqueproc: 'process',
+    };
+
+    //////////////////
+    self.checkBackup = function() {
+        return api.apiCall(self.endpoints.backupproc, 'GET');
+    };
+    self.launchBackup = function() {
+        return api.apiCall(self.endpoints.backupproc, 'POST');
     };
 
     //////////////////

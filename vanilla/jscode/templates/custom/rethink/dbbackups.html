@@ -1,3 +1,42 @@
 
-Work in progress.
+<md-content layout-padding layout-wrap
+    ng-controller="DBBackupController as dbb">
 
+ <h3>Database management</h3>
+  </hr>
+
+    <ul>
+        <li>
+            Process:
+            <i>
+                <span ng-if="dbb.status.exists"> running </span>
+                <span ng-if="!dbb.status.exists"> stopped </span>
+            </i>
+        </li>
+        <!--
+        <li ng-if="dbb.status.exists">
+            Documents updated: <b>{{dbb.status.counter}}</b>
+            <md-progress-circular ng-disabled="!dbb.status.exists"
+                class="md-hue-2" md-diameter="15px"></md-progress-circular>
+        </li>
+               ng-disabled="true"
+        -->
+        <li>&nbsp;</li>
+        <li ng-if="!dbb.status.exists">
+            <a class="btn cyan darken-4 padbtn" href
+               ng-click="dbb.launchProcess()"> launch </a>
+        </li>
+    </ul>
+
+    <table flex=50 ng-if="dbb.status.files.length > 0">
+        <tr>
+            <th> Backup </th>
+            <th> action </th>
+        </tr>
+        <tr ng-repeat="name in dbb.status.files">
+            <td> {{name}} </td>
+            <td> - </td>
+        </tr>
+    </table>
+
+</md-content>

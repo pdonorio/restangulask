@@ -4,6 +4,7 @@
 angular.module('web')
     .controller('UserManagerController', UserManagerController)
     .controller('LexiqueController', LexiqueController)
+    .controller('DBBackupController', DBBackupController)
     .controller('FieldsController', FieldsController);
 
 function FieldsController($scope, $log, $interval, AdminService)
@@ -60,6 +61,39 @@ function FieldsController($scope, $log, $interval, AdminService)
 };
 }
 
+function DBBackupController($scope, $log, $interval, AdminService)
+{
+    var self = this;
+    $log.debug("dbbackup");
+
+    self.checkProcess = function() {
+        // TODO: change me
+        AdminService.checkBackup().then(function(out) {
+            if (out) {
+                console.log("DATA", out);
+                self.status = out;
+                // self.users = out.data;
+            }
+        });
+    };
+
+    $interval(function(){
+        // console.log("Interval");
+        self.checkProcess();
+    }, 6000);
+    // init first time
+    self.checkProcess();
+
+    self.launchProcess = function() {
+        console.log("Database backup request");
+        AdminService.launchBackup().then(function(out) {
+            console.log("Launched:", out);
+            self.checkProcess();
+        });
+    };
+}
+
+
 function LexiqueController($scope, $log, $interval, AdminService)
 {
     var self = this;
@@ -77,7 +111,7 @@ function LexiqueController($scope, $log, $interval, AdminService)
     };
 
     $interval(function(){
-        console.log("Interval");
+        // console.log("Interval");
         self.checkLexique();
     }, 6000);
     // init first time
