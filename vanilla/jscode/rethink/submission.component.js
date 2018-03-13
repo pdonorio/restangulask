@@ -113,11 +113,14 @@ Handle 'draft' state for creating a new record
           // LIST / select
           if (choose == "list") {
 
+            // console.log("List", element.field);
             var options = [];
             if (self.step != 4)
                 options.push({"value": "", "name": "-"});
 
-            forEach(element.extra.split(','), function (obj, pos) {
+            // console.log("TEST", element.extra);
+            forEach(element.extra, function (obj, pos) {
+            // forEach(element.extra.split(','), function (obj, pos) {
                 options.push({"value":obj.trim(), "name": obj});
             });
             options.sort(compare);
