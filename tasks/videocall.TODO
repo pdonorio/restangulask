@@ -1,96 +1,29 @@
 
-# SPECTACLE BAROQUE
+# NORMAL
 
-https://spectaclebaroque.wordpress.com/
-
-☐ admin
-  ☐ lexique reload
-  ☐ edit step details options
-    rethinkdb datakeys collection
-  ☐ users
-    - roles/profiles
-  ☐ admin actions
-  ☐ backup
-  http://blog.leandot.com/elasticsearch/2017/03/04/create-elastic-search-snapshot-docker.html
-
-☐ letsencrypt
- ☐ check again
- ☐ cronjob
- every 10 weeks
-
-
-☐ search
-  - coma language bug
-  - placeholder
-   http://joshdmiller.github.io/angular-placeholders/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- topbar
+  - Rimuovere titolo
+  - Icona come link per welcome page
+  - barra bianca?
+  - stesso font: https://fonts.google.com/specimen/Quattrocento+Sans
+  - List de fete, recherche, Index, Carte, Aide
+- lista feste
+  - padding in multiple sources (unordered list)
+- index
+  - text from the doc, all in one page
+    - one page
+    - tabella
+    - descrizione
+ - carte
+   - doc
+   - legenda
+ - avignon trascrizione pagina 8
 
  --- ✄ -----------------------
 
-- move from private to public @production
-- roles @production
-  - user page
-    - remove current flask-admin
-    spectaclebaroque.eu/api/manage
-    - change main user email and pw
-  - set js function for checking roles
-  - set route for only admin on user page
+# EXTRA
 
-- authorized @views
-  ☐ no type column in fete list
-  ☐ roles @rbac
-   ☐ profiles administration for others
-
-- lexique
- - italiano/italien
- - split on commas
- - fixed table header
-
-- fete & date
-   ☐ all elements
-   ☐ also elastic?
-
- --- ✄ -----------------------
-
- - EXPO
-  ☐ Option no zoom
-
-
-in PRODUCTION:
- ✔ uptime robot (both interface and api) @done (17-02-16 17:12)
- ☐ change root adminer
- ☐ disable rethinkdb monitor interface...
-
-LAST:
-- medium_expo_thumbnail
-- python frontend not really multithread @urgh
-- details page
- - highlight bug on html elements
-- flow upload auth
-  nel template <div flow-init="ctrl.flowOptionsResources()"
-  nel controller
-   self.flowOptionsResources = function() {
-      return { headers: {Authorization : 'Bearer ' + $auth.getToken()} }
-      }
-- avoid refresh of angularjs pages when busy
-  http://j.mp/2lNxQqV
-- assets
-  https://flask-assets.readthedocs.io/en/latest/
+- user
+  - manage active users
+- update
+  https://github.com/Dogfalo/materialize/releases/tag/1.0.0-beta
