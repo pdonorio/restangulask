@@ -1,3 +1,19 @@
+/* some header */
+
+a.mymenu {
+    color: #000;
+    font-family: 'Quattrocento Sans';
+    font-size: 16px;
+    padding-right: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+}
+a.mymenu:hover {
+    color: #767676;
+}
 
 a.above:hover {
   text-decoration:underline !important;

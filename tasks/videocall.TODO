@@ -1,12 +1,6 @@
 
 # NORMAL
 
-- topbar
-  - Rimuovere titolo
-  - Icona come link per welcome page
-  - barra bianca?
-  - stesso font: https://fonts.google.com/specimen/Quattrocento+Sans
-  - List de fete, recherche, Index, Carte, Aide
 - lista feste
   - padding in multiple sources (unordered list)
 - index
@@ -17,13 +11,14 @@
  - carte
    - doc
    - legenda
- - avignon trascrizione pagina 8
 
  --- ✄ -----------------------
 
 # EXTRA
 
+- bug
+  + avignon trascrizione pagina 8
 - user
-  - manage active users
+  + manage active users
 - update
   https://github.com/Dogfalo/materialize/releases/tag/1.0.0-beta

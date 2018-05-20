@@ -13,48 +13,20 @@
 <md-toolbar class="md-whiteframe-4dp"
     style="
     top: 0; position:absolute; z-index: 3;
-    height: 100px;
-    line-height: 100px;
-    background-color: #fafafa;
+    height: 100px; line-height: 100px; background-color: #fafafa;
     "
     >
   <div class="md-toolbar-tools">
-        <div style="padding-right: 10px; padding-top: 85px;">
-            <img src="https://spectaclebaroque.eu/wp-content/uploads/2017/04/cropped-csb3.png"
-                alt="spectaclebaroque logo" style="width: 85px;">
+        <div style="padding-right: 10px; padding-top: 85px;" flex=30>
+            <a href="https://spectaclebaroque.eu/">
+                <img src="https://spectaclebaroque.eu/wp-content/uploads/2017/04/cropped-csb3.png"
+                    alt="spectaclebaroque logo" style="width: 85px;">
+            </a>
         </div>
 
-<div flex md-truncate class="black-text">
-    <h2
-    style="
-    font-family: 'Montserrat', sans-serif;
-    font-size: 44px; font-style: 'Light';
-    "
-    >
-        <a href="http://spectaclebaroque.eu">
-            Les relations de fêtes jésuites (1622)
-        </a>
-    </h2>
-  </div>
-
-<div style=" bottom: 0; ">
-
-    <a ui-sref="logged.fastsearch">
-     <md-button class="menu-button md-raised">
-      Recherche
-     </md-button>
-    </a>
-    <a ui-sref="logged.list">
-     <md-button class="md-raised menu-button">
-      Liste des fêtes
-     </md-button>
-    </a>
-    <a ui-sref="logged.lex">
-     <md-button class="menu-button md-raised">
-      Index
-     </md-button>
-    </a>
-
+<div style=" bottom: 0; " flex=70>
+      <a class="mymenu" ui-sref="{{key}}"
+       ng-repeat="(key, value) in root.unloggedMenu" > {{value}} </a>
 </div>
 
       </div>

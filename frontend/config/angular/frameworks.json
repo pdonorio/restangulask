@@ -6,7 +6,7 @@
 		"materialize/dist/css/materialize.min.css"
 	],
 	"customcss" : [
-        "https://fonts.googleapis.com/css?family=Montserrat:300",
+        "https://fonts.googleapis.com/css?family=Quattrocento+Sans",
         "css/newslider.css",
 		"css/custom_material.css",
 		"css/style.css"

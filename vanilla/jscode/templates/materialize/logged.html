@@ -5,73 +5,17 @@
     >
  <div layout="column" flex="{{appFlexSize}}">
 
-    <md-toolbar class="md-whiteframe-4dp" style="background-color: #fafafa;">
+    <md-toolbar class="md-whiteframe-4dp" style="background-color: #fff;">
       <div class="md-toolbar-tools">
-        <div style="padding-right: 10px; padding-top: 35px;">
+        <div style="padding-right: 10px; padding-top: 10px; padding-bottom: 5px;" flex=30>
             <img src="https://spectaclebaroque.eu/wp-content/uploads/2017/04/cropped-csb3.png"
                 alt="spectaclebaroque logo" style="width: 85px;">
         </div>
-        <h2 flex md-truncate class="black-text" style="
-            font-family: 'Montserrat', sans-serif; font-size: 22px; ">
-            <a href="http://spectaclebaroque.eu">
-                Les relations de fêtes jésuites (1622)
-            </a>
-            <!-- Cultures du Spectacle Baroque -->
-        </h2>
 
-    <a ui-sref="logged.fastsearch">
-     <md-button
-     style='border-radius:8px;'
-     class="menu-button md-raised">
-      Recherche
-     </md-button>
-    </a>
-    <a ui-sref='logged.list({name: null, book: null})'>
-     <md-button
-     style='border-radius:7px;'
-     class="menu-button md-raised">
-      Liste des fêtes
-     </md-button>
-    </a>
-    <a ui-sref="logged.lex">
-     <md-button
-     style='border-radius:7px;'
-     class="menu-button md-raised">
-      Index
-     </md-button>
-    </a>
-
-<!-- Map / carte -->
-    <a ui-sref="logged.chart">
-     <md-button class="menu-button md-raised"
-        style='border-radius:7px; line-height: 0; min-width: 50px;'>
-        <i class="material-icons" style='padding-top: 5px;' >map</i>
-     </md-button>
-    </a>
-
-<!-- mode d’emploi -->
-    <a ui-sref="logged.help">
-     <md-button class="menu-button md-raised"
-        style='border-radius:7px; line-height: 0; min-width: 50px;'>
-        <i class="material-icons" style='padding-top: 5px;' >live_help</i>
-     </md-button>
-    </a>
-
-<!-- Manage -->
-    <a ui-sref="logged.actions">
-     <md-button class="menu-button md-raised"
-        style='border-radius:7px; line-height: 0; min-width: 50px;'>
-        <i class="material-icons" style='padding-top: 5px;' >build</i>
-     </md-button>
-    </a>
-
-<!-- Logout -->
-    <a ui-sref="logged.logout">
-     <md-button class="menu-button md-raised"
-        style='border-radius:7px; line-height: 0; min-width: 50px;'>
-        <i class="material-icons" style='padding-top: 5px;'>exit_to_app</i>
-     </md-button>
-    </a>
+    <div flex=70>
+      <a class="mymenu" ui-sref="{{key}}"
+       ng-repeat="(key, value) in root.loggedMenu" > {{value}} </a>
+    </div>
 
       </div>
     </md-toolbar>

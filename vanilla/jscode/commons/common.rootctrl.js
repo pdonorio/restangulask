@@ -1,4 +1,5 @@
 (function() {
+
   'use strict';
 
 angular.module('web')
@@ -112,6 +113,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
 {
     // Init controller
     var self = this;
+
     $log.debug("Root controller");
     $rootScope.appFlexSize = 80;
 
@@ -119,6 +121,17 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
     $rootScope.goTo = function (element) {
         $state.go(element.state.name, element.params);
     };
+
+    self.unloggedMenu = {
+        'logged.fastsearch': 'Recherche',
+        'logged.list({name: null, book: null})': 'Liste des fêtes',
+        'logged.lex': 'Index',
+        'logged.chart': 'Carte',
+        'logged.help': 'Aide',
+    };
+    self.loggedMenu = JSON.parse(JSON.stringify(self.unloggedMenu));
+    self.loggedMenu['logged.actions'] = 'Diriger';
+    self.loggedMenu['logged.logout'] = 'Déconnecter';
 
     // Global editor configuration
     $rootScope.tinymceOptions = {
