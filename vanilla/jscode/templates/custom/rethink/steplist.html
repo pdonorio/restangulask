@@ -135,7 +135,9 @@
                     </span>
 
                     <span ng-if="header == 'Source'">
-                     <div ng-repeat="source in fete[header]">
+                     <div ng-repeat="source in fete[header]"
+                        style="padding: 2px;"
+                        >
                         <a class='above'
                             ui-sref="logged.list({
                                 name: fete.key,
