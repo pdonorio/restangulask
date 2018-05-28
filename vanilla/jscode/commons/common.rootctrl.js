@@ -123,10 +123,10 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
     };
 
     self.unloggedMenu = {
-        'logged.fastsearch': 'Recherche',
         'logged.list({name: null, book: null})': 'Liste des fêtes',
-        'logged.lex': 'Index',
+        'logged.fastsearch': 'Recherche',
         'logged.chart': 'Carte',
+        'logged.lex': 'Index',
         'logged.help': 'Aide',
     };
     self.loggedMenu = JSON.parse(JSON.stringify(self.unloggedMenu));
