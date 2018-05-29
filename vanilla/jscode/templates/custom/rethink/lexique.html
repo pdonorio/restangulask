@@ -1,8 +1,8 @@
-
-<md-content layout="column" layout-padding
-    ng-controller="PublicLexiqueController as lex">
-
-    <!-- <h3>TEST</h3> -->
+<div ng-controller="PublicLexiqueController as lex">
+<md-content layout="column" layout-padding>
+    <div layout="row" layout-fill layout-wrap layout-padding layout-align="center center">
+        <h5> Index </h5>
+    </div>
 
     <md-content layout="column" flex="grow" layout-align="center center">
 
@@ -12,7 +12,7 @@
         </div>
         -->
 
-        <md-content layout="row" flex="70" layout-align="center center">
+        <md-content layout="row" flex="80" layout-align="center center">
          <md-content  layout-wrap
             flex="70" style="text-align: justify;">
 L’index propose un recensement multilingue et thématique du vocabulaire de la fête baroque, effectué à partir des textes de la base de données (en latin, français ancien, italien ancien, portugais ancien).
@@ -27,13 +27,8 @@ La catégorie <b>expérience</b> regroupe les occurrences liées à la vue et l�
             </br> </br>
 La catégorie <b>fins</b> aborde quant à elle les objectifs visés et explicites du spectacle.
             </br> </br>
-Pour une recherche au sein de l’index, voir l’outil « <a ui-sref="logged.lex">Index</a> » de la page « Recherche ». Pour un guide d’utilisation de l’index, voir « <a ui-sref="logged.help">aide</a> ».
-         </md-content>
-        </md-content>
-
-    </md-content>
-
-    <br>
+Pour une recherche au sein de l’index, voir l’outil
+« <b><a href ng-click="toggle('open')">Index</a></b> » de la page « <b><a ui-sref="logged.fastsearch">Recherche</a></b> ». Pour un guide d’utilisation de l’index, voir « <b><a ui-sref="logged.help">aide</a></b> ».
 
     <md-tabs md-selected='lex.tab'
         md-no-ink md-no-ink-bar md-stretch-tabs='never'
@@ -58,6 +53,266 @@ Pour une recherche au sein de l’index, voir l’outil « <a ui-sref="logged.l
         </md-tab>
       </md-tabs>
 
+<div class="mylist">
+    <br>
+    <br>
+
+<h5>Plan</h5>
+<b>DISPOSITIFS</b>
+<ul>
+    <li class="nested"> architecture éphémère 
+        (= structure monumentales éphémère, mobile ou fixe)
+        <ul>
+            <li> porte </li>
+            <li> char </li>
+            <li>théâtre</li>
+            <li>fontaine</li>
+            <li>grotte</li>
+            <li>château</li>
+            <li>pyramide</li>
+            <li>obélisque</li>
+            <li>colonne</li>
+            <li>stade</li>
+            <li>clôture</li>
+        </ul>
+    </li>
+    <li class="nested"> décor textile
+        <ul>
+            <li>type d’objet textile</li>
+            <li>tissu</li>
+            <li>passementerie</li>
+        </ul>
+    </li>
+    <li class="nested">décor végétal
+        <ul>
+            <li>type de disposition</li>
+            <li>espèces</li>
+        </ul>
+    </li>
+    <li>objet de procession (= objets portés en procession) </li>
+    <li>objet militaire et de pouvoir</li>
+    <li class="nested">objet liturgique (= objets du culte catholique)
+        <ul>
+            <li>vaisselle sacrée</li>
+            <li>parement d’autel</li>
+            <li>vêtement et insignes ecclésiastiques</li>
+            <li>procession et dévotion</li>
+        </ul>
+    </li>
+    <li class="nested">objet lumineux
+        <ul>
+            <li>luminaire</li>
+            <li>pyrotechnie</li>
+        </ul>
+    </li>
+    <li class="nested">objet sonore 
+        <ul>
+            <li>artillerie</li>
+            <li>pétard</li>
+            <li>cloches</li>
+            <li>instrument à corde</li>
+            <li>instrument à vent</li>
+            <li>instrument à percussion</li>
+        </ul>
+    </li>
+    <li>objet odorant</li>
+    <li>représentation</li>
+    <li class="nested">iconographie 
+        <ul>
+            <li>hagiographie</li>
+            <li>mythologie</li>
+            <li>allégorie</li>
+            <li>figure anthropomorphe ou fantastique</li>
+            <li>animal</li>
+            <li>éléments terrestres et célestes</li>
+            <li>ornement</li>
+            <li>motif</li>
+        </ul>
+    </li>
+    <li class="nested">matières, matériaux 
+        <ul>
+            <li>textile</li>
+            <li>végétal</li>
+            <li>métal</li>
+            <li>minéral/pierre</li>
+            <li>bois</li>
+            <li>technique</li>
+        </ul>
+    </li>
+    <li>couleur</li>
+    <li>manière (= qualifie la mise en œuvre des dispositifs)</li>
+        </ul>
+    </li>
+</ul>
+
+<b>PERFORMANCE</b>
+<ul>
+    <li class="nested"> acteurs
+        <ul>
+            <li>artistes/artisans</li>
+            <li>participant</li>
+            <li>spectateur</li>
+        </ul>
+    </li>
+    <li class="nested">actions
+        <ul>
+            <li>religion</li>
+            <li>cortège</li>
+            <li>lumière et bruit</li>
+            <li>exécution musicale</li>
+            <li>combat</li>
+            <li>cavalcade</li>
+            <li>performance rhétorique</li>
+            <li>distribution des prix</li>
+            <li>performance théâtrale</li>
+            <li>divertissement</li>
+        </ul>
+    </li>
+    <li>Manière (= qualifie la mise en œuvre des actions par les acteurs)</li>
+</ul>
+
+<b>EXPERIENCE</b>
+
+<ul>
+    <li>vue</li>
+    <li>audition</li>
+    <li>émotions</li>
+</ul>
+
+<b>FINS</b>
+</div>
+
+
+         </md-content>
+        </md-content>
+    </md-content>
 </md-content>
-    <br>
-    <br>
+<br> <br>
+
+
+
+<!-- LEXIQUE SIDEBAR -->
+ <section layout="row" >
+   <md-sidenav class="md-sidenav-right" md-component-id="right"
+          style="overflow-y: hidden; width: 410px;"
+         md-is-open="lexiquesn"  md-disable-backdrop md-whiteframe="4" >
+
+      <md-content flex>
+       <md-toolbar  layout="column" class="blue-grey">
+        <h1 class="md-toolbar-tools">
+            <div flex="90">
+                Index
+            </div>
+            <div flex="10" style="text-align: right;">
+                <a href ng-click="toggle('close')">
+                  <i class="material-icons">close</i>
+                </a>
+            </div>
+        </h1>
+       </md-toolbar>
+       <div layout="row" layout-padding layout="center center">
+           <md-input-container flex=40>
+              <label>Recherche par mot</label>
+              <input type="text"
+                ng-model="lex.lexvar" ng-change="findLex()"
+                ng-focus="lex.catvar = ''; findLex()"
+                    focus-on="focusMe"/>
+           </md-input-container>
+           <div flex=10></div>
+           <md-input-container flex=40>
+              <label>Recherche par catégorie</label>
+              <input type="text"
+                ng-model="lex.catvar" ng-change="findLex()"
+                ng-focus="lex.lexvar = ''"/>
+           </md-input-container>
+       </div>
+      </md-content>
+
+      <md-content layout-padding
+        style="overflow-y: scroll; height: 100%; width: 350px;">
+          <md-list class="md-dense" flex>
+
+    <div ng-if="lexlen == 0">
+        ...
+    </div>
+
+    <div >
+    <!--
+        <div ng-if="lexlen === null">
+            loading...
+        </div>
+    -->
+
+        <div ng-repeat="mylex in lexers">
+            <md-list-item class="md-3-line">
+              <div class="md-list-item-text" layout="column">
+                <h3>
+                <!--titre:-->
+                  <b>
+                    <a ui-sref="logged.fastsearch({text: single})"
+                        ng-repeat="single in splitter(mylex._source.titre)">
+                        {{single}}
+                    </a>
+                  </b>
+                </h3>
+                <h4 ng-if="mylex._source['français']">
+                    français:
+                    <a ui-sref="logged.fastsearch({text: single})"
+                        ng-repeat="single in splitter(mylex._source['français'])">
+                        {{single}}
+                    </a>
+                </h4>
+                <h4 ng-if="mylex._source.latin">
+                    latin:
+                    <a ui-sref="logged.fastsearch({text: single})"
+                        ng-repeat="single in splitter(mylex._source.latin)">
+                        {{single}}
+                    </a>
+                </h4>
+                <h4 ng-if="mylex._source.italien">
+                    italien:
+                    <a ui-sref="logged.fastsearch({text: single})"
+                        ng-repeat="single in splitter(mylex._source.italien)">
+                        {{single}}
+                    </a>
+                </h4>
+                <br>
+                <h4>
+                 <i>
+                  <span>
+                    <a href ng-click="mylex.lexvar = ''; mylex.catvar = mylex._source.sheet; findLex()">
+                        {{mylex._source.sheet}}
+                    </a>
+                  </span>
+
+                  <span ng-if="mylex._source.macro != '-'">
+                    &gt;
+                    <a href ng-click="mylex.lexvar = ''; mylex.catvar = mylex._source.macro; findLex()">
+                        {{mylex._source.macro}}
+                    </a>
+                  </span>
+
+                  <span ng-if="mylex._source.macro != '-'">
+                    &gt;
+                    <a href ng-click="mylex.lexvar = ''; mylex.catvar = mylex._source.micro; findLex()">
+                        {{mylex._source.micro}}
+                    </a>
+                  </span>
+                 </i>
+                </h4>
+                <br>
+              </div>
+            </md-list-item>
+
+            <md-divider ></md-divider>
+            <br>
+
+        </div>
+    </div>
+
+          </md-list>
+      </md-content>
+    </md-sidenav>
+
+</section>
+</div>

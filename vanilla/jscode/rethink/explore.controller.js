@@ -518,8 +518,11 @@ function StepsController($scope, $rootScope, $log, $timeout,
 }
 
 
-function PublicLexiqueController($scope, $log, SearchService)
+function PublicLexiqueController($scope, $log, SearchService, $rootScope, $timeout, $mdSidenav)
 {
+    $rootScope.appFlexSize = 90;
+    $rootScope.appScrollY = false;
+
     // INIT controller
     $log.debug("lex!");
     var self = this;
@@ -543,6 +546,68 @@ function PublicLexiqueController($scope, $log, SearchService)
         console.log("OUT", self.data);
       }
     });
+
+
+  ///////////////////////////
+  $scope.lexlen = null;
+  self.lexvar = "";
+
+  $scope.toggle = function(action) {
+
+    if (action == 'open') {
+      $rootScope.appFlexSize = 100;
+      $scope.lexique_close = false;
+      $timeout(function() {
+          focus('focusMe');
+      }, 500);
+    } else if (action == 'close') {
+      // $rootScope.appFlexSize = self.appSize;
+      // $scope.lexique_close = true;
+    }
+
+    $mdSidenav('right').toggle();
+    self.lexvar = "";
+    $scope.findLex();
+  };
+
+  $scope.$watch('lexiquesn', function(newValue, oldValue) {
+    // console.log("UHM", newValue, oldValue)
+    // CLOSE ACTION
+    if (oldValue === true && newValue === false) {
+      $rootScope.appFlexSize = 90;
+      $scope.lexique_close = true;
+    }
+  });
+
+  $scope.findLex = function() {
+    $scope.lexers = {};
+    $scope.lexlen = null;
+
+    var term = '';
+    var cat = 0;
+    if (self.lexvar && self.lexvar.length > 0) {
+        term = self.lexvar;
+    } else if (self.catvar && self.catvar.length > 0) {
+        term = self.catvar;
+        cat = 1;
+    }
+    // console.log("Calling find lex", self.lexvar, term, cat);
+    // console.log("TERM", term, cat);
+
+    SearchService.getFastLex(term, 80, cat).then(function(out)
+    {
+        if (out && out.elements) {
+          // console.log("LEX", out);
+          $scope.lexers = out.data;
+          $scope.lexlen = out.elements;
+        } else {
+          $scope.lexlen = 0;
+          // console.log("LEX", $scope.lexlen);
+        }
+    });
+  };
+
+
 }
 
 

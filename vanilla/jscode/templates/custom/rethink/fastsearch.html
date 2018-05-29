@@ -123,9 +123,9 @@
   </md-input-container>
 
   <md-input-container>
-    <label>Support</label>
+    <label>Type</label>
     <md-select ng-model="search.filters.manuscrit" md-on-close="search.searchTextChange()" >
-      <md-optgroup label="Support">
+      <md-optgroup label="Type">
         <md-option ng-value="">-</md-option>
         <md-option ng-value="item" ng-repeat="item in ::search.base.manuscrits" >{{item}}</md-option>
       </md-optgroup>

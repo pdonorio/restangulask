@@ -1,16 +1,36 @@
 /* some header */
 
+.mylist ul {
+    padding: 0;
+    padding-left: 35px;
+}
+.mylist ul:not(.browser-default) li {
+    list-style-type: square;
+    padding: 0;
+    padding-left: 15px;
+}
+/*
+.mylist li.nested {
+    list-style-type: none !important;
+}
+*/
+.nested ul:not(.browser-default) li {
+    list-style-type: circle !important;
+}
+
 a.mymenu {
     color: #000;
     font-family: 'Quattrocento Sans';
     font-size: 16px;
-    padding-right: 28px;
     font-weight: 600;
+    padding-right: 14px;
+    padding-left: 14px;
     text-decoration: none;
     transition: color 0.2s;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
 }
+
 a.mymenu:hover {
     color: #767676;
 }

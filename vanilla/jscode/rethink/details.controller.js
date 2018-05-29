@@ -3,6 +3,7 @@
 
 angular.module('web')
     .controller('DetailsController', DetailsController)
+    .controller('NonController', NonController)
     .controller('AppedController', AppedController)
     .controller('OperationsController', OperationsController)
     .controller('UncompletedController', UncompletedController)
@@ -21,6 +22,11 @@ function AppedController($scope, $rootScope) {
 
 function OperationsController($scope, $rootScope) {
     $rootScope.appFlexSize = 80;
+    $rootScope.appScrollY = false;
+}
+
+function NonController($scope, $rootScope) {
+    $rootScope.appFlexSize = 90;
     $rootScope.appScrollY = false;
 }
 

@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="NonController" >
   <md-content
     layout="column" layout-padding layout-wrap
     layout-align="center center">
@@ -12,7 +12,7 @@ Cette carte des fêtes <b>localise</b> tous les témoignages connus des fêtes d
         </div>
         <div style="padding: 20px; padding-top: 0px;">
 La carte permet aussi <b>d’accéder aux relations numérisées</b> sur d’autres sites, notamment les relations des fêtes célébrées en Espagne et en Nouvelle Espagne. Les relations imprimées et manuscrites des fêtes célébrées aux Pays-Bas, en Italie, en France et au Portugal sont accessibles directement sur la page
-<b>Recherche</b> ou <b>Liste des fêtes</b>.
+<b><a ui-sref="logged.fastsearch">Recherche</a></b> ou <b><a ui-sref="logged.lex">Liste des fêtes</a></b>.
 </div>
         <div style="padding: 20px; padding-top: 0px;">
 Les couleurs représentent les différentes provinces de la Compagnie de Jésus.
@@ -28,7 +28,7 @@ Les couleurs représentent les différentes provinces de la Compagnie de Jésus.
     </div>
 
     <div layout="row" layout-fill layout-wrap layout-padding layout-align="center center">
-        <img src="/static/img/legend.png" alt="legenda">
+        <img src="/static/img/custom/legend.png" alt="legenda">
     </div>
 
   </md-content>
