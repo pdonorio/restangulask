@@ -22,7 +22,7 @@ La catégorie <b>expérience</b> regroupe les occurrences liées à la vue et l�
 La catégorie <b>fins</b> aborde quant à elle les objectifs visés et explicites du spectacle.
             </br> </br>
 Pour une recherche au sein de l’index, voir l’outil
-« <b><a href ng-click="toggle('open')">Index</a></b> » de la page « <b><a ui-sref="logged.fastsearch">Recherche</a></b> ». Pour un guide d’utilisation de l’index, voir « <b><a ui-sref="logged.help">aide</a></b> ».
+« <b><a href ng-click="toggle('open')">Index</a></b> » de la page « <b><a ui-sref="public.fastsearch">Recherche</a></b> ». Pour un guide d’utilisation de l’index, voir « <b><a ui-sref="public.help">aide</a></b> ».
 
     <md-tabs md-selected='lex.tab'
         md-no-ink md-no-ink-bar md-stretch-tabs='never'
@@ -243,7 +243,7 @@ Pour une recherche au sein de l’index, voir l’outil
                 <h3>
                 <!--titre:-->
                   <b>
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(mylex._source.titre)">
                         {{single}}
                     </a>
@@ -251,21 +251,21 @@ Pour une recherche au sein de l’index, voir l’outil
                 </h3>
                 <h4 ng-if="mylex._source['français']">
                     français:
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(mylex._source['français'])">
                         {{single}}
                     </a>
                 </h4>
                 <h4 ng-if="mylex._source.latin">
                     latin:
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(mylex._source.latin)">
                         {{single}}
                     </a>
                 </h4>
                 <h4 ng-if="mylex._source.italien">
                     italien:
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(mylex._source.italien)">
                         {{single}}
                     </a>

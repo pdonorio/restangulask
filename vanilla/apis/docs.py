@@ -163,7 +163,7 @@ class RethinkDataValues(BaseRethinkResource):
     @deck.add_endpoint_parameter(name='field')
     @deck.add_endpoint_parameter(name='details', default='short')
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, data_key=None):
 
         if data_key == 'draft':
@@ -346,10 +346,11 @@ class RethinkDataKeys(BaseRethinkResource):
     table_index = 'steps'
 
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, step=None):
         count, data = super().get(step)
         return self.response(data, elements=count)
+
 
 #####################################
 # Documents and files that are associated to records
@@ -394,7 +395,7 @@ class RethinkDocuments(Uploader, BaseRethinkResource):
     @deck.add_endpoint_parameter(name='filter')
     @deck.add_endpoint_parameter(name='key')
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, document_id=None):
 
         # Init
@@ -1080,7 +1081,7 @@ class RethinkElement(BaseRethinkResource):
     table = 'datavalues'
 
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self):
 
         documents = {}
@@ -1683,7 +1684,7 @@ class RethinkLex(BaseRethinkResource):
     table_index = 'titre'
 
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, sheet=None):
         query = self.get_table_query()
         if sheet is not None:

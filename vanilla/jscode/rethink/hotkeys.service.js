@@ -14,7 +14,7 @@ function ExtraKeysService($timeout, $state) {
   self.search = function(event, controller) {
     event.preventDefault();
     $timeout(function () {
-        $state.go('logged.fastsearch');
+        $state.go('public.fastsearch');
     }, 10);
   }
 

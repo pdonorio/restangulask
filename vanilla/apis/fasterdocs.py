@@ -39,7 +39,7 @@ class FastManage(ExtendedApiResource, FastSearch):
     @deck.add_endpoint_parameter(name='extrait')
     # @deck.add_endpoint_parameter(name='extrait', ptype=str, required=True)
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, id=None):
         """
         NOTE: this method is not generic anymore
@@ -121,7 +121,7 @@ class FastDocs(ExtendedApiResource, FastSearch):
     @deck.add_endpoint_parameter(name=DATE_SKEY, ptype=str)
     @deck.add_endpoint_parameter(name=DATE_EKEY, ptype=str)
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, searchterms=None):
 
         if not self.get_instance():
@@ -162,7 +162,7 @@ class FastSuggestion(ExtendedApiResource, FastSearch):
     """ A faster search on key values of the database documents """
 
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, searchterms=None):
         self.get_instance()
         return self.response(self.fast_suggest(searchterms))
@@ -173,7 +173,7 @@ class FastLex(ExtendedApiResource, FastSearch):
     @deck.add_endpoint_parameter(name='size')
     @deck.add_endpoint_parameter(name='category', ptype=int, default=0)
     @deck.apimethod
-    @auth_token_required
+    # @auth_token_required
     def get(self, term=None):
         inputs = self.get_input_new()
         size = inputs.get('size', 5)

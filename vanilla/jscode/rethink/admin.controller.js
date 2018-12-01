@@ -93,7 +93,6 @@ function getSectionData($scope, AdminService, custom_type, $sce)
                     anchor = 'welcome.subsection'
                 } else if (sec == 'Base de données') {
                     //console.log(sec, "SEARCH?");
-                    //anchor = 'logged.fastsearch'
                     anchor = 'public.db'
                 } else if (element.data['Content'].trim() != "") {
                     anchor = "welcome.more({" +

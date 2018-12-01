@@ -368,7 +368,7 @@ function DetailsController($scope, $rootScope,
         console.log("Selected", self.page);
         if (self.page) {
             $timeout(function () {
-                $state.go("logged.details", {id: self.page}); }, 200);
+                $state.go("public.details", {id: self.page}); }, 200);
         }
     };
 
@@ -451,7 +451,7 @@ function DetailsController($scope, $rootScope,
         SearchService.removeElement($scope.theid).then(function() {
             console.log("Removed", $scope.theid);
             // redirect to search page
-            $timeout(function () { $state.go("logged.fastsearch"); }, 2200);
+            $timeout(function () { $state.go("public.fastsearch"); }, 2200);
         });
 
     };

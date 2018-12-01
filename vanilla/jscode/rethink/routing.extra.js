@@ -48,33 +48,61 @@ angular.module('web').constant('rethinkRoutes', {
     },
 */
     //////////////////////
-    'logged.lex': {
+    'public.lex': {
         url: "/lexique",
         views: {
-            "loggedview": { dir: 'blueprint', templateUrl: 'lexique.html' }
+            "unloggedview": { dir: 'blueprint', templateUrl: 'lexique.html' }
+        }
+    },
+    //////////////////////
+    'public.fastsearch': {
+        url: "/fastsearch/:text?clean",
+        views: {
+            "unloggedview": {dir: 'blueprint', templateUrl: 'fastsearch.html'}
+        },
+    },
+    //////////////////////
+    'public.details': {
+        url: "/details/:id?query",
+        views: {
+            "unloggedview": {dir: 'blueprint', templateUrl: 'details.html'}
+        }
+    },
+    //////////////////////
+    'public.chart': {
+        url: "/map",
+        views: {"unloggedview": {dir: 'blueprint', templateUrl: 'map.html'}},
+    },
+    //////////////////////
+    'public.help': {
+        url: "/help",
+        views: {"unloggedview": {dir: 'blueprint', templateUrl: 'help.html'}},
+    },
+    //////////////////////
+    'public.list': {
+        url: "/list?name&book",
+        params: {
+            // squash: avoid showing in URL when value is default. cool
+            name: { value: '~', squash: true },
+            book: { value: null, squash: true }
+        },
+        views: {
+            "unloggedview": {dir: 'blueprint', templateUrl: 'steplist.html'}
         }
     },
 
-    // 'logged.fastsearch': {
-    'logged.fastsearch': {
-        url: "/fastsearch/:text?clean",
-        views: {
-            // "unlogged": {
-            "loggedview": {dir: 'blueprint', templateUrl: 'fastsearch.html'}
-        },
-        // onEnter: function ($rootScope) {
-        //     $rootScope.avoidTheToolbar = true;
-        // },
-        // onExit: function ($rootScope) {
-        //     $rootScope.avoidTheToolbar = false;
-        // },
-    },
+
+//////////////////////////
+//////////////////////////
+// THIS SHOULD BE LOGGED
+//////////////////////////
+//////////////////////////
+
     //////////////////////
-    'logged.details': {
-        url: "/details/:id?query",
-        views: {
-            "loggedview": {dir: 'blueprint', templateUrl: 'details.html'}
-        }
+    'logged.actions': {
+        url: "/manage",
+        views: { "loggedview": {dir: 'blueprint', templateUrl: 'operations.html'}
+        },
     },
     //////////////////////
     'logged.submit': {
@@ -89,22 +117,6 @@ angular.module('web').constant('rethinkRoutes', {
         url: "/remove/:id",
         views: {
             "loggedview": {dir: 'blueprint', templateUrl: 'remove_record.html'}
-        },
-    },
-    //////////////////////
-    'logged.chart': {
-        url: "/map",
-        views: {"loggedview": {dir: 'blueprint', templateUrl: 'map.html'}},
-    },
-    //////////////////////
-    'logged.help': {
-        url: "/help",
-        views: {"loggedview": {dir: 'blueprint', templateUrl: 'help.html'}},
-    },
-    //////////////////////
-    'logged.actions': {
-        url: "/manage",
-        views: { "loggedview": {dir: 'blueprint', templateUrl: 'operations.html'}
         },
     },
     //////////////////////
@@ -228,18 +240,6 @@ angular.module('web').constant('rethinkRoutes', {
         }
     },
 */
-    //////////////////////
-    'logged.list': {
-        url: "/list?name&book",
-        params: {
-            // squash: avoid showing in URL when value is default. cool
-            name: { value: '~', squash: true },
-            book: { value: null, squash: true }
-        },
-        views: {
-            "loggedview": {dir: 'blueprint', templateUrl: 'steplist.html'}
-        }
-    },
   }
 
 ); // END CONSTANT

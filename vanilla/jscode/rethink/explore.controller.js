@@ -433,7 +433,7 @@ function StepsController($scope, $rootScope, $log, $timeout,
         }));
         // console.log("TEST", self.cookieKey,
         //     JSON.parse(localStorage.getItem(self.cookieKey)) )
-        $state.go('logged.fastsearch');
+        $state.go('public.fastsearch');
     }
 
     self.changeDate = function() {

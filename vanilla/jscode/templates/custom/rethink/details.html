@@ -1,7 +1,7 @@
 <div ng-controller="ToastController as toast" >
  <div ng-controller="DetailsController as detail" >
 
-    <a ui-sref='logged.fastsearch()'>
+    <a ui-sref='public.fastsearch()'>
         <md-button>
             <div layout='row' layout-align="center center" flex >
                 <i class="material-icons prefix">arrow_back</i> Retour
@@ -40,7 +40,7 @@
                 data-tooltip="{{detail.first_page.page}}"
                 ng-if="detail.first_page && !detail.first_page.current
                     && detail.first_page.id != detail.previous_page.id"
-                ui-sref="logged.details({id: detail.first_page.id})">
+                ui-sref="public.details({id: detail.first_page.id})">
                 <i class="material-icons">skip_previous</i>
 
             </a>
@@ -48,7 +48,7 @@
                 tooltipped data-position="bottom" data-delay="50"
                 data-tooltip="{{detail.previous_page.page}}"
                 ng-if="detail.previous_page && !detail.previous_page.current"
-                ui-sref="logged.details({id: detail.previous_page.id})">
+                ui-sref="public.details({id: detail.previous_page.id})">
                 <i class="material-icons">keyboard_arrow_left</i>
             </a>
           </md-content>
@@ -82,7 +82,7 @@
                 tooltipped data-position="bottom" data-delay="50"
                 data-tooltip="{{detail.next_page.page}}"
                 ng-if="detail.next_page && !detail.next_page.current"
-                ui-sref="logged.details({id: detail.next_page.id})">
+                ui-sref="public.details({id: detail.next_page.id})">
                 <i class="material-icons">keyboard_arrow_right</i>
             </a>
             <a href layout="row" layout-align="center center"
@@ -90,7 +90,7 @@
                 data-tooltip="{{detail.last_page.page}}"
                 ng-if="detail.last_page && !detail.last_page.current
                     && detail.last_page.id != detail.next_page.id"
-                ui-sref="logged.details({id: detail.last_page.id})">
+                ui-sref="public.details({id: detail.last_page.id})">
                 <i class="material-icons">skip_next</i>
             </a>
           </md-content>
@@ -209,7 +209,7 @@
             ng-show='detail.refinedData[key3][field22]'>
           <th> {{ field22 }} </th>
           <td>
-            <a ui-sref="logged.list({
+            <a ui-sref="public.list({
                     name: currentFete,
                     book: detail.parties[currentFete].indexOf(currentSource)
                 })">
@@ -478,7 +478,7 @@
                 <h3>
                 <!--titre:-->
                   <b>
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(lex._source.titre)">
                         {{single}}
                     </a>
@@ -486,21 +486,21 @@
                 </h3>
                 <h4 ng-if="lex._source['français']">
                     français:
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(lex._source['français'])">
                         {{single}}
                     </a>
                 </h4>
                 <h4 ng-if="lex._source.latin">
                     latin:
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(lex._source.latin)">
                         {{single}}
                     </a>
                 </h4>
                 <h4 ng-if="lex._source.italien">
                     italien:
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(lex._source.italien)">
                         {{single}}
                     </a>

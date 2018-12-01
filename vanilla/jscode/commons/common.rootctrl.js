@@ -123,11 +123,11 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
     };
 
     self.unloggedMenu = {
-        'logged.list({name: null, book: null})': 'Liste des fêtes',
-        'logged.fastsearch': 'Recherche',
-        'logged.chart': 'Carte',
-        'logged.lex': 'Index',
-        'logged.help': 'Aide',
+        'public.list({name: null, book: null})': 'Liste des fêtes',
+        'public.fastsearch': 'Recherche',
+        'public.chart': 'Carte',
+        'public.lex': 'Index',
+        'public.help': 'Aide',
     };
     self.loggedMenu = JSON.parse(JSON.stringify(self.unloggedMenu));
     self.loggedMenu['logged.actions'] = 'Diriger';
@@ -308,7 +308,7 @@ function AppRootController($scope, $rootScope, $log, $state, $timeout,
     // Redirect to that state
     $rootScope.activateSearch = function ()
     {
-        $state.go('logged.fastsearch', {'clean': true});
+        $state.go('public.fastsearch', {'clean': true});
     }
 
     // In case of special search available

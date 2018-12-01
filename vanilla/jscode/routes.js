@@ -189,6 +189,19 @@ $stateProvider
     })
 */
 
+    .state("public", {
+        url: "/public",
+        resolve: {
+            skip: _skipAuthenticationCheckApiOnline,
+        },
+        views: {
+            "main": {
+                templateUrl: templateDir + 'unlogged.html',
+                // template: "<div ui-view='unlogged'></div>",
+            }
+        }
+    })
+
 // Base for the app views
 // a parent that checks for authentication and api online
     .state("logged", {
@@ -197,9 +210,6 @@ $stateProvider
             redirect: _redirectIfNotAuthenticated
         },
         views: {
-            // "menu": {
-            //     templateUrl: templateDir + 'menu.html',
-            // },
             "main": {
                 templateUrl: templateDir + 'logged.html',
             }
@@ -235,22 +245,6 @@ $stateProvider
         }
     })
 
-    // .state("public", {
-    //     url: "/public",
-    //     resolve: {
-    //         // skip: _skipAuthenticationCheckApiOnline,
-    //         redirect: _redirectIfNotAuthenticated,
-    //     },
-    //     views: {
-    //         "menu": {
-    //             templateUrl: templateDir + 'menu.html',
-    //         },
-    //         "main": {
-    //             template: "<div ui-view='unlogged'></div>",
-    //         }
-    //     }
-    // })
-
     .state("logged.logout", {
         url: "/logout",
         views: {
@@ -270,7 +264,6 @@ $stateProvider
 // CHECK THIS IN THE NEAR FUTURE
 //https://github.com/angular-ui/ui-router/issues/1022#issuecomment-50628789
     // $urlRouterProvider.otherwise('/login');
-
     $urlRouterProvider.otherwise(function ($injector) {
         // console.log("OTHERWISE");
         var $state = $injector.get('$state');

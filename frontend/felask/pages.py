@@ -312,6 +312,13 @@ def angular(mypath=None):
     return jstemplate(mydomain='/test1', page='none.html')
 
 
+@cms.route('/public', methods=["GET"])
+@cms.route('/public/<path:mypath>', methods=["GET"])
+def angularpublic(mypath=None):
+    logger.debug("Welcome Path: /%s" % mypath)
+    return jstemplate(mydomain='/test2', page='none.html')
+
+
 # MAIN ROUTE: give angular the power
 @cms.route('/welcome', methods=["GET"])
 @cms.route('/welcome/<path:mypath>', methods=["GET"])

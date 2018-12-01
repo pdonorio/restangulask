@@ -8,7 +8,7 @@
         <h4 ng-show="steps.element">
 
             <!-- <a href ng-click="goToLastRoute()"> -->
-            <a ui-sref='logged.list({name: null})'>
+            <a ui-sref='public.list({name: null})'>
                 <md-button>
                     <div layout='row' layout-align="center center" flex >
                         <i class="material-icons prefix">arrow_back</i> Retour
@@ -42,7 +42,7 @@
                 </span>
                 <span ng-if="source != steps.currentSource">
                     <a class='above'
-                        ui-sref="logged.list({
+                        ui-sref="public.list({
                             name: fete.key,
                             book: steps.sources.indexOf(source)})">
                         {{source}}
@@ -77,7 +77,7 @@
                 -->
                 <tr ng-repeat="row in steps.extraits">
                     <td>
-                    <a ui-sref='logged.details({id: row.record})'>
+                    <a ui-sref='public.details({id: row.record})'>
                      <img height=80 width=50
                 ng-src="/static/uploads/{{row.filename}}/TileGroup0/0-0-0.jpg">
                     </a>
@@ -129,7 +129,7 @@
 
                     <span ng-if="header == 'Fête'">
                      <!-- <a href ng-click="steps.selectElement(fete.key)"> -->
-                     <!-- <a href ui-sref="logged.list({name: fete.key})"> -->
+                     <!-- <a href ui-sref="public.list({name: fete.key})"> -->
                       <div ng-bind-html="fete[header]"></div>
                      <!-- </a> -->
                     </span>
@@ -139,7 +139,7 @@
                      <li ng-repeat="source in fete[header]"
                         style="padding: 2px;" >
                         <a class='above'
-                            ui-sref="logged.list({
+                            ui-sref="public.list({
                                 name: fete.key,
                                 book: fete[header].indexOf(source)})">
                             {{source}}
@@ -151,6 +151,7 @@
                     <div ng-if="header != 'Fête' && header != 'Source'"
                         ng-bind-html="fete[header]"></div>
                 </td>
+<!--
                 <td></td>
                 <td>
                   <a ui-sref="logged.date({fetepos: key})"
@@ -159,6 +160,7 @@
                         data-tooltip="Modify fete 'date'" tooltipped>edit</i>
                   </a>
                 </td>
+-->
             </tr>
             </tbody>
         </table>
@@ -225,7 +227,7 @@
                 <h3>
                 <!--titre:-->
                   <b>
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(lex._source.titre)">
                         {{single}}
                     </a>
@@ -233,21 +235,21 @@
                 </h3>
                 <h4 ng-if="lex._source['français']">
                     français:
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(lex._source['français'])">
                         {{single}}
                     </a>
                 </h4>
                 <h4 ng-if="lex._source.latin">
                     latin:
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(lex._source.latin)">
                         {{single}}
                     </a>
                 </h4>
                 <h4 ng-if="lex._source.italien">
                     italien:
-                    <a ui-sref="logged.fastsearch({text: single})"
+                    <a ui-sref="public.fastsearch({text: single})"
                         ng-repeat="single in splitter(lex._source.italien)">
                         {{single}}
                     </a>

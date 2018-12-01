@@ -74,7 +74,7 @@ function LoginController($scope, $log, $window, $auth, $mdToast, $document, $tim
     {
         $timeout(function () {
             $log.warn("Already logged");
-            $state.go('logged.fastsearch');
+            $state.go('public.fastsearch');
         });
     }
 

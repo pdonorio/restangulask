@@ -1,0 +1,44 @@
+
+<md-content ng-controller='AppedController'
+    style=" background-color: #eee; "
+    layout="row" layout-wrap layout-align="center start" layout-fill
+    >
+ <div layout="column" flex="{{appFlexSize}}">
+
+    <md-toolbar class="md-whiteframe-4dp" style="background-color: #fff;">
+      <div class="md-toolbar-tools">
+        <div style="padding-right: 10px;
+        padding-top: 10px; padding-bottom: 5px;" flex=20>
+            <a href="https://spectaclebaroque.eu" target="_self">
+            <img src="https://spectaclebaroque.eu/wp-content/uploads/2017/04/cropped-csb3.png"
+                alt="spectaclebaroque logo" style="width: 85px;">
+            </a>
+        </div>
+
+    <div flex=70>
+      <a class="mymenu" ui-sref="{{key}}"
+       ng-repeat="(key, value) in root.unloggedMenu" > {{value}} </a>
+    </div>
+
+      </div>
+    </md-toolbar>
+
+ <md-content layout="column" layout-padding
+    style=" background-color: #fff; min-height: 700px; "
+    ng-class="{'hidy': appScrollY}"
+    class="md-whiteframe-4dp"
+    >
+     <div ui-view='unloggedview'>
+      <div layout="row" layout-align='center'>
+        <h3>Well done!</h3>
+      </div>
+      <div layout="row" layout-align='center'>
+        <p> <i class="material-icons">account_circle</i>
+            <span> Now, you are <b>logged</b> inside our app. </span>
+        </p>
+      </div>
+     </div>
+  </md-content>
+
+ </div>
+</md-content>
