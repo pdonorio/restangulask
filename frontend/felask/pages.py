@@ -216,15 +216,15 @@ def zoom(document, code):
     template_path = 'custom' + '/' + CURRENT_BLUEPRINT
     filename = '/empty'
 
-    if g.user is None:
-        return "Server has restarted after your last login." + \
-            "<br>Please logout and login again..."
+    # if g.user is None:
+    #     return "Server has restarted after your last login." + \
+    #         "<br>Please logout and login again..."
 
 # https://teamtreehouse.com/community/attributeerror-anonymoususermixin-object-has-no-attribute-username
 
     HEADERS = {
         'content-type': 'application/json',
-        'Authentication-Token': g.user.token
+        # 'Authentication-Token': g.user.token
     }
     opts = {'stream': True, 'headers': HEADERS, 'timeout': 5}
     r = requests.get(API_URL + 'datadocs/' + document, **opts)
